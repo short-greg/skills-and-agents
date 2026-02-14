@@ -1286,6 +1286,74 @@ Do NOT use when:
 
 ## Process
 
+## Goal
+
+Implement a feature from an approved development plan using TDD, following project conventions, with verified modularity and quality.
+
+## OKRs
+
+**Objective:** Deliver production-ready feature code that passes all quality gates
+
+**Key Results:**
+- KR1: All acceptance criteria from plan have passing tests (100% coverage of requirements)
+- KR2: Test coverage ≥ [TEST_COVERAGE_THRESHOLD from repo interview]%
+- KR3: All modularity criteria pass (see skill-guidelines/modularity.md)
+- KR4: Code follows all conventions from CLAUDE.md (verified by linter/review)
+- KR5: Performance requirements met (if applicable, from repo interview)
+
+## Evaluation Criteria
+
+This skill is **complete** when ALL of the following are verified:
+
+**Correctness:**
+- [ ] All user stories from plan have acceptance tests: `pytest tests/acceptance/ -v`
+- [ ] All acceptance tests PASS: [Number]/[Number] passing
+- [ ] Edge cases tested and passing: [List specific edge cases from plan]
+- [ ] Error conditions handled and tested: [List error scenarios]
+
+**Quality:**
+- [ ] Test coverage ≥ [THRESHOLD]%: `pytest --cov=src --cov-report=term`
+- [ ] No linting errors: `pylint src/ --exit-zero` (score ≥ 8.0)
+- [ ] Modularity assessment PASS: All 8 criteria ✅ (see Phase 7)
+
+**Conventions:**
+- [ ] Uses patterns from CLAUDE.md: [List specific patterns used]
+- [ ] Naming matches project conventions: Verified in code review
+- [ ] No code duplication: `jscpd src/` shows <3% duplication
+
+**Completeness:**
+- [ ] All tasks from plan implemented: [X]/[Y] tasks complete
+- [ ] No TODOs or placeholders left: `grep -r "TODO\|FIXME\|XXX" src/` returns 0
+- [ ] Documentation updated: CLAUDE.md and module READMEs current
+
+**Security (if applicable):**
+- [ ] Input validation for all user inputs
+- [ ] No secrets in code: `git secrets --scan`
+- [ ] Dependencies scanned: `safety check` (Python) or `npm audit` (JS)
+
+**Performance (if applicable):**
+- [ ] Response time < [THRESHOLD from repo interview]ms: `pytest tests/performance/`
+- [ ] Memory usage acceptable: [specific threshold]
+- [ ] No N+1 queries: Database query count logged and reviewed
+
+**⚠️ Common Over-Evaluation Traps:**
+
+**Trap: "Tests pass" ≠ Complete**
+- ❌ "All tests pass" - Did you test ALL acceptance criteria? Edge cases? Error states?
+- ✅ Map each acceptance criterion to specific test, verify all pass
+
+**Trap: "Looks modular" ≠ Passes Modularity Assessment**
+- ❌ "Code is well-organized" - Run actual tools: `radon cc`, `pylint`, `pydeps`
+- ✅ All 8 modularity criteria evaluated with evidence (see Phase 7)
+
+**Trap: "Follows conventions" ≠ Verified**
+- ❌ "I followed the patterns" - Did you verify with grep/tools?
+- ✅ List specific conventions from CLAUDE.md and show evidence of usage
+
+**Trap: "No obvious bugs" ≠ Correct**
+- ❌ "Works for me" - Did you test error states? Invalid inputs? Concurrent access?
+- ✅ Acceptance tests cover happy path + edge cases + error states
+
 ### Phase 0: Read Documentation
 
 **Purpose:** Understand project conventions before starting.
@@ -1312,10 +1380,12 @@ PHASES:
 🔄 Phase 0: Read documentation [IN PROGRESS] ◀── YOU ARE HERE
 ⏸️ Phase 1: Research existing code
 ⏸️ Phase 2: Design structure
-⏸️ Phase 3: Write tests
-⏸️ Phase 4: Implement feature
-⏸️ Phase 5: Run tests
-⏸️ Phase 6: Update documentation
+⏸️ Phase 3: Design scratchpad
+⏸️ Phase 4: Write tests
+⏸️ Phase 5: Implement feature
+⏸️ Phase 6: Run tests
+⏸️ Phase 7: Assess quality
+⏸️ Phase 8: Update documentation
 
 CURRENT TASK:
 Phase 0: Reading CLAUDE.md and project conventions
@@ -1359,7 +1429,12 @@ PHASES:
 ✅ Phase 0: Read documentation
 🔄 Phase 1: Research existing code [IN PROGRESS] ◀── YOU ARE HERE
 ⏸️ Phase 2: Design structure
-...
+⏸️ Phase 3: Design scratchpad
+⏸️ Phase 4: Write tests
+⏸️ Phase 5: Implement feature
+⏸️ Phase 6: Run tests
+⏸️ Phase 7: Assess quality
+⏸️ Phase 8: Update documentation
 
 CURRENT TASK:
 Phase 1: Researching similar features and patterns
@@ -1421,8 +1496,12 @@ PHASES:
 ✅ Phase 0: Read documentation
 ✅ Phase 1: Research existing code
 🔄 Phase 2: Design structure [IN PROGRESS] ◀── YOU ARE HERE
-⏸️ Phase 3: Write tests
-...
+⏸️ Phase 3: Design scratchpad
+⏸️ Phase 4: Write tests
+⏸️ Phase 5: Implement feature
+⏸️ Phase 6: Run tests
+⏸️ Phase 7: Assess quality
+⏸️ Phase 8: Update documentation
 
 CURRENT TASK:
 Phase 2: Designing file structure and module organization
@@ -1440,7 +1519,146 @@ CHECKLIST:
 
 ---
 
-### Phase 3: Write Tests (TDD)
+### Phase 3: Design Scratchpad
+
+**Purpose:** Think through implementation to catch problems BEFORE writing code.
+
+**Create:** `${SPEC_DIR}/YYYY-MM-DD-feature-name-scratchpad.md`
+
+**Template:**
+
+````markdown
+# Implementation Scratchpad: [Feature Name]
+
+**Date:** YYYY-MM-DD
+**Plan:** ${SPEC_DIR}/YYYY-MM-DD-feature-name-plan.md
+
+## Initial Approach
+
+**Files to create/modify:**
+- path/to/file1.py - [What it does]
+- path/to/file2.py - [What it does]
+- tests/test_file1.py - [Test coverage]
+
+**Key functions/classes:**
+```python
+def main_function(arg1: Type1, arg2: Type2) -> ReturnType:
+    """What this does."""
+    # Pseudocode implementation idea
+    pass
+
+class MainClass:
+    """What this handles."""
+    def method1(self):
+        pass
+```
+
+**Dependencies:**
+- Existing module X (for Y functionality)
+- Library Z (for handling W)
+
+## Problems I Notice
+
+### Problem 1: [Describe issue]
+**Why it's a problem:** [Explain]
+**Fix:** [How to address]
+
+### Problem 2: [Describe issue]
+**Why it's a problem:** [Explain]
+**Fix:** [How to address]
+
+## Assessment Against Criteria
+
+**Modularity (Design Phase):**
+- [ ] Cohesion: Each module has single purpose? [Y/N + evidence]
+- [ ] Coupling: Dependencies minimal (<5)? [Y/N + list dependencies]
+- [ ] Complexity: Functions will be <15 complexity? [Y/N + estimate]
+- [ ] Testability: Can mock dependencies easily? [Y/N + explain]
+
+**Completeness:**
+Map to acceptance criteria from plan:
+- [ ] Acceptance criterion 1: [How implementation covers this]
+- [ ] Acceptance criterion 2: [How implementation covers this]
+- [ ] Edge case A: [How handled]
+- [ ] Error condition B: [How handled]
+
+**Conventions:**
+- [ ] Uses pattern X from CLAUDE.md? [Y/N + where]
+- [ ] Follows naming convention Y? [Y/N + examples]
+- [ ] No duplication of existing code? [Y/N + checked where]
+
+**Security (if applicable):**
+- [ ] Input validation needed? [Where + how]
+- [ ] Authentication required? [How handled]
+- [ ] Sensitive data? [How protected]
+
+**Performance (if applicable):**
+- [ ] Will meet <[X]ms requirement? [Y/N + why]
+- [ ] Database queries optimized? [How]
+- [ ] Caching needed? [Where]
+
+## Revised Approach (if changes needed)
+
+[If problems found above, revise design here]
+
+**Files to create/modify (revised):**
+- [Updated list]
+
+**Key functions/classes (revised):**
+```python
+[Updated design]
+```
+
+**Why this is better:**
+- [Explain improvements]
+
+## Self-Review Checklist
+
+- [ ] Read similar code in codebase for patterns
+- [ ] Drew dependency diagram (no circular deps)
+- [ ] Can test each component in isolation
+- [ ] All acceptance criteria mapped to code
+- [ ] No obvious security/performance issues
+- [ ] Follows CLAUDE.md conventions
+
+## Sign-Off
+
+Ready to proceed: ✅ / ❌
+If ❌, what needs more thought: [Explain]
+````
+
+**PROGRESS TRACKING:**
+```
+PHASES:
+✅ Phase 0: Read documentation
+✅ Phase 1: Research existing code
+✅ Phase 2: Design structure
+🔄 Phase 3: Design scratchpad [IN PROGRESS] ◀── YOU ARE HERE
+⏸️ Phase 4: Write tests
+⏸️ Phase 5: Implement feature
+⏸️ Phase 6: Run tests
+⏸️ Phase 7: Assess quality
+⏸️ Phase 8: Update documentation
+
+CURRENT TASK:
+Phase 3: Creating design scratchpad to catch issues early
+Status: Reviewing design for modularity and completeness
+Started: [TIME]
+
+CHECKLIST:
+✅ Document initial approach
+✅ Identify potential problems
+🔲 Assess against modularity criteria
+🔲 Map to acceptance criteria
+🔲 Check conventions
+🔲 Self-review complete
+```
+
+**Gate:** Scratchpad review complete, no blocking issues identified
+
+---
+
+### Phase 4: Write Tests (TDD)
 
 **Purpose:** Write tests BEFORE implementation.
 
@@ -1464,13 +1682,15 @@ PHASES:
 ✅ Phase 0: Read documentation
 ✅ Phase 1: Research existing code
 ✅ Phase 2: Design structure
-🔄 Phase 3: Write tests [IN PROGRESS] ◀── YOU ARE HERE
-⏸️ Phase 4: Implement feature
-⏸️ Phase 5: Run tests
-⏸️ Phase 6: Update documentation
+✅ Phase 3: Design scratchpad
+🔄 Phase 4: Write tests [IN PROGRESS] ◀── YOU ARE HERE
+⏸️ Phase 5: Implement feature
+⏸️ Phase 6: Run tests
+⏸️ Phase 7: Assess quality
+⏸️ Phase 8: Update documentation
 
 CURRENT TASK:
-Phase 3: Writing tests before implementation (TDD)
+Phase 4: Writing tests before implementation (TDD)
 Status: Writing tests for main_function
 Started: [TIME]
 
@@ -1485,7 +1705,7 @@ CHECKLIST:
 
 ---
 
-### Phase 4: Implement Feature
+### Phase 5: Implement Feature
 
 **Purpose:** Write code to make tests pass.
 
@@ -1510,13 +1730,15 @@ PHASES:
 ✅ Phase 0: Read documentation
 ✅ Phase 1: Research existing code
 ✅ Phase 2: Design structure
-✅ Phase 3: Write tests
-🔄 Phase 4: Implement feature [IN PROGRESS] ◀── YOU ARE HERE
-⏸️ Phase 5: Run tests
-⏸️ Phase 6: Update documentation
+✅ Phase 3: Design scratchpad
+✅ Phase 4: Write tests
+🔄 Phase 5: Implement feature [IN PROGRESS] ◀── YOU ARE HERE
+⏸️ Phase 6: Run tests
+⏸️ Phase 7: Assess quality
+⏸️ Phase 8: Update documentation
 
 CURRENT TASK:
-Phase 4: Implementing feature code
+Phase 5: Implementing feature code
 Status: Writing main_function implementation
 Started: [TIME]
 
@@ -1531,7 +1753,7 @@ CHECKLIST:
 
 ---
 
-### Phase 5: Run Tests
+### Phase 6: Run Tests
 
 **Purpose:** Verify implementation works.
 
@@ -1556,13 +1778,15 @@ PHASES:
 ✅ Phase 0: Read documentation
 ✅ Phase 1: Research existing code
 ✅ Phase 2: Design structure
-✅ Phase 3: Write tests
-✅ Phase 4: Implement feature
-🔄 Phase 5: Run tests [IN PROGRESS] ◀── YOU ARE HERE
-⏸️ Phase 6: Update documentation
+✅ Phase 3: Design scratchpad
+✅ Phase 4: Write tests
+✅ Phase 5: Implement feature
+🔄 Phase 6: Run tests [IN PROGRESS] ◀── YOU ARE HERE
+⏸️ Phase 7: Assess quality
+⏸️ Phase 8: Update documentation
 
 CURRENT TASK:
-Phase 5: Running tests and verifying implementation
+Phase 6: Running tests and verifying implementation
 Status: All tests passing, checking coverage
 Started: [TIME]
 
@@ -1577,7 +1801,152 @@ CHECKLIST:
 
 ---
 
-### Phase 6: Update Documentation (Final Phase)
+### Phase 7: Assess Quality
+
+**Purpose:** Comprehensive quality assessment before marking complete.
+
+**Assessment Types:**
+
+#### 7.1: Modularity Assessment
+
+**Reference:** skill-guidelines/modularity.md
+
+**Run comprehensive assessment:**
+
+```bash
+# Create assessment document
+cp skill-guidelines/modularity-assessment-template.md \
+   ${SPEC_DIR}/YYYY-MM-DD-feature-name-modularity-assessment.md
+
+# Run automated tools
+pylint --enable=R0904,R0902 src/new_module.py
+radon cc src/new_module.py -a -nb
+pydeps src/new_module.py --show-deps
+pytest tests/unit/test_new_module.py --verbose
+```
+
+**Fill out assessment template with evidence.**
+
+**Gate:** All 8 modularity criteria ✅ or ⚠️ (no ❌)
+
+#### 7.2: Correctness Assessment
+
+**Verify completeness:**
+
+```bash
+# Map acceptance criteria to tests
+grep -r "test_.*acceptance" tests/
+
+# Check edge cases covered
+grep -r "test_.*edge" tests/
+
+# Check error handling
+grep -r "test_.*error\|test_.*invalid" tests/
+```
+
+**Manual verification:**
+- [ ] Every acceptance criterion has a test
+- [ ] Every edge case from plan has a test
+- [ ] Every error condition has a test
+- [ ] All tests PASS
+
+**Gate:** 100% acceptance criteria coverage, all tests pass
+
+#### 7.3: Convention Assessment
+
+**Check against CLAUDE.md:**
+
+```bash
+# Naming conventions
+grep -r "def \|class " src/new_module.py
+# Compare against patterns in CLAUDE.md
+
+# No duplication
+jscpd src/new_module.py --min-tokens 50
+
+# Linting
+pylint src/new_module.py --exit-zero
+```
+
+**Manual verification:**
+- [ ] Uses patterns from CLAUDE.md: [List specific ones]
+- [ ] Naming follows conventions: [Examples]
+- [ ] No duplicated code: jscpd shows <3%
+- [ ] Linter score ≥8.0
+
+**Gate:** All conventions followed
+
+#### 7.4: Security Assessment (if applicable)
+
+**Run security checks:**
+
+```bash
+# Python
+bandit -r src/new_module.py
+safety check
+
+# JavaScript
+npm audit
+eslint --plugin security src/
+
+# Check for secrets
+git secrets --scan
+```
+
+**Manual verification:**
+- [ ] All user inputs validated
+- [ ] No secrets in code
+- [ ] Dependencies have no known vulnerabilities
+- [ ] Authentication/authorization correct
+
+**Gate:** No security issues found
+
+#### 7.5: Performance Assessment (if applicable)
+
+**Run performance tests:**
+
+```bash
+pytest tests/performance/test_feature_performance.py -v
+```
+
+**Verify requirements:**
+- [ ] Response time <[THRESHOLD]ms: [Actual time]
+- [ ] Memory usage acceptable: [Actual usage]
+- [ ] Database queries optimized: [Query count]
+
+**Gate:** All performance requirements met
+
+**PROGRESS TRACKING:**
+```
+PHASES:
+✅ Phase 0: Read documentation
+✅ Phase 1: Research existing code
+✅ Phase 2: Design structure
+✅ Phase 3: Design scratchpad
+✅ Phase 4: Write tests
+✅ Phase 5: Implement feature
+✅ Phase 6: Run tests
+🔄 Phase 7: Assess quality [IN PROGRESS] ◀── YOU ARE HERE
+⏸️ Phase 8: Update documentation
+
+CURRENT TASK:
+Phase 7: Running comprehensive quality assessment
+Status: Evaluating modularity, correctness, conventions
+Started: [TIME]
+
+ASSESSMENT RESULTS:
+✅ Modularity: 8/8 criteria pass
+✅ Correctness: 15/15 acceptance tests pass
+✅ Conventions: Linter score 9.2/10
+✅ Security: 0 vulnerabilities found
+✅ Performance: 95th percentile 87ms (< 100ms threshold)
+```
+
+**Gate:** All quality assessments pass
+
+---
+
+### Phase 8: Update Documentation (Final Phase)
 
 **Purpose:** Maintain project conventions and prevent documentation drift.
 
@@ -1598,19 +1967,26 @@ CHECKLIST:
    - Were existing patterns used?
    - Any new patterns that should be documented?
 
+4. **Document Assessment Results**
+   - Reference modularity assessment from Phase 7
+   - Note any conventions verified
+   - Record performance benchmarks (if applicable)
+
 **PROGRESS TRACKING:**
 ```
 PHASES:
 ✅ Phase 0: Read documentation
 ✅ Phase 1: Research existing code
 ✅ Phase 2: Design structure
-✅ Phase 3: Write tests
-✅ Phase 4: Implement feature
-✅ Phase 5: Run tests
-🔄 Phase 6: Update documentation [IN PROGRESS] ◀── YOU ARE HERE
+✅ Phase 3: Design scratchpad
+✅ Phase 4: Write tests
+✅ Phase 5: Implement feature
+✅ Phase 6: Run tests
+✅ Phase 7: Assess quality
+🔄 Phase 8: Update documentation [IN PROGRESS] ◀── YOU ARE HERE
 
 CURRENT TASK:
-Phase 6: Updating documentation to prevent drift
+Phase 8: Updating documentation to prevent drift
 Status: Updating CLAUDE.md with new patterns
 Started: [TIME]
 
@@ -1618,12 +1994,14 @@ CHECKLIST:
 ✅ Update CLAUDE.md
 🔲 Update module READMEs
 🔲 Check for convention drift
+🔲 Document assessment results
 🔲 Final review
 ```
 
 **Output:**
 - Feature complete
 - Tests passing
+- Quality assessments passed
 - Documentation current
 
 ---
@@ -1631,16 +2009,28 @@ CHECKLIST:
 ## Best Practices
 
 ### TDD Workflow
-- Always write tests first
+- Always write tests first (Phase 4)
 - Verify tests fail before implementing
-- Make tests pass incrementally
+- Make tests pass incrementally (Phase 5)
 - Refactor with confidence
+
+### Design Before Implementation
+- Use Phase 3 scratchpad to think through design
+- Catch modularity issues early
+- Map acceptance criteria to implementation
+- Identify problems before writing code
 
 ### Documentation Maintenance
 - Read conventions in Phase 0
 - Follow patterns during implementation
-- Update docs in Final Phase
+- Update docs in Phase 8 (Final Phase)
 - Prevents drift over time
+
+### Quality Assessment
+- Run comprehensive assessment in Phase 7
+- Use automated tools for modularity, security, performance
+- Verify all acceptance criteria covered
+- Don't skip quality gates
 
 ### Progress Tracking
 - Update status after each phase
@@ -1846,16 +2236,20 @@ Test each skill individually, then test the complete workflow.
 1. Use plan from Test 2
 2. Invoke: `/feature-impl ${SPEC_DIR}/YYYY-MM-DD-dark-mode-plan.md`
 3. Verify Phase 0 reads CLAUDE.md
-4. Check progress tracking displays at each phase
-5. Verify tests written before implementation (TDD)
-6. Verify Phase 6 updates documentation
+4. Verify Phase 3 creates design scratchpad
+5. Check progress tracking displays at each phase (0-8)
+6. Verify tests written before implementation (Phase 4 - TDD)
+7. Verify Phase 7 runs quality assessment
+8. Verify Phase 8 updates documentation
 
 **Expected Output:**
 - Working code matching plan
 - All tests pass
 - Coverage >80%
+- Design scratchpad created with assessment
+- Quality assessment passed (modularity, correctness, conventions)
 - CLAUDE.md updated if new patterns introduced
-- Progress tracker showed all phases
+- Progress tracker showed all 9 phases (0-8)
 
 ### Test 4: Review Skills
 

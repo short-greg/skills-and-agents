@@ -743,6 +743,28 @@ Do NOT use when:
 - Fixing bugs (use bugfix-impl)
 - Tests don't exist (write tests first)
 
+## Critical Reference
+
+**skill-guidelines/modularity.md** - Complete modularity assessment framework
+
+Refactoring is fundamentally about improving modularity. You MUST:
+1. Assess all 8 modularity criteria BEFORE refactoring (Phase 0.5)
+2. Use objective tools (radon, pylint, pydeps) not subjective judgment
+3. Re-assess all 8 criteria AFTER refactoring (Phase 5)
+4. Provide concrete evidence of improvement (before/after metrics)
+
+The 8 criteria from modularity.md:
+1. Cohesion - Single responsibility per module
+2. Coupling - Minimal dependencies
+3. Coherence - Logical boundaries
+4. Abstraction - Appropriate layers
+5. Encapsulation - Hidden implementation
+6. Testability - Isolated testing
+7. Reusability - Generic interfaces
+8. Complexity - Low cyclomatic complexity
+
+See modularity.md for complete measurement tools and thresholds.
+
 ## Input
 
 - Refactoring plan file path (e.g., `${SPEC_DIR}/YYYY-MM-DD-refactor-plan.md`)
@@ -756,6 +778,275 @@ Do NOT use when:
 - All tests passing
 
 ## Process
+
+## Goal
+
+Improve code structure through measurable modularity improvements while maintaining 100% correctness (all tests pass before and after).
+
+## OKRs
+
+**Objective:** Deliver structurally improved code with verified modularity gains and zero behavior changes
+
+**Key Results:**
+- KR1: All original tests preserved and passing (100% test preservation, no test modifications)
+- KR2: Modularity improved with concrete evidence (measurable via modularity.md 8 criteria)
+- KR3: Incremental changes applied safely (tests pass after each step, no big-bang refactoring)
+- KR4: No behavior changes introduced (verified by unchanged, passing test suite)
+- KR5: Before/after improvement documented (modularity metrics captured and compared)
+
+## Evaluation Criteria
+
+This skill is **complete** when ALL of the following are verified:
+
+**Safety:**
+- [ ] Test baseline established BEFORE refactoring: `pytest tests/ -v` (capture count)
+- [ ] All tests still pass AFTER refactoring: `pytest tests/ -v` (same count)
+- [ ] No tests modified during refactoring: `git diff tests/` shows no changes
+- [ ] No regressions introduced: Test count before = Test count after
+
+**Modularity Improvement (Evidence Required):**
+- [ ] Cohesion improved: Before/after assessment using modularity.md criteria #1
+- [ ] Coupling reduced: Before/after dependency count (imports, circular deps eliminated)
+- [ ] Coherence improved: Module boundaries more logical (measured via modularity.md criteria #3)
+- [ ] Complexity reduced: `radon cc` shows lower average complexity after refactoring
+- [ ] All 8 modularity criteria assessed: See modularity.md for complete framework
+
+**Incremental Process:**
+- [ ] Changes made in small steps: Each step documented in scratchpad
+- [ ] Tests run after EACH step: Evidence of incremental testing captured
+- [ ] No big-bang refactoring: Multiple small commits, not one large change
+
+**Convention Compliance:**
+- [ ] Follows CLAUDE.md patterns: List specific patterns used
+- [ ] No code duplication: `jscpd src/` shows <3% duplication
+- [ ] Naming conventions preserved: Verified in code review
+
+**⚠️ Common Over-Evaluation Traps:**
+
+**Trap: "Code looks better" ≠ Measurable modularity improvement**
+- ❌ "The code is more organized now" - Subjective assessment without metrics
+- ✅ Before: 15 imports, complexity 18. After: 8 imports, complexity 9. Evidence: `radon cc` output
+
+**Trap: "Refactored successfully" ≠ Tests prove no behavior change**
+- ❌ "Refactoring complete, everything works" - Did ALL original tests stay passing?
+- ✅ Baseline: 42/42 tests passing. After: 42/42 tests passing. No tests modified.
+
+**Trap: "More organized" ≠ Complexity metrics decreased**
+- ❌ "Files are better organized" - Did you measure cyclomatic complexity?
+- ✅ `radon cc` before: Average B (11.2). After: Average A (6.8). Improvement verified.
+
+**Trap: "Tests still pass" ≠ ALL tests pass (no skipped/disabled)**
+- ❌ "Tests pass" - Did you skip/disable any tests during refactoring?
+- ✅ All 42 original tests still enabled and passing. Zero tests skipped or disabled.
+
+**Reference: skill-guidelines/modularity.md**
+The 8 modularity criteria MUST be assessed with concrete evidence:
+1. Cohesion - Each module does ONE thing
+2. Coupling - Minimal dependencies between modules
+3. Coherence - Logical module boundaries
+4. Abstraction - Appropriate abstraction levels
+5. Encapsulation - Implementation details hidden
+6. Testability - Can test in isolation
+7. Reusability - Can reuse in other contexts
+8. Complexity - Low cyclomatic complexity
+
+See modularity.md for measurement tools and thresholds.
+
+---
+
+### Phase 0.5: Refactoring Scratchpad
+
+**Purpose:** Plan refactoring approach and predict modularity improvements BEFORE changing ANY code.
+
+**CRITICAL:** This phase prevents over-refactoring and ensures measurable goals.
+
+**Steps:**
+
+1. **Assess Current State (BEFORE refactoring)**
+
+   Run modularity assessment tools on target code:
+   ```bash
+   # Measure complexity
+   radon cc src/target_module.py -a -nb
+
+   # Count dependencies
+   grep -c "^import\|^from" src/target_module.py
+
+   # Check for circular dependencies
+   pydeps src/target_module.py --show-deps
+
+   # Count public methods (cohesion indicator)
+   grep -c "^    def [^_]" src/target_module.py
+   ```
+
+   Document baseline metrics in scratchpad.
+
+2. **Create Refactoring Scratchpad**
+
+   File: `${SPEC_DIR}/YYYY-MM-DD-refactor-name-scratchpad.md`
+
+   Template:
+   ```markdown
+   # Refactoring Scratchpad: [Module Name]
+
+   **Date:** YYYY-MM-DD
+   **Target:** [File/module being refactored]
+
+   ---
+
+   ## Current State Assessment (BEFORE Refactoring)
+
+   ### Modularity Metrics
+   - **Complexity:** radon cc average = [Score] (Grade [A-F])
+   - **Dependencies:** [Number] imports
+   - **Circular Dependencies:** [Yes/No, list if yes]
+   - **Cohesion:** [Number] public methods, [Number] responsibilities
+   - **Function Length:** Average [Number] lines per function
+   - **Nesting Depth:** Max [Number] levels
+
+   ### Modularity Assessment (8 Criteria)
+   Reference: skill-guidelines/modularity.md
+
+   1. **Cohesion:** ❌/⚠️/✅ - [Evidence]
+   2. **Coupling:** ❌/⚠️/✅ - [Evidence]
+   3. **Coherence:** ❌/⚠️/✅ - [Evidence]
+   4. **Abstraction:** ❌/⚠️/✅ - [Evidence]
+   5. **Encapsulation:** ❌/⚠️/✅ - [Evidence]
+   6. **Testability:** ❌/⚠️/✅ - [Evidence]
+   7. **Reusability:** ❌/⚠️/✅ - [Evidence]
+   8. **Complexity:** ❌/⚠️/✅ - [Evidence]
+
+   **Current Issues:**
+   - [List specific modularity problems]
+
+   ---
+
+   ## Proposed Changes
+
+   **What will be refactored:**
+   - [Specific structural changes]
+
+   **What will NOT change:**
+   - Behavior (verified by tests)
+   - Public API (no breaking changes)
+
+   ---
+
+   ## Expected Improvements (AFTER Refactoring)
+
+   ### Predicted Metrics
+   - **Complexity:** Target average [Score] (Grade A-B)
+   - **Dependencies:** Target [Number] imports (reduction of [X])
+   - **Cohesion:** Target [Number] responsibility per module
+   - **Circular Dependencies:** None
+
+   ### Expected Modularity Improvements
+   1. **Cohesion:** [Specific improvement expected]
+   2. **Coupling:** [Specific improvement expected]
+   3. **Coherence:** [Specific improvement expected]
+   4. **Complexity:** [Specific improvement expected]
+
+   ---
+
+   ## Refactoring Steps (Incremental)
+
+   **Step 1:** [Small change - 5-10 min]
+   - Action: [What to do]
+   - Test: Run `pytest tests/test_target.py -v`
+   - Expected: All tests pass
+
+   **Step 2:** [Small change - 5-10 min]
+   - Action: [What to do]
+   - Test: Run `pytest tests/test_target.py -v`
+   - Expected: All tests pass
+
+   **Step 3:** [Small change - 5-10 min]
+   - Action: [What to do]
+   - Test: Run `pytest tests/test_target.py -v`
+   - Expected: All tests pass
+
+   [Continue for all steps...]
+
+   ---
+
+   ## Risk Assessment
+
+   **What could break:**
+   - [List potential issues]
+
+   **Mitigation:**
+   - Tests run after each step
+   - Rollback if any test fails
+   - Small incremental changes
+
+   ---
+
+   ## Self-Review Question
+
+   **Am I changing BEHAVIOR or just STRUCTURE?**
+
+   - [ ] ✅ I am ONLY changing structure (refactoring)
+   - [ ] ❌ I am changing behavior (NOT refactoring - should be feature/bugfix)
+
+   **How do I know?**
+   - Tests define correct behavior
+   - If tests need changes, I'm changing behavior
+   - If tests stay unchanged and pass, I'm refactoring correctly
+
+   ---
+
+   ## Sign-Off
+
+   - [ ] Current state measured with tools (not subjective assessment)
+   - [ ] Expected improvements are specific and measurable
+   - [ ] Refactoring steps are small and incremental
+   - [ ] Risk assessment complete
+   - [ ] Ready to proceed with Phase 1 (Baseline Tests)
+   ```
+
+3. **Validate Scratchpad**
+
+   Self-check:
+   - [ ] All BEFORE metrics captured with tool output (not guesses)
+   - [ ] Expected AFTER metrics are specific numbers (not "better" or "improved")
+   - [ ] Refactoring steps are small (each <10 minutes)
+   - [ ] Each step has clear test verification
+   - [ ] All 8 modularity criteria assessed for current state
+
+**PROGRESS TRACKING:**
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 REFACTOR-IMPL PROGRESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PHASES:
+🔄 Phase 0.5: Refactoring scratchpad [IN PROGRESS] ◀── YOU ARE HERE
+⏸️ Phase 1: Baseline tests
+⏸️ Phase 2: Identify refactoring opportunity
+⏸️ Phase 3: Incremental refactoring
+⏸️ Phase 4: Continuous testing
+⏸️ Phase 5: Measure improvement
+⏸️ Phase 6: Code review
+
+CURRENT TASK:
+Phase 0.5: Creating refactoring scratchpad with BEFORE metrics
+Status: Running modularity assessment tools
+Started: [TIME]
+
+CHECKLIST:
+✅ Run complexity analysis (radon cc)
+✅ Count dependencies
+🔲 Assess all 8 modularity criteria
+🔲 Define incremental steps
+🔲 Validate scratchpad completeness
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+**Output:** Refactoring scratchpad with BEFORE metrics and incremental plan
+
+**Gate:** Scratchpad complete with measurable baseline before proceeding.
+
+---
 
 ### Phase 1: Baseline Tests
 
@@ -802,11 +1093,13 @@ Do NOT use when:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PHASES:
+✅ Phase 0.5: Refactoring scratchpad
 🔄 Phase 1: Baseline tests [IN PROGRESS] ◀── YOU ARE HERE
 ⏸️ Phase 2: Identify refactoring opportunity
 ⏸️ Phase 3: Incremental refactoring
 ⏸️ Phase 4: Continuous testing
-⏸️ Phase 5: Code review
+⏸️ Phase 5: Measure improvement
+⏸️ Phase 6: Code review
 
 CURRENT TASK:
 Phase 1: Establishing test baseline
@@ -901,11 +1194,13 @@ CHECKLIST:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0.5: Refactoring scratchpad
 ✅ Phase 1: Baseline tests
 🔄 Phase 2: Identify refactoring opportunity [IN PROGRESS] ◀── YOU ARE HERE
 ⏸️ Phase 3: Incremental refactoring
 ⏸️ Phase 4: Continuous testing
-⏸️ Phase 5: Code review
+⏸️ Phase 5: Measure improvement
+⏸️ Phase 6: Code review
 
 CURRENT TASK:
 Phase 2: Analyzing code and planning incremental steps
@@ -1013,11 +1308,13 @@ ANALYSIS:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0.5: Refactoring scratchpad
 ✅ Phase 1: Baseline tests
 ✅ Phase 2: Identify refactoring opportunity
 🔄 Phase 3: Incremental refactoring [IN PROGRESS] ◀── YOU ARE HERE
 ⏸️ Phase 4: Continuous testing
-⏸️ Phase 5: Code review
+⏸️ Phase 5: Measure improvement
+⏸️ Phase 6: Code review
 
 CURRENT TASK:
 Phase 3: Executing incremental refactoring
@@ -1080,11 +1377,13 @@ CURRENT STEP:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0.5: Refactoring scratchpad
 ✅ Phase 1: Baseline tests
 ✅ Phase 2: Identify refactoring opportunity
 ✅ Phase 3: Incremental refactoring
 🔄 Phase 4: Continuous testing [IN PROGRESS] ◀── YOU ARE HERE
-⏸️ Phase 5: Code review
+⏸️ Phase 5: Measure improvement
+⏸️ Phase 6: Code review
 
 CURRENT TASK:
 Phase 4: Final test verification
@@ -1106,74 +1405,382 @@ TEST RESULTS:
 
 ---
 
-### Phase 5: Code Review
+### Phase 5: Measure Improvement
 
-**Purpose:** Verify improvement without behavior change.
+**Purpose:** Quantify modularity improvements with concrete evidence (AFTER refactoring).
+
+**CRITICAL:** Use the SAME tools and measurements from Phase 0.5 scratchpad to prove improvement.
+
+**Steps:**
+
+1. **Re-run Modularity Assessment Tools (AFTER refactoring)**
+
+   Run the exact same commands as Phase 0.5:
+   ```bash
+   # Measure complexity AFTER
+   radon cc src/target_module.py -a -nb
+
+   # Count dependencies AFTER
+   grep -c "^import\|^from" src/target_module.py
+
+   # Check for circular dependencies AFTER
+   pydeps src/target_module.py --show-deps
+
+   # Count public methods AFTER (cohesion indicator)
+   grep -c "^    def [^_]" src/target_module.py
+
+   # Check code duplication AFTER
+   jscpd src/target_module.py
+   ```
+
+2. **Complete Modularity Assessment (AFTER)**
+
+   Use modularity.md assessment template for ALL 8 criteria:
+
+   ```markdown
+   ## Modularity Assessment (AFTER Refactoring)
+
+   **Reference:** skill-guidelines/modularity.md
+
+   ### 1. Cohesion
+   **Tool Check:**
+   ```bash
+   pylint --disable=all --enable=R0904,R0902 src/target_module.py
+   ```
+   Result: [Output]
+
+   **Manual Check:**
+   - Module purpose: [Describe in <10 words]
+   - Responsibilities per module: [Number]
+
+   **Rating:** ✅ Good / ⚠️ Warning / ❌ Poor
+   **Evidence:** [Specific tool output or metric]
+
+   ### 2. Coupling
+   **Tool Check:**
+   ```bash
+   grep -c "^import\|^from" src/target_module.py
+   pydeps src/target_module.py --show-deps
+   ```
+   Result: [Number] imports, [circular: yes/no]
+
+   **Rating:** ✅ Good / ⚠️ Warning / ❌ Poor
+   **Evidence:** [Import count, no circular dependencies]
+
+   ### 3. Coherence
+   **Tool Check:**
+   ```bash
+   tree src/ -L 2
+   find src/ -name "utils.py" -o -name "helpers.py"
+   ```
+   Result: [Module organization assessment]
+
+   **Rating:** ✅ Good / ⚠️ Warning / ❌ Poor
+   **Evidence:** [Logical module boundaries]
+
+   ### 4. Abstraction
+   **Manual Check:**
+   - Clear abstraction layers: [Yes/No]
+   - High-level doesn't know low-level details: [Yes/No]
+
+   **Rating:** ✅ Good / ⚠️ Warning / ❌ Poor
+   **Evidence:** [Description]
+
+   ### 5. Encapsulation
+   **Tool Check:**
+   ```bash
+   pylint --disable=all --enable=W0212 src/target_module.py
+   grep -r "\._[a-z]" src/ --include="*.py"
+   ```
+   Result: [Output]
+
+   **Rating:** ✅ Good / ⚠️ Warning / ❌ Poor
+   **Evidence:** [No external access to private members]
+
+   ### 6. Testability
+   **Tool Check:**
+   ```bash
+   pytest tests/unit/ --verbose
+   ```
+   Result: [All pass / Some fail]
+
+   **Rating:** ✅ Good / ⚠️ Warning / ❌ Poor
+   **Evidence:** [Tests run in isolation]
+
+   ### 7. Reusability
+   **Manual Check:**
+   - Could be used elsewhere: [Yes/No]
+   - No hard-coded assumptions: [Yes/No]
+
+   **Rating:** ✅ Good / ⚠️ Warning / ❌ Poor
+   **Evidence:** [Description]
+
+   ### 8. Complexity
+   **Tool Check:**
+   ```bash
+   radon cc src/target_module.py -a -nb
+   radon mi src/target_module.py -nb
+   ```
+   Result: Complexity [Score], MI [Score]
+
+   **Rating:** ✅ Good / ⚠️ Warning / ❌ Poor
+   **Evidence:** [Complexity grade A-B, MI > 20]
+   ```
+
+3. **Create Before/After Comparison**
+
+   **REQUIRED:** Side-by-side comparison with EVIDENCE:
+
+   ```markdown
+   ## Before/After Comparison
+
+   ### Complexity Metrics
+   | Metric | Before | After | Improvement |
+   |--------|--------|-------|-------------|
+   | Cyclomatic Complexity (avg) | [Number] (Grade [X]) | [Number] (Grade [X]) | ✅/❌ |
+   | Maintainability Index | [Number] | [Number] | ✅/❌ |
+   | Lines of Code per Function | [Number] | [Number] | ✅/❌ |
+   | Max Nesting Depth | [Number] | [Number] | ✅/❌ |
+
+   **Tool Evidence:**
+   ```bash
+   # BEFORE: radon cc output
+   [Paste actual output from Phase 0.5]
+
+   # AFTER: radon cc output
+   [Paste actual output from Phase 5]
+   ```
+
+   ### Coupling Metrics
+   | Metric | Before | After | Improvement |
+   |--------|--------|-------|-------------|
+   | Import Count | [Number] | [Number] | ✅/❌ |
+   | Circular Dependencies | [Yes/No] | [Yes/No] | ✅/❌ |
+   | Max Dependency Depth | [Number] | [Number] | ✅/❌ |
+
+   **Tool Evidence:**
+   ```bash
+   # BEFORE: import count
+   [Paste actual count from Phase 0.5]
+
+   # AFTER: import count
+   [Paste actual count from Phase 5]
+   ```
+
+   ### Cohesion Metrics
+   | Metric | Before | After | Improvement |
+   |--------|--------|-------|-------------|
+   | Responsibilities per Module | [Number] | [Number] | ✅/❌ |
+   | Public Methods per Class | [Number] | [Number] | ✅/❌ |
+   | Module Purpose Clarity | [Vague/Clear] | [Vague/Clear] | ✅/❌ |
+
+   ### Code Duplication
+   | Metric | Before | After | Improvement |
+   |--------|--------|-------|-------------|
+   | Duplication % | [Number]% | [Number]% | ✅/❌ |
+
+   **Tool Evidence:**
+   ```bash
+   # BEFORE: jscpd output
+   [Paste actual output]
+
+   # AFTER: jscpd output
+   [Paste actual output]
+   ```
+
+   ### Test Verification
+   | Metric | Before | After | Status |
+   |--------|--------|-------|--------|
+   | Tests Passing | [X]/[Y] | [X]/[Y] | ✅ Same |
+   | Tests Modified | 0 | 0 | ✅ None |
+   | Tests Disabled | 0 | 0 | ✅ None |
+   | New Test Failures | N/A | 0 | ✅ None |
+
+   ### Overall Modularity (8 Criteria)
+   | Criterion | Before | After | Improvement |
+   |-----------|--------|-------|-------------|
+   | 1. Cohesion | [✅/⚠️/❌] | [✅/⚠️/❌] | [Yes/No/Same] |
+   | 2. Coupling | [✅/⚠️/❌] | [✅/⚠️/❌] | [Yes/No/Same] |
+   | 3. Coherence | [✅/⚠️/❌] | [✅/⚠️/❌] | [Yes/No/Same] |
+   | 4. Abstraction | [✅/⚠️/❌] | [✅/⚠️/❌] | [Yes/No/Same] |
+   | 5. Encapsulation | [✅/⚠️/❌] | [✅/⚠️/❌] | [Yes/No/Same] |
+   | 6. Testability | [✅/⚠️/❌] | [✅/⚠️/❌] | [Yes/No/Same] |
+   | 7. Reusability | [✅/⚠️/❌] | [✅/⚠️/❌] | [Yes/No/Same] |
+   | 8. Complexity | [✅/⚠️/❌] | [✅/⚠️/❌] | [Yes/No/Same] |
+
+   **Summary:**
+   - Criteria improved: [Number]
+   - Criteria unchanged: [Number]
+   - Criteria degraded: [Number] ← Should be ZERO
+   ```
+
+4. **Validate Improvement**
+
+   **PASS Criteria:**
+   - [ ] At least 3 of 8 modularity criteria improved
+   - [ ] Zero criteria degraded
+   - [ ] All tests still passing (same count as baseline)
+   - [ ] No tests modified or disabled
+   - [ ] Concrete tool evidence for all metrics
+
+   **FAIL Criteria (requires more work):**
+   - Any modularity criterion degraded
+   - Tests modified during refactoring
+   - No measurable improvement in any criterion
+   - Missing tool evidence
+
+**PROGRESS TRACKING:**
+```
+PHASES:
+✅ Phase 0.5: Refactoring scratchpad
+✅ Phase 1: Baseline tests
+✅ Phase 2: Identify refactoring opportunity
+✅ Phase 3: Incremental refactoring
+✅ Phase 4: Continuous testing
+🔄 Phase 5: Measure improvement [IN PROGRESS] ◀── YOU ARE HERE
+⏸️ Phase 6: Code review
+
+CURRENT TASK:
+Phase 5: Measuring modularity improvement with concrete evidence
+Status: Running AFTER assessment tools and comparing to BEFORE
+Started: [TIME]
+
+ASSESSMENT PROGRESS:
+✅ Re-run complexity analysis (radon cc)
+✅ Re-count dependencies
+✅ Complete 8-criteria modularity assessment
+🔲 Create before/after comparison table
+🔲 Validate improvement (at least 3 criteria improved)
+🔲 Verify no degradation (zero criteria worse)
+
+PRELIMINARY RESULTS:
+- Complexity: [Before Grade] → [After Grade]
+- Dependencies: [Before Count] → [After Count]
+- Cohesion: [Before Rating] → [After Rating]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+**Output:** Before/After comparison with evidence-based modularity improvement
+
+**Gate:** At least 3 of 8 criteria improved, zero degraded, all tests passing.
+
+---
+
+### Phase 6: Code Review
+
+**Purpose:** Final validation that refactoring met all quality criteria with EVIDENCE from Phase 5.
+
+**CRITICAL:** This phase uses the measurements from Phase 5, not new subjective assessment.
 
 **Review checklist:**
 
-1. **Modularity Improvements**
+1. **Modularity Improvements (Evidence from Phase 5)**
+
+   Reference the Before/After comparison from Phase 5:
 
    **Cohesion:**
-   - [ ] Each module has single, clear purpose
+   - [ ] Evidence shows improved cohesion (Phase 5 metrics)
+   - [ ] Each module has single, clear purpose (verified via tool output)
    - [ ] Related functionality grouped together
    - [ ] No mixing of concerns
 
    **Coherence:**
+   - [ ] Evidence shows improved coherence (Phase 5 assessment)
    - [ ] Module boundaries make logical sense
    - [ ] Clear separation of concerns
    - [ ] Easy to understand structure
 
    **Coupling:**
-   - [ ] Dependencies reduced
-   - [ ] No circular dependencies
+   - [ ] Evidence shows reduced coupling (Phase 5 import count)
+   - [ ] Dependencies reduced (Before: [X] → After: [Y])
+   - [ ] No circular dependencies (verified by pydeps)
    - [ ] Clean, simple interfaces
 
+   **All 8 Modularity Criteria:**
+   - [ ] Reference Phase 5 complete assessment
+   - [ ] At least 3 of 8 criteria improved
+   - [ ] Zero criteria degraded
+   - [ ] All ratings backed by tool evidence
+
 2. **Behavior Preservation**
-   - [ ] All tests pass
-   - [ ] No test modifications (tests define behavior)
-   - [ ] Functionality unchanged
+   - [ ] All tests pass (Phase 5 verification: [X]/[X])
+   - [ ] Same test count as baseline (Phase 1: [X], Phase 5: [X])
+   - [ ] No test modifications: `git diff tests/` shows no changes
+   - [ ] Functionality unchanged (tests prove this)
 
 3. **Code Quality**
-   - [ ] Follows project conventions
-   - [ ] Proper naming
+   - [ ] Follows project conventions (CLAUDE.md patterns listed)
+   - [ ] Proper naming conventions maintained
+   - [ ] Code duplication reduced (Phase 5: [Before]% → [After]%)
+   - [ ] Complexity reduced (Phase 5: Grade [Before] → Grade [After])
    - [ ] Documentation updated if needed
 
-**Measurement:**
+4. **Incremental Process Verification**
+   - [ ] Scratchpad shows incremental steps taken (Phase 0.5)
+   - [ ] Tests run after each step (documented in implementation)
+   - [ ] No big-bang refactoring (multiple small commits)
+   - [ ] Each step had passing tests
+
+**Final Measurement Summary:**
+
+Reference Phase 5's Before/After comparison. Example:
 
 ```markdown
-## Modularity Improvement
+## Modularity Improvement (Evidence-Based)
+
+**Source:** Phase 5 Before/After Comparison
 
 **Cohesion:**
 - Before: Module handled 3 distinct responsibilities
 - After: 3 modules, each with single responsibility
-- Improvement: ✅ Yes
+- Evidence: `pylint R0904` violations: 3 → 0
+- Improvement: ✅ Yes (Verified by tool)
 
 **Coherence:**
 - Before: Related functions scattered across 3 files
-- After: Related functions grouped logically
-- Improvement: ✅ Yes
+- After: Related functions grouped logically in 1 module
+- Evidence: `tree` output shows clear module organization
+- Improvement: ✅ Yes (Verified by structure)
 
 **Coupling:**
 - Before: 15 direct imports, circular dependency
 - After: 8 imports, no circular dependencies
-- Improvement: ✅ Yes
+- Evidence: `grep -c import`: 15 → 8, `pydeps`: circular detected → none
+- Improvement: ✅ Yes (Verified by tools)
 
-**Overall:** Structure improved significantly
+**Complexity:**
+- Before: Average complexity 14.2 (Grade C)
+- After: Average complexity 7.1 (Grade A)
+- Evidence: `radon cc` output (see Phase 5)
+- Improvement: ✅ Yes (50% reduction)
+
+**Test Preservation:**
+- Before: 42/42 tests passing
+- After: 42/42 tests passing
+- Tests modified: 0
+- Evidence: `pytest` output identical, `git diff tests/` empty
+- Status: ✅ Behavior preserved
+
+**Overall:** Structure improved significantly with concrete evidence
+- 4 of 8 modularity criteria improved
+- 0 of 8 criteria degraded
+- All improvements verified by tools (not subjective)
 ```
 
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0.5: Refactoring scratchpad
 ✅ Phase 1: Baseline tests
 ✅ Phase 2: Identify refactoring opportunity
 ✅ Phase 3: Incremental refactoring
 ✅ Phase 4: Continuous testing
-🔄 Phase 5: Code review [IN PROGRESS] ◀── YOU ARE HERE
+✅ Phase 5: Measure improvement
+🔄 Phase 6: Code review [IN PROGRESS] ◀── YOU ARE HERE
 
 CURRENT TASK:
-Phase 5: Reviewing modularity improvements
-Status: Measuring cohesion/coherence/coupling
+Phase 6: Final code review and validation
+Status: Verifying all quality criteria met
 Started: [TIME]
 
 MODULARITY REVIEW:
@@ -1198,53 +1805,106 @@ When all phases complete:
 
 **Target:** [Files refactored]
 **Approach:** Incremental refactoring with continuous testing
+**Documentation:**
+- Scratchpad: ${SPEC_DIR}/YYYY-MM-DD-refactor-name-scratchpad.md
+- Before/After Evidence: See Phase 5 assessment
 
-### Modularity Improvements
+### Modularity Improvements (Evidence-Based)
+
+**Reference:** Phase 5 Before/After Comparison (skill-guidelines/modularity.md)
 
 **Cohesion:**
 - Before: Mixed responsibilities (validation + logic + formatting)
 - After: Single responsibility per module
+- Evidence: `pylint R0904` violations: 3 → 0
+- Tool Output: Module now has 1 clear purpose vs 3 before
 - Assessment: ✅ Significantly improved
 
 **Coherence:**
 - Before: Related functions scattered across files
 - After: Logical grouping of related functionality
+- Evidence: Module structure now matches domain concepts
+- Tool Output: No "utils.py" files, clear module names
 - Assessment: ✅ Significantly improved
 
 **Coupling:**
-- Before: 15 imports, circular dependency
+- Before: 15 imports, circular dependency detected
 - After: 8 imports, clean dependency graph
+- Evidence: `grep -c import`: 15 → 8, `pydeps`: circular → none
+- Tool Output: Max dependency depth reduced from 4 to 2
+- Assessment: ✅ Significantly improved (47% reduction)
+
+**Complexity:**
+- Before: Average cyclomatic complexity 14.2 (Grade C)
+- After: Average cyclomatic complexity 7.1 (Grade A)
+- Evidence: `radon cc -a` output (see Phase 5)
+- Tool Output: 50% complexity reduction
 - Assessment: ✅ Significantly improved
+
+**All 8 Modularity Criteria:**
+- Criteria improved: 4 (Cohesion, Coupling, Coherence, Complexity)
+- Criteria unchanged: 4 (maintained good ratings)
+- Criteria degraded: 0 ← **CRITICAL: Zero regressions**
+- Assessment: ✅ Overall modularity significantly improved
 
 ### Safety Verification
 
-- Baseline tests: 42/42 passing
-- After refactoring: 42/42 passing
+**Test Preservation:**
+- Baseline tests (Phase 1): 42/42 passing
+- After refactoring (Phase 5): 42/42 passing
 - Tests modified: 0 (behavior preserved)
+- Tests disabled: 0 (all original tests still active)
 - Regressions: None
+- Evidence: `git diff tests/` shows no changes
+
+**Verification Command:**
+```bash
+pytest tests/ -v
+# Output: 42 passed in X.XXs
+```
 
 ### Files Changed
 
 **Created:**
-- validation.py
-- business_logic.py
-- helpers.py
+- validation.py (extracted from processor.py)
+- business_logic.py (extracted from processor.py)
+- helpers.py (consolidated from utils*.py)
 
 **Modified:**
-- processor.py (refactored)
+- processor.py (refactored: 250 lines → 80 lines)
 
 **Removed:**
-- utils1.py (consolidated)
-- utils2.py (consolidated)
-- utils3.py (consolidated)
+- utils1.py (consolidated into helpers.py)
+- utils2.py (consolidated into helpers.py)
+- utils3.py (consolidated into helpers.py)
+
+**Metrics:**
+- Total lines of code: 450 → 380 (16% reduction)
+- Average function length: 35 lines → 18 lines
+- Code duplication: 12% → 2% (verified by jscpd)
 
 ### Incremental Steps Taken
 
-1. Extract validation → Tests pass ✅
-2. Separate business logic → Tests pass ✅
-3. Consolidate helpers → Tests pass ✅
+**Process:** All steps from Phase 0.5 scratchpad
 
-**Refactoring successful. Structure improved, behavior preserved.**
+1. Extract validation → Tests pass ✅ (pytest: 42/42)
+2. Separate business logic → Tests pass ✅ (pytest: 42/42)
+3. Consolidate helpers → Tests pass ✅ (pytest: 42/42)
+
+**Safety:** Tests run after EVERY step, no failures at any point
+
+### Evidence Summary
+
+**Objective Measurements:**
+- Complexity: `radon cc` Grade C → Grade A
+- Coupling: 15 imports → 8 imports
+- Duplication: 12% → 2%
+- Tests: 42/42 → 42/42 (preserved)
+- LOC: 450 → 380 (simplified)
+
+**All measurements from tools, not subjective assessment.**
+
+**Refactoring successful. Structure improved with concrete evidence, behavior preserved.**
 ```
 
 ---
@@ -1270,32 +1930,76 @@ When all phases complete:
 
 ### Modularity Focus
 
-**Cohesion (single responsibility):**
-- Each module does one thing well
-- No mixing of concerns
-- Clear, focused purpose
+**CRITICAL REFERENCE:** skill-guidelines/modularity.md
 
-**Coherence (logical boundaries):**
-- Related functionality grouped together
-- Module boundaries make sense
-- Easy to navigate codebase
+Refactoring is ALL ABOUT modularity improvement. Use the complete 8-criteria framework:
 
-**Coupling (minimal dependencies):**
-- Reduce import count
-- Eliminate circular dependencies
-- Clean, simple interfaces
+**The 8 Modularity Criteria (from modularity.md):**
 
-### Measurement
+1. **Cohesion** - Each module does ONE thing well
+   - Tool: `pylint --enable=R0904,R0902`
+   - Threshold: <5 public functions per module
+   - Evidence: Function count, responsibility count
 
-**Before refactoring:**
-- Count responsibilities per module
-- Map dependency graph
-- Document coupling issues
+2. **Coupling** - Minimal dependencies between modules
+   - Tool: `pydeps`, `grep -c import`
+   - Threshold: <10 imports, no circular dependencies
+   - Evidence: Import count, dependency graph
 
-**After refactoring:**
-- Compare metrics
-- Verify improvement
-- Document changes
+3. **Coherence** - Logical module boundaries
+   - Tool: `tree`, `find` for utils.py
+   - Threshold: No "junk drawer" modules
+   - Evidence: Module organization matches domain
+
+4. **Abstraction** - Appropriate abstraction levels
+   - Manual: Check layer violations
+   - Threshold: High-level doesn't know low-level details
+   - Evidence: No database code in API layer, etc.
+
+5. **Encapsulation** - Implementation details hidden
+   - Tool: `pylint --enable=W0212`
+   - Threshold: No external access to private methods
+   - Evidence: Private method usage, public API size
+
+6. **Testability** - Can test in isolation
+   - Tool: `pytest tests/unit/`
+   - Threshold: All tests pass without external dependencies
+   - Evidence: Test setup complexity, mock usage
+
+7. **Reusability** - Code can be reused elsewhere
+   - Manual: Check for hard-coded assumptions
+   - Threshold: Generic interfaces, no caller-specific code
+   - Evidence: Interface design, no tight coupling to use case
+
+8. **Complexity** - Low cyclomatic complexity
+   - Tool: `radon cc`, `radon mi`
+   - Threshold: Complexity <15, MI >20, functions <50 lines
+   - Evidence: Complexity grade, MI score
+
+**See modularity.md for:**
+- Complete tool commands for each criterion
+- Thresholds for pass/warning/fail
+- Example good vs bad code
+- Common over-evaluation traps
+
+### Measurement (REQUIRED)
+
+**Before refactoring (Phase 0.5):**
+- Run ALL 8 modularity assessments with tools
+- Document baseline metrics in scratchpad
+- Use objective measurements, not subjective assessment
+
+**After refactoring (Phase 5):**
+- Re-run ALL 8 modularity assessments with same tools
+- Create side-by-side comparison table
+- Verify improvement with concrete evidence
+- Require: At least 3 criteria improved, zero degraded
+
+**Evidence Required:**
+- Tool output (not "looks better")
+- Numeric metrics (not "more modular")
+- Before/after comparison (not "improved")
+- Pass/fail against thresholds (not subjective rating)
 
 ---
 
