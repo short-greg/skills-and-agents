@@ -8,35 +8,55 @@
 create-skill
 
 ## Background
-Creating effective AI coding assistant skills requires understanding skill structure, checklist generation, progress tracking, and documentation maintenance patterns. Without a structured process, skills end up incomplete, skip steps during execution, or fail to integrate with project conventions.
+Creating effective AI coding assistant skills requires understanding skill structure, checklist generation, progress tracking, and documentation maintenance patterns. Without a structured process, skills end up incomplete, skip steps during execution, or fail to integrate with project conventions. Skill creation is fundamentally similar to feature development - it requires defining requirements, planning structure, implementing content, and verifying quality.
 
 ## Skill Intent
-Enable consistent skill creation by guiding users through the complete process: from understanding requirements to producing a working SKILL.md file that follows framework conventions.
+Enable consistent skill creation through a workflow that reuses existing feature development patterns, adding skill-specific concerns like checklist generation rules, progress tracking format, and framework compliance verification.
 
 ## Skills in This Suite
 
 | Skill | Purpose | Type |
 |-------|---------|------|
-| `create-skill` | Create a new skill following framework conventions | Atomic |
+| `skill-workflow` | End-to-end orchestration from idea to working skill | Orchestrator |
+| `skill-define` | Define skill requirements and boundaries (uses feature-define pattern) | Atomic |
+| `skill-plan` | Plan skill phases and checklist rules (uses feature-plan pattern) | Atomic |
+| `skill-impl` | Write SKILL.md content (uses feature-impl pattern) | Atomic |
+| `skill-verify` | Verify skill follows framework conventions | Atomic |
 
 ### When to Use Each Skill
 
-**Use `create-skill` when:**
+**Use `skill-workflow` when:**
 - Creating a new skill from scratch
-- Converting an ad-hoc workflow into a reusable skill
-- Need structured guidance through skill creation
-- Want to ensure skill follows framework patterns
+- Want complete orchestration with verification gates
+- Unsure what already exists (it detects and resumes)
+
+**Use `skill-define` when:**
+- Have a skill idea that needs documentation
+- Need to clarify skill boundaries and use cases
+- Want to define inputs, outputs, and prerequisites
+
+**Use `skill-plan` when:**
+- Have approved skill requirements
+- Need to design phase structure and checklist rules
+
+**Use `skill-impl` when:**
+- Have approved skill plan
+- Ready to write SKILL.md content
+
+**Use `skill-verify` when:**
+- Skill is implemented
+- Need to verify framework compliance
 
 ## When to Use This Guideline
 **Use this guideline when:**
-- Setting up the create-skill skill for a project
+- Setting up the skill creation workflow for a project
 - Need to understand the skill creation process
 - Want to create skills that follow framework conventions
 
 **Do NOT use when:**
 - Modifying existing skills (edit directly)
-- Creating skill suites (use appropriate skill-guideline template)
-- Setting up repository structure (use setup-guidelines)
+- Creating skill suites from a guideline template (use that guideline directly)
+- Setting up repository structure (follow tool documentation)
 
 ## Guideline OKRs
 [See [references/goals-and-objectives.md](../references/goals-and-objectives.md)]
@@ -47,77 +67,219 @@ Enable consistent skill creation by guiding users through the complete process: 
 1. 100% of created skills have all required sections
 2. 100% of created skills include progress tracking
 3. Skills execute without missing steps or phases
+4. Skills verified against framework conventions
 
 ## Guideline Checklist
 **Process to create skills from this guideline:**
 
 - [ ] 1. Read this guideline and referenced framework docs
-- [ ] 2. Interview user for skill requirements
-- [ ] 3. Customize for repo type (prototype/production/library)
-- [ ] 4. Confirm skill design with user
-- [ ] 5. Write SKILL.md file:
-  - `${TOOL_CONFIG}/skills/create-skill/SKILL.md`
-- [ ] 6. Test skill execution
+- [ ] 2. Ensure feature-development skills exist (reused by this workflow)
+- [ ] 3. Interview user for skill-specific requirements
+- [ ] 4. Customize for repo type (prototype/production/library)
+- [ ] 5. Confirm skill designs with user
+- [ ] 6. Write SKILL.md files:
+  - `${TOOL_CONFIG}/skills/skill-workflow/SKILL.md`
+  - `${TOOL_CONFIG}/skills/skill-define/SKILL.md`
+  - `${TOOL_CONFIG}/skills/skill-plan/SKILL.md`
+  - `${TOOL_CONFIG}/skills/skill-impl/SKILL.md`
+  - `${TOOL_CONFIG}/skills/skill-verify/SKILL.md`
+- [ ] 7. Test skill execution
 
 ---
 
 # Process
 
-**How the create-skill skill creates its checklist on execution:**
+**How each skill creates its checklist on execution:**
 
 1. Read project documentation (see [references/skills-vs-agents.md](../references/skills-vs-agents.md) for tool-specific locations) to determine repo type and conventions
-2. Gather skill requirements from user
+2. Check for existing skill specs to determine starting point
 3. Based on skill complexity, include/exclude sections
 4. For each phase, add corresponding checklist items
-5. End with validation and testing items
+5. Add loop gates for verification failures
+6. End with testing and documentation items
 
-**Atomic skill (`create-skill`) checklist generation:**
+**Orchestrator (`skill-workflow`) checklist generation:**
+
+The orchestrator's checklist is composed from child skill checklists.
+
 ```yaml
 base_items:
   - "Read project documentation and confirm conventions"
+  - "Check for existing skill specs"
+  - "Determine starting point based on existing artifacts"
+
+phase_items:
+  define:
+    - "Run skill-define skill"
+    - "(If production) Review skill requirements"
+  plan:
+    - "Run skill-plan skill"
+    - "(If production) Review skill design"
+  implement:
+    - "Run skill-impl skill"
+  verify:
+    - "Run skill-verify skill"
+
+loop_gates:
+  - trigger: "review_rejected"
+    action: "go to previous skill for revision"
+  - trigger: "verification_failed"
+    action: "go to skill-impl to address issues"
+
+always_last:
+  - "Update project documentation if new patterns established"
+```
+
+**Atomic skill (`skill-define`) checklist generation:**
+
+This skill extends `feature-define` with skill-specific concerns.
+
+```yaml
+base_items:
+  - "Read project documentation for conventions"
   - "Gather skill name and purpose from user"
   - "Determine skill type (atomic/orchestrator/review)"
 
 phase_items:
   requirements:
     - "Define what problem skill solves"
-    - "Define when to use / when NOT to use"
-    - "Identify inputs and outputs"
-  design:
-    - "Design phase structure"
-    - "Define checklist generation rules"
-    - "Plan progress tracking format"
-  documentation:
-    - "Write all SKILL.md sections"
-    - "Add examples and edge cases"
-  validation:
-    - "Review against skill-template.md"
-    - "Test skill execution"
+    - "Define when to use (specific scenarios)"
+    - "Define when NOT to use (and what to use instead)"
+    - "Identify inputs (files, descriptions, specs)"
+    - "Identify outputs (code, docs, specs)"
+  boundaries:
+    - "Define prerequisites (what must exist)"
+    - "Define related skills (what composes with this)"
+    - "Identify risks and mitigations"
 
 conditional_items:
   - condition: "skill_type == 'orchestrator'"
     items:
-      - "Define atomic skills to call"
-      - "Define loop gates between skills"
-  - condition: "repo_type == 'production'"
-    items:
-      - "Add comprehensive error recovery"
-      - "Add rollback strategies"
+      - "Identify atomic skills to compose"
+      - "Define composition flow"
 
 always_last:
-  - "Verify skill follows framework conventions"
+  - "Write skill spec to ${SPEC_DIR}/skill-spec.md"
+```
+
+**Atomic skill (`skill-plan`) checklist generation:**
+
+This skill extends `feature-plan` with skill-specific structure.
+
+```yaml
+base_items:
+  - "Read project documentation for conventions"
+  - "Read approved skill spec"
+
+phase_items:
+  structure:
+    - "Design phase structure"
+    - "Define phase purposes and boundaries"
+    - "Plan phase transitions and gates"
+  checklist:
+    - "Define base items (always included)"
+    - "Define conditional items (based on repo type, inputs)"
+    - "Define loop gates (when to retry)"
+    - "Define final items (always last)"
+  tracking:
+    - "Design progress display format"
+    - "Define status reporting content"
+
+conditional_items:
+  - condition: "skill_type == 'orchestrator'"
+    items:
+      - "Define how child skill checklists compose"
+      - "Define orchestrator-level gates"
+  - condition: "repo_type == 'production'"
+    items:
+      - "Plan comprehensive error recovery"
+      - "Plan rollback strategies"
+
+always_last:
+  - "Write skill plan to ${SPEC_DIR}/skill-plan.md"
+```
+
+**Atomic skill (`skill-impl`) checklist generation:**
+
+This skill extends `feature-impl` for SKILL.md content.
+
+```yaml
+base_items:
+  - "Read project documentation for conventions"
+  - "Read approved skill plan"
+
+phase_items:
+  frontmatter:
+    - "Write YAML frontmatter (name, description, argument-hint)"
+  sections:
+    - "Write Background section"
+    - "Write Intent section"
+    - "Write Role section"
+    - "Write When to Use section"
+    - "Write Command section"
+    - "Write OKRs section"
+    - "Write Prerequisites section"
+    - "Write Risks section"
+    - "Write Process section (phases, checklist rules, error recovery)"
+    - "Write Deliverables section"
+    - "Write Reporting/Transparency section"
+    - "Write Fault Tolerance section"
+    - "Write Related Skills section"
+  examples:
+    - "Add examples and edge cases"
+    - "Add progress tracking display example"
+
+always_last:
+  - "Write SKILL.md to ${TOOL_CONFIG}/skills/[skill-name]/SKILL.md"
+```
+
+**Atomic skill (`skill-verify`) checklist generation:**
+
+This skill is unique to skill creation - verifies framework compliance.
+
+```yaml
+base_items:
+  - "Read skill-template.md for required sections"
+  - "Read created SKILL.md"
+
+verification_items:
+  structure:
+    - "Verify frontmatter present (name, description, argument-hint)"
+    - "Verify all required sections present"
+    - "Verify sections in correct order"
+  content:
+    - "Verify Background explains why skill exists"
+    - "Verify Intent is clear and specific"
+    - "Verify When to Use has clear boundaries"
+    - "Verify When NOT to Use lists alternatives"
+    - "Verify Prerequisites are complete"
+    - "Verify Risks identified with mitigations"
+  process:
+    - "Verify phases are logical and sequential"
+    - "Verify checklist generation rules are complete"
+    - "Verify gates between phases defined"
+    - "Verify error recovery documented"
+  tracking:
+    - "Verify progress display format defined"
+    - "Verify checklist markers documented"
+  quality:
+    - "Verify OKRs are measurable"
+    - "Verify deliverables clearly specified"
+    - "Verify fault tolerance addressed"
+
+always_last:
+  - "Document verification results in ${SPEC_DIR}/skill-verification.md"
+  - "Test skill execution"
 ```
 
 ---
 
 # Procedures
 
-## Procedure: Skill Creation (create-skill)
-**Purpose:** Create a complete SKILL.md file following framework conventions
+## Procedure: Skill Requirements (skill-define)
+**Purpose:** Define skill requirements and boundaries
 
 **Steps:**
-
-### Phase 1: Requirements Gathering
 1. **Get skill name** - Short, descriptive, kebab-case (e.g., `feature-impl`)
 2. **Get skill purpose** - One sentence describing what it does
 3. **Determine skill type:**
@@ -125,12 +287,23 @@ always_last:
    - **Orchestrator** - Coordinates multiple atomic skills
    - **Review** - Validates output of another skill
 4. **Define boundaries:**
-   - When to use this skill
+   - When to use this skill (specific scenarios)
    - When NOT to use (and what to use instead)
 5. **Identify inputs** - What does skill receive? (files, descriptions, specs)
 6. **Identify outputs** - What does skill produce? (code, docs, specs)
+7. **Identify prerequisites** - What must exist before skill runs?
+8. **Identify related skills** - What composes with this skill?
+9. **Identify risks and mitigations**
+10. Save to ${SPEC_DIR}/skill-spec.md
 
-### Phase 2: Phase Design
+**Override Points:**
+- Skill spec template format
+- Required sections
+
+## Procedure: Skill Planning (skill-plan)
+**Purpose:** Design skill phases and checklist generation rules
+
+**Steps:**
 1. **Break work into phases** - Each phase is a logical unit
 2. **Define phase purpose** - What each phase accomplishes
 3. **Define phase steps** - Concrete actions within each phase
@@ -140,16 +313,21 @@ always_last:
    - Conditional items (based on repo type, inputs)
    - Loop gates (when to retry)
    - Final items (always last)
+6. **Design progress tracking:**
+   - Progress display format
+   - Checklist markers (`[ ]`, `[x]`, `[-]`)
+   - Status reporting content
+7. Save to ${SPEC_DIR}/skill-plan.md
 
-### Phase 3: Progress Tracking Design
-1. **Define progress display format** - How phases and tasks are shown
-2. **Define checklist markers:**
-   - `[ ]` = pending
-   - `[x]` = completed
-   - `[-]` = skipped
-3. **Define status reporting** - What context to show
+**Override Points:**
+- Phase granularity
+- Progress tracking format
+- Checklist marker style
 
-### Phase 4: Write SKILL.md
+## Procedure: Skill Implementation (skill-impl)
+**Purpose:** Write SKILL.md content
+
+**Steps:**
 1. **Write frontmatter** - name, description, argument-hint
 2. **Write each section** from skill-template.md:
    - Background
@@ -165,17 +343,37 @@ always_last:
    - Reporting/Transparency
    - Fault Tolerance
    - Related Skills
-
-### Phase 5: Validation
-1. **Review against skill-template.md** - All sections present?
-2. **Check progress tracking** - Format correct?
-3. **Check checklist generation** - Rules complete?
-4. **Test execution** - Run skill, verify it works
+3. **Add examples** - Usage examples and edge cases
+4. **Add progress tracking example** - Show what progress display looks like
+5. Save to ${TOOL_CONFIG}/skills/[skill-name]/SKILL.md
 
 **Override Points:**
 - Section requirements (some may be optional for simple skills)
-- Progress tracking format
-- Checklist marker style
+
+## Procedure: Skill Verification (skill-verify)
+**Purpose:** Verify skill follows framework conventions
+
+**Steps:**
+1. **Review against skill-template.md** - All sections present?
+2. **Check structure** - Frontmatter, section order
+3. **Check content quality:**
+   - Background explains why skill exists
+   - Intent is clear and specific
+   - Boundaries clearly defined
+   - Prerequisites complete
+   - Risks identified with mitigations
+4. **Check process quality:**
+   - Phases are logical and sequential
+   - Checklist generation rules complete
+   - Gates between phases defined
+   - Error recovery documented
+5. **Check progress tracking** - Format correct?
+6. **Test execution** - Run skill, verify it works
+7. Document verification results
+
+**Override Points:**
+- Verification criteria
+- Quality thresholds
 
 ## Procedure: Evaluate Risks
 **Purpose:** Identify potential issues before skill creation
@@ -184,6 +382,7 @@ always_last:
 1. Check if similar skill already exists
 2. Verify skill doesn't overlap with existing skills
 3. Confirm skill scope is appropriate (not too broad/narrow)
+4. Verify skill name follows conventions
 
 **Override Points:**
 - Domain-specific risk checks
@@ -239,8 +438,25 @@ Use [skill-template.md](../templates/skill-template.md) as the base for creating
 13. **Fault Tolerance** - rollback, partial completion, recovery
 14. **Related Skills** - connections to other skills
 
-**Output location:**
-- `${TOOL_CONFIG}/skills/create-skill/SKILL.md`
+**Suite structure:**
+- `skill-workflow` orchestrator composes atomic skills
+- Orchestrator's checklist is composed from child skill checklists
+- Each atomic skill has its own progress tracking
+- Verification skill (`skill-verify`) is unique to skill creation
+
+**Composition pattern:**
+The orchestrator's checklist is dynamically composed by:
+1. Including base orchestrator items (read docs, detect state)
+2. For each child skill phase, including that skill's checklist
+3. Adding orchestrator-level gates and transitions
+4. Including final orchestrator items (testing, documentation)
+
+**Output locations:**
+- `${TOOL_CONFIG}/skills/skill-workflow/SKILL.md`
+- `${TOOL_CONFIG}/skills/skill-define/SKILL.md`
+- `${TOOL_CONFIG}/skills/skill-plan/SKILL.md`
+- `${TOOL_CONFIG}/skills/skill-impl/SKILL.md`
+- `${TOOL_CONFIG}/skills/skill-verify/SKILL.md`
 
 ---
 
@@ -411,3 +627,19 @@ update_if_needed:
 - [ ] Deliverables clearly specified
 - [ ] Fault tolerance addressed
 - [ ] Related skills identified
+
+---
+
+# Relationship to Feature Development
+
+This guideline composes skills from [feature-development.md](feature-development.md):
+
+| Skill Creation Skill | Based On | Additional Concerns |
+|---------------------|----------|---------------------|
+| `skill-define` | `feature-define` | Skill type, checklist inputs, related skills |
+| `skill-plan` | `feature-plan` | Checklist generation rules, progress tracking design |
+| `skill-impl` | `feature-impl` | SKILL.md sections, framework conventions |
+| `skill-verify` | (new) | Framework compliance verification |
+
+**Prerequisites:**
+Before using this guideline, ensure the feature-development skills are set up. The skill creation skills extend those patterns with skill-specific concerns.
