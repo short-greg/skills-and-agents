@@ -25,12 +25,13 @@ Quick reference for what needs to be done:
 - [ ] 2. Create or update CLAUDE.md with conventions
 - [ ] 3. Create specs/ folder for specifications
 - [ ] 4. Create ${TOOL_CONFIG}/skills/ directory
-- [ ] 5. (If parallel work needed) Set up worktrees
-- [ ] 6. Choose which skills to install (see decision tree)
-- [ ] 7. Copy skill templates from skill-setup-guidelines/
-- [ ] 8. Customize skills for your repo type
-- [ ] 9. Test first skill
-- [ ] 10. Iterate and add more skills as needed
+- [ ] 5. (If using autonomous agents) Create ${TOOL_CONFIG}/agents/ directory
+- [ ] 6. (If parallel work needed) Set up worktrees
+- [ ] 7. Choose which skills to install (see decision tree)
+- [ ] 8. Copy skill templates from skill-setup-guidelines/
+- [ ] 9. Customize skills for your repo type
+- [ ] 10. Test first skill
+- [ ] 11. Iterate and add more skills as needed
 
 ---
 
@@ -199,8 +200,13 @@ done
 
 # If not found, create for your tool
 mkdir -p .claude/skills/
-# or .cursor/skills/, .codex/skills/, etc.
+mkdir -p .claude/agents/  # If you plan to use autonomous agents
+# or .cursor/skills/, .cursor/agents/, etc.
 ```
+
+**Directory structure:**
+- `${TOOL_CONFIG}/skills/` - Skill SKILL.md files defining workflows
+- `${TOOL_CONFIG}/agents/` - Agent AGENT.md files for autonomous tasks (optional)
 
 Record the location as `${TOOL_CONFIG}` in your documentation.
 
