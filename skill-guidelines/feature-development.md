@@ -51,24 +51,33 @@ The **Feature Development Suite** provides a complete workflow from feature idea
 ```
 feature-workflow (orchestrator)
     │
-    ├─► Phase 1: feature-define
+    ├─► Phase 0: Detect current state
+    │       └─► Checks for existing PRD/plan/code
+    │
+    ├─► Phase 1: Repository-specific interview
+    │       └─► Gathers evaluation criteria and thresholds
+    │
+    ├─► Phase 2: feature-define
     │       └─► Creates PRD
     │
-    ├─► Phase 2: User review gate
+    ├─► Phase 3: User review gate
     │       └─► (Optional: feature-define-review for structured feedback)
     │
-    ├─► Phase 3: feature-plan
+    ├─► Phase 4: feature-plan
     │       └─► Creates development plan from PRD
     │
-    ├─► Phase 4: User review gate
+    ├─► Phase 5: User review gate
     │       └─► (Optional: feature-plan-review for structured feedback)
     │
-    ├─► Phase 5: Decide execution (parallel vs sequential)
+    ├─► Phase 6: Decide execution (parallel vs sequential)
     │
-    ├─► Phase 6-7: Propose & review implementation approach
+    ├─► Phase 7-8: Propose & review implementation approach
     │
-    └─► Phase 8: feature-impl
-            └─► Implements with TDD, produces working code
+    ├─► Phase 9: feature-impl
+    │       └─► Implements with TDD, produces working code
+    │
+    └─► Phase 10: Review modularity
+            └─► Verify against Phase 1 thresholds
 ```
 
 ---
@@ -210,12 +219,12 @@ Complete feature development orchestrator from requirements to implementation.
 ### Look for PRD
 Search for existing requirements documents:
 - Check ${SPEC_DIR} for *-prd.md files
-- If found: Read it and skip to Phase 3 (Plan Implementation)
+- If found: Read it and skip to Phase 4 (Plan Implementation)
 
 ### Look for Plan
 Search for existing development plans:
 - Check ${SPEC_DIR} for *-plan.md files
-- If found: Read it and skip to Phase 5 (Decide Execution)
+- If found: Read it and skip to Phase 6 (Decide Execution)
 
 ### Look for Partial Implementation
 Check if code mentioned in plan exists:
@@ -225,7 +234,193 @@ Check if code mentioned in plan exists:
 
 ---
 
-## Phase 1: Define Requirements
+## Phase 1: Repository-Specific Interview
+
+**Purpose:** Gather evaluation criteria and requirements specific to THIS repository.
+
+**This phase establishes the quality gates and thresholds that will be used throughout the workflow.**
+
+### 1.1: Quality Thresholds
+
+**Ask user:**
+- "What test coverage threshold is required for this project?"
+  - Examples: 80%, 90%, 100% for critical modules
+  - Default if not specified: 80%
+
+- "What code quality score is required?"
+  - Python: "What pylint score is required?" (e.g., ≥8.0, ≥9.0)
+  - JavaScript: "What eslint configuration should be used?"
+  - Default: Follow existing .pylintrc, .eslintrc, or project conventions
+
+- "Are there complexity limits?"
+  - Cyclomatic complexity threshold (e.g., <10, <15 per function)
+  - Function length limits (e.g., <50 lines)
+  - Default: Follow modularity.md recommendations
+
+**Document in:** `${SPEC_DIR}/repository-evaluation-criteria.md` or in skill configuration
+
+---
+
+### 1.2: Security Requirements
+
+**Ask user:**
+- "Are there security scanning tools configured for this project?"
+  - Python: bandit, safety
+  - JavaScript: npm audit, eslint-plugin-security
+  - General: git-secrets, trufflehog
+
+- "How should secrets and credentials be handled?"
+  - Environment variables? Secret management service?
+  - Are there .env files? Vault? AWS Secrets Manager?
+
+- "Are there authentication/authorization requirements for this feature?"
+  - Who can access this feature?
+  - What permissions are needed?
+
+**Document security requirements for reference during implementation.**
+
+---
+
+### 1.3: Performance Requirements
+
+**Ask user:**
+- "Are there response time requirements?"
+  - API endpoints: e.g., <100ms, <500ms, <1s
+  - UI interactions: e.g., <50ms for critical path
+  - Batch operations: e.g., process 1000 items in <5s
+
+- "Are there memory or CPU constraints?"
+  - Memory limits per request
+  - CPU usage limits
+
+- "Are there database query performance requirements?"
+  - Query time limits
+  - N+1 query prevention required?
+  - Database connection pooling limits?
+
+**If no specific requirements:** Use reasonable defaults and verify during implementation.
+
+---
+
+### 1.4: Approval Process
+
+**Ask user:**
+- "Who needs to approve before this feature is complete?"
+  - Tech lead? Product owner? Stakeholder?
+  - Multiple approvers?
+
+- "What review gates exist?"
+  - Code review (PR approval)?
+  - Design review?
+  - QA testing?
+  - Stakeholder demo?
+
+- "Are there deployment gates?"
+  - Staging environment testing?
+  - Production canary deployment?
+
+**Document the approval workflow to ensure all gates are met.**
+
+---
+
+### 1.5: Repository-Specific Conventions
+
+**Check for:**
+- Read CLAUDE.md or CONTRIBUTING.md for project-specific patterns
+- Identify test framework (pytest, jest, cargo test, etc.)
+- Identify code formatting tools (black, prettier, rustfmt, etc.)
+- Identify CI/CD configuration (.github/workflows/, .gitlab-ci.yml, etc.)
+
+**Document findings:**
+```markdown
+## Repository Evaluation Criteria
+
+**Quality Thresholds:**
+- Test coverage: ≥85%
+- Pylint score: ≥8.5
+- Cyclomatic complexity: <10 per function
+
+**Security Requirements:**
+- Security scan: bandit (must pass with 0 high/medium issues)
+- Secret handling: Environment variables via .env (never commit)
+- Authentication: All API endpoints require JWT token
+
+**Performance Requirements:**
+- API response time: <100ms (95th percentile)
+- Database queries: <50ms per query
+- N+1 prevention: Required (use eager loading)
+
+**Approval Process:**
+- Code review: Tech lead approval required
+- Testing: QA team validation required
+- Demo: Stakeholder sign-off required
+
+**Tools:**
+- Testing: pytest with pytest-cov
+- Linting: pylint, black
+- Security: bandit, safety
+- CI/CD: GitHub Actions (.github/workflows/test.yml)
+```
+
+---
+
+**PROGRESS TRACKING:**
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 FEATURE-WORKFLOW PROGRESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PHASES:
+✅ Phase 0: Detect current state
+🔄 Phase 1: Repository-specific interview [IN PROGRESS] ◀── YOU ARE HERE
+⏸️ Phase 2: Define requirements
+⏸️ Phase 3: Review requirements
+⏸️ Phase 4: Plan implementation
+⏸️ Phase 5: Review plan
+⏸️ Phase 6: Decide execution strategy
+⏸️ Phase 7: Propose implementation
+⏸️ Phase 8: Review proposal
+⏸️ Phase 9: Implement
+⏸️ Phase 10: Review modularity
+
+CURRENT TASK:
+Phase 1: Gathering repository-specific evaluation criteria
+Status: Interviewing user for quality thresholds and requirements
+Started: [TIME]
+
+CHECKLIST:
+✅ Quality thresholds defined
+✅ Security requirements documented
+🔲 Performance requirements gathered
+🔲 Approval process confirmed
+🔲 Repository conventions identified
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+**Output:** `${SPEC_DIR}/repository-evaluation-criteria.md` with all thresholds and requirements documented
+
+**Gate:** User confirms all requirements gathered correctly
+
+---
+
+**Why This Matters:**
+
+These criteria will be used to evaluate:
+- feature-impl completion (Phase 9: Assess Quality)
+- Test coverage thresholds
+- Security scan requirements
+- Performance benchmarks
+- Approval gates
+
+**Defining them upfront prevents:**
+- Moving goalposts during implementation
+- Subjective "looks good" evaluations
+- Missing critical requirements
+- Rework due to unclear standards
+
+---
+
+## Phase 2: Define Requirements
 
 **Only execute if no PRD exists.**
 
@@ -238,7 +433,7 @@ Create the Product Requirements Document:
 
 ---
 
-## Phase 2: Review Requirements
+## Phase 3: Review Requirements
 
 **User Review Gate**
 
@@ -248,11 +443,11 @@ Present the PRD to the user:
 3. Ask: "Does this PRD capture the requirements correctly?"
 
 **If changes requested:** Update and return to this phase
-**If approved:** Proceed to Phase 3
+**If approved:** Proceed to Phase 4
 
 ---
 
-## Phase 3: Plan Implementation
+## Phase 4: Plan Implementation
 
 **Only execute if no plan exists.**
 
@@ -265,7 +460,7 @@ Create the development plan from PRD:
 
 ---
 
-## Phase 4: Review Plan
+## Phase 5: Review Plan
 
 **User Review Gate**
 
@@ -276,11 +471,11 @@ Present the plan:
 4. Ask: "Does this plan look good?"
 
 **If changes requested:** Update and return to this phase
-**If approved:** Proceed to Phase 5
+**If approved:** Proceed to Phase 6
 
 ---
 
-## Phase 5: Decide Execution Strategy
+## Phase 6: Decide Execution Strategy
 
 **Analyze the plan to determine execution approach.**
 
@@ -296,11 +491,11 @@ Check for parallelization opportunities:
 Stop here - parallel execution happens in separate sessions.
 
 **If no → Sequential execution:**
-Proceed to Phase 6
+Proceed to Phase 7
 
 ---
 
-## Phase 6: Propose Implementation
+## Phase 7: Propose Implementation
 
 **Design the implementation approach WITHOUT writing code.**
 
@@ -314,7 +509,7 @@ Present to user:
 
 ---
 
-## Phase 7: Review Proposal
+## Phase 8: Review Proposal
 
 **User Review Gate**
 
@@ -323,12 +518,12 @@ Ask:
 - "Any concerns about modularity or architecture?"
 - "Should I proceed with implementation?"
 
-**If changes requested:** Revise and return to Phase 6
-**If approved:** Proceed to Phase 8
+**If changes requested:** Revise and return to Phase 7
+**If approved:** Proceed to Phase 9
 
 ---
 
-## Phase 8: Implement
+## Phase 9: Implement
 
 **Execute the implementation:**
 
@@ -344,13 +539,17 @@ Follow TDD implementation process:
 5. Run tests
 6. Document
 
+**Note:** Use evaluation criteria from Phase 1 (repository-specific interview) to guide implementation quality standards.
+
 **Output:** Implemented feature with passing tests
 
 ---
 
-## Phase 9: Review Modularity
+## Phase 10: Review Modularity
 
 **Evaluate code quality against modularity criteria.**
+
+**Note:** Verify against thresholds from Phase 1 (repository-specific interview) including test coverage, code quality scores, complexity limits, security requirements, and performance benchmarks.
 
 ### Cohesion Check
 - Does each module have a single, clear purpose?
@@ -365,12 +564,26 @@ Follow TDD implementation process:
 - Can modules be tested independently?
 - Are interfaces clean and simple?
 
+### Threshold Verification
+- Test coverage meets Phase 1 threshold?
+- Code quality score meets Phase 1 requirement?
+- Complexity within Phase 1 limits?
+- Security scans pass Phase 1 requirements?
+- Performance meets Phase 1 benchmarks?
+
 **Present findings:**
 ```
 Modularity Assessment:
 ✓/✗ Cohesion: [explanation]
 ✓/✗ Coherence: [explanation]
 ✓/✗ Loose Coupling: [explanation]
+
+Quality Thresholds (from Phase 1):
+✓/✗ Test coverage: [actual]% vs [threshold]%
+✓/✗ Code quality: [actual score] vs [threshold]
+✓/✗ Complexity: [actual] vs [limit]
+✓/✗ Security: [scan results]
+✓/✗ Performance: [actual] vs [requirement]
 
 Recommendations:
 - [any refactoring suggestions]
@@ -462,9 +675,243 @@ PRD at `${SPEC_DIR}/YYYY-MM-DD-feature-name-prd.md` containing:
 
 ---
 
-### Phase 1: Background and Context
+## Phase 1: Interview & Gather Requirements
+
+**Purpose:** Conduct comprehensive interview to gather all information needed for a complete PRD.
+
+### 1.1: Feature Context Interview
+
+**Ask user:**
+
+1. **Problem Definition:**
+   - "What problem does this feature solve?"
+   - "Who currently experiences this problem?"
+   - "How are they solving it now (workarounds)?"
+   - "Why is solving it important/urgent now?"
+
+2. **Target Users:**
+   - "Who are the primary users of this feature?" (specific personas)
+   - "Who are the secondary users?" (indirect beneficiaries)
+   - "Are there admin/operator roles involved?"
+   - "What permissions/roles are needed?"
+
+3. **Success Criteria:**
+   - "How will we measure success for this feature?"
+   - "What metrics matter?" (usage, engagement, conversion, performance)
+   - "What defines 'done' from a product perspective?"
+
+**Document answers for use in background section (Phase 2).**
+
+---
+
+### 1.2: Visual Materials Request
+
+**Ask user:**
+
+1. **UI Mockups/Designs:**
+   - "Do you have UI mockups or wireframes?"
+     - Figma links
+     - Sketch files
+     - Adobe XD designs
+     - Hand-drawn sketches (photos)
+
+2. **Reference Screenshots:**
+   - "Do you have screenshots of similar features to reference?"
+   - "Are there competitor features to emulate?"
+   - "Are there existing UI patterns in the app to follow?"
+
+3. **User Flow Diagrams:**
+   - "Do you have user flow diagrams showing the journey?"
+   - "Are there state diagrams for complex workflows?"
+   - "Are there interaction patterns documented?"
+
+**Gather all materials:**
+- Save mockups to `${SPEC_DIR}/mockups/YYYY-MM-DD-feature-name/`
+- Save screenshots to `${SPEC_DIR}/screenshots/YYYY-MM-DD-feature-name/`
+- Note links/paths in requirements doc
+
+**If no visual materials provided:**
+- "Would you like to describe the UI verbally?" (capture description)
+- "Should UI design be deferred to planning phase?" (note as TBD)
+
+---
+
+### 1.3: Scope Clarification Interview
+
+**Ask user:**
+
+1. **Must-Have Requirements:**
+   - "What absolutely MUST be included in v1?" (non-negotiable)
+   - "What is the minimum viable version?"
+   - "What cannot be deferred?"
+
+2. **Should-Have Requirements:**
+   - "What should be included if time permits?" (important but not critical)
+   - "What adds significant value but isn't essential?"
+
+3. **Nice-to-Have Requirements:**
+   - "What could be deferred to v2?" (future enhancements)
+   - "What are 'stretch goals'?"
+
+4. **Explicitly Out of Scope:**
+   - "What is explicitly NOT included?" (prevent scope creep)
+   - "What similar features should we NOT build?"
+   - "What edge cases are we explicitly ignoring for v1?"
+
+**Document scope boundaries clearly** to prevent misunderstandings later.
+
+---
+
+### 1.4: User Stories Seed Interview
+
+**Ask user (for each persona identified in 1.1):**
+
+1. **Primary Persona Stories:**
+   - "As a [primary persona], what do you want to accomplish with this feature?"
+   - "What specific actions will [persona] take?"
+   - "What value does [persona] get from this?"
+
+2. **Secondary Persona Stories:**
+   - Same questions for secondary users
+   - Admin/operator stories if applicable
+
+3. **Story Prioritization:**
+   - "Which stories are absolutely critical?" (must-have)
+   - "Which stories are important but can be deferred?" (should-have)
+   - "Which stories are nice-to-have?" (could-defer)
+
+**Capture raw user story ideas** for Phase 3 (User Stories phase).
+
+---
+
+### 1.5: Context and Constraints
+
+**Ask user:**
+
+1. **Related Work:**
+   - "Are there existing features this builds upon?"
+   - "Are there features this replaces?"
+   - "What features does this integrate with?"
+
+2. **Technical Constraints:**
+   - "Are there known technical limitations?" (API limits, browser constraints)
+   - "Are there performance requirements?" (response time, throughput)
+   - "Are there scalability requirements?" (user count, data volume)
+
+3. **Business Constraints:**
+   - "Are there timeline constraints?" (deadlines, releases)
+   - "Are there budget constraints?" (development time limits)
+   - "Are there legal/compliance requirements?" (GDPR, accessibility, etc.)
+
+**Document all constraints** for reference in PRD and planning.
+
+---
+
+### Interview Summary Document
+
+**Create:** `${SPEC_DIR}/YYYY-MM-DD-feature-name-interview-notes.md`
+
+```markdown
+# Feature Interview Notes: [Feature Name]
+
+**Date:** YYYY-MM-DD
+**Participants:** [Names]
+
+## Feature Context
+- Problem: [Description]
+- Current Workaround: [Description]
+- Urgency: [Why now]
+
+## Target Users
+- Primary: [Persona 1]
+- Secondary: [Persona 2]
+- Admin: [Persona 3]
+
+## Visual Materials
+- Mockups: [Links/paths]
+- Screenshots: [Links/paths]
+- Flow diagrams: [Links/paths]
+
+## Scope
+**Must-Have:**
+- [Requirement 1]
+- [Requirement 2]
+
+**Should-Have:**
+- [Requirement 3]
+
+**Nice-to-Have:**
+- [Requirement 4]
+
+**Out of Scope:**
+- [Excluded item 1]
+- [Excluded item 2]
+
+## User Story Seeds
+**Primary Persona:**
+- Story seed 1
+- Story seed 2
+
+**Secondary Persona:**
+- Story seed 3
+
+## Constraints
+**Technical:**
+- [Constraint 1]
+
+**Business:**
+- [Constraint 2]
+
+**Legal/Compliance:**
+- [Constraint 3]
+
+## Success Metrics
+- [Metric 1]
+- [Metric 2]
+```
+
+**PROGRESS TRACKING:**
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 FEATURE-DEFINE PROGRESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PHASES:
+✅ Phase 0: Intake
+🔄 Phase 1: Interview & Gather Requirements [IN PROGRESS] ◀── YOU ARE HERE
+⏸️ Phase 2: Background
+⏸️ Phase 3: User Stories
+⏸️ Phase 4: OKRs
+⏸️ Phase 5: UI Designs
+⏸️ Phase 6: Non-Technical Risks
+⏸️ Phase 7: Scope Boundaries
+⏸️ Phase 8: Write PRD
+⏸️ Phase 9: Review and Confirmation
+
+CURRENT TASK:
+Phase 1: Interviewing user to gather requirements and materials
+Status: Collecting visual materials and scope clarifications
+Started: [TIME]
+
+CHECKLIST:
+✅ Feature context interview complete
+✅ Visual materials requested
+🔲 Scope clarification complete
+🔲 User story seeds gathered
+🔲 Constraints documented
+🔲 Interview summary created
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+**Gate:** User confirms all questions answered, materials gathered, interview summary accurate
+
+---
+
+### Phase 2: Background and Context
 
 **Purpose:** Establish why this feature matters.
+
+**Note:** Use interview notes from Phase 1.
 
 Write background answering:
 - What problem does this solve?
@@ -478,9 +925,11 @@ Keep to 3-5 paragraphs maximum.
 
 ---
 
-### Phase 2: User Stories
+### Phase 3: User Stories
 
 **Purpose:** Define who needs what and why.
+
+**Note:** Expand story seeds from Phase 1.4.
 
 1. **Identify Personas**
    - Primary users (main beneficiaries)
@@ -505,7 +954,7 @@ Keep to 3-5 paragraphs maximum.
 
 ---
 
-### Phase 3: OKRs (Success Criteria)
+### Phase 4: OKRs (Success Criteria)
 
 **Purpose:** Define outcome-oriented success criteria.
 
@@ -535,9 +984,11 @@ Keep to 3-5 paragraphs maximum.
 
 ---
 
-### Phase 4: UI Designs
+### Phase 5: UI Designs
 
 **Purpose:** Capture or describe the user interface.
+
+**Note:** Reference materials from Phase 1.2.
 
 If UI mockups provided:
 - Include links or embed images
@@ -558,9 +1009,11 @@ For non-UI features (API/backend):
 
 ---
 
-### Phase 5: Non-Technical Risks
+### Phase 6: Non-Technical Risks
 
 **Purpose:** Identify business, user, and operational risks.
+
+**Note:** Reference constraints from Phase 1.5.
 
 Categories:
 - **User Risks:** Adoption, confusion, workflow disruption
@@ -578,9 +1031,11 @@ For each risk:
 
 ---
 
-### Phase 6: Scope Boundaries
+### Phase 7: Scope Boundaries
 
 **Purpose:** Define explicit out-of-scope items.
+
+**Note:** Use scope clarifications from Phase 1.3.
 
 1. **List What's NOT Included**
    - Features explicitly excluded
@@ -595,7 +1050,7 @@ For each risk:
 
 ---
 
-### Phase 7: Write PRD Document
+### Phase 8: Write PRD Document
 
 **Purpose:** Compile all sections into formal document.
 
@@ -608,27 +1063,27 @@ Create file: `${SPEC_DIR}/YYYY-MM-DD-feature-name-prd.md`
 **Status:** Draft
 
 ## Background
-[From Phase 1]
-
-## User Stories
 [From Phase 2]
 
-## OKRs
+## User Stories
 [From Phase 3]
 
-## UI Design
+## OKRs
 [From Phase 4]
 
-## Non-Technical Risks
+## UI Design
 [From Phase 5]
 
-## Out of Scope
+## Non-Technical Risks
 [From Phase 6]
+
+## Out of Scope
+[From Phase 7]
 ```
 
 ---
 
-### Phase 8: Review and Confirmation
+### Phase 9: Review and Confirmation
 
 **Purpose:** Get stakeholder sign-off.
 
@@ -714,6 +1169,7 @@ Read the PRD file and extract all sections.
 ### Phase 2: Validate Structure
 
 Check all required sections present:
+- [ ] Interview Notes (if exists)
 - [ ] Background
 - [ ] User Stories
 - [ ] OKRs
@@ -721,7 +1177,18 @@ Check all required sections present:
 - [ ] Risks
 - [ ] Out of Scope
 
-### Phase 3: Validate User Stories
+### Phase 3: Validate Interview Notes (if exists)
+
+Check interview notes for:
+- [ ] Feature context documented
+- [ ] Target users identified
+- [ ] Success criteria defined
+- [ ] Visual materials gathered or noted as TBD
+- [ ] Scope boundaries clarified (must-have/should-have/nice-to-have)
+- [ ] User story seeds captured
+- [ ] Constraints documented
+
+### Phase 4: Validate User Stories
 
 Check user stories are:
 - [ ] Specific personas (not "user")
@@ -730,7 +1197,7 @@ Check user stories are:
 - [ ] Independent
 - [ ] Prioritized
 
-### Phase 4: Validate OKRs
+### Phase 5: Validate OKRs
 
 Check OKRs are:
 - [ ] Outcome-oriented (not implementation)
@@ -738,7 +1205,7 @@ Check OKRs are:
 - [ ] High-level
 - [ ] Map to user stories
 
-### Phase 5: Identify Gaps
+### Phase 6: Identify Gaps
 
 Check for:
 - Unresolved questions
@@ -746,7 +1213,7 @@ Check for:
 - Missing edge cases
 - Undefined behaviors
 
-### Phase 6: Provide Feedback
+### Phase 7: Provide Feedback
 
 Generate review report:
 
@@ -757,9 +1224,15 @@ Generate review report:
 **Status:** Approved / Needs Changes
 
 ## Structure Validation
+- [x] Interview notes present
 - [x] Background present
 - [x] User stories present
 - [ ] Missing: UI Design section
+
+## Interview Notes Validation
+- [x] Feature context complete
+- [x] Visual materials documented
+- [ ] Issue: Missing constraints documentation
 
 ## User Stories Validation
 - [x] Specific personas
@@ -825,12 +1298,15 @@ Do NOT use when:
 ## Output
 
 Development plan at `${SPEC_DIR}/YYYY-MM-DD-feature-name-plan.md` containing:
-- Clarified requirements
+- Clarified requirements (with separate clarifications document)
 - Risk assessment
 - Design options with recommendation
 - Task breakdown with dependencies
 - System-level OKRs
 - Implementation roadmap
+
+Additionally creates:
+- `${SPEC_DIR}/YYYY-MM-DD-feature-name-clarifications.md` - Comprehensive record of technical interview questions and answers
 
 ## Process
 
@@ -858,40 +1334,250 @@ Development plan at `${SPEC_DIR}/YYYY-MM-DD-feature-name-plan.md` containing:
 
 ---
 
-### Phase 1: Question Resolution
+## Phase 1: Question Resolution & Technical Interview
 
-**Purpose:** Identify and resolve ambiguities in requirements.
+**Purpose:** Identify and resolve ALL ambiguities in requirements BEFORE designing the solution.
 
-1. **Identify Questions**
-   Review PRD for ambiguities in:
-   - Scope (in vs. out?)
-   - Requirements (must-have vs. nice-to-have?)
-   - Behavior (what happens when X?)
-   - Integration (how interact with existing?)
-   - Constraints (performance? compatibility?)
+### 1.1: Generate Questions from PRD
 
-2. **Check for Better Designs**
-   Even if requirements seem clear:
-   - Is there a simpler approach?
-   - Are there existing patterns to follow?
-   - Would a different architecture be better?
+**Review PRD systematically for ambiguities:**
 
-3. **Present Questions**
-   Group by priority:
-   - **Critical** (blocking design)
-   - **Important** (affects design options)
-   - **Nice to clarify** (minor impact)
+1. **Scope Questions:**
+   - Are there features mentioned without clear boundaries?
+   - Is "in scope" vs "out of scope" crystal clear?
+   - Are there assumptions that need verification?
 
-4. **Document Answers**
-   Update understanding with clarified requirements.
+2. **Requirements Questions:**
+   - Which requirements are must-have vs nice-to-have?
+   - Are there conflicting requirements?
+   - Are requirements measurable/testable?
 
-**Gate:** All critical questions answered.
+3. **Behavior Questions:**
+   - What happens when [edge case]?
+   - What happens if [error condition]?
+   - What happens when [concurrent users]?
+   - What are the state transitions?
+
+4. **Integration Questions:**
+   - How does this interact with existing systems?
+   - What APIs/interfaces are involved?
+   - What data flows between components?
+   - Are there authentication/authorization requirements?
+
+5. **Constraint Questions:**
+   - What are the performance requirements? (response time, throughput)
+   - What are the scalability requirements? (users, data volume)
+   - Are there compatibility requirements? (browsers, devices, API versions)
+   - Are there legal/compliance requirements?
+
+**Document all questions in a structured list.**
+
+---
+
+### 1.2: Check for Better Design Approaches
+
+**Even if requirements seem clear, ask:**
+
+1. **Simplicity Check:**
+   - "Is there a simpler approach that achieves the same goal?"
+   - "Are we over-engineering this?"
+   - "Can we reuse existing patterns instead of creating new ones?"
+
+2. **Pattern Check:**
+   - "What existing patterns in the codebase should we follow?"
+   - "Have we solved similar problems before?"
+   - "Are there industry-standard approaches?"
+
+3. **Architecture Check:**
+   - "Does this fit the current architecture?"
+   - "Would a different architecture be more appropriate?"
+   - "Are we creating technical debt?"
+
+**Document alternative approaches for discussion.**
+
+---
+
+### 1.3: Request Technical Visual Materials
+
+**Ask user for technical diagrams:**
+
+1. **Architecture Diagrams:**
+   - "Do you have system architecture diagrams?"
+   - "Are there component diagrams showing relationships?"
+   - "Are there deployment diagrams?"
+
+2. **Data Flow Diagrams:**
+   - "Do you have data flow diagrams?"
+   - "Are there sequence diagrams for key interactions?"
+   - "Are there state machine diagrams?"
+
+3. **Database Schema:**
+   - "Do you have entity-relationship diagrams?"
+   - "Are there database schema designs?"
+   - "What are the data models?"
+
+**If materials exist:**
+- Save to `${SPEC_DIR}/diagrams/YYYY-MM-DD-feature-name/`
+- Reference in plan document
+
+**If materials don't exist:**
+- Note as "To be designed in Phase 3 (Structural Design Options)"
+- May need to create these as part of planning
+
+---
+
+### 1.4: Prioritize and Present Questions
+
+**Group questions by priority:**
+
+#### Critical Questions (Blocking Design)
+Questions that MUST be answered before any design can proceed:
+- [Question 1]
+- [Question 2]
+
+#### Important Questions (Affects Design Options)
+Questions that significantly impact which design approach to choose:
+- [Question 3]
+- [Question 4]
+
+#### Nice to Clarify (Minor Impact)
+Questions that would be good to resolve but don't block progress:
+- [Question 5]
+- [Question 6]
+
+**Present to user in this prioritized format.**
+
+---
+
+### 1.5: Conduct Technical Interview
+
+**Ask user for answers to all questions:**
+
+**For each critical question:**
+- Ask the question
+- Document the answer
+- Ask follow-up clarifications if needed
+- Confirm understanding: "So you're saying [restate answer]?"
+
+**For important questions:**
+- Same process as critical questions
+- May reveal additional design constraints
+
+**For nice-to-clarify questions:**
+- Ask if time permits
+- Note "TBD" if not critical for v1
+
+---
+
+### 1.6: Document Clarified Requirements
+
+**Create:** `${SPEC_DIR}/YYYY-MM-DD-feature-name-clarifications.md`
+
+```markdown
+# Requirements Clarifications: [Feature Name]
+
+**Date:** YYYY-MM-DD
+**PRD:** [link to PRD]
+
+## Critical Questions & Answers
+
+### Q1: [Question]
+**Answer:** [User's answer]
+**Implication:** [How this affects design]
+
+### Q2: [Question]
+**Answer:** [User's answer]
+**Implication:** [How this affects design]
+
+## Important Questions & Answers
+
+### Q3: [Question]
+**Answer:** [User's answer]
+**Implication:** [How this affects design options]
+
+## Technical Visual Materials
+
+**Received:**
+- Architecture diagram: [path/link]
+- Data flow diagram: [path/link]
+
+**To be created:**
+- Component diagram (will create in Phase 3)
+- Database schema (will create in Phase 3)
+
+## Alternative Approaches Considered
+
+**Approach 1:** [Description]
+- Pros: [List]
+- Cons: [List]
+- User feedback: [Comments]
+
+**Approach 2:** [Description]
+- Pros: [List]
+- Cons: [List]
+- User feedback: [Comments]
+
+## Updated Requirements
+
+Based on clarifications, the following requirements are now clear:
+- [Requirement 1]: [Clarified version]
+- [Requirement 2]: [Clarified version]
+```
+
+**PROGRESS TRACKING:**
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 FEATURE-PLAN PROGRESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PHASES:
+✅ Phase 0: Intake and Context
+🔄 Phase 1: Question Resolution & Technical Interview [IN PROGRESS] ◀── YOU ARE HERE
+⏸️ Phase 2: Risk and Complexity Analysis
+⏸️ Phase 3: Structural Design Options
+⏸️ Phase 4: Task Decomposition
+⏸️ Phase 5: System-Level OKRs
+⏸️ Phase 6: Detailed Development Plan
+⏸️ Phase 7: Write Plan Document
+
+CURRENT TASK:
+Phase 1: Conducting technical interview to resolve ambiguities
+Status: Gathering answers to critical and important questions
+Started: [TIME]
+
+CHECKLIST:
+✅ Generated questions from PRD
+✅ Checked for better design approaches
+✅ Requested technical visual materials
+✅ Prioritized questions
+🔲 Conducted technical interview
+🔲 Documented clarifications
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+**Gate:** All critical questions answered, clarifications documented
+
+**Why This Matters:**
+
+Resolving questions NOW prevents:
+- Design rework (discovering requirements during implementation)
+- Multiple design iterations (unclear constraints)
+- Implementation delays (blocking questions during coding)
+- Scope creep (undefined boundaries)
+
+**Answering questions upfront enables:**
+- Accurate design (clear requirements)
+- Better options (understanding constraints)
+- Realistic estimates (known unknowns resolved)
+- Stakeholder alignment (confirmed understanding)
 
 ---
 
 ### Phase 2: Risk and Complexity Analysis
 
 **Purpose:** Identify technical risks and complexity factors.
+
+**Note:** Reference clarifications from Phase 1.6 to inform risk assessment.
 
 1. **Identify Risks**
    - Technical uncertainty (unfamiliar tech?)
@@ -932,6 +1618,8 @@ Development plan at `${SPEC_DIR}/YYYY-MM-DD-feature-name-plan.md` containing:
 ### Phase 3: Structural Design Options
 
 **Purpose:** Propose multiple design options with trade-offs.
+
+**Note:** Use constraints and requirements from Phase 1.6 clarifications document.
 
 1. **Design File Hierarchy**
    For each option, show:
@@ -1090,12 +1778,13 @@ Create: `${SPEC_DIR}/YYYY-MM-DD-feature-name-plan.md`
 **Date:** YYYY-MM-DD
 **Status:** Approved
 **PRD:** [link to PRD]
+**Clarifications:** [link to YYYY-MM-DD-feature-name-clarifications.md]
 
 ## Overview
 [Summary]
 
 ## Requirements
-[Clarified from Phase 1]
+[Clarified from Phase 1 - reference clarifications document]
 
 ## System-Level OKRs
 [From Phase 5]
@@ -1123,10 +1812,14 @@ Create: `${SPEC_DIR}/YYYY-MM-DD-feature-name-plan.md`
 
 ## Best Practices
 
-### Question Resolution
+### Question Resolution & Technical Interview
 - Ask early, don't discover during implementation
-- Be specific
+- Be specific and systematic in generating questions
 - Prioritize blocking vs. nice-to-clarify
+- Request visual materials (architecture diagrams, data flows)
+- Document all answers in clarifications document
+- Confirm understanding by restating answers
+- Consider alternative approaches even when requirements seem clear
 
 ### Design Options
 - Show trade-offs for each
@@ -1296,10 +1989,11 @@ Implement a feature from an approved development plan using TDD, following proje
 
 **Key Results:**
 - KR1: All acceptance criteria from plan have passing tests (100% coverage of requirements)
-- KR2: Test coverage ≥ [TEST_COVERAGE_THRESHOLD from repo interview]%
+- KR2: Test coverage ≥ [TEST_COVERAGE_THRESHOLD from Phase 1 repository interview]%
 - KR3: All modularity criteria pass (see skill-guidelines/modularity.md)
 - KR4: Code follows all conventions from CLAUDE.md (verified by linter/review)
-- KR5: Performance requirements met (if applicable, from repo interview)
+- KR5: Performance requirements met (if applicable, from Phase 1 repository interview)
+- KR6: Security requirements met (from Phase 1 repository interview)
 
 ## Evaluation Criteria
 
@@ -1312,9 +2006,10 @@ This skill is **complete** when ALL of the following are verified:
 - [ ] Error conditions handled and tested: [List error scenarios]
 
 **Quality:**
-- [ ] Test coverage ≥ [THRESHOLD]%: `pytest --cov=src --cov-report=term`
-- [ ] No linting errors: `pylint src/ --exit-zero` (score ≥ 8.0)
+- [ ] Test coverage ≥ [THRESHOLD from Phase 1]%: `pytest --cov=src --cov-report=term`
+- [ ] No linting errors: `pylint src/ --exit-zero` (score ≥ [THRESHOLD from Phase 1])
 - [ ] Modularity assessment PASS: All 8 criteria ✅ (see Phase 7)
+- [ ] Complexity within limits from Phase 1: `radon cc src/ -a -nb`
 
 **Conventions:**
 - [ ] Uses patterns from CLAUDE.md: [List specific patterns used]
@@ -1330,11 +2025,14 @@ This skill is **complete** when ALL of the following are verified:
 - [ ] Input validation for all user inputs
 - [ ] No secrets in code: `git secrets --scan`
 - [ ] Dependencies scanned: `safety check` (Python) or `npm audit` (JS)
+- [ ] Security tools from Phase 1 pass with 0 high/medium issues
+- [ ] Authentication/authorization requirements from Phase 1 met
 
 **Performance (if applicable):**
-- [ ] Response time < [THRESHOLD from repo interview]ms: `pytest tests/performance/`
-- [ ] Memory usage acceptable: [specific threshold]
+- [ ] Response time < [THRESHOLD from Phase 1 repository interview]ms: `pytest tests/performance/`
+- [ ] Memory usage acceptable: [specific threshold from Phase 1]
 - [ ] No N+1 queries: Database query count logged and reviewed
+- [ ] Database query performance meets Phase 1 requirements
 
 **⚠️ Common Over-Evaluation Traps:**
 
@@ -1805,6 +2503,8 @@ CHECKLIST:
 
 **Purpose:** Comprehensive quality assessment before marking complete.
 
+**Note:** Use evaluation criteria from Phase 1 (repository-specific interview) as the baseline for all assessments.
+
 **Assessment Types:**
 
 #### 7.1: Modularity Assessment
@@ -1872,7 +2572,8 @@ pylint src/new_module.py --exit-zero
 - [ ] Uses patterns from CLAUDE.md: [List specific ones]
 - [ ] Naming follows conventions: [Examples]
 - [ ] No duplicated code: jscpd shows <3%
-- [ ] Linter score ≥8.0
+- [ ] Linter score ≥ [THRESHOLD from Phase 1]
+- [ ] Complexity within limits from Phase 1
 
 **Gate:** All conventions followed
 
@@ -1898,8 +2599,10 @@ git secrets --scan
 - [ ] No secrets in code
 - [ ] Dependencies have no known vulnerabilities
 - [ ] Authentication/authorization correct
+- [ ] Security tools from Phase 1 all pass
+- [ ] Secret handling follows Phase 1 requirements
 
-**Gate:** No security issues found
+**Gate:** No security issues found, all Phase 1 security requirements met
 
 #### 7.5: Performance Assessment (if applicable)
 
@@ -1910,11 +2613,12 @@ pytest tests/performance/test_feature_performance.py -v
 ```
 
 **Verify requirements:**
-- [ ] Response time <[THRESHOLD]ms: [Actual time]
-- [ ] Memory usage acceptable: [Actual usage]
-- [ ] Database queries optimized: [Query count]
+- [ ] Response time < [THRESHOLD from Phase 1]ms: [Actual time]
+- [ ] Memory usage acceptable: [Actual usage vs Phase 1 limit]
+- [ ] Database queries optimized: [Query count vs Phase 1 requirements]
+- [ ] All Phase 1 performance benchmarks met
 
-**Gate:** All performance requirements met
+**Gate:** All performance requirements from Phase 1 met
 
 **PROGRESS TRACKING:**
 ```
@@ -2057,38 +2761,58 @@ The feature development skills form a cohesive workflow with clear handoffs:
     │                     │                     │
     ▼                     ▼                     ▼
 ┌─────────┐         ┌──────────┐         ┌──────────┐
-│ Phase 0 │         │ Phase 1  │         │ Phase 3  │
-│ Detect  │────────▶│ Define   │────────▶│ Plan     │
-│ State   │         │ (PRD)    │         │ (Plan)   │
+│ Phase 0 │         │ Phase 1  │         │ Phase 2  │
+│ Detect  │────────▶│ Repo     │────────▶│ Define   │
+│ State   │         │Interview │         │ (PRD)    │
 └─────────┘         └──────────┘         └──────────┘
                           │                     │
-                          ▼                     ▼
-                 ┌────────────────┐    ┌────────────────┐
-                 │ feature-define │    │ feature-plan   │
-                 │    (Atomic)    │    │   (Atomic)     │
-                 └────────────────┘    └────────────────┘
+                          │                     ▼
+                          │            ┌────────────────┐
+                          │            │ feature-define │
+                          │            │    (Atomic)    │
+                          │            └────────────────┘
                           │                     │
-                          ▼                     ▼
-                 ┌────────────────┐    ┌────────────────┐
-                 │feature-define- │    │feature-plan-   │
-                 │   review       │    │  review        │
-                 │  (Optional)    │    │  (Optional)    │
-                 └────────────────┘    └────────────────┘
-                                              │
-                    ┌─────────────────────────┼────────────────┐
-                    │                         │                │
-                    ▼                         ▼                ▼
-            ┌──────────────┐         ┌──────────────┐  ┌──────────┐
-            │ Phase 5      │         │ Phase 8      │  │ Phase 9  │
-            │ Decide       │────────▶│ Implement    │─▶│ Review   │
-            │ Execution    │         │              │  │ Quality  │
-            └──────────────┘         └──────────────┘  └──────────┘
-                    │                       │
-                    │                       ▼
-                    │              ┌────────────────┐
-                    │              │ feature-impl   │
-                    │              │   (Atomic)     │
-                    │              └────────────────┘
+                          │                     ▼
+                          │            ┌────────────────┐
+                          │            │feature-define- │
+                          │            │   review       │
+                          │            │  (Optional)    │
+                          │            └────────────────┘
+                          │                     │
+                          │                     ▼
+                          │            ┌──────────┐
+                          └────────────│ Phase 4  │
+                                       │ Plan     │
+                                       │ (Plan)   │
+                                       └──────────┘
+                                            │
+                                            ▼
+                                   ┌────────────────┐
+                                   │ feature-plan   │
+                                   │   (Atomic)     │
+                                   └────────────────┘
+                                            │
+                                            ▼
+                                   ┌────────────────┐
+                                   │feature-plan-   │
+                                   │  review        │
+                                   │  (Optional)    │
+                                   └────────────────┘
+                                            │
+                    ┌───────────────────────┼────────────────┐
+                    │                       │                │
+                    ▼                       ▼                ▼
+            ┌──────────────┐       ┌──────────────┐  ┌──────────┐
+            │ Phase 6      │       │ Phase 9      │  │ Phase 10 │
+            │ Decide       │──────▶│ Implement    │─▶│ Review   │
+            │ Execution    │       │              │  │ Quality  │
+            └──────────────┘       └──────────────┘  └──────────┘
+                    │                     │
+                    │                     ▼
+                    │            ┌────────────────┐
+                    │            │ feature-impl   │
+                    │            │   (Atomic)     │
+                    │            └────────────────┘
                     │
                     ▼
          ┌─────────────────────┐
@@ -2121,7 +2845,7 @@ User invokes: /feature-workflow
          │                │               │
     ┌────▼───┐       ┌────▼───┐      ┌────▼───┐
     │Skip to │       │Skip to │      │Resume  │
-    │Phase 3 │       │Phase 5 │      │from    │
+    │Phase 4 │       │Phase 6 │      │from    │
     │(Plan)  │       │(Decide)│      │last    │
     └────────┘       └────────┘      │task    │
                                      └────────┘
@@ -2140,12 +2864,17 @@ User invokes: /feature-workflow
 **Sequential Composition** (feature-workflow calls skills in order):
 ```
 feature-workflow
-  └─► feature-define
-        └─► Produces: ${SPEC_DIR}/YYYY-MM-DD-feature-name-prd.md
-              └─► feature-plan
-                    └─► Produces: ${SPEC_DIR}/YYYY-MM-DD-feature-name-plan.md
-                          └─► feature-impl
-                                └─► Produces: Working code + tests
+  └─► Phase 0: Detect state
+        └─► Phase 1: Repository interview
+              └─► Produces: ${SPEC_DIR}/repository-evaluation-criteria.md
+                    └─► Phase 2: feature-define
+                          └─► Produces: ${SPEC_DIR}/YYYY-MM-DD-feature-name-prd.md
+                                └─► Phase 4: feature-plan
+                                      └─► Produces: ${SPEC_DIR}/YYYY-MM-DD-feature-name-plan.md
+                                            └─► Phase 9: feature-impl
+                                                  └─► Produces: Working code + tests
+                                                        └─► Phase 10: Review modularity
+                                                              └─► Verify against Phase 1 criteria
 ```
 
 **Review Integration** (optional structured feedback):
@@ -2161,11 +2890,11 @@ feature-define
 ```
 feature-plan
   └─► Plan with task dependency graph
-        └─► feature-workflow analyzes
+        └─► feature-workflow Phase 6 analyzes
               │
               ├─► Independent tasks? → /parallel-orchestrate
               │
-              └─► Sequential tasks? → /feature-impl
+              └─► Sequential tasks? → Phase 9: /feature-impl
 ```
 
 ### Data Flow
@@ -2174,11 +2903,16 @@ feature-plan
 
 | Phase | Skill | Input | Output |
 |-------|-------|-------|--------|
-| 1 | feature-define | Feature idea | `*-prd.md` |
-| 2 | feature-define-review | `*-prd.md` | Review report |
-| 3 | feature-plan | `*-prd.md` | `*-plan.md` |
-| 4 | feature-plan-review | `*-plan.md` | Review report |
-| 5 | feature-impl | `*-plan.md` | Code + tests + docs |
+| 0 | State detection | - | Starting phase |
+| 1 | Repository interview | User responses | `repository-evaluation-criteria.md` |
+| 2 | feature-define | Feature idea | `*-prd.md` |
+| 3 | feature-define-review | `*-prd.md` | Review report |
+| 4 | feature-plan | `*-prd.md` | `*-plan.md` |
+| 5 | feature-plan-review | `*-plan.md` | Review report |
+| 6 | Execution decision | `*-plan.md` | Strategy (parallel/sequential) |
+| 7-8 | Implementation proposal | `*-plan.md` | Proposal + review |
+| 9 | feature-impl | `*-plan.md` | Code + tests + docs |
+| 10 | Modularity review | Code + Phase 1 criteria | Quality assessment |
 
 **File naming conventions:**
 - PRDs: `${SPEC_DIR}/YYYY-MM-DD-feature-name-prd.md`
@@ -2293,12 +3027,13 @@ Test each skill individually, then test the complete workflow.
 1. Create PRD manually or via `/feature-define`
 2. Invoke: `/feature-workflow`
 3. Verify it detects existing PRD
-4. Verify it skips to Phase 3 (Plan Implementation)
+4. Verify it skips to Phase 4 (Plan Implementation)
 
 **Expected Output:**
 - Workflow detects PRD exists
-- Skips Phase 1 (Define Requirements)
-- Starts from Phase 3 (Plan Implementation)
+- Skips Phase 2 (Define Requirements)
+- May still run Phase 1 (Repository Interview) if criteria not documented
+- Starts from Phase 4 (Plan Implementation)
 
 ### Test 7: Parallel vs Sequential
 

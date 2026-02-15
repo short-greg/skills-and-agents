@@ -37,8 +37,11 @@ refactor-workflow (orchestrator)
     ├─► Phase 0: Detect state
     │       └─► Check for existing refactoring plan
     │
+    ├─► Phase 0.5: Repository-Specific Interview
+    │       └─► Gather refactoring criteria, thresholds, and standards
+    │
     ├─► Phase 1: Plan Refactoring
-    │       └─► Document scope and goals
+    │       └─► Document scope and goals (using Phase 0.5 thresholds)
     │
     ├─► Phase 2: Review Plan (User approval gate)
     │
@@ -52,7 +55,7 @@ refactor-workflow (orchestrator)
     │       └─► Confirm tests still pass after refactoring
     │
     ├─► Phase 6: Review Modularity
-    │       └─► Measure improvement in cohesion/coupling
+    │       └─► Measure improvement in cohesion/coupling (against Phase 0.5 criteria)
     │
     └─► Phase 7: Document Changes
             └─► Update architecture docs if needed
@@ -116,6 +119,151 @@ cat CLAUDE.md README.md CONTRIBUTING.md ARCHITECTURE.md 2>/dev/null
 ```
 
 **Gate:** Do not proceed until spec directory and tool config are identified.
+
+---
+
+## Phase 0.5: Repository-Specific Interview
+
+After repository detection (Phase 0) and before general prerequisites (Phase 1), gather repository-specific refactoring criteria.
+
+### Purpose
+
+Similar to feature-workflow and bugfix-workflow, this phase establishes refactoring standards specific to THIS repository. These criteria will be used throughout the refactor-workflow to:
+- Set improvement targets in Phase 1 (Plan Refactoring)
+- Verify safety in Phase 3 (Preserve Tests)
+- Measure improvement in Phase 5 (Measure Improvement of refactor-impl)
+- Assess quality in Phase 6 (Review Modularity)
+- Document results in Phase 7 (Document Changes)
+
+### 0.5.1: Modularity Improvement Requirements
+
+**Ask user:**
+- "What modularity issues need addressing?" (tight coupling, low cohesion, high complexity)
+- "Are there specific modularity metrics to improve?" (complexity reduction, dependency reduction)
+- "What is the target improvement threshold?" (e.g., reduce complexity by 30%, reduce dependencies by 50%)
+
+### 0.5.2: Test Preservation Requirements
+
+**Ask user:**
+- "Should ALL existing tests be preserved?" (recommended: yes, unless tests are testing implementation details)
+- "What test coverage is required after refactoring?" (should be ≥ existing coverage)
+- "Are there integration test requirements?" (refactored code must pass all integration tests)
+- "Should refactoring be test-preserving?" (recommended: yes, verify no behavior changes)
+
+### 0.5.3: Incremental Refactoring Standards
+
+**Ask user:**
+- "What defines a 'small step'?" (e.g., <50 lines changed, <10 minutes)
+- "Should each step be committed separately?" (recommended: yes, for rollback safety)
+- "Should tests run after EACH step?" (recommended: yes, catch regressions immediately)
+- "What is the maximum time between test runs?" (e.g., every 5 minutes, after each file)
+
+### 0.5.4: Safety Requirements
+
+**Ask user:**
+- "Are there restrictions on when refactoring can occur?" (not during code freeze, not before release)
+- "Should behavior changes be prohibited?" (recommended: yes, refactor = preserve behavior)
+- "Should new features be prohibited during refactoring?" (recommended: yes, separate concerns)
+- "What is the rollback strategy if tests fail?" (git revert, stash, restart from last passing state)
+
+### 0.5.5: Quality and Performance Standards
+
+**Ask user:**
+- "What code quality score is required?" (pylint, eslint scores)
+- "Should refactoring improve code quality score?" (recommended: yes, measurable improvement)
+- "Are there performance requirements?" (refactored code must not be slower)
+- "Should complexity be reduced?" (recommended: yes, radon cc score should improve)
+
+### 0.5.6: Approval and Documentation
+
+**Ask user:**
+- "Who needs to approve refactoring work?" (tech lead, team consensus)
+- "What documentation is required?" (before/after metrics, refactoring plan)
+- "Should refactoring be documented for future reference?" (recommended: yes, in ${SPEC_DIR}/)
+
+**Document in:** `${SPEC_DIR}/repository-refactoring-criteria.md`
+
+**Output template:**
+```markdown
+## Repository Refactoring Criteria
+
+**Modularity Improvement Requirements:**
+- Target issues: High coupling in auth module, low cohesion in utils
+- Metrics to improve: Reduce cyclomatic complexity by 30%, reduce import count by 40%
+- Success threshold: All 8 modularity criteria ≥ ⚠️ Warning level (no ❌ Poor)
+
+**Test Preservation Requirements:**
+- All existing tests preserved: Yes (unless testing implementation details)
+- Test coverage after refactoring: ≥ existing coverage (currently 85%)
+- Integration tests: All must pass after refactoring
+- Test-preserving: Yes (no behavior changes allowed)
+
+**Incremental Refactoring Standards:**
+- Small step definition: <50 lines changed, <10 minutes
+- Separate commits: Yes (each step is one commit)
+- Tests after each step: Yes (no exceptions)
+- Maximum time between tests: 5 minutes
+
+**Safety Requirements:**
+- Timing restrictions: No refactoring during code freeze week
+- Behavior changes: Prohibited (refactor only, no fixes/features)
+- New features: Prohibited (separate PR)
+- Rollback strategy: Git revert to last passing commit
+
+**Quality and Performance Standards:**
+- Code quality: Pylint score must improve (currently 8.2, target ≥8.5)
+- Performance: No regression (same or faster)
+- Complexity reduction: Radon cc average <7.0 (currently 9.3)
+- Duplication: jscpd <2% (currently 4.5%)
+
+**Approval and Documentation:**
+- Approval: Tech lead + 1 other engineer review
+- Documentation: Before/after modularity assessment required
+- Location: ${SPEC_DIR}/refactorings/
+- Contents: Plan, before/after metrics, lessons learned
+```
+
+**Progress Tracking:**
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 REFACTOR-WORKFLOW PROGRESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PHASES:
+✅ Phase 0: Detect state
+🔄 Phase 0.5: Repository-specific interview [IN PROGRESS] ◀── YOU ARE HERE
+⏸️ Phase 1: Plan refactoring
+⏸️ Phase 2: Review plan
+⏸️ Phase 3: Preserve tests
+⏸️ Phase 4: Refactor structure
+⏸️ Phase 5: Verify tests
+⏸️ Phase 6: Review modularity
+⏸️ Phase 7: Document changes
+
+CURRENT TASK:
+Phase 0.5: Gathering repository-specific refactoring criteria
+Status: Interviewing user for modularity, safety, and quality standards
+Started: [TIME]
+
+CHECKLIST:
+✅ Modularity improvement requirements defined
+✅ Test preservation requirements documented
+🔲 Incremental refactoring standards gathered
+🔲 Safety requirements confirmed
+🔲 Quality/performance standards set
+🔲 Approval/documentation process defined
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+**Gate:** Criteria documented, user confirms refactoring standards
+
+**Why This Matters:**
+
+Defining these criteria upfront prevents:
+- Unmeasured refactoring ("looks better" without proof)
+- Breaking behavior during refactoring
+- Skipping test runs between steps
+- Unclear success criteria
 
 ---
 
@@ -215,6 +363,8 @@ If plan exists:
 
 **Purpose:** Document refactoring scope and goals with modularity focus.
 
+**Note:** Use improvement targets from Phase 0.5 repository-specific criteria.
+
 ### Analyze Current State
 Examine code to be refactored:
 - Read target files
@@ -223,7 +373,7 @@ Examine code to be refactored:
 - Find coherence issues
 
 ### Define Refactoring Goals
-Create plan with:
+Create plan with (reference Phase 0.5 improvement thresholds):
 
 ```markdown
 ## Refactoring Plan
@@ -284,6 +434,8 @@ Create plan with:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PHASES:
+✅ Phase 0: Detect state
+✅ Phase 0.5: Repository-specific interview
 🔄 Phase 1: Plan refactoring [IN PROGRESS] ◀── YOU ARE HERE
 ⏸️ Phase 2: Review plan
 ⏸️ Phase 3: Preserve tests
@@ -300,7 +452,7 @@ Started: [TIME]
 CHECKLIST:
 ✅ Analyze current state
 ✅ Identify modularity issues
-🔲 Define refactoring goals
+🔲 Define refactoring goals (using Phase 0.5 thresholds)
 🔲 Document incremental approach
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
@@ -327,6 +479,8 @@ Present the refactoring plan:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0: Detect state
+✅ Phase 0.5: Repository-specific interview
 ✅ Phase 1: Plan refactoring
 🔄 Phase 2: Review plan [IN PROGRESS] ◀── YOU ARE HERE
 ⏸️ Phase 3: Preserve tests
@@ -395,6 +549,8 @@ If coverage is insufficient:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0: Detect state
+✅ Phase 0.5: Repository-specific interview
 ✅ Phase 1: Plan refactoring
 ✅ Phase 2: Review plan
 🔄 Phase 3: Preserve tests [IN PROGRESS] ◀── YOU ARE HERE
@@ -445,6 +601,8 @@ Follow safe refactoring process:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0: Detect state
+✅ Phase 0.5: Repository-specific interview
 ✅ Phase 1: Plan refactoring
 ✅ Phase 2: Review plan
 ✅ Phase 3: Preserve tests
@@ -490,6 +648,8 @@ pytest tests/
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0: Detect state
+✅ Phase 0.5: Repository-specific interview
 ✅ Phase 1: Plan refactoring
 ✅ Phase 2: Review plan
 ✅ Phase 3: Preserve tests
@@ -520,6 +680,8 @@ TEST VERIFICATION:
 ## Phase 6: Review Modularity
 
 **Measure modularity improvement.**
+
+**Note:** Confirm improvement meets Phase 0.5 repository-specific requirements.
 
 ### Before vs After Comparison
 
@@ -580,6 +742,8 @@ Details:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0: Detect state
+✅ Phase 0.5: Repository-specific interview
 ✅ Phase 1: Plan refactoring
 ✅ Phase 2: Review plan
 ✅ Phase 3: Preserve tests
@@ -590,13 +754,14 @@ PHASES:
 
 CURRENT TASK:
 Phase 6: Measuring modularity improvement
-Status: Comparing before/after metrics
+Status: Comparing before/after metrics against Phase 0.5 criteria
 Started: [TIME]
 
 MODULARITY ASSESSMENT:
 ✅ Cohesion: Improved (3 responsibilities → 1 per module)
 ✅ Coherence: Improved (related functions now grouped)
 ✅ Coupling: Improved (15 imports → 8 imports)
+🔲 Verify meets Phase 0.5 requirements
 🔲 Document final assessment
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
@@ -627,6 +792,8 @@ If structure changed significantly:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0: Detect state
+✅ Phase 0.5: Repository-specific interview
 ✅ Phase 1: Plan refactoring
 ✅ Phase 2: Review plan
 ✅ Phase 3: Preserve tests
@@ -798,11 +965,14 @@ Improve code structure through measurable modularity improvements while maintain
 
 This skill is **complete** when ALL of the following are verified:
 
+**Note:** Use Phase 0.5 repository-specific refactoring criteria as the baseline for success thresholds.
+
 **Safety:**
 - [ ] Test baseline established BEFORE refactoring: `pytest tests/ -v` (capture count)
 - [ ] All tests still pass AFTER refactoring: `pytest tests/ -v` (same count)
 - [ ] No tests modified during refactoring: `git diff tests/` shows no changes
 - [ ] No regressions introduced: Test count before = Test count after
+- [ ] Safety requirements from Phase 0.5 met: (behavior changes prohibited, rollback strategy ready)
 
 **Modularity Improvement (Evidence Required):**
 - [ ] Cohesion improved: Before/after assessment using modularity.md criteria #1
@@ -810,6 +980,7 @@ This skill is **complete** when ALL of the following are verified:
 - [ ] Coherence improved: Module boundaries more logical (measured via modularity.md criteria #3)
 - [ ] Complexity reduced: `radon cc` shows lower average complexity after refactoring
 - [ ] All 8 modularity criteria assessed: See modularity.md for complete framework
+- [ ] Phase 0.5 improvement thresholds met: (e.g., complexity reduced by target %, dependencies reduced by target %)
 
 **Incremental Process:**
 - [ ] Changes made in small steps: Each step documented in scratchpad
@@ -1411,6 +1582,8 @@ TEST RESULTS:
 
 **CRITICAL:** Use the SAME tools and measurements from Phase 0.5 scratchpad to prove improvement.
 
+**Note:** Verify improvement against Phase 0.5 repository-specific refactoring criteria.
+
 **Steps:**
 
 1. **Re-run Modularity Assessment Tools (AFTER refactoring)**
@@ -1652,6 +1825,7 @@ ASSESSMENT PROGRESS:
 🔲 Create before/after comparison table
 🔲 Validate improvement (at least 3 criteria improved)
 🔲 Verify no degradation (zero criteria worse)
+🔲 Verify Phase 0.5 thresholds met (refactor-workflow context)
 
 PRELIMINARY RESULTS:
 - Complexity: [Before Grade] → [After Grade]

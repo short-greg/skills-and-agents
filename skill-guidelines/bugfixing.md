@@ -34,8 +34,11 @@ The **Bugfixing Suite** provides a systematic, hypothesis-driven approach to deb
 ```
 bugfix-workflow (orchestrator)
     │
+    ├─► Phase 0.5: Repository-Specific Interview
+    │       └─► Gather bug fix standards for this repository
+    │
     ├─► Phase 1: Reproduce Issue
-    │       └─► Creates failing test
+    │       └─► Creates failing test, gathers evidence
     │
     ├─► Phase 2: Generate Hypotheses
     │       └─► Creates 3+ potential root causes
@@ -54,7 +57,7 @@ bugfix-workflow (orchestrator)
     │       └─► Calls bugfix-impl with minimal fix
     │
     └─► Phase 8: Verify Fix
-            └─► Run tests, confirm issue resolved
+            └─► Run tests, confirm issue resolved, verify against Phase 0.5 criteria
 ```
 
 ---
@@ -220,25 +223,193 @@ If exists but no hypotheses:
 
 ---
 
+## Phase 0.5: Repository-Specific Interview
+
+**Purpose:** Gather evaluation criteria specific to THIS repository for bug fixes.
+
+### 0.5.1: Quality Thresholds
+
+**Ask user:**
+- "What test coverage is required after bug fix?" (often same as feature threshold: 80%, 90%)
+- "Should regression test coverage be 100% of the bug scenario?" (recommended: yes)
+- "What code quality score is required?" (pylint, eslint scores)
+
+### 0.5.2: Testing Requirements
+
+**Ask user:**
+- "What testing framework is used?" (pytest, jest, cargo test, etc.)
+- "Are there integration test requirements for bug fixes?"
+- "Should all hypothesis tests be preserved in the test suite?" (for future reference)
+
+### 0.5.3: Bug Documentation Standards
+
+**Ask user:**
+- "Where should bug analysis be documented?" (${SPEC_DIR}/, docs/bugs/, wiki, issue tracker)
+- "What information must be in the bug report?" (root cause, evidence, fix description)
+- "Should hypothesis testing results be preserved?" (recommended: yes, for learning)
+
+### 0.5.4: Minimal Fix Standards
+
+**Ask user:**
+- "Are there restrictions on refactoring during bug fixes?" (recommended: yes, separate from bug fix)
+- "What defines 'minimal fix'?" (smallest change that addresses root cause)
+- "Should behavior changes be prohibited?" (recommended: yes, unless required by fix)
+
+### 0.5.5: Approval Process
+
+**Ask user:**
+- "Who needs to approve bug fixes?" (tech lead, QA, security team for security bugs)
+- "Are there review requirements?" (code review, QA verification, stakeholder notification)
+- "Is production hotfix process different?" (expedited review, different deployment)
+
+**Document in:** `${SPEC_DIR}/repository-bugfix-criteria.md`
+
+**Output template:**
+```markdown
+## Repository Bug Fix Criteria
+
+**Quality Thresholds:**
+- Test coverage after fix: ≥85%
+- Regression test: 100% coverage of bug scenario
+- Pylint score: ≥8.5
+
+**Testing Requirements:**
+- Framework: pytest with pytest-cov
+- Regression test: Required in tests/regression/
+- Hypothesis tests: Preserve in tests/hypotheses/ (for reference)
+- Integration tests: Required for API/database bugs
+
+**Bug Documentation:**
+- Location: ${SPEC_DIR}/bugs/
+- Required sections: Root cause, Evidence, Fix description, Regression test
+- Hypothesis results: Preserved for future reference
+
+**Minimal Fix Standards:**
+- No refactoring during bug fix (separate PR if needed)
+- No behavior changes unless required by fix
+- No feature additions while fixing bugs
+
+**Approval Process:**
+- Code review: Tech lead + 1 other engineer
+- QA verification: Required for customer-facing bugs
+- Security review: Required for security-related bugs
+- Hotfix process: Expedited review, direct to main if critical
+```
+
+**Gate:** Criteria documented, user confirms standards
+
+---
+
 ## Phase 1: Reproduce Issue
 
 **Purpose:** Confirm the bug exists and is reproducible.
 
-### Gather Information
+### 1.1: Gather Information
 Ask user:
 - What is the expected behavior?
 - What is the actual behavior?
 - Steps to reproduce?
 - Error messages or logs?
 
-### Attempt Reproduction
+### 1.2: Evidence Gathering Interview
+
+**Purpose:** Collect all available evidence about the bug.
+
+**Interview Questions:**
+
+1. **Visual Evidence:**
+   - "Can you provide screenshots showing the bug?" (before/after if possible)
+   - "Can you provide screen recordings demonstrating the issue?"
+   - "Are there UI elements behaving incorrectly that can be captured?"
+
+2. **Log Evidence:**
+   - "Can you provide error logs?" (application logs, server logs)
+   - "Can you provide stack traces?" (full stack trace, not truncated)
+   - "Can you provide network logs?" (if API/network related)
+   - "Can you provide database query logs?" (if data-related)
+   - "Can you provide browser console logs?" (if frontend bug)
+
+3. **Reproduction Evidence:**
+   - "Can you provide exact steps to reproduce?"
+   - "Does this happen every time or intermittently?" (consistency helps diagnosis)
+   - "What is the minimal reproduction case?" (simplest way to trigger bug)
+   - "Are there specific conditions required?" (data state, user permissions, etc.)
+
+4. **Environmental Evidence:**
+   - "What environment does this occur in?" (production, staging, local dev)
+   - "What browser/OS/device?" (if applicable)
+   - "What version of the application?" (commit hash, version number)
+   - "What data state triggers this?" (specific user IDs, data values)
+
+5. **Impact Evidence:**
+   - "How many users are affected?" (1 user, some users, all users)
+   - "When did this start?" (recent deployment, always existed)
+   - "What is the business impact?" (revenue loss, user frustration, security risk)
+
+**Gather All Available Materials:**
+- Screenshots/recordings
+- Log files
+- Stack traces
+- Network traces
+- Database dumps (if data corruption)
+- Steps to reproduce
+- User reports
+
+**Create Evidence Document:**
+
+`${SPEC_DIR}/YYYY-MM-DD-bug-name-evidence-collected.md`
+
+```markdown
+# Bug Evidence: [Bug Name]
+
+**Date:** YYYY-MM-DD
+**Reporter:** [Name]
+**Environment:** [Production/Staging/Dev]
+
+## Visual Evidence
+- Screenshot 1: [path/to/screenshot1.png] - Shows error modal
+- Screenshot 2: [path/to/screenshot2.png] - Shows incorrect data
+- Recording: [path/to/recording.mp4] - Demonstrates full reproduction
+
+## Log Evidence
+- Application log: [path/to/app.log] - Lines 450-475 show exception
+- Stack trace: [path/to/stacktrace.txt]
+- Database log: [path/to/db.log] - Query execution times
+
+## Reproduction
+**Steps:**
+1. Log in as user with ID 12345
+2. Navigate to /dashboard
+3. Click "Export Data" button
+4. Error occurs immediately
+
+**Consistency:** Happens 100% of the time with user ID 12345, 0% with other users
+
+**Minimal case:** Only requires user ID 12345, any browser, any data
+
+## Environmental Details
+- Environment: Production
+- Browser: Chrome 120
+- OS: Windows 11
+- App version: v2.3.1 (commit abc123)
+- Specific data: User ID 12345 has NULL email field
+
+## Impact
+- Affected users: 1 user (ID 12345)
+- Started: 2 days ago (after deployment of v2.3.1)
+- Business impact: Medium - user cannot export their data
+```
+
+**Gate:** All available evidence collected and documented
+
+### 1.3: Attempt Reproduction
 Try to reproduce the issue:
 1. Follow reproduction steps
 2. Observe behavior
 3. Collect error messages
 4. Note any relevant context
 
-### Create Failing Test
+### 1.4: Create Failing Test
 Write a test that demonstrates the bug:
 ```python
 def test_bug_reproduction():
@@ -260,6 +431,7 @@ def test_bug_reproduction():
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PHASES:
+✅ Phase 0.5: Repository-specific interview
 🔄 Phase 1: Reproduce issue [IN PROGRESS] ◀── YOU ARE HERE
 ⏸️ Phase 2: Generate hypotheses
 ⏸️ Phase 3: Review hypotheses
@@ -276,6 +448,7 @@ Started: [TIME]
 
 CHECKLIST:
 ✅ Gather reproduction steps
+✅ Collect evidence (visual, logs, environment, impact)
 ✅ Attempt to reproduce
 🔲 Create failing test
 🔲 Verify test fails consistently
@@ -322,6 +495,7 @@ Based on the bug symptoms, generate hypotheses:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0.5: Repository-specific interview
 ✅ Phase 1: Reproduce issue
 🔄 Phase 2: Generate hypotheses [IN PROGRESS] ◀── YOU ARE HERE
 ⏸️ Phase 3: Review hypotheses
@@ -364,6 +538,7 @@ Present hypotheses to user:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0.5: Repository-specific interview
 ✅ Phase 1: Reproduce issue
 ✅ Phase 2: Generate hypotheses
 🔄 Phase 3: Review hypotheses [IN PROGRESS] ◀── YOU ARE HERE
@@ -425,6 +600,7 @@ For each hypothesis:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0.5: Repository-specific interview
 ✅ Phase 1: Reproduce issue
 ✅ Phase 2: Generate hypotheses
 ✅ Phase 3: Review hypotheses
@@ -486,6 +662,7 @@ Based on test results:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0.5: Repository-specific interview
 ✅ Phase 1: Reproduce issue
 ✅ Phase 2: Generate hypotheses
 ✅ Phase 3: Review hypotheses
@@ -534,6 +711,7 @@ Present root cause analysis:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0.5: Repository-specific interview
 ✅ Phase 1: Reproduce issue
 ✅ Phase 2: Generate hypotheses
 ✅ Phase 3: Review hypotheses
@@ -575,6 +753,7 @@ Follow hypothesis-based implementation:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0.5: Repository-specific interview
 ✅ Phase 1: Reproduce issue
 ✅ Phase 2: Generate hypotheses
 ✅ Phase 3: Review hypotheses
@@ -623,6 +802,7 @@ Fix Verification:
 **PROGRESS TRACKING:**
 ```
 PHASES:
+✅ Phase 0.5: Repository-specific interview
 ✅ Phase 1: Reproduce issue
 ✅ Phase 2: Generate hypotheses
 ✅ Phase 3: Review hypotheses
@@ -689,8 +869,10 @@ When all phases complete:
 
 ## Notes
 
+- Phase 0.5 sets repository-specific standards for bug fixes
 - Always generate at least 3 hypotheses
 - Test systematically - don't skip to a "likely" cause
+- Gather comprehensive evidence in Phase 1 before proceeding
 - Document all findings for future reference
 - Minimal fix is preferred over large refactors
 - Root cause document serves as historical record
@@ -763,17 +945,21 @@ Fix bugs with minimal changes, strong evidence-based root cause analysis, and co
 
 This skill is **complete** when ALL of the following are verified:
 
+**Note:** If bugfix-workflow Phase 0.5 was completed, verify against repository-specific criteria documented in `${SPEC_DIR}/repository-bugfix-criteria.md`.
+
 **Correctness:**
 - [ ] Original reproduction test now PASSES: `pytest tests/test_bug.py::test_bug_reproduction -v`
 - [ ] Regression test created and PASSES: Test prevents bug from recurring
 - [ ] Full test suite PASSES: No new failures introduced
 - [ ] Bug no longer reproducible: Manual verification confirms fix
+- [ ] Test coverage meets Phase 0.5 threshold (if defined): e.g., ≥85%
 
 **Minimal Fix Verification:**
 - [ ] Only root cause addressed: No refactoring performed
 - [ ] No scope creep: No additional features or improvements
 - [ ] Targeted change: Minimal lines of code modified
 - [ ] No unrelated changes: `git diff` shows only bug-related modifications
+- [ ] Meets Phase 0.5 minimal fix standards (if defined): No refactoring, no behavior changes unless required
 
 **Evidence Quality:**
 - [ ] All hypotheses tested: At least 3 distinct hypotheses generated and tested
@@ -1513,6 +1699,8 @@ Correctness Assessment:
 
 **Verify the fix is truly minimal (no refactoring or scope creep):**
 
+**Note:** If bugfix-workflow Phase 0.5 was completed, verify against minimal fix standards in `${SPEC_DIR}/repository-bugfix-criteria.md`.
+
 ```bash
 # Check what changed
 git diff HEAD
@@ -1529,6 +1717,7 @@ git diff HEAD | grep -E "rename|move|reorganize"
 - [ ] No scope creep (no additional features)
 - [ ] Minimal lines changed (< 20 lines for most bugs)
 - [ ] No unrelated file modifications
+- [ ] Meets Phase 0.5 standards (if defined): No behavior changes unless required by fix
 
 **Manual Review:**
 Review `git diff` output and ask:
@@ -1555,6 +1744,8 @@ Minimality Assessment:
 
 **Verify debugging process was systematic and well-documented:**
 
+**Note:** If bugfix-workflow Phase 0.5 was completed, verify bug documentation meets standards in `${SPEC_DIR}/repository-bugfix-criteria.md`.
+
 ```bash
 # Check evidence scratchpad exists
 ls -la ${SPEC_DIR}/*-evidence.md
@@ -1575,6 +1766,7 @@ ls -la ${SPEC_DIR}/*-root-cause.md
 - [ ] Each hypothesis has documented evidence
 - [ ] Confirmed hypothesis clearly identified
 - [ ] Root cause explains WHY, not just WHAT
+- [ ] Meets Phase 0.5 documentation standards (if defined): Required sections present, hypothesis results preserved
 
 **Manual Review:**
 Review evidence documents and ask:
@@ -1602,6 +1794,8 @@ Evidence Quality Assessment:
 
 **Verify nothing is left incomplete:**
 
+**Note:** If bugfix-workflow Phase 0.5 was completed, verify against approval process in `${SPEC_DIR}/repository-bugfix-criteria.md`.
+
 ```bash
 # Check for TODO/FIXME in modified files
 git diff --name-only HEAD | xargs grep -n "TODO\|FIXME\|XXX\|HACK"
@@ -1618,6 +1812,7 @@ git status
 - [ ] All modified files listed in analysis doc
 - [ ] Test suite fully green
 - [ ] Documentation complete
+- [ ] Ready for Phase 0.5 approval process (if defined): Code review, QA verification, etc.
 
 **Output:**
 ```
@@ -2007,14 +2202,15 @@ User invokes: /bugfix-workflow
 **Sequential Composition** (workflow calls bugfix-impl):
 ```
 bugfix-workflow
-  └─► Phase 1: Reproduce
-        └─► Phase 2: Generate hypotheses
-              └─► Phase 3: Review (user gate)
-                    └─► Phase 4: Test hypotheses
-                          └─► Phase 5: Identify root cause
-                                └─► Phase 6: Review (user gate)
-                                      └─► Phase 7: bugfix-impl
-                                            └─► Produces: Fixed code + tests
+  └─► Phase 0.5: Repository-specific interview
+        └─► Phase 1: Reproduce (with evidence gathering)
+              └─► Phase 2: Generate hypotheses
+                    └─► Phase 3: Review (user gate)
+                          └─► Phase 4: Test hypotheses
+                                └─► Phase 5: Identify root cause
+                                      └─► Phase 6: Review (user gate)
+                                            └─► Phase 7: bugfix-impl (with Phase 0.5 criteria)
+                                                  └─► Produces: Fixed code + tests
 ```
 
 **Standalone Usage** (direct bugfix-impl):
@@ -2034,16 +2230,19 @@ User: "Fix the bug where state validation is missing"
 
 | Phase | Skill | Input | Output |
 |-------|-------|-------|--------|
-| 1 | bugfix-workflow | Bug description | Failing test |
-| 2 | bugfix-workflow | Failing test | `*-hypotheses.md` |
+| 0.5 | bugfix-workflow | User interview | `repository-bugfix-criteria.md` |
+| 1 | bugfix-workflow | Bug description | Failing test + `*-evidence-collected.md` |
+| 2 | bugfix-workflow | Failing test + evidence | `*-hypotheses.md` |
 | 3 | User review | `*-hypotheses.md` | Approval |
 | 4 | bugfix-workflow | Hypotheses | Test results |
 | 5 | bugfix-workflow | Test results | `*-root-cause.md` |
 | 6 | User review | `*-root-cause.md` | Approval |
-| 7 | bugfix-impl | `*-root-cause.md` | Fixed code + tests |
-| 8 | bugfix-workflow | Fixed code | Verification report |
+| 7 | bugfix-impl | `*-root-cause.md` + Phase 0.5 criteria | Fixed code + tests |
+| 8 | bugfix-workflow | Fixed code | Verification report (against Phase 0.5 criteria) |
 
 **File naming conventions:**
+- Repository criteria: `${SPEC_DIR}/repository-bugfix-criteria.md`
+- Evidence collected: `${SPEC_DIR}/YYYY-MM-DD-bug-name-evidence-collected.md`
 - Hypotheses: `${SPEC_DIR}/YYYY-MM-DD-bug-name-hypotheses.md`
 - Root cause: `${SPEC_DIR}/YYYY-MM-DD-bug-name-root-cause.md`
 - Analysis: `${SPEC_DIR}/YYYY-MM-DD-bug-name-analysis.md`
@@ -2309,15 +2508,16 @@ After following this guide, you will have:
 **Complete Bugfix Workflow:**
 ```
 Bug Report
-  → Reproduce issue (failing test)
-    → Generate hypotheses (3+)
-      → Review gate
-        → Test all hypotheses systematically
-          → Identify root cause
-            → Review gate
-              → Implement minimal fix
-                → Verify fix (regression test + full suite)
-                  → Document findings
+  → Repository-specific interview (Phase 0.5)
+    → Gather evidence and reproduce issue (failing test)
+      → Generate hypotheses (3+)
+        → Review gate
+          → Test all hypotheses systematically
+            → Identify root cause
+              → Review gate
+                → Implement minimal fix (per Phase 0.5 standards)
+                  → Verify fix (regression test + full suite + Phase 0.5 criteria)
+                    → Document findings
 ```
 
 **State-Based Resume:**
@@ -2360,9 +2560,11 @@ Fix applied → Resume from verification
 
 ```
 ${SPEC_DIR}/
-├── YYYY-MM-DD-bug-name-hypotheses.md     # Hypotheses
-├── YYYY-MM-DD-bug-name-root-cause.md     # Root cause
-├── YYYY-MM-DD-bug-name-analysis.md       # Complete analysis
+├── repository-bugfix-criteria.md              # Phase 0.5 criteria
+├── YYYY-MM-DD-bug-name-evidence-collected.md  # Evidence (Phase 1)
+├── YYYY-MM-DD-bug-name-hypotheses.md          # Hypotheses
+├── YYYY-MM-DD-bug-name-root-cause.md          # Root cause
+├── YYYY-MM-DD-bug-name-analysis.md            # Complete analysis
 └── ...
 
 ${TOOL_CONFIG}/skills/
