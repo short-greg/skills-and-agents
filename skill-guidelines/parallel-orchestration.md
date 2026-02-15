@@ -18,7 +18,7 @@ Enable parallel development by breaking large PRDs into independent tasks with d
 | Skill | Purpose | Type |
 |-------|---------|------|
 | `parallel-orchestrate` | Plan, setup, status, review, merge workflows | Orchestrator |
-| `parallel-task-workflow` | Dependency checking and routing to implementation skills | Router |
+| `parallel-task` | Flexible task executor that discovers and uses available skills | Executor |
 | `parallel-help` | Quick reference for worktree commands | Reference |
 
 ### When to Use Each Skill
@@ -29,10 +29,10 @@ Enable parallel development by breaking large PRDs into independent tasks with d
 - Coordinating integration of parallel work
 - Need visibility into task progress and blockers
 
-**Use `parallel-task-workflow` when:**
+**Use `parallel-task` when:**
 - Running inside a worktree session to implement a task
 - Need dependency checking before starting work
-- Want automatic routing to the correct implementation skill (feature-impl, bugfix-impl, refactor-impl)
+- Want automatic discovery and routing to appropriate skills
 
 **Use `parallel-help` when:**
 - Need quick reference for worktree commands
@@ -70,7 +70,7 @@ Enable parallel development by breaking large PRDs into independent tasks with d
 - [ ] 4. Confirm skill designs with user
 - [ ] 5. Write SKILL.md files:
   - `${TOOL_CONFIG}/skills/parallel-orchestrate/SKILL.md`
-  - `${TOOL_CONFIG}/skills/parallel-task-workflow/SKILL.md`
+  - `${TOOL_CONFIG}/skills/parallel-task/SKILL.md`
   - `${TOOL_CONFIG}/skills/parallel-help/SKILL.md`
 - [ ] 6. Test skill execution
 
@@ -127,7 +127,16 @@ always_last:
   - "Update project documentation if new patterns established"
 ```
 
-**Router skill (`parallel-task-workflow`) checklist generation:**
+**Executor skill (`parallel-task`) checklist generation:**
+
+The orchestrator provides a task spec containing:
+- **Goal:** What the task should accomplish
+- **Objective and Key Results:** Measurable success criteria
+- **Background:** Context and constraints
+- **Additional info:** User stories, acceptance criteria, etc. (as appropriate)
+
+The executor then discovers how to accomplish it.
+
 ```yaml
 base_items:
   - "Read task spec from worktree"
@@ -141,9 +150,18 @@ conditional_items:
       - "Exit without proceeding"
 
 phase_items:
-  routing:
-    - "Detect task type (feature/bugfix/refactor)"
-    - "Route to appropriate implementation skill"
+  discover:
+    - "Scan ${TOOL_CONFIG}/skills/ for available skills"
+    - "Read skill descriptions and 'When to Use' sections"
+    - "Identify skills that can accomplish the goal"
+    - "Determine if single skill or composition needed"
+  plan:
+    - "Select skill(s) to use"
+    - "If composition needed, determine execution order"
+    - "Report plan to user before proceeding"
+  execute:
+    - "Invoke selected skill(s)"
+    - "Monitor progress and handle errors"
   completion:
     - "Verify all changes committed"
     - "Verify tests passing"
@@ -152,6 +170,15 @@ phase_items:
 always_last:
   - "Output next steps for orchestrator"
 ```
+
+**Example discovery process:**
+
+Task spec says: "Create an example demonstrating the new caching API"
+
+1. **Discover:** Scan skills, find `example-workflow`, `feature-workflow`, `tutorial-workflow`
+2. **Match:** `example-workflow` description says "creating framework examples" - matches goal
+3. **Plan:** Will use `example-workflow` to create the example
+4. **Execute:** Invoke `example-workflow` with the caching API context
 
 ---
 
@@ -188,18 +215,57 @@ always_last:
 - Branch naming convention
 - Worktree directory location
 
-## Procedure: Dependency Check (parallel-task-workflow)
-**Purpose:** Verify dependencies before starting implementation
+## Procedure: Task Execution (parallel-task)
+**Purpose:** Discover available skills and execute task
 
 **Steps:**
-1. Read task spec and extract dependencies
-2. For each dependency, check if branch is merged
+1. Read task spec (goal, OKRs, background, context)
+2. Check all dependencies are merged
 3. If ANY not merged: STOP and report
-4. If ALL merged: detect task type and route
+4. Scan `${TOOL_CONFIG}/skills/` for available skills
+5. Read each skill's description and "When to Use" section
+6. Identify skill(s) that match the task goal
+7. If multiple skills needed, determine composition order
+8. Report plan to user before proceeding
+9. Invoke selected skill(s)
+10. Verify completion (changes committed, tests passing)
+11. Report ready for merge
+
+**Task Spec Format (provided by orchestrator):**
+```markdown
+# Task: [Task Name]
+
+## Goal
+[What this task should accomplish - one sentence]
+
+## Objective
+[Broader objective this task contributes to]
+
+## Key Results
+1. [Measurable outcome 1]
+2. [Measurable outcome 2]
+
+## Background
+[Context, constraints, related information]
+
+## Additional Context (optional)
+- User stories
+- Acceptance criteria
+- Technical notes
+- Dependencies on other tasks
+```
+
+**Skill Discovery:**
+- List all directories in `${TOOL_CONFIG}/skills/`
+- Read each `SKILL.md` frontmatter (name, description)
+- Read "When to Use" section for matching criteria
+- Match task goal against skill purposes
 
 **Override Points:**
 - How to check merge status
 - What to do if blocked
+- Skill discovery location
+- How to handle no matching skill
 
 ## Procedure: Safe Merge (parallel-orchestrate merge)
 **Purpose:** Integrate work in correct dependency order
@@ -282,11 +348,11 @@ Use [skill-template.md](../templates/skill-template.md) as the base for creating
 
 **Suite structure:**
 - `parallel-orchestrate` handles planning, setup, status, review, merge
-- `parallel-task-workflow` runs in worktrees, routes to implementation skills
+- `parallel-task` runs in worktrees, discovers and invokes appropriate skills
 - `parallel-help` provides quick reference
-- Implementation skills (feature-impl, bugfix-impl, refactor-impl) do actual work
+- Any installed skill can be discovered and used by `parallel-task`
 
 **Output locations:**
 - `${TOOL_CONFIG}/skills/parallel-orchestrate/SKILL.md`
-- `${TOOL_CONFIG}/skills/parallel-task-workflow/SKILL.md`
+- `${TOOL_CONFIG}/skills/parallel-task/SKILL.md`
 - `${TOOL_CONFIG}/skills/parallel-help/SKILL.md`

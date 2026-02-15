@@ -1,37 +1,28 @@
 # Skills and Agents Setup Guide
 
-Quick guide to set up AI coding assistant skills and agents for your repository.
+Set up AI coding assistant skills and agents for your repository.
 
 ---
 
-## Quick Start
+## Objective
 
-Follow these steps to set up AI coding assistant skills in your repository:
+Enable consistent, reliable AI-assisted development workflows customized to this repository's conventions and needs.
 
-1. **Understand your repo** - What type of project is this?
-2. **Set up project documentation** - CLAUDE.md, AGENTS.md, specs folder
-3. **Choose skills** - Which workflows do you need?
-4. **Install and customize** - Adapt skills to your repo type
+## Key Results
 
-Estimated time: 15-30 minutes for initial setup.
+1. Project documentation exists and accurately describes conventions
+2. Skills directory exists with at least one working skill
+3. User can invoke skill and it follows project conventions
+4. All selected skill suites are installed and tested
 
 ---
 
 ## Setup Checklist
 
-Quick reference for what needs to be done:
-
-- [ ] 1. Understand your repository type (prototype/production/library)
-- [ ] 2. Create or update CLAUDE.md with conventions
-- [ ] 3. Create specs/ folder for specifications
-- [ ] 4. Create ${TOOL_CONFIG}/skills/ directory
-- [ ] 5. (If using autonomous agents) Create ${TOOL_CONFIG}/agents/ directory
-- [ ] 6. (If parallel work needed) Set up worktrees
-- [ ] 7. Choose which skills to install (see decision tree)
-- [ ] 8. Copy skill templates from skill-setup-guidelines/
-- [ ] 9. Customize skills for your repo type
-- [ ] 10. Test first skill
-- [ ] 11. Iterate and add more skills as needed
+- [ ] 1. Understand repo by reviewing the codebase and interviewing the developer
+- [ ] 2. Interview developer to find out what skills and agents to implement
+- [ ] 3. Set up the repo with skills and agents (add sub-checklist below)
+- [ ] 4. Summarize what was done and confirm with developer
 
 ---
 

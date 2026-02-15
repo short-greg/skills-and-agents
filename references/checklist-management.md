@@ -88,6 +88,41 @@ Mark items that must execute regardless of conditions:
 
 ---
 
+## Dynamic Sub-Checklists
+
+Checklists can be dynamically generated during execution. A parent item can spawn sub-items based on earlier decisions or discovered information.
+
+**Format:** Use letter suffixes for dynamic sub-items (3a, 3b, 3c...)
+
+```markdown
+- [ ] 1. Interview user about what features they need
+- [ ] 2. Analyze codebase to understand structure
+- [ ] 3. Implement selected features (add sub-checklist below)
+- [ ] 4. Summarize and confirm
+
+# After step 2, step 3 expands dynamically:
+- [x] 1. Interview user about what features they need
+- [x] 2. Analyze codebase to understand structure
+- [ ] 3. Implement selected features
+  - [ ] 3a. Set up authentication module
+  - [ ] 3b. Create user dashboard
+  - [ ] 3c. Add API endpoints
+- [ ] 4. Summarize and confirm
+```
+
+**Why this matters:**
+- Checklists adapt to actual needs discovered during execution
+- Avoids bloated static checklists with items that may not apply
+- Parent item serves as a placeholder until scope is known
+- Sub-items are concrete, actionable tasks
+
+**When to use:**
+- Setup workflows where choices determine work
+- Implementation phases where scope emerges from planning
+- Any step where the specific tasks depend on earlier steps
+
+---
+
 ## Loop-Back References
 
 Allow retry loops without duplicating checklist items:
