@@ -91,7 +91,7 @@ Enable safe code structure improvements through a suite of coordinated skills th
 
 **How each skill creates its checklist on execution:**
 
-1. Read CLAUDE.md to determine repo type and conventions
+1. Read project documentation (see [references/skills-vs-agents.md](../references/skills-vs-agents.md) for tool-specific locations) to determine repo type and conventions
 2. Read existing artifacts (refactoring plans) to detect current state
 3. Based on repo type, include/exclude quality gates
 4. For each phase, add corresponding checklist items
@@ -101,7 +101,7 @@ Enable safe code structure improvements through a suite of coordinated skills th
 **Orchestrator (`refactor-workflow`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md and confirm conventions"
+  - "Read project documentation and confirm conventions"
   - "Check for existing refactoring plans"
   - "Determine starting point based on existing artifacts"
 
@@ -126,13 +126,13 @@ loop_gates:
     action: "rollback in refactor-impl, fix issue"
 
 always_last:
-  - "Update CLAUDE.md if new patterns established"
+  - "Update project documentation if new patterns established"
 ```
 
 **Atomic skill (`refactor-plan`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md for conventions"
+  - "Read project documentation for conventions"
   - "Read BEFORE metrics from refactor-assess"
   - "Analyze target code for modularity issues"
 
@@ -153,7 +153,7 @@ always_last:
 **Atomic skill (`refactor-impl`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md for conventions"
+  - "Read project documentation for conventions"
   - "Read approved refactoring plan"
   - "Establish test baseline (all tests must pass)"
 
@@ -176,7 +176,7 @@ always_last:
 **Atomic skill (`refactor-assess`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md for conventions"
+  - "Read project documentation for conventions"
   - "Identify target code to assess"
 
 assessment_items:

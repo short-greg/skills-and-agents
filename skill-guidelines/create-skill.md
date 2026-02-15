@@ -65,7 +65,7 @@ Enable consistent skill creation by guiding users through the complete process: 
 
 **How the create-skill skill creates its checklist on execution:**
 
-1. Read CLAUDE.md to determine repo type and conventions
+1. Read project documentation (see [references/skills-vs-agents.md](../references/skills-vs-agents.md) for tool-specific locations) to determine repo type and conventions
 2. Gather skill requirements from user
 3. Based on skill complexity, include/exclude sections
 4. For each phase, add corresponding checklist items
@@ -74,7 +74,7 @@ Enable consistent skill creation by guiding users through the complete process: 
 **Atomic skill (`create-skill`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md and confirm conventions"
+  - "Read project documentation and confirm conventions"
   - "Gather skill name and purpose from user"
   - "Determine skill type (atomic/orchestrator/review)"
 
@@ -364,13 +364,13 @@ always_last:
 ```yaml
 # At start of skill
 read_first:
-  - "CLAUDE.md"
+  - "Project documentation (e.g., CLAUDE.md, .cursorrules)"
   - "Relevant package docs"
 
 # At end of skill
 update_if_needed:
   - condition: "new_pattern_established"
-    update: "CLAUDE.md"
+    update: "Project documentation"
   - condition: "api_changed"
     update: "Package documentation"
 ```

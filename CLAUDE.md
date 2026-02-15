@@ -39,23 +39,35 @@ skills-and-agents/
 ├── CLAUDE.md                    # This file - project conventions
 ├── README.md                    # User-facing overview and quick start
 │
+├── templates/                   # Base templates for skills and agents
+│   ├── skill-template.md        # Individual skill template
+│   ├── skill-setup-guideline-template.md  # Skill suite setup template
+│   ├── agent-template.md        # Individual agent template
+│   └── agent-setup-guideline-template.md  # Agent suite setup template
+│
+├── references/                  # Reusable patterns (referenced by guidelines)
+│   ├── skills-vs-agents.md      # When to use skills vs agents
+│   ├── checklist-management.md  # Checklist syntax
+│   ├── goals-and-objectives.md  # OKR patterns
+│   └── assessment-approaches.md # Quality criteria
+│
 ├── setup-guidelines/            # How to set up and customize
 │   ├── core-conventions.md      # Naming, progress tracking, doc maintenance
 │   ├── repo-detection.md        # How to analyze project structure
 │   ├── interview-protocol.md    # How to customize per project
 │   └── worktree-guide.md        # Git worktree usage for parallel work
 │
-├── skill-guidelines/            # Workflow templates
+├── skill-guidelines/            # Skill workflow templates
 │   ├── feature-development.md   # Complete feature workflow
-│   ├── bugfixing.md            # Hypothesis-based debugging
-│   ├── refactoring.md          # Safe refactoring
+│   ├── bugfixing.md             # Hypothesis-based debugging
+│   ├── refactoring.md           # Safe refactoring
 │   ├── parallel-orchestration.md # Parallel task coordination
-│   └── creating-examples.md    # Educational content creation
+│   └── creating-examples.md     # Educational content creation
 │
-└── agent-guidelines/            # Specialized agents
-    ├── overview.md              # Skills vs agents
-    ├── code-review-agent.md     # Code review automation
-    └── test-architect-agent.md  # Test strategy design
+└── agent-guidelines/            # Specialized agent setup guides
+    ├── INTENT.md                # Directory purpose
+    ├── code-review.md           # Code review agent setup
+    └── test-architect.md        # Test architect agent setup
 ```
 
 ---
@@ -73,9 +85,10 @@ skills-and-agents/
 - Each file contains ALL related skills (orchestrator + atomic skills)
 
 ### Agent Guidelines
-- `overview.md` - When to use agents vs skills
-- `[agent-name]-agent.md` - One agent per file
-- Examples: `code-review-agent.md`, `test-architect-agent.md`
+- `INTENT.md` - Directory purpose
+- `[domain].md` - One agent setup guide per file
+- Examples: `code-review.md`, `test-architect.md`
+- See `references/skills-vs-agents.md` for when to use agents vs skills
 
 ---
 
@@ -162,8 +175,8 @@ Purpose:
 - Ensures patterns are followed
 
 Required phases:
-- **Phase 0: Read Documentation** - Read CLAUDE.md, package docs, confirm understanding
-- **Final Phase: Update Documentation** - Update CLAUDE.md if new patterns, update package docs if API changed
+- **Phase 0: Read Documentation** - Read project documentation, package docs, confirm understanding
+- **Final Phase: Update Documentation** - Update project docs if new patterns, update package docs if API changed
 
 **Location:** Defined in `setup-guidelines/core-conventions.md`
 

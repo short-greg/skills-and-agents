@@ -179,8 +179,8 @@ argument-hint: "[expected input format]"
 - Conventions established
 
 **What to update:**
-- CLAUDE.md (if project-wide pattern)
-- AGENTS.md (if agent-related)
+- Project documentation (if project-wide pattern)
+- Agent documentation (if agent-related)
 - Subpackage docs (keep in sync with main)
 
 [See [references/spec-maintenance.md](../references/spec-maintenance.md)]

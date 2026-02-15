@@ -94,7 +94,7 @@ Purpose: This document defines how to create a guideline for setting up a partic
 **Orchestrator (`[name]-workflow`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md and confirm conventions"
+  - "Read project documentation and confirm conventions"
   - "Check for existing artifacts"
   - "Determine starting point based on existing artifacts"
 
@@ -111,13 +111,13 @@ loop_gates:
     action: "go to [previous skill]"
 
 always_last:
-  - "Update CLAUDE.md if new patterns established"
+  - "Update project documentation if new patterns established"
 ```
 
 **Atomic skill (`[name]-[action1]`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md for conventions"
+  - "Read project documentation for conventions"
   - "[Skill-specific base items]"
 
 conditional_items:

@@ -89,7 +89,7 @@ Enable consistent feature delivery from idea to tested code through a suite of c
 
 **How each skill creates its checklist on execution:**
 
-1. Read CLAUDE.md to determine repo type and conventions
+1. Read project documentation (see [references/skills-vs-agents.md](../references/skills-vs-agents.md) for tool-specific locations) to determine repo type and conventions
 2. Read existing specs (PRD, plan) to detect current state
 3. Based on repo type, include/exclude quality gates
 4. For each phase, add corresponding checklist items
@@ -99,7 +99,7 @@ Enable consistent feature delivery from idea to tested code through a suite of c
 **Orchestrator (`feature-workflow`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md and confirm conventions"
+  - "Read project documentation and confirm conventions"
   - "Check for existing PRD/plan documents"
   - "Determine starting point based on existing artifacts"
 
@@ -118,13 +118,13 @@ loop_gates:
     action: "go to previous skill for revision"
 
 always_last:
-  - "Update CLAUDE.md if new patterns established"
+  - "Update project documentation if new patterns established"
 ```
 
 **Atomic skill (`feature-define`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md for conventions"
+  - "Read project documentation for conventions"
   - "Gather feature description from user"
   - "Research existing code/patterns"
 

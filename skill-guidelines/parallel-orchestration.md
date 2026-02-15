@@ -80,7 +80,7 @@ Enable parallel development by breaking large PRDs into independent tasks with d
 
 **How each skill creates its checklist on execution:**
 
-1. Read CLAUDE.md to determine repo type and conventions
+1. Read project documentation (see [references/skills-vs-agents.md](../references/skills-vs-agents.md) for tool-specific locations) to determine repo type and conventions
 2. Read existing parallel plans to detect current state
 3. Check dependency status for all tasks
 4. For each phase, add corresponding checklist items
@@ -90,7 +90,7 @@ Enable parallel development by breaking large PRDs into independent tasks with d
 **Orchestrator (`parallel-orchestrate`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md and confirm conventions"
+  - "Read project documentation and confirm conventions"
   - "Check for existing parallel plans"
   - "Determine current wave status"
 
@@ -124,7 +124,7 @@ loop_gates:
     action: "stop and report, do not continue merging"
 
 always_last:
-  - "Update CLAUDE.md if new patterns established"
+  - "Update project documentation if new patterns established"
 ```
 
 **Router skill (`parallel-task-workflow`) checklist generation:**

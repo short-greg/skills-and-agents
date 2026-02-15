@@ -75,7 +75,7 @@ Enable consistent creation of educational content through coordinated skills for
 
 **How each skill creates its checklist on execution:**
 
-1. Read CLAUDE.md to determine repo type, examples directory, and conventions
+1. Read project documentation (see [references/skills-vs-agents.md](../references/skills-vs-agents.md) for tool-specific locations) to determine repo type, examples directory, and conventions
 2. Read existing examples to detect naming patterns and structure
 3. Based on repo type, include/exclude quality gates (tests, grievances)
 4. For each phase, add corresponding checklist items
@@ -85,7 +85,7 @@ Enable consistent creation of educational content through coordinated skills for
 **Atomic skill (`create-example`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md and confirm conventions"
+  - "Read project documentation and confirm conventions"
   - "Read example spec or gather description"
   - "Identify next example number"
   - "Research framework and existing examples"
@@ -121,7 +121,7 @@ always_last:
 **Atomic skill (`create-tutorial`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md for conventions"
+  - "Read project documentation for conventions"
   - "Gather tutorial topic from user"
   - "Research related documentation"
 

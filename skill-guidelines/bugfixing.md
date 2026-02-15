@@ -87,7 +87,7 @@ Enable systematic bug investigation through a suite of coordinated skills.
 
 **How each skill creates its checklist on execution:**
 
-1. Read CLAUDE.md to determine repo type and testing conventions
+1. Read project documentation (see [references/skills-vs-agents.md](../references/skills-vs-agents.md) for tool-specific locations) to determine repo type and testing conventions
 2. Check for existing debugging artifacts (hypotheses docs, root cause docs)
 3. Based on repo type, include/exclude quality gates
 4. For each phase, add corresponding checklist items
@@ -97,7 +97,7 @@ Enable systematic bug investigation through a suite of coordinated skills.
 **Orchestrator (`bugfix-workflow`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md and confirm conventions"
+  - "Read project documentation and confirm conventions"
   - "Check for existing hypotheses/root cause docs"
   - "Determine starting point based on existing artifacts"
 
@@ -119,13 +119,13 @@ loop_gates:
     action: "go to bugfix-investigate to re-examine"
 
 always_last:
-  - "Update CLAUDE.md if new debugging patterns established"
+  - "Update project documentation if new debugging patterns established"
 ```
 
 **Atomic skill (`bugfix-hypothesize`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md for conventions"
+  - "Read project documentation for conventions"
   - "Analyze bug symptoms and error messages"
   - "Identify potential cause categories"
 
