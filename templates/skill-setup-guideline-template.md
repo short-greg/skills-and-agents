@@ -1,5 +1,13 @@
 Purpose: This document defines how to create a guideline for setting up a particular type of skill.
 
+**IMPORTANT: Guidelines are setup guides, NOT pre-filled skills.**
+- Do NOT write complete SKILL.md content in the guideline
+- Do NOT pre-fill all sections from skill-template.md
+- DO describe procedures that map to skills in a suite
+- DO define the full skill suite (orchestrator + atomic skills)
+- DO reference skill-template.md for users to fill during interview
+- See feature-development.md as the canonical example
+
 [TEMPLATE]
 
 # [Guideline Name]
@@ -15,9 +23,29 @@ Purpose: This document defines how to create a guideline for setting up a partic
 [Context and motivation. Why does this guideline exist? What problems led to its creation?]
 
 ## Skill Intent
-[What problem does this skill solve? What workflow does it enable?]
+[What problem does this skill solve? What workflow does it enable through a suite of coordinated skills?]
 
-## When to Use
+## Skills in This Suite
+
+| Skill | Purpose | Type |
+|-------|---------|------|
+| `[name]-workflow` | [End-to-end orchestration description] | Orchestrator |
+| `[name]-[action1]` | [What this atomic skill does] | Atomic |
+| `[name]-[action2]` | [What this atomic skill does] | Atomic |
+| `[name]-[action3]` | [What this atomic skill does] | Atomic |
+
+### When to Use Each Skill
+
+**Use `[name]-workflow` when:**
+- [Use case for orchestrator]
+
+**Use `[name]-[action1]` when:**
+- [Use case for this atomic skill]
+
+**Use `[name]-[action2]` when:**
+- [Use case for this atomic skill]
+
+## When to Use This Guideline
 **Use this guideline when:**
 - [Use case 1]
 - [Use case 2]
@@ -37,74 +65,77 @@ Purpose: This document defines how to create a guideline for setting up a partic
 3. [Measurable outcome 3]
 
 ## Guideline Checklist
-**Process to create a skill from this guideline:**
+**Process to create skills from this guideline:**
 
 - [ ] 1. Read this guideline and referenced framework docs
-- [ ] 2. Determine: single skill or workflow (multiple skills)?
-- [ ] 3. Interview user until [skill-template.md](skill-template.md) is filled for each skill
-  - Ask about: Role, OKRs, phases, checklist rules, etc.
-  - (If workflow) Define orchestrator + atomic skills
-  - See "Skill Output Template" section below for full list of sections to fill
-- [ ] 4. Define command name(s) following naming conventions
-- [ ] 5. Customize for repo type (prototype/production/library)
-- [ ] 6. Confirm skill design with user
-- [ ] 7. Write SKILL.md file(s) to ${TOOL_CONFIG}/skills/[name]/
-- [ ] 8. Test skill execution
+- [ ] 2. Interview user for each skill in suite (see Skill Output Template)
+- [ ] 3. Customize for repo type (prototype/production/library)
+- [ ] 4. Confirm skill designs with user
+- [ ] 5. Write SKILL.md files:
+  - `${TOOL_CONFIG}/skills/[name]-workflow/SKILL.md`
+  - `${TOOL_CONFIG}/skills/[name]-[action1]/SKILL.md`
+  - `${TOOL_CONFIG}/skills/[name]-[action2]/SKILL.md`
+  - `${TOOL_CONFIG}/skills/[name]-[action3]/SKILL.md`
+- [ ] 6. Test skill execution
 
 ---
 
 # Process
 
-**How the skill creates its checklist on execution:**
+**How each skill creates its checklist on execution:**
 
-[Describe the steps the skill takes to generate a dynamic checklist based on context. This is NOT a static checklist - it's instructions for HOW to build one.]
-
-**Prose description:**
 1. Read top-level coding agent documentation (e.g., CLAUDE.md, AGENTS.md) to determine repo type and conventions
-2. (If working in a specific package) Read that package's coding agent documentation if it exists
+2. Read existing artifacts to detect current state
 3. Based on repo type, include/exclude quality gate items
-4. For each entity in input (files, features, etc.), add corresponding checklist items
+4. For each phase, add corresponding checklist items
 5. Add loop gates for validation failures (tests, coverage, etc.)
-6. Always end with progress update item
-7. (If skill adds, removes, or edits code) Include step to update coding agent documentation using templates from [coding-agent-doc-template.md](coding-agent-doc-template.md) and [coding-agent-doc-sub-level-template.md](coding-agent-doc-sub-level-template.md)
+6. End with documentation update item
 
-**YAML example (where helpful):**
+**Orchestrator (`[name]-workflow`) checklist generation:**
 ```yaml
 base_items:
-  - "Read CLAUDE.md and understand conventions"
-  - "Confirm understanding with user"
+  - "Read CLAUDE.md and confirm conventions"
+  - "Check for existing artifacts"
+  - "Determine starting point based on existing artifacts"
+
+phase_items:
+  [phase1]:
+    - "Run [name]-[action1] skill"
+  [phase2]:
+    - "Run [name]-[action2] skill"
+  [phase3]:
+    - "Run [name]-[action3] skill"
+
+loop_gates:
+  - trigger: "[failure condition]"
+    action: "go to [previous skill]"
+
+always_last:
+  - "Update CLAUDE.md if new patterns established"
+```
+
+**Atomic skill (`[name]-[action1]`) checklist generation:**
+```yaml
+base_items:
+  - "Read CLAUDE.md for conventions"
+  - "[Skill-specific base items]"
 
 conditional_items:
   - condition: "repo_type == 'production'"
     items:
-      - "Run security scans"
-      - "Run modularity assessment"
-
-loop_gates:
-  - trigger: "tests_fail"
-    action: "go to step [run_tests]"
+      - "[Production-specific items]"
 
 always_last:
-  - "Update ${SPEC_DIR}/plan.md with progress"
+  - "Write output to ${SPEC_DIR}/[output].md"
 ```
-
-**Checklist Syntax (for generated checklists):**
-```
-- [ ] 1. Item description
-- [ ] 2. (If condition) Conditional item
-- [ ] 3! (If condition) Loop gate - go to step N
-```
-
-**Markers:** `[ ]` pending, `[x]` done, `[-]` skipped, `!` = loop gate
 
 ---
 
 # Procedures
 
-[Reusable logic blocks that can be overridden when creating the skill]
+[Each procedure maps to an atomic skill in the suite]
 
-## Procedure: [Name]
-
+## Procedure: [Name] ([skill-name])
 **Purpose:** [What this procedure accomplishes]
 
 **Steps:**
@@ -116,18 +147,15 @@ always_last:
 - [What can be customized]
 
 ## Procedure: Evaluate Risks
-
 **Purpose:** Identify potential issues before execution
 
 **Steps:**
 1. Check for uncommitted changes
 2. Verify prerequisites exist
 3. Assess impact on existing code
-4. [Domain-specific risk checks]
 
 **Override Points:**
 - Additional risk checks for specific domains
-- Threshold adjustments
 
 ---
 
@@ -161,9 +189,9 @@ always_last:
 
 # Skill Output Template
 
-Use [skill-template.md](skill-template.md) as the base for creating SKILL.md files.
+Use [skill-template.md](skill-template.md) as the base for creating each SKILL.md file.
 
-**During the interview process, fill in these sections from skill-template.md:**
+**During the interview process, fill in these sections for each skill:**
 
 1. **Frontmatter** - name, description, argument-hint
 2. **Background** - why this skill exists
@@ -174,15 +202,19 @@ Use [skill-template.md](skill-template.md) as the base for creating SKILL.md fil
 7. **OKRs** - measurable outcomes
 8. **Prerequisites** - what must exist
 9. **Risks** - inherent risks and mitigations
-10. **Process** - checklist generation rules, phases, input handling, error recovery, documentation updates
+10. **Process** - checklist generation rules, phases, input handling, error recovery
 11. **Deliverables** - outputs produced
 12. **Reporting/Transparency** - progress tracking format
 13. **Fault Tolerance** - rollback, partial completion, recovery
-14. **Related Skills** - what it works with
+14. **Related Skills** - connections to other skills in suite
 
-**For workflows (multiple skills):**
-- Create one SKILL.md per atomic skill
-- Create one SKILL.md for the orchestrator
-- Orchestrator references atomic skills in "Related Skills"
+**Suite structure:**
+- `[name]-workflow` orchestrator calls atomic skills
+- Each atomic skill is standalone but designed to work in sequence
+- [Describe any loops or conditional flows]
 
-**Output location:** `${TOOL_CONFIG}/skills/[skill-name]/SKILL.md`
+**Output locations:**
+- `${TOOL_CONFIG}/skills/[name]-workflow/SKILL.md`
+- `${TOOL_CONFIG}/skills/[name]-[action1]/SKILL.md`
+- `${TOOL_CONFIG}/skills/[name]-[action2]/SKILL.md`
+- `${TOOL_CONFIG}/skills/[name]-[action3]/SKILL.md`
