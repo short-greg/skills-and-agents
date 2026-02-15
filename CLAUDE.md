@@ -49,20 +49,17 @@ skills-and-agents/
 │   ├── skills-vs-agents.md      # When to use skills vs agents
 │   ├── checklist-management.md  # Checklist syntax
 │   ├── goals-and-objectives.md  # OKR patterns
-│   └── assessment-approaches.md # Quality criteria
+│   ├── assessment-approaches.md # Quality criteria
+│   └── spec-maintenance.md      # Progress documentation
 │
-├── setup-guidelines/            # How to set up and customize
-│   ├── core-conventions.md      # Naming, progress tracking, doc maintenance
-│   ├── repo-detection.md        # How to analyze project structure
-│   ├── interview-protocol.md    # How to customize per project
-│   └── worktree-guide.md        # Git worktree usage for parallel work
-│
-├── skill-guidelines/            # Skill workflow templates
+├── skill-guidelines/            # Skill workflow setup guides
+│   ├── INTENT.md                # Directory purpose
 │   ├── feature-development.md   # Complete feature workflow
 │   ├── bugfixing.md             # Hypothesis-based debugging
 │   ├── refactoring.md           # Safe refactoring
 │   ├── parallel-orchestration.md # Parallel task coordination
-│   └── creating-examples.md     # Educational content creation
+│   ├── creating-examples.md     # Educational content creation
+│   └── create-skill.md          # Meta-skill for creating skills
 │
 └── agent-guidelines/            # Specialized agent setup guides
     ├── INTENT.md                # Directory purpose
