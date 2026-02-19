@@ -17,7 +17,7 @@ allowed-tools: Read, Grep
 
 **Intent:** Prevent acting on assumptions. Poor orientation leads to solving the wrong problem, missing real issues, or duplicating existing work.
 
-**Scope:** Understanding the current situation before taking action. Includes: inventorying what exists (code, docs, infrastructure), evaluating what is working vs. broken, identifying gaps between current state and any known target, surfacing existing issues and technical debt, and noting risks inherent in the current state.
+**Scope:** Understanding the current situation before taking action. Includes: inventorying what exists (code, docs, infrastructure), evaluating what is working vs. broken, identifying gaps between current state and any known target, surfacing existing issues and technical debt, and noting risks inherent in the current state. Orientation is about current state assessment — it answers "where are we now?" not "where should we go?"
 
 ---
 

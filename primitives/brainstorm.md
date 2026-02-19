@@ -17,7 +17,7 @@ allowed-tools: Read, Grep, WebSearch
 
 **Intent:** Prevent premature commitment to the first idea that comes to mind. Good brainstorming surfaces alternatives that may be better, simpler, or more appropriate — and helps avoid anchoring bias.
 
-**Scope:** Generating and exploring ideas, options, and alternatives. Includes: divergent thinking to expand possibilities, evaluating ideas at a high level for viability, combining or building on ideas, identifying non-obvious approaches, and organizing ideas for later evaluation. Does not include deep evaluation or final selection — that requires more focused analysis.
+**Scope:** Generating and exploring ideas, options, and alternatives. Includes: divergent thinking to expand possibilities, evaluating ideas at a high level for viability, combining or building on ideas, identifying non-obvious approaches, and organizing ideas for later evaluation. Brainstorming is about expanding the solution space — it answers "what are the possibilities?" not "which one is best?"
 
 ---
 

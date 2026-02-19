@@ -17,7 +17,7 @@ allowed-tools: Read, Grep, WebSearch, WebFetch
 
 **Intent:** Prevent acting on incomplete, incorrect, or outdated information. LLM knowledge has limits and becomes stale — investigation actively fills gaps. Poor investigation leads to reinventing existing solutions, choosing suboptimal approaches, solving symptoms instead of causes, or making decisions based on false assumptions.
 
-**Scope:** Gathering and synthesizing information to reduce uncertainty. Includes: researching documentation and best practices, surveying available solutions and prior art, searching the web for current information, tracing code paths and data flows, forming and testing hypotheses, identifying root causes of issues, asking users for clarification when needed, and synthesizing findings into actionable conclusions.
+**Scope:** Gathering and synthesizing information to reduce uncertainty. Includes: researching documentation and best practices, surveying available solutions and prior art, searching the web for current information, tracing code paths and data flows, forming and testing hypotheses, identifying root causes of issues, asking users for clarification when needed, and synthesizing findings into actionable conclusions. Investigation is about reducing uncertainty — it answers "what do we need to know?" not "what should we build?"
 
 ---
 

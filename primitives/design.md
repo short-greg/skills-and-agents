@@ -18,7 +18,7 @@ allowed-tools: Read, Grep
 
 **Intent:** Prevent implementation failures caused by insufficient upfront thinking. Design surfaces complexity, unknowns, and risks — then resolves them — before they become expensive to fix in code.
 
-**Scope:** Figuring out how to build something before writing code. Includes: structural design (file/module hierarchy, dependency graphs, data models, interfaces), process design (data flow, state transitions, error handling, concurrency), test strategy (what to test, edge cases to cover, test boundaries), evaluating tradeoffs between alternatives, identifying technical risks and determining concrete mitigations, and ensuring the approach fits existing project conventions and architecture.
+**Scope:** Figuring out how to build something before writing code. Includes: structural design (file/module hierarchy, dependency graphs, data models, interfaces), process design (data flow, state transitions, error handling, concurrency), test strategy (what to test, edge cases to cover, test boundaries), evaluating tradeoffs between alternatives, identifying technical risks and determining concrete mitigations, and ensuring the approach fits existing project conventions and architecture. Design is about technical approach — it answers "how will we build this?" not "what steps will we take?"
 
 ---
 

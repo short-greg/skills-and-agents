@@ -16,7 +16,7 @@ allowed-tools: Read, Grep, Write, Edit, Bash
 
 **Intent:** Turn plans and designs into reality. Good implementation follows the design, fits project conventions, handles edge cases, and produces code that is correct, readable, and maintainable.
 
-**Scope:** Writing and modifying code, tests, configuration, and other artifacts. Includes: translating designs into code, following project conventions and patterns, handling error cases and edge cases, writing tests alongside implementation, integrating with existing code, and iterating based on feedback.
+**Scope:** Writing and modifying code, tests, configuration, and other artifacts. Includes: translating designs into code, following project conventions and patterns, handling error cases and edge cases, writing tests alongside implementation, integrating with existing code, and iterating based on feedback. Implementation is about producing artifacts — it answers "does the code exist and work?" not "is it the right approach?"
 
 ---
 

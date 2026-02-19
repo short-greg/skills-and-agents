@@ -17,7 +17,7 @@ allowed-tools: Read, Grep
 
 **Intent:** Prevent wasted effort by ensuring the task is well-understood before any solution is attempted. Bad definitions lead to building the wrong thing or never knowing when to stop.
 
-**Scope:** Establishing what needs to be built and defining done. Includes: clarifying goals and intent, capturing requirements and constraints, defining key terminology precisely enough to serve as evaluation gates, writing user stories that surface intended experience and edge cases, and specifying SMARB criteria — Specific, Measurable, Achievable, Relevant, and Bounded — to enable binary pass/fail validation.
+**Scope:** Establishing what needs to be built and defining done. Includes: clarifying goals and intent, capturing requirements and constraints, defining key terminology precisely enough to serve as evaluation gates, writing user stories that surface intended experience and edge cases, and specifying SMARB criteria — Specific, Measurable, Achievable, Relevant, and Bounded — to enable binary pass/fail validation. Definition is about requirements and completion criteria — it answers "what are we building and how will we know it's done?" not "how will we build it?"
 
 ---
 

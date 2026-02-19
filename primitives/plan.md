@@ -17,7 +17,7 @@ allowed-tools: Read, Grep
 
 **Intent:** Prevent wasted effort from doing things in the wrong order, missing dependencies, or jumping into work without a strategy. A good plan makes execution straightforward.
 
-**Scope:** Deciding what to do and in what order. Includes: identifying the high-level actions required to accomplish a goal, determining dependencies between actions, sequencing actions so prerequisites are met before dependents, identifying opportunities for parallelism, and surfacing unknowns that may require investigation before proceeding.
+**Scope:** Deciding what to do and in what order. Includes: identifying the high-level actions required to accomplish a goal, determining dependencies between actions, sequencing actions so prerequisites are met before dependents, identifying opportunities for parallelism, and surfacing unknowns that may require investigation before proceeding. Planning is about sequencing and ordering — it answers "what steps and in what order?" not "how do we implement each step?"
 
 ---
 
