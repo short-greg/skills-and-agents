@@ -18,7 +18,7 @@ allowed-tools: Read, Grep        # tools allowed without asking permission
 
 **Intent:** [Why this skill exists - what problem it solves.]
 
-**Scope:** [What is and is not covered by this skill.]
+**Scope:** [Detailed description of what this skill covers. State positively what is included, not what is excluded. Be specific about the types of activities, artifacts, and concerns addressed.]
 
 ---
 

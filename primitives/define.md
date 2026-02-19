@@ -13,11 +13,11 @@ allowed-tools: Read, Grep
 
 # Define
 
-**Goal:** Produce a clear, shared understanding of what needs to be built and what success looks like.
+**Goal:** Establish when work is done — what needs to be built, what success looks like, and how completion will be verified.
 
-**Intent:** Prevent wasted effort by ensuring the task is well-understood before any solution is attempted. Bad definitions lead to building the wrong thing.
+**Intent:** Prevent wasted effort by ensuring the task is well-understood before any solution is attempted. Bad definitions lead to building the wrong thing or never knowing when to stop.
 
-**Scope:** Covers requirements, goals, terminology, constraints, user stories, and success criteria. Does not cover the order of actions to take (that is `plan`), how to build it (that is `design`), or whether a solution is correct (that is `validate`).
+**Scope:** Establishing what needs to be built and defining done. Includes: clarifying goals and intent, capturing requirements and constraints, defining key terminology precisely enough to serve as evaluation gates, writing user stories that surface intended experience and edge cases, and specifying SMARB criteria — Specific, Measurable, Achievable, Relevant, and Bounded — to enable binary pass/fail validation.
 
 ---
 
@@ -54,7 +54,7 @@ allowed-tools: Read, Grep
 2. Requirements are complete — no obvious gaps
 3. User stories capture the intended experience
 4. Key terms are defined precisely enough to use as evaluation gates
-5. Success criteria are measurable
+5. Success criteria are SMARB — Specific (unambiguous), Measurable (verifiable as pass/fail), Achievable (within scope), Relevant (addresses the goal), Bounded (clear stopping conditions)
 6. Out-of-scope items are explicitly stated
 7. User has confirmed the definition is accurate
 
@@ -94,9 +94,10 @@ Select and sequence based on context and expert reasoning. Others may be used.
 - **define user stories**: describe who does what and why — surfaces intended experience and edge cases
 - **identify constraints**: what must NOT change, what limitations exist (time, tech, compatibility)
 - **specify key results**: define measurable outcomes that confirm success
+- **verify SMARB**: for each criterion, check: Is it Specific (unambiguous)? Measurable (pass/fail)? Achievable? Relevant? Bounded (clear stopping condition)? Flag and refine any that fail
 - **define evaluation criteria**: specify how outputs will be judged — used as gates in later review stages
 - **identify out-of-scope**: explicitly state what is not being addressed
-- **identify risks**: business risks — market, user adoption, stakeholder alignment — not technical risks (those belong in `design`)
+- **identify risks**: business risks — market, user adoption, stakeholder alignment — not technical implementation risks
 - **draft definition**: write the definition document
 - **review with user**: confirm the definition is accurate before finalizing
 

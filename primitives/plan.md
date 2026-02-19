@@ -17,7 +17,7 @@ allowed-tools: Read, Grep
 
 **Intent:** Prevent wasted effort from doing things in the wrong order, missing dependencies, or jumping into work without a strategy. A good plan makes execution straightforward.
 
-**Scope:** Covers what to do and in what order — actions, sequencing, dependencies, and parallelism. Does not cover how to implement each action technically (that is `design`), what the task is (that is `define`), or whether the result is correct (that is `validate`).
+**Scope:** Deciding what to do and in what order. Includes: identifying the high-level actions required to accomplish a goal, determining dependencies between actions, sequencing actions so prerequisites are met before dependents, identifying opportunities for parallelism, and surfacing unknowns that may require investigation before proceeding.
 
 ---
 
@@ -45,7 +45,7 @@ allowed-tools: Read, Grep
 - The plan is at the right level of detail — actionable but not over-specified
 
 **Failure:**
-- Goal is too ambiguous to plan (need `define` first)
+- Goal is too ambiguous to plan — further clarification of requirements is needed first
 - Conflicting constraints make sequencing impossible without user input
 
 ---
@@ -92,7 +92,7 @@ Select and sequence based on context and expert reasoning. Others may be used.
 - **identify dependencies**: determine what must be done before what — critical for correctness
 - **sequence actions**: order actions based on dependencies and logical flow
 - **identify parallelism**: find actions that can run concurrently — useful for larger tasks
-- **identify unknowns**: surface actions where approach is unclear and `investigate` or `design` may be needed first
+- **identify unknowns**: surface actions where approach is unclear and further research or technical design may be needed first
 - **estimate scope**: rough sense of how much work each action involves — not deadlines, just relative size
 - **draft plan**: write the plan in a clear, ordered format
 - **review with user**: confirm the plan is complete and correctly ordered before proceeding

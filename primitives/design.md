@@ -18,7 +18,7 @@ allowed-tools: Read, Grep
 
 **Intent:** Prevent implementation failures caused by insufficient upfront thinking. Design surfaces complexity, unknowns, and risks — then resolves them — before they become expensive to fix in code.
 
-**Scope:** Covers how to build — structure, interfaces, data models, process flows, UI, dependencies, conventions, tradeoffs, risks, and mitigations. Does not cover what to build (that is `define`), the order of actions (that is `plan`), or the actual implementation (that is `implement`).
+**Scope:** Figuring out how to build something before writing code. Includes: structural design (file/module hierarchy, dependency graphs, data models, interfaces), process design (data flow, state transitions, error handling, concurrency), test strategy (what to test, edge cases to cover, test boundaries), evaluating tradeoffs between alternatives, identifying technical risks and determining concrete mitigations, and ensuring the approach fits existing project conventions and architecture.
 
 ---
 
@@ -49,8 +49,8 @@ allowed-tools: Read, Grep
 - The design fits project conventions and existing architecture
 
 **Failure:**
-- Too many unknowns remain — `investigate` is needed before design can proceed
-- Requirements are unclear — `define` is needed first
+- Too many unknowns remain — further investigation is needed before design can proceed
+- Requirements are unclear — further definition is needed first
 - Fundamental constraints conflict in a way that cannot be resolved without user input
 - UI designs are required but not available and user must provide them
 
@@ -64,8 +64,9 @@ allowed-tools: Read, Grep
 4. Structural design is complete: file/module hierarchy, dependency graph, key abstractions
 5. Process design is complete where needed: data flow, state transitions, error handling, concurrency
 6. Interfaces are precisely defined: function signatures, API shapes, data schemas, event contracts
-7. The design fits existing conventions and introduces no avoidable coupling or cycles
-8. User has confirmed the design is acceptable
+7. Test strategy is defined: critical paths, edge cases, test types, test boundaries
+8. The design fits existing conventions and introduces no avoidable coupling or cycles
+9. User has confirmed the design is acceptable
 
 ---
 
@@ -114,7 +115,13 @@ Select and sequence based on context and expert reasoning. Others may be used.
 **Risk Resolution**
 - **identify risks**: surface technical risks — complexity, unknowns, fragile assumptions, performance cliffs, edge cases, security concerns
 - **mitigate risks**: for each risk, determine a concrete mitigation — change the design, add a safeguard, or explicitly accept with rationale; the goal is resolution, not just awareness
-- **identify unknowns**: surface things that need `investigate` before design can be finalized — blocks the design until resolved
+- **identify unknowns**: surface things that need further investigation before design can be finalized — blocks the design until resolved
+
+**Test Strategy** (what to test and why — guides implementation)
+- **identify critical paths**: which flows must work correctly for the feature to be considered functional — these need tests
+- **identify edge cases**: boundary conditions, empty inputs, invalid states, error scenarios — enumerate them so implementation covers them
+- **determine test types**: what level of testing is appropriate — unit tests, integration tests, end-to-end tests, manual testing
+- **identify test boundaries**: what is tested in isolation vs. what needs integration — clarifies mocking/stubbing strategy
 
 **Output**
 - **produce design document**: write the design with enough precision to implement from — include structural diagrams or pseudocode where ambiguity would otherwise exist; this is a primary deliverable, not a summary
