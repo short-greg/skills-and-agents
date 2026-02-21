@@ -30,6 +30,7 @@ allowed-tools: Read, Grep, Write, Edit, Bash
 **Self-satisfiable:**
 - existing codebase: understand what exists and how to integrate
 - dependencies: understand what libraries, APIs, or modules are available
+- prior implementation: if implementation already exists, read it as starting point — enables refinement when looping back after validation failure
 
 **Non-essential:**
 - tests to satisfy: if existing tests define expected behavior, use them as specification

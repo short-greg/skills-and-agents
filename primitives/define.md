@@ -27,9 +27,9 @@ allowed-tools: Read, Grep
 - task understanding: interview user and/or review existing materials to surface what needs to be built
 - existing codebase context: read relevant files to understand current state
 - existing documentation: read project docs, conventions
+- prior definition: if a definition already exists, read it as starting point — enables refinement when looping back after validation failure
 
 **Non-essential:**
-- prior spec: if one exists it will be used as a starting point
 - technical constraints: if known, will shape requirements
 
 ---

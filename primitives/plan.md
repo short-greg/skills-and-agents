@@ -29,10 +29,10 @@ allowed-tools: Read, Grep
 **Self-satisfiable:**
 - existing definition: if a definition or requirements doc exists, read it
 - codebase context: read relevant files to understand current state and constraints
+- prior plan: if a plan already exists, read it as starting point — enables refinement when looping back after validation failure
 
 **Non-essential:**
 - design decisions: if already made, will influence plan
-- prior plan: if one exists, will be used as starting point or updated
 
 ---
 

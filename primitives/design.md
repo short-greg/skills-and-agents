@@ -31,6 +31,7 @@ allowed-tools: Read, Grep
 - project conventions: read project docs, style guides, architectural patterns in use — critical for producing designs that fit the system
 - existing codebase: read relevant files to understand current structure, dependencies, and constraints
 - existing definition: read requirements or spec if available
+- prior design: if a design already exists, read it as starting point — enables refinement when looping back after validation failure
 
 **Non-essential:**
 - performance requirements: if known, will constrain design choices
