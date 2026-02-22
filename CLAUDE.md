@@ -1,6 +1,8 @@
 # Skills and Agents Framework - Project Conventions
 
-This document defines conventions for maintaining and extending this framework.
+This document defines conventions for **developing within this repository** — adding primitives, workflows, protocols, and refining the framework itself.
+
+> **Note:** If you're looking to **use** this framework in another project, see [README.md](README.md) and [docs/SETUP.md](docs/SETUP.md) instead.
 
 ---
 

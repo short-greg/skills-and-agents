@@ -1,70 +1,172 @@
 # Skills and Agents Framework
 
-**Setup guides and templates for creating reliable AI coding assistant skills and agents.**
+**A framework of primitives, workflows, and protocols for building reliable AI coding assistant skills.**
+
+---
+
+## Getting Started
+
+**First time using this framework?** You need to set up the environment before using workflows.
+
+1. **Run setup** — Follow [docs/SETUP.md](docs/SETUP.md) to configure:
+   - Project documentation (CLAUDE.md)
+   - Tool configuration directory (`.claude/skills/`, `.cursor/`, etc.)
+   - Specs/plans directory
+
+2. **Install skills** — Copy workflow templates to your tool's skills directory
+
+3. **Start using** — Invoke skills like `/feature-workflow` or `/bugfix-workflow`
+
+> **For AI assistants:** If skills aren't installed yet, start with [docs/SETUP.md](docs/SETUP.md) to configure the environment first.
 
 ---
 
 ## What This Is
 
-This repository provides **setup guides** (not ready-to-use skills) that help you:
+This repository provides a **complete framework** for creating AI coding assistant skills that actually work:
 
-1. **Create skills** for your AI coding assistant (Claude Code, Cursor, Windsurf, etc.)
-2. **Customize templates** to match your project's conventions
-3. **Build reliable workflows** that actually complete (using progress tracking)
-4. **Prevent convention drift** (using documentation maintenance)
+- **Primitives** — Atomic cognitive actions (orient, define, design, implement, validate, investigate, brainstorm, critique)
+- **Workflows** — Multi-step processes that compose primitives (feature development, bugfixing, refactoring, code review)
+- **Protocols** — Reusable patterns for tracking, recovery, quality, and more
+- **Templates** — Starting points for creating your own skills
 
-### What You Get
+### Why This Exists
 
-- **Workflow templates** - Feature development, bugfixing, refactoring, parallel orchestration
-- **Progress tracking pattern** - Makes skills report what they're doing (less likely to skip steps)
-- **Documentation maintenance** - Skills read/update conventions to prevent drift
-- **Interview protocol** - Skills get customized to your project automatically
-- **Agent templates** - Code review, test architecture, and more
+AI coding assistants often:
+- Skip steps in complex workflows
+- Violate project conventions
+- Don't complete what they start
 
-### What This Is NOT
+This framework solves these problems with:
+- **Progress tracking** — Skills report what they're doing (less skipping)
+- **Documentation maintenance** — Skills read/update conventions (less drift)
+- **Structured workflows** — Clear steps with validation gates
 
-- ❌ Ready-to-use skills (you must customize templates for your project)
-- ❌ Tool-specific (works with any AI coding assistant)
-- ❌ A complete solution (requires your customization and setup)
+### Tool Compatibility
+
+Works with any AI coding assistant:
+- Claude Code (`.claude/skills/`)
+- Cursor
+- Windsurf
+- Others (adapt to your tool's format)
 
 ---
 
 ## Quick Start
 
-### 1. Choose What You Need
+### 1. Understand the Building Blocks
 
-| I Want To... | Use This Guide |
-|--------------|----------------|
-| Build a complete feature (PRD → Plan → Code) | [skill-guidelines/feature-development.md](skill-guidelines/feature-development.md) |
-| Fix a bug systematically | [skill-guidelines/bugfixing.md](skill-guidelines/bugfixing.md) |
-| Refactor code safely | [skill-guidelines/refactoring.md](skill-guidelines/refactoring.md) |
-| Work on tasks in parallel | [skill-guidelines/parallel-orchestration.md](skill-guidelines/parallel-orchestration.md) |
-| Create examples/tutorials | [skill-guidelines/creating-examples.md](skill-guidelines/creating-examples.md) |
-| Set up code review agent | [agent-guidelines/code-review-agent.md](agent-guidelines/code-review-agent.md) |
-| Set up test architect agent | [agent-guidelines/test-architect-agent.md](agent-guidelines/test-architect-agent.md) |
+| Component | Purpose | Examples |
+|-----------|---------|----------|
+| **Primitives** | Atomic cognitive actions | orient, define, design, implement, validate |
+| **Workflows** | Multi-step processes | feature_workflow, bugfix_workflow, refactor_workflow |
+| **Protocols** | Reusable patterns | tracking, recovery, checklist_management |
+| **Templates** | Starting points | skill-template, skill-setup-guideline-template |
 
-### 2. Follow the Setup Guide
+### 2. Choose a Workflow
 
-Each guide includes:
-- **Phase 0:** Repository Detection (analyze your project)
-- **Phase 1:** Prerequisites (verify requirements)
-- **Skill Templates:** Complete SKILL.md files ready to customize
-- **Integration:** How skills work together
-- **Testing:** Validate the skills work
+| I Want To... | Use This Workflow |
+|--------------|-------------------|
+| Build a complete feature | [feature_workflow.md](workflows/feature_workflow.md) |
+| Fix a bug systematically | [bugfix_workflow.md](workflows/bugfix_workflow.md) |
+| Refactor code safely | [refactor_workflow.md](workflows/refactor_workflow.md) |
+| Work on tasks in parallel | [worktree_orchestrate_workflow.md](workflows/worktree_orchestrate_workflow.md) |
+| Review code | [code_review_workflow.md](workflows/code_review_workflow.md) |
+| Design test strategy | [test_strategy_workflow.md](workflows/test_strategy_workflow.md) |
 
-### 3. Customize the Templates
+### 3. Customize for Your Project
 
 Templates use placeholders:
-- `${TOOL_CONFIG}` - Your AI tool's config directory (`.claude/`, `.cursor/`, etc.)
-- `${SPEC_DIR}` - Where you store PRDs/plans (`specs/`, `dev-docs/`, etc.)
-
-The interview protocol helps your AI assistant detect these automatically.
+- `${TOOL_CONFIG}` — Your AI tool's config directory (`.claude/`, `.cursor/`, etc.)
+- `${SPEC_DIR}` — Where you store PRDs/plans (`specs/`, `dev-docs/`, etc.)
 
 ---
 
-## Key Innovations
+## Repository Structure
 
-### 1. Progress Tracking
+```
+skills-and-agents/
+├── README.md                    # This file
+├── CLAUDE.md                    # Project conventions
+│
+├── primitives/                  # Atomic cognitive actions
+│   ├── orient.md                # Understand context and constraints
+│   ├── define.md                # Establish requirements and scope
+│   ├── design.md                # Plan technical approach
+│   ├── implement.md             # Execute plans into artifacts
+│   ├── validate.md              # Verify against criteria
+│   ├── investigate.md           # Diagnose root causes
+│   ├── brainstorm.md            # Generate options
+│   └── critique.md              # Evaluate quality
+│
+├── workflows/                   # Multi-step processes
+│   ├── feature_workflow.md      # Complete feature development
+│   ├── bugfix_workflow.md       # Hypothesis-driven bug fixing
+│   ├── refactor_workflow.md     # Safe behavior-preserving refactoring
+│   ├── worktree_orchestrate_workflow.md  # Parallel task coordination
+│   ├── worktree_task_workflow.md         # Single task in worktree
+│   ├── code_review_workflow.md  # Systematic code review
+│   └── test_strategy_workflow.md # Test design and planning
+│
+├── protocols/                   # Reusable patterns
+│   ├── tracking.md              # Progress documentation
+│   ├── recovery.md              # Resume from interruption
+│   ├── checklist_management.md  # Dynamic checklist patterns
+│   ├── skills_and_agents.md     # When to use skills vs agents
+│   ├── goals_and_objectives.md  # OKR patterns
+│   ├── project_quality.md       # Quality criteria
+│   ├── modularity.md            # Modular design principles
+│   └── ...                      # Other protocols
+│
+├── templates/                   # Base templates
+│   ├── skill-template.md        # Individual skill template
+│   └── skill-setup-guideline-template.md  # Skill suite setup
+│
+└── docs/                        # Additional documentation
+    ├── SETUP.md                 # Detailed setup guide
+    ├── SETUP_WORKTREE_ENV.md    # Git worktree setup
+    ├── PRIMITIVES.md            # Primitives overview
+    ├── IMPLEMENTATION-STATUS.md # Current status
+    └── FUTURE_WORK.md           # Planned improvements
+```
+
+---
+
+## Key Concepts
+
+### Primitives
+
+Primitives are atomic cognitive actions — the building blocks of workflows. Each primitive:
+- Has a single, clear purpose
+- Produces a well-defined output
+- Can be composed into workflows
+
+See [primitives/](primitives/) for all available primitives.
+
+### Workflows
+
+Workflows compose primitives into complete processes. Each workflow:
+- Maps each step to exactly one primitive
+- Follows required protocols (tracking, recovery, checklist_management)
+- Can be customized per project
+
+See [workflows/](workflows/) for all available workflows.
+
+### Protocols
+
+Protocols are reusable patterns that ensure consistency. Key protocols:
+
+- **[tracking.md](protocols/tracking.md)** — Progress documentation during execution
+- **[recovery.md](protocols/recovery.md)** — Resume from interruption
+- **[checklist_management.md](protocols/checklist_management.md)** — Dynamic progress tracking
+
+See [protocols/](protocols/) for all available protocols.
+
+---
+
+## Key Patterns
+
+### Progress Tracking
 
 **Problem:** AI skills often skip steps or don't complete workflows.
 
@@ -75,180 +177,32 @@ The interview protocol helps your AI assistant detect these automatically.
 
 **Result:** Skills are less likely to skip steps because they're actively reporting what they're doing.
 
-### 2. Documentation Maintenance
+### Documentation Maintenance
 
-**Problem:** Documentation drift causes convention violations, code duplication, tool misuse.
+**Problem:** Documentation drift causes convention violations and code duplication.
 
 **Solution:** Implementation skills must:
-- **Read** documentation before starting (Phase 0)
+- **Read** documentation before starting
 - **Follow** conventions during implementation
-- **Update** documentation when done (Final Phase)
+- **Update** documentation when done
 
-**Result:** Conventions stay current, preventing drift over time.
-
-### 3. Interview Protocol
+### Interview Protocol
 
 **Problem:** Skills need project-specific customization but users don't know how.
 
 **Solution:** Skills analyze your repository and ask targeted questions to customize themselves.
 
-**Result:** Skills fit your project's conventions automatically.
-
 ---
 
-## Repository Structure
+## Documentation
 
-```
-skills-and-agents/
-├── README.md                    # This file - quick start
-├── CLAUDE.md                    # Project conventions
-│
-├── setup-guidelines/            # How to set up and customize
-│   ├── core-conventions.md      # Progress tracking, doc maintenance, naming
-│   ├── repo-detection.md        # How to analyze project structure
-│   ├── interview-protocol.md    # How to customize per project
-│   └── worktree-guide.md        # Git worktree usage for parallel work
-│
-├── skill-guidelines/            # Workflow setup guides
-│   ├── feature-development.md   # feature-workflow, feature-define, feature-plan, feature-impl
-│   ├── bugfixing.md            # bugfix-workflow, bugfix-impl
-│   ├── refactoring.md          # refactor-workflow, refactor-impl
-│   ├── parallel-orchestration.md # parallel-orchestrate, parallel-task-workflow
-│   └── creating-examples.md    # create-example, create-tutorial
-│
-└── agent-guidelines/            # Agent setup guides
-    ├── overview.md              # Skills vs agents, when to use each
-    ├── code-review-agent.md     # Automated code review
-    └── test-architect-agent.md  # Test strategy design
-```
-
----
-
-## How Skills Work
-
-### Workflow Skills (Orchestrators)
-
-Example: `feature-workflow`
-
-```
-feature-workflow
-├── Detects current state (PRD exists? Plan exists? Code exists?)
-├── Skips completed phases
-├── Calls: feature-define (if no PRD)
-├── Calls: feature-plan (if no plan)
-├── Calls: feature-impl (to implement)
-└── Reviews modularity
-```
-
-### Atomic Skills
-
-Example: `feature-define`
-
-```
-feature-define
-├── Phase 0: Read documentation, confirm conventions
-├── Phase 1: Capture feature idea
-├── Phase 2: Write background
-├── Phase 3: Create user stories
-├── Phase 4: Define OKRs
-├── Phase 5: UI design (if applicable)
-├── Phase 6: Identify risks
-├── Phase 7: Define scope
-├── Phase 8: Write PRD document
-└── Final Phase: Update documentation
-```
-
-### Skills with Progress Tracking
-
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎯 FEATURE-DEFINE PROGRESS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-PHASES:
-✅ Phase 0: Read documentation
-✅ Phase 1: Capture idea
-✅ Phase 2: Write background
-🔄 Phase 3: User stories [IN PROGRESS] ◀── YOU ARE HERE
-⏸️ Phase 4: OKRs
-⏸️ Phase 5: UI design
-⏸️ Phase 6: Risks
-⏸️ Phase 7: Scope
-⏸️ Phase 8: Write PRD
-
-CURRENT TASK:
-Phase 3: Creating user stories
-Status: Writing stories for each persona
-Started: 10:30
-
-CHECKLIST:
-✅ Identify personas
-✅ Write stories for persona 1
-🔲 Write stories for persona 2
-🔲 Prioritize stories
-🔲 Present to user
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
-
----
-
-## Common Workflows
-
-### Build a Feature (End-to-End)
-
-```bash
-# 1. Start workflow
-/feature-workflow
-
-# It detects current state and skips completed phases
-# It composes: feature-define → feature-plan → feature-impl
-# User approval gates between major phases
-# Progress tracking shows what's done/pending
-```
-
-### Fix a Bug (Hypothesis-Based)
-
-```bash
-# 1. Start workflow
-/bugfix-workflow
-
-# It uses hypothesis-based debugging:
-# - Generate 3+ potential root causes
-# - Test each hypothesis systematically
-# - Implement minimal fix
-# - Verify resolution
-```
-
-### Refactor Code (Safely)
-
-```bash
-# 1. Start workflow
-/refactor-workflow
-
-# It ensures safety:
-# - Preserve existing tests
-# - Refactor in small steps
-# - Run tests after each change
-# - Measure modularity improvement
-```
-
-### Work in Parallel (Large Features)
-
-```bash
-# 1. Create plan with task decomposition
-/feature-plan specs/feature-prd.md
-
-# 2. Set up parallel orchestration
-/parallel-orchestrate plan specs/feature-plan.md
-/parallel-orchestrate setup
-
-# 3. Work on tasks in separate worktrees
-# (Each worktree runs /parallel-task-workflow)
-
-# 4. Review and merge
-/parallel-orchestrate review
-/parallel-orchestrate merge
-```
+| Document | Purpose |
+|----------|---------|
+| [SETUP.md](docs/SETUP.md) | Detailed setup instructions |
+| [SETUP_WORKTREE_ENV.md](docs/SETUP_WORKTREE_ENV.md) | Git worktree configuration |
+| [PRIMITIVES.md](docs/PRIMITIVES.md) | Primitives deep dive |
+| [IMPLEMENTATION-STATUS.md](docs/IMPLEMENTATION-STATUS.md) | Current implementation status |
+| [FUTURE_WORK.md](docs/FUTURE_WORK.md) | Planned improvements |
 
 ---
 
@@ -267,59 +221,26 @@ This framework works with any AI coding assistant that supports:
 
 ---
 
-## Documentation Maintenance Example
+## FAQ
 
-**Problem:** New developer adds code that duplicates existing functionality because they didn't know about the existing pattern.
+**Q: Are these ready-to-use skills?**
+A: No. These are templates you must customize for your project.
 
-**With this framework:**
+**Q: Does this only work with Claude Code?**
+A: No. It works with any AI coding assistant. Templates use placeholders you adapt to your tool.
 
-```markdown
-## Phase 0: Read Documentation
+**Q: Do I need to use everything?**
+A: No. Pick what you need. Start with one workflow and expand from there.
 
-**READ CLAUDE.md:**
-- Found: "Use BatchProcessor for bulk operations"
-- Found: "Batch sizes must not exceed 100"
-- Found: "All batch operations must be atomic"
+**Q: Why progress tracking?**
+A: AI skills often skip steps. Progress tracking makes the AI report what it's doing, which significantly reduces skipping.
 
-✅ I understand the conventions
-✅ I will use existing BatchProcessor
-✅ I will not create duplicate batch logic
-
-## [Implementation phases...]
-
-## Final Phase: Update Documentation
-
-**CLAUDE.md UPDATED:**
-- Added: Example usage of BatchProcessor for moderation
-- No new patterns needed - used existing ones
-
-**moderation/README.md UPDATED:**
-- Added: approve_batch function documentation
-- Added: Dependency on utils.batch
-```
-
-**Result:** No duplication, conventions followed, documentation stays current.
+**Q: Why documentation maintenance?**
+A: Documentation drift causes convention violations and code duplication. Making skills read/update docs prevents this.
 
 ---
 
-## Getting Help
-
-### Understanding Core Concepts
-
-- Read [setup-guidelines/core-conventions.md](setup-guidelines/core-conventions.md) for:
-  - Progress tracking pattern
-  - Documentation maintenance pattern
-  - Naming conventions
-
-### Setting Up Your First Skill
-
-1. Start with [skill-guidelines/feature-development.md](skill-guidelines/feature-development.md)
-2. Follow Phase 0-1 to detect your project structure
-3. Copy the SKILL.md templates
-4. Customize with your `${TOOL_CONFIG}` and `${SPEC_DIR}`
-5. Test with a simple feature
-
-### Contributing
+## Contributing
 
 See [CLAUDE.md](CLAUDE.md) for:
 - Project intent and conventions
@@ -329,45 +250,6 @@ See [CLAUDE.md](CLAUDE.md) for:
 
 ---
 
-## FAQ
-
-**Q: Are these ready-to-use skills?**
-A: No. These are setup guides and templates you must customize for your project.
-
-**Q: Does this only work with Claude Code?**
-A: No. It works with any AI coding assistant (Claude Code, Cursor, Windsurf, etc.). Templates use placeholders you adapt to your tool.
-
-**Q: Do I need to use all the skills?**
-A: No. Pick what you need. Start with one workflow (e.g., feature-development) and expand from there.
-
-**Q: What's the learning curve?**
-A: Start simple:
-1. Read core-conventions.md (15 min)
-2. Pick one workflow guide (30 min)
-3. Customize and test (1 hour)
-4. Total: ~2 hours to get first skill working
-
-**Q: Why progress tracking?**
-A: AI skills often skip steps. Progress tracking makes the AI report what it's doing as it works, which significantly reduces skipping.
-
-**Q: Why documentation maintenance?**
-A: Documentation drift is a primary cause of convention violations, code duplication, and architectural inconsistency. Making skills read/update docs prevents this.
-
-**Q: Can I modify the templates?**
-A: Yes! These are starting points. Adapt to your team's needs.
-
----
-
 ## License
 
-[Add your license here]
-
----
-
-## Credits
-
-Developed to solve real problems with AI coding assistants:
-- Skills that don't complete
-- Documentation that drifts
-- Conventions that aren't followed
-- Customization that's too manual
+MIT
