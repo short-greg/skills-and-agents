@@ -64,41 +64,19 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 - Framework repo not accessible
 - Installation fails
 
----
+## Steps
 
-## Protocols
-
-Comply with protocols to get consistent behavior `protocols/`. If you do not understand a protocol, read it.
-
-- `tracking.md` — Track which setup tasks are complete vs remain
-- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
-- `checklists.md` — Build preliminary checklist from Key Results before starting work.
-- `reasoning.md` — Reason about project state and approach before starting.
-- `goals_and_objectives.md` — Ensure setup achieves user's stated goals.
-
----
-
-## Available Primitives
-
-Primitives are atomic cognitive actions in `skills/`. Use these for setup. If you do not understand a primitive, read it before using it.
-
-- `orient` — Understand repository structure and conventions.
-- `define` — Establish user requirements and preferences.
-- `validate` — Verify setup works correctly.
-- `investigate` — Analyze existing code for risks, complexity, uncertainties.
-- `critique` — Evaluate modularity and conventions of existing code.
+Steps:
+1. Task: Create preliminary checklist from key results (todo list)
+2. Task: Reason about project
+3. Task: Interview the user
+4. Task: Decide on remaining tasks to complete in order to achieve the key results and refine the checklist
 
 ---
 
 ## Tasks
 
 Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
-
-Steps:
-1. Create preliminary checklist (todo list)
-2. Reason about project
-3. Interview the user
-4. Decide on remaining tasks to complete in order to achieve the key results and refine the checklist
 
 ### Create Preliminary Checklist (→ Req 1)
 
@@ -148,7 +126,7 @@ After understanding the Goal, Key Results, and Requirements and setting up a pre
 
 Based on the interview, determine the order of remaining tasks.
 
-**Tasks to complete (order based on project state):**
+**Tasks to complete (can add others):**
 
 - **Understand repository** — For existing repos, understand structure and conventions first
 - **Handle existing skills** — Adapt, keep, remove, or leave as-is based on user choice
@@ -272,6 +250,32 @@ Write summary file to `${TOOL_CONFIG}/SETUP_SUMMARY.md` documenting:
 - Quick start examples
 - Customizations applied
 - How to re-run setup
+
+---
+
+---
+
+## Protocols
+
+Comply with protocols to get consistent behavior `protocols/`. If you do not understand a protocol, read it.
+
+- `tracking.md` — Track which setup tasks are complete vs remain
+- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
+- `checklists.md` — Build preliminary checklist from Key Results before starting work.
+- `reasoning.md` — Reason about project state and approach before starting.
+- `goals_and_objectives.md` — Ensure setup achieves user's stated goals.
+
+---
+
+## Available Primitives
+
+Primitives are atomic cognitive actions in `skills/`. Use these for setup. If you do not understand a primitive, read it before using it.
+
+- `orient` — Understand repository structure and conventions.
+- `define` — Establish user requirements and preferences.
+- `validate` — Verify setup works correctly.
+- `investigate` — Analyze existing code for risks, complexity, uncertainties.
+- `critique` — Evaluate modularity and conventions of existing code.
 
 ---
 
