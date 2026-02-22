@@ -22,12 +22,41 @@ allowed-tools: Read, Grep        # tools allowed without asking permission
 
 ---
 
+## Key Results
+
+1. [measurable outcome]
+2. [measurable outcome]
+3. [measurable outcome]
+
+---
+
+## Protocols
+
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+
+- `tracking.md` — [when/why this protocol applies to this skill]
+- `recovery.md` — [when/why this protocol applies to this skill]
+- `[other].md` — [when/why this protocol applies to this skill]
+
+---
+
+## Risks
+
+[Risks inherent to this skill. What could go wrong? What requires careful handling?]
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|------------|--------|------------|
+| [Risk 1] | Low/Med/High | Low/Med/High | [How to prevent/handle] |
+| [Risk 2] | Low/Med/High | Low/Med/High | [How to prevent/handle] |
+
+---
+
 ## Preconditions
 
-**Must be provided** (cannot proceed without, cannot self-satisfy — ask user):
+**Must be provided** (cannot proceed without — ask user):
 - [condition]: [what to ask for]
 
-**Self-satisfiable** (skill will gather at start if not provided):
+**Self-satisfiable** (skill will gather if not provided):
 - [condition]: [how the skill will satisfy it]
 
 **Non-essential** (skill works without, but enables more if present):
@@ -45,29 +74,20 @@ allowed-tools: Read, Grep        # tools allowed without asking permission
 
 ---
 
-## Key Results
+## Tasks
 
-This skill succeeds when:
+Execute these tasks to achieve the key results. Select and sequence based on your reasoning. You may add tasks or skip tasks that don't apply.
 
-1. [measurable outcome]
-2. [measurable outcome]
-3. [measurable outcome]
+### [Task Name]
 
----
+[What this task does. Reference primitives or protocols as needed.]
 
-## Required Actions
+### [Task Name]
 
-These must always be performed:
+[What this task does.]
 
-**Expert Reasoning (REQUIRED FIRST)**
-Before doing anything else, describe how an expert in this domain would approach this task.
-Cover: their strategy, what they would do first and why, alternatives they would consider,
-fallbacks if the primary approach fails, common mistakes to avoid, and what a high-quality
-result looks like. This is not a plan — it is meta-reasoning about approach.
+### Confirm
 
-Output this reasoning before proceeding.
-
-**Confirm (REQUIRED LAST)**
 Before declaring done, verify against each key result:
 - Does the output satisfy each key result?
 - If not, what is missing and what action addresses it?
@@ -76,14 +96,14 @@ Report outcome explicitly: state whether the skill succeeded or failed, and why.
 
 ---
 
-## Possible Actions
+## Deliverables
 
-Select and sequence based on context and expert reasoning.
-Others not listed may be used if appropriate.
+[What this skill produces when successful.]
 
-- **[action]**: [what it does, when useful]
-- **[action]**: [what it does, when useful]
-- **[action]**: [what it does, when useful]
+| Output | Location | Format |
+|--------|----------|--------|
+| [Output 1] | [path or description] | [format] |
+| [Output 2] | [path or description] | [format] |
 
 ---
 
@@ -95,7 +115,9 @@ Others not listed may be used if appropriate.
 ---
 
 ## Tools
-None
+
+[List tools this skill uses, or "None"]
 
 ## Hooks
-None
+
+[List hooks this skill triggers, or "None"]

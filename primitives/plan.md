@@ -9,12 +9,6 @@ argument-hint: "[task or goal to plan]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep
-protocols:
-  - tracking  # Track which planning aspects are complete vs remain
-  - recovery  # Resume planning from where it was interrupted
-  - reasoning_patterns  # Reason about planning approach, verify plan completeness after
-  - goals_and_objectives  # Plan must achieve the defined success criteria
-  - manage_complexity_uncertainty_risk  # Identify risks and unknowns that affect sequencing
 ---
 
 # Plan
@@ -27,6 +21,29 @@ protocols:
 
 ---
 
+## Key Results
+
+1. Actions are complete — no obvious missing steps
+2. Order is correct — no action requires something that hasn't been done yet
+3. Dependencies are explicit
+4. Parallelizable work is identified where relevant
+5. The plan is at the right level of abstraction — not too granular, not too vague
+6. User has confirmed the plan is sound
+
+---
+
+## Protocols
+
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+
+- `tracking.md` — Track which planning aspects are complete vs remain
+- `recovery.md` — Resume planning from where it was interrupted
+- `reasoning.md` — Reason about planning approach before starting, verify plan completeness after
+- `goals_and_objectives.md` — Plan must achieve the defined success criteria
+- `risk_management.md` — Identify risks and unknowns that affect sequencing
+
+---
+
 ## Preconditions
 
 **Must be provided:**
@@ -35,7 +52,7 @@ protocols:
 **Self-satisfiable:**
 - existing definition: if a definition or requirements doc exists, read it
 - codebase context: read relevant files to understand current state and constraints
-- prior plan: if a plan already exists, read it as starting point — enables refinement when looping back after validation failure
+- prior plan: if a plan already exists, read it as starting point
 
 **Non-essential:**
 - design decisions: if already made, will influence plan
@@ -56,50 +73,30 @@ protocols:
 
 ---
 
-## Key Results
+## Possible Actions
 
-1. Actions are complete — no obvious missing steps
-2. Order is correct — no action requires something that hasn't been done yet
-3. Dependencies are explicit
-4. Parallelizable work is identified where relevant
-5. The plan is at the right level of abstraction — not too granular, not too vague
-6. User has confirmed the plan is sound
+Select and sequence based on context and your reasoning. Others may be used.
+
+- **review definition**: read existing task definition, requirements, or goals
+- **identify actions**: enumerate the high-level actions needed to accomplish the goal
+- **identify dependencies**: determine what must be done before what
+- **sequence actions**: order actions based on dependencies and logical flow
+- **identify parallelism**: find actions that can run concurrently
+- **identify unknowns**: surface actions where approach is unclear and further research may be needed first
+- **estimate scope**: rough sense of how much work each action involves
+- **draft plan**: write the plan in a clear, ordered format
+- **review with user**: confirm the plan is complete and correctly ordered before proceeding
 
 ---
 
-## Required Actions
+## Confirm
 
-You must comply with these protocols. Review any you have not read:
-
-- `protocols/tracking.md` — Track which planning aspects are complete vs remain
-- `protocols/recovery.md` — Resume planning from where it was interrupted
-- `protocols/reasoning_patterns.md` — Reason about planning approach before starting, verify plan completeness after
-- `protocols/goals_and_objectives.md` — Plan must achieve the defined success criteria
-- `protocols/manage_complexity_uncertainty_risk.md` — Identify risks and unknowns that affect sequencing
-
-**Confirm (REQUIRED LAST)**
-Before declaring done:
+Before declaring done, verify against each key result:
 - Does the plan satisfy each key result?
 - Has the user confirmed it is sound?
 - Are there gaps or ordering issues?
 
 Report outcome explicitly: state whether the skill succeeded or failed, and why.
-
----
-
-## Possible Actions
-
-Select and sequence based on context and expert reasoning. Others may be used.
-
-- **review definition**: read existing task definition, requirements, or goals — use to ground the plan in what's been agreed
-- **identify actions**: enumerate the high-level actions needed to accomplish the goal
-- **identify dependencies**: determine what must be done before what — critical for correctness
-- **sequence actions**: order actions based on dependencies and logical flow
-- **identify parallelism**: find actions that can run concurrently — useful for larger tasks
-- **identify unknowns**: surface actions where approach is unclear and further research or technical design may be needed first
-- **estimate scope**: rough sense of how much work each action involves — not deadlines, just relative size
-- **draft plan**: write the plan in a clear, ordered format
-- **review with user**: confirm the plan is complete and correctly ordered before proceeding
 
 ---
 
@@ -113,7 +110,9 @@ Select and sequence based on context and expert reasoning. Others may be used.
 ---
 
 ## Tools
+
 None
 
 ## Hooks
+
 None

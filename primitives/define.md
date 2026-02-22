@@ -9,11 +9,6 @@ argument-hint: "[task or feature to define]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep
-protocols:
-  - tracking  # Track which requirements have been captured vs remain
-  - recovery  # Resume definition from where it was interrupted
-  - reasoning_patterns  # Reason about approach before defining, verify completeness after
-  - goals_and_objectives  # Write outcome-oriented SMARB success criteria for the task
 ---
 
 # Define
@@ -23,6 +18,29 @@ protocols:
 **Intent:** Prevent wasted effort by ensuring the task is well-understood before any solution is attempted. Bad definitions lead to building the wrong thing or never knowing when to stop.
 
 **Scope:** Establishing what needs to be built and defining done. Includes: clarifying goals and intent, capturing requirements and constraints, defining key terminology precisely enough to serve as evaluation gates, writing user stories that surface intended experience and edge cases, and specifying SMARB criteria — Specific, Measurable, Achievable, Relevant, and Bounded — to enable binary pass/fail validation. Definition is about requirements and completion criteria — it answers "what are we building and how will we know it's done?" not "how will we build it?"
+
+---
+
+## Key Results
+
+1. Goal is stated clearly and unambiguously
+2. Requirements are complete — no obvious gaps
+3. User stories capture the intended experience
+4. Key terms are defined precisely enough to use as evaluation gates
+5. Success criteria are SMARB — Specific (unambiguous), Measurable (verifiable as pass/fail), Achievable (within scope), Relevant (addresses the goal), Bounded (clear stopping conditions)
+6. Out-of-scope items are explicitly stated
+7. User has confirmed the definition is accurate
+
+---
+
+## Protocols
+
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+
+- `tracking.md` — Track which requirements have been captured vs remain
+- `recovery.md` — Resume definition from where it was interrupted
+- `reasoning.md` — Reason about requirements approach before starting, verify completeness after
+- `goals_and_objectives.md` — Write outcome-oriented SMARB success criteria for the task
 
 ---
 
@@ -53,55 +71,35 @@ protocols:
 
 ---
 
-## Key Results
+## Possible Actions
 
-1. Goal is stated clearly and unambiguously
-2. Requirements are complete — no obvious gaps
-3. User stories capture the intended experience
-4. Key terms are defined precisely enough to use as evaluation gates
-5. Success criteria are SMARB — Specific (unambiguous), Measurable (verifiable as pass/fail), Achievable (within scope), Relevant (addresses the goal), Bounded (clear stopping conditions)
-6. Out-of-scope items are explicitly stated
-7. User has confirmed the definition is accurate
+Select and sequence based on context and your reasoning. Others may be used.
+
+- **request materials**: ask user for relevant inputs — transcripts, notes, prior specs, examples
+- **interview user**: ask targeted questions to clarify intent, scope, constraints
+- **review materials**: read existing code, docs, specs
+- **define terminology**: produce precise definitions for key terms — terms become evaluation gates
+- **identify requirements**: enumerate what must be true for the task to be complete
+- **define user stories**: describe who does what and why — surfaces intended experience and edge cases
+- **identify constraints**: what must NOT change, what limitations exist (time, tech, compatibility)
+- **specify key results**: define measurable outcomes that confirm success
+- **verify SMARB**: for each criterion, check: Is it Specific? Measurable? Achievable? Relevant? Bounded?
+- **define evaluation criteria**: specify how outputs will be judged
+- **identify out-of-scope**: explicitly state what is not being addressed
+- **identify risks**: business risks — market, user adoption, stakeholder alignment
+- **draft definition**: write the definition document
+- **review with user**: confirm the definition is accurate before finalizing
 
 ---
 
-## Required Actions
+## Confirm
 
-You must comply with these protocols. Review any you have not read:
-
-- `protocols/tracking.md` — Track which requirements have been captured vs remain
-- `protocols/recovery.md` — Resume definition from where it was interrupted
-- `protocols/reasoning_patterns.md` — Reason about requirements approach before starting, verify completeness after
-- `protocols/goals_and_objectives.md` — Write outcome-oriented SMARB success criteria for the task
-
-**Confirm (REQUIRED LAST)**
-Before declaring done:
+Before declaring done, verify against each key result:
 - Does the definition satisfy each key result?
 - Has the user confirmed it is accurate?
 - Are there any remaining ambiguities?
 
 Report outcome explicitly: state whether the skill succeeded or failed, and why.
-
----
-
-## Possible Actions
-
-Select and sequence based on context and expert reasoning. Others may be used.
-
-- **request materials**: ask user for relevant inputs — transcripts, notes, prior specs, examples — use when context is thin or task is complex
-- **interview user**: ask targeted questions to clarify intent, scope, constraints — use when requirements are unclear or underspecified
-- **review materials**: read existing code, docs, specs — use when context exists that shapes requirements
-- **define terminology**: produce precise definitions for key terms — always useful, terms become evaluation gates
-- **identify requirements**: enumerate what must be true for the task to be complete
-- **define user stories**: describe who does what and why — surfaces intended experience and edge cases
-- **identify constraints**: what must NOT change, what limitations exist (time, tech, compatibility)
-- **specify key results**: define measurable outcomes that confirm success
-- **verify SMARB**: for each criterion, check: Is it Specific (unambiguous)? Measurable (pass/fail)? Achievable? Relevant? Bounded (clear stopping condition)? Flag and refine any that fail
-- **define evaluation criteria**: specify how outputs will be judged — used as gates in later review stages
-- **identify out-of-scope**: explicitly state what is not being addressed
-- **identify risks**: business risks — market, user adoption, stakeholder alignment — not technical implementation risks
-- **draft definition**: write the definition document
-- **review with user**: confirm the definition is accurate before finalizing
 
 ---
 
@@ -115,7 +113,9 @@ Select and sequence based on context and expert reasoning. Others may be used.
 ---
 
 ## Tools
+
 None
 
 ## Hooks
+
 None

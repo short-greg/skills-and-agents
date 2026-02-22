@@ -8,14 +8,6 @@ argument-hint: "[what to implement]"
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Write, Edit, Bash
-protocols:
-  - tracking  # Track progress during multi-file or long implementations
-  - recovery  # Resume from interruption without losing work
-  - reasoning_patterns  # Reason about implementation approach, verify against requirements after
-  - goals_and_objectives  # Understand the success criteria being implemented against
-  - modularity  # Produce modular code with clear boundaries and minimal coupling
-  - project_quality  # Ensure code meets quality dimensions: correctness, clarity, maintainability
-  - doc_maintenance  # Update documentation when implementation changes behavior or APIs
 ---
 
 # Implement
@@ -28,17 +20,42 @@ protocols:
 
 ---
 
+## Key Results
+
+1. Implementation matches the design and requirements
+2. Code follows project conventions and is consistent with existing codebase
+3. Edge cases and error conditions are handled appropriately
+4. Code is readable — clear names, reasonable structure, appropriate comments where needed
+5. Tests are written or updated as needed
+6. Implementation integrates cleanly with existing code
+
+---
+
+## Protocols
+
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+
+- `tracking.md` — Track progress during multi-file or long implementations
+- `recovery.md` — Resume from interruption without losing work
+- `reasoning.md` — Reason about implementation approach before writing code, verify against requirements after
+- `goals_and_objectives.md` — Understand the success criteria being implemented against
+- `modularity.md` — Produce modular code with clear boundaries and minimal coupling
+- `quality.md` — Ensure code meets quality dimensions: correctness, clarity, maintainability
+- `documentation.md` — Update documentation when implementation changes behavior or APIs
+
+---
+
 ## Preconditions
 
 **Must be provided:**
 - what to implement: clear description of the feature, fix, or artifact — ask if not clear
 - design or approach: how it should be built — if not provided, may need design first
-- project conventions: understand the repo's patterns, style, and structure BEFORE writing any code — this is essential, not optional
+- project conventions: understand the repo's patterns, style, and structure BEFORE writing any code
 
 **Self-satisfiable:**
 - existing codebase: understand what exists and how to integrate
 - dependencies: understand what libraries, APIs, or modules are available
-- prior implementation: if implementation already exists, read it as starting point — enables refinement when looping back after validation failure
+- prior implementation: if implementation already exists, read it as starting point
 
 **Non-essential:**
 - tests to satisfy: if existing tests define expected behavior, use them as specification
@@ -64,66 +81,32 @@ protocols:
 
 ---
 
-## Key Results
-
-1. Implementation matches the design and requirements
-2. Code follows project conventions and is consistent with existing codebase
-3. Edge cases and error conditions are handled appropriately
-4. Code is readable — clear names, reasonable structure, appropriate comments where needed
-5. Tests are written or updated as needed
-6. Implementation integrates cleanly with existing code
-
----
-
-## Required Actions
-
-You must comply with these protocols. Review any you have not read:
-
-- `protocols/tracking.md` — Track progress during multi-file or long implementations
-- `protocols/recovery.md` — Resume from interruption without losing work
-- `protocols/reasoning_patterns.md` — Reason about implementation approach before writing code, verify against requirements after
-- `protocols/goals_and_objectives.md` — Understand the success criteria being implemented against
-- `protocols/modularity.md` — Produce modular code with clear boundaries and minimal coupling
-- `protocols/project_quality.md` — Ensure code meets quality dimensions: correctness, clarity, maintainability
-- `protocols/doc_maintenance.md` — Update documentation when implementation changes behavior or APIs
-
-**Confirm (REQUIRED LAST)**
-Before declaring done, verify against each key result:
-- Does the implementation match the design?
-- Does it follow project conventions?
-- Are edge cases handled?
-- Do tests pass?
-
-Report outcome explicitly: state whether the skill succeeded or failed, and why.
-
----
-
 ## Possible Actions
 
-Select and sequence based on context and expert reasoning. Others may be used.
+Select and sequence based on context and your reasoning. Others may be used.
 
-**Preparation (REQUIRED BEFORE WRITING CODE)**
-- **review conventions**: read existing code, style guides, CLAUDE.md to understand patterns, style, and structure — this must happen before writing any code
+**Preparation**
+- **review conventions**: read existing code, style guides, CLAUDE.md to understand patterns, style, and structure
 - **review design**: re-read the design to ensure the implementation matches intent
 - **identify integration points**: understand where the new code connects to existing code
 - **set up scaffolding**: create files, basic structure, imports before writing logic
 
 **Design Feedback**
-- **flag design issues**: if implementation reveals problems with the design (missing cases, unclear interfaces, unforeseen constraints), surface them before proceeding
-- **propose design adjustments**: for minor issues, propose a light touch-up to the design and confirm with user before continuing
+- **flag design issues**: if implementation reveals problems with the design, surface them before proceeding
+- **propose design adjustments**: for minor issues, propose a light touch-up and confirm with user
 
 **Implementation Techniques**
-- **incremental implementation**: implement in small pieces, verifying each works before moving on — reduces debugging scope
-- **skeleton first**: write the structure (functions, classes, signatures) before filling in logic — clarifies shape before details
-- **test-driven**: write a failing test first, then implement to make it pass — ensures testability and clear success criteria
-- **copy-adapt-modify**: find similar code in the codebase, copy it, adapt to the new context — leverages proven patterns
+- **incremental implementation**: implement in small pieces, verifying each works before moving on
+- **skeleton first**: write the structure before filling in logic
+- **test-driven**: write a failing test first, then implement to make it pass
+- **copy-adapt-modify**: find similar code in the codebase, copy it, adapt to the new context
 
 **Core Implementation**
 - **write core logic**: implement the main functionality
 - **handle edge cases**: add handling for boundary conditions, empty inputs, invalid states
 - **handle errors**: implement error handling, validation, and recovery
-- **refactor as needed**: clean up code as you go — don't leave messes for later
-- **verify conventions after writing**: after outputting code, re-check that it follows project conventions — catch drift before it accumulates
+- **refactor as needed**: clean up code as you go
+- **verify conventions after writing**: re-check that code follows project conventions
 
 **Testing**
 - **write tests**: create unit tests, integration tests as appropriate
@@ -143,6 +126,18 @@ Select and sequence based on context and expert reasoning. Others may be used.
 
 ---
 
+## Confirm
+
+Before declaring done, verify against each key result:
+- Does the implementation match the design?
+- Does it follow project conventions?
+- Are edge cases handled?
+- Do tests pass?
+
+Report outcome explicitly: state whether the skill succeeded or failed, and why.
+
+---
+
 ## Use Cases
 
 - Implementing a feature after design is complete
@@ -155,7 +150,9 @@ Select and sequence based on context and expert reasoning. Others may be used.
 ---
 
 ## Tools
+
 Write, Edit, Bash
 
 ## Hooks
+
 None

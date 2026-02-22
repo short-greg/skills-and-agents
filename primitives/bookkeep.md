@@ -9,11 +9,6 @@ argument-hint: "[what to record or sync]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep, Write, Edit
-protocols:
-  - tracking  # Track which records have been updated vs remain
-  - recovery  # Resume bookkeeping from where it was interrupted
-  - reasoning_patterns  # Reason about what needs recording, verify completeness after
-  - doc_maintenance  # Core purpose: ensure documentation matches reality
 ---
 
 # Bookkeep
@@ -23,6 +18,27 @@ protocols:
 **Intent:** Prevent confusion and errors caused by stale or inaccurate records. When documentation drifts from reality, people make decisions based on wrong information, duplicate work that was already done, or miss constraints that exist but aren't documented.
 
 **Scope:** Keeping records accurate and in sync with reality. Includes: updating documentation to reflect code changes, recording decisions and their rationale, maintaining changelogs and version history, syncing specs with implementation, updating diagrams and architecture docs, and ensuring all written artifacts match current state. Bookkeeping is about accuracy of records — it answers "do our records match reality?" not "is the system healthy?"
+
+---
+
+## Key Results
+
+1. Documentation matches implementation — no drift
+2. Decisions are recorded with rationale — not just what, but why
+3. Changes are traceable — can follow the history
+4. No contradictions exist between different records
+5. Records are in the right place per project conventions
+
+---
+
+## Protocols
+
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+
+- `tracking.md` — Track which records have been updated vs remain
+- `recovery.md` — Resume bookkeeping from where it was interrupted
+- `reasoning.md` — Reason about what needs recording before starting, verify completeness after
+- `documentation.md` — Core purpose: ensure documentation matches reality
 
 ---
 
@@ -57,39 +73,9 @@ protocols:
 
 ---
 
-## Key Results
-
-1. Documentation matches implementation — no drift
-2. Decisions are recorded with rationale — not just what, but why
-3. Changes are traceable — can follow the history
-4. No contradictions exist between different records
-5. Records are in the right place per project conventions
-
----
-
-## Required Actions
-
-You must comply with these protocols. Review any you have not read:
-
-- `protocols/tracking.md` — Track which records have been updated vs remain
-- `protocols/recovery.md` — Resume bookkeeping from where it was interrupted
-- `protocols/reasoning_patterns.md` — Reason about what needs recording before starting, verify completeness after
-- `protocols/doc_maintenance.md` — Core purpose: ensure documentation matches reality
-
-**Confirm (REQUIRED LAST)**
-Before declaring done, verify against each key result:
-- Does documentation match implementation?
-- Are decisions recorded with rationale?
-- Are changes traceable?
-- Are there any remaining contradictions?
-
-Report outcome explicitly: state whether bookkeeping is complete, and list what was updated.
-
----
-
 ## Possible Actions
 
-Select and sequence based on context and expert reasoning. Others may be used.
+Select and sequence based on context and your reasoning. Others may be used.
 
 **Discovery**
 - **identify affected records**: determine which documents, specs, or logs need updating based on what changed
@@ -115,6 +101,18 @@ Select and sequence based on context and expert reasoning. Others may be used.
 
 ---
 
+## Confirm
+
+Before declaring done, verify against each key result:
+- Does documentation match implementation?
+- Are decisions recorded with rationale?
+- Are changes traceable?
+- Are there any remaining contradictions?
+
+Report outcome explicitly: state whether bookkeeping is complete, and list what was updated.
+
+---
+
 ## Use Cases
 
 - After implementing a feature, updating specs and docs to match
@@ -127,7 +125,9 @@ Select and sequence based on context and expert reasoning. Others may be used.
 ---
 
 ## Tools
+
 Write, Edit
 
 ## Hooks
+
 None

@@ -9,13 +9,6 @@ argument-hint: "[question or topic to investigate]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep, WebSearch, WebFetch
-protocols:
-  - tracking  # Track what has been investigated vs what questions remain
-  - recovery  # Resume investigation from where it was interrupted
-  - reasoning_patterns  # Form hypotheses before investigating, verify findings after
-  - goals_and_objectives  # Investigate questions about requirements or success criteria
-  - manage_complexity_uncertainty_risk  # Investigation reduces uncertainty before committing to an approach
-  - doc_maintenance  # Flag documentation gaps or inaccuracies discovered during investigation
 ---
 
 # Investigate
@@ -28,10 +21,34 @@ protocols:
 
 ---
 
+## Key Results
+
+1. Uncertainty is reduced — the original question has a grounded answer
+2. Sources are cited — where did the information come from
+3. Confidence level is stated — what is certain vs. probable vs. still unknown
+4. If researching solutions: options are enumerated with tradeoffs
+5. If debugging: root cause is identified, not just symptoms
+6. Findings are actionable — clear what to do next based on results
+
+---
+
+## Protocols
+
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+
+- `tracking.md` — Track what has been investigated vs what questions remain
+- `recovery.md` — Resume investigation from where it was interrupted
+- `reasoning.md` — Form hypotheses before investigating, verify findings are grounded in evidence after
+- `goals_and_objectives.md` — Investigate questions about requirements or success criteria
+- `risk_management.md` — Investigation reduces uncertainty before committing to an approach
+- `documentation.md` — Flag documentation gaps or inaccuracies discovered during investigation
+
+---
+
 ## Preconditions
 
 **Must be provided:**
-- uncertainty assessment: the LLM must first reflect on what it does not know or is unsure about — this grounds the investigation in actual gaps rather than assumed ones
+- uncertainty assessment: the LLM must first reflect on what it does not know or is unsure about
 - question or topic: what needs to be investigated — ask if not clear from context
 
 **Self-satisfiable:**
@@ -55,33 +72,46 @@ protocols:
 **Failure:**
 - Insufficient access to information (docs missing, code inaccessible, web search blocked)
 - Investigation scope is too broad — needs narrowing before proceeding
-- Question cannot be answered with available evidence — further action required (e.g., user must provide more context)
+- Question cannot be answered with available evidence — further action required
 
 ---
 
-## Key Results
+## Possible Actions
 
-1. Uncertainty is reduced — the original question has a grounded answer
-2. Sources are cited — where did the information come from
-3. Confidence level is stated — what is certain vs. probable vs. still unknown
-4. If researching solutions: options are enumerated with tradeoffs
-5. If debugging: root cause is identified, not just symptoms
-6. Findings are actionable — clear what to do next based on results
+Select and sequence based on context and your reasoning. Others may be used.
+
+**Self-Reflection**
+- **assess own uncertainty**: explicitly identify what the LLM does not know or is unsure about
+- **ask user for clarification**: when uncertain about context, intent, or constraints that only the user can provide
+
+**External Research**
+- **search web**: find current documentation, best practices, known issues, solutions
+- **survey solutions**: enumerate available approaches, libraries, or patterns
+- **find prior art**: look for how others have solved similar problems
+- **check documentation**: read official docs for APIs, libraries, or tools
+
+**Codebase Research**
+- **read code**: trace code paths, understand behavior, find where things happen
+- **search codebase**: find related code, usages, patterns
+- **read logs**: examine error messages, stack traces, system logs
+
+**Hypothesis-Driven**
+- **form hypotheses**: based on evidence, generate possible explanations or candidate approaches
+- **test hypotheses**: design checks that would confirm or refute each hypothesis
+- **compare states**: compare working vs. broken, before vs. after, expected vs. actual
+- **reproduce issue**: attempt to reproduce a reported behavior
+- **identify root cause**: distinguish root cause from symptoms
+
+**Synthesis**
+- **document findings**: write up what was found, with evidence and sources
+- **state confidence**: be explicit about what is known vs. suspected vs. still unknown
+- **enumerate options**: if researching solutions, list viable approaches with tradeoffs
+- **recommend next steps**: based on findings, what should happen next
 
 ---
 
-## Required Actions
+## Confirm
 
-You must comply with these protocols. Review any you have not read:
-
-- `protocols/tracking.md` — Track what has been investigated vs what questions remain
-- `protocols/recovery.md` — Resume investigation from where it was interrupted
-- `protocols/reasoning_patterns.md` — Form hypotheses before investigating, verify findings are grounded in evidence after
-- `protocols/goals_and_objectives.md` — Investigate questions about requirements or success criteria
-- `protocols/manage_complexity_uncertainty_risk.md` — Investigation reduces uncertainty before committing to an approach
-- `protocols/doc_maintenance.md` — Flag documentation gaps or inaccuracies discovered during investigation
-
-**Confirm (REQUIRED LAST)**
 Before declaring done, verify against each key result:
 - Is uncertainty mitigated with evidence?
 - Are sources cited?
@@ -89,40 +119,6 @@ Before declaring done, verify against each key result:
 - Are findings actionable?
 
 Report outcome explicitly: state whether the skill succeeded or failed, and why.
-
----
-
-## Possible Actions
-
-Select and sequence based on context and expert reasoning. Others may be used.
-
-**Self-Reflection**
-- **assess own uncertainty**: explicitly identify what the LLM does not know or is unsure about — LLM knowledge has limits and gaps; recognizing them is the first step
-- **ask user for clarification**: when uncertain about context, intent, or constraints that only the user can provide — do not guess when asking is possible
-
-**External Research**
-- **search web**: find current documentation, best practices, known issues, solutions — critical because LLM training data becomes stale; prefer authoritative sources
-- **survey solutions**: enumerate available approaches, libraries, or patterns — useful when deciding how to solve a problem, not just whether something exists
-- **find prior art**: look for how others have solved similar problems — prevents reinventing and surfaces proven patterns
-- **check documentation**: read official docs for APIs, libraries, or tools — primary source for intended behavior and current interfaces
-
-**Codebase Research**
-- **read code**: trace code paths, understand behavior, find where things happen — primary source for how the system actually works
-- **search codebase**: find related code, usages, patterns — useful when you don't know where to look
-- **read logs**: examine error messages, stack traces, system logs — primary source for runtime behavior
-
-**Hypothesis-Driven**
-- **form hypotheses**: based on evidence, generate possible explanations or candidate approaches — prevents aimless searching
-- **test hypotheses**: design checks that would confirm or refute each hypothesis — prevents confirmation bias
-- **compare states**: compare working vs. broken, before vs. after, expected vs. actual, option A vs. option B — often reveals key differences
-- **reproduce issue**: attempt to reproduce a reported behavior — confirms the problem exists and provides data
-- **identify root cause**: distinguish root cause from symptoms — the thing that, if addressed, would resolve the issue
-
-**Synthesis**
-- **document findings**: write up what was found, with evidence and sources
-- **state confidence**: be explicit about what is known vs. suspected vs. still unknown
-- **enumerate options**: if researching solutions, list viable approaches with tradeoffs
-- **recommend next steps**: based on findings, what should happen next
 
 ---
 
@@ -139,7 +135,9 @@ Select and sequence based on context and expert reasoning. Others may be used.
 ---
 
 ## Tools
+
 WebSearch, WebFetch
 
 ## Hooks
+
 None

@@ -9,11 +9,6 @@ argument-hint: "[topic or problem to brainstorm]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep, WebSearch
-protocols:
-  - tracking  # Track which idea categories have been explored vs remain
-  - recovery  # Resume brainstorming from where it was interrupted
-  - reasoning_patterns  # Reason about brainstorm approach, verify diversity of ideas after
-  - goals_and_objectives  # Generate ideas that could achieve the defined goals
 ---
 
 # Brainstorm
@@ -23,6 +18,27 @@ protocols:
 **Intent:** Prevent premature commitment to the first idea that comes to mind. Good brainstorming surfaces alternatives that may be better, simpler, or more appropriate — and helps avoid anchoring bias.
 
 **Scope:** Generating and exploring ideas, options, and alternatives. Includes: divergent thinking to expand possibilities, evaluating ideas at a high level for viability, combining or building on ideas, identifying non-obvious approaches, and organizing ideas for later evaluation. Brainstorming is about expanding the solution space — it answers "what are the possibilities?" not "which one is best?"
+
+---
+
+## Key Results
+
+1. Multiple distinct ideas generated — not variations of one idea
+2. Ideas span different approaches or paradigms
+3. Each idea is described clearly enough to evaluate later
+4. Non-obvious options are surfaced alongside obvious ones
+5. Ideas are organized or grouped for easier review
+
+---
+
+## Protocols
+
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+
+- `tracking.md` — Track which idea categories have been explored vs remain
+- `recovery.md` — Resume brainstorming from where it was interrupted
+- `reasoning.md` — Reason about brainstorm approach before starting, verify diversity of ideas after
+- `goals_and_objectives.md` — Generate ideas that could achieve the defined goals
 
 ---
 
@@ -56,58 +72,40 @@ protocols:
 
 ---
 
-## Key Results
+## Possible Actions
 
-1. Multiple distinct ideas generated — not variations of one idea
-2. Ideas span different approaches or paradigms
-3. Each idea is described clearly enough to evaluate later
-4. Non-obvious options are surfaced alongside obvious ones
-5. Ideas are organized or grouped for easier review
+Select and sequence based on context and your reasoning. Others may be used.
+
+**Techniques for Diverse Generation**
+- **confidence spectrum (commonality)**: generate ideas from common/obvious to rare/unusual — deliberately include low-probability ideas
+- **confidence spectrum (effectiveness)**: rate each idea's expected effectiveness — high-confidence proven approaches vs. speculative ones
+- **first principles decomposition**: break the problem down to fundamental assumptions, question each one, generate ideas by modifying or removing each
+- **invert the problem**: what would the opposite approach look like?
+- **analogy search**: how is this problem solved in other domains?
+- **push extremes**: what's the simplest possible solution? The most powerful? The most unusual?
+- **explore categories**: systematically cover different dimensions (performance vs. simplicity vs. cost vs. maintainability)
+
+**Expansion**
+- **build on ideas**: take a promising idea and generate variations
+- **combine ideas**: merge aspects of different ideas into new hybrids
+- **remove constraints**: what would we do if X wasn't a limitation?
+- **search for prior art**: what solutions exist externally?
+
+**Organization**
+- **group ideas**: cluster related ideas together
+- **label dimensions**: identify the key tradeoffs or axes that differentiate ideas
+- **flag viability**: note which ideas seem more or less viable given known constraints
 
 ---
 
-## Required Actions
+## Confirm
 
-You must comply with these protocols. Review any you have not read:
-
-- `protocols/tracking.md` — Track which idea categories have been explored vs remain
-- `protocols/recovery.md` — Resume brainstorming from where it was interrupted
-- `protocols/reasoning_patterns.md` — Reason about brainstorm approach before starting, verify diversity of ideas after
-- `protocols/goals_and_objectives.md` — Generate ideas that could achieve the defined goals
-
-**Confirm (REQUIRED LAST)**
 Before declaring done, verify against each key result:
 - Are there multiple distinct ideas?
 - Do they span different approaches?
 - Are non-obvious options included?
 
 Report outcome explicitly: state whether the skill succeeded or failed, and why.
-
----
-
-## Possible Actions
-
-Select and sequence based on context and expert reasoning. Others may be used.
-
-**Techniques for Diverse Generation**
-- **confidence spectrum (commonality)**: generate ideas from common/obvious to rare/unusual — deliberately include low-probability ideas that seem "a bit off" alongside conventional ones
-- **confidence spectrum (effectiveness)**: rate each idea's expected effectiveness — high-confidence proven approaches vs. speculative ones that might work better if they pan out
-- **first principles decomposition**: break the problem down to its fundamental assumptions, question each one, and generate ideas by modifying or removing each assumption
-- **invert the problem**: what would the opposite approach look like? What if we solved for the inverse?
-- **analogy search**: how is this problem solved in other domains? What patterns from unrelated fields might apply?
-- **push extremes**: what's the simplest possible solution? The most powerful? The most unusual? The one that changes the least?
-- **explore categories**: systematically cover different dimensions (e.g., performance vs. simplicity vs. cost vs. maintainability)
-
-**Expansion**
-- **build on ideas**: take a promising idea and generate variations
-- **combine ideas**: merge aspects of different ideas into new hybrids
-- **remove constraints**: what would we do if X wasn't a limitation? Then find ways to relax X
-- **search for prior art**: what solutions exist externally? What patterns are used elsewhere?
-
-**Organization**
-- **group ideas**: cluster related ideas together
-- **label dimensions**: identify the key tradeoffs or axes that differentiate ideas
-- **flag viability**: note which ideas seem more or less viable given known constraints (light evaluation, not deep analysis)
 
 ---
 
@@ -122,7 +120,9 @@ Select and sequence based on context and expert reasoning. Others may be used.
 ---
 
 ## Tools
+
 WebSearch
 
 ## Hooks
+
 None
