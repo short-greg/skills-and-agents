@@ -64,26 +64,29 @@ Three fundamental hurdles limit what LLMs can achieve in producing maintainable 
 
 ### Modularity
 
-1. **Should atomic skills be truly standalone?**
-   - Currently designed as suites (feature-define → feature-plan → feature-impl)
-   - Could someone use just `feature-define` without the workflow?
-   - Naming must be clear if skills are standalone
+1. **Should primitives be invokable standalone?**
+   - Currently primitives (orient, define, design, implement, validate, etc.) are composed by workflows
+   - Could someone invoke just `define` without a full workflow?
+   - Primitives are generic; workflows provide context
 
-2. **Should there be "building block" skills?**
-   - Reusable pieces like: `interview`, `assess-modularity`, `run-tests`
-   - Composed into larger workflows
+2. **Should there be additional "building block" primitives?**
+   - Current set: orient, define, design, implement, validate, investigate, brainstorm, critique
+   - Potential additions: `interview`, `assess`, `synthesize`
+   - Composed into workflows as needed
 
-3. **Should templates be overridable?**
-   - Let users skip sections they don't need
-   - Provide sensible defaults but allow customization
+3. **Should workflows be customizable at runtime?**
+   - Let users skip steps they don't need
+   - Provide sensible defaults but allow step omission
+   - Current: repo-type customization (Prototype/Production/Library)
 
 4. **What level of modularity matters most?**
    - Unknown - will discover through testing
 
 ### Naming
 
-- Atomic skills named for reuse vs. named for their suite?
-- Example: `hypothesize` (reusable) vs. `bugfix-hypothesize` (suite-specific)
+- Primitives are generic and reusable (`brainstorm`, not `bugfix-brainstorm`)
+- Workflows are domain-specific (`bugfix_workflow`, `feature_workflow`)
+- This separation is intentional but may need refinement
 
 ---
 
@@ -104,15 +107,12 @@ Three fundamental hurdles limit what LLMs can achieve in producing maintainable 
 plugin/
 ├── skills/
 │   ├── <prefix>-setup/SKILL.md
-│   ├── <prefix>-skill/SKILL.md
-│   ├── <prefix>-skill-guideline/SKILL.md
-│   ├── <prefix>-agent/SKILL.md
-│   └── <prefix>-agent-guideline/SKILL.md
+│   └── <prefix>-workflow/SKILL.md
 │
-├── skill-guidelines/          # Bundled
-├── agent-guidelines/          # Bundled
-├── templates/                 # Bundled
-└── protocols/                 # Bundled
+├── primitives/                # Bundled - core cognitive actions
+├── workflows/                 # Bundled - multi-step processes
+├── protocols/                 # Bundled - reusable patterns
+└── templates/                 # Bundled - skill templates
 ```
 
 ### Commands (Planned)
@@ -120,10 +120,7 @@ plugin/
 | Command | Purpose |
 |---------|---------|
 | `/<prefix>-setup` | Initial project setup |
-| `/<prefix>-skill` | Create skill from guideline or scratch |
-| `/<prefix>-skill-guideline` | Create new skill guideline |
-| `/<prefix>-agent` | Create agent from guideline or scratch |
-| `/<prefix>-agent-guideline` | Create new agent guideline |
+| `/<prefix>-workflow` | Create workflow from template |
 
 ### Distribution Channels (Research)
 

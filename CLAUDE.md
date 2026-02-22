@@ -56,7 +56,9 @@ skills-and-agents/
 │   ├── bugfix_workflow.md       # Hypothesis-driven bug fixing
 │   ├── refactor_workflow.md     # Safe behavior-preserving refactoring
 │   ├── worktree_orchestrate_workflow.md  # Parallel task coordination
-│   └── worktree_task_workflow.md         # Single task execution in worktree
+│   ├── worktree_task_workflow.md         # Single task execution in worktree
+│   ├── code_review_workflow.md  # Systematic code review
+│   └── test_strategy_workflow.md # Test design and planning
 │
 ├── protocols/                   # Reusable patterns and conventions
 │   ├── README.md                # Protocols overview
@@ -69,16 +71,9 @@ skills-and-agents/
 │   ├── modularity.md            # Modular design principles
 │   └── ...                      # Other protocols
 │
-├── templates/                   # Base templates for skills and agents
-│   ├── skill-template.md        # Individual skill template
-│   ├── skill-setup-guideline-template.md  # Skill suite setup template
-│   ├── agent-template.md        # Individual agent template
-│   └── agent-setup-guideline-template.md  # Agent suite setup template
-│
-└── agent-guidelines/            # Specialized agent setup guides
-    ├── INTENT.md                # Directory purpose
-    ├── code-review.md           # Code review agent setup
-    └── test-architect.md        # Test architect agent setup
+└── templates/                   # Base templates for skills
+    ├── skill-template.md        # Individual skill template
+    └── skill-setup-guideline-template.md  # Skill suite setup template
 ```
 
 ---
@@ -98,12 +93,6 @@ skills-and-agents/
 - `[topic].md` - One protocol per file
 - Examples: `tracking.md`, `recovery.md`, `checklist_management.md`
 - Protocols are referenced by workflows and primitives
-
-### Agent Guidelines
-- `INTENT.md` - Directory purpose
-- `[domain].md` - One agent setup guide per file
-- Examples: `code-review.md`, `test-architect.md`
-- See `protocols/skills_and_agents.md` for when to use agents vs skills
 
 ---
 

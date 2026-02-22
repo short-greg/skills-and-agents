@@ -56,6 +56,20 @@ A workflow is a sequence of primitives orchestrated to accomplish a larger goal.
 - **Type:** Adaptive (routes to appropriate workflow based on task type)
 - **Use when:** Working on an individual task within a worktree (created by orchestrate workflow)
 
+### Quality Workflows
+
+**[code_review_workflow.md](code_review_workflow.md)**
+- Systematic code review for quality, conventions, and issues
+- **Primitives:** orient → validate → critique → implement (report)
+- **Type:** Deterministic (review criteria are well-defined)
+- **Use when:** Reviewing code changes for quality and issues
+
+**[test_strategy_workflow.md](test_strategy_workflow.md)**
+- Design test strategies following test pyramid principles
+- **Primitives:** orient → investigate → design → brainstorm → implement (output)
+- **Type:** Deterministic (test design follows established patterns)
+- **Use when:** Planning tests for new features or changes
+
 ---
 
 ## Workflow Structure
