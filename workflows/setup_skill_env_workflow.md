@@ -33,13 +33,19 @@ protocols:
 
 ## Key Results
 
-1. Project structure understood and documented
-2. **Repo analysis report created** (uncertainties, risks, complexity, modularity)
-3. Primitives, workflows, and protocols installed
-4. Worktree decision made and configured (if enabled)
-5. Project documentation created/updated for AI coding (CLAUDE.md or equivalent)
-6. Skill customizations applied based on user preferences
-7. Setup validated and working
+**Required:**
+1. **User requirements understood** — project state, preferences, desired workflows clear
+2. **Framework components installed** — selected primitives, workflows, protocols in place
+3. **Project documentation guides AI behavior** — CLAUDE.md (or equivalent) enables effective AI coding
+4. **Setup is functional** — installed components work correctly
+
+**Conditional:**
+5. **Repository understood** — structure, conventions, AI-friendliness assessed (if existing repo)
+6. **Repo analysis report captures key insights** — uncertainties, risks, complexity documented (if existing repo)
+7. **Existing skills resolved** — adapted, kept, removed, or left as-is (if existing skills present)
+
+**Optional:**
+8. **Worktrees configured** — parallel work enabled (if user requested)
 
 ---
 
@@ -74,44 +80,62 @@ Output reasoning before proceeding.
 
 ## Execution
 
-### Phase 1: Determine Project State
+### Step 1: Interview the User
 
-First, determine which case we're in:
+Before doing anything, interview the user to understand their situation:
 
-**Case A: Existing Repository**
-- Has code, conventions, possibly existing docs
-- Need to understand before configuring
-- May have existing AI tool config
+**Questions to ask:**
 
-**Case B: New/Empty Repository**
-- Little or no code
-- Need to establish conventions
-- Fresh configuration
+1. **Project state:**
+   - Is this an existing project with code, or a new/empty project?
+   - Does it have existing AI tool config (`.claude/`, `.cursor/`, etc.)?
 
-**Detection:**
-```bash
-# Check for existing code
-ls -la src/ lib/ app/ 2>/dev/null
-git log --oneline -5 2>/dev/null
+2. **Existing skills:**
+   - Are there existing skills installed?
+   - If yes: Do you want to adapt them to the framework, keep them alongside, remove them, or leave them as-is?
 
-# Check for existing AI config
-ls -la .claude/ .cursor/ .codex/ 2>/dev/null
+3. **What they want:**
+   - Which workflows do they need? (feature, bugfix, refactor, code review, etc.)
+   - Do they want worktree support for parallel work?
+   - How strict should validation be?
 
-# Check for existing project docs
-cat CLAUDE.md README.md CONTRIBUTING.md 2>/dev/null
-```
+4. **Preferences:**
+   - Where should specs/plans be stored?
+   - What documentation format do they prefer?
 
-**Ask user to confirm:**
-```
-Is this an existing project with code, or a new/empty project?
-
-1. Existing project - has code and conventions to understand
-2. New project - fresh setup, establishing conventions
-```
+**Detect what you can automatically** (existing code, AI config, project structure) and confirm with user.
 
 ---
 
-### Phase 2: Understand the Repository (Existing Repo Only)
+### Step 2: Determine Best Approach
+
+Based on the interview, determine the order of remaining tasks:
+
+**Tasks to complete (order based on project state):**
+
+- **Understand repository** — For existing repos, understand structure and conventions first
+- **Handle existing skills** — Adapt, keep, remove, or leave as-is based on user choice
+- **Configure tool directories** — Set up `.claude/skills/`, etc.
+- **Install framework components** — Primitives, protocols, selected workflows
+- **Create/update documentation** — CLAUDE.md or equivalent
+- **Configure worktrees** — If user wants parallel work support
+- **Validate setup** — Confirm everything works
+- **Create summary** — Document what was done
+
+The order depends on what was learned in the interview. For example:
+- New repo → skip "understand repository" and "handle existing skills"
+- User wants to adapt existing skills → do that before installing new ones
+- User wants to remove existing skills → back up and remove before installing
+
+---
+
+### Step 3: Execute Tasks
+
+Execute the tasks in the determined order. For each task:
+
+---
+
+#### Task: Understand the Repository (Existing Repo Only)
 
 **Primitive:** `orient`
 
@@ -149,7 +173,7 @@ For existing repos, understand before configuring:
 
 ---
 
-### Phase 3: Repository Analysis Report (Existing Repo Only)
+#### Task: Repository Analysis Report (Existing Repo Only)
 
 **Primitives:** `investigate`, `critique`
 
@@ -275,7 +299,7 @@ Evaluate consistency of conventions:
 
 ---
 
-### Phase 4: Tool Configuration
+#### Task: Tool Configuration
 
 **Determine AI tool:**
 
@@ -299,7 +323,7 @@ mkdir -p ${TOOL_CONFIG}/protocols
 
 ---
 
-### Phase 5: Worktree Configuration
+#### Task: Worktree Configuration
 
 **Present worktree option with context:**
 
@@ -347,7 +371,7 @@ Enable worktree support?
 
 ---
 
-### Phase 6: Workflow Selection
+#### Task: Workflow Selection
 
 **Present workflow categories:**
 
@@ -389,7 +413,7 @@ Which workflows do you need? (Select all that apply)
 
 ---
 
-### Phase 7: Skill Customization
+#### Task: Skill Customization
 
 **Ask about customization preferences:**
 
@@ -443,7 +467,7 @@ Require user approval at workflow gates?
 
 ---
 
-### Phase 8: Install Components
+#### Task: Install Components
 
 **Install selected components:**
 
@@ -487,7 +511,7 @@ ${TOOL_CONFIG}/
 
 ---
 
-### Phase 9: Create Project Documentation
+#### Task: Create Project Documentation
 
 **Create or update CLAUDE.md (or equivalent):**
 
@@ -523,7 +547,7 @@ For AI coding to be effective, the project needs documentation that guides AI be
 
 ---
 
-### Phase 10: Validate Setup
+#### Task: Validate Setup
 
 **Primitive:** `validate`
 
@@ -556,7 +580,7 @@ mkdir -p ${SPEC_DIR} && touch ${SPEC_DIR}/.gitkeep
 
 ---
 
-### Phase 11: Create Setup Summary
+#### Task: Create Setup Summary
 
 **Write summary file:**
 

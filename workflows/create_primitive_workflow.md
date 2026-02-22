@@ -12,6 +12,7 @@ protocols:
   - recovery
   - checklist_management
   - reasoning_patterns
+  - goals_and_objectives
 ---
 
 # Create Primitive Workflow
@@ -34,11 +35,11 @@ protocols:
 
 ## Key Results
 
-1. Primitive has a clear, distinct purpose (one sentence)
-2. Scope is self-contained (no references to other primitives)
-3. Preconditions and postconditions are defined
-4. No overlap >50% with existing primitives
-5. Primitive follows template structure
+1. **Primitive is distinct** — answers a question no existing primitive answers
+2. **Primitive is atomic** — single cognitive action, not decomposable
+3. **Primitive is self-contained** — scope doesn't reference other primitives
+4. **Primitive is composable** — can be sequenced into workflows
+5. **Primitive Key Results are outcome-oriented** — measure what's produced, not steps taken
 
 ---
 

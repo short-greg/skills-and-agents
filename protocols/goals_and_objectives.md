@@ -49,21 +49,33 @@ This protocol addresses goal-setting and OKR structure: defining clear objective
 - 3-5 key results (not too many)
 - Each KR contributes to the objective
 
-### Outcomes vs Implementation Steps
+**Key Result Priority Levels:**
+- **Required:** Must be achieved for success
+- **Recommended:** Should be achieved unless user opts out
+- **Optional:** User chooses whether to pursue (e.g., "if user requested")
+- **Conditional:** Applies only when a condition is met (e.g., "existing repos only", "if tests exist")
 
-The most common mistake is confusing implementation steps with key results.
+### Outcomes vs Process vs Implementation Steps
 
-**Implementation steps** are tasks you complete:
+Key Results fall into three categories:
+
+**Outcome-oriented (preferred, primary):** Evaluates quality of what was produced
+- "Login success rate >95%"
+- "Zero security incidents in production"
+- "Primitive is atomic — single cognitive action"
+- "User satisfaction ≥4.5/5"
+
+**Process-oriented (acceptable, secondary):** Confirms steps/activities completed
+- "File exists at expected path"
+- "Template sections present"
+- "Protocol referenced in frontmatter"
+
+**Implementation steps (avoid as KRs):** Tasks you complete
 - "Create login endpoint"
 - "Write email template"
 - "Add database migration"
-- "Write tests"
 
-**Outcomes** are results you achieve:
-- "Login success rate >95%"
-- "Average login time <2 seconds"
-- "Zero security incidents"
-- "User satisfaction ≥4.5/5"
+**Preference:** Primary Key Results should be outcome-oriented. Process-oriented KRs are acceptable as secondary/supporting results but should not be the main measure of success.
 
 You can complete all implementation steps and still fail to achieve outcomes. A login endpoint can exist but have terrible performance. Tests can pass but miss critical edge cases.
 

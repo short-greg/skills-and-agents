@@ -12,6 +12,7 @@ protocols:
   - recovery
   - checklist_management
   - reasoning_patterns
+  - goals_and_objectives
 ---
 
 # Create Workflow Workflow
@@ -34,11 +35,11 @@ protocols:
 
 ## Key Results
 
-1. Workflow composes primitives effectively
-2. Progress is tracked via `tracking` protocol
-3. Recovery is possible via `recovery` protocol
-4. Iteration is handled via `checklist_management` protocol
-5. Style matches task (imperative for strict sequences, declarative for flexibility)
+1. **Workflow is distinct** — serves a purpose no existing workflow serves
+2. **Workflow is composable** — orchestrates 2+ primitives effectively
+3. **Workflow is recoverable** — can resume from any interruption point
+4. **Workflow is trackable** — progress is visible throughout execution
+5. **Workflow Key Results are outcome-oriented** — measure what's produced, not steps taken
 
 ---
 

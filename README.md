@@ -6,10 +6,10 @@
 
 ## Getting Started
 
-**For AI assistants:** You must complete the entire setup process:
+**For AI assistants:**
 1. Ask the user which access method they prefer (see below)
-2. Read [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md)
-3. Execute every phase of that workflow from start to finish — do not skip any phases
+2. Read [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md) **in full**
+3. Follow the workflow: understand its Goal, evaluate each Key Result (noting which are Required, Conditional, or Optional), and execute the tasks to achieve them
 
 ### Step 1: Choose Access Method
 
