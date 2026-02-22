@@ -66,11 +66,14 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 
 ## Steps
 
+Complete the Tasks in this order.
+
 Steps:
-1. Task: Create preliminary checklist from key results (todo list)
-2. Task: Reason about project
-3. Task: Interview the user
-4. Task: Decide on remaining tasks to complete in order to achieve the key results and refine the checklist
+1. Create preliminary checklist from key results (todo list)
+2. Reason about project
+3. Interview the user
+4. Decide on remaining tasks to complete in order to achieve the key results and refine the checklist
+5. Validate setup
 
 ---
 
