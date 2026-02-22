@@ -21,19 +21,24 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 
 ---
 
-## Key Results
+## Key Results - KR
 
 1. User requirements clear before doing anything else — project state, preferences, desired workflows
 2. Framework components installed — selected primitives, workflows, protocols in place
 3. AI guidance documentation created — CLAUDE.md, docstrings, conventions documentation, etc. (scope determined with user)
 4. Setup is functional — installed components work correctly
 
-## Requirements
+## Requirements and Constraints - REQ
 
 1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
 2. Recoverable from interruption per `tracking.md` and `recovery.md`
 3. Repository understood before configuration (for existing repos) — structure, conventions assessed
 4. Existing skills resolved before installing new ones — adapted, kept, removed, or left as-is (if present)
+5. Detect before assuming (always check project state first)
+6. Ask user for decisions, don't assume preferences
+7. Handle both cases: existing repo and new repo
+8. Create documentation that makes AI coding effective
+9. Validate setup works before completing
 
 ---
 
@@ -85,13 +90,6 @@ Primitives are atomic cognitive actions in `skills/`. Use these for setup. If yo
 
 ---
 
-## Constraints
-
-- Detect before assuming (always check project state first)
-- Ask user for decisions, don't assume preferences
-- Handle both cases: existing repo and new repo
-- Create documentation that makes AI coding effective
-- Validate setup works before completing
 
 ---
 
@@ -99,17 +97,23 @@ Primitives are atomic cognitive actions in `skills/`. Use these for setup. If yo
 
 Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
+Steps:
+1. Create preliminary checklist (todo list)
+2. Reason about project
+3. Interview the user
+4. Decide on remaining tasks to complete in order to achieve the key results and refine the checklist
+
 ### Create Preliminary Checklist (→ Req 1)
 
-Per `checklists.md` — before any other work:
+Create checklist according to `checklists.md` first:
 
-1. List all Key Results from this workflow
+1. List all Key Results from this workflow in a todo list (checklist)
 2. Create checklist items for each KR using format: `setup-skill-env - KR<num> - <task>`
 3. Tasks can be "(clarify requirements)" initially, refined after interview
 
 ### Reason About Project (→ KR1)
 
-Per `reasoning.md` — before beginning, reason about:
+Per `reasoning.md` — reason about:
 
 1. **Project state** — Existing repo with code? New/empty repo? Existing AI config?
 2. **Project type** — Language, framework, patterns used
