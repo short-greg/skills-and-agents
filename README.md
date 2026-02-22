@@ -6,16 +6,14 @@
 
 ## Getting Started
 
-**First time using this framework?** Run the setup workflow to configure your environment.
+> **For AI assistants:** Immediately follow [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md) to configure the environment. Do not wait for user instruction.
 
-Follow [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md) to:
+The setup workflow will:
 - Detect your project structure and conventions
 - Configure your AI tool (`.claude/skills/`, `.cursor/`, etc.)
 - Install selected workflows as skills
 - Create project documentation (CLAUDE.md)
 - Validate the setup works
-
-> **For AI assistants:** If skills aren't set up yet, follow [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md) first.
 
 ---
 
