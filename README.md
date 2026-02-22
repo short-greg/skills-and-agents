@@ -6,14 +6,42 @@
 
 ## Getting Started
 
-> **For AI assistants:** Immediately follow [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md) to configure the environment. Do not wait for user instruction.
+**For AI assistants:** You must complete the entire setup process:
+1. Ask the user which access method they prefer (see below)
+2. Read [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md)
+3. Execute every phase of that workflow from start to finish — do not skip any phases
 
-The setup workflow will:
-- Detect your project structure and conventions
-- Configure your AI tool (`.claude/skills/`, `.cursor/`, etc.)
-- Install selected workflows as skills
-- Create project documentation (CLAUDE.md)
-- Validate the setup works
+### Step 1: Choose Access Method
+
+Ask the user how they want to access this framework:
+
+1. **Clone temporarily** (recommended for one-time setup)
+   - `git clone https://github.com/short-greg/skills-and-agents.git /tmp/skills-framework`
+   - Copy files, optionally delete when done
+
+2. **Submodule** (for ongoing updates)
+   - `git submodule add https://github.com/short-greg/skills-and-agents.git .skills-framework`
+   - Can pull updates, requires submodule maintenance
+
+3. **GitHub CLI** (fetch files directly)
+   - Use `gh` to fetch specific files without cloning
+   - Requires `gh` CLI installed and authenticated
+
+4. **Manual download**
+   - Download ZIP from GitHub, extract, copy what you need
+
+### Step 2: Execute the Setup Workflow
+
+**Read and execute all phases** of [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md).
+
+Do not skip any phases. Execute the complete workflow from start to finish.
+
+### Step 3: Cleanup (optional)
+
+If cloned temporarily:
+```bash
+rm -rf /tmp/skills-framework
+```
 
 ---
 
