@@ -6,18 +6,20 @@
 
 ## Getting Started
 
-**First time using this framework?** You need to set up the environment before using workflows.
+**First time using this framework?** Run the setup skill to configure your environment.
 
-1. **Run setup** — Follow [docs/SETUP.md](docs/SETUP.md) to configure:
-   - Project documentation (CLAUDE.md)
-   - Tool configuration directory (`.claude/skills/`, `.cursor/`, etc.)
-   - Specs/plans directory
+```
+/setup-skill-env current
+```
 
-2. **Install skills** — Copy workflow templates to your tool's skills directory
+This will:
+- Detect your project structure and conventions
+- Configure your AI tool (`.claude/skills/`, `.cursor/`, etc.)
+- Install selected workflows as skills
+- Create project documentation (CLAUDE.md)
+- Validate the setup works
 
-3. **Start using** — Invoke skills like `/feature-workflow` or `/bugfix-workflow`
-
-> **For AI assistants:** If skills aren't installed yet, start with [docs/SETUP.md](docs/SETUP.md) to configure the environment first.
+> **For AI assistants:** If skills aren't set up yet, run `/setup-skill-env` first. See [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md) for the full process.
 
 ---
 
@@ -198,9 +200,7 @@ See [protocols/](protocols/) for all available protocols.
 
 | Document | Purpose |
 |----------|---------|
-| [SETUP.md](docs/SETUP.md) | Detailed setup instructions |
 | [SETUP_WORKTREE_ENV.md](docs/SETUP_WORKTREE_ENV.md) | Git worktree configuration |
-| [PRIMITIVES.md](docs/PRIMITIVES.md) | Primitives deep dive |
 | [IMPLEMENTATION-STATUS.md](docs/IMPLEMENTATION-STATUS.md) | Current implementation status |
 | [FUTURE_WORK.md](docs/FUTURE_WORK.md) | Planned improvements |
 
