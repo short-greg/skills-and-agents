@@ -7,12 +7,6 @@ argument-hint: "[primitive name and purpose]"
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, TodoWrite
-protocols:
-  - tracking
-  - recovery
-  - checklist_management
-  - reasoning_patterns
-  - goals_and_objectives
 ---
 
 # Create Primitive Workflow
@@ -25,27 +19,38 @@ protocols:
 
 ---
 
-## Workflow Type
+## Key Results
 
-**Type:** Adaptive
-
-**Style:** Hybrid (declarative goals with validation gates)
+1. Need for primitive is reasoned about before creating
+2. Primitive is distinct — answers a question no existing primitive answers
+3. Primitive is atomic — single cognitive action, not decomposable
+4. Primitive is self-contained — scope doesn't reference other primitives
+5. Primitive is composable — can be sequenced into workflows
+6. Primitive Key Results are outcome-oriented — measure what's produced, not steps taken
 
 ---
 
-## Key Results
+## Protocols
 
-1. **Primitive is distinct** — answers a question no existing primitive answers
-2. **Primitive is atomic** — single cognitive action, not decomposable
-3. **Primitive is self-contained** — scope doesn't reference other primitives
-4. **Primitive is composable** — can be sequenced into workflows
-5. **Primitive Key Results are outcome-oriented** — measure what's produced, not steps taken
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+
+- `tracking.md` — Track which sections of the primitive are complete.
+- `recovery.md` — On startup, check for partial primitive document. Resume from last completed section.
+- `checklists.md` — Create a checklist based on required sections. Update dynamically.
+- `reasoning.md` — Reason about whether primitive is needed before creating.
+- `goals_and_objectives.md` — Ensure primitive key results are outcome-oriented.
 
 ---
 
 ## Available Primitives
 
-`orient`, `define`, `validate`, `critique`, `brainstorm`
+Primitives are atomic cognitive actions in `skills/`. Use these to create the new primitive. If you do not understand a primitive, read it before using it.
+
+- `orient` — Understand existing primitives and the landscape.
+- `define` — Establish the new primitive's identity and scope.
+- `validate` — Verify the primitive meets all criteria.
+- `critique` — Review the primitive for issues.
+- `brainstorm` — Generate options for scope and naming.
 
 ---
 
@@ -58,49 +63,34 @@ protocols:
 
 ---
 
-## Expert Reasoning (Required First)
+## Tasks
 
-Per `reasoning_patterns` protocol — before beginning, reason about:
+Execute these tasks to achieve the key results. Select and sequence based on your reasoning.
+
+### Reason About Need
+
+Per `reasoning.md` — before beginning, reason about:
 
 1. **Is this primitive needed?** — Could an existing primitive handle this?
 2. **Is it atomic?** — Can it be decomposed? If yes, it's a workflow.
 3. **What question does it answer?** — One sentence that no other primitive answers.
 4. **Where does it fit?** — Understanding, Planning, Execution, Verification, Maintenance?
 
-Output reasoning before proceeding.
+Output your reasoning.
 
----
+### Understand Existing Primitives
 
-## Execution
+Use `orient` primitive. Read existing primitives to understand the landscape:
 
-### Phase 1: Understand Existing Primitives
-
-**Primitive:** `orient`
-
-Read existing primitives to understand the landscape:
-
-```
-primitives/
-├── orient.md        # Understanding context and constraints
-├── define.md        # Establishing requirements and scope
-├── design.md        # Planning technical approach
-├── implement.md     # Executing plans into artifacts
-├── validate.md      # Verifying against criteria
-├── investigate.md   # Diagnosing root causes
-├── brainstorm.md    # Generating options
-├── critique.md      # Evaluating quality
-├── plan.md          # Creating action plans
-├── bookkeep.md      # Recording state changes
-└── upkeep.md        # Maintaining existing systems
-```
+- orient.md, define.md, design.md, implement.md, validate.md
+- investigate.md, brainstorm.md, critique.md
+- plan.md, bookkeep.md, upkeep.md
 
 **Key question:** What question does the proposed primitive answer that none of these answer?
 
-### Phase 2: Define the Primitive
+### Define the Primitive
 
-**Primitive:** `define`
-
-Establish the primitive's identity:
+Use `define` primitive. Establish the primitive's identity:
 
 1. **Name** — Action verb (e.g., orient, define, validate)
 2. **Goal** — One sentence outcome
@@ -114,82 +104,25 @@ Establish the primitive's identity:
 [Primitive name] answers "[question it answers]" not "[different question]".
 ```
 
-**Gate:** User confirms the scope is distinct from existing primitives.
+**Gate:** Ask user to confirm the scope is distinct from existing primitives.
 
-### Phase 3: Write the Primitive
+### Write the Primitive
 
-Create the primitive document in `primitives/`:
+Create the primitive document in `primitives/` following the template in `templates/skill_template.md`.
 
 **Required sections:**
+- Goal, Intent, Scope
+- Key Results
+- Protocols
+- Preconditions, Postconditions
+- Possible Actions
+- Confirm
+- Use Cases
+- Tools, Hooks
 
-```markdown
-# [Primitive Name]
+### Validate Primitive
 
-[One sentence description]
-
----
-
-## Goal
-
-[Outcome this primitive achieves]
-
----
-
-## Intent
-
-[Why it exists — what problem it prevents]
-
----
-
-## Scope
-
-[Positive, self-contained description of what's covered]
-
----
-
-## Key Results
-
-[Binary, verifiable outcomes]
-
----
-
-## Preconditions
-
-**Must be provided:** [Required inputs]
-**Self-satisfiable:** [Context primitive can gather]
-**Non-essential:** [Helpful but not required]
-
----
-
-## Postconditions
-
-**Success:** [State when primitive succeeds]
-**Failure:** [Conditions that cause failure]
-
----
-
-## Possible Actions
-
-[Actions the primitive might take — not required steps]
-
----
-
-## Patterns
-
-[Recommended approaches]
-
----
-
-## Anti-Patterns
-
-[What to avoid]
-```
-
-### Phase 4: Validate
-
-**Primitive:** `validate`
-
-Verify the primitive:
+Use `validate` primitive. Verify the primitive:
 
 1. **Distinct purpose** — Different question than existing primitives?
 2. **Atomic** — Single cognitive action, not decomposable?
@@ -198,6 +131,17 @@ Verify the primitive:
 5. **Declarative** — Defines goals, not steps?
 
 **On failure:** Revise and re-validate.
+
+---
+
+## Progress Tracking
+
+Per `checklists.md` — create and maintain a checklist throughout execution.
+
+**Rules:**
+- Create checklist based on required sections
+- Mark items complete immediately after finishing each task
+- Report progress after each completed item
 
 ---
 
@@ -219,7 +163,7 @@ Verify the primitive:
 
 ## Recovery
 
-Per `recovery` protocol — check for partial primitive document, resume from last completed section.
+Per `recovery.md` — check for partial primitive document, resume from last completed section.
 
 ---
 

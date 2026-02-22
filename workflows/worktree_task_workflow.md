@@ -7,13 +7,6 @@ argument-hint: "[task spec file or task description]"
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
-protocols:
-  - tracking
-  - recovery
-  - checklist_management
-  - reasoning_patterns
-  - goals_and_objectives
-  - doc_maintenance
 ---
 
 # Worktree Task Workflow
@@ -26,32 +19,37 @@ protocols:
 
 ---
 
-## Workflow Type
+## Key Results
 
-**Type:** Adaptive
-
-**Style:** Declarative (routes to other workflows based on task type)
+1. Task approach is reasoned about before starting
+2. Task is understood — goal, dependencies, acceptance criteria are clear
+3. Dependencies are satisfied — all required tasks merged before starting
+4. Acceptance criteria are met — all specified criteria pass
+5. Task is merge-ready — tests pass, changes committed, completion signaled
+6. Documentation is updated if task changes behavior or reveals gaps
 
 ---
 
-## Key Results
+## Protocols
 
-Per `goals_and_objectives` protocol — outcome-oriented results:
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
 
-**Required:**
-1. **Task is understood** — goal, dependencies, acceptance criteria are clear
-2. **Dependencies are satisfied** — all required tasks merged before starting
-3. **Acceptance criteria are met** — all specified criteria pass
-4. **Task is merge-ready** — tests pass, changes committed, completion signaled
-
-**Conditional:**
-5. **Documentation is updated** — if task changes behavior or reveals gaps (per `doc_maintenance`)
+- `tracking.md` — Track progress through task execution.
+- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
+- `checklists.md` — Create a checklist based on the task spec. Update dynamically.
+- `reasoning.md` — Reason about task type and workflow selection before starting.
+- `goals_and_objectives.md` — Validate against task acceptance criteria.
+- `documentation.md` — Update documentation if task changes behavior.
 
 ---
 
 ## Available Primitives
 
-`orient`, `validate`, `implement`
+Primitives are atomic cognitive actions in `skills/`. Use these for task execution. If you do not understand a primitive, read it before using it.
+
+- `orient` — Read task spec, understand goal and dependencies.
+- `validate` — Check dependencies are merged, verify completion criteria.
+- `implement` — Execute the routed workflow.
 
 ---
 
@@ -65,63 +63,33 @@ Per `goals_and_objectives` protocol — outcome-oriented results:
 
 ---
 
-## Expert Reasoning (Required First)
+## Tasks
 
-Per `reasoning_patterns` protocol — before beginning, reason about:
+Execute these tasks to achieve the key results. Select and sequence based on your reasoning.
+
+### Reason About Task
+
+Per `reasoning.md` — before beginning, reason about:
 
 1. **Task type** — Feature? Bugfix? Refactor? Documentation?
 2. **Dependency status** — All dependencies merged?
 3. **Workflow selection** — Which workflow matches this task?
 4. **Scope clarity** — Are acceptance criteria clear?
 
-Output reasoning before proceeding.
+Output your reasoning.
 
----
+### Understand Task
 
-## Progress Tracking (Required)
+Use `orient` primitive. Read task spec, understand:
 
-Per `checklist_management` protocol — create and maintain a checklist throughout execution.
-
-**On workflow start, create this checklist:**
-
-```markdown
-## Task Progress
-
-- [ ] 1. Understand task (orient)
-- [ ] 2. Validate dependencies (validate) — HARD GATE: must pass
-- [ ] 3. Route to workflow
-- [ ] 4. Execute workflow (feature/bugfix/refactor)
-- [ ] 5. Validate completion (validate)
-- [ ] 6. Signal completion
-```
-
-**Rules:**
-- Display checklist at start of workflow
-- Step 2 is a HARD GATE — do NOT proceed if dependencies not merged
-- Step 4 invokes another workflow which has its own checklist
-- Report progress after each completed item: "✅ [item] — [brief summary]"
-
----
-
-## Execution
-
-Execute by selecting and sequencing primitives to achieve key results.
-
-### Phase 1: Understand Task
-
-**Primitive:** `orient` — See `primitives/orient.md`
-
-Read task spec, understand:
 - Goal and Key Results
 - Dependencies
 - Acceptance criteria
 - Files likely affected
 
-### Phase 2: Validate Dependencies
+### Validate Dependencies
 
-**Primitive:** `validate` — See `primitives/validate.md`
-
-Check all dependencies are merged to main.
+Use `validate` primitive. Check all dependencies are merged to main.
 
 **On failure (dependencies not merged):**
 ```
@@ -135,7 +103,7 @@ Action: Wait for dependencies to complete and merge before starting.
 
 **Critical:** This is a hard gate. Do NOT proceed.
 
-### Phase 3: Route to Workflow
+### Route to Workflow
 
 Analyze task spec to determine workflow:
 
@@ -147,31 +115,32 @@ Analyze task spec to determine workflow:
 
 **If unclear:** Ask user which workflow to use.
 
-### Phase 4: Execute Workflow
+### Execute Workflow
 
 Invoke selected workflow with task context:
+
 - For feature: "Implement [Goal] with success criteria [Key Results]"
 - For bugfix: "Fix [Goal] - expected behavior: [Key Results]"
 - For refactor: "Refactor [Goal] - improvement targets: [Key Results]"
 
-### Phase 5: Validate Completion
+### Validate Completion
 
-**Primitive:** `validate` — See `primitives/validate.md`
+Use `validate` primitive. Verify:
 
-Verify:
 - All acceptance criteria satisfied
 - All key results achieved
 - Tests pass
 - All changes committed
 - Branch is clean and mergeable
 
-**On failure:** Loop back to Phase 4, continue workflow execution.
+**On failure:** Loop back to Execute Workflow, continue execution.
 
 **Iteration bounds:** Max 3 iterations before escalating.
 
-### Phase 6: Signal Completion
+### Signal Completion
 
 Output completion signal:
+
 ```markdown
 ## Task Complete: [Task Name]
 
@@ -187,6 +156,19 @@ Output completion signal:
 **Merge command:**
 git merge parallel/[task-name]
 ```
+
+---
+
+## Progress Tracking
+
+Per `checklists.md` — create and maintain a checklist throughout execution.
+
+**Rules:**
+- Create checklist based on the task spec
+- Dependency validation is a HARD GATE — do NOT proceed if not passed
+- The routed workflow has its own checklist
+- Mark items complete immediately after finishing each task
+- Report progress after each completed item
 
 ---
 
@@ -210,9 +192,9 @@ git merge parallel/[task-name]
 
 ## Recovery
 
-Per `recovery` protocol — check for existing trace on startup.
+Per `recovery.md` — check for existing trace on startup.
 
-**Step-specific notes:**
+**Task-specific notes:**
 - Re-verify dependencies (may have been merged)
 - If workflow in progress, that workflow has its own recovery
 - Check if already signaled completion

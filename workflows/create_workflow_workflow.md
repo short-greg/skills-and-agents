@@ -7,12 +7,6 @@ argument-hint: "[workflow name and purpose]"
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, TodoWrite
-protocols:
-  - tracking
-  - recovery
-  - checklist_management
-  - reasoning_patterns
-  - goals_and_objectives
 ---
 
 # Create Workflow Workflow
@@ -25,42 +19,58 @@ protocols:
 
 ---
 
-## Workflow Type
+## Key Results
 
-**Type:** Adaptive
-
-**Style:** Hybrid (declarative goals with validation gates)
+1. Need for workflow is reasoned about before creating
+2. Workflow is distinct — serves a purpose no existing workflow serves
+3. Workflow is composable — orchestrates 2+ primitives effectively
+4. Workflow is recoverable — can resume from any interruption point
+5. Workflow is trackable — progress is visible throughout execution
+6. Workflow Key Results are outcome-oriented — measure what's produced, not steps taken
 
 ---
 
-## Key Results
+## Protocols
 
-1. **Workflow is distinct** — serves a purpose no existing workflow serves
-2. **Workflow is composable** — orchestrates 2+ primitives effectively
-3. **Workflow is recoverable** — can resume from any interruption point
-4. **Workflow is trackable** — progress is visible throughout execution
-5. **Workflow Key Results are outcome-oriented** — measure what's produced, not steps taken
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+
+- `tracking.md` — Track which sections of the workflow are complete.
+- `recovery.md` — On startup, check for partial workflow document. Resume from last completed section.
+- `checklists.md` — Create a checklist based on required sections. Update dynamically.
+- `reasoning.md` — Reason about whether workflow is needed before creating.
+- `goals_and_objectives.md` — Ensure workflow key results are outcome-oriented.
 
 ---
 
 ## Available Primitives
 
-`orient`, `define`, `design`, `validate`, `critique`, `brainstorm`
+Primitives are atomic cognitive actions in `skills/`. Use these to create the new workflow. If you do not understand a primitive, read it before using it.
+
+- `orient` — Understand existing workflows and patterns.
+- `define` — Establish the new workflow's identity and purpose.
+- `design` — Plan the workflow structure and primitive composition.
+- `validate` — Verify the workflow meets all criteria.
+- `critique` — Review the workflow for issues.
+- `brainstorm` — Generate options for structure and approach.
 
 ---
 
 ## Constraints
 
-- Every workflow MUST reference: tracking, recovery, checklist_management protocols
+- Every workflow MUST reference: tracking, recovery, checklists protocols
 - Compose primitives, don't repeat their content
 - Prefer declarative style (goals + constraints) over imperative (rigid steps)
 - Validation gates after steps that produce artifacts
 
 ---
 
-## Expert Reasoning (Required First)
+## Tasks
 
-Per `reasoning_patterns` protocol — before beginning, reason about:
+Execute these tasks to achieve the key results. Select and sequence based on your reasoning.
+
+### Reason About Need
+
+Per `reasoning.md` — before beginning, reason about:
 
 1. **Is a workflow needed?** — Does this require multiple primitives? Would a single primitive suffice?
 2. **What primitives are involved?** — Which from: orient, define, design, implement, validate, investigate, brainstorm, critique?
@@ -68,36 +78,21 @@ Per `reasoning_patterns` protocol — before beginning, reason about:
 4. **What validation gates?** — Where should progress be verified?
 5. **Style?** — Deterministic (fixed path) or Adaptive (context-dependent)?
 
-Output reasoning before proceeding.
+Output your reasoning.
 
----
+### Understand Existing Workflows
 
-## Execution
+Use `orient` primitive. Read existing workflows to understand patterns:
 
-### Phase 1: Understand Existing Workflows
-
-**Primitive:** `orient`
-
-Read existing workflows to understand patterns:
-
-```
-workflows/
-├── feature_workflow.md          # End-to-end feature development
-├── bugfix_workflow.md           # Hypothesis-driven bug fixing
-├── refactor_workflow.md         # Safe behavior-preserving refactoring
-├── code_review_workflow.md      # Systematic code review
-├── test_strategy_workflow.md    # Test design and planning
-├── worktree_orchestrate_workflow.md  # Parallel task coordination
-└── worktree_task_workflow.md    # Single task in worktree
-```
+- feature_workflow.md, bugfix_workflow.md, refactor_workflow.md
+- code_review_workflow.md, test_strategy_workflow.md
+- worktree_orchestrate_workflow.md, worktree_task_workflow.md
 
 **Key question:** Does this workflow serve a distinct purpose from existing ones?
 
-### Phase 2: Define the Workflow
+### Define the Workflow
 
-**Primitive:** `define`
-
-Establish the workflow's identity:
+Use `define` primitive. Establish the workflow's identity:
 
 1. **Name** — Descriptive name (e.g., feature-workflow, bugfix-workflow)
 2. **Goal** — What the workflow achieves
@@ -106,19 +101,11 @@ Establish the workflow's identity:
 5. **Type** — Deterministic (fixed path) or Adaptive (context-dependent)
 6. **Style** — Imperative, Declarative, or Hybrid
 
-**Workflow Styles:**
+**Gate:** Ask user to confirm the workflow purpose is distinct.
 
-- **Declarative (preferred):** Define goal, key results, available primitives, constraints. Execution determines path.
-- **Imperative:** Explicit step-by-step sequence. Use when order is strictly required.
-- **Hybrid:** Declarative goals with imperative gates (validation checkpoints).
+### Design the Workflow
 
-**Gate:** User confirms the workflow purpose is distinct.
-
-### Phase 3: Design the Workflow
-
-**Primitive:** `design`
-
-Plan the workflow structure:
+Use `design` primitive. Plan the workflow structure:
 
 1. **Identify primitives needed** — Which cognitive actions?
 2. **Determine sequence/dependencies** — What order? What depends on what?
@@ -126,127 +113,47 @@ Plan the workflow structure:
 4. **Define iteration behavior** — What happens on validation failure?
 5. **Specify customization points** — How to adapt to different contexts?
 
-**Declarative structure (preferred):**
-```markdown
-## Available Primitives
-[list]
+**Gate:** Ask user to review workflow design.
 
-## Constraints
-[ordering requirements, validation gates]
+### Write the Workflow
 
-## Execution
-[guidance, not rigid steps]
-```
-
-**Gate:** User reviews workflow design.
-
-### Phase 4: Write the Workflow
-
-Create the workflow document in `workflows/`:
+Create the workflow document in `workflows/` following the updated feature_workflow.md as the template.
 
 **Required sections:**
+- Goal, Intent, Scope
+- Key Results
+- Protocols (with descriptions)
+- Available Primitives (with descriptions)
+- Constraints
+- Tasks (not numbered, not rigid phases)
+- Progress Tracking
+- Preconditions, Postconditions
+- Recovery
+- Customization Points
 
-```markdown
----
-name: workflow-name
-description: When to use this workflow
-argument-hint: "[expected input]"
-protocols:
-  - tracking
-  - recovery
-  - checklist_management
----
+### Validate Workflow
 
-# Workflow Name
-
-**Goal:** [Outcome]
-**Intent:** [Why it exists]
-**Scope:** [What's covered]
-
----
-
-## Workflow Type
-
-**Type:** Deterministic | Adaptive
-**Style:** Imperative | Declarative | Hybrid
-
----
-
-## Key Results
-
-[Binary, verifiable outcomes]
-
----
-
-## Available Primitives
-
-[List of primitives workflow may use]
-
----
-
-## Constraints
-
-[Ordering, dependencies, validation requirements]
-
----
-
-## Expert Reasoning (Required First)
-
-[What to reason about before starting]
-
----
-
-## Execution
-
-[Phases/steps with primitive references and gates]
-
----
-
-## Preconditions
-
-**Must be provided:** [Required inputs]
-**Self-satisfiable:** [Context workflow gathers]
-
----
-
-## Postconditions
-
-**Success:** [End state]
-**Failure:** [Failure conditions]
-
----
-
-## Recovery
-
-[How to resume from interruption]
-
----
-
-## Iteration
-
-[How validation failures are handled]
-
----
-
-## Customization Points
-
-[How to adapt to different contexts]
-```
-
-### Phase 5: Validate
-
-**Primitive:** `validate`
-
-Verify the workflow:
+Use `validate` primitive. Verify the workflow:
 
 1. **Composes primitives** — References primitives, doesn't repeat their content?
-2. **Required protocols** — tracking, recovery, checklist_management referenced?
+2. **Required protocols** — tracking, recovery, checklists referenced?
 3. **Validation gates** — Present after artifact-producing steps?
 4. **Iteration handling** — Clear what happens on failure?
 5. **Recoverable** — Can resume from interruption?
 6. **Follows template** — All required sections present?
 
 **On failure:** Revise and re-validate.
+
+---
+
+## Progress Tracking
+
+Per `checklists.md` — create and maintain a checklist throughout execution.
+
+**Rules:**
+- Create checklist based on required sections
+- Mark items complete immediately after finishing each task
+- Report progress after each completed item
 
 ---
 
@@ -268,7 +175,7 @@ Verify the workflow:
 
 ## Recovery
 
-Per `recovery` protocol — check for partial workflow document, resume from last completed section.
+Per `recovery.md` — check for partial workflow document, resume from last completed section.
 
 ---
 
@@ -282,4 +189,4 @@ Per `recovery` protocol — check for partial workflow document, resume from las
 
 **Single primitive:** If only one primitive is needed, use that primitive directly.
 
-**Missing protocols:** Every workflow needs tracking, recovery, checklist_management.
+**Missing protocols:** Every workflow needs tracking, recovery, checklists.

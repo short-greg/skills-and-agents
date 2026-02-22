@@ -7,14 +7,6 @@ argument-hint: "[code to refactor and improvement goal]"
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
-protocols:
-  - tracking  # Track progress through analyze → plan → refactor → validate phases
-  - recovery  # Resume from interruption at any phase
-  - checklist_management  # Create dynamic checklist based on refactor scope
-  - reasoning_patterns  # Reason about refactor approach, verify behavior preserved after
-  - goals_and_objectives  # Define what "improved" means without changing behavior
-  - modularity  # Apply modularity principles: reduce coupling, improve cohesion
-  - doc_maintenance  # Update documentation if refactor changes structure
 ---
 
 # Refactor Workflow
@@ -27,33 +19,43 @@ protocols:
 
 ---
 
-## Workflow Type
+## Key Results
 
-**Type:** Deterministic
-
-**Style:** Hybrid (declarative goals with imperative test-after-each-change)
+1. Uncertainties about scope and approach are resolved before starting
+2. Behavior is preserved — all existing tests pass, external behavior unchanged
+3. Code quality is improved — target dimension(s) measurably better (clarity, maintainability, etc.)
+4. No regressions introduced — no new bugs, no broken functionality
+5. API contracts unchanged — public interfaces remain stable (unless internal-only refactoring)
+6. Changes are incremental — each commit is self-contained and reversible
+7. Documentation is updated if refactoring changes patterns or reveals missing docs
 
 ---
 
-## Key Results
+## Protocols
 
-Per `goals_and_objectives` protocol — outcome-oriented results:
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
 
-**Required:**
-1. **Behavior is preserved** — all existing tests pass, external behavior unchanged
-2. **Code quality is improved** — target dimension(s) measurably better (clarity, maintainability, etc.)
-3. **No regressions introduced** — no new bugs, no broken functionality
-
-**Conditional:**
-4. **API contracts unchanged** — public interfaces remain stable (unless internal-only refactoring)
-5. **Documentation is updated** — if refactoring changes patterns or reveals missing docs (per `doc_maintenance`)
-6. **Changes are incremental** — each commit is self-contained and reversible (per `modularity`)
+- `tracking.md` — Track progress through analyze → plan → refactor → validate phases
+- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
+- `checklists.md` — Create a checklist after reasoning about the refactor. Update it dynamically.
+- `reasoning.md` — Reason about refactor approach before starting. Verify behavior preserved after.
+- `goals_and_objectives.md` — Define what "improved" means without changing behavior.
+- `modularity.md` — Apply modularity principles: reduce coupling, improve cohesion.
+- `documentation.md` — Update documentation if refactor changes structure.
 
 ---
 
 ## Available Primitives
 
-`orient`, `define`, `design`, `implement`, `validate`, `critique`, `investigate`
+Primitives are atomic cognitive actions in `skills/`. Use these to refactor. If you do not understand a primitive, read it before using it.
+
+- `orient` — Understand code to refactor, identify test coverage, existing patterns.
+- `define` — Establish what will change (structure) and what will NOT change (behavior).
+- `design` — Plan incremental refactoring steps.
+- `implement` — Execute refactoring plan with continuous testing.
+- `validate` — Confirm behavior preserved and quality improved.
+- `critique` — Review intermediate states for issues.
+- `investigate` — Diagnose test failures or unexpected behavior.
 
 ---
 
@@ -68,100 +70,74 @@ Per `goals_and_objectives` protocol — outcome-oriented results:
 
 ---
 
-## Expert Reasoning (Required First)
+## Tasks
 
-Per `reasoning_patterns` protocol — before beginning, reason about:
+Execute these tasks to achieve the key results. Select and sequence based on your reasoning about the refactor.
+
+### Reason About Refactor
+
+Per `reasoning.md` — before beginning, reason about:
 
 1. **Test coverage** — Adequate tests to verify behavior preservation?
 2. **Scope assessment** — What needs to change? What must NOT change?
 3. **Increment strategy** — How to break into small, verifiable steps?
 4. **Risk identification** — Which changes are risky? Which are safe?
 
-Output reasoning before proceeding.
+Output your reasoning.
 
----
+### Understand Context
 
-## Progress Tracking (Required)
+Use `orient` primitive. Understand code to refactor, identify test coverage, existing patterns.
 
-Per `checklist_management` protocol — create and maintain a checklist throughout execution.
+### Define Scope
 
-**On workflow start, create this checklist:**
-
-```markdown
-## Refactor Progress
-
-- [ ] 1. Understand context (orient)
-- [ ] 2. Define scope (define) — Gate: user confirms, tests exist
-- [ ] 3. Design approach (design) — Gate: user confirms
-- [ ] 4. Implement incrementally (implement)
-  - [ ] 4a. [increment 1] — test after
-  - [ ] 4b. [increment 2] — test after
-  - (expand as design determines increments)
-- [ ] 5. Validate refactoring (validate)
-```
-
-**Rules:**
-- Display checklist at start of workflow
-- Mark items `[x]` immediately after completing each phase
-- Expand step 4 into specific increments after design phase
-- Run tests after EACH increment — if fail, stop and investigate
-- Report progress after each completed item: "✅ [item] — [brief summary]"
-
----
-
-## Execution
-
-Execute by selecting and sequencing primitives to achieve key results. The following phases provide guidance, not rigid steps.
-
-### Phase 1: Understand Context
-
-**Primitive:** `orient` — See `primitives/orient.md`
-
-Understand code to refactor, identify test coverage, existing patterns.
-
-### Phase 2: Define Scope
-
-**Primitive:** `define` — See `primitives/define.md`
-
-Establish what will change (structure) and what will NOT change (behavior).
+Use `define` primitive. Establish what will change (structure) and what will NOT change (behavior).
 
 - **Refactoring goals:** What quality dimensions to improve
 - **Preservation criteria:** What must stay the same (API, outputs, side effects)
 - **Out of scope:** Feature additions, behavior changes
 
-**Gate:** Invoke `validate` on scope. Verify tests exist to catch behavior changes. User confirms.
+**Gate:** Verify tests exist to catch behavior changes. Ask user to confirm.
 
-### Phase 3: Design Approach
+### Design Approach
 
-**Primitive:** `design` — See `primitives/design.md`
+Use `design` primitive. Plan incremental refactoring steps. Each step is small and verifiable.
 
-Plan incremental refactoring steps. Each step is small and verifiable.
+Per `modularity.md` — ensure steps maintain clear component boundaries.
 
-Per `modularity` protocol — ensure steps maintain clear component boundaries.
+**Gate:** Ask user to confirm design.
 
-**Gate:** Invoke `validate` or `critique` on design. User confirms.
+### Implement Incrementally
 
-### Phase 4: Implement Incrementally
+Use `implement` primitive. Execute refactoring plan:
 
-**Primitive:** `implement` — See `primitives/implement.md`
-
-Execute refactoring plan:
 1. Make one small change
 2. Run tests
 3. If pass → commit → next change
 4. If fail → revert or fix → re-run tests → continue
 
-### Phase 5: Validate Refactoring
+### Validate Refactoring
 
-**Primitive:** `validate` — See `primitives/validate.md`
+Use `validate` primitive. Confirm: all tests pass, quality improved, no API changes, no new complexity.
 
-Confirm: all tests pass, quality improved, no API changes, no new complexity.
+**On failure:**
+- Invoke `investigate` to determine which increment broke behavior
+- Revert breaking increment or fix to preserve behavior
+- Update checklist
+- Re-validate
 
-**On failure:** Per `checklist_management` protocol:
-1. Invoke `investigate` to determine which increment broke behavior
-2. Revert breaking increment or fix to preserve behavior
-3. Update checklist
-4. Re-validate
+---
+
+## Progress Tracking
+
+Per `checklists.md` — create and maintain a checklist throughout execution.
+
+**Rules:**
+- Create checklist after reasoning about the refactor, based on what you learned
+- Expand checklist into specific increments after design task
+- Run tests after EACH increment — if fail, stop and investigate
+- Mark items complete immediately after finishing each task
+- Report progress after each completed item
 
 ---
 
@@ -183,10 +159,10 @@ Confirm: all tests pass, quality improved, no API changes, no new complexity.
 
 ## Recovery
 
-Per `recovery` protocol — check for existing trace on startup, resume from last completed step.
+Per `recovery.md` — check for existing trace on startup, resume from last completed task.
 
-**Step-specific notes:**
-- Phase 4 uses incremental commits — can rollback to any passing state
+**Task-specific notes:**
+- Incremental commits allow rollback to any passing state
 - Check test status first on recovery
 - If tests failing: revert last change, then continue
 
@@ -194,7 +170,7 @@ Per `recovery` protocol — check for existing trace on startup, resume from las
 
 ## Iteration
 
-Per `checklist_management` protocol:
+Per `checklists.md`:
 - Max 2 refactoring iterations before escalating
 - If same test fails repeatedly, escalate immediately
 

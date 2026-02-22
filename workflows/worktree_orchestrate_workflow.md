@@ -7,13 +7,6 @@ argument-hint: "[PRD or plan to decompose into parallel tasks]"
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
-protocols:
-  - tracking
-  - recovery
-  - checklist_management
-  - reasoning_patterns
-  - goals_and_objectives
-  - manage_complexity_uncertainty_risk
 ---
 
 # Worktree Orchestrate Workflow
@@ -26,32 +19,39 @@ protocols:
 
 ---
 
-## Workflow Type
+## Key Results
 
-**Type:** Adaptive
-
-**Style:** Hybrid (declarative goals with imperative dependency ordering)
+1. Decomposition approach is reasoned about before starting
+2. Tasks are independent — 2-6 tasks with minimal file overlap within execution waves
+3. Dependencies are correct — no circular dependencies, graph is valid
+4. Task specs are complete — each task has goal, key results, dependencies, acceptance criteria
+5. Merges are safe — completed tasks merged in dependency order with passing tests
+6. Worktrees are ready — created for wave 1 tasks (if user wants parallel execution now)
 
 ---
 
-## Key Results
+## Protocols
 
-Per `goals_and_objectives` protocol — outcome-oriented results:
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
 
-**Required:**
-1. **Tasks are independent** — 2-6 tasks with minimal file overlap within execution waves
-2. **Dependencies are correct** — no circular dependencies, graph is valid
-3. **Task specs are complete** — each task has goal, key results, dependencies, acceptance criteria
-4. **Merges are safe** — completed tasks merged in dependency order with passing tests
-
-**Conditional:**
-5. **Worktrees are ready** — created for wave 1 tasks (if user wants parallel execution now)
+- `tracking.md` — Track task status: not started → in progress → ready for merge → merged
+- `recovery.md` — On startup, check for existing parallel plan. Resume from current state.
+- `checklists.md` — Create a checklist after reasoning about decomposition. Update dynamically.
+- `reasoning.md` — Reason about decomposition strategy before starting.
+- `goals_and_objectives.md` — Ensure task specs have clear success criteria.
+- `risk_management.md` — Identify overlap risks and dependency issues.
 
 ---
 
 ## Available Primitives
 
-`orient`, `brainstorm`, `define`, `validate`, `implement`
+Primitives are atomic cognitive actions in `skills/`. Use these for orchestration. If you do not understand a primitive, read it before using it.
+
+- `orient` — Understand PRD/plan, project structure, identify parallelization opportunities.
+- `brainstorm` — Explore decomposition options.
+- `define` — Create task specs with goals, dependencies, acceptance criteria.
+- `validate` — Verify task specs, check merge safety.
+- `implement` — Create worktrees, execute merges.
 
 ---
 
@@ -65,72 +65,39 @@ Per `goals_and_objectives` protocol — outcome-oriented results:
 
 ---
 
-## Expert Reasoning (Required First)
+## Tasks
 
-Per `reasoning_patterns` protocol — before beginning, reason about:
+Execute these tasks to achieve the key results. Select and sequence based on your reasoning.
+
+### Reason About Decomposition
+
+Per `reasoning.md` — before beginning, reason about:
 
 1. **Decomposition strategy** — By feature? By layer? By component?
 2. **Task granularity** — How many tasks? (2-6 optimal)
 3. **Dependency complexity** — Simple waves or complex graph?
 4. **Overlap risk** — Which files might be touched by multiple tasks?
 
-Output reasoning before proceeding.
+Output your reasoning.
 
----
+### Understand Context
 
-## Progress Tracking (Required)
+Use `orient` primitive. Understand PRD/plan, project structure, identify parallelization opportunities.
 
-Per `checklist_management` protocol — create and maintain a checklist throughout execution.
+### Brainstorm Decomposition
 
-**On workflow start, create this checklist:**
+Use `brainstorm` primitive. Explore decomposition options:
 
-```markdown
-## Orchestration Progress
-
-- [ ] 1. Understand context (orient)
-- [ ] 2. Brainstorm decomposition (brainstorm)
-- [ ] 3. Define task specs (define) — Gate: user confirms
-  - [ ] 3a. Task 1 spec
-  - [ ] 3b. Task 2 spec
-  - (expand based on decomposition)
-- [ ] 4. Setup worktrees (implement)
-- [ ] 5. Track and merge (validate)
-```
-
-**Rules:**
-- Display checklist at start of workflow
-- Expand task specs in step 3 after decomposition is decided
-- Track task status: not started → in progress → ready for merge → merged
-- Report progress after each completed item: "✅ [item] — [brief summary]"
-
----
-
-## Execution
-
-Execute by selecting and sequencing primitives to achieve key results.
-
-### Phase 1: Understand Context
-
-**Primitive:** `orient` — See `primitives/orient.md`
-
-Understand PRD/plan, project structure, identify parallelization opportunities.
-
-### Phase 2: Brainstorm Decomposition
-
-**Primitive:** `brainstorm` — See `primitives/brainstorm.md`
-
-Explore decomposition options:
 - By component (frontend, backend, database)
 - By feature (user stories, use cases)
 - By layer (API, service, data)
 
 Recommend approach that minimizes file overlap.
 
-### Phase 3: Define Task Specs
+### Define Task Specs
 
-**Primitive:** `define` — See `primitives/define.md`
+Use `define` primitive. Create task specs (one per task) with:
 
-Create task specs (one per task) with:
 - Goal and Key Results
 - Dependencies (which tasks must complete first)
 - Files likely affected
@@ -138,24 +105,21 @@ Create task specs (one per task) with:
 
 Create dependency graph with execution waves.
 
-**Gate:** Invoke `validate` on task specs. User confirms decomposition.
+**Gate:** Ask user to confirm decomposition.
 
-### Phase 4: Setup Worktrees
+### Setup Worktrees
 
-**Primitive:** `implement` — See `primitives/implement.md`
+Use `implement` primitive. Create worktrees for Wave 1 tasks (no dependencies):
 
-Create worktrees for Wave 1 tasks (no dependencies):
 ```bash
 git worktree add ../{repo}-worktrees/{task-name} -b parallel/{task-name}
 ```
 
 Copy task spec to each worktree.
 
-### Phase 5: Track and Merge
+### Track and Merge
 
-**Primitives:** `validate`, `implement`
-
-Monitor status, merge completed tasks in dependency order:
+Use `validate` and `implement` primitives. Monitor status, merge completed tasks in dependency order:
 
 1. Check task status (not started, in progress, ready for merge, merged)
 2. Merge ready tasks respecting dependencies
@@ -166,6 +130,19 @@ Monitor status, merge completed tasks in dependency order:
 **On merge conflict:** Stop immediately, user must resolve.
 
 **On test failure:** Stop immediately, user must fix before continuing.
+
+---
+
+## Progress Tracking
+
+Per `checklists.md` — create and maintain a checklist throughout execution.
+
+**Rules:**
+- Create checklist after reasoning about decomposition, based on what you learned
+- Expand task specs after decomposition is decided
+- Track task status: not started → in progress → ready for merge → merged
+- Mark items complete immediately after finishing each task
+- Report progress after each completed item
 
 ---
 
@@ -189,9 +166,9 @@ Monitor status, merge completed tasks in dependency order:
 
 ## Recovery
 
-Per `recovery` protocol — check for existing parallel plan on startup.
+Per `recovery.md` — check for existing parallel plan on startup.
 
-**Step-specific notes:**
+**Task-specific notes:**
 - Check which worktrees exist
 - Check which branches are merged
 - Resume from current state

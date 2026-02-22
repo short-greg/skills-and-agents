@@ -7,14 +7,6 @@ argument-hint: "[bug description or reproduction steps]"
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
-protocols:
-  - tracking  # Track progress through investigate → hypothesize → fix → validate phases
-  - recovery  # Resume from interruption at any phase
-  - checklist_management  # Create dynamic checklist based on bug complexity
-  - reasoning_patterns  # Form hypotheses before investigating, verify fix after
-  - goals_and_objectives  # Define what "fixed" means with binary pass/fail criteria
-  - manage_complexity_uncertainty_risk  # Identify root cause before fixing symptoms
-  - doc_maintenance  # Update documentation if bug reveals incorrect docs
 ---
 
 # Bugfix Workflow
@@ -27,33 +19,42 @@ protocols:
 
 ---
 
-## Workflow Type
+## Key Results
 
-**Type:** Adaptive
-
-**Style:** Hybrid (declarative goals with imperative hypothesis-test loop)
+1. Uncertainties about the bug are resolved through investigation before fixing
+2. Bug is reproducible — failing test demonstrates the bug before fix
+3. Root cause is identified — evidence confirms cause, not speculation
+4. Fix is minimal — changes address root cause only, no unrelated modifications
+5. Regression is prevented — new test catches this bug if reintroduced
+6. All tests pass — existing test suite passes with fix applied
+7. Documentation is updated if fix changes behavior or reveals missing docs
 
 ---
 
-## Key Results
+## Protocols
 
-Per `goals_and_objectives` protocol — outcome-oriented results:
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
 
-**Required:**
-1. **Bug is reproducible** — failing test demonstrates the bug before fix
-2. **Root cause is identified** — evidence confirms cause, not speculation
-3. **Fix is minimal** — changes address root cause only, no unrelated modifications
-4. **Regression is prevented** — new test catches this bug if reintroduced
-
-**Conditional:**
-5. **Documentation is updated** — if fix changes behavior or reveals missing docs (per `doc_maintenance`)
-6. **All tests pass** — existing test suite passes with fix applied
+- `tracking.md` — Track progress through investigate → hypothesize → fix → validate phases
+- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
+- `checklists.md` — Create a checklist after reasoning about the bug. Update it dynamically.
+- `reasoning.md` — Form hypotheses before investigating. Verify fix after.
+- `goals_and_objectives.md` — Define what "fixed" means with binary pass/fail criteria.
+- `risk_management.md` — Identify root cause before fixing symptoms.
+- `documentation.md` — Update documentation if bug reveals incorrect docs.
 
 ---
 
 ## Available Primitives
 
-`orient`, `investigate`, `brainstorm`, `define`, `implement`, `validate`
+Primitives are atomic cognitive actions in `skills/`. Use these to fix the bug. If you do not understand a primitive, read it before using it.
+
+- `orient` — Understand codebase, identify relevant code areas, testing conventions.
+- `investigate` — Create failing test, trace execution, test hypotheses.
+- `brainstorm` — Generate potential root causes ranked by likelihood.
+- `define` — Define minimal fix scope.
+- `implement` — Apply minimal fix, add regression test.
+- `validate` — Confirm fix works, all tests pass.
 
 ---
 
@@ -68,107 +69,75 @@ Per `goals_and_objectives` protocol — outcome-oriented results:
 
 ---
 
-## Expert Reasoning (Required First)
+## Tasks
 
-Per `reasoning_patterns` protocol — before beginning, reason about:
+Execute these tasks to achieve the key results. Select and sequence based on your reasoning about the bug.
+
+### Reason About Bug
+
+Per `reasoning.md` — before beginning, reason about:
 
 1. **Bug characteristics** — Clear reproduction? Intermittent? Environment-specific?
 2. **Uncertainty level** — Obvious cause or deep investigation needed?
 3. **Hypothesis count** — Low uncertainty: 2-3 hypotheses. High uncertainty: 5+
 4. **Risk assessment** — Could fix introduce regressions? Critical system?
 
-Output reasoning before proceeding.
+Output your reasoning.
 
----
+### Understand Context
 
-## Progress Tracking (Required)
+Use `orient` primitive. Understand codebase, identify relevant code areas, testing conventions.
 
-Per `checklist_management` protocol — create and maintain a checklist throughout execution.
+### Reproduce Bug
 
-**On workflow start, create this checklist:**
+Use `investigate` primitive. Create failing test that demonstrates the bug. This becomes the success criterion.
 
-```markdown
-## Bugfix Progress
+**On failure to reproduce:** Per `risk_management.md` — gather more information, check environment factors, consider intermittent issues.
 
-- [ ] 1. Understand context (orient)
-- [ ] 2. Reproduce bug with failing test (investigate)
-- [ ] 3. Generate hypotheses (brainstorm)
-- [ ] 4. Investigate root cause (investigate) — Gate: root cause confirmed
-- [ ] 5. Define fix scope (define)
-- [ ] 6. Implement minimal fix (implement)
-- [ ] 7. Validate fix (validate)
-```
+### Generate Hypotheses
 
-**Rules:**
-- Display checklist at start of workflow
-- Mark items `[x]` immediately after completing each phase
-- On hypothesis failure, add sub-items (e.g., "4a. Test hypothesis 1", "4b. Test hypothesis 2")
-- On validation failure, add remediation items and loop back
-- Report progress after each completed item: "✅ [item] — [brief summary]"
+Use `brainstorm` primitive. Generate potential root causes ranked by likelihood. Scale hypothesis count with uncertainty.
 
----
+### Investigate Root Cause
 
-## Execution
+Use `investigate` primitive. Test hypotheses through instrumentation, logging, analysis until root cause is confirmed.
 
-Execute by selecting and sequencing primitives to achieve key results. The following phases provide guidance, not rigid steps.
-
-### Phase 1: Understand Context
-
-**Primitive:** `orient` — See `primitives/orient.md`
-
-Understand codebase, identify relevant code areas, testing conventions.
-
-### Phase 2: Reproduce Bug
-
-**Primitive:** `investigate` — See `primitives/investigate.md`
-
-Create failing test that demonstrates the bug. This becomes the success criterion.
-
-**On failure to reproduce:** Per `manage_complexity_uncertainty_risk` protocol — gather more information, check environment factors, consider intermittent issues.
-
-### Phase 3: Generate Hypotheses
-
-**Primitive:** `brainstorm` — See `primitives/brainstorm.md`
-
-Generate potential root causes ranked by likelihood. Scale hypothesis count with uncertainty.
-
-**Pre-hypothesis investigation:** If domain is unfamiliar, invoke `investigate` first to gather context.
-
-### Phase 4: Investigate Root Cause
-
-**Primitive:** `investigate` — See `primitives/investigate.md`
-
-Test hypotheses through instrumentation, logging, analysis until root cause is confirmed.
-
-**Iteration:** Test most likely hypothesis first. If ruled out, test next. If all ruled out, loop to Phase 3 for new hypotheses.
+**Iteration:** Test most likely hypothesis first. If ruled out, test next. If all ruled out, generate new hypotheses.
 
 **Bounds:** Max 5 hypothesis iterations before escalating.
 
-**Gate:** Root cause confirmed with evidence. User confirms before proceeding.
+**Gate:** Root cause confirmed with evidence. Ask user to confirm before proceeding.
 
-### Phase 5: Define Fix Scope
+### Define Fix Scope
 
-**Primitive:** `define` — See `primitives/define.md`
+Use `define` primitive. Define minimal fix scope — what should change and what must NOT change.
 
-Define minimal fix scope — what should change and what must NOT change.
+### Implement Fix
 
-### Phase 6: Implement Fix
+Use `implement` primitive. Apply minimal fix addressing root cause. Add regression test.
 
-**Primitive:** `implement` — See `primitives/implement.md`
+### Validate Fix
 
-Apply minimal fix addressing root cause. Add regression test.
+Use `validate` primitive. Confirm: failing test passes, all tests pass, fix addresses root cause.
 
-### Phase 7: Validate Fix
+**On failure:**
+- Invoke `investigate` to determine why fix didn't work
+- Determine which task to return to
+- Add remediation tasks to checklist
+- Re-execute and re-validate
 
-**Primitive:** `validate` — See `primitives/validate.md`
+---
 
-Confirm: failing test passes, all tests pass, fix addresses root cause.
+## Progress Tracking
 
-**On failure:** Per `checklist_management` protocol:
-1. Invoke `investigate` to determine why fix didn't work
-2. Determine loop-back point (Phase 4 or Phase 6)
-3. Add remediation tasks to checklist
-4. Re-execute and re-validate
+Per `checklists.md` — create and maintain a checklist throughout execution.
+
+**Rules:**
+- Create checklist after reasoning about the bug, based on what you learned
+- Mark items complete immediately after finishing each task
+- On hypothesis failure, add sub-items for each hypothesis tested
+- On validation failure, add remediation items
+- Report progress after each completed item
 
 ---
 
@@ -190,9 +159,9 @@ Confirm: failing test passes, all tests pass, fix addresses root cause.
 
 ## Recovery
 
-Per `recovery` protocol — check for existing trace on startup, resume from last completed step.
+Per `recovery.md` — check for existing trace on startup, resume from last completed task.
 
-**Step-specific notes:**
+**Task-specific notes:**
 - Partial failing test → review and complete
 - Hypothesis list exists → read and continue
 - Instrumentation added → review findings before continuing
@@ -202,7 +171,7 @@ Per `recovery` protocol — check for existing trace on startup, resume from las
 
 ## Iteration
 
-Per `checklist_management` protocol:
+Per `checklists.md`:
 - Max 5 hypothesis iterations before escalating
 - Max 2 fix iterations before escalating
 - If same failure recurs, escalate immediately

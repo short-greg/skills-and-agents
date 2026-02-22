@@ -7,13 +7,6 @@ argument-hint: "[files or changes to review]"
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Bash, TodoWrite
-protocols:
-  - tracking  # Track which files/sections have been reviewed vs remain
-  - recovery  # Resume review from where it was interrupted
-  - checklist_management  # Create dynamic checklist based on review scope
-  - reasoning_patterns  # Reason about review approach, verify thoroughness after
-  - goals_and_objectives  # Review against defined quality criteria
-  - project_quality  # Evaluate against quality dimensions: correctness, clarity, maintainability
 ---
 
 # Code Review Workflow
@@ -26,32 +19,37 @@ protocols:
 
 ---
 
-## Workflow Type
+## Key Results
 
-**Type:** Deterministic
-
-**Style:** Hybrid (declarative goals with imperative category checklist)
+1. Review approach is reasoned about before starting
+2. All specified files reviewed — complete coverage of review scope
+3. Issues are actionable — each issue has file:line reference and concrete recommendation
+4. Issues are prioritized — categorized by severity (blocking, non-blocking, suggestion)
+5. Quality dimensions assessed — correctness, clarity, reliability, completeness evaluated
+6. Review concludes with decision — clear approval, needs changes, or blocked verdict
 
 ---
 
-## Key Results
+## Protocols
 
-Per `goals_and_objectives` protocol — outcome-oriented results:
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
 
-**Required:**
-1. **All specified files reviewed** — complete coverage of review scope
-2. **Issues are actionable** — each issue has file:line reference and concrete recommendation
-3. **Issues are prioritized** — categorized by severity (blocking, non-blocking, suggestion) per impact
-4. **Review concludes with decision** — clear approval, needs changes, or blocked verdict
-
-**Conditional:**
-5. **Quality dimensions assessed** — correctness, clarity, reliability, completeness evaluated (per `project_quality`)
+- `tracking.md` — Track which files/sections have been reviewed vs remain
+- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
+- `checklists.md` — Create a checklist after reasoning about the review. Update it dynamically.
+- `reasoning.md` — Reason about review approach before starting. Verify thoroughness after.
+- `goals_and_objectives.md` — Review against defined quality criteria.
+- `quality.md` — Evaluate against quality dimensions: correctness, clarity, maintainability.
 
 ---
 
 ## Available Primitives
 
-`orient`, `validate`, `critique`
+Primitives are atomic cognitive actions in `skills/`. Use these to review. If you do not understand a primitive, read it before using it.
+
+- `orient` — Understand project conventions, coding standards, test conventions.
+- `validate` — Check code against standards systematically.
+- `critique` — Identify issues, categorize by severity, suggest improvements.
 
 ---
 
@@ -65,83 +63,48 @@ Per `goals_and_objectives` protocol — outcome-oriented results:
 
 ---
 
-## Expert Reasoning (Required First)
+## Tasks
 
-Per `reasoning_patterns` protocol — before beginning, reason about:
+Execute these tasks to achieve the key results. Select and sequence based on your reasoning about the review.
+
+### Reason About Review
+
+Per `reasoning.md` — before beginning, reason about:
 
 1. **Review scope** — What files? Full review or focused?
 2. **Project context** — What conventions apply? What matters most?
 3. **Priority categories** — Security-critical? Performance-critical? API stability?
 4. **Output format** — PR comments? Report? Issue tickets?
 
-Output reasoning before proceeding.
+Output your reasoning.
 
----
+### Understand Context
 
-## Progress Tracking (Required)
-
-Per `checklist_management` protocol — create and maintain a checklist throughout execution.
-
-**On workflow start, create this checklist:**
-
-```markdown
-## Code Review Progress
-
-- [ ] 1. Understand context (orient)
-- [ ] 2. Review against standards (validate)
-  - [ ] 2a. Code standards
-  - [ ] 2b. Design principles
-  - [ ] 2c. Maintainability
-  - [ ] 2d. Testing
-  - [ ] 2e. Security
-- [ ] 3. Categorize issues (critique)
-- [ ] 4. Generate report
-```
-
-**Rules:**
-- Display checklist at start of workflow
-- Mark items `[x]` immediately after completing each category
-- Track which files have been reviewed
-- Report progress after each completed category: "✅ [category] — [N issues found]"
-
----
-
-## Execution
-
-Execute by selecting and sequencing primitives to achieve key results.
-
-### Phase 1: Understand Context
-
-**Primitive:** `orient` — See `primitives/orient.md`
-
-Understand project conventions, coding standards, test conventions.
+Use `orient` primitive. Understand project conventions, coding standards, test conventions.
 
 Read: CLAUDE.md, style guides, existing patterns.
 
-### Phase 2: Review Against Standards
+### Review Against Standards
 
-**Primitive:** `validate` — See `primitives/validate.md`
+Use `validate` primitive. Check code against each category systematically.
 
-Check code against each category systematically.
+Per `quality.md` — apply quality dimensions:
 
-Per `project_quality` protocol — apply quality dimensions:
+- **Code Standards:** naming, imports, types, docstrings, error handling
+- **Design Principles:** single responsibility, DRY, modularity, coherence
+- **Maintainability:** self-documenting, comments for complex logic, edge cases
+- **Testing:** tests exist, happy path, error cases, edge cases
+- **Security:** injection, input validation, secrets, sensitive data
 
-**Code Standards:** naming, imports, types, docstrings, error handling
-**Design Principles:** single responsibility, DRY, modularity, coherence
-**Maintainability:** self-documenting, comments for complex logic, edge cases
-**Testing:** tests exist, happy path, error cases, edge cases
-**Security:** injection, input validation, secrets, sensitive data
+### Categorize Issues
 
-### Phase 3: Categorize Issues
+Use `critique` primitive. Classify by severity:
 
-**Primitive:** `critique` — See `primitives/critique.md`
-
-Classify by severity:
 - **Blocking:** Security, data integrity, functional bugs, breaking changes
 - **Non-blocking:** Code quality, minor violations, missing coverage
 - **Suggestion:** Style preference, optimization, alternative approach
 
-### Phase 4: Generate Report
+### Generate Report
 
 Output structured report:
 
@@ -171,6 +134,18 @@ Output structured report:
 
 ---
 
+## Progress Tracking
+
+Per `checklists.md` — create and maintain a checklist throughout execution.
+
+**Rules:**
+- Create checklist after reasoning about the review, based on what you learned
+- Track which files have been reviewed
+- Mark items complete immediately after finishing each category
+- Report progress after each completed category
+
+---
+
 ## Preconditions
 
 **Must be provided:** Code to review (files, directory, or diff)
@@ -189,9 +164,9 @@ Output structured report:
 
 ## Recovery
 
-Per `recovery` protocol — check for existing trace on startup.
+Per `recovery.md` — check for existing trace on startup.
 
-**Step-specific notes:**
+**Task-specific notes:**
 - Track which files reviewed
 - Resume from next unreviewed file
 - Report generation is idempotent — regenerate from categorized issues
