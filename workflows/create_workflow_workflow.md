@@ -66,9 +66,9 @@ Primitives are atomic cognitive actions in `skills/`. Use these to create the ne
 
 ## Tasks
 
-Execute these tasks to achieve the key results. Select and sequence based on your reasoning.
+Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
-### Reason About Need
+### Reason About Need (→ KR1)
 
 Per `reasoning.md` — before beginning, reason about:
 
@@ -80,7 +80,7 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Understand Existing Workflows
+### Understand Existing Workflows (→ KR2)
 
 Use `orient` primitive. Read existing workflows to understand patterns:
 
@@ -90,7 +90,7 @@ Use `orient` primitive. Read existing workflows to understand patterns:
 
 **Key question:** Does this workflow serve a distinct purpose from existing ones?
 
-### Define the Workflow
+### Define the Workflow (→ KR2)
 
 Use `define` primitive. Establish the workflow's identity:
 
@@ -103,7 +103,7 @@ Use `define` primitive. Establish the workflow's identity:
 
 **Gate:** Ask user to confirm the workflow purpose is distinct.
 
-### Design the Workflow
+### Design the Workflow (→ KR3, KR4, KR5)
 
 Use `design` primitive. Plan the workflow structure:
 
@@ -115,9 +115,9 @@ Use `design` primitive. Plan the workflow structure:
 
 **Gate:** Ask user to review workflow design.
 
-### Write the Workflow
+### Write the Workflow (→ KR3, KR4, KR5, KR6)
 
-Create the workflow document in `workflows/` following the updated feature_workflow.md as the template.
+Create the workflow document in `workflows/` following the template in `templates/workflow_template.md`.
 
 **Required sections:**
 - Goal, Intent, Scope
@@ -131,7 +131,7 @@ Create the workflow document in `workflows/` following the updated feature_workf
 - Recovery
 - Customization Points
 
-### Validate Workflow
+### Validate Workflow (→ KR2, KR3, KR4, KR5)
 
 Use `validate` primitive. Verify the workflow:
 

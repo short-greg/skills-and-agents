@@ -65,9 +65,9 @@ Primitives are atomic cognitive actions in `skills/`. Use these for task executi
 
 ## Tasks
 
-Execute these tasks to achieve the key results. Select and sequence based on your reasoning.
+Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
-### Reason About Task
+### Reason About Task (→ KR1)
 
 Per `reasoning.md` — before beginning, reason about:
 
@@ -78,7 +78,7 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Understand Task
+### Understand Task (→ KR2)
 
 Use `orient` primitive. Read task spec, understand:
 
@@ -87,7 +87,7 @@ Use `orient` primitive. Read task spec, understand:
 - Acceptance criteria
 - Files likely affected
 
-### Validate Dependencies
+### Validate Dependencies (→ KR3)
 
 Use `validate` primitive. Check all dependencies are merged to main.
 
@@ -103,7 +103,7 @@ Action: Wait for dependencies to complete and merge before starting.
 
 **Critical:** This is a hard gate. Do NOT proceed.
 
-### Route to Workflow
+### Route to Workflow (→ KR2)
 
 Analyze task spec to determine workflow:
 
@@ -115,7 +115,7 @@ Analyze task spec to determine workflow:
 
 **If unclear:** Ask user which workflow to use.
 
-### Execute Workflow
+### Execute Workflow (→ KR4)
 
 Invoke selected workflow with task context:
 
@@ -123,7 +123,7 @@ Invoke selected workflow with task context:
 - For bugfix: "Fix [Goal] - expected behavior: [Key Results]"
 - For refactor: "Refactor [Goal] - improvement targets: [Key Results]"
 
-### Validate Completion
+### Validate Completion (→ KR4, KR5, KR6)
 
 Use `validate` primitive. Verify:
 
@@ -137,7 +137,7 @@ Use `validate` primitive. Verify:
 
 **Iteration bounds:** Max 3 iterations before escalating.
 
-### Signal Completion
+### Signal Completion (→ KR5)
 
 Output completion signal:
 

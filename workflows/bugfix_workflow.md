@@ -71,9 +71,9 @@ Primitives are atomic cognitive actions in `skills/`. Use these to fix the bug. 
 
 ## Tasks
 
-Execute these tasks to achieve the key results. Select and sequence based on your reasoning about the bug.
+Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
-### Reason About Bug
+### Reason About Bug (→ KR1)
 
 Per `reasoning.md` — before beginning, reason about:
 
@@ -84,21 +84,21 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Understand Context
+### Understand Context (→ KR1)
 
 Use `orient` primitive. Understand codebase, identify relevant code areas, testing conventions.
 
-### Reproduce Bug
+### Reproduce Bug (→ KR2)
 
 Use `investigate` primitive. Create failing test that demonstrates the bug. This becomes the success criterion.
 
 **On failure to reproduce:** Per `risk_management.md` — gather more information, check environment factors, consider intermittent issues.
 
-### Generate Hypotheses
+### Generate Hypotheses (→ KR1, KR3)
 
 Use `brainstorm` primitive. Generate potential root causes ranked by likelihood. Scale hypothesis count with uncertainty.
 
-### Investigate Root Cause
+### Investigate Root Cause (→ KR3)
 
 Use `investigate` primitive. Test hypotheses through instrumentation, logging, analysis until root cause is confirmed.
 
@@ -108,15 +108,15 @@ Use `investigate` primitive. Test hypotheses through instrumentation, logging, a
 
 **Gate:** Root cause confirmed with evidence. Ask user to confirm before proceeding.
 
-### Define Fix Scope
+### Define Fix Scope (→ KR4)
 
 Use `define` primitive. Define minimal fix scope — what should change and what must NOT change.
 
-### Implement Fix
+### Implement Fix (→ KR4, KR5)
 
 Use `implement` primitive. Apply minimal fix addressing root cause. Add regression test.
 
-### Validate Fix
+### Validate Fix (→ KR5, KR6, KR7)
 
 Use `validate` primitive. Confirm: failing test passes, all tests pass, fix addresses root cause.
 

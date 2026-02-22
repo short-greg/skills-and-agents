@@ -67,9 +67,9 @@ Primitives are atomic cognitive actions in `skills/`. Use these to design tests.
 
 ## Tasks
 
-Execute these tasks to achieve the key results. Select and sequence based on your reasoning.
+Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
-### Reason About Strategy
+### Reason About Strategy (→ KR1)
 
 Per `reasoning.md` — before beginning, reason about:
 
@@ -80,11 +80,11 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Understand Context
+### Understand Context (→ KR1)
 
 Use `orient` primitive. Understand code/feature to test, project test conventions, existing patterns.
 
-### Analyze Testability
+### Analyze Testability (→ KR2, KR5)
 
 Use `investigate` primitive. Identify what needs testing at each level:
 
@@ -94,7 +94,7 @@ Use `investigate` primitive. Identify what needs testing at each level:
 - **Edge cases:** Boundary conditions, error states, empty inputs
 - **Happy paths:** Primary success scenarios
 
-### Design Strategy
+### Design Strategy (→ KR3)
 
 Use `design` primitive. Plan test distribution following pyramid:
 
@@ -102,7 +102,7 @@ Use `design` primitive. Plan test distribution following pyramid:
 - Integration tests (some): Component interactions, API contracts
 - E2E tests (few): Critical user journeys
 
-### Identify Test Cases
+### Identify Test Cases (→ KR4, KR5)
 
 Use `brainstorm` primitive. Enumerate specific test cases for each level:
 
@@ -111,7 +111,7 @@ Use `brainstorm` primitive. Enumerate specific test cases for each level:
 - Expected behavior
 - Dependencies to mock
 
-### Generate Output
+### Generate Output (→ KR6)
 
 Use `implement` primitive. Produce one of:
 

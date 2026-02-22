@@ -72,9 +72,9 @@ Primitives are atomic cognitive actions in `skills/`. Use these to refactor. If 
 
 ## Tasks
 
-Execute these tasks to achieve the key results. Select and sequence based on your reasoning about the refactor.
+Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
-### Reason About Refactor
+### Reason About Refactor (→ KR1)
 
 Per `reasoning.md` — before beginning, reason about:
 
@@ -85,11 +85,11 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Understand Context
+### Understand Context (→ KR1)
 
 Use `orient` primitive. Understand code to refactor, identify test coverage, existing patterns.
 
-### Define Scope
+### Define Scope (→ KR2, KR3, KR5)
 
 Use `define` primitive. Establish what will change (structure) and what will NOT change (behavior).
 
@@ -99,7 +99,7 @@ Use `define` primitive. Establish what will change (structure) and what will NOT
 
 **Gate:** Verify tests exist to catch behavior changes. Ask user to confirm.
 
-### Design Approach
+### Design Approach (→ KR6)
 
 Use `design` primitive. Plan incremental refactoring steps. Each step is small and verifiable.
 
@@ -107,7 +107,7 @@ Per `modularity.md` — ensure steps maintain clear component boundaries.
 
 **Gate:** Ask user to confirm design.
 
-### Implement Incrementally
+### Implement Incrementally (→ KR2, KR4, KR6)
 
 Use `implement` primitive. Execute refactoring plan:
 
@@ -116,7 +116,7 @@ Use `implement` primitive. Execute refactoring plan:
 3. If pass → commit → next change
 4. If fail → revert or fix → re-run tests → continue
 
-### Validate Refactoring
+### Validate Refactoring (→ KR2, KR3, KR4, KR5, KR7)
 
 Use `validate` primitive. Confirm: all tests pass, quality improved, no API changes, no new complexity.
 

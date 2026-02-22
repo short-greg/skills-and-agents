@@ -43,6 +43,66 @@ Checklists are a primary mechanism for tracking progress in workflows. Unlike st
 
 ---
 
+## Building Checklists from Key Results
+
+**Key Results are the checklist source, not Tasks.**
+
+Tasks are *how* you achieve Key Results. If checklists are built from Tasks alone, you can miss Key Results that aren't explicitly covered. Key Results are the success criteria — the checklist must ensure every one is achieved.
+
+### Checklist Construction Process
+
+1. **Start with Key Results** — List all Key Results from the skill/workflow
+2. **Create preliminary checklist** — Before starting work (or interviewing), create a checklist with tasks that achieve each Key Result
+3. **Map each Key Result → Task(s)** — Every Key Result must have at least one task that achieves it
+4. **Verify coverage** — Check that no Key Result is orphaned (has no corresponding task)
+5. **Add missing tasks** — If a Key Result has no task, create one
+6. **Interview/discovery refines** — Update checklist based on what you learn (add, remove, reorder), but don't create from scratch
+
+### Example: Key Results → Checklist Mapping
+
+**Key Results:**
+1. User requirements understood through interview
+2. Repository structure analyzed
+3. Framework components installed
+4. Setup validated and working
+
+**Preliminary Checklist (before interview):**
+```markdown
+- [ ] 1. Interview user about requirements (→ KR1)
+- [ ] 2. Analyze repository structure (→ KR2)
+- [ ] 3. Install framework components (→ KR3)
+- [ ] 4. Validate setup works (→ KR4)
+```
+
+**After interview (refined):**
+```markdown
+- [x] 1. Interview user about requirements (→ KR1)
+- [ ] 2. Analyze repository structure (→ KR2)
+  - [ ] 2a. Run orient primitive
+  - [ ] 2b. Create analysis report
+- [ ] 3. Install framework components (→ KR3)
+  - [ ] 3a. Install primitives
+  - [ ] 3b. Install protocols
+  - [ ] 3c. Install selected workflows
+- [ ] 4. Validate setup works (→ KR4)
+```
+
+### Why This Matters
+
+Without Key Results → Tasks mapping:
+- AI may cherry-pick tasks it knows how to do
+- Cognitive tasks (analyze, critique) get skipped in favor of mechanical tasks (mkdir, copy)
+- Key Results get orphaned — no task achieves them
+- Checklist becomes AI's interpretation, not workflow's requirements
+
+With Key Results → Tasks mapping:
+- Every Key Result is visible as a checklist item
+- Omissions require conscious removal with justification
+- Refinement is less error-prone than creation from scratch
+- Audit trail shows which Key Results each task serves
+
+---
+
 ## Checklist Structure
 
 ### Standard Format

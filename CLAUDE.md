@@ -228,7 +228,7 @@ Process:
 ### Be General About Tools
 - Don't assume Claude Code - say "your AI tool"
 - Use `${TOOL_CONFIG}` not `.claude/`
-- Use `${SPEC_DIR}` not `specs/`
+- Use `${TASK_DIR}` not `tasks/`
 - Adapt examples to multiple tools
 
 ### Be Clear About Purpose

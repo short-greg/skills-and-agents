@@ -65,9 +65,9 @@ Primitives are atomic cognitive actions in `skills/`. Use these to review. If yo
 
 ## Tasks
 
-Execute these tasks to achieve the key results. Select and sequence based on your reasoning about the review.
+Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
-### Reason About Review
+### Reason About Review (→ KR1)
 
 Per `reasoning.md` — before beginning, reason about:
 
@@ -78,13 +78,13 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Understand Context
+### Understand Context (→ KR1)
 
 Use `orient` primitive. Understand project conventions, coding standards, test conventions.
 
 Read: CLAUDE.md, style guides, existing patterns.
 
-### Review Against Standards
+### Review Against Standards (→ KR2, KR5)
 
 Use `validate` primitive. Check code against each category systematically.
 
@@ -96,7 +96,7 @@ Per `quality.md` — apply quality dimensions:
 - **Testing:** tests exist, happy path, error cases, edge cases
 - **Security:** injection, input validation, secrets, sensitive data
 
-### Categorize Issues
+### Categorize Issues (→ KR3, KR4)
 
 Use `critique` primitive. Classify by severity:
 
@@ -104,7 +104,7 @@ Use `critique` primitive. Classify by severity:
 - **Non-blocking:** Code quality, minor violations, missing coverage
 - **Suggestion:** Style preference, optimization, alternative approach
 
-### Generate Report
+### Generate Report (→ KR6)
 
 Output structured report:
 

@@ -220,7 +220,7 @@ cat > .worktreesync << 'EOF'
 # or: .cursor/, .codex/, .windsurf/
 
 # Specifications (shared across worktrees)
-specs/
+tasks/
 
 # Project documentation
 CLAUDE.md
@@ -360,7 +360,7 @@ When using parallel-orchestration skills:
 
 1. **Worktrees enable parallel task execution** - Each task runs in its own worktree
 2. **Skills are synced via .worktreesync** - Add your `${TOOL_CONFIG}/` directory
-3. **Specs can be shared or isolated** - Choose whether to sync `specs/` directory
+3. **Task specs can be shared or isolated and use a directory** - Choose whether to sync `{TASK_DIR}/` directory
 
 See [skill-setup-guidelines/parallel-orchestration.md](skill-setup-guidelines/parallel-orchestration.md) for parallel work coordination.
 

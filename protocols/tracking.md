@@ -243,7 +243,7 @@ This protocol addresses **what to record and when**: trace file structure, step 
 # Trace: feature-workflow
 
 **Task:** Add user avatar upload to profile page
-**Task spec:** specs/avatar-upload.md
+**Task spec:** {TASK_DIR}/avatar-upload/specs.md # note the name can be different
 **Started:** 2025-01-15T14:32
 **Status:** in-progress
 
@@ -253,7 +253,7 @@ This protocol addresses **what to record and when**: trace file structure, step 
 
 **Status:** completed
 **Summary:** Defined requirements: max 5MB, JPEG/PNG only, stored in S3, displayed at 48px in nav.
-**Artifacts:** Created specs/avatar-upload.md
+**Artifacts:** Created tasks/avatar-upload/specs.md
 **Key decisions:** none
 **Challenges:** none
 
@@ -263,7 +263,7 @@ This protocol addresses **what to record and when**: trace file structure, step 
 
 **Status:** completed
 **Summary:** Designed upload flow: presigned S3 URL from API, client uploads directly.
-**Artifacts:** Modified specs/avatar-upload.md (added design section)
+**Artifacts:** Modified {TASK_DIR}/avatar-upload/specs.md (added design section)
 **Key decisions:** Chose presigned URL over base64 (size limits) and server proxy (memory). Stateless approach.
 **Challenges:** none
 

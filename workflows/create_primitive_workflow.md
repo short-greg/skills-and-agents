@@ -65,9 +65,9 @@ Primitives are atomic cognitive actions in `skills/`. Use these to create the ne
 
 ## Tasks
 
-Execute these tasks to achieve the key results. Select and sequence based on your reasoning.
+Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
-### Reason About Need
+### Reason About Need (→ KR1)
 
 Per `reasoning.md` — before beginning, reason about:
 
@@ -78,7 +78,7 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Understand Existing Primitives
+### Understand Existing Primitives (→ KR2)
 
 Use `orient` primitive. Read existing primitives to understand the landscape:
 
@@ -88,7 +88,7 @@ Use `orient` primitive. Read existing primitives to understand the landscape:
 
 **Key question:** What question does the proposed primitive answer that none of these answer?
 
-### Define the Primitive
+### Define the Primitive (→ KR2, KR3, KR4)
 
 Use `define` primitive. Establish the primitive's identity:
 
@@ -106,9 +106,9 @@ Use `define` primitive. Establish the primitive's identity:
 
 **Gate:** Ask user to confirm the scope is distinct from existing primitives.
 
-### Write the Primitive
+### Write the Primitive (→ KR5, KR6)
 
-Create the primitive document in `primitives/` following the template in `templates/skill_template.md`.
+Create the primitive document in `primitives/` following the template in `templates/primitive_template.md`.
 
 **Required sections:**
 - Goal, Intent, Scope
@@ -120,7 +120,7 @@ Create the primitive document in `primitives/` following the template in `templa
 - Use Cases
 - Tools, Hooks
 
-### Validate Primitive
+### Validate Primitive (→ KR2, KR3, KR4, KR5)
 
 Use `validate` primitive. Verify the primitive:
 

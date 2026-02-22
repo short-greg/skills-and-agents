@@ -67,9 +67,9 @@ Primitives are atomic cognitive actions in `skills/`. Use these for orchestratio
 
 ## Tasks
 
-Execute these tasks to achieve the key results. Select and sequence based on your reasoning.
+Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
-### Reason About Decomposition
+### Reason About Decomposition (→ KR1)
 
 Per `reasoning.md` — before beginning, reason about:
 
@@ -80,11 +80,11 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Understand Context
+### Understand Context (→ KR1)
 
 Use `orient` primitive. Understand PRD/plan, project structure, identify parallelization opportunities.
 
-### Brainstorm Decomposition
+### Brainstorm Decomposition (→ KR2)
 
 Use `brainstorm` primitive. Explore decomposition options:
 
@@ -94,7 +94,7 @@ Use `brainstorm` primitive. Explore decomposition options:
 
 Recommend approach that minimizes file overlap.
 
-### Define Task Specs
+### Define Task Specs (→ KR2, KR3, KR4)
 
 Use `define` primitive. Create task specs (one per task) with:
 
@@ -107,7 +107,7 @@ Create dependency graph with execution waves.
 
 **Gate:** Ask user to confirm decomposition.
 
-### Setup Worktrees
+### Setup Worktrees (→ KR6)
 
 Use `implement` primitive. Create worktrees for Wave 1 tasks (no dependencies):
 
@@ -117,7 +117,7 @@ git worktree add ../{repo}-worktrees/{task-name} -b parallel/{task-name}
 
 Copy task spec to each worktree.
 
-### Track and Merge
+### Track and Merge (→ KR5)
 
 Use `validate` and `implement` primitives. Monitor status, merge completed tasks in dependency order:
 

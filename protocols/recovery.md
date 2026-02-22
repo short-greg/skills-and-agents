@@ -230,7 +230,7 @@ This makes session boundaries visible in the audit trail.
 
 **Trace shows:**
 ```markdown
-**Task spec:** specs/auth-feature.md
+**Task spec:** tasks/auth_feature/tracking.md
 **Status:** in-progress
 
 ## Step 3: implement
@@ -243,7 +243,7 @@ This makes session boundaries visible in the audit trail.
 
 **Recovery action:**
 ```
-1. Re-read specs/auth-feature.md to understand requirements
+1. Re-read {TASK_DIR}/auth-feature/tracking.md to understand progress and {TASK_DIR}/auth-feature/requirements.md requirements. Note the requirements file may be different.
 2. Note key decisions: JWT with 24h expiry, refresh tokens in DB
 3. Verify artifacts exist: src/auth/login.py ✓, src/api/routes.py ✓
 4. Present to user:

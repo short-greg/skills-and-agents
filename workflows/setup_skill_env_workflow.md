@@ -67,9 +67,9 @@ Primitives are atomic cognitive actions in `skills/`. Use these for setup. If yo
 
 ## Tasks
 
-Execute these tasks to achieve the key results. The order depends on what you learn from the interview.
+Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
-### Reason About Project
+### Reason About Project (→ KR1)
 
 Per `reasoning.md` — before beginning, reason about:
 
@@ -80,7 +80,7 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Interview the User
+### Interview the User (→ KR1, KR2)
 
 Before doing anything, interview the user to understand their situation:
 
@@ -105,7 +105,7 @@ Before doing anything, interview the user to understand their situation:
 
 **Detect what you can automatically** (existing code, AI config, project structure) and confirm with user.
 
-### Determine Best Approach
+### Determine Best Approach (→ KR1, KR2)
 
 Based on the interview, determine the order of remaining tasks.
 
@@ -120,9 +120,9 @@ Based on the interview, determine the order of remaining tasks.
 - **Validate setup** — Confirm everything works
 - **Create summary** — Document what was done
 
-### Understand the Repository (Existing Repo Only)
+### Understand the Repository (→ KR6)
 
-Use `orient` primitive.
+Use `orient` primitive. For existing repos only.
 
 For existing repos, understand before configuring:
 
@@ -134,9 +134,9 @@ For existing repos, understand before configuring:
 
 **Gate:** Confirm understanding with user before proceeding.
 
-### Repository Analysis Report (Existing Repo Only)
+### Repository Analysis Report (→ KR6)
 
-Use `investigate` and `critique` primitives.
+Use `investigate` and `critique` primitives. For existing repos only.
 
 Create a comprehensive analysis report highlighting what the AI needs to know to work effectively in this codebase.
 
@@ -149,14 +149,18 @@ Create a comprehensive analysis report highlighting what the AI needs to know to
 
 **Gate:** Review report with user, discuss key findings.
 
-### Tool Configuration
+### Handle Existing Skills (→ KR7)
+
+Based on interview, adapt, keep, remove, or leave existing skills as-is.
+
+### Tool Configuration (→ KR3)
 
 Determine AI tool and create directory structure:
 
 - Ask user which AI coding tool (Claude Code, Cursor, Windsurf, etc.)
 - Create `${TOOL_CONFIG}/skills`, `${TOOL_CONFIG}/primitives`, `${TOOL_CONFIG}/protocols`
 
-### Worktree Configuration (If Requested)
+### Worktree Configuration (→ KR3)
 
 If user wants parallel work support:
 
@@ -165,7 +169,7 @@ If user wants parallel work support:
 3. Create .worktreesync file
 4. Test the setup
 
-### Workflow Selection
+### Workflow Selection (→ KR2, KR3)
 
 Present workflow categories and let user select:
 
@@ -174,7 +178,7 @@ Present workflow categories and let user select:
 - **Parallel Work:** worktree workflows (requires worktrees)
 - **Meta:** create-primitive-workflow, create-workflow-workflow
 
-### Skill Customization
+### Skill Customization (→ KR2, KR3)
 
 Ask about customization preferences:
 
@@ -184,7 +188,7 @@ Ask about customization preferences:
 - Validation strictness
 - User approval gates frequency
 
-### Install Components
+### Install Components (→ KR3)
 
 Install selected components:
 
@@ -193,7 +197,7 @@ Install selected components:
 3. **Install workflows** — Copy selected from `workflows/` to `${TOOL_CONFIG}/skills/`
 4. **Apply customizations** — Replace placeholders in installed files
 
-### Create Project Documentation
+### Create Project Documentation (→ KR4)
 
 Create or update CLAUDE.md (or equivalent) with:
 
@@ -206,7 +210,7 @@ Create or update CLAUDE.md (or equivalent) with:
 
 **For existing repos:** Merge with existing CLAUDE.md, don't overwrite.
 
-### Validate Setup
+### Validate Setup (→ KR5)
 
 Use `validate` primitive.
 
@@ -222,7 +226,7 @@ Verify the setup works:
 
 **On failure:** Report what's missing, offer to fix.
 
-### Create Setup Summary
+### Create Setup Summary (→ KR5)
 
 Write summary file to `${TOOL_CONFIG}/SETUP_SUMMARY.md` documenting:
 

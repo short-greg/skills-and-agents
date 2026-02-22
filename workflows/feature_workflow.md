@@ -73,9 +73,9 @@ You may use other operations when necessary, but prefer primitives when they fit
 
 ## Tasks
 
-Execute these tasks to achieve the key results. Select and sequence based on your reasoning about the feature. You may add tasks or skip tasks that don't apply.
+Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
-### Reason About Approach
+### Reason About Approach (→ KR1)
 
 Per `reasoning.md` — reason about:
 
@@ -86,11 +86,11 @@ Per `reasoning.md` — reason about:
 
 Output your reasoning.
 
-### Understand Context
+### Understand Context (→ KR6)
 
 Use `orient` primitive. Understand project structure, conventions, and where this feature fits.
 
-### Define Requirements
+### Define Requirements (→ KR2)
 
 Use `define` primitive. Establish requirements and success criteria.
 
@@ -98,7 +98,7 @@ Per `goals_and_objectives.md` — requirements must be outcome-oriented and veri
 
 **Gate:** Validate requirements. Ask user to confirm before proceeding.
 
-### Design Approach
+### Design Approach (→ KR3)
 
 Use `design` primitive. Plan technical approach.
 
@@ -106,7 +106,7 @@ Per `risk_management.md` — if uncertainty exists, invoke `investigate` before 
 
 **Gate:** Validate or critique design. Ask user to confirm before proceeding.
 
-### Implement
+### Implement (→ KR4, KR6)
 
 Use `implement` primitive. Write code following the design.
 
@@ -114,7 +114,7 @@ Per `documentation.md` — update documentation when implementation changes beha
 
 Per `checklists.md` — add sub-tasks dynamically when scope expands.
 
-### Validate
+### Validate (→ KR4)
 
 Use `validate` primitive. Verify implementation meets requirements.
 
@@ -124,7 +124,7 @@ Use `validate` primitive. Verify implementation meets requirements.
 - Add remediation tasks to checklist
 - Re-execute and re-validate
 
-### Update Documentation
+### Update Documentation (→ KR5)
 
 Per `documentation.md` — ensure all documentation reflects the implemented feature.
 
