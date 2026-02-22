@@ -7,8 +7,8 @@
 ## Getting Started
 
 **For AI assistants:**
-1. You must comply with [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md) . If you have not read it, review it **in full** — this workflow is required to set up a repository with this skills framework. This workflow defines how to install the framework to set up an agent-friendly repository.
-2. Follow all of the Key Results of workflows/setup_skill_env_workflow.md)  — these define what success looks like
+1. You must comply with the instructions in  [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md) to set up the repository to be AI-Friendly. If you have not read it, review it **in full** — completing this workflow in full is required to set up a repository with this skills framework. This workflow defines how to install the framework to set up an agent-friendly repository.
+2. Achieve all key results and requirements described in the instructions in workflows/setup_skill_env_workflow.md)  — these define what successful setup looks like.
 3. Confirm all key results are met before finishing.
 
 ### Access Methods
