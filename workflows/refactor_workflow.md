@@ -130,14 +130,7 @@ Use `validate` primitive. Confirm: all tests pass, quality improved, no API chan
 
 ## Progress Tracking
 
-Per `checklists.md` — create and maintain a checklist throughout execution.
-
-**Rules:**
-- Create checklist after reasoning about the refactor, based on what you learned
-- Expand checklist into specific increments after design task
-- Run tests after EACH increment — if fail, stop and investigate
-- Mark items complete immediately after finishing each task
-- Report progress after each completed item
+Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
 
 ---
 

@@ -136,13 +136,7 @@ Output structured report:
 
 ## Progress Tracking
 
-Per `checklists.md` — create and maintain a checklist throughout execution.
-
-**Rules:**
-- Create checklist after reasoning about the review, based on what you learned
-- Track which files have been reviewed
-- Mark items complete immediately after finishing each category
-- Report progress after each completed category
+Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
 
 ---
 

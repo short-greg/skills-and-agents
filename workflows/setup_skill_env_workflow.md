@@ -100,7 +100,7 @@ Before doing anything, interview the user to understand their situation:
    - How strict should validation be?
 
 4. **Preferences:**
-   - Where should specs/plans be stored?
+   - Where should specs and plans for tasks be stored?
    - What documentation format do they prefer?
 
 **Detect what you can automatically** (existing code, AI config, project structure) and confirm with user.
@@ -240,13 +240,7 @@ Write summary file to `${TOOL_CONFIG}/SETUP_SUMMARY.md` documenting:
 
 ## Progress Tracking
 
-Per `checklists.md` — create and maintain a checklist throughout execution.
-
-**Rules:**
-- Create checklist AFTER the interview, based on what the interview reveals
-- Do NOT use a fixed checklist
-- Mark items complete immediately after finishing each task
-- Report progress after each completed item
+Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
 
 ---
 

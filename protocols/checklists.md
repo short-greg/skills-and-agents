@@ -49,42 +49,45 @@ Checklists are a primary mechanism for tracking progress in workflows. Unlike st
 
 Tasks are *how* you achieve Key Results. If checklists are built from Tasks alone, you can miss Key Results that aren't explicitly covered. Key Results are the success criteria — the checklist must ensure every one is achieved.
 
-### Checklist Construction Process
+### Checklist Item Format
 
-1. **Start with Key Results** — List all Key Results from the skill/workflow
-2. **Create preliminary checklist** — Before starting work (or interviewing), create a checklist with tasks that achieve each Key Result
-3. **Map each Key Result → Task(s)** — Every Key Result must have at least one task that achieves it
-4. **Verify coverage** — Check that no Key Result is orphaned (has no corresponding task)
-5. **Add missing tasks** — If a Key Result has no task, create one
-6. **Interview/discovery refines** — Update checklist based on what you learn (add, remove, reorder), but don't create from scratch
-
-### Example: Key Results → Checklist Mapping
-
-**Key Results:**
-1. User requirements understood through interview
-2. Repository structure analyzed
-3. Framework components installed
-4. Setup validated and working
-
-**Preliminary Checklist (before interview):**
-```markdown
-- [ ] 1. Interview user about requirements (→ KR1)
-- [ ] 2. Analyze repository structure (→ KR2)
-- [ ] 3. Install framework components (→ KR3)
-- [ ] 4. Validate setup works (→ KR4)
+```
+<Skill> - KR<num> - <task>
 ```
 
-**After interview (refined):**
+This format provides full traceability:
+- **Skill** — Which skill/workflow this belongs to
+- **KR#** — Which Key Result this task achieves
+- **Task** — What action to take
+
+### Checklist Construction Process
+
+**Phase 1: Preliminary Checklist (before starting work)**
+
+1. **List all Key Results** from the skill/workflow
+2. **Create checklist items** for each Key Result (task TBD if unclear)
+
 ```markdown
-- [x] 1. Interview user about requirements (→ KR1)
-- [ ] 2. Analyze repository structure (→ KR2)
-  - [ ] 2a. Run orient primitive
-  - [ ] 2b. Create analysis report
-- [ ] 3. Install framework components (→ KR3)
-  - [ ] 3a. Install primitives
-  - [ ] 3b. Install protocols
-  - [ ] 3c. Install selected workflows
-- [ ] 4. Validate setup works (→ KR4)
+- [ ] setup-skill-env - KR1 - (clarify requirements)
+- [ ] setup-skill-env - KR2 - (clarify requirements)
+- [ ] setup-skill-env - KR3 - (clarify requirements)
+- [ ] setup-skill-env - KR4 - (clarify requirements)
+```
+
+**Phase 2: Add Tasks (after clarifying uncertainties)**
+
+3. **Interview/investigate** to understand what's needed
+4. **Add specific tasks** that achieve each Key Result
+5. **Verify coverage** — every Key Result has at least one task
+
+```markdown
+- [x] setup-skill-env - KR1 - Interview user about requirements
+- [ ] setup-skill-env - KR2 - Analyze repository structure
+- [ ] setup-skill-env - KR2 - Create analysis report
+- [ ] setup-skill-env - KR3 - Install primitives
+- [ ] setup-skill-env - KR3 - Install protocols
+- [ ] setup-skill-env - KR3 - Install selected workflows
+- [ ] setup-skill-env - KR4 - Validate setup works
 ```
 
 ### Why This Matters

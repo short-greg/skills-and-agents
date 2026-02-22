@@ -132,14 +132,7 @@ Per `documentation.md` — ensure all documentation reflects the implemented fea
 
 ## Progress Tracking
 
-Per `checklists.md` — create and maintain a checklist throughout execution.
-
-**Rules:**
-- Create checklist after reasoning about the feature, based on what you learned
-- Mark items complete immediately after finishing each task
-- Add sub-items dynamically when scope expands
-- On validation failure, add remediation items
-- Report progress after each completed item
+Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
 
 ---
 

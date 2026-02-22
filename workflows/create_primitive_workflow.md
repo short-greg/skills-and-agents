@@ -136,12 +136,7 @@ Use `validate` primitive. Verify the primitive:
 
 ## Progress Tracking
 
-Per `checklists.md` — create and maintain a checklist throughout execution.
-
-**Rules:**
-- Create checklist based on required sections
-- Mark items complete immediately after finishing each task
-- Report progress after each completed item
+Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
 
 ---
 

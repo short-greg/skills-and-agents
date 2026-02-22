@@ -96,7 +96,7 @@ Works with any AI coding assistant:
 
 Templates use placeholders:
 - `${TOOL_CONFIG}` — Your AI tool's config directory (`.claude/`, `.cursor/`, etc.)
-- `${SPEC_DIR}` — Where you store PRDs/plans (`specs/`, `dev-docs/`, etc.)
+- `${TASKS_DIR}` — Where you store PRDs/plans (`tasks/`, `dev-docs/`, `specs/` etc.)
 
 ---
 

@@ -135,14 +135,7 @@ Use `validate` and `implement` primitives. Monitor status, merge completed tasks
 
 ## Progress Tracking
 
-Per `checklists.md` — create and maintain a checklist throughout execution.
-
-**Rules:**
-- Create checklist after reasoning about decomposition, based on what you learned
-- Expand task specs after decomposition is decided
-- Track task status: not started → in progress → ready for merge → merged
-- Mark items complete immediately after finishing each task
-- Report progress after each completed item
+Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
 
 ---
 

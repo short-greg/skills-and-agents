@@ -78,13 +78,7 @@ Select and execute tasks to achieve each Key Result. Each task shows which KR it
 
 ## Progress Tracking
 
-Per `checklists.md` — create and maintain a checklist throughout execution.
-
-**Rules:**
-- Build checklist from Key Results before starting
-- Mark items complete immediately after finishing each task
-- Add sub-items dynamically when scope expands
-- Report progress after each completed item
+Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
 
 ---
 

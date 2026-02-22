@@ -58,7 +58,7 @@ Template for project documentation that AI coding agents read (CLAUDE.md, AGENTS
 [project]/
 ├── src/           # Source code
 ├── tests/         # Tests
-├── specs/         # Specifications (${SPEC_DIR})
+├── tasks/         # Task Descriptions include specs (${TASK_DIR})
 └── .claude/       # AI config (${TOOL_CONFIG})
 ```
 

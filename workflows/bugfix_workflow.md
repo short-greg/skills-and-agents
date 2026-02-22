@@ -130,14 +130,7 @@ Use `validate` primitive. Confirm: failing test passes, all tests pass, fix addr
 
 ## Progress Tracking
 
-Per `checklists.md` — create and maintain a checklist throughout execution.
-
-**Rules:**
-- Create checklist after reasoning about the bug, based on what you learned
-- Mark items complete immediately after finishing each task
-- On hypothesis failure, add sub-items for each hypothesis tested
-- On validation failure, add remediation items
-- Report progress after each completed item
+Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
 
 ---
 
