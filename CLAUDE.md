@@ -1,22 +1,30 @@
 # Skills and Agents Framework - Project Conventions
 
-This document defines conventions for **developing within this repository** — adding primitives, workflows, protocols, and refining the framework itself.
+## About This Repo
 
-> **Note:** If you're looking to **use** this framework in another project, see [README.md](README.md) and run `/setup-skill-env`.
+This is a **tool/framework repository**. It defines primitives, workflows, and protocols that other projects use to build reliable AI coding assistant skills.
+
+**To use this framework in another project:** See [README.md](README.md) and follow [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md).
+
+**To develop this framework:** Use the skills in `.claude/skills/`:
+- `/create-workflow` — Create new workflows
+- `/create-primitive` — Create new primitives
+- `/setup-skill-env` — Test the setup workflow
 
 ---
 
 ## Project Intent
 
-This repository provides **setup guides and templates** for creating reliable AI coding assistant skills and agents.
+This repository provides **primitives, workflows, and protocols** for creating reliable AI coding assistant skills.
 
 **What this is:**
-- Setup guides that help users configure skills in their AI tool
-- Templates that get customized per project
-- Patterns for progress tracking, documentation maintenance, and customization
+- Primitives (atomic cognitive actions)
+- Workflows (multi-step processes composing primitives)
+- Protocols (reusable patterns for tracking, recovery, quality)
+- Templates for creating new skills
 
 **What this is NOT:**
-- Ready-to-use skills (users must adapt templates to their project)
+- Ready-to-use skills (users must adapt to their project)
 - Tool-specific (works with Claude Code, Cursor, Windsurf, etc.)
 - A complete solution (requires user customization)
 
