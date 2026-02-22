@@ -8,12 +8,12 @@ disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Bash, TodoWrite
 protocols:
-  - tracking
-  - recovery
-  - checklist_management
-  - reasoning_patterns
-  - goals_and_objectives
-  - project_quality
+  - tracking  # Track which files/sections have been reviewed vs remain
+  - recovery  # Resume review from where it was interrupted
+  - checklist_management  # Create dynamic checklist based on review scope
+  - reasoning_patterns  # Reason about review approach, verify thoroughness after
+  - goals_and_objectives  # Review against defined quality criteria
+  - project_quality  # Evaluate against quality dimensions: correctness, clarity, maintainability
 ---
 
 # Code Review Workflow

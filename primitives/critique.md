@@ -9,6 +9,13 @@ argument-hint: "[what to critique]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep
+protocols:
+  - tracking  # Track which aspects have been critiqued vs remain
+  - recovery  # Resume critique from where it was interrupted
+  - reasoning_patterns  # Reason about critique approach, verify thoroughness after
+  - goals_and_objectives  # Assess whether work achieves its intended outcomes
+  - project_quality  # Evaluate against quality dimensions: correctness, clarity, maintainability
+  - doc_maintenance  # Flag documentation issues discovered during critique
 ---
 
 # Critique
@@ -63,14 +70,14 @@ allowed-tools: Read, Grep
 
 ## Required Actions
 
-**Expert Reasoning (REQUIRED FIRST)**
-Before doing anything else, describe how an expert reviewer would approach critiquing this work.
-Cover: their strategy, what they would look for first and why, what categories of issues
-they would check (correctness, clarity, security, performance, maintainability), common
-issues in this type of work, and what thorough critique looks like.
-This is not a critique — it is meta-reasoning about approach.
+You must comply with these protocols. Review any you have not read:
 
-Output this reasoning before proceeding.
+- `protocols/tracking.md` — Track which aspects have been critiqued vs remain
+- `protocols/recovery.md` — Resume critique from where it was interrupted
+- `protocols/reasoning_patterns.md` — Reason about critique approach before starting, verify thoroughness after
+- `protocols/goals_and_objectives.md` — Assess whether work achieves its intended outcomes
+- `protocols/project_quality.md` — Evaluate against quality dimensions: correctness, clarity, maintainability
+- `protocols/doc_maintenance.md` — Flag documentation issues discovered during critique
 
 **Confirm (REQUIRED LAST)**
 Before declaring done, verify against each key result:

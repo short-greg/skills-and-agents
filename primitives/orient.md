@@ -9,6 +9,11 @@ argument-hint: "[subject to orient on]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep
+protocols:
+  - tracking  # Track what has been assessed vs what remains
+  - recovery  # Resume orientation from where it was interrupted
+  - reasoning_patterns  # Reason about approach before orienting, verify findings after
+  - goals_and_objectives  # Assess current state relative to target goals when gaps need identifying
 ---
 
 # Orient
@@ -63,14 +68,12 @@ allowed-tools: Read, Grep
 
 ## Required Actions
 
-**Expert Reasoning (REQUIRED FIRST)**
-Before doing anything else, describe how an expert in this domain would approach orienting
-on this subject. Cover: their strategy, what they would look at first and why, what signals
-indicate good vs. bad state, common blind spots to check, and what a thorough orientation
-looks like for this type of subject.
-This is not an orientation — it is meta-reasoning about approach.
+You must comply with these protocols. Review any you have not read:
 
-Output this reasoning before proceeding.
+- `protocols/tracking.md` — Track what has been assessed vs what remains
+- `protocols/recovery.md` — Resume orientation from where it was interrupted
+- `protocols/reasoning_patterns.md` — Reason about orientation approach before starting, verify findings after
+- `protocols/goals_and_objectives.md` — Assess current state relative to target goals when identifying gaps
 
 **Confirm (REQUIRED LAST)**
 Before declaring done, verify against each key result:

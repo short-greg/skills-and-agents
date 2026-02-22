@@ -55,6 +55,9 @@ This protocol addresses goal-setting and OKR structure: defining clear objective
 - **Optional:** User chooses whether to pursue (e.g., "if user requested")
 - **Conditional:** Applies only when a condition is met (e.g., "existing repos only", "if tests exist")
 
+**Key Results Can Drive Behavior:**
+Key results define outcomes, not process. However, some key results implicitly require certain behaviors or ordering. For example, "uncertainties resolved prior to beginning work" is an outcome that implies investigation must happen first. The skill reasons about how to achieve each key result — when a key result implies ordering or behavior, the skill should follow that implication. Key results drive behavior where necessary, but are not primarily a mechanism for prescribing steps.
+
 ### Outcomes vs Process vs Implementation Steps
 
 Key Results fall into three categories:

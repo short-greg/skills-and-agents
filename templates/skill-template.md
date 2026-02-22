@@ -6,7 +6,28 @@ Purpose: This document defines the template for an individual skill.
 name: [skill-name]
 description: [One-line description]
 argument-hint: "[expected input format]"
+protocols:
+  - [protocol-name]  # Use case: when/why this protocol applies to this skill
 ---
+
+## Protocol References
+
+List protocols this skill uses with a one-sentence use case explaining when/why:
+
+```yaml
+protocols:
+  - reasoning_patterns  # Reason about approach before starting, verify completion after
+  - goals_and_objectives  # Write SMARB criteria when defining success for the task
+  - project_quality  # Assess quality dimensions when evaluating code
+  - doc_maintenance  # Update documentation when implementation changes behavior
+  - manage_complexity_uncertainty_risk  # Identify and mitigate risks during design or planning
+  - modularity  # Ensure designs are modular and loosely coupled
+```
+
+**Guidelines:**
+- Only include protocols that genuinely apply to this skill
+- The use case statement should explain a specific situation when the protocol is used
+- Don't add protocols just because they might tangentially relate
 
 # Skill: [Skill Display Name]
 

@@ -1,17 +1,17 @@
 # Skills and Agents Framework
 
-**A framework of primitives, workflows, and protocols for building reliable AI coding assistant skills.**
+**A framework to set up a code repository to be AI-Friendly. It includes primitives, workflows, and protocols for building reliable AI coding assistant skills.**
 
 ---
 
 ## Getting Started
 
 **For AI assistants:**
-1. Ask the user which access method they prefer (see below)
-2. Read [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md) **in full**
-3. Follow the workflow: understand its Goal, evaluate each Key Result (noting which are Required, Conditional, or Optional), and execute the tasks to achieve them
+1. You must comply with [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md) . If you have not read it, review it **in full** — this workflow is required to set up a repository with this skills framework. This workflow defines how to install the framework to set up an agent-friendly repository.
+2. Follow all of the Key Results of workflows/setup_skill_env_workflow.md)  — these define what success looks like
+3. Confirm all key results are met before finishing.
 
-### Step 1: Choose Access Method
+### Access Methods
 
 Ask the user how they want to access this framework:
 
@@ -30,13 +30,7 @@ Ask the user how they want to access this framework:
 4. **Manual download**
    - Download ZIP from GitHub, extract, copy what you need
 
-### Step 2: Execute the Setup Workflow
-
-**Read and execute all phases** of [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md).
-
-Do not skip any phases. Execute the complete workflow from start to finish.
-
-### Step 3: Cleanup (optional)
+### Cleanup (optional)
 
 If cloned temporarily:
 ```bash

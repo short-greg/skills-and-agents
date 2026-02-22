@@ -7,14 +7,6 @@ argument-hint: "[feature to implement]"
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, WebSearch, WebFetch, Task, TodoWrite
-protocols:
-  - tracking
-  - recovery
-  - checklist_management
-  - reasoning_patterns
-  - doc_maintenance
-  - goals_and_objectives
-  - manage_complexity_uncertainty_risk
 ---
 
 # Feature Workflow
@@ -27,27 +19,45 @@ protocols:
 
 ---
 
-## Workflow Type
+## Key Results
 
-**Type:** Adaptive
-
-**Style:** Hybrid (declarative goals with imperative validation gates)
+1. Uncertainties are resolved through reasoning and investigation prior to beginning work
+2. Requirements are defined, clear, and outcome-oriented
+3. Design addresses all requirements
+4. Implementation passes all tests and meets acceptance criteria
+5. Documentation is updated
+6. Code follows project conventions
 
 ---
 
-## Key Results
+## Protocols
 
-1. Requirements are clear and SMARB (per `goals_and_objectives` protocol)
-2. Design addresses all requirements
-3. Implementation passes all tests and meets acceptance criteria
-4. Documentation is updated (per `doc_maintenance` protocol)
-5. Code follows project conventions
+Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+
+- `tracking.md` — Track progress through all tasks. Report what you're doing as you work.
+- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
+- `checklists.md` — Create a checklist after reasoning about the feature. Update it dynamically as scope changes.
+- `reasoning.md` — Reason about approach BEFORE starting. Verify completion AFTER each task.
+- `documentation.md` — Update documentation when the feature changes behavior or APIs.
+- `goals_and_objectives.md` — Define outcome-oriented success criteria for the feature.
+- `risk_management.md` — Identify risks and unknowns. Resolve them before implementation.
 
 ---
 
 ## Available Primitives
 
-`orient`, `define`, `design`, `implement`, `validate`, `investigate`, `critique`, `brainstorm`
+Primitives are atomic cognitive actions. They are in `skills/`. Use these to implement the feature. If you do not understand a primitive, read it before using it.
+
+- `orient` — Understand project structure, conventions, and where this feature fits.
+- `define` — Establish requirements and success criteria.
+- `design` — Plan technical approach before implementing.
+- `implement` — Write code following the design.
+- `validate` — Verify work meets requirements with pass/fail verdicts.
+- `investigate` — Reduce uncertainty by researching unknowns or diagnosing issues.
+- `critique` — Review work for quality and identify improvements.
+- `brainstorm` — Generate multiple distinct options when choices are needed.
+
+You may use other operations when necessary, but prefer primitives when they fit.
 
 ---
 
@@ -61,90 +71,75 @@ protocols:
 
 ---
 
-## Expert Reasoning (Required First)
+## Tasks
 
-Per `reasoning_patterns` protocol — before beginning, reason about:
+Execute these tasks to achieve the key results. Select and sequence based on your reasoning about the feature. You may add tasks or skip tasks that don't apply.
+
+### Reason About Approach
+
+Per `reasoning.md` — reason about:
 
 1. **Complexity assessment** — Simple feature or complex? Uncertainty level?
 2. **Risk identification** — What could go wrong? Where are unknowns?
 3. **Approach selection** — Which primitives needed? What order?
 4. **Alternatives** — What if primary approach fails?
 
-Output reasoning before proceeding.
+Output your reasoning.
+
+### Understand Context
+
+Use `orient` primitive. Understand project structure, conventions, and where this feature fits.
+
+### Define Requirements
+
+Use `define` primitive. Establish requirements and success criteria.
+
+Per `goals_and_objectives.md` — requirements must be outcome-oriented and verifiable.
+
+**Gate:** Validate requirements. Ask user to confirm before proceeding.
+
+### Design Approach
+
+Use `design` primitive. Plan technical approach.
+
+Per `risk_management.md` — if uncertainty exists, invoke `investigate` before finalizing design.
+
+**Gate:** Validate or critique design. Ask user to confirm before proceeding.
+
+### Implement
+
+Use `implement` primitive. Write code following the design.
+
+Per `documentation.md` — update documentation when implementation changes behavior or APIs.
+
+Per `checklists.md` — add sub-tasks dynamically when scope expands.
+
+### Validate
+
+Use `validate` primitive. Verify implementation meets requirements.
+
+**On failure:**
+- Invoke `investigate` to diagnose root cause
+- Determine which task to return to
+- Add remediation tasks to checklist
+- Re-execute and re-validate
+
+### Update Documentation
+
+Per `documentation.md` — ensure all documentation reflects the implemented feature.
 
 ---
 
-## Progress Tracking (Required)
+## Progress Tracking
 
-Per `checklist_management` protocol — create and maintain a checklist throughout execution.
-
-**On workflow start, create this checklist:**
-
-```markdown
-## Feature Progress
-
-- [ ] 1. Understand context (orient)
-- [ ] 2. Define requirements (define) — Gate: user confirms
-- [ ] 3. Design approach (design) — Gate: user confirms
-- [ ] 4. Implement feature (implement)
-- [ ] 5. Validate implementation (validate)
-- [ ] 6. Update documentation (doc_maintenance)
-```
+Per `checklists.md` — create and maintain a checklist throughout execution.
 
 **Rules:**
-- Display checklist at start of workflow
-- Mark items `[x]` immediately after completing each phase
-- Add sub-items dynamically when scope expands (e.g., "4a. Implement auth", "4b. Implement API")
-- On validation failure, add remediation items and loop back
-- Report progress after each completed item: "✅ [item] — [brief summary]"
-
----
-
-## Execution
-
-Execute by selecting and sequencing primitives to achieve key results. The following phases provide guidance, not rigid steps.
-
-### Phase 1: Understand Context
-
-**Primitive:** `orient` — See `primitives/orient.md`
-
-Understand project structure, conventions, and where this feature fits.
-
-### Phase 2: Define Requirements
-
-**Primitive:** `define` — See `primitives/define.md`
-
-Establish requirements and success criteria. Apply `goals_and_objectives` protocol for SMARB criteria.
-
-**Gate:** Invoke `validate` on requirements. User confirms before proceeding.
-
-### Phase 3: Design Approach
-
-**Primitive:** `design` — See `primitives/design.md`
-
-Plan technical approach.
-
-**On uncertainty:** Per `manage_complexity_uncertainty_risk` protocol — invoke `investigate` before finalizing.
-
-**Gate:** Invoke `validate` or `critique` on design. User confirms before proceeding.
-
-### Phase 4: Implement
-
-**Primitive:** `implement` — See `primitives/implement.md`
-
-Write code following the design. Apply `doc_maintenance` protocol.
-
-### Phase 5: Validate
-
-**Primitive:** `validate` — See `primitives/validate.md`
-
-Verify implementation meets requirements.
-
-**On failure:** Per `checklist_management` protocol:
-1. Invoke `investigate` to diagnose root cause
-2. Determine loop-back point
-3. Add remediation tasks to checklist
-4. Re-execute and re-validate
+- Create checklist after reasoning about the feature, based on what you learned
+- Mark items complete immediately after finishing each task
+- Add sub-items dynamically when scope expands
+- On validation failure, add remediation items
+- Report progress after each completed item
 
 ---
 
@@ -166,13 +161,13 @@ Verify implementation meets requirements.
 
 ## Recovery
 
-Per `recovery` protocol — check for existing trace on startup, resume from last completed step.
+Per `recovery.md` — check for existing trace on startup, resume from last completed task.
 
 ---
 
 ## Iteration
 
-Per `checklist_management` protocol:
+Per `checklists.md`:
 - Max 3 validation iterations before escalating
 - Each iteration must show progress
 - If same failure recurs, escalate immediately
@@ -183,6 +178,6 @@ Per `checklist_management` protocol:
 
 **Prototype:** Simplified requirements, lighter validation, minimal docs.
 
-**Production:** Full SMARB requirements, strict validation, documentation required.
+**Production:** Full requirements, strict validation, documentation required.
 
 **Library:** API compatibility, public API stability, changelog updates.

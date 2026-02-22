@@ -9,6 +9,13 @@ argument-hint: "[what to validate]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep, Bash
+protocols:
+  - tracking  # Track which criteria have been validated vs remain
+  - recovery  # Resume validation from where it was interrupted
+  - reasoning_patterns  # Reason about validation approach, verify all criteria checked after
+  - goals_and_objectives  # Validate against outcome-oriented success criteria
+  - project_quality  # Check against quality dimensions: correctness, clarity, reliability
+  - doc_maintenance  # Flag documentation gaps or inaccuracies discovered during validation
 ---
 
 # Validate
@@ -66,14 +73,14 @@ allowed-tools: Read, Grep, Bash
 
 ## Required Actions
 
-**Expert Reasoning (REQUIRED FIRST)**
-Before doing anything else, describe how an expert would approach validating this output.
-Cover: their strategy, what they would check first and why, how they would systematically
-verify all requirements, what edge cases they would test, how they would confirm integration,
-and what thorough validation looks like for this type of output.
-This is not validation — it is meta-reasoning about approach.
+You must comply with these protocols. Review any you have not read:
 
-Output this reasoning before proceeding.
+- `protocols/tracking.md` — Track which criteria have been validated vs remain
+- `protocols/recovery.md` — Resume validation from where it was interrupted
+- `protocols/reasoning_patterns.md` — Reason about validation approach before starting, verify all criteria checked after
+- `protocols/goals_and_objectives.md` — Validate against outcome-oriented success criteria
+- `protocols/project_quality.md` — Check against quality dimensions: correctness, clarity, reliability
+- `protocols/doc_maintenance.md` — Flag documentation gaps or inaccuracies discovered during validation
 
 **Confirm (REQUIRED LAST)**
 Before declaring done, verify against each key result:

@@ -8,13 +8,13 @@ disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 protocols:
-  - tracking
-  - recovery
-  - checklist_management
-  - reasoning_patterns
-  - goals_and_objectives
-  - modularity
-  - doc_maintenance
+  - tracking  # Track progress through analyze → plan → refactor → validate phases
+  - recovery  # Resume from interruption at any phase
+  - checklist_management  # Create dynamic checklist based on refactor scope
+  - reasoning_patterns  # Reason about refactor approach, verify behavior preserved after
+  - goals_and_objectives  # Define what "improved" means without changing behavior
+  - modularity  # Apply modularity principles: reduce coupling, improve cohesion
+  - doc_maintenance  # Update documentation if refactor changes structure
 ---
 
 # Refactor Workflow

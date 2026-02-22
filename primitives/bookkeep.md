@@ -9,6 +9,11 @@ argument-hint: "[what to record or sync]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep, Write, Edit
+protocols:
+  - tracking  # Track which records have been updated vs remain
+  - recovery  # Resume bookkeeping from where it was interrupted
+  - reasoning_patterns  # Reason about what needs recording, verify completeness after
+  - doc_maintenance  # Core purpose: ensure documentation matches reality
 ---
 
 # Bookkeep
@@ -64,14 +69,12 @@ allowed-tools: Read, Grep, Write, Edit
 
 ## Required Actions
 
-**Expert Reasoning (REQUIRED FIRST)**
-Before doing anything else, describe how an expert in documentation and record-keeping
-would approach this task. Cover: their strategy, what records they would check first and why,
-how they would ensure completeness (nothing missed), how they would avoid introducing
-new inconsistencies, and what thorough bookkeeping looks like for this type of change.
-This is not bookkeeping — it is meta-reasoning about approach.
+You must comply with these protocols. Review any you have not read:
 
-Output this reasoning before proceeding.
+- `protocols/tracking.md` — Track which records have been updated vs remain
+- `protocols/recovery.md` — Resume bookkeeping from where it was interrupted
+- `protocols/reasoning_patterns.md` — Reason about what needs recording before starting, verify completeness after
+- `protocols/doc_maintenance.md` — Core purpose: ensure documentation matches reality
 
 **Confirm (REQUIRED LAST)**
 Before declaring done, verify against each key result:

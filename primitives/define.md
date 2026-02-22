@@ -9,6 +9,11 @@ argument-hint: "[task or feature to define]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep
+protocols:
+  - tracking  # Track which requirements have been captured vs remain
+  - recovery  # Resume definition from where it was interrupted
+  - reasoning_patterns  # Reason about approach before defining, verify completeness after
+  - goals_and_objectives  # Write outcome-oriented SMARB success criteria for the task
 ---
 
 # Define
@@ -62,17 +67,14 @@ allowed-tools: Read, Grep
 
 ## Required Actions
 
-**Expert Reasoning (REQUIRED FIRST)**
-Before doing anything else, describe how an expert in requirements and product definition
-would approach this task. Cover: their strategy, what they would do first and why,
-alternatives they would consider, fallbacks if the primary approach fails, common mistakes
-to avoid, and what a high-quality definition looks like for this type of task.
-This is not a plan — it is meta-reasoning about approach.
+You must comply with these protocols. Review any you have not read:
 
-Output this reasoning before proceeding.
+- `protocols/tracking.md` — Track which requirements have been captured vs remain
+- `protocols/recovery.md` — Resume definition from where it was interrupted
+- `protocols/reasoning_patterns.md` — Reason about requirements approach before starting, verify completeness after
+- `protocols/goals_and_objectives.md` — Write outcome-oriented SMARB success criteria for the task
 
 **Confirm (REQUIRED LAST)**
-
 Before declaring done:
 - Does the definition satisfy each key result?
 - Has the user confirmed it is accurate?

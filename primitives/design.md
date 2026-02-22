@@ -10,6 +10,14 @@ argument-hint: "[component or problem to design]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep
+protocols:
+  - tracking  # Track which design aspects are complete vs remain
+  - recovery  # Resume design from where it was interrupted
+  - reasoning_patterns  # Reason about design approach before starting, verify design completeness after
+  - goals_and_objectives  # Ensure design achieves the defined success criteria
+  - modularity  # Ensure designs have clear boundaries, minimal coupling, and single responsibilities
+  - manage_complexity_uncertainty_risk  # Identify technical risks and unknowns, then resolve them before implementation
+  - doc_maintenance  # Document design decisions and rationale for future reference
 ---
 
 # Design
@@ -73,14 +81,15 @@ allowed-tools: Read, Grep
 
 ## Required Actions
 
-**Expert Reasoning (REQUIRED FIRST)**
-Before doing anything else, describe how an expert in this domain would approach designing
-this component or system. Cover: their strategy, what they would do first and why,
-alternatives they would consider, fallbacks if the primary approach fails, common mistakes
-to avoid, and what a high-quality design looks like for this type of problem.
-This is not a plan — it is meta-reasoning about approach.
+You must comply with these protocols. Review any you have not read:
 
-Output this reasoning before proceeding.
+- `protocols/tracking.md` — Track which design aspects are complete vs remain
+- `protocols/recovery.md` — Resume design from where it was interrupted
+- `protocols/reasoning_patterns.md` — Reason about design approach before starting, verify design completeness after
+- `protocols/goals_and_objectives.md` — Ensure design achieves the defined success criteria
+- `protocols/modularity.md` — Ensure designs have clear boundaries, minimal coupling, and single responsibilities
+- `protocols/manage_complexity_uncertainty_risk.md` — Identify technical risks and unknowns, resolve them before implementation
+- `protocols/doc_maintenance.md` — Document design decisions and rationale for future reference
 
 **Confirm (REQUIRED LAST)**
 Before declaring done, verify against each key result:

@@ -9,6 +9,12 @@ argument-hint: "[what to maintain or clean up]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep, Write, Edit, Bash
+protocols:
+  - tracking  # Track which maintenance tasks are complete vs remain
+  - recovery  # Resume upkeep from where it was interrupted
+  - reasoning_patterns  # Reason about maintenance priorities, verify health improvements after
+  - project_quality  # Assess and improve quality dimensions: reduce warnings, update deps, remove dead code
+  - doc_maintenance  # Update documentation when upkeep changes behavior or removes features
 ---
 
 # Upkeep
@@ -63,14 +69,13 @@ allowed-tools: Read, Grep, Write, Edit, Bash
 
 ## Required Actions
 
-**Expert Reasoning (REQUIRED FIRST)**
-Before doing anything else, describe how an expert in code maintenance and technical debt
-would approach this task. Cover: their strategy, what health indicators they would check first,
-how they would prioritize issues (quick wins vs. deeper fixes), how they would ensure safety
-(no regressions), and what effective upkeep looks like for this type of system.
-This is not upkeep — it is meta-reasoning about approach.
+You must comply with these protocols. Review any you have not read:
 
-Output this reasoning before proceeding.
+- `protocols/tracking.md` — Track which maintenance tasks are complete vs remain
+- `protocols/recovery.md` — Resume upkeep from where it was interrupted
+- `protocols/reasoning_patterns.md` — Reason about maintenance priorities before starting, verify health improvements after
+- `protocols/project_quality.md` — Assess and improve quality dimensions: reduce warnings, update deps, remove dead code
+- `protocols/doc_maintenance.md` — Update documentation when upkeep changes behavior or removes features
 
 **Confirm (REQUIRED LAST)**
 Before declaring done, verify against each key result:

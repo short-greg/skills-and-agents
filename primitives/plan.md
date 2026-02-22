@@ -9,6 +9,12 @@ argument-hint: "[task or goal to plan]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep
+protocols:
+  - tracking  # Track which planning aspects are complete vs remain
+  - recovery  # Resume planning from where it was interrupted
+  - reasoning_patterns  # Reason about planning approach, verify plan completeness after
+  - goals_and_objectives  # Plan must achieve the defined success criteria
+  - manage_complexity_uncertainty_risk  # Identify risks and unknowns that affect sequencing
 ---
 
 # Plan
@@ -63,17 +69,15 @@ allowed-tools: Read, Grep
 
 ## Required Actions
 
-**Expert Reasoning (REQUIRED FIRST)**
-Before doing anything else, describe how an expert in this domain would approach planning
-this task. Cover: their strategy, what they would do first and why, alternatives they would
-consider, fallbacks if the primary approach fails, common mistakes to avoid, and what a
-high-quality plan looks like for this type of task.
-This is not a plan — it is meta-reasoning about approach.
+You must comply with these protocols. Review any you have not read:
 
-Output this reasoning before proceeding.
+- `protocols/tracking.md` — Track which planning aspects are complete vs remain
+- `protocols/recovery.md` — Resume planning from where it was interrupted
+- `protocols/reasoning_patterns.md` — Reason about planning approach before starting, verify plan completeness after
+- `protocols/goals_and_objectives.md` — Plan must achieve the defined success criteria
+- `protocols/manage_complexity_uncertainty_risk.md` — Identify risks and unknowns that affect sequencing
 
 **Confirm (REQUIRED LAST)**
-
 Before declaring done:
 - Does the plan satisfy each key result?
 - Has the user confirmed it is sound?

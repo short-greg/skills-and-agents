@@ -8,6 +8,14 @@ argument-hint: "[what to implement]"
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Write, Edit, Bash
+protocols:
+  - tracking  # Track progress during multi-file or long implementations
+  - recovery  # Resume from interruption without losing work
+  - reasoning_patterns  # Reason about implementation approach, verify against requirements after
+  - goals_and_objectives  # Understand the success criteria being implemented against
+  - modularity  # Produce modular code with clear boundaries and minimal coupling
+  - project_quality  # Ensure code meets quality dimensions: correctness, clarity, maintainability
+  - doc_maintenance  # Update documentation when implementation changes behavior or APIs
 ---
 
 # Implement
@@ -69,14 +77,15 @@ allowed-tools: Read, Grep, Write, Edit, Bash
 
 ## Required Actions
 
-**Expert Reasoning (REQUIRED FIRST)**
-Before doing anything else, describe how an expert would approach implementing this.
-Cover: their strategy, what they would implement first and why, how they would ensure
-correctness, what edge cases they would watch for, how they would maintain code quality,
-and what a clean implementation looks like for this type of work.
-This is not implementation — it is meta-reasoning about approach.
+You must comply with these protocols. Review any you have not read:
 
-Output this reasoning before proceeding.
+- `protocols/tracking.md` — Track progress during multi-file or long implementations
+- `protocols/recovery.md` — Resume from interruption without losing work
+- `protocols/reasoning_patterns.md` — Reason about implementation approach before writing code, verify against requirements after
+- `protocols/goals_and_objectives.md` — Understand the success criteria being implemented against
+- `protocols/modularity.md` — Produce modular code with clear boundaries and minimal coupling
+- `protocols/project_quality.md` — Ensure code meets quality dimensions: correctness, clarity, maintainability
+- `protocols/doc_maintenance.md` — Update documentation when implementation changes behavior or APIs
 
 **Confirm (REQUIRED LAST)**
 Before declaring done, verify against each key result:

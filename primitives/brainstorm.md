@@ -9,6 +9,11 @@ argument-hint: "[topic or problem to brainstorm]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep, WebSearch
+protocols:
+  - tracking  # Track which idea categories have been explored vs remain
+  - recovery  # Resume brainstorming from where it was interrupted
+  - reasoning_patterns  # Reason about brainstorm approach, verify diversity of ideas after
+  - goals_and_objectives  # Generate ideas that could achieve the defined goals
 ---
 
 # Brainstorm
@@ -63,14 +68,12 @@ allowed-tools: Read, Grep, WebSearch
 
 ## Required Actions
 
-**Expert Reasoning (REQUIRED FIRST)**
-Before doing anything else, describe how an expert would approach brainstorming this
-topic. Cover: their strategy for generating diverse ideas, how they would avoid anchoring
-on the first idea, what categories or dimensions they would explore, how they would
-push beyond obvious solutions, and what makes a brainstorm session productive.
-This is not brainstorming — it is meta-reasoning about approach.
+You must comply with these protocols. Review any you have not read:
 
-Output this reasoning before proceeding.
+- `protocols/tracking.md` — Track which idea categories have been explored vs remain
+- `protocols/recovery.md` — Resume brainstorming from where it was interrupted
+- `protocols/reasoning_patterns.md` — Reason about brainstorm approach before starting, verify diversity of ideas after
+- `protocols/goals_and_objectives.md` — Generate ideas that could achieve the defined goals
 
 **Confirm (REQUIRED LAST)**
 Before declaring done, verify against each key result:

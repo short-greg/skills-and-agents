@@ -9,6 +9,13 @@ argument-hint: "[question or topic to investigate]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep, WebSearch, WebFetch
+protocols:
+  - tracking  # Track what has been investigated vs what questions remain
+  - recovery  # Resume investigation from where it was interrupted
+  - reasoning_patterns  # Form hypotheses before investigating, verify findings after
+  - goals_and_objectives  # Investigate questions about requirements or success criteria
+  - manage_complexity_uncertainty_risk  # Investigation reduces uncertainty before committing to an approach
+  - doc_maintenance  # Flag documentation gaps or inaccuracies discovered during investigation
 ---
 
 # Investigate
@@ -65,14 +72,14 @@ allowed-tools: Read, Grep, WebSearch, WebFetch
 
 ## Required Actions
 
-**Expert Reasoning (REQUIRED FIRST)**
-Before doing anything else, describe how an expert would approach investigating this
-question or topic. Cover: their strategy, what sources they would consult first and why,
-how they would evaluate the quality of information found, what would constitute sufficient
-evidence, common pitfalls in this type of investigation, and what a conclusive finding looks like.
-This is not an investigation — it is meta-reasoning about approach.
+You must comply with these protocols. Review any you have not read:
 
-Output this reasoning before proceeding.
+- `protocols/tracking.md` — Track what has been investigated vs what questions remain
+- `protocols/recovery.md` — Resume investigation from where it was interrupted
+- `protocols/reasoning_patterns.md` — Form hypotheses before investigating, verify findings are grounded in evidence after
+- `protocols/goals_and_objectives.md` — Investigate questions about requirements or success criteria
+- `protocols/manage_complexity_uncertainty_risk.md` — Investigation reduces uncertainty before committing to an approach
+- `protocols/doc_maintenance.md` — Flag documentation gaps or inaccuracies discovered during investigation
 
 **Confirm (REQUIRED LAST)**
 Before declaring done, verify against each key result:

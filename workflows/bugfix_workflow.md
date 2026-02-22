@@ -8,13 +8,13 @@ disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 protocols:
-  - tracking
-  - recovery
-  - checklist_management
-  - reasoning_patterns
-  - goals_and_objectives
-  - manage_complexity_uncertainty_risk
-  - doc_maintenance
+  - tracking  # Track progress through investigate → hypothesize → fix → validate phases
+  - recovery  # Resume from interruption at any phase
+  - checklist_management  # Create dynamic checklist based on bug complexity
+  - reasoning_patterns  # Form hypotheses before investigating, verify fix after
+  - goals_and_objectives  # Define what "fixed" means with binary pass/fail criteria
+  - manage_complexity_uncertainty_risk  # Identify root cause before fixing symptoms
+  - doc_maintenance  # Update documentation if bug reveals incorrect docs
 ---
 
 # Bugfix Workflow
