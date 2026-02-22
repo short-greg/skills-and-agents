@@ -1,8 +1,12 @@
 ---
 name: setup-skill-env
 description: >
-  Use when setting up skill environment for a new or existing project.
-  Triggers on: "setup skills", "configure skill environment", "install skills framework".
+  Use when making a repository AI-friendly using the skills-and-agents framework.
+  Analyzes existing repos, interviews the user, installs framework components
+  (primitives, protocols, workflows), creates CLAUDE.md for AI behavior guidance,
+  and optionally configures worktrees for parallel work.
+  Triggers on: "setup skills", "configure skill environment", "make repo AI-friendly".
+  Achieve the Goal for this skill by satisfying the Key Results and following the Requirements.
 argument-hint: "[project path or 'current']"
 disable-model-invocation: true
 user-invocable: true
@@ -15,20 +19,23 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 
 **Intent:** Projects need proper setup for AI coding to be effective. This includes understanding the repo, installing the right skills, configuring worktrees if needed, and creating documentation that guides AI behavior. Without this setup, AI coding is inconsistent and ineffective.
 
-**Scope:** Complete environment setup: repo understanding, skill installation, worktree configuration, documentation creation, and skill customization.
+**Scope:** Complete AI-friendliness setup: repo analysis (for existing repos), user interview, skills framework installation (primitives, protocols, workflows), AI-focused documentation (CLAUDE.md, repository analysis reports, setup summaries, etc.), worktree configuration (optional), and setup validation.
 
 ---
 
 ## Key Results
 
+1. User requirements clear before doing anything else — project state, preferences, desired workflows
+2. Framework components installed — selected primitives, workflows, protocols in place
+3. AI guidance documentation created — CLAUDE.md, docstrings, conventions documentation, etc. (scope determined with user)
+4. Setup is functional — installed components work correctly
+
+## Requirements
+
 1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
-2. User requirements understood through interview before setup begins
-3. User requirements understood — project state, preferences, desired workflows clear
-4. Framework components installed — selected primitives, workflows, protocols in place
-5. Project documentation guides AI behavior — CLAUDE.md (or equivalent) enables effective AI coding
-6. Setup is functional — installed components work correctly
-7. Repository understood — structure, conventions, AI-friendliness assessed (if existing repo)
-8. Existing skills resolved — adapted, kept, removed, or left as-is (if existing skills present)
+2. Recoverable from interruption per `tracking.md` and `recovery.md`
+3. Repository understood before configuration (for existing repos) — structure, conventions assessed
+4. Existing skills resolved before installing new ones — adapted, kept, removed, or left as-is (if present)
 
 ---
 
@@ -70,7 +77,7 @@ Primitives are atomic cognitive actions in `skills/`. Use these for setup. If yo
 
 Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
-### Create Preliminary Checklist (→ KR1)
+### Create Preliminary Checklist (→ Req 1)
 
 Per `checklists.md` — before any other work:
 
@@ -78,7 +85,7 @@ Per `checklists.md` — before any other work:
 2. Create checklist items for each KR using format: `setup-skill-env - KR<num> - <task>`
 3. Tasks can be "(clarify requirements)" initially, refined after interview
 
-### Reason About Project (→ KR2)
+### Reason About Project (→ KR1)
 
 Per `reasoning.md` — before beginning, reason about:
 
@@ -89,7 +96,7 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Interview the User (→ KR2, KR3)
+### Interview the User (→ KR1)
 
 Before doing anything, interview the user to understand their situation:
 
@@ -114,7 +121,7 @@ Before doing anything, interview the user to understand their situation:
 
 **Detect what you can automatically** (existing code, AI config, project structure) and confirm with user.
 
-### Determine Best Approach (→ KR2, KR3)
+### Determine Best Approach (→ KR1)
 
 Based on the interview, determine the order of remaining tasks.
 
@@ -124,12 +131,12 @@ Based on the interview, determine the order of remaining tasks.
 - **Handle existing skills** — Adapt, keep, remove, or leave as-is based on user choice
 - **Configure tool directories** — Set up `.claude/skills/`, etc.
 - **Install framework components** — Primitives, protocols, selected workflows
-- **Create/update documentation** — CLAUDE.md or equivalent
+- **Create/update AI guidance documentation** — CLAUDE.md, docstrings, conventions, etc.
 - **Configure worktrees** — If user wants parallel work support
 - **Validate setup** — Confirm everything works
 - **Create summary** — Document what was done
 
-### Understand the Repository (→ KR7)
+### Understand the Repository (→ Req 3)
 
 Use `orient` primitive. For existing repos only.
 
@@ -143,7 +150,7 @@ For existing repos, understand before configuring:
 
 **Gate:** Confirm understanding with user before proceeding.
 
-### Repository Analysis Report (→ KR7)
+### Repository Analysis Report (→ Req 3)
 
 Use `investigate` and `critique` primitives. For existing repos only.
 
@@ -158,18 +165,18 @@ Create a comprehensive analysis report highlighting what the AI needs to know to
 
 **Gate:** Review report with user, discuss key findings.
 
-### Handle Existing Skills (→ KR8)
+### Handle Existing Skills (→ Req 4)
 
 Based on interview, adapt, keep, remove, or leave existing skills as-is.
 
-### Tool Configuration (→ KR4)
+### Tool Configuration (→ KR2)
 
 Determine AI tool and create directory structure:
 
 - Ask user which AI coding tool (Claude Code, Cursor, Windsurf, etc.)
 - Create `${TOOL_CONFIG}/skills`, `${TOOL_CONFIG}/primitives`, `${TOOL_CONFIG}/protocols`
 
-### Worktree Configuration (→ KR4)
+### Worktree Configuration (→ KR2)
 
 If user wants parallel work support:
 
@@ -178,7 +185,7 @@ If user wants parallel work support:
 3. Create .worktreesync file
 4. Test the setup
 
-### Workflow Selection (→ KR3, KR4)
+### Workflow Selection (→ KR1, KR2)
 
 Present workflow categories and let user select:
 
@@ -187,7 +194,7 @@ Present workflow categories and let user select:
 - **Parallel Work:** worktree workflows (requires worktrees)
 - **Meta:** create-primitive-workflow, create-workflow-workflow
 
-### Skill Customization (→ KR3, KR4)
+### Skill Customization (→ KR1, KR2)
 
 Ask about customization preferences:
 
@@ -197,7 +204,7 @@ Ask about customization preferences:
 - Validation strictness
 - User approval gates frequency
 
-### Install Components (→ KR4)
+### Install Components (→ KR2)
 
 Install selected components:
 
@@ -206,20 +213,18 @@ Install selected components:
 3. **Install workflows** — Copy selected from `workflows/` to `${TOOL_CONFIG}/skills/`
 4. **Apply customizations** — Replace placeholders in installed files
 
-### Create Project Documentation (→ KR5)
+### Create Project Documentation (→ KR3)
 
-Create or update CLAUDE.md (or equivalent) with:
+Create or update AI guidance documentation throughout the repo:
 
-- Project Overview
-- Directory Structure
-- Conventions
-- Commands
-- Skills Configuration
-- Working Agreements
+- **CLAUDE.md** — Project overview, conventions, commands, skills configuration
+- **Docstrings** — Add/improve where needed for AI understanding
+- **Conventions documentation** — Document patterns, naming, file organization
+- **Analysis reports** — Repository analysis findings (for existing repos)
 
-**For existing repos:** Merge with existing CLAUDE.md, don't overwrite.
+**Scope determined with user** — how much documentation they want.
 
-### Validate Setup (→ KR6)
+### Validate Setup (→ KR4)
 
 Use `validate` primitive.
 
@@ -235,7 +240,7 @@ Verify the setup works:
 
 **On failure:** Report what's missing, offer to fix.
 
-### Create Setup Summary (→ KR6)
+### Create Setup Summary (→ KR4)
 
 Write summary file to `${TOOL_CONFIG}/SETUP_SUMMARY.md` documenting:
 
