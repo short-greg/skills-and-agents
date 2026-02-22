@@ -23,10 +23,10 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 
 ## Key Results - KR
 
-1. User requirements clear before doing anything else — project state, preferences, desired workflows
+1. User have been made clear before setting up the skill — project state, preferences, desired workflows, AI-Friendly preferences.
 2. Framework components installed — selected primitives, workflows, protocols in place
-3. AI guidance documentation created — CLAUDE.md, docstrings, conventions documentation, etc. (scope determined with user)
-4. Setup is functional — installed components work correctly
+3. The repository is AI-friendly by creating detailed AI guidance documentation such as docstrings, conventions documentation, CLAUDE.md.
+4. The skill Setup is functional — installed components work correctly
 
 ## Requirements and Constraints - REQ
 
@@ -68,7 +68,7 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 
 ## Protocols
 
-Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+Comply with protocols to get consistent behavior `protocols/`. If you do not understand a protocol, read it.
 
 - `tracking.md` — Track which setup tasks are complete vs remain
 - `recovery.md` — On startup, check for existing progress. Resume from last completed task.
@@ -87,9 +87,6 @@ Primitives are atomic cognitive actions in `skills/`. Use these for setup. If yo
 - `validate` — Verify setup works correctly.
 - `investigate` — Analyze existing code for risks, complexity, uncertainties.
 - `critique` — Evaluate modularity and conventions of existing code.
-
----
-
 
 ---
 
