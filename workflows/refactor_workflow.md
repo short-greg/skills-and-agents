@@ -384,6 +384,27 @@ Behavior is NOT necessarily preserved when:
 
 When adapting this workflow for your project:
 
+### Repository Type
+
+**Prototype:**
+- Lighter test coverage requirements
+- Manual verification acceptable for behavior preservation
+- Documentation updates optional
+- Faster iteration, less formality
+
+**Production:**
+- Full test coverage required before refactoring
+- Automated tests must verify behavior preservation
+- Documentation updates required if architecture changes
+- Code review required
+- All tests must pass after each increment
+
+**Library:**
+- Must verify public API unchanged
+- Internal refactoring must not change public behavior
+- API documentation must be verified unchanged
+- Consider downstream consumers
+
 ### Testing Conventions
 - Test framework and commands
 - How to run full test suite

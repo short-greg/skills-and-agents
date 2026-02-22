@@ -290,6 +290,27 @@ These gates are **recommended** but optional — ask user if they want approval 
 
 When adapting this workflow for your project:
 
+### Repository Type
+
+**Prototype:**
+- Simplified requirements (goal + basic acceptance criteria)
+- Lighter validation (working code, manual testing acceptable)
+- Minimal documentation requirements
+- Fast iteration prioritized over formality
+
+**Production:**
+- Full requirements with SMARB criteria
+- Strict validation (automated tests, coverage targets)
+- Documentation required (API docs, README updates)
+- Code review required before completion
+
+**Library:**
+- Requirements must include API compatibility considerations
+- Design must consider public API stability
+- Implementation must include usage examples
+- Validation includes backward compatibility checks
+- Changelog updates required
+
 ### Tool Configuration
 - `${TOOL_CONFIG}` — location of AI tool configuration (e.g., `.claude/`, `.cursor/`)
 - `${TASK_DIR}` — where trace files are stored

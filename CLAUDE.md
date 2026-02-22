@@ -39,28 +39,41 @@ skills-and-agents/
 ├── CLAUDE.md                    # This file - project conventions
 ├── README.md                    # User-facing overview and quick start
 │
+├── primitives/                  # Core cognitive actions (atomic building blocks)
+│   ├── README.md                # Primitives overview
+│   ├── orient.md                # Understand context and constraints
+│   ├── define.md                # Establish requirements and scope
+│   ├── design.md                # Plan technical approach
+│   ├── implement.md             # Execute plans into artifacts
+│   ├── validate.md              # Verify against criteria
+│   ├── investigate.md           # Diagnose root causes
+│   ├── brainstorm.md            # Generate options
+│   └── critique.md              # Evaluate quality
+│
+├── workflows/                   # Multi-step processes composing primitives
+│   ├── README.md                # Workflows overview
+│   ├── feature_workflow.md      # Complete feature development
+│   ├── bugfix_workflow.md       # Hypothesis-driven bug fixing
+│   ├── refactor_workflow.md     # Safe behavior-preserving refactoring
+│   ├── worktree_orchestrate_workflow.md  # Parallel task coordination
+│   └── worktree_task_workflow.md         # Single task execution in worktree
+│
+├── protocols/                   # Reusable patterns and conventions
+│   ├── README.md                # Protocols overview
+│   ├── tracking.md              # Progress documentation
+│   ├── recovery.md              # Resume from interruption
+│   ├── checklist_management.md  # Dynamic checklist patterns
+│   ├── skills_and_agents.md     # When to use skills vs agents
+│   ├── goals_and_objectives.md  # OKR patterns
+│   ├── project_quality.md       # Quality criteria and assessment
+│   ├── modularity.md            # Modular design principles
+│   └── ...                      # Other protocols
+│
 ├── templates/                   # Base templates for skills and agents
 │   ├── skill-template.md        # Individual skill template
 │   ├── skill-setup-guideline-template.md  # Skill suite setup template
 │   ├── agent-template.md        # Individual agent template
 │   └── agent-setup-guideline-template.md  # Agent suite setup template
-│
-├── protocols/                   # Reusable patterns (referenced by guidelines)
-│   ├── skills_and_agents.md     # When to use skills vs agents
-│   ├── checklist_management.md  # Checklist syntax
-│   ├── goals_and_objectives.md  # OKR patterns
-│   ├── project_quality.md       # Quality criteria and assessment
-│   ├── tracking.md              # Progress documentation
-│   └── ...                      # Other protocols
-│
-├── skill-guidelines/            # Skill workflow setup guides
-│   ├── INTENT.md                # Directory purpose
-│   ├── feature-development.md   # Complete feature workflow
-│   ├── bugfixing.md             # Hypothesis-based debugging
-│   ├── refactoring.md           # Safe refactoring
-│   ├── parallel-orchestration.md # Parallel task coordination
-│   ├── creating-examples.md     # Educational content creation
-│   └── create-skill.md          # Meta-skill for creating skills
 │
 └── agent-guidelines/            # Specialized agent setup guides
     ├── INTENT.md                # Directory purpose
@@ -72,15 +85,19 @@ skills-and-agents/
 
 ## Document Naming Conventions
 
-### Setup Guidelines
-- `core-conventions.md` - Core patterns and standards
-- `[topic]-[purpose].md` - Descriptive, hyphenated
-- Examples: `repo-detection.md`, `interview-protocol.md`
+### Primitives
+- `[action].md` - One primitive per file, named after the action
+- Examples: `orient.md`, `define.md`, `validate.md`
 
-### Skill Guidelines
-- `[workflow-name].md` - One workflow per file
-- Examples: `feature-development.md`, `bugfixing.md`
-- Each file contains ALL related skills (orchestrator + atomic skills)
+### Workflows
+- `[name]_workflow.md` - One workflow per file
+- Examples: `feature_workflow.md`, `bugfix_workflow.md`, `worktree_orchestrate_workflow.md`
+- Each workflow composes primitives into a complete process
+
+### Protocols
+- `[topic].md` - One protocol per file
+- Examples: `tracking.md`, `recovery.md`, `checklist_management.md`
+- Protocols are referenced by workflows and primitives
 
 ### Agent Guidelines
 - `INTENT.md` - Directory purpose
@@ -92,53 +109,57 @@ skills-and-agents/
 
 ## Content Organization
 
-### Skill Guideline Files
+### Workflow Files
 
-Each skill guideline file (e.g., `feature-development.md`) contains:
+Each workflow file (e.g., `feature_workflow.md`) contains:
 
-1. **Overview** - What this workflow does, when to use
-2. **Phase 0: Repository Detection** - How to detect project structure
-3. **Phase 1: Prerequisites** - What must exist before setup
-4. **Skill Definitions** - All skills in this workflow
-5. **SKILL.md Templates** - Complete, copy-paste ready templates
-6. **Integration** - How skills compose together
-7. **Testing** - How to validate the skills work
+1. **Frontmatter** - name, description, argument-hint, protocols
+2. **Goal/Intent/Scope** - What it achieves and why
+3. **Workflow Type** - Deterministic/Adaptive, Imperative/Declarative/Hybrid
+4. **Steps** - Each step maps to exactly one primitive
+5. **Preconditions/Postconditions** - What's needed, what's produced
+6. **Recovery** - How to resume from interruption
+7. **Quality Gates** - When to validate deliverables
+8. **Customization Points** - How to adapt to different projects/repo types
 
-**All related skills in ONE file:**
-- Orchestrator (e.g., `feature-workflow`)
-- Atomic skills (e.g., `feature-define`, `feature-plan`, `feature-impl`)
-- Review skills (e.g., `feature-define-review`, `feature-plan-review`)
+### Workflow Structure
 
-### Template Structure
-
-All SKILL.md templates follow this structure:
+All workflows follow this structure:
 
 ```markdown
 ---
-name: [skill-name]
-description: [one-line description]
-disable-model-invocation: true
+name: workflow-name
+description: When to use this workflow
+argument-hint: What argument is expected
+protocols:
+  - tracking
+  - recovery
+  - checklist_management
 ---
 
-# [Skill Display Name]
+# Workflow Name
 
-[Purpose and when to use]
+**Goal:** [What this achieves]
+**Intent:** [Why this exists]
+**Scope:** [Complete process description]
 
-## Progress Tracking
+## Workflow Type
+[Deterministic/Adaptive, Imperative/Declarative/Hybrid]
 
-[Progress tracker and checklist pattern]
+## Steps
+[Each step maps to one primitive]
 
-## Phase 0: [First Phase]
+## Preconditions
+[What's needed to start]
 
-[Phase checklist and instructions]
+## Postconditions
+[Success/failure states]
 
-## Phase N: [Next Phase]
+## Recovery
+[How to resume from interruption]
 
-[Continue...]
-
-## Best Practices
-
-[Guidelines for this skill]
+## Customization Points
+[Repository type variations, tool configuration, etc.]
 ```
 
 ---
@@ -159,7 +180,7 @@ Components:
 2. **Phase checklist** - Strict list of required actions
 3. **Status reporting** - Claude reports completion as it works
 
-**Location:** Defined in `setup-guidelines/core-conventions.md`
+**Location:** Defined in `protocols/tracking.md`
 
 **User approval gates are OPTIONAL** - Claude should ask user if they want to review at each gate, not force it.
 
@@ -176,7 +197,7 @@ Required phases:
 - **Phase 0: Read Documentation** - Read project documentation, package docs, confirm understanding
 - **Final Phase: Update Documentation** - Update project docs if new patterns, update package docs if API changed
 
-**Location:** Defined in `setup-guidelines/core-conventions.md`
+**Location:** Defined in `protocols/doc_maintenance.md`
 
 ### Interview Protocol
 
@@ -193,7 +214,7 @@ Process:
 3. Ask user targeted questions
 4. Generate customized templates
 
-**Location:** Defined in `setup-guidelines/interview-protocol.md`
+**Location:** Defined in `templates/skill-setup-guideline-template.md`
 
 ---
 

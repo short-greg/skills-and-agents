@@ -44,11 +44,17 @@ A workflow is a sequence of primitives orchestrated to accomplish a larger goal.
 
 ### Coordination Workflows
 
-**[parallel_orchestration.md](parallel_orchestration.md)**
-- Coordinate multiple independent tasks in parallel
-- **Primitives:** orient → brainstorm → plan → implement (parallel) → validate
-- **Type:** Hybrid (deterministic structure, adaptive task execution)
-- **Use when:** Multiple independent tasks can run concurrently
+**[worktree_orchestrate_workflow.md](worktree_orchestrate_workflow.md)**
+- Break large plans/PRDs into parallelizable tasks across git worktrees
+- **Primitives:** orient → brainstorm → define → validate → implement (setup/merge)
+- **Type:** Adaptive (task decomposition, dependency management)
+- **Use when:** Large features can be split into independent parallel tasks
+
+**[worktree_task_workflow.md](worktree_task_workflow.md)**
+- Execute a single task in a git worktree based on a task specification
+- **Primitives:** orient → validate → (delegates to feature/bugfix/refactor workflow)
+- **Type:** Adaptive (routes to appropriate workflow based on task type)
+- **Use when:** Working on an individual task within a worktree (created by orchestrate workflow)
 
 ---
 

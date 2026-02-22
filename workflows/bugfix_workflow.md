@@ -325,6 +325,26 @@ generate new hypotheses (loop to Step 3)
 
 When adapting this workflow for your project:
 
+### Repository Type
+
+**Prototype:**
+- Simplified reproduction (manual reproduction acceptable)
+- Fewer hypothesis iterations before proceeding
+- Regression test optional (but recommended)
+- Documentation of root cause optional
+
+**Production:**
+- Full hypothesis-driven investigation required
+- Automated regression test mandatory
+- Root cause documentation required
+- Code review required for fix
+
+**Library:**
+- Must consider API compatibility when fixing
+- Regression test must cover public API
+- Changelog entry required for behavioral changes
+- May require deprecation notice if fix changes API
+
 ### Testing Conventions
 - Test framework (pytest, jest, rspec, etc.)
 - Test file naming and organization
