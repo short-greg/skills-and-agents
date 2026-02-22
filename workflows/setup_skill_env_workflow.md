@@ -3,7 +3,7 @@ name: setup-skill-env
 description: >
   Use when making a repository AI-friendly using the skills-and-agents framework.
   Analyzes existing repos, interviews the user, installs all framework components, sets up the repo to be AI-friendly based on user requests.
-  You MUST satisfy the Goal, Key Results and follow the Requirements described. They are specified in the instruction body.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this skill. They are specified in the instruction body.
   Triggers on: "setup skills environment", "configure skill environment", "make repo AI-friendly".
 argument-hint: "[project path or 'current']"
 disable-model-invocation: true
@@ -120,7 +120,7 @@ Output your reasoning.
 
 ### Interview the User (→ KR1)
 
-Before doing anything, interview the user to understand their situation:
+After understanding the Goal, Key Results, and Requirements and setting up a preliminary checklist with key results, interview the user to understand their situation. Once finished with that finalize the checklist with tasks to achieve them:
 
 **Questions to ask:**
 
