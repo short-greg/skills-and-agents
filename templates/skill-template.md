@@ -63,7 +63,7 @@ argument-hint: "[expected input format]"
 
 # OKRs
 
-[See [references/goals-and-objectives.md](../references/goals-and-objectives.md)]
+[See [protocols/goals_and_objectives.md](../protocols/goals_and_objectives.md)]
 
 **Objective:** [Aspirational outcome]
 
@@ -104,7 +104,7 @@ argument-hint: "[expected input format]"
 
 **How this skill creates its checklist on execution:**
 
-[See [references/checklist-management.md](../references/checklist-management.md)]
+[See [protocols/checklist_management.md](../protocols/checklist_management.md)]
 
 ## Checklist Generation Rules
 
@@ -183,7 +183,7 @@ argument-hint: "[expected input format]"
 - Agent documentation (if agent-related)
 - Subpackage docs (keep in sync with main)
 
-[See [references/spec-maintenance.md](../references/spec-maintenance.md)]
+[See [protocols/tracking.md](../protocols/tracking.md)]
 
 ---
 

@@ -112,7 +112,7 @@ plugin/
 ├── skill-guidelines/          # Bundled
 ├── agent-guidelines/          # Bundled
 ├── templates/                 # Bundled
-└── references/                # Bundled
+└── protocols/                 # Bundled
 ```
 
 ### Commands (Planned)

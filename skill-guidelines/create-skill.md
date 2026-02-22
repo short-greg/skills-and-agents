@@ -36,7 +36,7 @@ This workflow **reuses** existing skills:
 - Creating skill suites from a guideline template (use that guideline directly)
 
 ## Guideline OKRs
-[See [references/goals-and-objectives.md](../references/goals-and-objectives.md)]
+[See [protocols/goals_and_objectives.md](../protocols/goals_and_objectives.md)]
 
 **Objective:** New skills are complete, consistent, and effective on first use
 
@@ -171,8 +171,8 @@ For `feature-impl`:
 # Framework References
 
 - [feature-development.md](feature-development.md) - Skills that are composed
-- [references/goals-and-objectives.md](../references/goals-and-objectives.md) - OKR patterns
-- [references/checklist-management.md](../references/checklist-management.md) - Checklist syntax
+- [protocols/goals_and_objectives.md](../protocols/goals_and_objectives.md) - OKR patterns
+- [protocols/checklist_management.md](../protocols/checklist_management.md) - Checklist syntax
 - [templates/skill-template.md](../templates/skill-template.md) - SKILL.md format
 
 ---

@@ -183,7 +183,7 @@ Produce either:
 
 # Framework References
 
-- [references/assessment-approaches.md](../references/assessment-approaches.md) - Quality criteria
+- [protocols/project_quality.md](../protocols/project_quality.md) - Quality criteria
 
 ---
 

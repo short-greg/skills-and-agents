@@ -64,7 +64,7 @@ Each agent operates independently. Skills handle orchestration when multiple age
 
 ## Guideline OKRs
 
-[See [references/goals-and-objectives.md](../references/goals-and-objectives.md)]
+[See [protocols/goals_and_objectives.md](../protocols/goals_and_objectives.md)]
 
 **Objective:** [Aspirational outcome for agents created from this guideline]
 
@@ -92,7 +92,7 @@ Each agent operates independently. Skills handle orchestration when multiple age
 
 **How to design an agent:**
 
-1. Read project documentation (see [references/skills-vs-agents.md](../references/skills-vs-agents.md) for tool-specific locations) to understand conventions
+1. Read project documentation (see [protocols/skills_and_agents.md](../protocols/skills_and_agents.md) for tool-specific locations) to understand conventions
 2. Identify the domain expertise needed
 3. Define what inputs the agent receives
 4. Design the step-by-step process the agent follows
@@ -173,8 +173,8 @@ quality_checks:
 
 # Framework References
 
-- [references/goals-and-objectives.md](../references/goals-and-objectives.md) - OKR patterns
-- [references/assessment-approaches.md](../references/assessment-approaches.md) - Quality criteria
+- [protocols/goals_and_objectives.md](../protocols/goals_and_objectives.md) - OKR patterns
+- [protocols/project_quality.md](../protocols/project_quality.md) - Quality criteria
 
 ---
 

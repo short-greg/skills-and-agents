@@ -47,7 +47,7 @@ These workflows **reuse** existing skills:
 - Fixing bugs in existing examples (use bugfixing)
 
 ## Guideline OKRs
-[See [references/goals-and-objectives.md](../references/goals-and-objectives.md)]
+[See [protocols/goals_and_objectives.md](../protocols/goals_and_objectives.md)]
 
 **Objective:** Educational content enables effective learning with working examples
 
@@ -178,8 +178,8 @@ This workflow is simpler - tutorials are primarily documentation with code sampl
 # Framework References
 
 - [feature-development.md](feature-development.md) - Skills that are composed
-- [references/goals-and-objectives.md](../references/goals-and-objectives.md) - OKR patterns
-- [references/checklist-management.md](../references/checklist-management.md) - Checklist syntax
+- [protocols/goals_and_objectives.md](../protocols/goals_and_objectives.md) - OKR patterns
+- [protocols/checklist_management.md](../protocols/checklist_management.md) - Checklist syntax
 
 ---
 

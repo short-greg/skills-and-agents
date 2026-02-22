@@ -55,7 +55,7 @@ Purpose: This document defines how to create a guideline for setting up a partic
 - [Anti-use case 2]
 
 ## Guideline OKRs
-[See [references/goals-and-objectives.md](../references/goals-and-objectives.md)]
+[See [protocols/goals_and_objectives.md](../protocols/goals_and_objectives.md)]
 
 **Objective:** [Aspirational outcome for skills created from this guideline]
 
@@ -180,10 +180,10 @@ always_last:
 
 # Framework References
 
-- [references/goals-and-objectives.md](../references/goals-and-objectives.md) - OKR patterns
-- [references/checklist-management.md](../references/checklist-management.md) - Checklist syntax
-- [references/assessment-approaches.md](../references/assessment-approaches.md) - Quality criteria
-- [references/spec-maintenance.md](../references/spec-maintenance.md) - Progress tracking
+- [protocols/goals_and_objectives.md](../protocols/goals_and_objectives.md) - OKR patterns
+- [protocols/checklist_management.md](../protocols/checklist_management.md) - Checklist syntax
+- [protocols/project_quality.md](../protocols/project_quality.md) - Quality criteria
+- [protocols/tracking.md](../protocols/tracking.md) - Progress tracking
 
 ---
 

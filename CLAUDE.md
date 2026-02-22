@@ -45,12 +45,13 @@ skills-and-agents/
 │   ├── agent-template.md        # Individual agent template
 │   └── agent-setup-guideline-template.md  # Agent suite setup template
 │
-├── references/                  # Reusable patterns (referenced by guidelines)
-│   ├── skills-vs-agents.md      # When to use skills vs agents
-│   ├── checklist-management.md  # Checklist syntax
-│   ├── goals-and-objectives.md  # OKR patterns
-│   ├── assessment-approaches.md # Quality criteria
-│   └── spec-maintenance.md      # Progress documentation
+├── protocols/                   # Reusable patterns (referenced by guidelines)
+│   ├── skills_and_agents.md     # When to use skills vs agents
+│   ├── checklist_management.md  # Checklist syntax
+│   ├── goals_and_objectives.md  # OKR patterns
+│   ├── project_quality.md       # Quality criteria and assessment
+│   ├── tracking.md              # Progress documentation
+│   └── ...                      # Other protocols
 │
 ├── skill-guidelines/            # Skill workflow setup guides
 │   ├── INTENT.md                # Directory purpose
@@ -85,7 +86,7 @@ skills-and-agents/
 - `INTENT.md` - Directory purpose
 - `[domain].md` - One agent setup guide per file
 - Examples: `code-review.md`, `test-architect.md`
-- See `references/skills-vs-agents.md` for when to use agents vs skills
+- See `protocols/skills_and_agents.md` for when to use agents vs skills
 
 ---
 

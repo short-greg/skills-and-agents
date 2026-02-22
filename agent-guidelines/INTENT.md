@@ -13,4 +13,4 @@ Agent guidelines use [templates/agent-template.md](../templates/agent-template.m
 
 ## Skills vs Subagents
 
-See [references/skills-vs-agents.md](../references/skills-vs-agents.md) for a detailed comparison of when to use skills vs subagents.
+See [protocols/skills_and_agents.md](../protocols/skills_and_agents.md) for a detailed comparison of when to use skills vs subagents.

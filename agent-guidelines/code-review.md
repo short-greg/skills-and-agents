@@ -77,7 +77,7 @@ Provide expert code review that checks code quality, conventions, design princip
 
 ## Step 1: Understand Context
 
-1. Read project documentation (see [references/skills-vs-agents.md](../references/skills-vs-agents.md) for tool-specific locations)
+1. Read project documentation (see [protocols/skills_and_agents.md](../protocols/skills_and_agents.md) for tool-specific locations)
 2. Check for existing patterns in similar code
 3. Understand the purpose of the code being reviewed
 
@@ -173,7 +173,7 @@ Produce structured report following output format.
 
 # Framework References
 
-- [references/assessment-approaches.md](../references/assessment-approaches.md) - Quality criteria
+- [protocols/project_quality.md](../protocols/project_quality.md) - Quality criteria
 
 ---
 

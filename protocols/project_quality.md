@@ -547,6 +547,134 @@ Not all quality issues matter equally:
 
 ---
 
+## Tool-Based Assessment
+
+Quality assessment must be objective and evidence-based. LLMs tend to over-evaluate quality with subjective assessments like "looks organized" or "no errors." Require tool output and specific evidence for all assessments.
+
+### Modularity/Maintainability Tools
+
+**Python:**
+```bash
+# Cohesion - check for too many methods/attributes
+pylint --disable=all --enable=R0904,R0902 src/
+
+# Coupling - count imports per file
+find src/ -name "*.py" -exec grep -c "^import\|^from" {} \;
+
+# Circular dependencies
+pydeps src/ --show-deps
+
+# Complexity
+radon cc src/ -a -nb
+# Target: A-B rating (complexity 1-10)
+```
+
+**JavaScript/TypeScript:**
+```bash
+# Complexity and maintainability
+eslint src/ --ext .js,.ts
+npx madge --circular src/
+
+# Dependency analysis
+npx madge --image graph.png src/
+```
+
+**Thresholds:**
+| Metric | Good | Warning | Poor |
+|--------|------|---------|------|
+| Public functions per module | <5 | 5-10 | >10 |
+| Direct dependencies | <5 | 5-10 | >10 |
+| Cyclomatic complexity | <10 | 10-15 | >15 |
+| Function length (lines) | <30 | 30-50 | >50 |
+| Nesting depth | <3 | 3-4 | >4 |
+
+### Test Coverage Tools
+
+```bash
+# Python
+pytest tests/ --cov=src --cov-report=term-missing
+# Target: >85% for production, >50% for prototype
+
+# JavaScript
+npm test -- --coverage
+# Target: >85% for production, >50% for prototype
+```
+
+### Security Tools
+
+```bash
+# Python
+bandit -r src/
+safety check
+pip-audit
+
+# JavaScript
+npm audit
+npx snyk test
+
+# General - check for hardcoded secrets
+grep -r "password\|secret\|api_key" src/
+```
+
+### Evidence Requirements
+
+**Avoid subjective assessments:**
+
+| Bad (Subjective) | Good (Evidence-Based) |
+|------------------|----------------------|
+| "Looks organized" | "`pylint --enable=R0904` shows 0 violations. Each module has <5 public methods." |
+| "No errors" | "Coupling check: `pydeps --max-bacon=2` shows max depth 2. No circular dependencies." |
+| "Functions are small" | "`radon cc -a` shows average complexity 6.2 (Grade A). No functions >15 complexity." |
+| "Tests exist" | "`pytest --cov` shows 87% coverage (meets 85% threshold). See report: [output]" |
+
+### Assessment Template
+
+```markdown
+# Quality Assessment: [Feature/Module]
+
+**Date:** YYYY-MM-DD
+**Repo Type:** [Prototype/Production/Library]
+
+## Modularity
+**Tool:** `pylint --enable=R0904,R0902 src/module.py`
+**Result:** [output]
+**Rating:** ✅ Good / ⚠️ Warning / ❌ Poor
+
+## Test Coverage
+**Tool:** `pytest tests/ --cov=src`
+**Result:** [N]% coverage
+**Rating:** ✅ PASS / ❌ FAIL
+
+## Security (Production only)
+**Tool:** `bandit -r src/`
+**Result:** [output]
+**Rating:** ✅ PASS / ❌ FAIL
+
+## Overall: ✅ PASS / ❌ FAIL
+**Required Actions:** [None / List of fixes]
+```
+
+### Customization by Repo Type
+
+**Prototype:**
+- Focus: Functional correctness, basic readability
+- Coverage: >50% acceptable
+- Skip: Security scans, performance optimization, comprehensive documentation
+
+**Production:**
+- Full modularity assessment (all metrics)
+- Coverage: ≥85% required
+- Security scans required
+- Performance requirements verified
+
+**Library:**
+- API correctness (especially public APIs)
+- Coverage: ≥90% for public APIs
+- Backward compatibility checks
+- Semantic versioning compliance
+
+---
+
 ## References
 
 - [ISO 25010 Software Quality Model](https://iso25000.com/en/iso-25000-standards/iso-25010)

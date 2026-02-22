@@ -52,7 +52,7 @@ Enable parallel development by breaking large PRDs into independent tasks with d
 - Codebase area is tightly coupled
 
 ## Guideline OKRs
-[See [references/goals-and-objectives.md](../references/goals-and-objectives.md)]
+[See [protocols/goals_and_objectives.md](../protocols/goals_and_objectives.md)]
 
 **Objective:** Large features complete faster through safe parallel execution
 
@@ -80,7 +80,7 @@ Enable parallel development by breaking large PRDs into independent tasks with d
 
 **How each skill creates its checklist on execution:**
 
-1. Read project documentation (see [references/skills-vs-agents.md](../references/skills-vs-agents.md) for tool-specific locations) to determine repo type and conventions
+1. Read project documentation (see [protocols/skills_and_agents.md](../protocols/skills_and_agents.md) for tool-specific locations) to determine repo type and conventions
 2. Read existing parallel plans to detect current state
 3. Check dependency status for all tasks
 4. For each phase, add corresponding checklist items
@@ -317,11 +317,10 @@ Task spec says: "Create an example demonstrating the new caching API"
 
 # Framework References
 
-- [references/goals-and-objectives.md](../references/goals-and-objectives.md) - OKR patterns
-- [references/checklist-management.md](../references/checklist-management.md) - Checklist syntax
-- [references/assessment-approaches.md](../references/assessment-approaches.md) - Quality criteria
-- [references/spec-maintenance.md](../references/spec-maintenance.md) - Progress tracking
-- [setup-guidelines/worktree-guide.md](../setup-guidelines/worktree-guide.md) - Git worktree setup
+- [protocols/goals_and_objectives.md](../protocols/goals_and_objectives.md) - OKR patterns
+- [protocols/checklist_management.md](../protocols/checklist_management.md) - Checklist syntax
+- [protocols/project_quality.md](../protocols/project_quality.md) - Quality criteria
+- [protocols/tracking.md](../protocols/tracking.md) - Progress tracking
 
 ---
 

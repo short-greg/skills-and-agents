@@ -59,13 +59,28 @@ A protocol is a standardized process or pattern that multiple primitives and wor
 - Loop-back patterns for iteration
 - Progress tracking and reporting
 
+### Goals & Design
+
+**[goals_and_objectives.md](goals_and_objectives.md)**
+- Writing clear goals and measurable objectives (OKRs)
+- Outcome-focused key results vs implementation steps
+- Context-specific examples (PRD, technical plan, implementation)
+- Anti-patterns and verification checklist
+
+**[skills_and_agents.md](skills_and_agents.md)**
+- Understanding skills vs subagents (when to use each)
+- Skill structure and progressive disclosure
+- SKILL.md format and invocation patterns
+- File locations by AI coding tool
+
 ### Quality & Maintenance
 
 **[project_quality.md](project_quality.md)**
 - Assessing artifact quality across 6 dimensions
 - Correctness, clarity, reliability, completeness, efficiency, testability
 - Multi-dimensional tradeoff analysis
-- Context-dependent quality prioritization
+- Tool-based assessment with evidence requirements
+- Customization by repo type (prototype/production/library)
 
 **[modularity.md](modularity.md)**
 - Assessing modularity in code, design, and workflows
@@ -115,6 +130,13 @@ A protocol is a standardized process or pattern that multiple primitives and wor
 - **modularity.md** — When assessing design modularity
 - **project_quality.md** — When evaluating design quality across dimensions
 - **manage_complexity_uncertainty_risk.md** — When mitigating complexity/uncertainty/risk
+- **goals_and_objectives.md** — When defining OKRs for features/plans
+
+### During Skill/Agent Creation
+
+- **skills_and_agents.md** — When deciding between skills and agents
+- **skills_and_agents.md** — When structuring SKILL.md files
+- **goals_and_objectives.md** — When defining skill OKRs
 
 ### During Code Review
 
@@ -138,6 +160,9 @@ recovery.md ──┘
 checklist_management.md ──> Support tracking
 
 manage_complexity_uncertainty_risk.md ──> Guide adaptive workflows
+
+goals_and_objectives.md ──> Define success criteria
+skills_and_agents.md ─────> Guide skill/agent design
 
 project_quality.md ──┐
 modularity.md ───────┼──> Ensure quality

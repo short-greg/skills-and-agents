@@ -109,7 +109,7 @@ Production Application - user-facing, high quality
 - Review: [who reviews, approval process]
 
 ## Modularity
-- Follow assessment criteria (see references/assessment-approaches.md)
+- Follow assessment criteria (see protocols/project_quality.md)
 - Complexity <10 per function
 - Low coupling, high cohesion
 ```
@@ -388,7 +388,7 @@ Skills are **templates** - customize based on your repo type.
 
 **Quality focus:**
 - Tests pass (85%+ coverage)
-- Full modularity assessment (8 criteria from references/assessment-approaches.md)
+- Full modularity assessment (8 criteria from protocols/project_quality.md)
 - Security scans pass (bandit, safety, npm audit, etc.)
 - Performance requirements met
 - Code review approval
@@ -702,13 +702,14 @@ After setup:
 
 ## References
 
-- **Skill Guidelines:** [skill-setup-guidelines/](skill-setup-guidelines/) - Complete skill templates and guides
+- **Skill Guidelines:** [skill-guidelines/](skill-guidelines/) - Complete skill templates and guides
 - **Agent Guidelines:** [agent-guidelines/](agent-guidelines/) - Agent setup and configuration
-- **References:** [references/](references/) - Framework concepts and best practices
-  - [assessment-approaches.md](references/assessment-approaches.md) - Code quality assessment criteria
-  - [goals-and-objectives.md](references/goals-and-objectives.md) - Setting goals and measurable OKRs
-  - [checklist-management.md](references/checklist-management.md) - Checklist patterns and conditionals
-  - [spec-maintenance.md](references/spec-maintenance.md) - Keeping spec/plan documents updated
+- **Protocols:** [protocols/](protocols/) - Framework concepts and best practices
+  - [project_quality.md](protocols/project_quality.md) - Code quality assessment criteria
+  - [goals_and_objectives.md](protocols/goals_and_objectives.md) - Setting goals and measurable OKRs
+  - [checklist_management.md](protocols/checklist_management.md) - Checklist patterns and conditionals
+  - [tracking.md](protocols/tracking.md) - Progress tracking and spec maintenance
+  - [skills_and_agents.md](protocols/skills_and_agents.md) - Skills vs agents comparison
 
 ---
 

@@ -61,7 +61,7 @@ Enable safe code structure improvements through a suite of coordinated skills th
 - Tests don't exist for target code (write tests first)
 
 ## Guideline OKRs
-[See [references/goals-and-objectives.md](../references/goals-and-objectives.md)]
+[See [protocols/goals_and_objectives.md](../protocols/goals_and_objectives.md)]
 
 **Objective:** Code structure improves while behavior is provably preserved
 
@@ -91,7 +91,7 @@ Enable safe code structure improvements through a suite of coordinated skills th
 
 **How each skill creates its checklist on execution:**
 
-1. Read project documentation (see [references/skills-vs-agents.md](../references/skills-vs-agents.md) for tool-specific locations) to determine repo type and conventions
+1. Read project documentation (see [protocols/skills_and_agents.md](../protocols/skills_and_agents.md) for tool-specific locations) to determine repo type and conventions
 2. Read existing artifacts (refactoring plans) to detect current state
 3. Based on repo type, include/exclude quality gates
 4. For each phase, add corresponding checklist items
@@ -307,10 +307,10 @@ always_last:
 
 # Framework References
 
-- [references/goals-and-objectives.md](../references/goals-and-objectives.md) - OKR patterns
-- [references/checklist-management.md](../references/checklist-management.md) - Checklist syntax
-- [references/assessment-approaches.md](../references/assessment-approaches.md) - Quality criteria
-- [references/spec-maintenance.md](../references/spec-maintenance.md) - Progress tracking
+- [protocols/goals_and_objectives.md](../protocols/goals_and_objectives.md) - OKR patterns
+- [protocols/checklist_management.md](../protocols/checklist_management.md) - Checklist syntax
+- [protocols/project_quality.md](../protocols/project_quality.md) - Quality criteria
+- [protocols/tracking.md](../protocols/tracking.md) - Progress tracking
 
 ---
 
