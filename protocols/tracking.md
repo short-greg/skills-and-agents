@@ -10,6 +10,16 @@ Enable workflows to maintain a persistent record of progress that survives conte
 
 ---
 
+## Tools
+
+**For real-time display:** Use `TodoWrite` tool to show progress to the user (if available in your AI tool)
+
+**For persistence:** Use `Write`/`Edit` tools to maintain a `trace.md` file that survives compaction
+
+Both are needed: TodoWrite shows live progress, trace.md enables recovery after interruption.
+
+---
+
 ## Intent
 
 Without tracking, workflows that are interrupted lose all context about what was completed. Silent failures go undetected. Progress is invisible. After compaction, the new context has no memory of prior work. Tracking solves this by maintaining an external trace file that records status, artifacts, decisions, and current focus — everything needed to resume intelligently.

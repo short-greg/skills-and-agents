@@ -6,13 +6,15 @@ description: >
 argument-hint: "[bug description or reproduction steps]"
 disable-model-invocation: true
 user-invocable: true
-allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task
+allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 protocols:
   - tracking
   - recovery
   - checklist_management
   - reasoning_patterns
+  - goals_and_objectives
   - manage_complexity_uncertainty_risk
+  - doc_maintenance
 ---
 
 # Bugfix Workflow
@@ -35,11 +37,17 @@ protocols:
 
 ## Key Results
 
-1. Bug is reproducible via failing test
-2. Root cause is identified with evidence (not guessed)
-3. Fix is minimal (addresses root cause only)
-4. Regression test prevents recurrence
-5. All existing tests still pass
+Per `goals_and_objectives` protocol — outcome-oriented results:
+
+**Required:**
+1. **Bug is reproducible** — failing test demonstrates the bug before fix
+2. **Root cause is identified** — evidence confirms cause, not speculation
+3. **Fix is minimal** — changes address root cause only, no unrelated modifications
+4. **Regression is prevented** — new test catches this bug if reintroduced
+
+**Conditional:**
+5. **Documentation is updated** — if fix changes behavior or reveals missing docs (per `doc_maintenance`)
+6. **All tests pass** — existing test suite passes with fix applied
 
 ---
 
@@ -70,6 +78,33 @@ Per `reasoning_patterns` protocol — before beginning, reason about:
 4. **Risk assessment** — Could fix introduce regressions? Critical system?
 
 Output reasoning before proceeding.
+
+---
+
+## Progress Tracking (Required)
+
+Per `checklist_management` protocol — create and maintain a checklist throughout execution.
+
+**On workflow start, create this checklist:**
+
+```markdown
+## Bugfix Progress
+
+- [ ] 1. Understand context (orient)
+- [ ] 2. Reproduce bug with failing test (investigate)
+- [ ] 3. Generate hypotheses (brainstorm)
+- [ ] 4. Investigate root cause (investigate) — Gate: root cause confirmed
+- [ ] 5. Define fix scope (define)
+- [ ] 6. Implement minimal fix (implement)
+- [ ] 7. Validate fix (validate)
+```
+
+**Rules:**
+- Display checklist at start of workflow
+- Mark items `[x]` immediately after completing each phase
+- On hypothesis failure, add sub-items (e.g., "4a. Test hypothesis 1", "4b. Test hypothesis 2")
+- On validation failure, add remediation items and loop back
+- Report progress after each completed item: "✅ [item] — [brief summary]"
 
 ---
 

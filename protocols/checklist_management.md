@@ -16,6 +16,23 @@ Checklists are a primary mechanism for tracking progress in workflows. Unlike st
 
 ---
 
+## Tools
+
+**For real-time display:** Use `TodoWrite` tool (if available) to show progress to the user
+- Call TodoWrite at workflow start with all checklist items (status: `pending`)
+- Update status to `in_progress` when starting an item
+- Update status to `completed` when item is done
+- Keep exactly ONE item `in_progress` at a time
+
+**For persistence:** Use `Write`/`Edit` tools to maintain checklist in trace file
+- Write to `${SPEC_DIR}/trace.md` or `${TASK_DIR}/trace.md`
+- This enables recovery after compaction or session interruption
+- See `tracking` protocol for trace file format
+
+**Both are needed:** TodoWrite provides real-time visibility; trace file enables recovery.
+
+---
+
 ## Purpose
 
 **Goal:** Enable workflows to track progress reliably and adapt to discovered needs.

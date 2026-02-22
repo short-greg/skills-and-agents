@@ -6,12 +6,13 @@ description: >
 argument-hint: "[files or changes to review]"
 disable-model-invocation: true
 user-invocable: true
-allowed-tools: Read, Grep, Glob, Bash
+allowed-tools: Read, Grep, Glob, Bash, TodoWrite
 protocols:
   - tracking
   - recovery
   - checklist_management
   - reasoning_patterns
+  - goals_and_objectives
   - project_quality
 ---
 
@@ -35,11 +36,16 @@ protocols:
 
 ## Key Results
 
-1. All specified files reviewed
-2. Issues identified with file:line references
-3. Issues categorized by severity (blocking, non-blocking, suggestion)
-4. Each issue has actionable recommendation
-5. Approval decision made
+Per `goals_and_objectives` protocol — outcome-oriented results:
+
+**Required:**
+1. **All specified files reviewed** — complete coverage of review scope
+2. **Issues are actionable** — each issue has file:line reference and concrete recommendation
+3. **Issues are prioritized** — categorized by severity (blocking, non-blocking, suggestion) per impact
+4. **Review concludes with decision** — clear approval, needs changes, or blocked verdict
+
+**Conditional:**
+5. **Quality dimensions assessed** — correctness, clarity, reliability, completeness evaluated (per `project_quality`)
 
 ---
 
@@ -69,6 +75,34 @@ Per `reasoning_patterns` protocol — before beginning, reason about:
 4. **Output format** — PR comments? Report? Issue tickets?
 
 Output reasoning before proceeding.
+
+---
+
+## Progress Tracking (Required)
+
+Per `checklist_management` protocol — create and maintain a checklist throughout execution.
+
+**On workflow start, create this checklist:**
+
+```markdown
+## Code Review Progress
+
+- [ ] 1. Understand context (orient)
+- [ ] 2. Review against standards (validate)
+  - [ ] 2a. Code standards
+  - [ ] 2b. Design principles
+  - [ ] 2c. Maintainability
+  - [ ] 2d. Testing
+  - [ ] 2e. Security
+- [ ] 3. Categorize issues (critique)
+- [ ] 4. Generate report
+```
+
+**Rules:**
+- Display checklist at start of workflow
+- Mark items `[x]` immediately after completing each category
+- Track which files have been reviewed
+- Report progress after each completed category: "✅ [category] — [N issues found]"
 
 ---
 

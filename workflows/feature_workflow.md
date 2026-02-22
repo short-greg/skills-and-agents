@@ -6,7 +6,7 @@ description: >
 argument-hint: "[feature to implement]"
 disable-model-invocation: true
 user-invocable: true
-allowed-tools: Read, Grep, Glob, Write, Edit, Bash, WebSearch, WebFetch, Task
+allowed-tools: Read, Grep, Glob, Write, Edit, Bash, WebSearch, WebFetch, Task, TodoWrite
 protocols:
   - tracking
   - recovery
@@ -71,6 +71,32 @@ Per `reasoning_patterns` protocol — before beginning, reason about:
 4. **Alternatives** — What if primary approach fails?
 
 Output reasoning before proceeding.
+
+---
+
+## Progress Tracking (Required)
+
+Per `checklist_management` protocol — create and maintain a checklist throughout execution.
+
+**On workflow start, create this checklist:**
+
+```markdown
+## Feature Progress
+
+- [ ] 1. Understand context (orient)
+- [ ] 2. Define requirements (define) — Gate: user confirms
+- [ ] 3. Design approach (design) — Gate: user confirms
+- [ ] 4. Implement feature (implement)
+- [ ] 5. Validate implementation (validate)
+- [ ] 6. Update documentation (doc_maintenance)
+```
+
+**Rules:**
+- Display checklist at start of workflow
+- Mark items `[x]` immediately after completing each phase
+- Add sub-items dynamically when scope expands (e.g., "4a. Implement auth", "4b. Implement API")
+- On validation failure, add remediation items and loop back
+- Report progress after each completed item: "✅ [item] — [brief summary]"
 
 ---
 

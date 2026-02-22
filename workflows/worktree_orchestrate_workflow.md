@@ -6,12 +6,13 @@ description: >
 argument-hint: "[PRD or plan to decompose into parallel tasks]"
 disable-model-invocation: true
 user-invocable: true
-allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task
+allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 protocols:
   - tracking
   - recovery
   - checklist_management
   - reasoning_patterns
+  - goals_and_objectives
   - manage_complexity_uncertainty_risk
 ---
 
@@ -35,11 +36,16 @@ protocols:
 
 ## Key Results
 
-1. PRD/plan decomposed into 2-6 independent tasks
-2. Dependencies correctly identified (no circular dependencies)
-3. Tasks within same wave don't modify same files
-4. Worktrees created for ready tasks
-5. Completed tasks merged in dependency order with passing tests
+Per `goals_and_objectives` protocol — outcome-oriented results:
+
+**Required:**
+1. **Tasks are independent** — 2-6 tasks with minimal file overlap within execution waves
+2. **Dependencies are correct** — no circular dependencies, graph is valid
+3. **Task specs are complete** — each task has goal, key results, dependencies, acceptance criteria
+4. **Merges are safe** — completed tasks merged in dependency order with passing tests
+
+**Conditional:**
+5. **Worktrees are ready** — created for wave 1 tasks (if user wants parallel execution now)
 
 ---
 
@@ -69,6 +75,33 @@ Per `reasoning_patterns` protocol — before beginning, reason about:
 4. **Overlap risk** — Which files might be touched by multiple tasks?
 
 Output reasoning before proceeding.
+
+---
+
+## Progress Tracking (Required)
+
+Per `checklist_management` protocol — create and maintain a checklist throughout execution.
+
+**On workflow start, create this checklist:**
+
+```markdown
+## Orchestration Progress
+
+- [ ] 1. Understand context (orient)
+- [ ] 2. Brainstorm decomposition (brainstorm)
+- [ ] 3. Define task specs (define) — Gate: user confirms
+  - [ ] 3a. Task 1 spec
+  - [ ] 3b. Task 2 spec
+  - (expand based on decomposition)
+- [ ] 4. Setup worktrees (implement)
+- [ ] 5. Track and merge (validate)
+```
+
+**Rules:**
+- Display checklist at start of workflow
+- Expand task specs in step 3 after decomposition is decided
+- Track task status: not started → in progress → ready for merge → merged
+- Report progress after each completed item: "✅ [item] — [brief summary]"
 
 ---
 

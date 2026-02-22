@@ -6,7 +6,7 @@ description: >
 argument-hint: "[workflow name and purpose]"
 disable-model-invocation: true
 user-invocable: true
-allowed-tools: Read, Grep, Glob, Write, Edit
+allowed-tools: Read, Grep, Glob, Write, Edit, TodoWrite
 protocols:
   - tracking
   - recovery

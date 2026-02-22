@@ -6,12 +6,14 @@ description: >
 argument-hint: "[feature or code to design tests for]"
 disable-model-invocation: true
 user-invocable: true
-allowed-tools: Read, Grep, Glob, Write, Edit
+allowed-tools: Read, Grep, Glob, Write, Edit, TodoWrite
 protocols:
   - tracking
   - recovery
   - checklist_management
   - reasoning_patterns
+  - goals_and_objectives
+  - project_quality
 ---
 
 # Test Strategy Workflow
@@ -34,11 +36,17 @@ protocols:
 
 ## Key Results
 
-1. Testability analyzed at all levels (unit, integration, e2e)
-2. Test strategy follows pyramid principles (many unit, some integration, few e2e)
-3. Test cases identified for each level
-4. Edge cases and error scenarios covered
-5. Output produced (strategy doc or code skeleton)
+Per `goals_and_objectives` protocol — outcome-oriented results:
+
+**Required:**
+1. **Testability is understood** — units, integrations, boundaries, edge cases identified
+2. **Strategy follows pyramid** — distribution favors unit tests, with fewer integration and e2e tests
+3. **Test cases are specific** — each case has what to test, inputs, expected behavior
+4. **Edge cases are covered** — boundary conditions, error scenarios, invalid inputs identified
+
+**Conditional:**
+5. **Quality dimensions assessed** — correctness, reliability, completeness considered (per `project_quality`)
+6. **Output is actionable** — strategy doc or code skeleton produced based on user preference
 
 ---
 
@@ -68,6 +76,33 @@ Per `reasoning_patterns` protocol — before beginning, reason about:
 4. **Output format** — Strategy doc for planning or code skeleton for implementation?
 
 Output reasoning before proceeding.
+
+---
+
+## Progress Tracking (Required)
+
+Per `checklist_management` protocol — create and maintain a checklist throughout execution.
+
+**On workflow start, create this checklist:**
+
+```markdown
+## Test Strategy Progress
+
+- [ ] 1. Understand context (orient)
+- [ ] 2. Analyze testability (investigate)
+  - [ ] 2a. Identify units
+  - [ ] 2b. Identify integrations
+  - [ ] 2c. Identify boundaries
+  - [ ] 2d. Identify edge cases
+- [ ] 3. Design strategy (design)
+- [ ] 4. Identify test cases (brainstorm)
+- [ ] 5. Generate output (implement) — Gate: ask user preference
+```
+
+**Rules:**
+- Display checklist at start of workflow
+- Mark items `[x]` immediately after completing each phase
+- Report progress after each completed item: "✅ [item] — [brief summary]"
 
 ---
 

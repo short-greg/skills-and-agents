@@ -6,11 +6,13 @@ description: >
 argument-hint: "[project path or 'current']"
 disable-model-invocation: true
 user-invocable: true
-allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion
+allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 protocols:
   - tracking
   - recovery
   - checklist_management
+  - reasoning_patterns
+  - goals_and_objectives
 ---
 
 # Setup Skill Environment Workflow
@@ -75,6 +77,42 @@ Per `reasoning_patterns` protocol — before beginning, reason about:
 4. **Likely needs** — What workflows will this project need?
 
 Output reasoning before proceeding.
+
+---
+
+## Progress Tracking (Required)
+
+Per `checklist_management` protocol — create and maintain a checklist throughout execution.
+
+**On workflow start, create this checklist (adapt based on interview results):**
+
+```markdown
+## Setup Progress
+
+- [ ] 1. Interview user (understand project state and needs)
+- [ ] 2. Understand repository (if existing repo)
+- [ ] 3. Create repo analysis report (if existing repo)
+- [ ] 4. Configure tool directories
+- [ ] 5. Handle existing skills (if present)
+- [ ] 6. Select and install workflows
+- [ ] 7. Install primitives and protocols
+- [ ] 8. Configure worktrees (if requested)
+- [ ] 9. Create/update project documentation
+- [ ] 10. Validate setup
+- [ ] 11. Create setup summary
+```
+
+**How to track progress:**
+
+1. **Use TodoWrite for real-time display** — Call `TodoWrite` tool with the checklist items. Update status (`pending` → `in_progress` → `completed`) as you work. This shows live progress to the user.
+
+2. **Use trace.md for persistence** — Write checklist to `${SPEC_DIR}/trace.md` using `Write`/`Edit` tools. This survives compaction and enables recovery.
+
+**Rules:**
+- Display checklist at start of workflow (via TodoWrite)
+- Update TodoWrite immediately when completing each task
+- Skip items that don't apply (e.g., skip repo analysis for new repos)
+- Report progress after each completed item: "✅ [item] — [brief summary of what was done]"
 
 ---
 

@@ -6,12 +6,14 @@ description: >
 argument-hint: "[task spec file or task description]"
 disable-model-invocation: true
 user-invocable: true
-allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task
+allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 protocols:
   - tracking
   - recovery
   - checklist_management
   - reasoning_patterns
+  - goals_and_objectives
+  - doc_maintenance
 ---
 
 # Worktree Task Workflow
@@ -34,11 +36,16 @@ protocols:
 
 ## Key Results
 
-1. Task spec understood (goal, dependencies, acceptance criteria)
-2. Dependencies verified as merged
-3. Correct workflow invoked (feature, bugfix, refactor)
-4. All acceptance criteria met
-5. Task signaled as ready for merge
+Per `goals_and_objectives` protocol — outcome-oriented results:
+
+**Required:**
+1. **Task is understood** — goal, dependencies, acceptance criteria are clear
+2. **Dependencies are satisfied** — all required tasks merged before starting
+3. **Acceptance criteria are met** — all specified criteria pass
+4. **Task is merge-ready** — tests pass, changes committed, completion signaled
+
+**Conditional:**
+5. **Documentation is updated** — if task changes behavior or reveals gaps (per `doc_maintenance`)
 
 ---
 
@@ -68,6 +75,31 @@ Per `reasoning_patterns` protocol — before beginning, reason about:
 4. **Scope clarity** — Are acceptance criteria clear?
 
 Output reasoning before proceeding.
+
+---
+
+## Progress Tracking (Required)
+
+Per `checklist_management` protocol — create and maintain a checklist throughout execution.
+
+**On workflow start, create this checklist:**
+
+```markdown
+## Task Progress
+
+- [ ] 1. Understand task (orient)
+- [ ] 2. Validate dependencies (validate) — HARD GATE: must pass
+- [ ] 3. Route to workflow
+- [ ] 4. Execute workflow (feature/bugfix/refactor)
+- [ ] 5. Validate completion (validate)
+- [ ] 6. Signal completion
+```
+
+**Rules:**
+- Display checklist at start of workflow
+- Step 2 is a HARD GATE — do NOT proceed if dependencies not merged
+- Step 4 invokes another workflow which has its own checklist
+- Report progress after each completed item: "✅ [item] — [brief summary]"
 
 ---
 

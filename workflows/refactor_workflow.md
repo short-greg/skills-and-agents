@@ -6,13 +6,15 @@ description: >
 argument-hint: "[code to refactor and improvement goal]"
 disable-model-invocation: true
 user-invocable: true
-allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task
+allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 protocols:
   - tracking
   - recovery
   - checklist_management
   - reasoning_patterns
+  - goals_and_objectives
   - modularity
+  - doc_maintenance
 ---
 
 # Refactor Workflow
@@ -35,11 +37,17 @@ protocols:
 
 ## Key Results
 
-1. Behavior is preserved (all tests pass)
-2. Code quality is improved in target dimension(s)
-3. No regressions introduced
-4. API contracts unchanged (unless internal)
-5. Changes are incremental and reversible
+Per `goals_and_objectives` protocol — outcome-oriented results:
+
+**Required:**
+1. **Behavior is preserved** — all existing tests pass, external behavior unchanged
+2. **Code quality is improved** — target dimension(s) measurably better (clarity, maintainability, etc.)
+3. **No regressions introduced** — no new bugs, no broken functionality
+
+**Conditional:**
+4. **API contracts unchanged** — public interfaces remain stable (unless internal-only refactoring)
+5. **Documentation is updated** — if refactoring changes patterns or reveals missing docs (per `doc_maintenance`)
+6. **Changes are incremental** — each commit is self-contained and reversible (per `modularity`)
 
 ---
 
@@ -70,6 +78,34 @@ Per `reasoning_patterns` protocol — before beginning, reason about:
 4. **Risk identification** — Which changes are risky? Which are safe?
 
 Output reasoning before proceeding.
+
+---
+
+## Progress Tracking (Required)
+
+Per `checklist_management` protocol — create and maintain a checklist throughout execution.
+
+**On workflow start, create this checklist:**
+
+```markdown
+## Refactor Progress
+
+- [ ] 1. Understand context (orient)
+- [ ] 2. Define scope (define) — Gate: user confirms, tests exist
+- [ ] 3. Design approach (design) — Gate: user confirms
+- [ ] 4. Implement incrementally (implement)
+  - [ ] 4a. [increment 1] — test after
+  - [ ] 4b. [increment 2] — test after
+  - (expand as design determines increments)
+- [ ] 5. Validate refactoring (validate)
+```
+
+**Rules:**
+- Display checklist at start of workflow
+- Mark items `[x]` immediately after completing each phase
+- Expand step 4 into specific increments after design phase
+- Run tests after EACH increment — if fail, stop and investigate
+- Report progress after each completed item: "✅ [item] — [brief summary]"
 
 ---
 
