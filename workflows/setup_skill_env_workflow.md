@@ -23,12 +23,16 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 
 ## Key Results - KR
 
+You must satisfy these to complete the skill successfully.
+
 1. User have been made clear before setting up the skill — project state, preferences, desired workflows, AI-Friendly preferences.
 2. Framework components installed — selected primitives, workflows, protocols in place
 3. The repository is AI-friendly by creating detailed AI guidance documentation such as docstrings, conventions documentation, CLAUDE.md.
 4. The skill Setup is functional — installed components work correctly
 
 ## Requirements and Constraints - REQ
+
+Contraints on how to complete the skill.
 
 1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
 2. Recoverable from interruption per `tracking.md` and `recovery.md`
@@ -44,9 +48,9 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 
 ## Preconditions
 
-**Must be provided:** Project path or confirmation of current directory
+**Required:** Project path or confirmation of current directory
 
-**Self-satisfiable:**
+**Elicit if not provided:**
 - Project structure (detected)
 - Existing configuration (detected)
 - Framework components (from framework repo)
@@ -253,8 +257,6 @@ Write summary file to `${TOOL_CONFIG}/SETUP_SUMMARY.md` documenting:
 - Quick start examples
 - Customizations applied
 - How to re-run setup
-
----
 
 ---
 
