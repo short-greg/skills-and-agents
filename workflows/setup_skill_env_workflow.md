@@ -2,11 +2,9 @@
 name: setup-skill-env
 description: >
   Use when making a repository AI-friendly using the skills-and-agents framework.
-  Analyzes existing repos, interviews the user, installs framework components
-  (primitives, protocols, workflows), creates CLAUDE.md for AI behavior guidance,
-  and optionally configures worktrees for parallel work.
+  Analyzes existing repos, interviews the user, installs all framework components, sets up the repo to be AI-friendly based on user requests.
+  You must execute this skill by satisfying the Goal, Key Results and following the Requirements described in depth in the instructions.
   Triggers on: "setup skills", "configure skill environment", "make repo AI-friendly".
-  Achieve the Goal for this skill by satisfying the Key Results and following the Requirements.
 argument-hint: "[project path or 'current']"
 disable-model-invocation: true
 user-invocable: true
