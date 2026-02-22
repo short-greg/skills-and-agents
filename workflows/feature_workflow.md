@@ -11,15 +11,19 @@ protocols:
   - tracking
   - recovery
   - checklist_management
+  - reasoning_patterns
+  - doc_maintenance
+  - goals_and_objectives
+  - manage_complexity_uncertainty_risk
 ---
 
 # Feature Workflow
 
 **Goal:** Take a feature from initial idea to validated implementation.
 
-**Intent:** Prevent incomplete or poorly-planned features by ensuring each stage (definition, design, implementation, validation) is completed before the next begins. Features ship with clear requirements, solid plans, and tested code.
+**Intent:** Prevent incomplete or poorly-planned features by ensuring requirements are clear, design is sound, and implementation is validated before completion.
 
-**Scope:** End-to-end feature development. Includes: establishing requirements and success criteria, designing the technical approach, implementing the solution, and validating correctness. The workflow produces working, validated code that meets the defined requirements.
+**Scope:** End-to-end feature development: requirements, design, implementation, validation.
 
 ---
 
@@ -27,375 +31,132 @@ protocols:
 
 **Type:** Adaptive
 
-**Style:** Imperative
-
-**Uncertainty Handling:**
-- If design surfaces unknowns (unclear dependencies, missing context), invoke `investigate` before finalizing design
-- If design reveals scope is significantly larger than expected, stop and renegotiate with user before implementation
-- If implementation reveals design gaps or ambiguities, surface to user rather than improvising
-- If validation fails, invoke `investigate` to determine root cause, then loop back to appropriate step (define/design/implement)
-
-**Iteration Handling:**
-- Max 3 validation iterations per deliverable before escalating to user
-- Each iteration must show measurable progress
-- If same failure recurs, escalate immediately
+**Style:** Hybrid (declarative goals with imperative validation gates)
 
 ---
 
-## Steps
+## Key Results
 
-### Step 1: Orient
+1. Requirements are clear and SMARB (per `goals_and_objectives` protocol)
+2. Design addresses all requirements
+3. Implementation passes all tests and meets acceptance criteria
+4. Documentation is updated (per `doc_maintenance` protocol)
+5. Code follows project conventions
 
-**Primitive:** orient
+---
 
-**Purpose:** Understand project structure, conventions, existing features, and where this feature fits
+## Available Primitives
 
-**Inputs:** Feature idea or request from user
+`orient`, `define`, `design`, `implement`, `validate`, `investigate`, `critique`, `brainstorm`
 
-**Outputs:**
-- Project conventions identified (testing approach, documentation standards, code style)
-- Existing relevant code identified (similar features, patterns to follow)
-- Context for where feature fits in project architecture
+---
 
-**Self-satisfiable:** Reads project documentation, existing code, and conventions
+## Constraints
 
-### Step 2: Define Requirements
+- Validate requirements before design
+- Validate design before implementation
+- Validate implementation before completion
+- On uncertainty, invoke `investigate` before proceeding
+- On validation failure, diagnose root cause before looping back
 
-**Primitive:** define
+---
 
-**Purpose:** Establish what we're building and how we'll know it's done
+## Expert Reasoning (Required First)
 
-**Inputs:**
-- Feature idea (from user)
-- Project context (from Step 1)
+Per `reasoning_patterns` protocol — before beginning, reason about:
 
-**Outputs:**
-- Clear requirements (functional and non-functional)
-- Success criteria (SMARB: Specific, Measurable, Achievable, Relevant, Bounded)
-- Out-of-scope items (what this feature explicitly does NOT include)
-- Acceptance criteria (how to verify the feature works)
+1. **Complexity assessment** — Simple feature or complex? Uncertainty level?
+2. **Risk identification** — What could go wrong? Where are unknowns?
+3. **Approach selection** — Which primitives needed? What order?
+4. **Alternatives** — What if primary approach fails?
 
-### Step 3: Validate Definition
+Output reasoning before proceeding.
 
-**Primitive:** validate
+---
 
-**Purpose:** Verify requirements are complete, unambiguous, and SMARB criteria are verifiable before investing in design
+## Execution
 
-**Inputs:**
-- Requirements from Step 2
-- Success criteria from Step 2
+Execute by selecting and sequencing primitives to achieve key results. The following phases provide guidance, not rigid steps.
 
-**Outputs:**
-- Pass/fail verdict
-- Evidence (which criteria pass/fail)
-- Gaps or ambiguities identified
+### Phase 1: Understand Context
 
-**On failure:**
-1. Invoke `investigate` to diagnose what's unclear or incomplete
-2. Loop back to Step 2 with refinement context
-3. Update checklist with specific items to address
+**Primitive:** `orient` — See `primitives/orient.md`
 
-**Gate:** User confirms definition is accurate and complete before proceeding to design
+Understand project structure, conventions, and where this feature fits.
 
-### Step 4: Design Approach
+### Phase 2: Define Requirements
 
-**Primitive:** design
+**Primitive:** `define` — See `primitives/define.md`
 
-**Purpose:** Figure out how to build it before writing code — architectural decisions, component design, test strategy
+Establish requirements and success criteria. Apply `goals_and_objectives` protocol for SMARB criteria.
 
-**Inputs:**
-- Validated requirements from Steps 2-3
-- Project conventions from Step 1
+**Gate:** Invoke `validate` on requirements. User confirms before proceeding.
 
-**Outputs:**
-- Technical approach (architecture, technologies, patterns)
-- Structural design (components, interfaces, data flow)
-- Test strategy (what tests, at what levels, coverage targets)
-- Implementation plan (rough task breakdown)
+### Phase 3: Design Approach
 
-**Uncertainty triggers:**
-- Unclear dependencies → invoke `investigate` to map dependencies
-- Unknown API contracts → invoke `investigate` to research APIs
-- Performance concerns → invoke `investigate` to profile or prototype
+**Primitive:** `design` — See `primitives/design.md`
 
-### Step 5: Validate Design
+Plan technical approach.
 
-**Primitive:** validate
+**On uncertainty:** Per `manage_complexity_uncertainty_risk` protocol — invoke `investigate` before finalizing.
 
-**Purpose:** Verify design addresses all requirements and is implementable before committing to code
+**Gate:** Invoke `validate` or `critique` on design. User confirms before proceeding.
 
-**Inputs:**
-- Design from Step 4
-- Requirements from Step 2
+### Phase 4: Implement
 
-**Outputs:**
-- Pass/fail verdict
-- Evidence (which design aspects satisfy which requirements)
-- Design gaps or risks identified
+**Primitive:** `implement` — See `primitives/implement.md`
 
-**On failure:**
-1. Invoke `investigate` to diagnose design issues
-2. Determine if failure is:
-   - Design gap → loop back to Step 4
-   - Requirements ambiguity → loop back to Step 2
-3. Update checklist with remediation tasks
+Write code following the design. Apply `doc_maintenance` protocol.
 
-**Alternative:** Use `critique` instead of `validate` for qualitative design assessment and improvement suggestions
+### Phase 5: Validate
 
-**Gate:** User confirms design is acceptable before implementation
+**Primitive:** `validate` — See `primitives/validate.md`
 
-### Step 6: Implement
+Verify implementation meets requirements.
 
-**Primitive:** implement
-
-**Purpose:** Write the code following the validated design
-
-**Inputs:**
-- Validated design from Steps 4-5
-- Requirements from Step 2
-- Project conventions from Step 1
-
-**Outputs:**
-- Working code implementing the feature
-- Tests (unit, integration, as specified in test strategy)
-- Updated documentation (inline comments, README updates as needed)
-
-**Implementation approach:**
-- Follow test strategy from design
-- Adhere to project conventions
-- Maintain documentation proximity (update docs as code changes)
-
-### Step 7: Validate Implementation
-
-**Primitive:** validate
-
-**Purpose:** Confirm implementation meets requirements and design before considering the feature complete
-
-**Inputs:**
-- Implementation from Step 6 (code + tests)
-- Success criteria from Step 2
-- Design from Step 4
-
-**Outputs:**
-- Pass/fail verdict with evidence
-- Test results (coverage, pass rates)
-- Requirement satisfaction analysis
-
-**On failure:**
+**On failure:** Per `checklist_management` protocol:
 1. Invoke `investigate` to diagnose root cause
-2. Determine loop-back point:
-   - Implementation bug → loop back to Step 6
-   - Design doesn't cover edge case → loop back to Step 4
-   - Requirement was misunderstood → loop back to Step 2
-3. Update checklist with specific fixes needed
-4. Re-run from loop-back step (not from scratch — refine existing work)
-5. Re-validate
-
-**Iteration bounds:** Max 3 iterations before escalating to user
+2. Determine loop-back point
+3. Add remediation tasks to checklist
+4. Re-execute and re-validate
 
 ---
 
 ## Preconditions
 
-**Must be provided:**
-- feature description: what to build — ask user if not clear
+**Must be provided:** Feature description (ask if unclear)
 
-**Self-satisfiable:**
-- project context: read project docs (CLAUDE.md, .cursorrules, etc.) and existing code to understand conventions
-- existing patterns: identify similar features to follow
+**Self-satisfiable:** Project context (read docs and code)
 
 ---
 
 ## Postconditions
 
-**Success:**
-- Feature is fully implemented and validated
-- All success criteria pass
-- Code follows project conventions
-- Tests meet coverage targets
-- Documentation is updated
+**Success:** Feature implemented, validated, documented, following conventions.
 
-**Failure (blocked):**
-- Requirements cannot be established (blocked at Step 2)
-- Design reveals fundamental blockers or unknowns (blocked at Step 4)
-- Implementation cannot satisfy requirements (blocked at Step 6)
-- User aborts workflow
+**Failure:** Requirements cannot be established, design blocked, implementation cannot satisfy requirements, or user aborts.
 
 ---
 
 ## Recovery
 
-This workflow follows the recovery protocol. On startup:
-
-1. Check for existing trace at `${TASK_DIR}/trace.md`
-2. If found, apply recovery rules from `protocols/recovery.md`:
-   - Identify last completed step from trace
-   - Check if current step was interrupted mid-execution
-   - Resume from appropriate point
-3. Restore checklist state from trace
-
-**Step-specific recovery notes:**
-
-- **Step 1 (Orient):** Safe to re-run from beginning if interrupted
-- **Step 2 (Define):** If partial requirements exist, read and continue from where left off
-- **Step 4 (Design):** If partial design exists, read and refine rather than restart
-- **Step 6 (Implement):** If interrupted mid-implementation:
-  - Assess partial state (what's complete, what's in-progress, what's not started)
-  - Review partial code for correctness before continuing
-  - Complete in-progress items first, then move to not-started items
-- **Step 7 (Validate):** Safe to re-run from beginning if interrupted
+Per `recovery` protocol — check for existing trace on startup, resume from last completed step.
 
 ---
 
-## On Validation Failure
+## Iteration
 
-**Validation failure is distinct from primitive failure** — the workflow completed the step but output doesn't meet criteria. This triggers iteration:
-
-1. **Validate reports failure** — which criteria failed, with evidence
-2. **Invoke investigate** — determine root cause and which step produced the defect:
-   - "Implementation doesn't match design" → loop to Step 6
-   - "Design doesn't cover edge case" → loop to Step 4
-   - "Requirement was ambiguous" → loop to Step 2
-3. **Update trace** — record iteration: "Validation failed, root cause: [X], looping to Step [N]"
-4. **Add remediation tasks** — update checklist with specific fixes needed
-5. **Re-run from loop-back step** — primitive reads prior output and refines (not starts fresh)
-6. **Re-validate** — check if fixes resolved the issue
-
-**Iteration bounds:**
-- Default: max 3 iterations per deliverable before escalating to user
-- If same failure recurs without progress, escalate immediately
-- User can override bounds or abort at any iteration
-
----
-
-## Quality Gates
-
-This workflow includes quality gates after each deliverable:
-
-| Step | Gate | Purpose |
-|------|------|---------|
-| Step 3 | Validate definition | Verify requirements before design |
-| Step 5 | Validate design | Verify design before implementation |
-| Step 7 | Validate implementation | Verify code meets requirements |
-
-**User approval gates:**
-- After Step 3: User confirms requirements are correct
-- After Step 5: User confirms design is acceptable
-
-These gates are **recommended** but optional — ask user if they want approval gates or automatic progression.
+Per `checklist_management` protocol:
+- Max 3 validation iterations before escalating
+- Each iteration must show progress
+- If same failure recurs, escalate immediately
 
 ---
 
 ## Customization Points
 
-When adapting this workflow for your project:
+**Prototype:** Simplified requirements, lighter validation, minimal docs.
 
-### Repository Type
+**Production:** Full SMARB requirements, strict validation, documentation required.
 
-**Prototype:**
-- Simplified requirements (goal + basic acceptance criteria)
-- Lighter validation (working code, manual testing acceptable)
-- Minimal documentation requirements
-- Fast iteration prioritized over formality
-
-**Production:**
-- Full requirements with SMARB criteria
-- Strict validation (automated tests, coverage targets)
-- Documentation required (API docs, README updates)
-- Code review required before completion
-
-**Library:**
-- Requirements must include API compatibility considerations
-- Design must consider public API stability
-- Implementation must include usage examples
-- Validation includes backward compatibility checks
-- Changelog updates required
-
-### Tool Configuration
-- `${TOOL_CONFIG}` — location of AI tool configuration (e.g., `.claude/`, `.cursor/`)
-- `${TASK_DIR}` — where trace files are stored
-- `${SPEC_DIR}` — where specifications are stored (PRDs, plans, design docs)
-
-### Testing Conventions
-- Test framework (pytest, jest, rspec, etc.)
-- Coverage targets (80%, 90%, etc.)
-- Test file naming (test_*.py, *.test.js, *_spec.rb, etc.)
-- Test organization (tests/ directory, inline, spec/, etc.)
-
-### Documentation Standards
-- Where feature docs live (README.md, docs/, inline comments)
-- Documentation format (markdown, docstrings, JSDoc, etc.)
-- What requires documentation (APIs, complex logic, configuration)
-
-### Quality Standards
-- Code style (linter configuration, formatting rules)
-- Review requirements (self-review, peer review, automated checks)
-- Performance requirements (benchmarks, profiling)
-
-### Iteration Bounds
-- Max validation iterations (default: 3)
-- Escalation process (user notification, automatic abort)
-
----
-
-## Example Usage
-
-**User:** "Implement user authentication with email and password"
-
-**Workflow execution:**
-
-1. **Orient** — Read project, identify it's a web app using Node/Express, has auth middleware patterns
-2. **Define** — Create requirements:
-   - Functional: Email/password registration, login, logout, session management
-   - Non-functional: Passwords hashed with bcrypt, sessions use secure cookies
-   - Success criteria: Users can register, login, access protected routes, logout
-   - Out of scope: OAuth, 2FA, password reset (can add later)
-3. **Validate definition** — Verify requirements are SMARB and complete → PASS
-4. **Design** — Technical approach:
-   - User model with email/hashed password
-   - Auth routes: POST /register, POST /login, POST /logout
-   - Middleware for protected routes
-   - Test strategy: Unit tests for User model, integration tests for auth flow
-5. **Validate design** — Check design addresses all requirements → PASS
-6. **Implement** — Write User model, auth routes, middleware, tests
-7. **Validate implementation** — Run tests, verify all success criteria → PASS
-
-**Outcome:** Feature complete, tested, validated.
-
----
-
-## Best Practices
-
-- **Don't skip steps** — Each step builds on prior steps; skipping causes rework
-- **Validate early** — Catch issues in requirements/design before implementation
-- **Use investigation** — When uncertain, investigate rather than guess
-- **Iterate deliberately** — On validation failure, diagnose root cause before looping
-- **Maintain trace** — Document progress for recovery and audit trail
-- **Update docs as you go** — Don't defer documentation to the end
-
----
-
-## Related Protocols
-
-- **Required:**
-  - [tracking.md](../protocols/tracking.md) — How to maintain trace file
-  - [recovery.md](../protocols/recovery.md) — How to resume from interruption
-  - [checklist_management.md](../protocols/checklist_management.md) — Dynamic checklist patterns
-
-- **Optional:**
-  - [manage_complexity_uncertainty_risk.md](../protocols/manage_complexity_uncertainty_risk.md) — Handle design uncertainty
-  - [project_quality.md](../protocols/project_quality.md) — Assess implementation quality
-  - [doc_maintenance.md](../protocols/doc_maintenance.md) — When to update documentation
-
----
-
-## Related Primitives
-
-This workflow composes these primitives in sequence:
-
-1. [orient](../primitives/orient.md) — Understand context
-2. [define](../primitives/define.md) — Establish requirements
-3. [validate](../primitives/validate.md) — Verify deliverables
-4. [design](../primitives/design.md) — Plan technical approach
-5. [implement](../primitives/implement.md) — Write code
-6. [investigate](../primitives/investigate.md) — Diagnose issues (on uncertainty or failure)
+**Library:** API compatibility, public API stability, changelog updates.
