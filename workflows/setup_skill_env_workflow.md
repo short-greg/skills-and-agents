@@ -3,8 +3,8 @@ name: setup-skill-env
 description: >
   Use when making a repository AI-friendly using the skills-and-agents framework.
   Analyzes existing repos, interviews the user, installs all framework components, sets up the repo to be AI-friendly based on user requests.
-  You must execute this skill by satisfying the Goal, Key Results and following the Requirements described in depth in the instructions.
-  Triggers on: "setup skills", "configure skill environment", "make repo AI-friendly".
+  You MUST satisfy the Goal, Key Results and follow the Requirements described. They are specified in the instruction body.
+  Triggers on: "setup skills environment", "configure skill environment", "make repo AI-friendly".
 argument-hint: "[project path or 'current']"
 disable-model-invocation: true
 user-invocable: true
@@ -34,6 +34,30 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 2. Recoverable from interruption per `tracking.md` and `recovery.md`
 3. Repository understood before configuration (for existing repos) — structure, conventions assessed
 4. Existing skills resolved before installing new ones — adapted, kept, removed, or left as-is (if present)
+
+---
+
+## Preconditions
+
+**Must be provided:** Project path or confirmation of current directory
+
+**Self-satisfiable:**
+- Project structure (detected)
+- Existing configuration (detected)
+- Framework components (from framework repo)
+
+## Postconditions
+
+**Success:**
+- Skill environment fully configured
+- Selected workflows installed and customized
+- Project documentation created/updated
+- Setup validated and working
+
+**Failure:**
+- User aborts
+- Framework repo not accessible
+- Installation fails
 
 ---
 
@@ -253,32 +277,6 @@ Write summary file to `${TOOL_CONFIG}/SETUP_SUMMARY.md` documenting:
 ## Progress Tracking
 
 Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
-
----
-
-## Preconditions
-
-**Must be provided:** Project path or confirmation of current directory
-
-**Self-satisfiable:**
-- Project structure (detected)
-- Existing configuration (detected)
-- Framework components (from framework repo)
-
----
-
-## Postconditions
-
-**Success:**
-- Skill environment fully configured
-- Selected workflows installed and customized
-- Project documentation created/updated
-- Setup validated and working
-
-**Failure:**
-- User aborts
-- Framework repo not accessible
-- Installation fails
 
 ---
 
