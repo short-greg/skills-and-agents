@@ -1,46 +1,94 @@
-# Skill Templates
+---
+name: skill-name
+description: >
+  [What this skill does. Be specific about when to use this skill.]
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this skill. They are specified in the instruction body.
+  Triggers on: "[trigger phrase 1]", "[trigger phrase 2]".
+argument-hint: "[optional: e.g. [subject] or [feature]]"
+disable-model-invocation: false
+user-invocable: true
+allowed-tools: Read, Grep
+---
 
-Skills come in two types. Use the appropriate template:
+# Skill Name
 
-## Workflows
+**Goal:** [What this skill achieves - one sentence.]
 
-**Use for:** Multi-step processes that compose primitives.
+**Intent:** [Why this skill exists - what problem it solves or prevents.]
 
-**Template:** [workflow_template.md](workflow_template.md)
-
-**Key characteristics:**
-- Orchestrates 2+ primitives
-- Has Tasks with `(→ KR#)` annotations showing which Key Result each task serves
-- Includes Progress Tracking, Recovery, Iteration sections
-- References tracking, recovery, checklists protocols
-
-**Examples:** feature_workflow, bugfix_workflow, refactor_workflow
+**Scope:** [What this skill covers. Be specific about activities and artifacts.]
 
 ---
 
-## Primitives
+## Key Results - KR
 
-**Use for:** Atomic cognitive actions that do one thing well.
+You must satisfy these to complete the skill successfully.
 
-**Template:** [primitive_template.md](primitive_template.md)
+1. [measurable outcome]
+2. [measurable outcome]
+3. [measurable outcome]
 
-**Key characteristics:**
-- Single cognitive action, not decomposable
-- Has Possible Actions (options, not required steps) without KR annotations
-- Has Confirm section to verify Key Results at the end
-- Answers one question that no other primitive answers
+## Requirements and Constraints - REQ
 
-**Examples:** orient, define, design, implement, validate
+Constraints on how to complete the skill.
+
+1. [constraint]
+2. [constraint]
+3. [constraint]
 
 ---
 
-## When to Use Which
+## Preconditions
 
-| Situation | Use |
-|-----------|-----|
-| Requires multiple cognitive actions in sequence | Workflow |
-| Single cognitive action, context determines specifics | Primitive |
-| Needs validation gates between steps | Workflow |
-| Can be completed in one "thinking session" | Primitive |
-| Composes existing primitives | Workflow |
-| Answers a unique question no other primitive answers | Primitive |
+Satisfy preconditions before beginning unless Optional.
+
+**Required:** [what must be provided]
+
+**Elicit if not provided:**
+- [what skill will detect or ask about]
+
+**Optional:** [optional inputs that enhance the skill]
+
+## Postconditions
+
+The resulting state after the skill is finished.
+
+**Success:** [state when skill completes successfully]
+
+**Failure:** [state when skill cannot complete]
+
+---
+
+## Execution Items
+
+Execute these to achieve each Key Result. Each item shows which KR it serves.
+
+### [Execution Item Name] (→ KR#)
+
+[What this does and when to use it.]
+
+### [Execution Item Name] (→ KR#, KR#)
+
+[What this does and when to use it.]
+
+**Note:** Workflows replace this section with Steps → Tasks. Primitives replace this with Actions.
+
+---
+
+## Validation Criteria
+
+- [ ] **Structure:** All sections present with one-line imperatives. Frontmatter complete.
+- [ ] **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW), no overlap
+- [ ] **Traceability:** Execution items show (→ KR#), all KRs served
+- [ ] **Preconditions:** Categorized as Required, Elicit if not provided, or Optional
+- [ ] **No redundancy:** Each piece of information appears exactly once
+- [ ] **Coherent:** Execution flows logically, no contradictions between sections
+- [ ] **Concise:** As few words as possible, no duplication
+- [ ] **Complete:** All necessary information provided, all KRs achievable
+- [ ] **Precise:** Specific, unambiguous language, clear definitions
+
+---
+
+## Additional Notes and Terms
+
+[Domain-specific terms or other notes. Write "None" if not applicable.]

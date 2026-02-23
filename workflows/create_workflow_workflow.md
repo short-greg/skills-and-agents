@@ -1,7 +1,10 @@
+**This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions.**
+
 ---
 name: create-workflow
 description: >
   Use when creating a new workflow (multi-step process composing primitives).
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow. They are specified in the instruction body.
   Triggers on: "create a workflow", "define a new workflow", "add a workflow".
 argument-hint: "[workflow name and purpose]"
 disable-model-invocation: true
@@ -19,48 +22,55 @@ allowed-tools: Read, Grep, Glob, Write, Edit, TodoWrite
 
 ---
 
-## Key Results
+## Key Results - KR
 
-1. Need for workflow is reasoned about before creating
-2. Workflow is distinct — serves a purpose no existing workflow serves
-3. Workflow is composable — orchestrates 2+ primitives effectively
-4. Workflow is recoverable — can resume from any interruption point
-5. Workflow is trackable — progress is visible throughout execution
-6. Workflow Key Results are outcome-oriented — measure what's produced, not steps taken
+You must satisfy these to complete the skill successfully.
 
----
+1. Workflow need justified and distinct — reasoned about necessity, serves unique purpose not covered by existing workflows
+2. Workflow document created — in workflows/, follows template, validated against criteria
+3. Workflow is effective — orchestrates 2+ primitives, recoverable, trackable
 
-## Protocols
+## Requirements and Constraints - REQ
 
-Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+Constraints on how to complete the skill.
 
-- `tracking.md` — Track which sections of the workflow are complete.
-- `recovery.md` — On startup, check for partial workflow document. Resume from last completed section.
-- `checklists.md` — Create a checklist based on required sections. Update dynamically.
-- `reasoning.md` — Reason about whether workflow is needed before creating.
-- `goals_and_objectives.md` — Ensure workflow key results are outcome-oriented.
+1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
+2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for partial workflow document, resume from last section
+3. Compose primitives, don't repeat their content — reference primitives, add workflow-specific context only
+4. Iterate up to 3 times if validation fails, revise workflow, re-validate
 
 ---
 
-## Available Primitives
+## Preconditions
 
-Primitives are atomic cognitive actions in `skills/`. Use these to create the new workflow. If you do not understand a primitive, read it before using it.
+Satisfy preconditions before beginning unless Optional.
 
-- `orient` — Understand existing workflows and patterns.
-- `define` — Establish the new workflow's identity and purpose.
-- `design` — Plan the workflow structure and primitive composition.
-- `validate` — Verify the workflow meets all criteria.
-- `critique` — Review the workflow for issues.
-- `brainstorm` — Generate options for structure and approach.
+**Required:** Workflow name and purpose
 
----
+**Elicit if not provided:**
+- Existing workflows (read from workflows/ to check for duplicates)
+- Workflow type preference (Deterministic vs Adaptive, Imperative vs Declarative)
 
-## Constraints
+**Optional:** Specific primitives to compose, validation gate preferences
 
-- Every workflow MUST reference: tracking, recovery, checklists protocols
-- Compose primitives, don't repeat their content
-- Prefer declarative style (goals + constraints) over imperative (rigid steps)
-- Validation gates after steps that produce artifacts
+## Postconditions
+
+The resulting state after the skill is finished.
+
+**Success:** New workflow document created in workflows/, validated against all criteria
+
+**Failure:** Workflow duplicates existing one, doesn't need multiple primitives, or user aborts
+
+## Steps
+
+Complete the Tasks in this order.
+
+1. Reason About Need
+2. Understand Existing Workflows
+3. Define the Workflow
+4. Design the Workflow
+5. Write the Workflow
+6. Validate Workflow
 
 ---
 
@@ -71,7 +81,6 @@ Select and execute tasks to achieve each Key Result. Each task shows which KR it
 ### Reason About Need (→ KR1)
 
 Per `reasoning.md` — before beginning, reason about:
-
 1. **Is a workflow needed?** — Does this require multiple primitives? Would a single primitive suffice?
 2. **What primitives are involved?** — Which from: orient, define, design, implement, validate, investigate, brainstorm, critique?
 3. **What are the dependencies?** — Must any step complete before another?
@@ -80,108 +89,102 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Understand Existing Workflows (→ KR2)
+### Understand Existing Workflows (→ KR1)
 
-Use `orient` primitive. Read existing workflows to understand patterns:
-
-- feature_workflow.md, bugfix_workflow.md, refactor_workflow.md
-- code_review_workflow.md, test_strategy_workflow.md
-- worktree_orchestrate_workflow.md, worktree_task_workflow.md
-
-**Key question:** Does this workflow serve a distinct purpose from existing ones?
+Use `orient` primitive. Read existing workflows to understand patterns and verify uniqueness.
 
 ### Define the Workflow (→ KR2)
 
 Use `define` primitive. Establish the workflow's identity:
+1. Name, Goal, Intent, Scope
+2. Type (Deterministic/Adaptive, Imperative/Declarative/Hybrid)
+3. Key Results (2-4 measurable outcomes)
+4. Requirements (constraints on execution)
 
-1. **Name** — Descriptive name (e.g., feature-workflow, bugfix-workflow)
-2. **Goal** — What the workflow achieves
-3. **Intent** — Why it exists, what it prevents
-4. **Scope** — What's covered
-5. **Type** — Deterministic (fixed path) or Adaptive (context-dependent)
-6. **Style** — Imperative, Declarative, or Hybrid
+Ask user to confirm the workflow purpose is distinct.
 
-**Gate:** Ask user to confirm the workflow purpose is distinct.
-
-### Design the Workflow (→ KR3, KR4, KR5)
+### Design the Workflow (→ KR2, KR3)
 
 Use `design` primitive. Plan the workflow structure:
+1. Identify primitives needed
+2. Determine sequence/dependencies
+3. Add validation gates
+4. Define iteration behavior
+5. Specify Steps and Tasks with KR mapping
 
-1. **Identify primitives needed** — Which cognitive actions?
-2. **Determine sequence/dependencies** — What order? What depends on what?
-3. **Add validation gates** — Where to verify before proceeding?
-4. **Define iteration behavior** — What happens on validation failure?
-5. **Specify customization points** — How to adapt to different contexts?
+Ask user to review workflow design.
 
-**Gate:** Ask user to review workflow design.
+### Write the Workflow (→ KR2)
 
-### Write the Workflow (→ KR3, KR4, KR5, KR6)
+Create the workflow document in workflows/ following templates/workflow_template.md.
 
-Create the workflow document in `workflows/` following the template in `templates/workflow_template.md`.
-
-**Required sections:**
+Required sections per template:
+- Frontmatter with MUST satisfy instruction
 - Goal, Intent, Scope
-- Key Results
-- Protocols (with descriptions)
-- Available Primitives (with descriptions)
-- Constraints
-- Tasks (not numbered, not rigid phases)
-- Progress Tracking
-- Preconditions, Postconditions
-- Recovery
-- Customization Points
+- Key Results - KR (with imperative)
+- Requirements and Constraints - REQ (with imperative, include progress tracking, recovery, iteration)
+- Preconditions (Required, Elicit, Optional)
+- Postconditions (Success, Failure)
+- Steps
+- Tasks (with → KR# mapping)
+- Available Primitives
+- Validation Criteria
+- Additional Notes and Terms
 
-### Validate Workflow (→ KR2, KR3, KR4, KR5)
+### Validate Workflow (→ KR2, KR3)
 
-Use `validate` primitive. Verify the workflow:
+Use `validate` primitive. Verify the created workflow against all Validation Criteria from templates/workflow_template.md:
 
-1. **Composes primitives** — References primitives, doesn't repeat their content?
-2. **Required protocols** — tracking, recovery, checklists referenced?
-3. **Validation gates** — Present after artifact-producing steps?
-4. **Iteration handling** — Clear what happens on failure?
-5. **Recoverable** — Can resume from interruption?
-6. **Follows template** — All required sections present?
+1. **Structure:** All sections present with one-line imperatives. Frontmatter complete.
+2. **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW), no overlap
+3. **Traceability:** Tasks show (→ KR#), all KRs served by at least one task
+4. **Preconditions:** Categorized as Required, Elicit if not provided, or Optional
+5. **No redundancy:** Each piece of information appears exactly once
+6. **Recovery:** Created workflow includes progress tracking, recovery behavior, iteration limit in its Requirements section
+7. **Coherent:** Steps flow logically, no contradictions between sections
+8. **Concise:** As few words as possible, no duplication
+9. **Complete:** All necessary information provided, all KRs achievable from Tasks
+10. **Precise:** Specific, unambiguous language, clear definitions
 
-**On failure:** Revise and re-validate.
+Check each criterion. Report which pass and which fail.
 
----
-
-## Progress Tracking
-
-Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
-
----
-
-## Preconditions
-
-**Must be provided:** Workflow name and purpose (ask if unclear)
-
-**Self-satisfiable:** Existing workflows (read from `workflows/`)
+On failure: Revise the workflow to address failures, then re-validate (up to 3 iterations per REQ4).
 
 ---
 
-## Postconditions
+## Available Primitives
 
-**Success:** New workflow document created in `workflows/`, validated.
+Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
 
-**Failure:** Workflow duplicates existing one, doesn't need multiple primitives, or user aborts.
+- `orient` — Understand existing workflows and patterns
+- `define` — Establish the new workflow's identity and purpose
+- `design` — Plan the workflow structure and primitive composition
+- `validate` — Verify the workflow meets all criteria
+- `critique` — Review the workflow for issues
+- `brainstorm` — Generate options for structure and approach
 
 ---
 
-## Recovery
+## Validation Criteria
 
-Per `recovery.md` — check for partial workflow document, resume from last completed section.
+- [ ] **Structure:** All sections present with one-line imperatives. Frontmatter complete.
+- [ ] **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW), no overlap
+- [ ] **Traceability:** Tasks show (→ KR#), all KRs served by at least one task
+- [ ] **Preconditions:** Categorized as Required, Elicit if not provided, or Optional
+- [ ] **No redundancy:** Each piece of information appears exactly once
+- [ ] **Recovery:** Includes progress tracking, recovery behavior, iteration limit in Requirements
+- [ ] **Coherent:** Steps flow logically, no contradictions between sections
+- [ ] **Concise:** As few words as possible, no duplication
+- [ ] **Complete:** All necessary information provided, all KRs achievable from Tasks
+- [ ] **Precise:** Specific, unambiguous language, clear definitions
 
 ---
 
-## Anti-Patterns
+## Additional Notes and Terms
 
-**Repeating primitive content:** Reference the primitive, add workflow-specific context only.
-
-**Silent iteration:** When validation fails, explicitly update checklist—don't silently loop.
-
-**Over-specification:** Let primitives do their job; don't dictate their internal actions.
-
-**Single primitive:** If only one primitive is needed, use that primitive directly.
-
-**Missing protocols:** Every workflow needs tracking, recovery, checklists.
+**Anti-Patterns to Avoid:**
+- Repeating primitive content (reference instead)
+- Silent iteration (explicitly update checklist on validation failure)
+- Over-specification (let primitives do their job)
+- Single primitive workflows (use primitive directly)
+- Missing protocols (every workflow needs tracking, recovery, checklists in Requirements)

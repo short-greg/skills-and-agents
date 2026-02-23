@@ -1,7 +1,14 @@
+**This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
+- **Steps section** — Sequential execution order
+- **Tasks section** — Replaces generic Execution Items
+- **Available Primitives section** — Lists primitives used in this workflow
+- **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
+
 ---
 name: code-review-workflow
 description: >
   Use when reviewing code for quality, conventions, and issues.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow. They are specified in the instruction body.
   Triggers on: "review this code", "code review", "check code quality".
 argument-hint: "[files or changes to review]"
 disable-model-invocation: true
@@ -19,7 +26,9 @@ allowed-tools: Read, Grep, Glob, Bash, TodoWrite
 
 ---
 
-## Key Results
+## Key Results - KR
+
+You must satisfy these to complete the skill successfully.
 
 1. Review approach is reasoned about before starting
 2. All specified files reviewed — complete coverage of review scope
@@ -28,38 +37,52 @@ allowed-tools: Read, Grep, Glob, Bash, TodoWrite
 5. Quality dimensions assessed — correctness, clarity, reliability, completeness evaluated
 6. Review concludes with decision — clear approval, needs changes, or blocked verdict
 
----
+## Requirements and Constraints - REQ
 
-## Protocols
+Constraints on how to complete the skill.
 
-Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
-
-- `tracking.md` — Track which files/sections have been reviewed vs remain
-- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
-- `checklists.md` — Create a checklist after reasoning about the review. Update it dynamically.
-- `reasoning.md` — Reason about review approach before starting. Verify thoroughness after.
-- `goals_and_objectives.md` — Review against defined quality criteria.
-- `quality.md` — Evaluate against quality dimensions: correctness, clarity, maintainability.
-
----
-
-## Available Primitives
-
-Primitives are atomic cognitive actions in `skills/`. Use these to review. If you do not understand a primitive, read it before using it.
-
-- `orient` — Understand project conventions, coding standards, test conventions.
-- `validate` — Check code against standards systematically.
-- `critique` — Identify issues, categorize by severity, suggest improvements.
+1. Progress tracked per `checklists.md` — preliminary checklist created before starting work, track which files/sections reviewed vs remain
+2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing trace on startup, resume from next unreviewed file
+3. Check all review categories systematically per `quality.md`
+4. Every issue must have file:line reference
+5. Every issue must have concrete recommendation
+6. Severity must match impact (blocking = security/functionality/major violations, don't mix personal preference with blocking issues)
+7. Per `goals_and_objectives.md` — review against defined quality criteria
+8. Iterate up to 2 times if review needs revision
 
 ---
 
-## Constraints
+## Preconditions
 
-- Check all review categories systematically
-- Every issue must have file:line reference
-- Every issue must have recommendation
-- Severity must match impact (blocking = security/functionality/major violations)
-- Don't mix personal preference with blocking issues
+Satisfy preconditions before beginning unless Optional.
+
+**Required:** Code to review (files, directory, or diff)
+
+**Elicit if not provided:**
+- Project conventions (read from CLAUDE.md, style guides, existing patterns)
+- Review priorities (security-critical? performance-critical? API stability?)
+- Output format preference (PR comments? Report? Issue tickets?)
+
+**Optional:** Specific quality dimensions to focus on
+
+## Postconditions
+
+The resulting state after the skill is finished.
+
+**Success:** All files reviewed, issues categorized, recommendations provided, decision made.
+
+**Failure:** Files don't exist or aren't readable, conventions cannot be determined, or user aborts.
+
+## Steps
+
+Complete the Tasks in this order.
+
+Steps:
+1. Reason About Review
+2. Understand Context
+3. Review Against Standards
+4. Categorize Issues
+5. Generate Report
 
 ---
 
@@ -78,7 +101,7 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Understand Context (→ KR1)
+### Understand Context (→ KR1, KR5)
 
 Use `orient` primitive. Understand project conventions, coding standards, test conventions.
 
@@ -134,43 +157,42 @@ Output structured report:
 
 ---
 
-## Progress Tracking
+## Available Primitives
 
-Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
+Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
 
----
-
-## Preconditions
-
-**Must be provided:** Code to review (files, directory, or diff)
-
-**Self-satisfiable:** Project conventions (read from docs and existing code)
+- `orient` — Understand project conventions, coding standards, test conventions
+- `validate` — Check code against standards systematically
+- `critique` — Identify issues, categorize by severity, suggest improvements
 
 ---
 
-## Postconditions
+## Validation Criteria
 
-**Success:** All files reviewed, issues categorized, recommendations provided, decision made.
-
-**Failure:** Files don't exist or aren't readable, conventions cannot be determined (ask user).
-
----
-
-## Recovery
-
-Per `recovery.md` — check for existing trace on startup.
-
-**Task-specific notes:**
-- Track which files reviewed
-- Resume from next unreviewed file
-- Report generation is idempotent — regenerate from categorized issues
+- [ ] **Structure:** All sections present with one-line imperatives. Frontmatter complete.
+- [ ] **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW), no overlap
+- [ ] **Traceability:** Tasks show (→ KR#), all KRs served by at least one task
+- [ ] **Preconditions:** Categorized as Required, Elicit if not provided, or Optional
+- [ ] **No redundancy:** Each piece of information appears exactly once
+- [ ] **Recovery:** Includes progress tracking, recovery behavior, iteration limit in Requirements
+- [ ] **Coherent:** Steps flow logically, no contradictions between sections
+- [ ] **Concise:** As few words as possible, no duplication
+- [ ] **Complete:** All necessary information provided, all KRs achievable from Tasks
+- [ ] **Precise:** Specific, unambiguous language, clear definitions
 
 ---
 
-## Customization Points
+## Additional Notes and Terms
 
-**Prototype:** Focus on blocking issues only, skip test coverage requirements.
+**Behavior Preservation:**
 
-**Production:** Full review against all categories, comprehensive security review.
+Behavior is preserved when:
+- Public API contracts unchanged
+- All existing tests pass
+- No observable changes from client perspective
 
-**Library:** Extra focus on public API documentation, backward compatibility, changelog.
+**Customization Points:**
+
+- **Prototype:** Focus on blocking issues only, skip test coverage requirements
+- **Production:** Full review against all categories, comprehensive security review
+- **Library:** Extra focus on public API documentation, backward compatibility, changelog

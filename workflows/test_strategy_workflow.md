@@ -1,7 +1,14 @@
+**This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
+- **Steps section** — Sequential execution order
+- **Tasks section** — Replaces generic Execution Items
+- **Available Primitives section** — Lists primitives used in this workflow
+- **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
+
 ---
 name: test-strategy-workflow
 description: >
   Use when designing test strategies for features or code changes.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow. They are specified in the instruction body.
   Triggers on: "design tests for", "test strategy", "what tests do I need".
 argument-hint: "[feature or code to design tests for]"
 disable-model-invocation: true
@@ -19,7 +26,9 @@ allowed-tools: Read, Grep, Glob, Write, Edit, TodoWrite
 
 ---
 
-## Key Results
+## Key Results - KR
+
+You must satisfy these to complete the skill successfully.
 
 1. Approach is reasoned about before starting analysis
 2. Testability is understood — units, integrations, boundaries, edge cases identified
@@ -28,40 +37,54 @@ allowed-tools: Read, Grep, Glob, Write, Edit, TodoWrite
 5. Edge cases are covered — boundary conditions, error scenarios, invalid inputs identified
 6. Output is actionable — strategy doc or code skeleton produced based on user preference
 
----
+## Requirements and Constraints - REQ
 
-## Protocols
+Constraints on how to complete the skill.
 
-Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
-
-- `tracking.md` — Track which analysis phases are complete vs remain
-- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
-- `checklists.md` — Create a checklist after reasoning about the test strategy. Update it dynamically.
-- `reasoning.md` — Reason about approach before starting. Verify thoroughness after.
-- `goals_and_objectives.md` — Ensure test strategy achieves coverage goals.
-- `quality.md` — Consider quality dimensions: correctness, reliability, completeness.
-
----
-
-## Available Primitives
-
-Primitives are atomic cognitive actions in `skills/`. Use these to design tests. If you do not understand a primitive, read it before using it.
-
-- `orient` — Understand code/feature to test, project test conventions, existing patterns.
-- `investigate` — Analyze testability: units, integrations, boundaries, edge cases.
-- `design` — Plan test distribution following pyramid principles.
-- `brainstorm` — Enumerate specific test cases for each level.
-- `implement` — Produce strategy document or test code skeleton.
+1. Progress tracked per `checklists.md` — preliminary checklist created before starting work, track which analysis phases complete vs remain
+2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing trace on startup, resume from last completed task, analysis tasks safe to re-run, if partial test cases exist read and continue
+3. Follow test pyramid per `quality.md` — many unit, some integration, few e2e tests
+4. Identify edge cases and error scenarios, not just happy path
+5. Test behavior, not implementation details
+6. Mock at boundaries (external dependencies)
+7. Output must be actionable — specific test cases with inputs and expected behavior, not vague descriptions
+8. Per `goals_and_objectives.md` — ensure test strategy achieves coverage goals
+9. Iterate up to 2 times if strategy needs revision
 
 ---
 
-## Constraints
+## Preconditions
 
-- Follow test pyramid (many unit, some integration, few e2e)
-- Identify edge cases and error scenarios, not just happy path
-- Test behavior, not implementation details
-- Mock at boundaries (external dependencies)
-- Output must be actionable (specific test cases, not vague descriptions)
+Satisfy preconditions before beginning unless Optional.
+
+**Required:** Feature or code to design tests for
+
+**Elicit if not provided:**
+- Test conventions (read from existing tests)
+- Test framework (read from project dependencies)
+- Output format preference (strategy doc or code skeleton)
+
+**Optional:** Coverage targets, specific test levels to focus on
+
+## Postconditions
+
+The resulting state after the skill is finished.
+
+**Success:** Testability analyzed, strategy follows pyramid, test cases identified, output produced.
+
+**Failure:** Feature/code doesn't exist, unable to determine test framework, or user aborts.
+
+## Steps
+
+Complete the Tasks in this order.
+
+Steps:
+1. Reason About Strategy
+2. Understand Context
+3. Analyze Testability
+4. Design Strategy
+5. Identify Test Cases
+6. Generate Output
 
 ---
 
@@ -80,7 +103,7 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Understand Context (→ KR1)
+### Understand Context (→ KR1, KR2)
 
 Use `orient` primitive. Understand code/feature to test, project test conventions, existing patterns.
 
@@ -122,40 +145,36 @@ Use `implement` primitive. Produce one of:
 
 ---
 
-## Progress Tracking
+## Available Primitives
 
-Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
+Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
 
----
-
-## Preconditions
-
-**Must be provided:** Feature or code to design tests for
-
-**Self-satisfiable:** Test conventions, test framework (read from existing tests)
+- `orient` — Understand code/feature to test, project test conventions, existing patterns
+- `investigate` — Analyze testability: units, integrations, boundaries, edge cases
+- `design` — Plan test distribution following pyramid principles
+- `brainstorm` — Enumerate specific test cases for each level
+- `implement` — Produce strategy document or test code skeleton
 
 ---
 
-## Postconditions
+## Validation Criteria
 
-**Success:** Testability analyzed, strategy follows pyramid, test cases identified, output produced.
-
-**Failure:** Feature/code doesn't exist, unable to determine test framework (ask user).
-
----
-
-## Recovery
-
-Per `recovery.md` — check for existing trace on startup, resume from last completed task.
-
-**Task-specific notes:**
-- Analysis tasks safe to re-run
-- If partial test cases exist, read and continue
-- Output generation is idempotent
+- [ ] **Structure:** All sections present with one-line imperatives. Frontmatter complete.
+- [ ] **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW), no overlap
+- [ ] **Traceability:** Tasks show (→ KR#), all KRs served by at least one task
+- [ ] **Preconditions:** Categorized as Required, Elicit if not provided, or Optional
+- [ ] **No redundancy:** Each piece of information appears exactly once
+- [ ] **Recovery:** Includes progress tracking, recovery behavior, iteration limit in Requirements
+- [ ] **Coherent:** Steps flow logically, no contradictions between sections
+- [ ] **Concise:** As few words as possible, no duplication
+- [ ] **Complete:** All necessary information provided, all KRs achievable from Tasks
+- [ ] **Precise:** Specific, unambiguous language, clear definitions
 
 ---
 
-## Test Pyramid
+## Additional Notes and Terms
+
+**Test Pyramid:**
 
 ```
         /\
@@ -170,12 +189,8 @@ Per `recovery.md` — check for existing trace on startup, resume from last comp
                    - Fast, isolated
 ```
 
----
+**Customization Points:**
 
-## Customization Points
-
-**Prototype:** Focus on happy path, minimal edge coverage, skip integration tests.
-
-**Production:** Full pyramid, comprehensive edge cases, coverage targets enforced.
-
-**Library:** Extensive API testing, property-based testing consideration, backward compatibility tests.
+- **Prototype:** Focus on happy path, minimal edge coverage, skip integration tests
+- **Production:** Full pyramid, comprehensive edge cases, coverage targets enforced
+- **Library:** Extensive API testing, property-based testing consideration, backward compatibility tests

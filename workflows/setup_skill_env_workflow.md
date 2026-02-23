@@ -32,21 +32,18 @@ You must satisfy these to complete the skill successfully.
 
 ## Requirements and Constraints - REQ
 
-Contraints on how to complete the skill.
+Constraints on how to complete the skill.
 
 1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
-2. Recoverable from interruption per `tracking.md` and `recovery.md`
-3. Repository understood before configuration (for existing repos) — structure, conventions assessed
-4. Existing skills resolved before installing new ones — adapted, kept, removed, or left as-is (if present)
-5. Detect before assuming (always check project state first)
-6. Ask user for decisions, don't assume preferences
-7. Handle both cases: existing repo and new repo
-8. Create documentation that makes AI coding effective
-9. Validate setup works before completing
+2. Recoverable from interruption per `tracking.md` and `recovery.md` — don't duplicate already-installed components
+3. Resolve existing skills before installing new ones
+4. Iterate up to 3 times if validation fails, identify missing components, Offer to install/fix, Re-validate
 
 ---
 
 ## Preconditions
+
+Satisfy preconditions before beginning unless Optional.
 
 **Required:** Project path or confirmation of current directory
 
@@ -56,6 +53,8 @@ Contraints on how to complete the skill.
 - Framework components (from framework repo)
 
 ## Postconditions
+
+The resulting state after the skill is finished.
 
 **Success:**
 - Skill environment fully configured
@@ -144,7 +143,7 @@ Based on the interview, determine the order of remaining tasks.
 - **Validate setup** — Confirm everything works
 - **Create summary** — Document what was done
 
-### Understand the Repository (→ Req 3)
+### Understand the Repository (→ KR1)
 
 Use `orient` primitive. For existing repos only.
 
@@ -158,7 +157,7 @@ For existing repos, understand before configuring:
 
 **Gate:** Confirm understanding with user before proceeding.
 
-### Repository Analysis Report (→ Req 3)
+### Repository Analysis Report (→ KR3)
 
 Use `investigate` and `critique` primitives. For existing repos only.
 
@@ -173,7 +172,7 @@ Create a comprehensive analysis report highlighting what the AI needs to know to
 
 **Gate:** Review report with user, discuss key findings.
 
-### Handle Existing Skills (→ Req 4)
+### Handle Existing Skills (→ Req 3)
 
 Based on interview, adapt, keep, remove, or leave existing skills as-is.
 
@@ -284,34 +283,6 @@ Primitives are atomic cognitive actions in `skills/`. Use these for setup. If yo
 
 ---
 
-## Progress Tracking
+## Additional Notes and Terms
 
-Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
-
----
-
-## Recovery
-
-Per `recovery.md`:
-- If interrupted mid-setup, detect partial configuration
-- Resume from last completed task
-- Don't duplicate already-installed components
-
----
-
-## Iteration
-
-If validation fails:
-1. Identify missing components
-2. Offer to install/fix
-3. Re-validate
-
----
-
-## Notes for Users
-
-1. **This workflow is run in YOUR project**, not in the framework repo
-2. **You need access to the framework repo** to copy components
-3. **Re-run anytime** to add workflows or change settings
-4. **Worktrees are optional** but recommended for parallel work
-5. **Customizations are applied** to installed files, not the framework
+None

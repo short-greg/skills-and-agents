@@ -1,7 +1,14 @@
+**This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
+- **Steps section** — Sequential execution order
+- **Tasks section** — Replaces generic Execution Items
+- **Available Primitives section** — Lists primitives used in this workflow
+- **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
+
 ---
 name: feature-workflow
 description: >
   Use when implementing a complete feature from requirements to validation.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow. They are specified in the instruction body.
   Triggers on: "build this feature", "implement this end-to-end", "full feature workflow".
 argument-hint: "[feature to implement]"
 disable-model-invocation: true
@@ -19,55 +26,64 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, WebSearch, WebFetch, Task, T
 
 ---
 
-## Key Results
+## Key Results - KR
 
-1. Uncertainties are resolved through reasoning and investigation prior to beginning work
-2. Requirements are defined, clear, and outcome-oriented
-3. Design addresses all requirements
-4. Implementation passes all tests and meets acceptance criteria
-5. Documentation is updated
-6. Code follows project conventions
+You must satisfy these to complete the skill successfully.
 
----
+1. Requirements are defined, clear, and outcome-oriented
+2. Design addresses all requirements
+3. Implementation passes all tests and meets acceptance criteria
+4. Documentation is updated and code follows project conventions
 
-## Protocols
+## Requirements and Constraints - REQ
 
-Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+Constraints on how to complete the skill.
 
-- `tracking.md` — Track progress through all tasks. Report what you're doing as you work.
-- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
-- `checklists.md` — Create a checklist after reasoning about the feature. Update it dynamically as scope changes.
-- `reasoning.md` — Reason about approach BEFORE starting. Verify completion AFTER each task.
-- `documentation.md` — Update documentation when the feature changes behavior or APIs.
-- `goals_and_objectives.md` — Define outcome-oriented success criteria for the feature.
-- `risk_management.md` — Identify risks and unknowns. Resolve them before implementation.
-
----
-
-## Available Primitives
-
-Primitives are atomic cognitive actions. They are in `skills/`. Use these to implement the feature. If you do not understand a primitive, read it before using it.
-
-- `orient` — Understand project structure, conventions, and where this feature fits.
-- `define` — Establish requirements and success criteria.
-- `design` — Plan technical approach before implementing.
-- `implement` — Write code following the design.
-- `validate` — Verify work meets requirements with pass/fail verdicts.
-- `investigate` — Reduce uncertainty by researching unknowns or diagnosing issues.
-- `critique` — Review work for quality and identify improvements.
-- `brainstorm` — Generate multiple distinct options when choices are needed.
-
-You may use other operations when necessary, but prefer primitives when they fit.
+1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
+2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing trace on startup, resume from last completed task
+3. Validate requirements before design
+4. Validate design before implementation
+5. Validate implementation before completion
+6. On uncertainty, invoke `investigate` before proceeding
+7. On validation failure, diagnose root cause before looping back
+8. Per `documentation.md` — update documentation when feature changes behavior or APIs
+9. Per `risk_management.md` — identify and resolve risks/unknowns before implementation
+10. Iterate up to 3 times if validation fails, diagnose root cause, add remediation tasks, re-execute and re-validate
 
 ---
 
-## Constraints
+## Preconditions
 
-- Validate requirements before design
-- Validate design before implementation
-- Validate implementation before completion
-- On uncertainty, invoke `investigate` before proceeding
-- On validation failure, diagnose root cause before looping back
+Satisfy preconditions before beginning unless Optional.
+
+**Required:** Feature description
+
+**Elicit if not provided:**
+- Project context (read docs and code)
+- Conventions (from codebase)
+
+**Optional:** None
+
+## Postconditions
+
+The resulting state after the skill is finished.
+
+**Success:** Feature implemented, validated, documented, following conventions.
+
+**Failure:** Requirements cannot be established, design blocked, implementation cannot satisfy requirements, or user aborts.
+
+## Steps
+
+Complete the Tasks in this order.
+
+Steps:
+1. Reason about approach
+2. Understand context (orient)
+3. Define requirements
+4. Design approach
+5. Implement feature
+6. Validate implementation
+7. Update documentation
 
 ---
 
@@ -86,11 +102,11 @@ Per `reasoning.md` — reason about:
 
 Output your reasoning.
 
-### Understand Context (→ KR6)
+### Understand Context (→ KR4)
 
 Use `orient` primitive. Understand project structure, conventions, and where this feature fits.
 
-### Define Requirements (→ KR2)
+### Define Requirements (→ KR1)
 
 Use `define` primitive. Establish requirements and success criteria.
 
@@ -98,7 +114,7 @@ Per `goals_and_objectives.md` — requirements must be outcome-oriented and veri
 
 **Gate:** Validate requirements. Ask user to confirm before proceeding.
 
-### Design Approach (→ KR3)
+### Design Approach (→ KR2)
 
 Use `design` primitive. Plan technical approach.
 
@@ -106,7 +122,7 @@ Per `risk_management.md` — if uncertainty exists, invoke `investigate` before 
 
 **Gate:** Validate or critique design. Ask user to confirm before proceeding.
 
-### Implement (→ KR4, KR6)
+### Implement (→ KR3, KR4)
 
 Use `implement` primitive. Write code following the design.
 
@@ -114,7 +130,7 @@ Per `documentation.md` — update documentation when implementation changes beha
 
 Per `checklists.md` — add sub-tasks dynamically when scope expands.
 
-### Validate (→ KR4)
+### Validate (→ KR3)
 
 Use `validate` primitive. Verify implementation meets requirements.
 
@@ -124,53 +140,46 @@ Use `validate` primitive. Verify implementation meets requirements.
 - Add remediation tasks to checklist
 - Re-execute and re-validate
 
-### Update Documentation (→ KR5)
+### Update Documentation (→ KR4)
 
 Per `documentation.md` — ensure all documentation reflects the implemented feature.
 
 ---
 
-## Progress Tracking
+## Available Primitives
 
-Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
+Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
 
----
-
-## Preconditions
-
-**Must be provided:** Feature description (ask if unclear)
-
-**Self-satisfiable:** Project context (read docs and code)
-
----
-
-## Postconditions
-
-**Success:** Feature implemented, validated, documented, following conventions.
-
-**Failure:** Requirements cannot be established, design blocked, implementation cannot satisfy requirements, or user aborts.
+- `orient` — Understand project structure, conventions, and where this feature fits
+- `define` — Establish requirements and success criteria
+- `design` — Plan technical approach before implementing
+- `implement` — Write code following the design
+- `validate` — Verify work meets requirements with pass/fail verdicts
+- `investigate` — Reduce uncertainty by researching unknowns or diagnosing issues
+- `critique` — Review work for quality and identify improvements
+- `brainstorm` — Generate multiple distinct options when choices are needed
 
 ---
 
-## Recovery
+## Validation Criteria
 
-Per `recovery.md` — check for existing trace on startup, resume from last completed task.
+- [ ] **Structure:** All sections present with one-line imperatives. Frontmatter complete.
+- [ ] **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW), no overlap
+- [ ] **Traceability:** Tasks show (→ KR#), all KRs served by at least one task
+- [ ] **Preconditions:** Categorized as Required, Elicit if not provided, or Optional
+- [ ] **No redundancy:** Each piece of information appears exactly once
+- [ ] **Recovery:** Includes progress tracking, recovery behavior, iteration limit in Requirements
+- [ ] **Coherent:** Steps flow logically, no contradictions between sections
+- [ ] **Concise:** As few words as possible, no duplication
+- [ ] **Complete:** All necessary information provided, all KRs achievable from Tasks
+- [ ] **Precise:** Specific, unambiguous language, clear definitions
 
 ---
 
-## Iteration
+## Additional Notes and Terms
 
-Per `checklists.md`:
-- Max 3 validation iterations before escalating
-- Each iteration must show progress
-- If same failure recurs, escalate immediately
+**Customization Points:**
 
----
-
-## Customization Points
-
-**Prototype:** Simplified requirements, lighter validation, minimal docs.
-
-**Production:** Full requirements, strict validation, documentation required.
-
-**Library:** API compatibility, public API stability, changelog updates.
+- **Prototype:** Simplified requirements, lighter validation, minimal docs
+- **Production:** Full requirements, strict validation, documentation required
+- **Library:** API compatibility, public API stability, changelog updates

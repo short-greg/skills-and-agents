@@ -1,7 +1,14 @@
+**This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
+- **Steps section** — Sequential execution order
+- **Tasks section** — Replaces generic Execution Items
+- **Available Primitives section** — Lists primitives used in this workflow
+- **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
+
 ---
 name: bugfix-workflow
 description: >
   Use when fixing bugs systematically with hypothesis-driven investigation.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow. They are specified in the instruction body.
   Triggers on: "fix this bug", "debug this issue", "systematic bugfix".
 argument-hint: "[bug description or reproduction steps]"
 disable-model-invocation: true
@@ -19,53 +26,65 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 
 ---
 
-## Key Results
+## Key Results - KR
 
-1. Uncertainties about the bug are resolved through investigation before fixing
-2. Bug is reproducible — failing test demonstrates the bug before fix
-3. Root cause is identified — evidence confirms cause, not speculation
-4. Fix is minimal — changes address root cause only, no unrelated modifications
-5. Regression is prevented — new test catches this bug if reintroduced
-6. All tests pass — existing test suite passes with fix applied
-7. Documentation is updated if fix changes behavior or reveals missing docs
+You must satisfy these to complete the skill successfully.
 
----
+1. Bug is reproducible — failing test demonstrates the bug before fix
+2. Root cause is identified — evidence confirms cause, not speculation
+3. Fix is minimal — changes address root cause only, no unrelated modifications
+4. Regression is prevented — new test catches this bug if reintroduced, all tests pass
 
-## Protocols
+## Requirements and Constraints - REQ
 
-Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+Constraints on how to complete the skill.
 
-- `tracking.md` — Track progress through investigate → hypothesize → fix → validate phases
-- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
-- `checklists.md` — Create a checklist after reasoning about the bug. Update it dynamically.
-- `reasoning.md` — Form hypotheses before investigating. Verify fix after.
-- `goals_and_objectives.md` — Define what "fixed" means with binary pass/fail criteria.
-- `risk_management.md` — Identify root cause before fixing symptoms.
-- `documentation.md` — Update documentation if bug reveals incorrect docs.
-
----
-
-## Available Primitives
-
-Primitives are atomic cognitive actions in `skills/`. Use these to fix the bug. If you do not understand a primitive, read it before using it.
-
-- `orient` — Understand codebase, identify relevant code areas, testing conventions.
-- `investigate` — Create failing test, trace execution, test hypotheses.
-- `brainstorm` — Generate potential root causes ranked by likelihood.
-- `define` — Define minimal fix scope.
-- `implement` — Apply minimal fix, add regression test.
-- `validate` — Confirm fix works, all tests pass.
+1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
+2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing trace on startup, resume from last completed task (partial failing test → review and complete, hypothesis list exists → read and continue, instrumentation added → review findings, partial fix → review for correctness)
+3. Reproduce before diagnosing (create failing test first)
+4. Confirm root cause before implementing fix
+5. Test hypotheses systematically (most likely first)
+6. On validation failure, investigate before re-fixing
+7. Per `risk_management.md` — identify root cause before fixing symptoms
+8. Per `documentation.md` — update documentation if bug reveals incorrect docs
+9. Iterate up to 5 times for hypothesis testing before escalating, max 2 fix iterations before escalating
 
 ---
 
-## Constraints
+## Preconditions
 
-- Reproduce before diagnosing (create failing test first)
-- Confirm root cause before implementing fix
-- Test hypotheses systematically (most likely first)
-- Fix must be minimal (no "while I'm here" changes)
-- Must add regression test
-- On validation failure, investigate before re-fixing
+Satisfy preconditions before beginning unless Optional.
+
+**Required:** Bug description
+
+**Elicit if not provided:**
+- Reproduction steps (ask if unclear)
+- Project context (read docs and code)
+- Testing setup (from existing tests)
+
+**Optional:** None
+
+## Postconditions
+
+The resulting state after the skill is finished.
+
+**Success:** Bug fixed, root cause documented, regression test added, all tests pass.
+
+**Failure:** Cannot reproduce, cannot identify root cause, fix introduces regressions, or user aborts.
+
+## Steps
+
+Complete the Tasks in this order.
+
+Steps:
+1. Reason about bug
+2. Understand context (orient)
+3. Reproduce bug
+4. Generate hypotheses
+5. Investigate root cause
+6. Define fix scope
+7. Implement fix
+8. Validate fix
 
 ---
 
@@ -73,7 +92,7 @@ Primitives are atomic cognitive actions in `skills/`. Use these to fix the bug. 
 
 Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
-### Reason About Bug (→ KR1)
+### Reason About Bug (→ KR1, KR2)
 
 Per `reasoning.md` — before beginning, reason about:
 
@@ -88,17 +107,17 @@ Output your reasoning.
 
 Use `orient` primitive. Understand codebase, identify relevant code areas, testing conventions.
 
-### Reproduce Bug (→ KR2)
+### Reproduce Bug (→ KR1)
 
 Use `investigate` primitive. Create failing test that demonstrates the bug. This becomes the success criterion.
 
 **On failure to reproduce:** Per `risk_management.md` — gather more information, check environment factors, consider intermittent issues.
 
-### Generate Hypotheses (→ KR1, KR3)
+### Generate Hypotheses (→ KR2)
 
 Use `brainstorm` primitive. Generate potential root causes ranked by likelihood. Scale hypothesis count with uncertainty.
 
-### Investigate Root Cause (→ KR3)
+### Investigate Root Cause (→ KR2)
 
 Use `investigate` primitive. Test hypotheses through instrumentation, logging, analysis until root cause is confirmed.
 
@@ -108,15 +127,15 @@ Use `investigate` primitive. Test hypotheses through instrumentation, logging, a
 
 **Gate:** Root cause confirmed with evidence. Ask user to confirm before proceeding.
 
-### Define Fix Scope (→ KR4)
+### Define Fix Scope (→ KR3)
 
 Use `define` primitive. Define minimal fix scope — what should change and what must NOT change.
 
-### Implement Fix (→ KR4, KR5)
+### Implement Fix (→ KR3, KR4)
 
 Use `implement` primitive. Apply minimal fix addressing root cause. Add regression test.
 
-### Validate Fix (→ KR5, KR6, KR7)
+### Validate Fix (→ KR4)
 
 Use `validate` primitive. Confirm: failing test passes, all tests pass, fix addresses root cause.
 
@@ -128,53 +147,38 @@ Use `validate` primitive. Confirm: failing test passes, all tests pass, fix addr
 
 ---
 
-## Progress Tracking
+## Available Primitives
 
-Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
+Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
 
----
-
-## Preconditions
-
-**Must be provided:** Bug description (ask for reproduction steps if unclear)
-
-**Self-satisfiable:** Project context, testing setup (read docs and code)
-
----
-
-## Postconditions
-
-**Success:** Bug fixed, root cause documented, regression test added, all tests pass.
-
-**Failure:** Cannot reproduce, cannot identify root cause, fix introduces regressions, or user aborts.
+- `orient` — Understand codebase, identify relevant code areas, testing conventions
+- `investigate` — Create failing test, trace execution, test hypotheses
+- `brainstorm` — Generate potential root causes ranked by likelihood
+- `define` — Define minimal fix scope
+- `implement` — Apply minimal fix, add regression test
+- `validate` — Confirm fix works, all tests pass
 
 ---
 
-## Recovery
+## Validation Criteria
 
-Per `recovery.md` — check for existing trace on startup, resume from last completed task.
-
-**Task-specific notes:**
-- Partial failing test → review and complete
-- Hypothesis list exists → read and continue
-- Instrumentation added → review findings before continuing
-- Partial fix → review for correctness, complete or revise
-
----
-
-## Iteration
-
-Per `checklists.md`:
-- Max 5 hypothesis iterations before escalating
-- Max 2 fix iterations before escalating
-- If same failure recurs, escalate immediately
+- [ ] **Structure:** All sections present with one-line imperatives. Frontmatter complete.
+- [ ] **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW), no overlap
+- [ ] **Traceability:** Tasks show (→ KR#), all KRs served by at least one task
+- [ ] **Preconditions:** Categorized as Required, Elicit if not provided, or Optional
+- [ ] **No redundancy:** Each piece of information appears exactly once
+- [ ] **Recovery:** Includes progress tracking, recovery behavior, iteration limit in Requirements
+- [ ] **Coherent:** Steps flow logically, no contradictions between sections
+- [ ] **Concise:** As few words as possible, no duplication
+- [ ] **Complete:** All necessary information provided, all KRs achievable from Tasks
+- [ ] **Precise:** Specific, unambiguous language, clear definitions
 
 ---
 
-## Customization Points
+## Additional Notes and Terms
 
-**Prototype:** Manual reproduction acceptable, regression test recommended but optional.
+**Customization Points:**
 
-**Production:** Automated regression test mandatory, root cause documentation required, code review for fix.
-
-**Library:** Consider API compatibility, changelog entry for behavioral changes.
+- **Prototype:** Manual reproduction acceptable, regression test recommended but optional
+- **Production:** Automated regression test mandatory, root cause documentation required, code review for fix
+- **Library:** Consider API compatibility, changelog entry for behavioral changes

@@ -1,7 +1,14 @@
+**This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
+- **Steps section** — Sequential execution order
+- **Tasks section** — Replaces generic Execution Items
+- **Available Primitives section** — Lists primitives used in this workflow
+- **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
+
 ---
 name: refactor-workflow
 description: >
   Use when refactoring code to improve structure without changing behavior.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow. They are specified in the instruction body.
   Triggers on: "refactor this code", "improve code structure", "safe refactoring".
 argument-hint: "[code to refactor and improvement goal]"
 disable-model-invocation: true
@@ -19,54 +26,64 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 
 ---
 
-## Key Results
+## Key Results - KR
 
-1. Uncertainties about scope and approach are resolved before starting
-2. Behavior is preserved — all existing tests pass, external behavior unchanged
-3. Code quality is improved — target dimension(s) measurably better (clarity, maintainability, etc.)
-4. No regressions introduced — no new bugs, no broken functionality
-5. API contracts unchanged — public interfaces remain stable (unless internal-only refactoring)
-6. Changes are incremental — each commit is self-contained and reversible
-7. Documentation is updated if refactoring changes patterns or reveals missing docs
+You must satisfy these to complete the skill successfully.
 
----
+1. Behavior is preserved — all existing tests pass, external behavior unchanged
+2. Code quality is improved — target dimension(s) measurably better (clarity, maintainability, etc.)
+3. No regressions introduced — no new bugs, no broken functionality
+4. Changes are incremental — each commit is self-contained and reversible
 
-## Protocols
+## Requirements and Constraints - REQ
 
-Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+Constraints on how to complete the skill.
 
-- `tracking.md` — Track progress through analyze → plan → refactor → validate phases
-- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
-- `checklists.md` — Create a checklist after reasoning about the refactor. Update it dynamically.
-- `reasoning.md` — Reason about refactor approach before starting. Verify behavior preserved after.
-- `goals_and_objectives.md` — Define what "improved" means without changing behavior.
-- `modularity.md` — Apply modularity principles: reduce coupling, improve cohesion.
-- `documentation.md` — Update documentation if refactor changes structure.
-
----
-
-## Available Primitives
-
-Primitives are atomic cognitive actions in `skills/`. Use these to refactor. If you do not understand a primitive, read it before using it.
-
-- `orient` — Understand code to refactor, identify test coverage, existing patterns.
-- `define` — Establish what will change (structure) and what will NOT change (behavior).
-- `design` — Plan incremental refactoring steps.
-- `implement` — Execute refactoring plan with continuous testing.
-- `validate` — Confirm behavior preserved and quality improved.
-- `critique` — Review intermediate states for issues.
-- `investigate` — Diagnose test failures or unexpected behavior.
+1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
+2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing trace on startup, resume from last completed task (incremental commits allow rollback to any passing state, check test status first on recovery, if tests failing: revert last change then continue)
+3. Tests must exist before refactoring (can't verify preservation without tests)
+4. Run tests after EACH incremental change
+5. Commit after each passing increment (can rollback)
+6. Stop immediately if tests fail — fix before continuing
+7. On validation failure, investigate before continuing
+8. Per `modularity.md` — apply modularity principles: reduce coupling, improve cohesion
+9. Per `documentation.md` — update documentation if refactor changes structure
+10. Iterate up to 2 times if refactoring fails before escalating
 
 ---
 
-## Constraints
+## Preconditions
 
-- Tests must exist before refactoring (can't verify preservation without tests)
-- Run tests after EACH incremental change
-- Commit after each passing increment (can rollback)
-- Stop immediately if tests fail — fix before continuing
-- Don't add features or change behavior
-- On validation failure, investigate before continuing
+Satisfy preconditions before beginning unless Optional.
+
+**Required:** Code to refactor, improvement goal
+
+**Elicit if not provided:**
+- Test coverage (verify from existing tests)
+- Code structure (read and analyze)
+- Project conventions (from codebase)
+
+**Optional:** None
+
+## Postconditions
+
+The resulting state after the skill is finished.
+
+**Success:** Code structure improved, all tests pass, behavior preserved, no regressions.
+
+**Failure:** Insufficient test coverage, cannot preserve behavior, or user aborts.
+
+## Steps
+
+Complete the Tasks in this order.
+
+Steps:
+1. Reason about refactor
+2. Understand context (orient)
+3. Define scope
+4. Design approach
+5. Implement incrementally
+6. Validate refactoring
 
 ---
 
@@ -74,7 +91,7 @@ Primitives are atomic cognitive actions in `skills/`. Use these to refactor. If 
 
 Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
 
-### Reason About Refactor (→ KR1)
+### Reason About Refactor (→ KR1, KR2)
 
 Per `reasoning.md` — before beginning, reason about:
 
@@ -85,11 +102,11 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Understand Context (→ KR1)
+### Understand Context (→ KR1, KR2)
 
 Use `orient` primitive. Understand code to refactor, identify test coverage, existing patterns.
 
-### Define Scope (→ KR2, KR3, KR5)
+### Define Scope (→ KR1, KR2)
 
 Use `define` primitive. Establish what will change (structure) and what will NOT change (behavior).
 
@@ -99,7 +116,7 @@ Use `define` primitive. Establish what will change (structure) and what will NOT
 
 **Gate:** Verify tests exist to catch behavior changes. Ask user to confirm.
 
-### Design Approach (→ KR6)
+### Design Approach (→ KR4)
 
 Use `design` primitive. Plan incremental refactoring steps. Each step is small and verifiable.
 
@@ -107,7 +124,7 @@ Per `modularity.md` — ensure steps maintain clear component boundaries.
 
 **Gate:** Ask user to confirm design.
 
-### Implement Incrementally (→ KR2, KR4, KR6)
+### Implement Incrementally (→ KR1, KR3, KR4)
 
 Use `implement` primitive. Execute refactoring plan:
 
@@ -116,7 +133,7 @@ Use `implement` primitive. Execute refactoring plan:
 3. If pass → commit → next change
 4. If fail → revert or fix → re-run tests → continue
 
-### Validate Refactoring (→ KR2, KR3, KR4, KR5, KR7)
+### Validate Refactoring (→ KR1, KR2, KR3)
 
 Use `validate` primitive. Confirm: all tests pass, quality improved, no API changes, no new complexity.
 
@@ -128,64 +145,50 @@ Use `validate` primitive. Confirm: all tests pass, quality improved, no API chan
 
 ---
 
-## Progress Tracking
+## Available Primitives
 
-Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
+Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
 
----
-
-## Preconditions
-
-**Must be provided:** Code to refactor, improvement goal
-
-**Self-satisfiable:** Test coverage, code structure, project conventions (read docs and code)
-
----
-
-## Postconditions
-
-**Success:** Code structure improved, all tests pass, behavior preserved, no regressions.
-
-**Failure:** Insufficient test coverage, cannot preserve behavior, or user aborts.
+- `orient` — Understand code to refactor, identify test coverage, existing patterns
+- `define` — Establish what will change (structure) and what will NOT change (behavior)
+- `design` — Plan incremental refactoring steps
+- `implement` — Execute refactoring plan with continuous testing
+- `validate` — Confirm behavior preserved and quality improved
+- `critique` — Review intermediate states for issues
+- `investigate` — Diagnose test failures or unexpected behavior
 
 ---
 
-## Recovery
+## Validation Criteria
 
-Per `recovery.md` — check for existing trace on startup, resume from last completed task.
-
-**Task-specific notes:**
-- Incremental commits allow rollback to any passing state
-- Check test status first on recovery
-- If tests failing: revert last change, then continue
-
----
-
-## Iteration
-
-Per `checklists.md`:
-- Max 2 refactoring iterations before escalating
-- If same test fails repeatedly, escalate immediately
+- [ ] **Structure:** All sections present with one-line imperatives. Frontmatter complete.
+- [ ] **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW), no overlap
+- [ ] **Traceability:** Tasks show (→ KR#), all KRs served by at least one task
+- [ ] **Preconditions:** Categorized as Required, Elicit if not provided, or Optional
+- [ ] **No redundancy:** Each piece of information appears exactly once
+- [ ] **Recovery:** Includes progress tracking, recovery behavior, iteration limit in Requirements
+- [ ] **Coherent:** Steps flow logically, no contradictions between sections
+- [ ] **Concise:** As few words as possible, no duplication
+- [ ] **Complete:** All necessary information provided, all KRs achievable from Tasks
+- [ ] **Precise:** Specific, unambiguous language, clear definitions
 
 ---
 
-## Behavior Preservation
+## Additional Notes and Terms
 
-**Behavior is preserved when:**
+**Behavior Preservation:**
+
+Behavior is preserved when:
 - Public API contracts unchanged
 - All existing tests pass
 - No observable changes from client perspective
 
-**Internal changes are fine:**
+Internal changes are fine:
 - Implementation details may change
 - Private/internal APIs may change (if tests pass)
 
----
+**Customization Points:**
 
-## Customization Points
-
-**Prototype:** Lighter test requirements, manual verification acceptable.
-
-**Production:** Full test coverage required, all tests must pass after each increment, code review required.
-
-**Library:** Must verify public API unchanged, consider downstream consumers.
+- **Prototype:** Lighter test requirements, manual verification acceptable
+- **Production:** Full test coverage required, all tests must pass after each increment, code review required
+- **Library:** Must verify public API unchanged, consider downstream consumers

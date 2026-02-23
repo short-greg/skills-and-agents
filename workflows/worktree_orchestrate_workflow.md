@@ -1,7 +1,14 @@
+**This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
+- **Steps section** — Sequential execution order
+- **Tasks section** — Replaces generic Execution Items
+- **Available Primitives section** — Lists primitives used in this workflow
+- **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
+
 ---
 name: worktree-orchestrate-workflow
 description: >
   Use when breaking large features into parallelizable tasks across git worktrees.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow. They are specified in the instruction body.
   Triggers on: "parallelize this work", "break into tasks", "coordinate parallel development".
 argument-hint: "[PRD or plan to decompose into parallel tasks]"
 disable-model-invocation: true
@@ -19,7 +26,9 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 
 ---
 
-## Key Results
+## Key Results - KR
+
+You must satisfy these to complete the skill successfully.
 
 1. Decomposition approach is reasoned about before starting
 2. Tasks are independent — 2-6 tasks with minimal file overlap within execution waves
@@ -28,40 +37,54 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 5. Merges are safe — completed tasks merged in dependency order with passing tests
 6. Worktrees are ready — created for wave 1 tasks (if user wants parallel execution now)
 
----
+## Requirements and Constraints - REQ
 
-## Protocols
+Constraints on how to complete the skill.
 
-Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
-
-- `tracking.md` — Track task status: not started → in progress → ready for merge → merged
-- `recovery.md` — On startup, check for existing parallel plan. Resume from current state.
-- `checklists.md` — Create a checklist after reasoning about decomposition. Update dynamically.
-- `reasoning.md` — Reason about decomposition strategy before starting.
-- `goals_and_objectives.md` — Ensure task specs have clear success criteria.
-- `risk_management.md` — Identify overlap risks and dependency issues.
-
----
-
-## Available Primitives
-
-Primitives are atomic cognitive actions in `skills/`. Use these for orchestration. If you do not understand a primitive, read it before using it.
-
-- `orient` — Understand PRD/plan, project structure, identify parallelization opportunities.
-- `brainstorm` — Explore decomposition options.
-- `define` — Create task specs with goals, dependencies, acceptance criteria.
-- `validate` — Verify task specs, check merge safety.
-- `implement` — Create worktrees, execute merges.
+1. Progress tracked per `checklists.md` — preliminary checklist created before starting work, track task status: not started → in progress → ready for merge → merged
+2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing parallel plan on startup, check which worktrees exist and which branches merged, resume from current state
+3. Tasks should be independent — minimize file overlap per `risk_management.md`
+4. Merge only in dependency order
+5. Test after EACH merge
+6. Stop immediately on merge conflict or test failure
+7. Clean up worktrees after merge
+8. Per `goals_and_objectives.md` — ensure task specs have clear success criteria
+9. Iterate up to 2 times if decomposition needs revision
 
 ---
 
-## Constraints
+## Preconditions
 
-- Tasks should be independent (minimize file overlap)
-- Merge only in dependency order
-- Test after EACH merge
-- Stop immediately on merge conflict or test failure
-- Clean up worktrees after merge
+Satisfy preconditions before beginning unless Optional.
+
+**Required:** PRD or plan to decompose, Git 2.5+, clean working directory, stable main branch
+
+**Elicit if not provided:**
+- Project structure (read and analyze)
+- Git setup (verify worktree support)
+- Decomposition strategy preference (by feature, layer, component)
+
+**Optional:** Task granularity preference, specific dependency constraints
+
+## Postconditions
+
+The resulting state after the skill is finished.
+
+**Success:** All tasks defined, worktrees created for ready tasks, completed tasks merged with passing tests.
+
+**Failure:** Cannot decompose into independent tasks, circular dependencies, merge conflicts, test failures, or user aborts.
+
+## Steps
+
+Complete the Tasks in this order.
+
+Steps:
+1. Reason About Decomposition
+2. Understand Context
+3. Brainstorm Decomposition
+4. Define Task Specs
+5. Setup Worktrees
+6. Track and Merge
 
 ---
 
@@ -80,7 +103,7 @@ Per `reasoning.md` — before beginning, reason about:
 
 Output your reasoning.
 
-### Understand Context (→ KR1)
+### Understand Context (→ KR1, KR2)
 
 Use `orient` primitive. Understand PRD/plan, project structure, identify parallelization opportunities.
 
@@ -133,43 +156,36 @@ Use `validate` and `implement` primitives. Monitor status, merge completed tasks
 
 ---
 
-## Progress Tracking
+## Available Primitives
 
-Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
+Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
 
----
-
-## Preconditions
-
-**Must be provided:** PRD or plan to decompose
-
-**Self-satisfiable:** Project structure, git setup (read and verify)
-
-**Prerequisites:** Git 2.5+, clean working directory, stable main branch
+- `orient` — Understand PRD/plan, project structure, identify parallelization opportunities
+- `brainstorm` — Explore decomposition options
+- `define` — Create task specs with goals, dependencies, acceptance criteria
+- `validate` — Verify task specs, check merge safety
+- `implement` — Create worktrees, execute merges
 
 ---
 
-## Postconditions
+## Validation Criteria
 
-**Success:** All tasks defined, worktrees created for ready tasks, completed tasks merged with passing tests.
-
-**Failure:** Cannot decompose into independent tasks, circular dependencies, merge conflicts, or test failures.
-
----
-
-## Recovery
-
-Per `recovery.md` — check for existing parallel plan on startup.
-
-**Task-specific notes:**
-- Check which worktrees exist
-- Check which branches are merged
-- Resume from current state
-- If interrupted mid-merge, verify test status before continuing
+- [ ] **Structure:** All sections present with one-line imperatives. Frontmatter complete.
+- [ ] **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW), no overlap
+- [ ] **Traceability:** Tasks show (→ KR#), all KRs served by at least one task
+- [ ] **Preconditions:** Categorized as Required, Elicit if not provided, or Optional
+- [ ] **No redundancy:** Each piece of information appears exactly once
+- [ ] **Recovery:** Includes progress tracking, recovery behavior, iteration limit in Requirements
+- [ ] **Coherent:** Steps flow logically, no contradictions between sections
+- [ ] **Concise:** As few words as possible, no duplication
+- [ ] **Complete:** All necessary information provided, all KRs achievable from Tasks
+- [ ] **Precise:** Specific, unambiguous language, clear definitions
 
 ---
 
-## Task Spec Format
+## Additional Notes and Terms
+
+**Task Spec Format:**
 
 ```markdown
 # Task: [Task Name]
@@ -190,12 +206,8 @@ Per `recovery.md` — check for existing parallel plan on startup.
 - [ ] [Criterion]
 ```
 
----
+**Customization Points:**
 
-## Customization Points
-
-**Prototype:** Simplified task specs, fewer dependency checks.
-
-**Production:** Full task specs, strict dependency enforcement, required code review before merge.
-
-**Library:** Task specs include API compatibility notes, changelog updates per task.
+- **Prototype:** Simplified task specs, fewer dependency checks
+- **Production:** Full task specs, strict dependency enforcement, required code review before merge
+- **Library:** Task specs include API compatibility notes, changelog updates per task

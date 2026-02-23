@@ -1,7 +1,15 @@
+**This template inherits from [skill_template.md](skill_template.md) with workflow-specific additions:**
+- **Steps section** — Sequential execution order
+- **Tasks section** — Replaces generic Execution Items
+- **Available Primitives section** — Lists primitives used in this workflow
+- **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
+
 ---
 name: workflow-name
 description: >
   [What this workflow does. Include trigger keywords and phrases users naturally say.]
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow. They are specified in the instruction body.
+  Triggers on: "[trigger phrase 1]", "[trigger phrase 2]".
 argument-hint: "[optional: e.g. [feature] or [bug description]]"
 disable-model-invocation: true
 user-invocable: true
@@ -18,43 +26,52 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, TodoWrite
 
 ---
 
-## Key Results
+## Key Results - KR
+
+You must satisfy these to complete the skill successfully.
 
 1. [measurable outcome]
 2. [measurable outcome]
 3. [measurable outcome]
 
----
+## Requirements and Constraints - REQ
 
-## Protocols
+Constraints on how to complete the skill.
 
-Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
-
-- `tracking.md` — Track progress through workflow execution
-- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
-- `checklists.md` — Build checklist from Key Results. Update dynamically.
-- `reasoning.md` — Reason about approach before starting
-- `[other].md` — [when/why this protocol applies]
+1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
+2. Recoverable from interruption per `tracking.md` and `recovery.md` — [specific recovery behavior]
+3. [constraint]
+4. Iterate up to N times if validation fails, [specific iteration behavior]
 
 ---
 
-## Available Primitives
+## Preconditions
 
-Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
+Satisfy preconditions before beginning unless Optional.
 
-- `orient` — [when to use in this workflow]
-- `define` — [when to use in this workflow]
-- `design` — [when to use in this workflow]
-- `implement` — [when to use in this workflow]
-- `validate` — [when to use in this workflow]
+**Required:** [what user must provide]
 
----
+**Elicit if not provided:**
+- [what workflow will detect or ask about]
 
-## Constraints
+**Optional:** [optional inputs that enhance the workflow]
 
-- [constraint 1]
-- [constraint 2]
-- [constraint 3]
+## Postconditions
+
+The resulting state after the skill is finished.
+
+**Success:** [state when workflow completes successfully]
+
+**Failure:** [state when workflow fails]
+
+## Steps
+
+Complete the Tasks in this order.
+
+Steps:
+1. [step referencing task]
+2. [step referencing task]
+3. [step referencing task]
 
 ---
 
@@ -70,53 +87,64 @@ Select and execute tasks to achieve each Key Result. Each task shows which KR it
 
 [What this task does.]
 
-### [Final Task] (→ KR#)
+### [Task Name] (→ KR#)
 
 [What this task does.]
 
----
+### Validate Workflow (→ KR#)
 
-## Progress Tracking
+Use `validate` primitive. Verify the workflow against all Validation Criteria below.
 
-Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
+For each criterion, provide:
+- **Reasons to PASS:** Evidence supporting the criterion is met
+- **Reasons to FAIL:** Evidence the criterion is not met
+- **DECISION:** PASS or FAIL based on the evidence
 
----
+Check all 10 criteria:
+1. Structure: All sections present with one-line imperatives. Frontmatter complete.
+2. KRs vs Requirements: KRs are outcomes (WHAT), Requirements are constraints (HOW), no overlap
+3. Traceability: Tasks show (→ KR#), all KRs served by at least one task
+4. Preconditions: Categorized as Required, Elicit if not provided, or Optional
+5. No redundancy: Each piece of information appears exactly once
+6. Recovery: Includes progress tracking, recovery behavior, iteration limit in Requirements
+7. Coherent: Steps flow logically, no contradictions between sections
+8. Concise: As few words as possible, no duplication
+9. Complete: All necessary information provided, all KRs achievable from Tasks
+10. Precise: Specific, unambiguous language, clear definitions
 
-## Preconditions
-
-**Must be provided:** [what user must provide]
-
-**Self-satisfiable:** [what workflow will gather]
-
----
-
-## Postconditions
-
-**Success:** [state when workflow completes successfully]
-
-**Failure:** [state when workflow fails]
-
----
-
-## Recovery
-
-Per `recovery.md` — check for existing trace on startup, resume from last completed task.
+Report overall result (X/10). On failure: revise to address failures, then re-validate.
 
 ---
 
-## Iteration
+## Available Primitives
 
-Per `checklists.md`:
-- Max N iterations before escalating
-- Each iteration must show progress
-- If same failure recurs, escalate immediately
+Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
+
+- `orient` — [when to use in this workflow]
+- `define` — [when to use in this workflow]
+- `design` — [when to use in this workflow]
+- `implement` — [when to use in this workflow]
+- `validate` — [when to use in this workflow]
 
 ---
 
-## Customization Points
+## Validation Criteria
 
-**Prototype:** [how to adapt for prototypes]
+- [ ] **Structure:** All sections present with one-line imperatives. Frontmatter complete.
+- [ ] **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW), no overlap
+- [ ] **Traceability:** Tasks show (→ KR#), all KRs served by at least one task
+- [ ] **Preconditions:** Categorized as Required, Elicit if not provided, or Optional
+- [ ] **No redundancy:** Each piece of information appears exactly once
+- [ ] **Recovery:** Includes progress tracking, recovery behavior, iteration limit in Requirements
+- [ ] **Coherent:** Steps flow logically, no contradictions between sections
+- [ ] **Concise:** As few words as possible, no duplication
+- [ ] **Complete:** All necessary information provided, all KRs achievable from Tasks
+- [ ] **Precise:** Specific, unambiguous language, clear definitions
 
-**Production:** [how to adapt for production]
+---
 
-**Library:** [how to adapt for libraries]
+## Additional Notes and Terms
+
+[Domain-specific terms, customization points, or other notes. Write "None" if not applicable.]
+
+**Note on Protocols:** Protocols (tracking, recovery, checklists, etc.) are typically handled by primitives and specified in Requirements. Only include a separate Protocols section if the workflow requires domain-specific protocols beyond the standard ones.

@@ -340,3 +340,6 @@ Prioritize risks: High impact + High probability = Address immediately
 2. Simplify **complexity** where possible (decompose, abstract, simplify)
 3. Mitigate **risk** with appropriate techniques (gates, retries, compensation)
 4. Accept remaining complexity/uncertainty/risk with documentation and monitoring
+
+
+[COMMENT: add more strategies for managing risk such as adding redundancy]

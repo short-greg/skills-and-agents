@@ -1,7 +1,14 @@
+**This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
+- **Steps section** — Sequential execution order
+- **Tasks section** — Replaces generic Execution Items
+- **Available Primitives section** — Lists primitives used in this workflow
+- **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
+
 ---
 name: worktree-task-workflow
 description: >
   Use when executing a task in a git worktree based on a task spec.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow. They are specified in the instruction body.
   Triggers on: "execute this task", "work on this worktree task", "implement task spec".
 argument-hint: "[task spec file or task description]"
 disable-model-invocation: true
@@ -19,7 +26,9 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 
 ---
 
-## Key Results
+## Key Results - KR
+
+You must satisfy these to complete the skill successfully.
 
 1. Task approach is reasoned about before starting
 2. Task is understood — goal, dependencies, acceptance criteria are clear
@@ -28,38 +37,54 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 5. Task is merge-ready — tests pass, changes committed, completion signaled
 6. Documentation is updated if task changes behavior or reveals gaps
 
----
+## Requirements and Constraints - REQ
 
-## Protocols
+Constraints on how to complete the skill.
 
-Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
-
-- `tracking.md` — Track progress through task execution.
-- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
-- `checklists.md` — Create a checklist based on the task spec. Update dynamically.
-- `reasoning.md` — Reason about task type and workflow selection before starting.
-- `goals_and_objectives.md` — Validate against task acceptance criteria.
-- `documentation.md` — Update documentation if task changes behavior.
-
----
-
-## Available Primitives
-
-Primitives are atomic cognitive actions in `skills/`. Use these for task execution. If you do not understand a primitive, read it before using it.
-
-- `orient` — Read task spec, understand goal and dependencies.
-- `validate` — Check dependencies are merged, verify completion criteria.
-- `implement` — Execute the routed workflow.
+1. Progress tracked per `checklists.md` — preliminary checklist created before starting work, routed workflow has its own checklist
+2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing trace on startup, re-verify dependencies (may have been merged), check if already signaled completion
+3. Do NOT proceed if dependencies aren't merged (hard gate)
+4. Route to correct workflow based on task type per `reasoning.md`
+5. Validate against ALL acceptance criteria, not just tests per `goals_and_objectives.md`
+6. Signal completion so orchestrator knows status
+7. Stay in worktree (don't modify main branch directly)
+8. Per `documentation.md` — update documentation if task changes behavior
+9. Iterate up to 3 times if workflow execution fails before escalating
 
 ---
 
-## Constraints
+## Preconditions
 
-- Do NOT proceed if dependencies aren't merged (hard gate)
-- Route to correct workflow based on task type
-- Validate against ALL acceptance criteria, not just tests
-- Signal completion so orchestrator knows status
-- Stay in worktree (don't modify main branch directly)
+Satisfy preconditions before beginning unless Optional.
+
+**Required:** Task spec (file or content), running in git worktree, task spec exists, dependencies merged
+
+**Elicit if not provided:**
+- Dependency status (check main branch)
+- Available workflows (feature, bugfix, refactor)
+
+**Optional:** Workflow preference if task type is ambiguous
+
+## Postconditions
+
+The resulting state after the skill is finished.
+
+**Success:** Task implemented per spec, criteria met, tests pass, signaled ready for merge.
+
+**Failure:** Dependencies not merged, task type unclear, cannot satisfy criteria, or user aborts.
+
+## Steps
+
+Complete the Tasks in this order.
+
+Steps:
+1. Reason About Task
+2. Understand Task
+3. Validate Dependencies
+4. Route to Workflow
+5. Execute Workflow
+6. Validate Completion
+7. Signal Completion
 
 ---
 
@@ -115,7 +140,7 @@ Analyze task spec to determine workflow:
 
 **If unclear:** Ask user which workflow to use.
 
-### Execute Workflow (→ KR4)
+### Execute Workflow (→ KR4, KR6)
 
 Invoke selected workflow with task context:
 
@@ -123,7 +148,7 @@ Invoke selected workflow with task context:
 - For bugfix: "Fix [Goal] - expected behavior: [Key Results]"
 - For refactor: "Refactor [Goal] - improvement targets: [Key Results]"
 
-### Validate Completion (→ KR4, KR5, KR6)
+### Validate Completion (→ KR4, KR5)
 
 Use `validate` primitive. Verify:
 
@@ -133,9 +158,7 @@ Use `validate` primitive. Verify:
 - All changes committed
 - Branch is clean and mergeable
 
-**On failure:** Loop back to Execute Workflow, continue execution.
-
-**Iteration bounds:** Max 3 iterations before escalating.
+**On failure:** Loop back to Execute Workflow, continue execution (up to 3 iterations per REQ9).
 
 ### Signal Completion (→ KR5)
 
@@ -159,48 +182,35 @@ git merge parallel/[task-name]
 
 ---
 
-## Progress Tracking
+## Available Primitives
 
-Per `checklists.md` — build checklist using format: `<Skill> - KR<num> - <task>`
-- The routed workflow has its own checklist
-- Mark items complete immediately after finishing each task
-- Report progress after each completed item
+Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
 
----
-
-## Preconditions
-
-**Must be provided:** Task spec (file or content)
-
-**Self-satisfiable:** Dependency status (check main branch), available workflows
-
-**Prerequisites:** Running in git worktree, task spec exists, dependencies merged
+- `orient` — Read task spec, understand goal and dependencies
+- `validate` — Check dependencies are merged, verify completion criteria
+- `implement` — Execute the routed workflow
 
 ---
 
-## Postconditions
+## Validation Criteria
 
-**Success:** Task implemented per spec, criteria met, tests pass, signaled ready for merge.
-
-**Failure:** Dependencies not merged, task type unclear, cannot satisfy criteria.
-
----
-
-## Recovery
-
-Per `recovery.md` — check for existing trace on startup.
-
-**Task-specific notes:**
-- Re-verify dependencies (may have been merged)
-- If workflow in progress, that workflow has its own recovery
-- Check if already signaled completion
+- [ ] **Structure:** All sections present with one-line imperatives. Frontmatter complete.
+- [ ] **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW), no overlap
+- [ ] **Traceability:** Tasks show (→ KR#), all KRs served by at least one task
+- [ ] **Preconditions:** Categorized as Required, Elicit if not provided, or Optional
+- [ ] **No redundancy:** Each piece of information appears exactly once
+- [ ] **Recovery:** Includes progress tracking, recovery behavior, iteration limit in Requirements
+- [ ] **Coherent:** Steps flow logically, no contradictions between sections
+- [ ] **Concise:** As few words as possible, no duplication
+- [ ] **Complete:** All necessary information provided, all KRs achievable from Tasks
+- [ ] **Precise:** Specific, unambiguous language, clear definitions
 
 ---
 
-## Customization Points
+## Additional Notes and Terms
 
-**Prototype:** Simplified validation (tests pass, changes committed).
+**Customization Points:**
 
-**Production:** Full validation against all acceptance criteria, code review may be required.
-
-**Library:** API compatibility checks, documentation requirements.
+- **Prototype:** Simplified validation (tests pass, changes committed)
+- **Production:** Full validation against all acceptance criteria, code review may be required
+- **Library:** API compatibility checks, documentation requirements
