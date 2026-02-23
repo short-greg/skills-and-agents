@@ -1,10 +1,9 @@
 ---
 name: orient
 description: >
-  Use when you need to understand the current state of something before deciding what to do.
-  Triggers on: "orient me", "where are we", "what's the current state", "what's the situation",
-  "how bad is it", "what do we have", "take stock", "size this up", "what's working",
-  "get my bearings", "gap analysis", "assess the situation".
+  Use when you need to understand the current state of something before deciding what to do. A primitive is an atomic cognitive action - it does one thing well.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive. They are specified in the instruction body.
+  Triggers on: "orient me", "where are we", "what's the current state", "what's the situation", "how bad is it", "what do we have", "take stock", "size this up", "what's working", "get my bearings", "gap analysis", "assess the situation".
 argument-hint: "[subject to orient on]"
 disable-model-invocation: false
 user-invocable: true
@@ -13,107 +12,70 @@ allowed-tools: Read, Grep
 
 # Orient
 
-**Goal:** Produce an accurate picture of the current state so that next steps can be decided with confidence.
+**Goal:** Produce accurate picture of current state so next steps can be decided with confidence.
 
 **Intent:** Prevent acting on assumptions. Poor orientation leads to solving the wrong problem, missing real issues, or duplicating existing work.
 
-**Scope:** Understanding the current situation before taking action. Includes: inventorying what exists (code, docs, infrastructure), evaluating what is working vs. broken, identifying gaps between current state and any known target, surfacing existing issues and technical debt, and noting risks inherent in the current state. Orientation is about current state assessment — it answers "where are we now?" not "where should we go?"
+**Scope:** Understanding current situation before taking action. Includes inventorying what exists (code, docs, infrastructure), evaluating what works vs broken, identifying gaps between current and target state, surfacing existing issues and technical debt, noting risks in current state. Orientation answers "where are we now?" not "where should we go?"
 
 ---
 
-## Key Results
+## Key Results - KR
 
-1. Current state is described accurately — no significant omissions
-2. Gaps between current state and known target (if any) are identified
-3. Issues and risks in the current state are surfaced, not hidden
-4. Strengths and what's working are noted
-5. The orientation is actionable — reader knows what decisions need to be made
+You must satisfy these to complete the primitive successfully.
 
----
+1. Current state described accurately with gaps, issues, risks, and strengths identified
+2. Orientation is actionable — reader knows what decisions need to be made
 
-## Protocols
+## Requirements and Constraints - REQ
 
-Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+Constraints on how to execute the primitive.
 
-- `tracking.md` — Track what has been assessed vs what remains
-- `recovery.md` — Resume orientation from where it was interrupted
-- `reasoning.md` — Reason about orientation approach before starting, verify findings after
-- `goals_and_objectives.md` — Assess current state relative to target goals when identifying gaps
+1. Track what assessed vs what remains per `tracking.md`
+2. Reason about orientation approach before starting, verify findings after per `reasoning.md`
+3. No significant omissions — inventory comprehensively
+4. Distinguish what works from what doesn't clearly
 
 ---
 
 ## Preconditions
 
-**Must be provided:**
-- subject to orient on: what is being evaluated — ask if not clear from context
+Satisfy preconditions before beginning unless Optional.
 
-**Self-satisfiable:**
-- current state: read relevant files, code, docs, or outputs to understand what exists
-- prior work: look for existing assessments, specs, or decisions that shaped current state
+**Required:** Subject to orient on
 
-**Non-essential:**
-- target state: if known, gaps between current and target can be identified
-- success criteria: if known, orientation can measure against them
+**Elicit if not provided:**
+- Current state (read relevant files, code, docs, outputs)
+- Prior work (look for existing assessments, specs, decisions)
 
----
+**Optional:** Target state (if known, enables gap identification), success criteria
 
 ## Postconditions
 
-**Success:**
-- Current state is documented accurately
-- Gaps between current state and target (if any) are identified
-- Issues and risks are surfaced
-- What works and what doesn't is clearly distinguished
-- The orientation is actionable — it's clear what decisions need to be made
+The resulting state after the primitive is finished.
 
-**Failure:**
-- Cannot access the subject (missing files, access denied, unclear what to orient on)
-- Subject is too large or ill-defined to orient on meaningfully without scoping input from user
+**Success:** Current state documented accurately, gaps and issues surfaced, what works distinguished from what doesn't, orientation is actionable.
+
+**Failure:** Cannot access subject (missing files, access denied), subject too large or ill-defined without scoping input.
 
 ---
 
-## Possible Actions
+## Actions
 
-Select and sequence based on context and your reasoning. Others may be used.
+Select and execute actions to achieve each Key Result. Each action shows which KR it serves.
 
-- **scope the orientation**: clarify boundaries — what is and isn't being evaluated
-- **read materials**: read code, docs, specs, test results, logs — primary way to understand current state
-- **identify gaps**: compare what exists against what's needed or expected
-- **identify issues**: surface problems, bugs, inconsistencies, or technical debt
-- **identify risks**: note what could go wrong or is fragile
-- **identify strengths**: note what's working well — avoids overcorrection
-- **categorize findings**: group findings by severity, type, or area
-- **summarize state**: produce a concise summary of current state with evidence
-- **flag decision points**: identify what decisions need to be made based on findings
+### Assess Current State (→ KR1)
 
----
+Read materials (code, docs, specs, test results, logs) to understand what exists. Identify gaps (compare what exists against what's needed), identify issues (problems, bugs, inconsistencies, technical debt), identify risks (what could go wrong or is fragile), identify strengths (what's working well).
 
-## Confirm
+Categorize findings by severity, type, or area.
 
-Before declaring done, verify against each key result:
-- Is current state described accurately?
-- Are gaps identified?
-- Are issues and risks surfaced?
-- Is the orientation actionable?
+### Summarize and Flag Decisions (→ KR1, KR2)
 
-Report outcome explicitly: state whether the skill succeeded or failed, and why.
+Produce concise summary of current state with evidence. Flag decision points — identify what decisions need to be made based on findings.
 
 ---
 
-## Use Cases
+## Additional Notes and Terms
 
-- Before starting a refactor to understand what exists
-- Before planning a feature to understand current capabilities
-- Evaluating code quality, test coverage, or documentation completeness
-- Understanding the state of a bug or incident before debugging
-- Sizing work before committing to a plan
-
----
-
-## Tools
-
-None
-
-## Hooks
-
-None
+**Use cases:** Before starting refactor, before planning feature, evaluating code quality or test coverage, understanding bug state before debugging, sizing work before committing to plan.
