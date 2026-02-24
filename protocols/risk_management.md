@@ -1,24 +1,24 @@
-# Managing Complexity, Uncertainty, and Risk
+# Risk Management Protocol
 
-This protocol defines techniques for identifying and mitigating complexity, uncertainty, and risk in workflows.
+Systematic techniques for identifying and mitigating complexity, uncertainty, and risk in workflows.
 
 ---
 
 ## Goal
 
-Enable workflows to systematically identify and mitigate complexity, uncertainty, and risk.
+Enable workflows to systematically identify and mitigate complexity, uncertainty, and risk before they cause failures.
 
 ---
 
 ## Intent
 
-Workflows often face three interrelated challenges: complexity (many parts, dependencies, intricate logic), uncertainty (unclear requirements or approach), and risk (potential for failure). Without systematic techniques to address these, workflows fail, skip steps, or produce incorrect results. This protocol provides concrete strategies to recognize and handle each challenge.
+Workflows face three interrelated challenges: **complexity** (many parts, dependencies, intricate logic), **uncertainty** (unclear requirements or approach), and **risk** (potential for failure). Without systematic techniques, workflows fail, skip steps, or produce incorrect results. This protocol provides strategies to recognize and handle each challenge.
 
 ---
 
 ## Scope
 
-**Addresses:** Identifying and mitigating complexity (essential vs accidental), uncertainty (requirements, approach, outcomes), and risk (technical, operational, external) in workflows
+**Addresses:** Identifying and mitigating complexity (essential vs accidental), uncertainty (requirements, technical, outcome), and risk (technical, requirements, process, quality, operational) in workflows. Includes risk assessment, monitoring, and mitigation strategies.
 
 **Does not address:** Project management, team coordination, resource allocation, business risk assessment
 
@@ -26,342 +26,135 @@ Workflows often face three interrelated challenges: complexity (many parts, depe
 
 ## Core Concepts
 
-Workflows face three distinct but related challenges:
+**Complexity, Uncertainty, Risk - evaluation criteria:**
 
-- **Complexity**: The workflow involves many parts, dependencies, or intricate logic
-- **Uncertainty**: The workflow's requirements, approach, or outcomes are unclear or unknown
-- **Risk**: The workflow has potential for failure, delays, or unintended consequences
+| Concept | Check for strength | Check for excess | Key relationship |
+|---------|-------------------|------------------|------------------|
+| **Complexity** | Decomposed into modules, dependencies explicit, <7 steps per module | Accidental complexity (nested conditionals, unclear dependencies) | Increases likelihood of errors, makes diagnosis harder |
+| **Uncertainty** | Requirements clarified, approach validated, unknowns surfaced explicitly | Guessing/assuming instead of investigating, vague success criteria | Hidden risks lurk in unknowns |
+| **Risk** | Assessed (impact × probability × detectability), mitigation strategy chosen, monitoring in place | Unidentified risks, no fail-fast, no quality gates | Increased by both complexity and uncertainty |
 
-Key relationships:
-- **Complexity** increases the likelihood of errors and makes failures harder to diagnose
-- **Uncertainty** means we don't know what complexity exists or what risks we face
-- **Risk** is the potential for failure — it's increased by both complexity and uncertainty
+**Types:**
 
----
+| Type | Complexity | Uncertainty | Risk |
+|------|-----------|-------------|------|
+| **Categories** | Essential (inherent to problem) vs Accidental (solution-introduced) | Requirements, Technical, Outcome | Technical, Requirements, Process, Quality, Operational |
+| **Identification** | >7 steps, deep dependencies, conditionals, parallel execution, external deps | Vague requirements, "probably", "should work", missing success criteria | Side effects, external deps, novel approaches, irreversible actions |
+| **Assessment** | Count steps, dependencies, conditionals, state space | Known vs unknown, assumptions made | Impact (low/med/high/critical), Probability (low/med/high), Detectability (easy/mod/hard) |
 
-## Complexity
-
-**Definition:** The degree of interconnectedness, dependencies, and intricate logic in a workflow.
-
-### Types of Complexity
-
-**Essential Complexity:**
-- Inherent to the problem domain
-- Cannot be eliminated, only managed
-- Example: A compiler must handle complex grammar rules — that's essential
-
-**Accidental Complexity:**
-- Introduced by the solution approach
-- Can be reduced or eliminated through better design
-- Example: Overly nested conditionals that could be simplified with a lookup table
-
-### Identifying Complexity
-
-Look for:
-- High number of steps (>6-7 steps suggests complexity)
-- Deep dependencies (Step N depends on Steps A, B, C, D...)
-- Conditional branching (multiple paths through workflow)
-- Parallel execution with synchronization points
-- External dependencies (APIs, services, databases)
-- Data transformations between steps
-- Large state space (many possible states workflow can be in)
-
-### Mitigating Complexity
-
-**Decomposition:**
-- Break complex workflows into smaller sub-workflows or modules
-- Each sub-workflow should have a single clear responsibility
-- Use composition rather than monolithic workflows
-
-**Abstraction:**
-- Hide complexity inside primitives
-- Workflow sees primitives as black boxes with clear contracts
-- Internal complexity of primitives doesn't leak into workflow
-
-**Simplification:**
-- Question whether each step is necessary
-- Combine steps where possible without losing clarity
-- Remove conditional logic where possible (make deterministic workflows)
-
-**Explicit Dependencies:**
-- Make data flow and dependencies explicit in step definitions
-- Document which steps depend on which outputs
-- Order steps to minimize backtracking
-
-**Modularization:**
-- Group related steps together
-- Use quality gates between modules (validate outputs before proceeding)
-- Enable independent testing of modules
-
-**When to apply:**
-- During workflow design (before implementation)
-- When workflows grow beyond 6-7 steps
-- When failures are hard to diagnose
-- When steps have unclear dependencies
+**Key relationships:**
+- Complexity → Risk: More failure points, harder recovery
+- Uncertainty → Risk: Unknown requirements/approaches increase failure potential
+- Complexity + Uncertainty → High Risk: Most dangerous combination
+- Strategy: Reduce uncertainty first (investigate), then simplify complexity, then mitigate remaining risk
 
 ---
 
-## Uncertainty
+## Techniques
 
-**Definition:** The degree to which requirements, approach, or outcomes are unknown or unclear.
+**Risk management process (follows academic frameworks):**
 
-### Types of Uncertainty
+1. **Identify** complexity, uncertainty, and risks in workflow design
+2. **Assess** priority: High impact + High probability = Address immediately
+3. **Mitigate** using appropriate strategies (see below)
+4. **Monitor** during execution for unexpected issues
+5. **Document** remaining risks and accepted tradeoffs
 
-**Requirements Uncertainty:**
-- What needs to be built is unclear
-- Success criteria are ambiguous
-- Constraints are unknown
-- Example: "Make it faster" — how fast? What defines success?
+**Mitigation strategies:**
 
-**Technical Uncertainty:**
-- How to achieve the goal is unknown
-- Multiple approaches exist, unclear which is best
-- Dependencies or integrations are poorly understood
-- Example: "Will this API support our use case?" — need to investigate
+**For Complexity:**
+- **Decomposition:** Break into sub-workflows (<7 steps each), single responsibility per module
+- **Abstraction:** Hide complexity inside primitives with clear contracts
+- **Simplification:** Remove unnecessary steps, eliminate conditionals where possible
+- **Explicit dependencies:** Document data flow, order steps to minimize backtracking
 
-**Outcome Uncertainty:**
-- What will happen when workflow executes is unclear
-- Side effects are unknown
-- Performance characteristics are unpredictable
-- Example: "Will this scale to 1M users?" — need to test
+**For Uncertainty:**
+- **Investigation:** Use `investigate` primitive, read docs/code, surface unknowns explicitly
+- **Spikes/Prototypes:** Time-boxed throwaway implementations to test feasibility
+- **Defer commitment:** Use declarative workflows, avoid premature optimization
+- **Clarify requirements:** Use `define` primitive for SMARB criteria, interview users
+- **Escalate to user:** Surface decision points with options/tradeoffs (don't guess)
 
-### Identifying Uncertainty
+**For Risk:**
+- **Avoidance:** Choose approach that eliminates risk (proven library vs custom)
+- **Reduction:** Add validation, testing, quality gates to decrease probability/impact
+- **Transfer:** Use external services for risky operations (managed DB vs self-hosted)
+- **Acceptance:** Document risk, have mitigation plan ready if occurs
+- **Fail-fast:** Order risky items first, surface failures before investing effort
+- **Defensive measures:** Retry logic, compensation/rollback, timeouts, input validation
+- **Quality gates:** Use `validate` and `critique` primitives between steps
+- **Incremental approach:** Break into smaller steps, validate each (staging before production)
+- **Monitoring:** Add logging/metrics for detectability
 
-Look for:
-- Vague or missing requirements ("make it better")
-- Multiple possible approaches with unclear tradeoffs
-- Dependencies on external systems not fully understood
-- Novel or untested technology
-- Phrases like "I think", "probably", "should work"
-- Missing success criteria or non-SMARB criteria
-- Unknown unknowns (things we don't know we don't know)
-
-### Reducing Uncertainty
-
-**Investigation:**
-- Use the `investigate` primitive to explore unknowns before committing
-- Read documentation, code, external resources
-- Identify what's known vs. unknown
-- Surface unknowns explicitly rather than assuming
-
-**Spikes/Prototypes:**
-- Create throwaway implementations to test feasibility
-- Build minimal proofs-of-concept before full implementation
-- Time-box investigation (e.g., "spend 1 hour exploring, then decide")
-
-**Defer Commitment:**
-- Don't lock in decisions until uncertainty is resolved
-- Use declarative workflows where approach can adapt
-- Build flexibility into design (avoid premature optimization)
-
-**Clarify Requirements:**
-- Use the `define` primitive to establish SMARB criteria
-- Interview users to surface implicit requirements
-- Write user stories to clarify intended experience
-- Make assumptions explicit and validate them
-
-**Incremental Discovery:**
-- Start with high-level design, fill in details progressively
-- Use quality gates to validate each increment
-- Allow refinement based on learnings
-
-**Escalate to User:**
-- When uncertainty can't be resolved, ask the user
-- Don't guess or assume — surface the decision point
-- Provide options with tradeoffs rather than asking open-ended questions
-
-**When to apply:**
-- At workflow start (define and orient reduce uncertainty)
-- Before high-commitment steps (design before implement)
-- When encountering blockers (investigate before proceeding)
-- When assumptions are proven wrong (loop back, refine)
+**Evaluation criteria:**
+- Complexity, uncertainty, and risks identified during workflow design?
+- Assessment done (complexity: step count/dependencies, uncertainty: knowns vs unknowns, risk: impact × probability)?
+- Appropriate mitigation strategy chosen and applied?
+- Uncertainty reduced before tackling complexity?
+- High-impact risks addressed with fail-fast, quality gates, or defensive measures?
+- Remaining risks documented with acceptance rationale?
 
 ---
 
-## Risk
+## Use Cases and Triggers
 
-**Definition:** The potential for failure, delays, or unintended consequences.
-
-### Types of Risk
-
-**Technical Risk:**
-- Approach may not work
-- Performance may be insufficient
-- Integration may fail
-- Example: "This algorithm might be too slow for production data"
-
-**Requirements Risk:**
-- Building the wrong thing
-- Missing critical requirements
-- Misunderstanding user needs
-- Example: "User might actually need X, not Y"
-
-**Process Risk:**
-- Workflow might not complete (interruptions, resource constraints)
-- Dependencies might block progress
-- Deadlines might be missed
-- Example: "External API might be unavailable"
-
-**Quality Risk:**
-- Output might not meet standards
-- Bugs might escape to production
-- Technical debt might accumulate
-- Example: "Without tests, regressions are likely"
-
-**Operational Risk:**
-- Deployment might break existing systems
-- Rollback might be difficult or impossible
-- Data loss or corruption
-- Example: "Schema migration might fail, corrupting data"
-
-### Identifying Risk
-
-Look for:
-- Steps with side effects (database writes, file deletion, API calls)
-- Dependencies on external systems (APIs, databases, services)
-- Novel or untested approaches
-- High-complexity steps
-- Steps with uncertain outcomes
-- Irreversible actions (data deletion, production deployment)
-- Time constraints or deadlines
-- Resource constraints (memory, CPU, budget)
-
-### Assessing Risk
-
-For each identified risk, assess:
-- **Impact**: How bad if this fails? (low / medium / high / critical)
-- **Probability**: How likely is failure? (low / medium / high)
-- **Detectability**: Will we know if this fails? (easy / moderate / hard to detect)
-
-Prioritize risks: High impact + High probability = Address immediately
-
-### Mitigating Risk
-
-**Avoidance:**
-- Choose a different approach that eliminates the risk
-- Simplify to remove risky steps
-- Example: Use proven library instead of custom implementation
-
-**Reduction:**
-- Decrease probability or impact of failure
-- Add validation, testing, quality gates
-- Example: Add integration tests to catch API failures early
-
-**Transfer:**
-- Move risk to another component or system
-- Use external services that handle risky operations
-- Example: Use managed database instead of running your own
-
-**Acceptance:**
-- Acknowledge risk and proceed anyway
-- Document the risk and its potential impact
-- Have mitigation plan ready if it occurs
-- Example: "API might be slow, but we'll add timeout handling"
-
-**Fail-Fast:**
-- Order steps so risky/uncertain items come first
-- Surface failures early before investing effort
-- Example: Validate API access before building entire integration
-
-**Defensive Measures:**
-- Add retry logic for transient failures
-- Implement compensation/rollback for side effects
-- Add timeouts to prevent hangs
-- Validate inputs before processing
-- Example: Retry network calls with exponential backoff
-
-**Quality Gates:**
-- Validate outputs before they become inputs to next step
-- Use `validate` primitive to check success criteria
-- Use `critique` primitive to identify issues
-- Example: Validate design before implementing
-
-**Incremental Approach:**
-- Break risky steps into smaller, safer steps
-- Validate each increment before proceeding
-- Example: Deploy to staging before production
-
-**Monitoring & Observability:**
-- Add logging, metrics, traces
-- Enable detection of failures
-- Example: Log each step's start/completion for diagnosis
-
-**When to apply:**
-- During workflow design (identify risks upfront)
-- Before high-impact steps (validate before destructive actions)
-- When uncertainty is high (risks are often hidden in unknowns)
-- After failures (learn what risks were missed)
+Apply when:
+- Designing adaptive workflows (identify upfront)
+- Workflows have >6-7 steps (complexity management critical)
+- External dependencies involved (APIs, services, databases)
+- Requirements unclear or changing (systematic uncertainty reduction)
+- Failures occur with complex root causes (diagnose and mitigate)
+- Deciding between workflow approaches (assess tradeoffs)
 
 ---
 
-## Relationships Between Complexity, Uncertainty, and Risk
+## Patterns and Anti-Patterns
 
-**Complexity → Risk:**
-- More complex workflows have more potential failure points
-- Complex dependencies make failures harder to recover from
-- **Mitigation**: Reduce complexity through decomposition and abstraction
+### Patterns (✅)
 
-**Uncertainty → Risk:**
-- Unknown requirements increase risk of building wrong thing
-- Unknown approaches increase risk of technical failure
-- **Mitigation**: Reduce uncertainty through investigation and clarification
+**Uncertainty First:** Reduce uncertainty (investigate, clarify) before tackling complexity or risk. Hidden risks lurk in unknowns.
 
-**Complexity + Uncertainty → High Risk:**
-- Complex and uncertain workflows are most risky
-- Failures are both likely and hard to diagnose
-- **Mitigation**: Reduce uncertainty first (investigate), then tackle complexity
+**Fail-Fast:** Order risky/uncertain items first. Surface failures early before investing effort.
 
-**Risk → Complexity:**
-- Mitigation strategies (retries, compensation, validation) add complexity
-- Trade-off: More robust but more complex
-- **Mitigation**: Only add complexity where risk justifies it
+**Quality Gates:** Validate outputs between steps using `validate` and `critique` primitives. Catch issues before they cascade.
 
----
+**Decompose Complexity:** Break workflows >7 steps into modules with single responsibilities. Makes diagnosis easier.
 
-## Applying This Protocol
+**Explicit Tradeoffs:** Document accepted risks with rationale. "API might be slow, but timeout handling added."
 
-### During Workflow Design
+### Anti-Patterns (❌)
 
-1. **Identify** complexity, uncertainty, and risk
-2. **Assess** which are highest priority to address
-3. **Mitigate** using techniques from this protocol
-4. **Document** remaining risks and accepted tradeoffs
+**Guessing Under Uncertainty:** Assuming instead of investigating. **Fix:** Use `investigate` primitive, escalate to user.
 
-### During Workflow Execution
+**Accidental Complexity:** Nested conditionals, unclear dependencies. **Fix:** Simplify with lookup tables, make dependencies explicit.
 
-1. **Monitor** for unexpected complexity, uncertainty, or risk
-2. **Escalate** to user when mitigation strategies fail
-3. **Adapt** workflow based on what's discovered
-4. **Learn** from failures to improve future workflows
+**Ignoring Risk:** Proceeding without assessment. **Fix:** Assess impact × probability, apply appropriate mitigation.
+
+**Late Validation:** Testing only at end. **Fix:** Quality gates between steps, incremental validation.
+
+**Premature Optimization:** Locking in decisions under uncertainty. **Fix:** Defer commitment, use declarative workflows.
 
 ---
 
-## When to Apply
+## Examples
 
-Use this protocol when:
+**Complexity:** Workflow with 12 steps → Decompose into 3 modules of 4 steps each, add quality gates between modules.
 
-- **Designing adaptive workflows** - Identify complexity, uncertainty, and risk upfront
-- **Workflows have >6-7 steps** - Complexity management becomes critical
-- **External dependencies involved** - APIs, services, databases introduce risk
-- **Requirements are unclear or changing** - Uncertainty needs systematic reduction
-- **Failures occur with complex root causes** - Use techniques to diagnose and mitigate
-- **Deciding between workflow approaches** - Assess tradeoffs of complexity, uncertainty, risk
+**Uncertainty:** "Make it faster" requirement → Clarify: "Response time <200ms for 95th percentile under 1000 concurrent users"
+
+**Risk assessment:** Database migration - Impact: Critical (data loss), Probability: Medium (untested schema) → Mitigation: Fail-fast (validate migration on copy first), defensive (automated backups, rollback plan)
+
+**Fail-fast:** External API integration → Order: 1. Validate API access, 2. Test with sample data, 3. Build integration, 4. Full implementation (surface auth/compatibility issues early)
+
+**Uncertainty + Complexity:** Novel algorithm in 10-step workflow → 1. Reduce uncertainty (spike to test algorithm feasibility), 2. Simplify (decompose into 3 modules), 3. Mitigate risk (quality gates, incremental validation)
 
 ---
 
-## Summary
+## References
 
-| Concept | Definition | Key Techniques |
-|---------|------------|----------------|
-| **Complexity** | Many parts, dependencies, intricate logic | Decomposition, abstraction, simplification |
-| **Uncertainty** | Unknown requirements, approach, or outcomes | Investigation, spikes, defer commitment, clarify |
-| **Risk** | Potential for failure or unintended consequences | Fail-fast, quality gates, retry/compensation, incremental |
-
-**General strategy:**
-1. Reduce **uncertainty** first (investigate, clarify, prototype)
-2. Simplify **complexity** where possible (decompose, abstract, simplify)
-3. Mitigate **risk** with appropriate techniques (gates, retries, compensation)
-4. Accept remaining complexity/uncertainty/risk with documentation and monitoring
-
-
-[COMMENT: add more strategies for managing risk such as adding redundancy]
+- `primitives/investigate.md` - Reducing uncertainty through exploration
+- `primitives/define.md` - Clarifying requirements and success criteria
+- `primitives/validate.md` - Quality gates and verification
+- `primitives/critique.md` - Identifying quality issues
+- [Risk Management Framework Components - MetricStream](https://www.metricstream.com/learn/risk-management-framework-and-components.html)
+- [Understanding Risk Assessment Methodology - DataGuard](https://www.dataguard.com/blog/understanding-risk-assessment-methodology/)

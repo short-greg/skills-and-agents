@@ -1,359 +1,134 @@
 # Goals and Objectives Protocol
 
-Enable clear goal-setting and measurable outcomes through well-structured OKRs.
+Enable clear goal-setting and measurable outcomes through OKRs.
 
 ---
 
 ## Goal
 
-Ensure artifacts have clear success criteria that are measurable and outcome-oriented.
+Ensure artifacts have clear, measurable, outcome-oriented success criteria.
 
 ---
 
 ## Intent
 
-Without explicit goals and measurable outcomes, work drifts, success becomes subjective, and stakeholders misalign on expectations. OKRs (Objectives and Key Results) provide a structured approach to defining what success looks like before work begins, enabling objective assessment of whether goals were achieved.
+Without explicit goals and measurable outcomes, work drifts, success becomes subjective, and expectations misalign. OKRs (Objectives and Key Results) define success before work begins, enabling objective assessment.
 
 ---
 
 ## Scope
 
-This protocol addresses goal-setting and OKR structure: defining clear objectives, writing measurable key results, and applying OKRs appropriately across different contexts (PRDs, technical plans, implementations).
+**Addresses:** OKR structure (clear objectives, measurable key results), context-appropriate goals (PRDs, plans, implementations), outcome vs process vs implementation distinction
+
+**Does not address:** Project management methodologies, team goal-setting processes, performance reviews
 
 ---
 
-## Key Results
+## Core Concepts
 
-- Goals are clear and focused (single objective per OKR)
-- Key results are measurable (numbers, percentages, boolean outcomes)
-- Key results are outcomes, not implementation steps
-- OKRs match their context (user value for PRDs, technical feasibility for plans, code quality for implementations)
-- Success can be objectively determined
+**OKR components - evaluation criteria:**
 
----
+| Component | Check for strength | Check for excess |
+|-----------|-------------------|------------------|
+| **Objective** | Clear, focused, single goal with purpose stated | Multiple goals combined, vague aspirations |
+| **Key Results** | Outcomes measured (what changed), 3-5 total, context-appropriate | >5 KRs (diluted), implementation steps, disconnected from objective |
+| **Evaluation type** | Subjective (judgment) OR objective (metrics), chosen appropriately | Gaming metrics, insufficient proxies, ignoring judgment |
+| **Constraints** | Stated explicitly (time, resources, scope) | Overconstrained (no flexibility), underconstrained (drift) |
 
-## Essential Concepts
+**Key Result types (preference order):**
+1. **Outcomes** (preferred): What changed ("Success rate >95%", "User satisfaction ≥4/5", "Zero incidents")
+2. **Leading indicators** (acceptable): Predictive measures (survey scores, engagement, early signals)
+3. **Process** (last resort): Activities completed ("File exists", "Template present") - only when outcome unmeasurable
 
-### OKR Structure
+**Evaluation methods:**
+- **Subjective**: Judgment-based (code quality, satisfaction, experience) - valid when expertise matters, numbers mislead
+- **Objective**: Metric-based (counts, %, time) - valid when measurable, not gaming-prone
+- **Hybrid**: Combine both (metrics + expert review) - often best, balances rigor with insight
 
-**OKR = Objective + Key Results**
-
-**Objective:** Aspirational statement of what and why
-- What are we trying to achieve?
-- Why does it matter?
-- Single, focused goal (not multiple things)
-
-**Key Results:** Measurable, outcome-oriented metrics
-- MUST be measurable (numbers, percentages, boolean)
-- MUST be outcomes (not implementation steps)
-- 3-5 key results (not too many)
-- Each KR contributes to the objective
-
-**Key Result Priority Levels:**
-- **Required:** Must be achieved for success
-- **Recommended:** Should be achieved unless user opts out
-- **Optional:** User chooses whether to pursue (e.g., "if user requested")
-- **Conditional:** Applies only when a condition is met (e.g., "existing repos only", "if tests exist")
-
-**Key Results Can Drive Behavior:**
-Key results define outcomes, not process. However, some key results implicitly require certain behaviors or ordering. For example, "uncertainties resolved prior to beginning work" is an outcome that implies investigation must happen first. The skill reasons about how to achieve each key result — when a key result implies ordering or behavior, the skill should follow that implication. Key results drive behavior where necessary, but are not primarily a mechanism for prescribing steps.
-
-### Outcomes vs Process vs Implementation Steps
-
-Key Results fall into three categories:
-
-**Outcome-oriented (preferred, primary):** Evaluates quality of what was produced
-- "Login success rate >95%"
-- "Zero security incidents in production"
-- "Primitive is atomic — single cognitive action"
-- "User satisfaction ≥4.5/5"
-
-**Process-oriented (acceptable, secondary):** Confirms steps/activities completed
-- "File exists at expected path"
-- "Template sections present"
-- "Protocol referenced in frontmatter"
-
-**Implementation steps (avoid as KRs):** Tasks you complete
-- "Create login endpoint"
-- "Write email template"
-- "Add database migration"
-
-**Preference:** Primary Key Results should be outcome-oriented. Process-oriented KRs are acceptable as secondary/supporting results but should not be the main measure of success.
-
-You can complete all implementation steps and still fail to achieve outcomes. A login endpoint can exist but have terrible performance. Tests can pass but miss critical edge cases.
-
-### Context-Appropriate OKRs
-
-Different contexts require different focus:
-
-**PRD (Product Requirements)**
-- Focus: User value and business outcomes
-- Example KRs: User satisfaction scores, support ticket reduction, feature adoption rates
-
-**Technical Plan**
-- Focus: Technical feasibility and risk mitigation
-- Example KRs: Performance targets, scalability limits, design review approval
-
-**Implementation**
-- Focus: Code quality and completeness
-- Example KRs: Test coverage, requirements completion, code complexity metrics
-
-**Refactoring**
-- Focus: Quality improvement without behavior change
-- Example KRs: Complexity reduction, coverage maintained, no regressions
-
-**Bug Fix**
-- Focus: Issue resolution with regression prevention
-- Example KRs: Bug not reproducible, regression tests added, no new bugs
+**Context-appropriate focus:**
+- **PRD:** User outcomes (satisfaction, adoption, value delivered)
+- **Plan:** Feasibility (performance, scalability, risk mitigation)
+- **Implementation:** Code quality (coverage, complexity, requirements met)
+- **Refactoring:** Quality gains (complexity down, no behavior change)
+- **Bug Fix:** Resolution (not reproducible, regressions prevented)
 
 ---
 
-## Processes
+## Techniques
 
-### Writing Good OKRs
+**Writing OKRs:**
 
-**1. Start with the outcome**
+1. **Start with outcome** - "If this succeeds, what changes?" (users can X, performance is Y, errors are Z)
+2. **Choose evaluation** - Subjective (judgment), objective (metrics), or hybrid based on what's measurable without gaming
+3. **Make measurable** - Numbers (>95%, <100ms), comparisons (50% better), boolean (zero incidents), or judgment (expert review)
+4. **State constraints** - Time (by when), resources (with what), scope (what's excluded)
+5. **Keep focused** - One objective, 3-5 key results that directly support it
 
-Ask: "If this succeeds, what will be different?"
-- Users will be able to...
-- Performance will improve to...
-- Errors will decrease to...
+**Evaluation criteria:**
+- Objective clear (one sentence explanation)?
+- KRs are outcomes (what changed), not implementation steps (what you'll do)?
+- Evaluation method appropriate (won't cause gaming, captures what matters)?
+- Constraints explicit (time, scope, resources)?
+- Context-appropriate (PRD→user value, plan→feasibility, impl→quality)?
 
-**2. Make it measurable**
+---
 
-Ask: "How will I know if I succeeded?"
-- Numbers: percentages, counts, times
-- Comparisons: X% better than baseline
-- Boolean: zero incidents, all tests pass
+## Use Cases and Triggers
 
-**3. Focus on value, not activity**
-
-Transform activity into value:
-- Activity: "Write 10 functions"
-- Value: "Feature works correctly with 90% test coverage"
-
-**4. Keep it simple**
-
-Avoid compound objectives:
-- Complex: "Improve the system's overall performance characteristics across multiple dimensions while maintaining backward compatibility and ensuring security compliance"
-- Simple: "Response time <100ms with zero security incidents"
-
-### Verification Checklist
-
-Before finalizing OKRs:
-
-- [ ] Objective is clear (can explain in one sentence)
-- [ ] Objective is focused (one main thing, not multiple)
-- [ ] 3-5 Key Results (not too few, not too many)
-- [ ] Each KR is measurable (includes number or clear pass/fail)
-- [ ] Each KR is outcome-oriented (not an implementation step)
-- [ ] Each KR relates to objective (all KRs support the objective)
-- [ ] Can determine success (can objectively say if each KR was met)
-- [ ] Appropriate for context (PRD → user value, plan → feasibility, impl → quality)
+Apply when:
+- Defining requirements (PRD phase)
+- Planning technical approach
+- Starting implementation
+- Setting refactoring goals
+- Scoping bug fixes
+- Evaluating whether work succeeded
 
 ---
 
 ## Patterns and Anti-Patterns
 
-### Patterns
+### Patterns (✅)
 
-**Pattern 1: Outcome-Focused KRs**
+**Outcome-focused:** Transform "what you'll do" into "what will change". Example: Not "Create login page" but "Login success >95%, avg time <2s, zero auth bugs".
 
-Transform "what you'll do" into "what will be different":
+**Subjective when appropriate:** "Code quality meets team standards (expert review)" valid when metrics mislead. Combine with objective: "Coverage >85% AND passes code review".
 
-```markdown
-**Objective:** Enable users to reset passwords securely
+**Constraints explicit:** "Response <100ms (within 2 weeks, using current infrastructure, excluding admin panel)". Prevents scope creep.
 
-**Key Results:**
-1. Password reset completion rate >95%
-2. Average reset time <2 minutes
-3. Zero password reset security incidents
-4. User satisfaction ≥4.5/5 for reset flow
-```
+**Context-appropriate:** PRD→user value (satisfaction, adoption). Plan→feasibility (performance, scale). Impl→quality (coverage, complexity).
 
-Why it works: Each KR measures a user-facing outcome, not an implementation task.
+### Anti-Patterns (❌)
 
-**Pattern 2: Context-Appropriate Focus**
+**Implementation steps as KRs:** "Create X, write Y, add Z" - can finish all and still fail. **Fix:** "Success rate >95%, time <2s, zero bugs".
 
-Match KRs to the artifact type:
+**Insufficient proxies:** Test coverage ≠ quality. Lines of code ≠ value. **Fix:** Use subjective judgment or multiple indicators.
 
-```markdown
-# PRD OKRs (user value)
-**Objective:** Enable order tracking
-**KRs:** Support tickets reduced 60%, satisfaction ≥4.5/5
+**Gaming metrics:** Optimizing for metric, not outcome. **Fix:** Hybrid evaluation (metrics + judgment).
 
-# Plan OKRs (technical feasibility)
-**Objective:** Design scalable tracking architecture
-**KRs:** Handle 100k concurrent users, latency <500ms
-
-# Implementation OKRs (code quality)
-**Objective:** Implement high-quality tracking feature
-**KRs:** 100% requirements met, 85% coverage, zero critical bugs
-```
-
-**Pattern 3: Measurable Thresholds**
-
-Always include specific numbers:
-
-```markdown
-# Vague (hard to assess)
-"Improve performance"
-
-# Measurable (clear success criteria)
-"P95 response time <100ms (down from 300ms)"
-```
-
-### Anti-Patterns
-
-**Anti-Pattern 1: Implementation Steps as KRs**
-
-```markdown
-# Bad
-**Key Results:**
-1. Create login page
-2. Add database table
-3. Write tests
-
-# Good
-**Key Results:**
-1. Login success rate >95%
-2. Average login time <2 seconds
-3. Zero authentication bugs in production
-```
-
-Why it fails: You can complete all tasks and still have a broken feature.
-
-**Anti-Pattern 2: Non-Measurable KRs**
-
-```markdown
-# Bad
-"Improve security", "Make it faster", "Better UX"
-
-# Good
-"Zero security incidents", "Response time <100ms", "User satisfaction ≥4/5"
-```
-
-Why it fails: Cannot objectively determine success.
-
-**Anti-Pattern 3: Too Many KRs**
-
-```markdown
-# Bad: 10+ key results (diluted focus)
-
-# Good: 3-5 key results (focused)
-```
-
-Why it fails: Too many KRs means none get proper attention.
-
-**Anti-Pattern 4: Disconnected KRs**
-
-```markdown
-# Bad
-Objective: Improve user onboarding
-Key Results:
-1. Database query time <10ms  # Not related
-2. Test coverage >90%  # Not an outcome
-
-# Good
-Objective: Improve user onboarding
-Key Results:
-1. Onboarding completion rate >80%
-2. Time to complete onboarding <5 minutes
-3. Day-1 retention rate >70%
-```
-
-Why it fails: KRs don't actually measure the objective.
+**Too many KRs:** >5 dilutes focus. **Fix:** 3-5 key results max.
 
 ---
 
 ## Examples
 
-### Example 1: Feature Development
+**Bad (implementation):** "Add password reset. KRs: 1) Create endpoint 2) Write email template 3) Add DB migration 4) Write tests"
 
-**Context:** Password reset feature
+**Good (outcome):** "Enable secure password reset. KRs: 1) Completion rate >95% 2) Avg time <2min 3) Zero security incidents 4) Satisfaction ≥4/5"
 
-**Bad OKR (implementation-focused):**
-```markdown
-Objective: Add password reset feature
+**Subjective evaluation:** "Improve code quality. KRs: 1) Complexity reduced (expert review: satisfactory) 2) Coverage >85% 3) No regressions (tests pass)"
 
-Key Results:
-1. Create reset password endpoint
-2. Write email template
-3. Add database migration
-4. Write tests
-```
+**With constraints:** "Improve response time (within Q1, using current infrastructure, excluding batch jobs). KRs: 1) P95 <100ms 2) Zero timeouts 3) Cost unchanged"
 
-**Good OKR (outcome-focused):**
-```markdown
-Objective: Enable users to securely reset their passwords
-
-Key Results:
-1. Password reset completion rate >95%
-2. Average reset time <2 minutes
-3. Zero password reset security incidents
-4. User satisfaction score ≥4.5/5 for reset flow
-```
-
-### Example 2: Performance Improvement
-
-**Context:** Application responsiveness
-
-**Bad OKR:**
-```markdown
-Objective: Optimize the application
-
-Key Results:
-1. Add caching layer
-2. Refactor database queries
-3. Minify JavaScript
-4. Use CDN
-```
-
-**Good OKR:**
-```markdown
-Objective: Improve application responsiveness for better user experience
-
-Key Results:
-1. P95 response time <100ms (down from 300ms)
-2. Time to interactive <2 seconds on 3G connections
-3. Zero timeout errors during peak hours
-4. User-reported "slow performance" complaints reduced by 80%
-```
-
-### Example 3: Technical Plan
-
-**Context:** Real-time order tracking architecture
-
-```markdown
-Objective: Design a scalable architecture for real-time order tracking
-
-Key Results:
-1. System can handle 100,000 concurrent users
-2. Data latency <500ms from warehouse to customer
-3. Zero single points of failure in design
-4. Cost per order tracked <$0.01
-5. Technical design review approved by senior engineers
-```
+**Context-appropriate:**
+- PRD: "Order tracking. KRs: Tickets -60%, satisfaction ≥4/5, adoption >50%"
+- Plan: "Scalable tracking. KRs: 100k users, <500ms latency, zero SPOFs"
+- Impl: "Quality tracking. KRs: 100% requirements, 85% coverage, zero critical bugs"
 
 ---
 
-## Key Takeaways
+## References
 
-- **Outcomes, not tasks**: Key results measure what will be different, not what you'll do
-- **Measurable always**: If you can't measure it, you can't assess success
-- **Context matters**: PRDs focus on user value, plans on feasibility, implementations on quality
-- **3-5 KRs**: Enough to be comprehensive, few enough to maintain focus
-- **Single objective**: One clear goal per OKR, not multiple combined
-- **Ask "so what?"**: Transform tasks into the outcomes they produce
-
----
-
-## When to Apply This Protocol
-
-- When defining requirements (PRD phase)
-- When planning technical approach
-- When starting implementation
-- When defining refactoring goals
-- When scoping bug fixes
-- When setting project milestones
-- When evaluating whether work succeeded
+- [OKRs: The Ultimate Guide - Atlassian](https://www.atlassian.com/agile/agile-at-scale/okr)
+- [What are OKRs? Guide - Asana](https://asana.com/resources/okr-meaning)
+- [OKRs: The Only Guide You Need - Mooncamp](https://mooncamp.com/okr)
+- [Practical Guidance on Developing Indicators - CRS](https://www.crs.org/sites/default/files/2025-03/indicator_guidance_final_low_res.pdf)

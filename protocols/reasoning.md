@@ -1,245 +1,160 @@
-# Reasoning Patterns Protocol
+# Reasoning Protocol
 
-Structured reasoning patterns for primitives and workflows.
+Structured reasoning techniques for problem-solving and verification.
 
 ---
 
 ## Goal
 
-Ensure quality through deliberate reasoning before action and verification before completion.
+Apply appropriate reasoning techniques before action and verify completion against success criteria.
 
 ---
 
 ## Intent
 
-AI tends to rush into solutions without considering approach, and declare completion without verification. These patterns prevent poor approaches and premature completion by requiring explicit reasoning at key points.
+AI tends to rush into solutions without deliberate reasoning, and declare completion without verification. Explicit reasoning patterns prevent poor approaches and premature completion.
 
 ---
 
 ## Scope
 
-**Addresses:** Reasoning patterns for primitives and workflows (pre-action reasoning, post-action verification, pattern selection based on complexity)
+**Addresses:** Reasoning techniques (deductive, inductive, abductive, analogical), pre-action reasoning patterns, post-action verification
 
-**Does not address:** Domain-specific reasoning techniques, debugging strategies, code review patterns
-
----
-
-## Key Results
-
-- Approach is considered before execution begins
-- Completion is verified against success criteria
-- Pattern choice matches task complexity
+**Does not address:** Domain-specific problem-solving methods, debugging strategies, code review patterns
 
 ---
 
-## Pre-Action Reasoning
+## Core Concepts
 
-Before starting work, reason about approach. Choose based on task complexity:
+### Reasoning Techniques
 
-### Expert Reasoning (Full)
+| Technique | Check for strength | Check for excess | When to use |
+|-----------|-------------------|------------------|-------------|
+| **Deductive** | Premises valid and explicit, conclusions follow logically | Applying rules when premises uncertain | Apply rules/specs to cases |
+| **Inductive** | Sufficient observations, pattern holds across cases | Generalizing from too few observations | Identify patterns from observations |
+| **Abductive** | Multiple explanations considered, most plausible chosen | Accepting first explanation | Diagnose root cause from symptoms |
+| **Analogical** | Structural similarities identified, differences noted | Relying on superficial similarities | Apply lessons from similar cases |
+| **Causal** | Intervention supports causation, confounders ruled out | Assuming causation from correlation | Understand why X causes Y |
+| **Counterfactual** | Alternative scenarios evaluated, tradeoffs explicit | Endless "what if" analysis | Evaluate alternative scenarios |
 
-**When to use:** Complex or unfamiliar tasks, high-stakes decisions, tasks with multiple valid approaches.
+### Thinking Techniques
 
-**Pattern:**
-```
-Before doing anything else, describe how an expert in [domain] would approach [task].
-Cover:
-- Strategy and first steps
-- Alternatives to consider
-- Fallbacks if primary approach fails
-- Common mistakes to avoid
-- What high-quality output looks like
-
-This is meta-reasoning about approach, not doing the task.
-```
-
-### Quick Assessment
-
-**When to use:** Moderate complexity, familiar domain, time-sensitive tasks.
-
-**Pattern:**
-```
-Before starting, briefly identify:
-- Key considerations for this task
-- Primary approach and one alternative
-- Main risk to watch for
-```
-
-### Skip
-
-**When to use:** Simple/routine tasks, well-defined procedures, approach is obvious.
-
-**Guidance:** Only skip pre-action reasoning when the task is truly straightforward. When in doubt, use Quick Assessment.
+| Technique | Check for strength | Check for excess | When to use |
+|-----------|-------------------|------------------|-------------|
+| **Strategic** | Long-term vision, systems perspective, big picture | Analysis paralysis, never executing | Plan approach, long-term goals |
+| **Tactical** | Immediate next steps clear, actionable plan | Losing sight of overall goal | Determine immediate actions |
+| **Creative/Lateral** | Novel approaches explored, indirect solutions | Novelty for novelty's sake | Generate novel solutions |
+| **Critical** | Assumptions challenged, evidence evaluated | Endless critique, no construction | Challenge assumptions |
+| **Analytical** | Problem decomposed, cause-effect identified | Over-fragmentation, missing gestalt | Break down complex problems |
+| **Systems** | Interdependencies mapped, feedback loops identified | Complexity overwhelms, no action | Map interdependencies |
 
 ---
 
-## Post-Action Verification
+## Techniques
 
-Before declaring completion, verify against success criteria.
+**Pre-action reasoning:**
 
-### Confirm
+1. **Assess complexity:** Complex/unfamiliar → strategic reasoning (approach, alternatives, tradeoffs). Moderate → tactical (key considerations, approach, risks). Simple → skip, proceed directly.
 
-**When to use:** Always required for primitives and workflows.
+2. **Choose reasoning type:** Known rules → Deductive. Multiple observations → Inductive. Unexplained symptoms → Abductive. Similar cases → Analogical. Understanding causes → Causal. Exploring alternatives → Counterfactual. Complex problem → Decomposition. Multiple insights → Synthesis.
 
-**Pattern:**
-```
-Before declaring done, verify against each key result:
-- [Check for key result 1]
-- [Check for key result 2]
-- ...
+3. **Execute:** State premises/observations explicitly. Apply technique. Identify alternatives. Note limitations.
 
-Report outcome explicitly: state whether succeeded or failed, and why.
-```
+**Post-action verification (always required):**
 
-**Why always required:** Unlike pre-action reasoning (which can be scaled), verification is binary—either you checked or you didn't. Skipping verification leads to incomplete work being marked complete.
+1. Verify against each success criterion
+2. Check completeness
+3. Report outcome explicitly (success/failure, why)
+
+**Evaluation criteria:**
+- Reasoning type appropriate for problem?
+- Premises/observations explicit?
+- Conclusions supported?
+- Verification complete?
 
 ---
 
-## Choosing Patterns
+## Use Cases and Triggers
 
-| Task Type | Pre-Action | Post-Action |
-|-----------|------------|-------------|
-| Complex/unfamiliar | Expert Reasoning | Confirm |
-| Moderate complexity | Quick Assessment | Confirm |
-| Simple/routine | Skip | Confirm |
+Apply when:
+- Starting primitives or workflows (choose appropriate reasoning technique)
+- Debugging issues (use abductive reasoning to find root cause)
+- Designing solutions (use strategic reasoning for approach, tactical for steps)
+- Before declaring completion (always verify against success criteria)
+- Analyzing patterns across multiple cases (use inductive reasoning)
+- Solving new problems similar to past cases (use analogical reasoning)
 
-**Default:** Quick Assessment + Confirm. Upgrade to Expert Reasoning when uncertain.
+---
+
+## Patterns and Anti-Patterns
+
+### Patterns (✅)
+
+**Match Reasoning to Problem:** Use deductive for rule application, inductive for pattern finding, abductive for diagnosis, analogical for similar cases.
+
+**Explicit Premises:** State observations, assumptions, and constraints before reasoning. Prevents hidden assumptions.
+
+**Scale Depth to Complexity:** Complex tasks need strategic reasoning (alternatives, tradeoffs). Simple tasks can proceed directly.
+
+**Always Verify:** Verification is non-optional. Check completion against all success criteria.
+
+### Anti-Patterns (❌)
+
+**Wrong Reasoning Type:** Using inductive reasoning (patterns) when deductive (applying rules) is needed. **Fix:** Identify problem type first.
+
+**Skipping Reasoning on Complex Tasks:** Jumping to implementation without considering approach. **Fix:** Use strategic reasoning for high-level plan.
+
+**Skipping Verification:** Declaring completion without checking success criteria. **Fix:** Verification is always required.
+
+**Analysis Paralysis:** Over-reasoning simple tasks. **Fix:** Match reasoning depth to task complexity.
 
 ---
 
 ## Examples
 
-### Example 1: Complex Task - Designing Authentication System
+**Deductive:** "All endpoints must validate (rule). This is endpoint (case). Therefore, add validation."
 
-**Context:** User asks to add authentication to an existing web application.
+**Inductive:** "Bug with >10MB files, images, videos. Pattern: Large files → bug. Hypothesis: Buffer overflow."
 
-**Application:** Use Expert Reasoning (complex, multiple valid approaches, high stakes)
+**Abductive:** "Crashes at 2AM daily. Cron at 2AM. Most plausible: Cron causes crash. Test by disabling."
 
-**Reasoning:**
-```
-Before implementing authentication, an expert would approach this by:
+**Analogical:** "Previous auth used JWT successfully. Similar requirements. Likely: JWT works here. Verify first."
 
-Strategy:
-- Assess existing architecture (sessions? stateless?)
-- Choose auth method (JWT, OAuth, session-based)
-- Plan integration points (middleware, protected routes)
-- Consider security (password hashing, token storage, HTTPS)
+**Causal:** "Cache TTL 5min→1min → response +200ms. Causal: Short TTL → more DB queries."
 
-Alternatives:
-- Session-based (simpler, requires server state)
-- JWT tokens (stateless, more scalable)
-- OAuth delegation (external provider)
+**Counterfactual:** "Slow performance. What if Redis vs memcache? Evaluate tradeoffs before switch."
 
-Fallbacks:
-- If JWT proves complex, fall back to session-based
-- If OAuth integration fails, implement basic JWT
+**Strategic:** "Scale to 10M users. Approach: Microservices, caching, DB optimization. Timeline: 6 months."
 
-Common mistakes:
-- Storing passwords in plaintext (use bcrypt)
-- Weak JWT secrets (use cryptographically secure random)
-- No HTTPS enforcement (sensitive data exposure)
+**Tactical:** "Next: 1) Profile bottleneck 2) Add user table index 3) Deploy and measure."
 
-High-quality output:
-- Secure password hashing
-- Proper token expiration
-- Protected routes with middleware
-- Clear error messages for auth failures
-```
+**Creative/Lateral:** "Login slow, optimization failed. Lateral: Cache entire session? Novel approach works."
 
-**Result:** Expert reasoning revealed multiple security considerations that might have been missed with immediate implementation. Approach selected before writing code.
+**Critical:** "Assumption: Real-time updates needed. Challenge: Really? Survey: Hourly fine. Simplify."
 
-### Example 2: Moderate Task - Refactoring Function
+**Analytical:** "Auth system → decompose: user model, hash, sessions, middleware, routes, tests."
 
-**Context:** User asks to refactor a 50-line function to improve readability.
-
-**Application:** Use Quick Assessment (moderate complexity, familiar domain)
-
-**Reasoning:**
-```
-Key considerations:
-- Identify separate concerns within function
-- Extract helper functions for each concern
-- Preserve existing behavior (tests must pass)
-
-Primary approach:
-- Extract logging logic to separate function
-- Extract validation logic to separate function
-- Main function orchestrates extracted functions
-
-Alternative:
-- Split into multiple smaller functions (might be overkill for 50 lines)
-
-Main risk:
-- Breaking existing behavior during refactoring (run tests frequently)
-```
-
-**Result:** Quick assessment provided clear direction without over-analyzing. Refactoring proceeded smoothly.
-
-### Example 3: Simple Task - Adding Console Log
-
-**Context:** User asks to add debug logging to a specific function.
-
-**Application:** Skip pre-action reasoning (simple, obvious approach)
-
-**Implementation:** Directly add `console.log(...)` at relevant point.
-
-**Verification:** Use Confirm pattern to verify
-```
-Before declaring done, verify:
-- [✓] Log statement added at correct location
-- [✓] Log includes relevant context (function name, key variables)
-- [✓] Log doesn't expose sensitive data
-```
-
-**Result:** Task completed efficiently without unnecessary reasoning overhead.
+**Systems:** "Cache change affects: DB load, response time, memory, cost. Feedback: less cache → more DB → slower."
 
 ---
 
-## Patterns
+## References
 
-**Pattern: Scale reasoning to complexity**
-- Match pre-action reasoning depth to task difficulty
-- Don't over-engineer simple tasks
-- Don't under-think complex ones
+**Foundational reasoning:**
+- [Deductive, Inductive and Abductive Reasoning - Butte College](https://www.butte.edu/departments/cas/tipsheets/thinking/reasoning.html)
+- [Types of Reasoning - Mathematics LibreTexts](https://math.libretexts.org/Courses/Coalinga_College/Math_for_Educators_(MATH_010A_and_010B_CID120)/06:_Mathematical_Reasoning/6.02:_Types_of_Reasoning)
+- [Critical Thinking - Internet Encyclopedia of Philosophy](https://iep.utm.edu/critical-thinking/)
+- [Informal Logic - Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/logic-informal/)
 
-**Pattern: Always verify**
-- Confirm is not optional
-- Verification catches issues before they propagate
+**Causal reasoning:**
+- [Judea Pearl on LLMs, Causal Reasoning, and AI](https://causalai.causalens.com/resources/blog/judea-pearl-on-the-future-of-ai-llms-and-need-for-causal-reasoning/)
+- [Causal AI: How cause and effect will change AI - S&P Global](https://www.spglobal.com/en/research-insights/special-reports/causal-ai-how-cause-and-effect-will-change-artificial-intelligence)
 
----
+**Computational thinking:**
+- [Problem-Solving Techniques in Computational Thinking - Sage Journals](https://journals.sagepub.com/doi/10.1177/21582440241249897)
+- [Computational Thinking in Complex Problem Solving - Springer](https://link.springer.com/article/10.1186/s13662-025-03866-3)
 
-## Anti-Patterns
-
-**Anti-Pattern: Skipping reasoning on complex tasks**
-- Leads to poor approaches, wasted effort, rework
-- When in doubt, use Quick Assessment at minimum
-
-**Anti-Pattern: Skipping verification**
-- Leads to incomplete work marked as complete
-- Confirm is required, not optional
-
-**Anti-Pattern: Over-reasoning simple tasks**
-- Expert Reasoning on trivial tasks wastes time
-- Match pattern to complexity
-
----
-
-## When to Apply
-
-Use this protocol when:
-
-- **Starting a primitive or workflow** - Apply pre-action reasoning appropriate to task complexity
-- **Before declaring completion** - Always use Confirm pattern to verify key results
-- **Task approach is unclear** - Upgrade from Quick Assessment to Expert Reasoning
-- **Previous approach failed** - Use Expert Reasoning to consider alternatives
-- **Reviewing workflow design** - Ensure reasoning patterns are specified for each step
-- **Teaching or documenting skills** - Include reasoning patterns in skill instructions
-
----
-
-## Key Takeaways
-
-- Pre-action reasoning prevents poor approaches (scale to complexity)
-- Post-action verification prevents premature completion (always required)
-- Default to Quick Assessment + Confirm
-- Upgrade to Expert Reasoning when task is complex or unfamiliar
+**Thinking techniques:**
+- [Lateral Thinking - Edward de Bono](https://www.interaction-design.org/literature/topics/lateral-thinking)
+- [Strategic Thinking Training - Six Paths Consulting](https://www.sixpathsconsulting.com/strategic-thinking-training/)
+- [Critical, Creative, Systems Thinking - ScienceDirect](https://www.sciencedirect.com/science/article/pii/S1871187125002627)
