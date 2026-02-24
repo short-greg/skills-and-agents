@@ -33,7 +33,14 @@ In the template, sections are required [REQUIRED], recommended [RECOMMENDED], or
 
 ## Protocol Structure
 
-Protocols capture essential principles and patterns. They focus on WHAT matters and HOW to do it.
+Protocols are **instruction-focused**, not descriptive essays. Follow this content pattern:
+
+1. **Description (light)** - Goal/Intent/Scope for context
+2. **Instructions** - How to do it (actionable steps in Techniques)
+3. **Criteria** - How to evaluate success (in Core Concepts and/or Techniques)
+4. **Patterns** - Examples showing it in action
+
+See `protocols/instructions.md` for writing effective instruction-focused content.
 
 ---
 
@@ -72,33 +79,48 @@ Why this protocol exists — what problem it solves or prevents.
 
 ## Core Concepts
 
-The core ideas that define this protocol (WHAT matters, not HOW to do it).
+**Keep this light.** Prefer evaluation criteria over verbose descriptions.
 
-[Format as appropriate:
-- Bulleted principles
-- Numbered dimensions/criteria
-- Categorized concepts
+**Best format:** Table with evaluation criteria
 
-Focus on defining what's important, not implementation details.]
+```markdown
+| Concept | Check for strength | Check for excess |
+|---------|-------------------|------------------|
+| [Name] | [How to verify it's working] | [How to detect too much] |
+```
+
+**Alternative:** Brief bulleted principles (2-3 sentences max each)
+
+**Avoid:** Long explanations of what concepts mean. Focus on what to check, not what to know.
 
 ---
 
 ## Techniques
 
-How to apply this protocol - the practical methods and approaches.
+**Instructions for how to do it + criteria for evaluating success.**
 
-[Group related techniques. Use categories if many techniques, simple list if few. Avoid including a lot of examples of things the LLM already understands or common patterns]
+**Include:**
+1. **Process steps** - Numbered instructions (1. Do X, 2. Do Y, 3. Do Z)
+2. **Decision guidance** - How to make choices ("Make X explicit", "Hide Y", "Establish Z")
+3. **Evaluation criteria** - How to assess if done correctly (checklist or questions)
 
-- [Technique 1] - [Brief description]
-- [Technique 2] - [Brief description]
+**Format example:**
 
-[Or if categorized:]
+```markdown
+**[Technique name]:**
 
-**[Category]:**
-- [Technique] - [Brief description]
+[Brief instruction on how to apply]
 
-**[Category]:**
-- [Technique] - [Brief description]
+1. Step 1 - [action]
+2. Step 2 - [action]
+3. Step 3 - [action]
+
+**Evaluation criteria:**
+- [Question or check 1]
+- [Question or check 2]
+```
+
+**Avoid:** Vague platitudes like "make good decisions" or "coupling that makes sense is good." Be specific and actionable.
 
 ---
 
@@ -232,6 +254,23 @@ Think carefully about quality and make good decisions.
 - Review code against quality dimensions systematically
 - Categorize issues by severity (critical, non-blocking, suggestion)
 - Provide specific improvement recommendations with locations
+```
+
+❌ **Vague platitudes**
+```markdown
+## Techniques
+- Coupling that makes sense is good
+- Make sure cohesion is appropriate
+- Balance all the objectives
+```
+*These provide no actionable guidance.*
+
+✅ **Specific, actionable instructions**
+```markdown
+## Techniques
+- Make dependencies explicit and depend on stable interfaces, not implementation details
+- Group responsibilities that change together into same component
+- Evaluate: Which objectives does this design optimize? Which does it sacrifice? Is that appropriate?
 ```
 
 ❌ **Used by only one skill**
