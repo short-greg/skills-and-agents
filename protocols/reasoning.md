@@ -18,7 +18,9 @@ AI tends to rush into solutions without considering approach, and declare comple
 
 ## Scope
 
-This protocol addresses reasoning patterns for primitives and workflows: pre-action reasoning (Expert Reasoning and alternatives), post-action verification (Confirm), and guidance on when to use each.
+**Addresses:** Reasoning patterns for primitives and workflows (pre-action reasoning, post-action verification, pattern selection based on complexity)
+
+**Does not address:** Domain-specific reasoning techniques, debugging strategies, code review patterns
 
 ---
 
@@ -105,6 +107,94 @@ Report outcome explicitly: state whether succeeded or failed, and why.
 
 ---
 
+## Examples
+
+### Example 1: Complex Task - Designing Authentication System
+
+**Context:** User asks to add authentication to an existing web application.
+
+**Application:** Use Expert Reasoning (complex, multiple valid approaches, high stakes)
+
+**Reasoning:**
+```
+Before implementing authentication, an expert would approach this by:
+
+Strategy:
+- Assess existing architecture (sessions? stateless?)
+- Choose auth method (JWT, OAuth, session-based)
+- Plan integration points (middleware, protected routes)
+- Consider security (password hashing, token storage, HTTPS)
+
+Alternatives:
+- Session-based (simpler, requires server state)
+- JWT tokens (stateless, more scalable)
+- OAuth delegation (external provider)
+
+Fallbacks:
+- If JWT proves complex, fall back to session-based
+- If OAuth integration fails, implement basic JWT
+
+Common mistakes:
+- Storing passwords in plaintext (use bcrypt)
+- Weak JWT secrets (use cryptographically secure random)
+- No HTTPS enforcement (sensitive data exposure)
+
+High-quality output:
+- Secure password hashing
+- Proper token expiration
+- Protected routes with middleware
+- Clear error messages for auth failures
+```
+
+**Result:** Expert reasoning revealed multiple security considerations that might have been missed with immediate implementation. Approach selected before writing code.
+
+### Example 2: Moderate Task - Refactoring Function
+
+**Context:** User asks to refactor a 50-line function to improve readability.
+
+**Application:** Use Quick Assessment (moderate complexity, familiar domain)
+
+**Reasoning:**
+```
+Key considerations:
+- Identify separate concerns within function
+- Extract helper functions for each concern
+- Preserve existing behavior (tests must pass)
+
+Primary approach:
+- Extract logging logic to separate function
+- Extract validation logic to separate function
+- Main function orchestrates extracted functions
+
+Alternative:
+- Split into multiple smaller functions (might be overkill for 50 lines)
+
+Main risk:
+- Breaking existing behavior during refactoring (run tests frequently)
+```
+
+**Result:** Quick assessment provided clear direction without over-analyzing. Refactoring proceeded smoothly.
+
+### Example 3: Simple Task - Adding Console Log
+
+**Context:** User asks to add debug logging to a specific function.
+
+**Application:** Skip pre-action reasoning (simple, obvious approach)
+
+**Implementation:** Directly add `console.log(...)` at relevant point.
+
+**Verification:** Use Confirm pattern to verify
+```
+Before declaring done, verify:
+- [✓] Log statement added at correct location
+- [✓] Log includes relevant context (function name, key variables)
+- [✓] Log doesn't expose sensitive data
+```
+
+**Result:** Task completed efficiently without unnecessary reasoning overhead.
+
+---
+
 ## Patterns
 
 **Pattern: Scale reasoning to complexity**
@@ -131,6 +221,19 @@ Report outcome explicitly: state whether succeeded or failed, and why.
 **Anti-Pattern: Over-reasoning simple tasks**
 - Expert Reasoning on trivial tasks wastes time
 - Match pattern to complexity
+
+---
+
+## When to Apply
+
+Use this protocol when:
+
+- **Starting a primitive or workflow** - Apply pre-action reasoning appropriate to task complexity
+- **Before declaring completion** - Always use Confirm pattern to verify key results
+- **Task approach is unclear** - Upgrade from Quick Assessment to Expert Reasoning
+- **Previous approach failed** - Use Expert Reasoning to consider alternatives
+- **Reviewing workflow design** - Ensure reasoning patterns are specified for each step
+- **Teaching or documenting skills** - Include reasoning patterns in skill instructions
 
 ---
 

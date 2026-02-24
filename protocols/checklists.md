@@ -39,7 +39,11 @@ Checklists are a primary mechanism for tracking progress in workflows. Unlike st
 
 **Intent:** Prevent workflows from skipping steps, losing track of progress, or becoming rigid when reality differs from initial plans.
 
-**Scope:** This protocol covers checklist structure, dynamic modification, progress tracking, and integration with the tracking protocol. It does NOT cover validation logic (see primitives) or workflow design (see create_workflow).
+**Scope:**
+
+**Addresses:** Checklist structure, dynamic modification patterns, progress tracking, integration with tracking protocol, loop-back patterns, conditional logic
+
+**Does not address:** Validation logic (see primitives), workflow design (see create_workflow), recovery mechanisms (see recovery protocol)
 
 ---
 
@@ -526,6 +530,19 @@ Build in small pieces, verify each:
 **Bad:** Silently delete/modify items without explanation
 
 **Good:** Strike through with reason, preserve history
+
+---
+
+## When to Apply
+
+Use this protocol when:
+
+- **Implementing workflows** - Build checklist from Key Results to ensure complete execution
+- **Starting multi-step tasks** - Create preliminary checklist to track planned work
+- **Discovering new requirements** - Add items dynamically as needs become clear
+- **During code reviews** - Check that workflows have proper checklist tracking
+- **Resuming after interruption** - Use checklist state to determine where to continue
+- **Debugging workflow issues** - Examine checklist history to understand what was attempted
 
 ---
 

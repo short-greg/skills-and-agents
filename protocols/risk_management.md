@@ -4,20 +4,38 @@ This protocol defines techniques for identifying and mitigating complexity, unce
 
 ---
 
-## Overview
+## Goal
 
-Workflows often face three interrelated challenges:
+Enable workflows to systematically identify and mitigate complexity, uncertainty, and risk.
+
+---
+
+## Intent
+
+Workflows often face three interrelated challenges: complexity (many parts, dependencies, intricate logic), uncertainty (unclear requirements or approach), and risk (potential for failure). Without systematic techniques to address these, workflows fail, skip steps, or produce incorrect results. This protocol provides concrete strategies to recognize and handle each challenge.
+
+---
+
+## Scope
+
+**Addresses:** Identifying and mitigating complexity (essential vs accidental), uncertainty (requirements, approach, outcomes), and risk (technical, operational, external) in workflows
+
+**Does not address:** Project management, team coordination, resource allocation, business risk assessment
+
+---
+
+## Core Concepts
+
+Workflows face three distinct but related challenges:
 
 - **Complexity**: The workflow involves many parts, dependencies, or intricate logic
 - **Uncertainty**: The workflow's requirements, approach, or outcomes are unclear or unknown
 - **Risk**: The workflow has potential for failure, delays, or unintended consequences
 
-These concepts are distinct but related:
+Key relationships:
 - **Complexity** increases the likelihood of errors and makes failures harder to diagnose
 - **Uncertainty** means we don't know what complexity exists or what risks we face
 - **Risk** is the potential for failure — it's increased by both complexity and uncertainty
-
-Effective workflows identify and address all three.
 
 ---
 
@@ -316,14 +334,18 @@ Prioritize risks: High impact + High probability = Address immediately
 3. **Adapt** workflow based on what's discovered
 4. **Learn** from failures to improve future workflows
 
-### When to Reference This Protocol
+---
 
-- When designing adaptive workflows
-- When workflows have >6-7 steps
-- When workflows involve external dependencies
-- When requirements are unclear or changing
-- When failures occur and root cause is complex
-- When deciding between workflow approaches
+## When to Apply
+
+Use this protocol when:
+
+- **Designing adaptive workflows** - Identify complexity, uncertainty, and risk upfront
+- **Workflows have >6-7 steps** - Complexity management becomes critical
+- **External dependencies involved** - APIs, services, databases introduce risk
+- **Requirements are unclear or changing** - Uncertainty needs systematic reduction
+- **Failures occur with complex root causes** - Use techniques to diagnose and mitigate
+- **Deciding between workflow approaches** - Assess tradeoffs of complexity, uncertainty, risk
 
 ---
 
