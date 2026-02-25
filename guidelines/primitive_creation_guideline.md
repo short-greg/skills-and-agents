@@ -24,6 +24,52 @@ A primitive is an **atomic cognitive action** - a single, indivisible operation 
 
 ---
 
+## Writing Style for Primitives
+
+Primitives are **instruction-focused** or **evaluation-focused**, not descriptive essays.
+
+**Key principles:**
+1. **Action-oriented/instruction-oriented OR evaluation-oriented language**
+   - Actions: Use imperatives: "Identify gaps", "Verify criteria", not "The primitive identifies..."
+   - Evaluation: Use checks: "Gaps identified?", "Criteria verified?", not "The validation process..."
+2. **Evaluation criteria over descriptions** - Focus on what to check or do, not what things mean
+3. **Minimal descriptions** - Goal/Intent/Scope should be brief context only (2-3 sentences max)
+4. **Instructions first** - Actions section is the heart of the primitive
+
+**Example transformations:**
+- ❌ Descriptive: "Validation is the process of checking whether something meets criteria..."
+- ✅ Action-oriented: "Verify against each criterion. Check evidence. Report pass/fail with specifics."
+- ✅ Evaluation-oriented: "Criteria verified? Evidence checked? Pass/fail reported with specifics?"
+
+---
+
+## Research Best Practices
+
+**Before writing a new primitive, research in this order:**
+
+**Step 1: Claude Code's website FIRST**
+
+1. Search Claude Code's documentation: "site:claude.ai OR site:docs.anthropic.com [primitive topic] best practices"
+2. Incorporate Claude Code's guidelines as foundation
+3. These take precedence
+
+**Step 2: Expert/academic best practices (in addition)**
+
+1. **Web search** for academic and expert sources on the cognitive operation
+   - Example: Creating `reason` primitive → search "reasoning techniques academic cognitive science"
+   - Example: Creating `validate` primitive → search "validation criteria software engineering best practices"
+
+2. **Incorporate findings** into Actions section (complementing Claude Code guidelines)
+   - Add techniques from academic sources
+   - Reference expert frameworks
+   - Include non-obvious strategies
+
+3. **Add References section** with ALL sources (Claude Code + research)
+
+**This ensures primitives reflect Claude Code guidelines PLUS expert knowledge, not just intuition.**
+
+---
+
 ## When to Create a Primitive
 
 Create a primitive when you have:
@@ -32,9 +78,10 @@ Create a primitive when you have:
 - A clear question it answers that no other primitive answers
 
 **Before creating a new primitive:**
-1. Check if an existing primitive already covers this (>50% overlap means extend that one instead)
-2. Verify it's truly atomic (can't be decomposed into multiple primitives)
-3. Confirm it has a distinct purpose
+1. **Research** best practices from experts/academics (see above)
+2. Check if an existing primitive already covers this (>50% overlap means extend that one instead)
+3. Verify it's truly atomic (can't be decomposed into multiple primitives)
+4. Confirm it has a distinct purpose
 
 ---
 
@@ -42,16 +89,22 @@ Create a primitive when you have:
 
 Primitives differ from the base skill template in these ways:
 
-### 1. Simpler Requirements
+### 1. Conciseness Target
+Primitives should be **100-150 lines maximum**. If longer, refactor into multiple primitives or remove verbose descriptions.
+
+### 2. Simpler Requirements
 Primitives typically have fewer constraints than workflows (2-4 requirements vs 5-9).
 
-### 2. Exactly 2 Key Results
+### 3. Exactly 2 Key Results
 Primitives are atomic, so they have exactly 2 KRs (not 3-4 like workflows).
 
-### 3. Actions Section
+### 4. Actions Section
 Replace "Execution Items" with "Actions" - the detailed steps to execute the primitive.
+- Use **tables** for categorizing actions when appropriate (clearer than prose)
+- Each action maps to KR(s): `(→ KR#)`
+- Include **evaluation criteria** at end of Actions section
 
-### 4. No Steps Section
+### 5. No Steps Section
 Primitives don't have a separate Steps section - they go straight to Actions.
 
 ---

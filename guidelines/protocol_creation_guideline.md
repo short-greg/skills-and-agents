@@ -40,6 +40,10 @@ Protocols are **instruction-focused**, not descriptive essays. Follow this conte
 3. **Criteria** - How to evaluate success (in Core Concepts and/or Techniques)
 4. **Patterns** - Examples showing it in action
 
+**Prefer output-oriented instructions** - LLMs execute more rigorously when artifacts are explicit:
+- Preferred: "Output an evaluation of X against Y"
+- Acceptable: "Evaluate X against Y"
+
 See `protocols/instructions.md` for writing effective instruction-focused content.
 
 ---

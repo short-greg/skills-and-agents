@@ -1,16 +1,17 @@
 ---
-name: implement
+name: implementing
 description: >
-  Use when writing code, tests, or other artifacts to realize a design. A primitive is an atomic cognitive action - it does one thing well.
-  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive. They are specified in the instruction body.
-  Triggers on: "implement this", "write the code", "build this", "code this up", "create the feature", "add the tests", "implement the design", "write the function", "make this work".
+  Writes code, tests, or other artifacts to realize a design.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
+  Triggers on: "implement this", "write the code", "build this", "code this up",
+  "create the feature", "add the tests", "implement the design", "write the function".
 argument-hint: "[what to implement]"
-disable-model-invocation: true
+disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep, Write, Edit, Bash
 ---
 
-# Implement
+# Implementing
 
 **Goal:** Produce working code or artifacts that realize design and meet specified requirements.
 
@@ -22,26 +23,31 @@ allowed-tools: Read, Grep, Write, Edit, Bash
 
 ## Key Results - KR
 
-You must satisfy these to complete the primitive successfully.
-
-1. Implementation matches design and requirements (follows conventions, handles edge cases, code is readable, tests written, integrates cleanly)
-2. Tests pass (or failures documented with specifics)
+1. Implementation matches design and requirements — follows conventions, handles edge cases, code is readable, integrates cleanly
+2. Tests pass — or failures documented with specifics
 
 ## Requirements and Constraints - REQ
 
-Constraints on how to execute the primitive.
+1. Understand project conventions BEFORE writing any code
+2. Produce modular code with clear boundaries and minimal coupling
+3. Update documentation when implementation changes behavior or APIs
 
-1. Track progress during multi-file or long implementations per `tracking.md`
-2. Produce modular code with clear boundaries and minimal coupling per `modularity.md`
-3. Ensure code meets quality dimensions: correctness, clarity, maintainability per `quality.md`
-4. Update documentation when implementation changes behavior or APIs per `documentation.md`
-5. Understand project conventions BEFORE writing any code (read existing code, style guides, CLAUDE.md)
+---
+
+## Protocols
+
+Use these protocols to satisfy key results. Read each protocol before using it.
+
+- **modularity.md** - Must use for modular code with clear boundaries
+- **quality.md** - Must use to ensure correctness, clarity, maintainability
+- **documentation.md** - Must use when implementation changes behavior or APIs
+- **checklists.md** - Must use to ensure completeness
+- **tracking.md** - Use when tracking progress during multi-file implementations
+- **recovery.md** - Use when resuming after interruption
 
 ---
 
 ## Preconditions
-
-Satisfy preconditions before beginning unless Optional.
 
 **Required:** What to implement, design or approach (how it should be built), project conventions (repo patterns, style, structure)
 
@@ -53,11 +59,9 @@ Satisfy preconditions before beginning unless Optional.
 
 ## Postconditions
 
-The resulting state after the primitive is finished.
+**Success:** Code implements specified functionality, matches design, follows conventions, handles edge cases, tests pass
 
-**Success:** Code or artifacts exist that implement specified functionality. Implementation matches design. Code follows conventions and patterns. Edge cases and error conditions handled. Code is readable and maintainable. Tests pass.
-
-**Failure:** Requirements unclear (need definition first), design missing or insufficient (need design first), implementation blocked by external factors (missing dependencies, access issues), cannot satisfy requirements within existing constraints.
+**Failure:** Requirements unclear, design missing, blocked by external factors
 
 ---
 
@@ -85,4 +89,11 @@ Flag design issues if implementation reveals problems. For minor issues, propose
 
 ## Additional Notes and Terms
 
-**Use cases:** Implementing feature after design is complete, writing bug fix, adding tests to existing code, creating new module or component, implementing API endpoint, writing script or utility.
+None
+
+---
+
+## References
+
+- [Anthropic - Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
+- [Google - Code Review Standards](https://google.github.io/eng-practices/review/reviewer/standard.html)

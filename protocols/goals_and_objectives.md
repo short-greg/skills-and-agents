@@ -45,6 +45,15 @@ Without explicit goals and measurable outcomes, work drifts, success becomes sub
 - **Objective**: Metric-based (counts, %, time) - valid when measurable, not gaming-prone
 - **Hybrid**: Combine both (metrics + expert review) - often best, balances rigor with insight
 
+**SMARB criteria for each key result:**
+| Criterion | Check | Example |
+|-----------|-------|---------|
+| **Specific** | Unambiguous, one interpretation | "Response time <100ms" not "Fast response" |
+| **Measurable** | Pass/fail verifiable | "Coverage >85%" not "Good coverage" |
+| **Achievable** | Within scope and resources | Realistic given constraints |
+| **Relevant** | Addresses the objective | Directly supports the goal |
+| **Bounded** | Clear stopping condition | "By end of sprint" not "Soon" |
+
 **Context-appropriate focus:**
 - **PRD:** User outcomes (satisfaction, adoption, value delivered)
 - **Plan:** Feasibility (performance, scalability, risk mitigation)
@@ -67,6 +76,7 @@ Without explicit goals and measurable outcomes, work drifts, success becomes sub
 **Evaluation criteria:**
 - Objective clear (one sentence explanation)?
 - KRs are outcomes (what changed), not implementation steps (what you'll do)?
+- Each KR passes SMARB (Specific, Measurable, Achievable, Relevant, Bounded)?
 - Evaluation method appropriate (won't cause gaming, captures what matters)?
 - Constraints explicit (time, scope, resources)?
 - Context-appropriate (PRD→user value, plan→feasibility, impl→quality)?

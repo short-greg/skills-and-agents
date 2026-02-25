@@ -1,16 +1,17 @@
 ---
-name: investigate
+name: investigating
 description: >
-  Use when uncertain about something and need to gather information before proceeding. A primitive is an atomic cognitive action - it does one thing well.
-  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive. They are specified in the instruction body.
-  Triggers on: "investigate", "research", "look into", "find out", "what are the options", "what's the best practice", "check the docs", "find prior art", "why is this happening", "I'm not sure about", "what solutions exist", "how do others do this".
+  Gathers information to reduce uncertainty before proceeding.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
+  Triggers on: "investigate", "research", "look into", "find out", "why is this happening",
+  "what's the best practice", "check the docs", "find prior art", "what solutions exist".
 argument-hint: "[question or topic to investigate]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep, WebSearch, WebFetch
 ---
 
-# Investigate
+# Investigating
 
 **Goal:** Mitigate uncertainty by gathering sufficient information to proceed with confidence.
 
@@ -22,26 +23,30 @@ allowed-tools: Read, Grep, WebSearch, WebFetch
 
 ## Key Results - KR
 
-You must satisfy these to complete the primitive successfully.
-
-1. Uncertainty reduced with grounded answer (sources cited, confidence level stated, options enumerated if researching solutions, root cause identified if debugging)
+1. Uncertainty reduced with grounded answer — sources cited, confidence stated, root cause identified if debugging
 2. Findings are actionable — clear what to do next based on results
 
 ## Requirements and Constraints - REQ
 
-Constraints on how to execute the primitive.
+1. Assess own uncertainty explicitly — identify what LLM does not know
+2. Form hypotheses before investigating
+3. Cite sources — where did information come from
 
-1. Track what investigated vs what questions remain per `tracking.md`
-2. Form hypotheses before investigating, verify findings grounded in evidence after per `reasoning.md`
-3. Assess own uncertainty explicitly — identify what LLM does not know or is unsure about
-4. Distinguish root cause from symptoms when debugging per `risk_management.md`
-5. Cite sources — where did information come from
+---
+
+## Protocols
+
+Use these protocols to satisfy key results. Read each protocol before using it.
+
+- **reasoning.md** - Must use for forming and testing hypotheses
+- **checklists.md** - Must use to ensure completeness
+- **risk_management.md** - Use when distinguishing root cause from symptoms
+- **tracking.md** - Use when tracking what investigated vs questions remaining
+- **recovery.md** - Use when resuming after interruption
 
 ---
 
 ## Preconditions
-
-Satisfy preconditions before beginning unless Optional.
 
 **Required:** Uncertainty assessment (LLM reflects on what it does not know), question or topic to investigate
 
@@ -53,11 +58,9 @@ Satisfy preconditions before beginning unless Optional.
 
 ## Postconditions
 
-The resulting state after the primitive is finished.
+**Success:** Uncertainty mitigated with evidence, findings grounded in sources, confidence stated, next steps clear
 
-**Success:** Uncertainty mitigated with evidence. Findings grounded in sources, not speculation. Confidence level stated. Findings documented clearly enough to inform next steps.
-
-**Failure:** Insufficient access to information (docs missing, code inaccessible, web search blocked), investigation scope too broad (needs narrowing), question cannot be answered with available evidence.
+**Failure:** Insufficient access to information, scope too broad, question cannot be answered
 
 ---
 
@@ -67,7 +70,7 @@ Select and execute actions to achieve each Key Result. Each action shows which K
 
 ### Gather Information (→ KR1)
 
-**Self-reflection:** Assess own uncertainty (identify what LLM does not know or is unsure about). Ask user for clarification when uncertain about context, intent, or constraints only user can provide.
+**Self-reflection:** Output an assessment of own uncertainty (identify what LLM does not know or is unsure about). Ask user for clarification when uncertain about context, intent, or constraints only user can provide.
 
 **External research:** Search web (find current documentation, best practices, known issues, solutions). Survey solutions (enumerate available approaches, libraries, patterns). Find prior art (how others solved similar problems). Check documentation (read official docs for APIs, libraries, tools).
 
@@ -83,4 +86,13 @@ Select and execute actions to achieve each Key Result. Each action shows which K
 
 ## Additional Notes and Terms
 
-**Use cases:** Researching best practices before designing, surveying available libraries before choosing, finding current documentation when LLM knowledge may be outdated, debugging bug when cause is unknown, understanding unfamiliar codebase, determining whether suspected issue is real, clarifying ambiguous requirements.
+None
+
+---
+
+## References
+
+- [Anthropic - Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
+- [TapRoot - Six Root Cause Analysis Best Practices](https://taproot.com/root-cause-analysis-best-practices/)
+- [TestDevLab - Core Principles of Root Cause Analysis](https://www.testdevlab.com/blog/what-is-root-cause-analysis)
+- [Bugasura - Root Cause Analysis Guide](https://bugasura.io/blog/root-cause-analysis-for-bug-tracking/)

@@ -90,3 +90,6 @@ Pass only if ALL criteria pass. Fail if ANY criterion fails. For failures, ident
 **Validation is objective verification** — answers "does this meet criteria?" not "is this good quality?" For quality assessment, use `critique` primitive.
 
 **Evidence-based decisions** — REQ1 requires finding evidence for both passing and failing before deciding. This prevents confirmation bias and ensures rigorous evaluation.
+
+
+[TODO: Include information on how to define a term rigorously so that it can be validated whether it is satisfied]
