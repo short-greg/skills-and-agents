@@ -41,12 +41,23 @@ AI tends to rush into solutions without deliberate reasoning, and declare comple
 
 | Technique | Check for strength | Check for excess | When to use |
 |-----------|-------------------|------------------|-------------|
+| **First Principles** | Problem reduced to fundamental truths, rebuilt from scratch | Reinventing when existing solutions work | Challenge assumptions, rebuild from fundamentals |
 | **Strategic** | Long-term vision, systems perspective, big picture | Analysis paralysis, never executing | Plan approach, long-term goals |
 | **Tactical** | Immediate next steps clear, actionable plan | Losing sight of overall goal | Determine immediate actions |
 | **Creative/Lateral** | Novel approaches explored, indirect solutions | Novelty for novelty's sake | Generate novel solutions |
 | **Critical** | Assumptions challenged, evidence evaluated | Endless critique, no construction | Challenge assumptions |
 | **Analytical** | Problem decomposed, cause-effect identified | Over-fragmentation, missing gestalt | Break down complex problems |
 | **Systems** | Interdependencies mapped, feedback loops identified | Complexity overwhelms, no action | Map interdependencies |
+
+### First Principles Technique (Detail)
+
+**Steps:**
+1. **Identify assumptions:** Write down what you assume to be true. Assumptions are invisible until named.
+2. **Break down to fundamentals:** Ask "What is this fundamentally made of?" Reduce to basic, undeniable truths.
+3. **Rebuild from scratch:** Reason upward from fundamentals. Ignore how things have "always been done."
+4. **Test with small experiments:** Validate rebuilt assumptions with pilots or prototypes.
+
+**Example (Musk/SpaceX):** Industry price $65M/launch. First principles: What are rockets made of? Aluminum, titanium, carbon fiber — commodity prices ~2% of launch cost. Gap = inefficiency, not physics. Result: 10x cost reduction.
 
 ---
 
@@ -124,6 +135,8 @@ Apply when:
 
 **Counterfactual:** "Slow performance. What if Redis vs memcache? Evaluate tradeoffs before switch."
 
+**First Principles:** "API slow. Assumption: Need bigger servers. First principles: What does API do? Fetch, transform, return. Fundamentals: DB query 500ms, transform 10ms, network 50ms. Rebuild: Fix query, not servers."
+
 **Strategic:** "Scale to 10M users. Approach: Microservices, caching, DB optimization. Timeline: 6 months."
 
 **Tactical:** "Next: 1) Profile bottleneck 2) Add user table index 3) Deploy and measure."
@@ -139,6 +152,10 @@ Apply when:
 ---
 
 ## References
+
+**First principles:**
+- [First Principles: The Building Blocks of True Knowledge - Farnam Street](https://fs.blog/first-principles/)
+- [Elon Musk's First Principles Thinking - James Clear](https://jamesclear.com/first-principles)
 
 **Foundational reasoning:**
 - [Deductive, Inductive and Abductive Reasoning - Butte College](https://www.butte.edu/departments/cas/tipsheets/thinking/reasoning.html)

@@ -1,16 +1,17 @@
 ---
-name: orient
+name: orienting
 description: >
-  Use when you need to understand the current state of something before deciding what to do. A primitive is an atomic cognitive action - it does one thing well.
-  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive. They are specified in the instruction body.
-  Triggers on: "orient me", "where are we", "what's the current state", "what's the situation", "how bad is it", "what do we have", "take stock", "size this up", "what's working", "get my bearings", "gap analysis", "assess the situation".
+  Understands current state before deciding what to do.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
+  Triggers on: "orient me", "where are we", "what's the current state", "what's the situation",
+  "take stock", "size this up", "gap analysis", "assess the situation".
 argument-hint: "[subject to orient on]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep
 ---
 
-# Orient
+# Orienting
 
 **Goal:** Produce accurate picture of current state so next steps can be decided with confidence.
 
@@ -22,25 +23,29 @@ allowed-tools: Read, Grep
 
 ## Key Results - KR
 
-You must satisfy these to complete the primitive successfully.
-
-1. Current state described accurately with gaps, issues, risks, and strengths identified
+1. Current state described accurately — gaps, issues, risks, and strengths identified
 2. Orientation is actionable — reader knows what decisions need to be made
 
 ## Requirements and Constraints - REQ
 
-Constraints on how to execute the primitive.
+1. No significant omissions — inventory comprehensively
+2. Distinguish what works from what doesn't clearly
+3. Be aware of cognitive biases that might affect assessment
 
-1. Track what assessed vs what remains per `tracking.md`
-2. Reason about orientation approach before starting, verify findings after per `reasoning.md`
-3. No significant omissions — inventory comprehensively
-4. Distinguish what works from what doesn't clearly
+---
+
+## Protocols
+
+Use these protocols to satisfy key results. Read each protocol before using it.
+
+- **reasoning.md** - Must use to reason about approach and verify findings
+- **checklists.md** - Must use to ensure comprehensive coverage
+- **tracking.md** - Use when tracking what assessed vs remaining
+- **recovery.md** - Use when resuming after interruption
 
 ---
 
 ## Preconditions
-
-Satisfy preconditions before beginning unless Optional.
 
 **Required:** Subject to orient on
 
@@ -52,11 +57,9 @@ Satisfy preconditions before beginning unless Optional.
 
 ## Postconditions
 
-The resulting state after the primitive is finished.
+**Success:** Current state documented accurately, gaps and issues surfaced, orientation is actionable
 
-**Success:** Current state documented accurately, gaps and issues surfaced, what works distinguished from what doesn't, orientation is actionable.
-
-**Failure:** Cannot access subject (missing files, access denied), subject too large or ill-defined without scoping input.
+**Failure:** Cannot access subject, subject too large or ill-defined
 
 ---
 
@@ -78,4 +81,12 @@ Produce concise summary of current state with evidence. Flag decision points —
 
 ## Additional Notes and Terms
 
-**Use cases:** Before starting refactor, before planning feature, evaluating code quality or test coverage, understanding bug state before debugging, sizing work before committing to plan.
+None
+
+---
+
+## References
+
+- [Anthropic - Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
+- [Farnam Street - The OODA Loop](https://fs.blog/ooda-loop/)
+- [Corporate Finance Institute - OODA Loop Guide](https://corporatefinanceinstitute.com/resources/management/ooda-loop/)

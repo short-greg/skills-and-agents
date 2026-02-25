@@ -28,7 +28,7 @@ allowed-tools: Read, Grep
 
 ## Requirements and Constraints - REQ
 
-1. Find evidence for multiple quality grades before deciding final grade
+1. Output evidence for multiple quality grades before deciding final grade
 2. Each issue must have exact location and concrete improvement
 3. Prioritize by severity (critical, non-blocking, suggestion)
 4. Balance feedback — note strengths alongside weaknesses

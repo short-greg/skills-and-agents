@@ -1,11 +1,11 @@
 ---
 name: upkeep
 description: >
-  Use when maintaining system health and preventing degradation. Triggers on:
-  "clean this up", "maintain this", "keep this healthy", "prevent rot",
-  "reduce tech debt", "improve code health", "housekeeping", "tidy up",
-  "prune unused", "update dependencies", "fix warnings".
-argument-hint: "[what to maintain or clean up]"
+  Keeps system healthy by addressing accumulated issues before they compound.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
+  Triggers on: "clean this up", "reduce tech debt", "update dependencies",
+  "fix warnings", "housekeeping", "tidy up", "prune unused code".
+argument-hint: "[what to clean up or maintain]"
 disable-model-invocation: false
 user-invocable: true
 allowed-tools: Read, Grep, Write, Edit, Bash
@@ -13,125 +13,91 @@ allowed-tools: Read, Grep, Write, Edit, Bash
 
 # Upkeep
 
-**Goal:** Maintain system health and prevent gradual degradation — keep things working well over time.
+**Goal:** Keep system healthy by addressing accumulated issues — warnings, dead code, outdated dependencies, technical debt.
 
-**Intent:** Prevent the slow accumulation of problems that makes systems harder to work with. Without regular upkeep, technical debt grows, dependencies become outdated, warnings accumulate, unused code clutters the codebase, and small issues compound into large ones.
+**Intent:** Prevent slow accumulation of problems that makes systems harder to work with. Without regular upkeep, small issues compound into large ones.
 
-**Scope:** Keeping things healthy and functional over time. Includes: removing dead code and unused dependencies, updating outdated dependencies, fixing warnings and linter errors, reducing technical debt, improving test coverage, cleaning up temporary workarounds, and addressing small issues before they become large ones. Upkeep is about system health — it answers "is this maintainable and sustainable?" not "do our records match reality?"
+**Scope:** Addressing accumulated health issues. Answers "is this clean and sustainable?" not "does it work right now?"
 
 ---
 
-## Key Results
+## Key Results - KR
 
-1. Health issues are identified with specific locations and severity
-2. Issues are addressed or explicitly deferred with rationale
-3. No regressions — existing functionality still works
-4. Changes follow project conventions
-5. System is measurably healthier (fewer warnings, updated deps, less dead code)
+1. Health issues identified and addressed — warnings fixed, dead code removed, dependencies updated, or explicitly deferred with rationale
+2. No regressions — existing functionality preserved, tests pass
+
+## Requirements and Constraints - REQ
+
+1. Allocate focused time — don't let upkeep be squeezed out by features
+2. Prioritize by impact — security updates first, then quick wins, then larger refactors
+3. Verify no regressions after each change
 
 ---
 
 ## Protocols
 
-Protocols are reusable patterns that ensure consistent behavior. They are in `protocols/`. You must comply with these. If you do not understand a protocol, read it.
+Use these protocols to satisfy key results. Read each protocol before using it.
 
-- `tracking.md` — Track which maintenance tasks are complete vs remain
-- `recovery.md` — Resume upkeep from where it was interrupted
-- `reasoning.md` — Reason about maintenance priorities before starting, verify health improvements after
-- `quality.md` — Assess and improve quality dimensions: reduce warnings, update deps, remove dead code
-- `documentation.md` — Update documentation when upkeep changes behavior or removes features
+- **quality.md** - Must use to assess and improve health dimensions
+- **reasoning.md** - Must use to prioritize tasks
+- **checklists.md** - Must use to ensure systematic coverage
+- **documentation.md** - Use when upkeep changes behavior or removes features
+- **tracking.md** - Use when tracking tasks complete vs remaining
+- **recovery.md** - Use when resuming after interruption
 
 ---
 
 ## Preconditions
 
-**Must be provided:**
-- scope of upkeep: what area or aspect to maintain — ask if not clear (entire codebase vs. specific module)
+**Required:** Scope — what area to address (entire codebase vs specific module)
 
-**Self-satisfiable:**
-- current health indicators: warnings, linter errors, test coverage, dependency status
-- project conventions: understand what "healthy" looks like for this project
+**Elicit if not provided:**
+- Current health indicators (warnings, linter errors, test coverage, dependency status)
+- Project conventions (what "healthy" looks like for this project)
 
-**Non-essential:**
-- known technical debt: if tracked, use as a starting point
-- prior upkeep: understanding what was addressed recently helps prioritize
-
----
+**Optional:** Known technical debt list, prior upkeep history
 
 ## Postconditions
 
-**Success:**
-- Identified issues are addressed or explicitly deferred with rationale
-- No new issues were introduced
-- System is healthier than before
-- Changes are safe — functionality is preserved
+**Success:** Issues addressed or deferred with rationale, no regressions, system healthier
 
-**Failure:**
-- Scope is too large to address meaningfully — needs scoping
-- Cannot assess health (missing tooling, no tests)
-- Changes would break functionality and cannot be made safely
+**Failure:** Scope too large, cannot assess health, changes would break functionality
 
 ---
 
-## Possible Actions
+## Actions
 
-Select and sequence based on context and your reasoning. Others may be used.
+Select based on context. Each action shows which KR it serves.
 
-**Assessment**
-- **check warnings**: run linters, compilers, static analysis — surface existing warnings
-- **check dependencies**: identify outdated, deprecated, or vulnerable dependencies
-- **check test coverage**: identify untested or under-tested areas
-- **identify dead code**: find unused functions, imports, files, dependencies
-- **review TODOs and FIXMEs**: check for deferred work that should be addressed
-- **assess complexity**: identify overly complex or hard-to-maintain areas
+### Assess Health (→ KR1)
+Current state must be known. Run linters, check warnings, identify outdated dependencies, find dead code, review TODOs/FIXMEs.
 
-**Prioritization**
-- **triage issues**: categorize by severity (critical, moderate, minor) and effort (quick win, moderate, large)
-- **identify quick wins**: low-effort, high-impact improvements
-- **identify safety boundaries**: what can be changed safely vs. what needs careful testing
+### Triage and Prioritize (→ KR1)
+Issues must be prioritized. Categorize by severity and effort. Security issues first, then quick wins.
 
-**Remediation**
-- **remove dead code**: delete unused functions, imports, files
-- **update dependencies**: upgrade outdated packages — prioritize security updates
-- **fix warnings**: address linter and compiler warnings
-- **clean up workarounds**: remove temporary fixes that are no longer needed
-- **simplify complexity**: refactor overly complex code
-- **improve test coverage**: add tests to critical but untested paths
+### Remove Dead Code (→ KR1)
+Unused code must be removed. Delete unused functions, imports, files, dependencies.
 
-**Verification**
-- **run tests**: ensure no regressions from upkeep changes
-- **verify functionality**: spot-check that things still work
-- **check for new issues**: ensure upkeep didn't introduce new problems
+### Update Dependencies (→ KR1)
+Dependencies must be current. Upgrade outdated packages, prioritize security updates.
+
+### Fix Warnings (→ KR1)
+Warnings must be addressed. Fix linter and compiler warnings systematically.
+
+### Verify No Regressions (→ KR2)
+Functionality must be preserved. Run tests after each change, spot-check behavior.
 
 ---
 
-## Confirm
+## Additional Notes and Terms
 
-Before declaring done, verify against each key result:
-- Were health issues identified with locations and severity?
-- Were issues addressed or explicitly deferred?
-- Were regressions avoided?
-- Is the system healthier?
-
-Report outcome explicitly: state what was improved, what was deferred, and overall health impact.
+**Maintenance allocation:** IEEE recommends 15% of development time for refactoring and debt reduction.
 
 ---
 
-## Use Cases
+## References
 
-- Regular codebase maintenance
-- Preparing for a major release
-- Onboarding to a new codebase (clean up as you learn)
-- After completing a feature (clean up before moving on)
-- Addressing accumulated technical debt
-- Security maintenance (dependency updates)
-
----
-
-## Tools
-
-Write, Edit, Bash
-
-## Hooks
-
-None
+- [Anthropic - Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
+- [Atlassian - Technical Debt Guide](https://www.atlassian.com/agile/software-development/technical-debt)
+- [Monday.com - Technical Debt Strategic Guide 2026](https://monday.com/blog/rnd/technical-debt/)
+- [IBM - What Is Preventive Maintenance](https://www.ibm.com/think/topics/what-is-preventive-maintenance)

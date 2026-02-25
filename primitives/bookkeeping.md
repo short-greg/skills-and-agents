@@ -24,8 +24,9 @@ allowed-tools: Read, Grep, Write, Edit
 
 ## Key Results - KR
 
-1. Records accurately reflect reality — documentation matches implementation, no contradictions, correct locations per conventions
+1. All records accurately reflect reality — documentation matches implementation, no contradictions, correct locations per conventions
 2. Changes are traceable with rationale — what changed, why, and history preserved
+3. Records are updated according to conventions.
 
 ## Requirements and Constraints - REQ
 
@@ -69,10 +70,10 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 Select based on context. Each action shows which KR it serves.
 
 ### Identify Affected Records (→ KR1)
-All impacted records must be identified. Determine which docs, specs, or logs need updating.
+All impacted records must be identified. Output which docs, specs, or logs need updating.
 
 ### Read Current State (→ KR1)
-Record content must be known. Before updating, review what records say.
+Record content must be known. Before updating, output what records currently say.
 
 ### Update Documentation (→ KR1)
 Docs must match current behavior. Sync with implementation.
@@ -87,10 +88,10 @@ Decisions must be preserved with rationale. Capture what, why, and alternatives 
 Changes must be version-tracked. Record what changed.
 
 ### Check Cross-References (→ KR1)
-Referencing docs must remain accurate. Verify other docs that reference the updated item.
+Referencing docs must remain accurate. Output verification results for docs that reference the updated item.
 
 ### Resolve Contradictions (→ KR1)
-Records must not conflict. Determine which is correct and update the others.
+Records must not conflict. Output which record is correct and the resolution, then update the others.
 
 ---
 
