@@ -2,7 +2,20 @@
 
 **This guideline inherits from [skill_creation_guideline.md](skill_creation_guideline.md).**
 
-Read the base skill guideline first for common instructions and validation criteria.
+Read the base skill guideline first for common instructions.
+
+---
+
+## Table of Contents
+
+- [Primitive Creation Guideline](#primitive-creation-guideline)
+  - [Table of Contents](#table-of-contents)
+  - [What is a Primitive?](#what-is-a-primitive)
+  - [Implementation Steps](#implementation-steps)
+  - [Writing Style](#writing-style)
+  - [Validation Criteria](#validation-criteria)
+  - [Tips](#tips)
+  - [Template](#template)
 
 ---
 
@@ -11,105 +24,102 @@ Read the base skill guideline first for common instructions and validation crite
 A primitive is an **atomic cognitive action** - a single, indivisible operation that cannot be meaningfully decomposed into smaller steps.
 
 **Primitives answer one specific question:**
-- `orient` - "Where are we now?"
-- `define` - "What are we building and how will we know it's done?"
-- `validate` - "Does this meet the criteria?"
-- `critique` - "How good is this and how could it be better?"
+- `orienting` - "Where are we now?"
+- `defining` - "What are we building and how will we know it's done?"
+- `critiquing` - "How good is this and how could it be better?"
+- `implementing` - "How do I build this?"
 
 **Key characteristics:**
 - Atomic (not decomposable)
 - Single-purpose (does one thing well)
 - Self-contained (can be used independently)
-- 2 Key Results (primitives are focused)
+- Exactly 2 Key Results (primitives are focused)
+- 80-130 lines (130-150 acceptable with user permission)
+
+**When to create a primitive:**
+- A distinct cognitive operation not covered by existing primitives
+- An atomic action that cannot be broken down further
+- A clear question it answers that no other primitive answers
+- **Before creating:** Research best practices, check for >50% overlap with existing primitives, verify it's truly atomic
 
 ---
 
-## Writing Style for Primitives
+## Implementation Steps
+
+1. Find out the goal and intent of the primitive
+2. Clarify your understanding
+3. Confirm it is not already covered
+4. Do web research to find out
+   1. General web research
+   2. Domain-specific web research
+5. **Create decision table** - List all relevant protocols in a table with columns:
+   - Protocol name
+   - Reasons to use (how it helps this primitive)
+   - Reasons not to use (why it might not fit)
+   - Decision (use or don't use)
+6. Create the primitive according to the template
+7. Validate the primitive
+8. Do final confirmation from the creator
+
+---
+
+## Writing Style
 
 Primitives are **instruction-focused** or **evaluation-focused**, not descriptive essays.
 
 **Key principles:**
-1. **Action-oriented/instruction-oriented OR evaluation-oriented language**
-   - Actions: Use imperatives: "Identify gaps", "Verify criteria", not "The primitive identifies..."
-   - Evaluation: Use checks: "Gaps identified?", "Criteria verified?", not "The validation process..."
+1. **Action-oriented OR evaluation-oriented language** - Use imperatives ("Identify gaps") or checks ("Gaps identified?"), not descriptions ("The primitive identifies...")
 2. **Evaluation criteria over descriptions** - Focus on what to check or do, not what things mean
-3. **Minimal descriptions** - Goal/Intent/Scope should be brief context only (2-3 sentences max)
-4. **Instructions first** - Actions section is the heart of the primitive
+3. **Minimal descriptions** - Goal/Intent/Scope should be brief (2-3 sentences max)
+4. **Output-focused language** - Use "Output evidence" not "Find evidence" to prevent LLMs skipping documentation
 
-**Example transformations:**
-- ❌ Descriptive: "Validation is the process of checking whether something meets criteria..."
-- ✅ Action-oriented: "Verify against each criterion. Check evidence. Report pass/fail with specifics."
-- ✅ Evaluation-oriented: "Criteria verified? Evidence checked? Pass/fail reported with specifics?"
-
----
-
-## Research Best Practices
-
-**Before writing a new primitive, research in this order:**
-
-**Step 1: Claude Code's website FIRST**
-
-1. Search Claude Code's documentation: "site:claude.ai OR site:docs.anthropic.com [primitive topic] best practices"
-2. Incorporate Claude Code's guidelines as foundation
-3. These take precedence
-
-**Step 2: Expert/academic best practices (in addition)**
-
-1. **Web search** for academic and expert sources on the cognitive operation
-   - Example: Creating `reason` primitive → search "reasoning techniques academic cognitive science"
-   - Example: Creating `validate` primitive → search "validation criteria software engineering best practices"
-
-2. **Incorporate findings** into Actions section (complementing Claude Code guidelines)
-   - Add techniques from academic sources
-   - Reference expert frameworks
-   - Include non-obvious strategies
-
-3. **Add References section** with ALL sources (Claude Code + research)
-
-**This ensures primitives reflect Claude Code guidelines PLUS expert knowledge, not just intuition.**
+**Structural differences from workflows:**
+- 80-130 lines (130-150 acceptable with user permission)
+- 2-4 requirements vs workflows with 5-9
+- Exactly 2 Key Results vs workflows with 3-4
+- Actions show KR linkage and protocol usage
+- All primitives reference `primitive_execution.md` protocol
 
 ---
 
-## When to Create a Primitive
+## Validation Criteria
 
-Create a primitive when you have:
-- A distinct cognitive operation not covered by existing primitives
-- An atomic action that cannot be broken down further
-- A clear question it answers that no other primitive answers
+For each criterion, you MUST output all evidence that it passes and all evidence that it fails. Once evidence is output, weigh the evidence to decide if it passes or fails.
 
-**Before creating a new primitive:**
-1. **Research** best practices from experts/academics (see above)
-2. Check if an existing primitive already covers this (>50% overlap means extend that one instead)
-3. Verify it's truly atomic (can't be decomposed into multiple primitives)
-4. Confirm it has a distinct purpose
+**Structural:**
+- [ ] **Follows template exactly:** All sections present with correct format (2 KRs, 2-4 Requirements, Preconditions categorized, Actions show → KR# and protocols, etc.)
+- [ ] **80-130 lines:** Length stays within target range (130-150 acceptable with user permission)
 
----
+**Content Quality:**
+- [ ] **Coherent:** Sections flow logically without contradictions
+- [ ] **Complete:** All necessary information provided, all KRs achievable from Actions
+- [ ] **Concise:** Minimum necessary words, no duplication
+- [ ] **Precise:** Specific, unambiguous language
+- [ ] **LLM-focused:** Non-obvious constraints, no needless definitions
 
-## Primitive-Specific Structure
-
-Primitives differ from the base skill template in these ways:
-
-### 1. Conciseness Target
-Primitives should be **100-150 lines maximum**. If longer, refactor into multiple primitives or remove verbose descriptions.
-
-### 2. Simpler Requirements
-Primitives typically have fewer constraints than workflows (2-4 requirements vs 5-9).
-
-### 3. Exactly 2 Key Results
-Primitives are atomic, so they have exactly 2 KRs (not 3-4 like workflows).
-
-### 4. Actions Section
-Replace "Execution Items" with "Actions" - the detailed steps to execute the primitive.
-- Use **tables** for categorizing actions when appropriate (clearer than prose)
-- Each action maps to KR(s): `(→ KR#)`
-- Include **evaluation criteria** at end of Actions section
-
-### 5. No Steps Section
-Primitives don't have a separate Steps section - they go straight to Actions.
+**Primitive-Specific:**
+- [ ] **Distinct Purpose:** Answers question no other primitive answers (<50% overlap with existing)
+- [ ] **Atomic:** Single cognitive action, not decomposable into multiple primitives
+- [ ] **Self-contained:** Doesn't reference other primitives in scope or actions
+- [ ] **Research completed:** References section includes Claude Code docs + expert/academic sources
 
 ---
 
-## Primitive Template
+## Tips
+
+1. **Start with the question:** What specific question does this primitive answer?
+2. **Keep it atomic:** If you find yourself writing "first... then... finally...", it's probably a workflow
+3. **2 KRs only:** Consolidate related outcomes into compound Key Results
+4. **Simple requirements:** Primitives typically need 2-4 requirements, not 9
+5. **Self-contained:** Don't reference other primitives in scope or actions
+6. **Clear triggers:** Include natural phrases users might say to invoke this primitive
+7. **Output-focused:** Use "Output X" not "Find X" to ensure LLM documents work
+
+---
+
+## Template
+
+**Note:** Text in `[brackets]` are placeholders - replace with actual content. Text in `<angle brackets>` are guidelines - do NOT include in your final primitive. Instructions that go in the final template, are not included in either.
 
 ```markdown
 ---
@@ -148,11 +158,22 @@ Constraints on how to execute the primitive.
 1. [constraint on execution]
 2. [constraint on execution]
 
+## Protocols
+
+Protocols that this primitive uses.
+
+- **[protocol_name.md]** — Must use to [required action]
+- **[protocol_name.md]** — Use when [optional condition]
+
+---
+
+## Steps
+
+Execute per protocol `primitive_execution.md` — track, plan, execute, validate.
+
 ---
 
 ## Preconditions
-
-Satisfy preconditions before beginning unless Optional.
 
 **Required:** [what must be provided to proceed]
 
@@ -173,106 +194,39 @@ The resulting state after the primitive is finished.
 
 ## Actions
 
-Select and execute actions to achieve each Key Result. Each action shows which KR it serves.
+Select based on context. Each action shows which KR it serves.
 
-### [Action Name] (→ KR#)
+### [Action Name] (→ KR#, uses protocol1.md, protocol2.md)
 
-[What this action does, when to use it.]
+[Required state]. [How to achieve it.]
 
-### [Action Name] (→ KR#, KR#)
+### [Action Name] (→ KR#, KR#, uses protocol1.md)
 
-[What this action does, when to use it.]
-
----
-
-## Validation Criteria
-
-- [ ] **Structure:** All sections present with one-line imperatives
-- [ ] **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW)
-- [ ] **Traceability:** Actions show (→ KR#), all KRs served by at least one action
-- [ ] **Preconditions:** Categorized as Required, Elicit if not provided, or Optional
-- [ ] **Coherent:** Actions flow logically, no contradictions
-- [ ] **Concise:** As few words as possible, no duplication
-- [ ] **Complete:** All necessary information provided, all KRs achievable from Actions
-- [ ] **Precise:** Specific, unambiguous language
-- [ ] **LLM-focused:** No unnecessary explanations
-- [ ] **Distinct Purpose:** Answers question no other primitive answers
-- [ ] **Atomic:** Single cognitive action, not decomposable
+[Required state]. [How to achieve it.]
 
 ---
 
 ## Additional Notes and Terms
 
-[Domain-specific terms or other notes. Write "None" if not applicable.]
-```
+<Domain-specific terms or other notes. Write "None" if not applicable.>
 
 ---
 
-## Additional Validation Criteria for Primitives
+## References
 
-In addition to the 10 base criteria from [skill_creation_guideline.md](skill_creation_guideline.md), primitives must also pass:
+<REQUIRED: Research must be completed before creating a primitive.
 
-### 11. Distinct Purpose
-The primitive must answer a question that no existing primitive answers. Check for >50% overlap with existing primitives.
+Step 1 - Claude Code's documentation FIRST:
+- Search: `site:claude.ai OR site:docs.anthropic.com [primitive topic] best practices`
+- These guidelines take precedence
 
-### 12. Atomic
-The primitive must be a single cognitive action, not decomposable into multiple primitives or steps.
+Step 2 - Expert/academic sources (in addition):
+- Search: "[primitive topic] techniques academic" or "[topic] best practices software engineering"
+- Example: Creating `reasoning` → search "reasoning techniques academic cognitive science"
+- Example: Creating `designing` → search "software design principles best practices">
 
----
-
-## Common Primitive Anti-Patterns
-
-❌ **Too many Key Results**
-```markdown
-## Key Results
-1. Current state is described
-2. Gaps are identified
-3. Issues are surfaced
-4. Strengths are noted
-5. Orientation is actionable
+**List ALL sources consulted:**
+- [Claude Code documentation URL and topic]
+- [Academic paper/source title and URL]
+- [Expert framework/source title and URL]
 ```
-*Primitives should have exactly 2 KRs. Consolidate related outcomes.*
-
-✅ **Correct: 2 Key Results**
-```markdown
-## Key Results
-1. Current state described accurately with gaps, issues, risks, and strengths identified
-2. Orientation is actionable — reader knows what decisions need to be made
-```
-
-❌ **Not atomic (references other primitives)**
-```markdown
-## Actions
-### Analyze System (→ KR1)
-Use `investigate` to understand the system, then use `critique` to identify issues.
-```
-*This is a workflow, not a primitive. Primitives don't orchestrate other primitives.*
-
-✅ **Atomic actions**
-```markdown
-## Actions
-### Analyze System (→ KR1)
-Read code and documentation. Identify what works vs broken. Surface issues with specific locations.
-```
-
-❌ **Scope references other primitives**
-```markdown
-**Scope:** Identifying issues and improvements by using validate and critique primitives.
-```
-*Scope should be self-contained.*
-
-✅ **Self-contained scope**
-```markdown
-**Scope:** Identifying issues and improvements by reviewing work for quality, finding bugs, and suggesting specific fixes.
-```
-
----
-
-## Tips for Writing Good Primitives
-
-1. **Start with the question:** What specific question does this primitive answer?
-2. **Keep it atomic:** If you find yourself writing "first... then... finally...", it's probably a workflow
-3. **2 KRs only:** Consolidate related outcomes into compound Key Results
-4. **Simple requirements:** Primitives typically need 2-4 requirements, not 9
-5. **Self-contained:** Don't reference other primitives in scope or actions
-6. **Clear triggers:** Include natural phrases users might say to invoke this primitive

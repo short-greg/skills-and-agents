@@ -2,6 +2,19 @@
 
 This guideline explains how to create protocols for the skills-and-agents framework.
 
+---
+
+## Table of Contents
+
+- [What is a Protocol?](#what-is-a-protocol)
+- [Implementation Steps](#implementation-steps)
+- [Writing Style](#writing-style)
+- [Validation Criteria](#validation-criteria)
+- [Tips](#tips)
+- [Template](#template)
+
+---
+
 ## What is a Protocol?
 
 A protocol is a **standardized process or pattern** that multiple primitives and workflows follow. Protocols capture essential principles and patterns, distilling expert knowledge into reusable concepts.
@@ -10,66 +23,117 @@ A protocol is a **standardized process or pattern** that multiple primitives and
 - `tracking.md` - Progress documentation standards
 - `recovery.md` - Resuming from interruption
 - `quality.md` - Quality assessment dimensions
-- `risk_management.md` - Risk identification and mitigation
+- `validation.md` - Evidence-based verification
 
----
+**Key characteristics:**
+- Reusable across multiple skills
+- Instruction-focused (not descriptive)
+- Contains actionable techniques
+- 100-150 lines (150-180 acceptable with user permission)
 
-## When to Create a Protocol
-
-Create a protocol when:
+**When to create a protocol:**
 - Pattern is used by multiple primitives/workflows
 - Protocol provides non-obvious constraints
 - Process needs standardization across the framework
-- Quality concern needs systematic approach
-
-**Don't create a protocol when:**
-- Used by only one primitive/workflow (put it there instead)
-- Too specific to a use case (belongs in a skill or guideline)
-- No clear process to define (needs research first)
-
-In the template, sections are required [REQUIRED], recommended [RECOMMENDED], or optional [OPTIONAL]. Only provide optional sections when really needed to use the protocol
+- **Don't create when:** Used by only one skill (put it there instead), too specific to a use case, no clear process to define
 
 ---
 
-## Protocol Structure
+## Implementation Steps
 
-Protocols are **instruction-focused**, not descriptive essays. Follow this content pattern:
+1. Find out the goal and intent of the protocol
+2. Clarify your understanding
+3. Confirm pattern is used by multiple skills (not just one)
+4. Do web research to find out:
+   1. General web research on the pattern/process
+   2. Domain-specific web research
+5. Create the protocol according to the template
+6. Validate the protocol
+7. Do final confirmation from the creator
 
+---
+
+## Writing Style
+
+Protocols are **instruction-focused**, not descriptive essays.
+
+**Key principles:**
+1. **Action-oriented language** - Use imperatives ("Output evaluation") or instructions ("1. Do X, 2. Do Y"), not descriptions
+2. **Evaluation criteria over descriptions** - Focus on what to check, not what things mean
+3. **Minimal descriptions** - Goal/Intent/Scope should be brief (2-3 sentences max)
+4. **Output-focused language** - "Output an evaluation of X" is better than "Evaluate X"
+
+**Content pattern:**
 1. **Description (light)** - Goal/Intent/Scope for context
 2. **Instructions** - How to do it (actionable steps in Techniques)
 3. **Criteria** - How to evaluate success (in Core Concepts and/or Techniques)
-4. **Patterns** - Examples showing it in action
+4. **Examples** - Show it in action (optional)
 
-**Prefer output-oriented instructions** - LLMs execute more rigorously when artifacts are explicit:
-- Preferred: "Output an evaluation of X against Y"
-- Acceptable: "Evaluate X against Y"
-
-See `protocols/instructions.md` for writing effective instruction-focused content.
+**Structural differences from primitives:**
+- 100-150 lines (150-180 acceptable with user permission)
+- More instructional sections (Core Concepts, Techniques)
+- Examples are optional
+- No Key Results (protocols aren't invoked directly)
 
 ---
 
-## Protocol Template
+## Validation Criteria
+
+For each criterion, you MUST output all evidence that it passes and all evidence that it fails. Once evidence is output, weigh the evidence to decide if it passes or fails.
+
+**Structural:**
+- [ ] **Follows template exactly:** All required sections present with correct format
+- [ ] **100-150 lines:** Length stays within target range (150-180 acceptable with user permission)
+
+**Content Quality:**
+- [ ] **Coherent:** Sections flow logically without contradictions
+- [ ] **Complete:** All necessary information provided, nothing critical missing
+- [ ] **Concise:** Minimum necessary words, no duplication
+- [ ] **Precise:** Specific, unambiguous language
+- [ ] **LLM-focused:** Non-obvious constraints, no needless definitions
+- [ ] **Actionable:** Provides clear techniques, not vague philosophy
+
+**Protocol-Specific:**
+- [ ] **Used by multiple skills:** Not just one primitive/workflow
+- [ ] **Clear boundaries:** Scope states what's included and excluded
+- [ ] **Research completed:** References section includes relevant sources
+
+---
+
+## Tips
+
+1. **Start with the problem:** What inconsistency or gap does this protocol address?
+2. **Keep it focused:** One protocol per pattern or process
+3. **Make it actionable:** Include specific techniques, not just concepts
+4. **Output-oriented instructions:** "Output evaluation" better than "Evaluate"
+5. **Avoid vague platitudes:** Not "make good decisions", but "Evaluate: Which objectives does this optimize? Which does it sacrifice?"
+6. **Reference, don't repeat:** Link to related protocols instead of duplicating content
+7. **Test with multiple skills:** Verify the protocol works across different primitives/workflows
+
+---
+
+## Template
+
+**Note:** Text in `[brackets]` are placeholders - replace with actual content. Text in `<angle brackets>` are guidelines - do NOT include in your final protocol. Instructions that go in the final template, are not included in either.
 
 ```markdown
 # [Protocol Name]
 
-Brief one-sentence description of what this protocol does.
+**Type:** Protocol
+
+[Brief one-sentence description of what this protocol does.]
 
 ---
 
-## Goal [REQUIRED]
+## Goal
 
-What this protocol achieves — the end state it produces.
-
-[One clear sentence.]
+[What this protocol achieves — the end state it produces. One clear sentence.]
 
 ---
 
 ## Intent
 
-Why this protocol exists — what problem it solves or prevents.
-
-[2-3 sentences explaining the fundamental problem and why this matters.]
+[Why this protocol exists — what problem it solves or prevents. 2-3 sentences explaining the fundamental problem and why this matters.]
 
 ---
 
@@ -83,17 +147,15 @@ Why this protocol exists — what problem it solves or prevents.
 
 ## Core Concepts
 
-**Keep this light.** Prefer evaluation criteria over verbose descriptions.
+[Keep this light. Prefer evaluation criteria over verbose descriptions.]
 
-**Best format:** Table with evaluation criteria
+**Best format - Table with evaluation criteria:**
 
-```markdown
 | Concept | Check for strength | Check for excess |
 |---------|-------------------|------------------|
 | [Name] | [How to verify it's working] | [How to detect too much] |
-```
 
-**Alternative:** Brief bulleted principles (2-3 sentences max each)
+**Alternative - Brief bulleted principles (2-3 sentences max each)**
 
 **Avoid:** Long explanations of what concepts mean. Focus on what to check, not what to know.
 
@@ -101,16 +163,8 @@ Why this protocol exists — what problem it solves or prevents.
 
 ## Techniques
 
-**Instructions for how to do it + criteria for evaluating success.**
+[Instructions for how to do it + criteria for evaluating success.]
 
-**Include:**
-1. **Process steps** - Numbered instructions (1. Do X, 2. Do Y, 3. Do Z)
-2. **Decision guidance** - How to make choices ("Make X explicit", "Hide Y", "Establish Z")
-3. **Evaluation criteria** - How to assess if done correctly (checklist or questions)
-
-**Format example:**
-
-```markdown
 **[Technique name]:**
 
 [Brief instruction on how to apply]
@@ -122,47 +176,36 @@ Why this protocol exists — what problem it solves or prevents.
 **Evaluation criteria:**
 - [Question or check 1]
 - [Question or check 2]
-```
-
-**Avoid:** Vague platitudes like "make good decisions" or "coupling that makes sense is good." Be specific and actionable.
 
 ---
 
-## Use Cases and Triggers
+## Use Cases
 
-Specific contexts where this protocol is relevant.
+[Specific contexts where this protocol is relevant]
 
-- Context 1
-- Context 2
-- Context 3
+- [Context 1]
+- [Context 2]
+- [Context 3]
 
 ---
 
-## Patterns and Anti-Patterns [OPTIONAL]
+## Patterns and Anti-Patterns <OPTIONAL>
 
-What works and what doesn't.
+<Only include if truly needed. Keep examples concise.>
 
 ### Patterns (✅)
 
-**Pattern 1: [Name]**
-- What it is
-- When to use
-- Why it works
-- Example
+**[Pattern name]:** [What it is, when to use, brief example]
 
 ### Anti-Patterns (❌)
 
-**Anti-Pattern 1: [Name]**
-- What it is
-- Why it fails
-- What to do instead
-- Example
+**[Anti-pattern name]:** [What it is, why it fails, what to do instead]
 
 ---
 
-## Examples [OPTIONAL]
+## Examples <OPTIONAL>
 
-Concrete scenarios showing the protocol in action.
+<Only include if needed to clarify application. Keep concise.>
 
 ### Example 1: [Scenario]
 
@@ -174,145 +217,21 @@ Concrete scenarios showing the protocol in action.
 
 ---
 
-## References [OPTIONAL]
+## References
 
-Related protocols, resources, or background material.
+<REQUIRED: Research must be completed before creating a protocol.
 
-- [Reference with reason why it's relevant]
+Step 1 - Claude Code's documentation FIRST:
+- Search: `site:claude.ai OR site:docs.anthropic.com [protocol topic] best practices`
+- These guidelines take precedence
+
+Step 2 - Expert/academic sources (in addition):
+- Search: "[protocol topic] techniques" or "[topic] best practices"
+- Example: Creating `quality` → search "code quality assessment best practices"
+- Example: Creating `risk_management` → search "risk management software engineering">
+
+**List ALL sources consulted:**
+- [Claude Code documentation URL and topic]
+- [Academic paper/source title and URL]
+- [Expert framework/source title and URL]
 ```
-
----
-
-## Validation
-
-For each criterion, you MUST output all evidence that it passes and all evidence that it fails. Once evidence is output, weight the evidence to decide if it passes or fails. Only validate one prototocol at a time. 
-
-- [ ] **Clear:** Text is explicit and to the point. Each section communicates its purpose directly.
-- [ ] **Actionable:** Provides clear guidance with specific techniques, not vague philosophy.
-- [ ] **Concrete examples:** Real scenarios with context, application, and results (not abstract).
-- [ ] **Clear boundaries:** Scope explicitly states what's included and excluded.
-- [ ] **Integration addressed:** Explains how this relates to other protocols/components.
-- [ ] **Coherent:** Sections flow logically without contradictions.
-- [ ] **No redundancy:** Each piece of information appears exactly once.
-- [ ] **Complete:** All necessary information provided, nothing critical missing.
-- [ ] **Concise:** Concepts explained in minimum necessary words.
-- [ ] **Precise:** Specific, unambiguous language. No vague terms.
-- [ ] **LLM-focused:** Contains informative, non-obvious constraints. No needless definitions.
-- [ ] **Follows template:** Only contains sections listed in template.
-- [ ] **Valuable:** All sections add clear value. 
-
----
-
-## Adding Protocol to Framework
-
-After creating a protocol:
-
-1. **Add to protocols/README.md:**
-   - Add entry under appropriate category
-   - Update "When to Use" section
-   - Update relationships documentation
-
-2. **Reference from relevant components:**
-   - Add to primitives that use it
-   - Add to workflows that use it
-   - Add to other protocols that relate to it
-
-3. **Update documentation:**
-   - Add to CLAUDE.md if it's a core pattern
-   - Update setup guidelines if it affects user setup
-
-4. **Test the protocol:**
-   - Ensure it's actually useful
-   - Verify examples work
-   - Check that guidance is clear
-
----
-
-## Common Protocol Anti-Patterns
-
-❌ **Too broad - trying to cover everything**
-```markdown
-## Scope
-**Addresses:** All aspects of software development quality
-**Does not address:** N/A
-```
-*Protocols should be focused on specific patterns or processes.*
-
-✅ **Focused scope**
-```markdown
-## Scope
-**Addresses:** Code quality assessment (correctness, clarity, maintainability, convention adherence)
-**Does not address:** Performance benchmarking, security audits, deployment processes
-```
-
-❌ **No techniques - only philosophy**
-```markdown
-## Techniques
-Think carefully about quality and make good decisions.
-```
-*Protocols must provide actionable techniques.*
-
-✅ **Actionable techniques**
-```markdown
-## Techniques
-- Review code against quality dimensions systematically
-- Categorize issues by severity (critical, non-blocking, suggestion)
-- Provide specific improvement recommendations with locations
-```
-
-❌ **Vague platitudes**
-```markdown
-## Techniques
-- Coupling that makes sense is good
-- Make sure cohesion is appropriate
-- Balance all the objectives
-```
-*These provide no actionable guidance.*
-
-✅ **Specific, actionable instructions**
-```markdown
-## Techniques
-- Make dependencies explicit and depend on stable interfaces, not implementation details
-- Group responsibilities that change together into same component
-- Evaluate: Which objectives does this design optimize? Which does it sacrifice? Is that appropriate?
-```
-
-❌ **Used by only one skill**
-```markdown
-# Specific Feature Implementation Protocol
-[Only used by feature_workflow.md]
-```
-*If only one skill uses it, put the content in that skill instead.*
-
-❌ **Missing "When to Apply" - unclear triggers**
-```markdown
-## Use Cases
-- Documentation maintenance
-- Code reviews
-- API changes
-```
-*Use Cases show scenarios, but don't show when to trigger the protocol.*
-
-✅ **Clear triggering conditions**
-```markdown
-## Use Cases
-- Documentation maintenance
-- Code reviews
-- API changes
-
-## When to Apply
-- When implementing code (`implement` primitive) - update docs in same commit
-- During code review (`critique` primitive) - verify docs match code
-- When changing APIs - update all affected docstrings
-```
-
----
-
-## Tips for Writing Good Protocols
-
-1. **Start with the problem:** What inconsistency or gap does this protocol address?
-2. **Keep it focused:** One protocol per pattern or process
-3. **Make it actionable:** Include specific techniques, not just concepts
-4. **Show real examples:** Concrete scenarios from actual use
-5. **Test with users:** Verify the protocol is actually useful
-6. **Reference, don't repeat:** Link to related protocols instead of duplicating content
