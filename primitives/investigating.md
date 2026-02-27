@@ -1,7 +1,7 @@
 ---
 name: investigating
 description: >
-  Gathers information to reduce uncertainty before proceeding.
+  Researching the problem or solutions. Gathers information to reduce uncertainty before proceeding.
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "investigate", "research", "look into", "find out", "why is this happening",
   "what's the best practice", "check the docs", "find prior art", "what solutions exist".

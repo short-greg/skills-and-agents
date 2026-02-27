@@ -1,8 +1,7 @@
 ---
 name: bookkeeping
 description: >
-  Keeps records in sync with reality. Use when documentation drifts from implementation,
-  decisions need recording, or changelogs need updating.
+  Documenting the state and changes of a project or system. Keeps records in sync with reality.
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "update the docs", "sync the documentation", "record this", "log this change",
   "update the spec", "document what we did", "update the changelog", "capture this decision".

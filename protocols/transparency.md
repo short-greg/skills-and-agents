@@ -1,3 +1,5 @@
+[TODO: Changed the name to the broader "informing". Currently documentation is too narrow. ]
+
 # Documentation Protocol
 
 Maintain documentation that enables both humans and AI to understand, navigate, and modify code effectively.

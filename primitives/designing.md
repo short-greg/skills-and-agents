@@ -1,7 +1,7 @@
 ---
 name: designing
 description: >
-  Produces technical approach for how to build something before implementation.
+  Detailing how a solution will work and be used. Produces technical approach for how to build something before implementation.
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "design this", "how should we build this", "what's the architecture",
   "what are the tradeoffs", "design the API", "design the data model".

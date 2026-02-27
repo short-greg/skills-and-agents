@@ -1,7 +1,7 @@
 ---
 name: orienting
 description: >
-  Understands current state before deciding what to do.
+  Understanding the current state of a system, project, or task. Understands current state before deciding what to do.
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "orient me", "where are we", "what's the current state", "what's the situation",
   "take stock", "size this up", "gap analysis", "assess the situation".

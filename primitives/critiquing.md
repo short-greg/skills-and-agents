@@ -1,7 +1,7 @@
 ---
 name: critiquing
 description: >
-  Reviews work for quality, identifies issues, and suggests improvements.
+  Evaluating and recommending a solution, approach, or process. Reviews work for quality, identifies issues, and suggests improvements.
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "critique this", "review this", "what's wrong with this", "how can I improve",
   "code review", "give me feedback", "find issues", "red team this", "poke holes".

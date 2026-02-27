@@ -1,3 +1,7 @@
+[TODO: Combine with tracking
+I think this 
+]
+
 # Checklist Management Protocol
 
 Dynamic checklist patterns for tracking workflow progress and adapting to discovered needs.

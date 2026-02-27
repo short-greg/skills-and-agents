@@ -1,7 +1,7 @@
 ---
 name: defining
 description: >
-  Establishes requirements, success criteria, and definition of done for a task.
+  Specifying the problem, goal, and constraints of a project or task. Establishes requirements, success criteria, and definition of done.
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "define this", "what are the requirements", "scope this out",
   "clarify requirements", "what should we build", "create a PRD".

@@ -1,7 +1,7 @@
 ---
 name: planning
 description: >
-  Produces a sequence of actions to accomplish a goal before starting work.
+  Sequencing actions to achieve a goal. Produces a sequence of actions to accomplish a goal before starting work.
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "plan this", "how should we approach this", "break this down",
   "what should we do first", "create a plan", "what are the steps".

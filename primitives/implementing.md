@@ -1,7 +1,7 @@
 ---
 name: implementing
 description: >
-  Writes code, tests, or other artifacts to realize a design.
+  Realizing a solution. Writes code, tests, or other artifacts to realize a design.
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "implement this", "write the code", "build this", "code this up",
   "create the feature", "add the tests", "implement the design", "write the function".

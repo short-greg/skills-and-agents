@@ -1,7 +1,7 @@
 ---
 name: brainstorming
 description: >
-  Generates diverse options and ideas before committing to an approach.
+  Generating possible solutions, reasons, or methods from current knowledge. Generates diverse options and ideas before committing to an approach.
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "brainstorm", "what are our options", "alternatives", "how else could we",
   "generate ideas", "explore possibilities", "creative solutions".

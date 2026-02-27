@@ -1,7 +1,7 @@
 ---
 name: upkeep
 description: >
-  Keeps system healthy by addressing accumulated issues before they compound.
+  Maintaining quality and reducing friction of a system or project. Keeps system healthy by addressing accumulated issues before they compound.
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "clean this up", "reduce tech debt", "update dependencies",
   "fix warnings", "housekeeping", "tidy up", "prune unused code".

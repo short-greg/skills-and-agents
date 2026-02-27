@@ -125,7 +125,7 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 ---
 name: primitive-name
 description: >
-  [What this primitive does. A primitive is an atomic cognitive action - it does one thing well.]
+  [Concise definition - one sentence starting with gerund, e.g. "Understanding the current state of a system, project, or task."]. [What it does in more detail.]
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive. They are specified in the instruction body.
   Triggers on: "[trigger phrase 1]", "[trigger phrase 2]".
 argument-hint: "[optional: e.g. [subject] or [topic]]"
