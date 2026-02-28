@@ -41,7 +41,7 @@ You must satisfy these to complete the skill successfully.
 
 Constraints on how to complete the skill.
 
-1. Progress tracked per `checklists.md` — preliminary checklist created before starting work, track which analysis phases complete vs remain
+1. Progress tracked per `tracking.md` — preliminary checklist created before starting work, track which analysis phases complete vs remain
 2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing trace on startup, resume from last completed task, analysis tasks safe to re-run, if partial test cases exist read and continue
 3. Follow test pyramid per `quality.md` — many unit, some integration, few e2e tests
 4. Identify edge cases and error scenarios, not just happy path

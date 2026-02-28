@@ -41,7 +41,7 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 - **modularity.md** - Must use for modular code with clear boundaries
 - **quality.md** - Must use to ensure correctness, clarity, maintainability
 - **documentation.md** - Must use when implementation changes behavior or APIs
-- **checklists.md** - Must use to ensure completeness
+- **tracking.md** - Must use to ensure completeness
 - **tracking.md** - Use when tracking progress during multi-file implementations
 - **recovery.md** - Use when resuming after interruption
 

@@ -11,9 +11,9 @@ Standard execution pattern for all primitives.
 All primitives follow these steps:
 
 1. **Track progress** using protocol `tracking.md`
-2. **Create preliminary checklist** with key results using protocol `checklists.md`
+2. **Create preliminary checklist** with key results using protocol `tracking.md`
 3. **Resolve precondition uncertainties** — elicit missing required inputs
-4. **Output action plan** using protocol `checklists.md` — which actions, what order
+4. **Output action plan** using protocol `tracking.md` — which actions, what order
 5. **Execute actions** — perform primitive-specific actions (see Actions section)
 6. **Validate key results** using protocol `validation.md` — verify each KR, report success/failure
 

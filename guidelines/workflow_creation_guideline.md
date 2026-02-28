@@ -132,7 +132,7 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 3. **Each step typically maps to one skill:** Orient → Define → Design → Implement → Validate (can be primitives or workflows)
 4. **Tasks can use primitives OR workflows:** Don't just orchestrate primitives - workflows can orchestrate other workflows too
 5. **Include preconditions/postconditions:** Crucial for goal-oriented workflows - specify what each skill needs and produces
-6. **Include recovery:** All workflows need progress tracking per `checklists.md`, recovery per `recovery.md`, iteration limits
+6. **Include recovery:** All workflows need progress tracking per `tracking.md`, recovery per `recovery.md`, iteration limits
 7. **3-4 Key Results:** Workflows can have more KRs than primitives (but not too many)
 8. **Handle failures:** Specify what happens when tasks fail (retry, escalate, etc.)
 9. **Don't create single-skill workflows:** If it only uses one primitive/workflow, just use that skill directly
@@ -181,7 +181,7 @@ You must satisfy these to complete the skill successfully.
 
 Constraints on how to complete the skill.
 
-1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
+1. Progress tracked per `tracking.md` — preliminary checklist created before starting work
 2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing trace on startup, resume from last completed task
 3. [workflow-specific constraint]
 4. [workflow-specific constraint]

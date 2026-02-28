@@ -128,6 +128,7 @@ description: >
   [Concise definition - one sentence starting with gerund, e.g. "Understanding the current state of a system, project, or task."]. [What it does in more detail.]
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive. They are specified in the instruction body.
   Triggers on: "[trigger phrase 1]", "[trigger phrase 2]".
+  keywords: [keyword1], [keyword2], [keyword3], [keyword4], [keyword5]
 argument-hint: "[optional: e.g. [subject] or [topic]]"
 disable-model-invocation: false
 user-invocable: true
@@ -173,6 +174,14 @@ Execute per protocol `primitive_execution.md` — track, plan, execute, validate
 
 ---
 
+## Terms
+
+<Define key domain-specific terms used in this primitive. Write "None" if not applicable.>
+
+[Term Name]: [Definition]
+
+---
+
 ## Preconditions
 
 **Required:** [what must be provided to proceed]
@@ -196,19 +205,19 @@ The resulting state after the primitive is finished.
 
 Select based on context. Each action shows which KR it serves.
 
-### [Action Name] (→ KR#, uses protocol1.md, protocol2.md)
+### [Action Name] (→ KR#)
 
-[Required state]. [How to achieve it.]
+<Execute when [condition that triggers this action]. [What this action accomplishes and how to achieve it using protocols/methods.]>
 
-### [Action Name] (→ KR#, KR#, uses protocol1.md)
+### [Action Name] (→ KR#, KR#)
 
-[Required state]. [How to achieve it.]
+<Execute when [condition that triggers this action]. [What this action accomplishes and how to achieve it using protocols/methods.]>
 
 ---
 
 ## Additional Notes and Terms
 
-<Domain-specific terms or other notes. Write "None" if not applicable.>
+<Additional notes, clarifications, or distinctions from other primitives. Write "None" if not applicable.>
 
 ---
 

@@ -40,7 +40,7 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 
 - **goals_and_objectives.md** - Must use for writing outcome-oriented success criteria
 - **instructions.md** - Must use for writing clear instructions for implementers
-- **checklists.md** - Must use to ensure completeness
+- **tracking.md** - Must use to ensure completeness
 - **reasoning.md** - Use when analyzing requirements for completeness and consistency
 - **tracking.md** - Use when tracking requirements captured vs remaining
 - **recovery.md** - Use when resuming after interruption

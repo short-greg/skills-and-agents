@@ -39,7 +39,7 @@ You must satisfy these to complete the skill successfully.
 
 Constraints on how to complete the skill.
 
-1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
+1. Progress tracked per `tracking.md` — preliminary checklist created before starting work
 2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing trace on startup, resume from last completed task
 3. Validate requirements before design
 4. Validate design before implementation
@@ -128,7 +128,7 @@ Use `implement` primitive. Write code following the design.
 
 Per `documentation.md` — update documentation when implementation changes behavior or APIs.
 
-Per `checklists.md` — add sub-tasks dynamically when scope expands.
+Per `tracking.md` — add sub-tasks dynamically when scope expands.
 
 ### Validate (→ KR3)
 

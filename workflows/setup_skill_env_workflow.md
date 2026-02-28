@@ -34,7 +34,7 @@ You must satisfy these to complete the skill successfully.
 
 Constraints on how to complete the skill.
 
-1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
+1. Progress tracked per `tracking.md` — preliminary checklist created before starting work
 2. Recoverable from interruption per `tracking.md` and `recovery.md` — don't duplicate already-installed components
 3. Resolve existing skills before installing new ones
 4. Iterate up to 3 times if validation fails, identify missing components, Offer to install/fix, Re-validate
@@ -86,7 +86,7 @@ Select and execute tasks to achieve each Key Result. Each task shows which KR it
 
 ### Create Preliminary Checklist (→ Req 1)
 
-Create checklist according to `checklists.md` first:
+Create checklist according to `tracking.md` first:
 
 1. List all Key Results from this workflow in a todo list (checklist)
 2. Create checklist items for each KR using format: `setup-skill-env - KR<num> - <task>`
@@ -265,7 +265,7 @@ Comply with protocols to get consistent behavior `protocols/`. If you do not und
 
 - `tracking.md` — Track which setup tasks are complete vs remain
 - `recovery.md` — On startup, check for existing progress. Resume from last completed task.
-- `checklists.md` — Build preliminary checklist from Key Results before starting work.
+- `tracking.md` — Build preliminary checklist from Key Results before starting work.
 - `reasoning.md` — Reason about project state and approach before starting.
 - `goals_and_objectives.md` — Ensure setup achieves user's stated goals.
 

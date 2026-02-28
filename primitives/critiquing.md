@@ -41,7 +41,7 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 
 - **reasoning.md** - Must use to find evidence for multiple grades before deciding
 - **quality.md** - Must use for severity prioritization
-- **checklists.md** - Must use to ensure systematic coverage
+- **tracking.md** - Must use to ensure systematic coverage
 - **modularity.md** - Use when critiquing design or architecture
 - **tracking.md** - Use when tracking which aspects critiqued vs remaining
 - **recovery.md** - Use when resuming after interruption

@@ -39,7 +39,7 @@ You must satisfy these to complete the skill successfully.
 
 Constraints on how to complete the skill.
 
-1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
+1. Progress tracked per `tracking.md` — preliminary checklist created before starting work
 2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing trace on startup, resume from last completed task (incremental commits allow rollback to any passing state, check test status first on recovery, if tests failing: revert last change then continue)
 3. Tests must exist before refactoring (can't verify preservation without tests)
 4. Run tests after EACH incremental change

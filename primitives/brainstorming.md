@@ -5,6 +5,7 @@ description: >
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "brainstorm", "what are our options", "alternatives", "how else could we",
   "generate ideas", "explore possibilities", "creative solutions".
+  keywords: generating, ideating, diverging, exploring, creating
 argument-hint: "[topic or problem to brainstorm]"
 disable-model-invocation: false
 user-invocable: true
@@ -15,9 +16,9 @@ allowed-tools: Read, Grep, WebSearch
 
 **Goal:** Generate a diverse set of viable options to expand the solution space before narrowing down.
 
-**Intent:** Prevent premature commitment to the first idea. Good brainstorming surfaces alternatives that may be better, simpler, or more appropriate.
+**Intent:** Prevent premature commitment to the first idea. Good brainstorming surfaces alternatives that may be better, simpler, or more appropriate than initial solutions.
 
-**Scope:** Generating and exploring ideas, options, and alternatives. Answers "what are the possibilities?" not "which one is best?"
+**Scope:** Generating and exploring ideas, options, and alternatives from current knowledge. Answers "what are the possibilities?" not "which one is best?" Brainstorming is divergent (expand options), not convergent (select best).
 
 ---
 
@@ -31,6 +32,7 @@ allowed-tools: Read, Grep, WebSearch
 1. Defer judgment — no critiquing during generation
 2. Quantity over quality — generate many ideas before filtering
 3. Include wild ideas — brilliant ideas often seem ridiculous initially
+4. Use current knowledge — brainstorming doesn't research, it generates from what's already known
 
 ---
 
@@ -39,9 +41,16 @@ allowed-tools: Read, Grep, WebSearch
 Use these protocols to satisfy key results. Read each protocol before using it.
 
 - **reasoning.md** - Must use to evaluate which categories to explore and assess diversity
-- **checklists.md** - Must use to ensure coverage across idea categories
-- **tracking.md** - Use when tracking idea categories explored vs remaining
+- **tracking.md** - Must use to track idea categories explored vs remaining
 - **recovery.md** - Use when resuming after interruption
+
+---
+
+## Terms
+
+**Brainstorming Target:** What you're generating ideas for (problem to solve, approach to take, explanation for phenomenon, etc.)
+
+**Brainstorming Method:** Technique used to generate ideas (first principles, analogies, SCAMPER, inversion, extremes, etc.)
 
 ---
 
@@ -51,12 +60,13 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 
 **Elicit if not provided:**
 - Context and constraints — problem space, what makes an idea viable
+- Goal of brainstorming — what kind of ideas are needed
 
 **Optional:** Starting ideas to build from, evaluation criteria for flagging promising ideas
 
 ## Postconditions
 
-**Success:** Multiple distinct options generated, spanning different approaches, each described enough to evaluate
+**Success:** Multiple distinct options generated, spanning different approaches, each described enough to evaluate later
 
 **Failure:** Only one idea generated, topic too vague, constraints too tight for viable options
 
@@ -64,37 +74,47 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 
 ## Actions
 
-Select based on context. Each action shows which KR it serves.
+Select actions based on context. Each action shows which KR it serves.
 
-### First Principles Decomposition (→ KR1)
-Assumptions must be questioned. Break problem to fundamentals, generate ideas by modifying or removing each assumption.
+### Decompose to First Principles (→ KR1)
+
+Execute first principles decomposition using reasoning.md to generate foundational ideas when seeking novel approaches or when assumptions need questioning. Break problem to fundamental truths, identify underlying assumptions, generate ideas by modifying or removing each.
 
 ### Invert the Problem (→ KR1)
-Opposite approaches must be considered. Ask what the reverse solution would look like.
 
-### Analogy Search (→ KR1)
-Cross-domain solutions must be explored. Ask how this problem is solved in other fields.
+Execute problem inversion using reasoning.md to generate contrarian ideas when seeking opposite approaches or when forward thinking feels stuck. Ask what the reverse solution would look like, what would make the problem worse, how to achieve the opposite goal.
 
-### SCAMPER (→ KR1)
-Systematic variations must be generated. Apply: Substitute, Combine, Adapt, Modify, Put to other uses, Eliminate, Reverse.
+### Search for Analogies (→ KR1)
 
-### Push Extremes (→ KR1)
-Boundary cases must be explored. Generate simplest, most powerful, and most unusual solutions.
+Execute analogy search using WebSearch to generate cross-domain ideas when seeking inspiration from other fields. Identify how similar problems are solved elsewhere (nature, other industries, different contexts), apply those patterns to current problem.
 
-### Build and Combine (→ KR1, KR2)
-Ideas must be expanded. Take promising ideas and generate variations or merge aspects into hybrids.
+### Apply SCAMPER (→ KR1)
+
+Execute SCAMPER method to generate systematic variations when building on existing solution or idea. Apply each transformation: **S**ubstitute, **C**ombine, **A**dapt, **M**odify, **P**ut to other uses, **E**liminate, **R**everse.
+
+### Push to Extremes (→ KR1)
+
+Execute extreme exploration to generate boundary-case ideas when seeking unusual solutions or when moderate ideas lack impact. Generate simplest, most powerful, fastest, cheapest, and most unusual solutions.
+
+### Build and Combine Ideas (→ KR1)
+
+Execute idea synthesis using reasoning.md to generate evolved ideas when expanding on promising directions or when seeking hybrids. Take existing ideas, generate variations (refine, extend, specialize). Merge aspects of different ideas into new combinations.
 
 ### Describe Each Idea (→ KR2)
-Ideas must be actionable. For each idea, state what it is and why it might work.
+
+Execute idea description using tracking.md to ensure actionability when documenting all generated ideas. State clearly for each: what it is, how it would work, why it might be viable. Ensure every idea is concrete enough for later evaluation.
 
 ### Group and Label (→ KR2)
-Ideas must be organized. Cluster related ideas, identify key tradeoffs that differentiate them.
+
+Execute idea categorization using reasoning.md to organize output when preparing ideas for evaluation. Cluster related ideas into categories, identify key tradeoffs that differentiate approaches, label each cluster.
 
 ---
 
 ## Additional Notes and Terms
 
-None
+**Brainstorming vs Investigating:** Brainstorming generates from current knowledge. Investigating gathers new knowledge through research. If brainstorming reveals knowledge gaps, investigate first.
+
+**Brainstorming vs Evaluating:** Brainstorming is judgment-free divergent thinking (expand options). Evaluating is analytical convergent thinking (select best). Defer evaluation until after brainstorming completes.
 
 ---
 

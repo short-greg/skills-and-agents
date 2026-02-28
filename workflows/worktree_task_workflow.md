@@ -41,7 +41,7 @@ You must satisfy these to complete the skill successfully.
 
 Constraints on how to complete the skill.
 
-1. Progress tracked per `checklists.md` — preliminary checklist created before starting work, routed workflow has its own checklist
+1. Progress tracked per `tracking.md` — preliminary checklist created before starting work, routed workflow has its own checklist
 2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing trace on startup, re-verify dependencies (may have been merged), check if already signaled completion
 3. Do NOT proceed if dependencies aren't merged (hard gate)
 4. Route to correct workflow based on task type per `reasoning.md`

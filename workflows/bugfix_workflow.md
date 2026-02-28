@@ -39,7 +39,7 @@ You must satisfy these to complete the skill successfully.
 
 Constraints on how to complete the skill.
 
-1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
+1. Progress tracked per `tracking.md` — preliminary checklist created before starting work
 2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing trace on startup, resume from last completed task (partial failing test → review and complete, hypothesis list exists → read and continue, instrumentation added → review findings, partial fix → review for correctness)
 3. Reproduce before diagnosing (create failing test first)
 4. Confirm root cause before implementing fix

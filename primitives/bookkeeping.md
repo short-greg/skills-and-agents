@@ -41,7 +41,7 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 
 - **documentation.md** - Must use for updating documentation
 - **tracking.md** - Use when tracking progress across multiple records
-- **checklists.md** - Must use to ensure completeness of updates
+- **tracking.md** - Must use to ensure completeness of updates
 - **recovery.md** - Use when resuming after interruption
 - **reasoning.md** - Use when resolving contradictions between records
 

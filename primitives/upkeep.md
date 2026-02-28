@@ -40,7 +40,7 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 
 - **quality.md** - Must use to assess and improve health dimensions
 - **reasoning.md** - Must use to prioritize tasks
-- **checklists.md** - Must use to ensure systematic coverage
+- **tracking.md** - Must use to ensure systematic coverage
 - **documentation.md** - Use when upkeep changes behavior or removes features
 - **tracking.md** - Use when tracking tasks complete vs remaining
 - **recovery.md** - Use when resuming after interruption

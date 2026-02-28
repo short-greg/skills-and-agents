@@ -71,7 +71,7 @@ Before creating a skill, review relevant protocols. These define patterns your s
 **Available protocols in `protocols/`:**
 - **tracking.md** - Progress documentation for multi-step workflows
 - **recovery.md** - Resuming workflows after interruption
-- **checklists.md** - Dynamic checklists, feedback loops, workflow patterns
+- **tracking.md** - Dynamic checklists, feedback loops, workflow patterns
 - **reasoning.md** - Reasoning and thinking techniques
 - **quality.md** - Quality assessment dimensions and criteria
 - **goals_and_objectives.md** - Setting objectives with key results (OKRs)

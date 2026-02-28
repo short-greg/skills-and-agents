@@ -39,7 +39,7 @@ allowed-tools: Read, Grep
 Use these protocols to satisfy key results. Read each protocol before using it.
 
 - **reasoning.md** - Must use to reason about approach and verify findings
-- **checklists.md** - Must use to ensure comprehensive coverage
+- **tracking.md** - Must use to ensure comprehensive coverage
 - **tracking.md** - Use when tracking what assessed vs remaining
 - **recovery.md** - Use when resuming after interruption
 

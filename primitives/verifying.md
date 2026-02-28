@@ -40,8 +40,7 @@ allowed-tools: Read, Grep, Bash
 Use these protocols to satisfy key results. Read each protocol before using it.
 
 - **reasoning.md** - Must use to reason about what evidence would confirm or falsify
-- **checklists.md** - Must use to track verification steps systematically
-- **tracking.md** - Use when tracking which verifications complete vs remaining
+- **tracking.md** - Must use to track verification steps systematically
 - **recovery.md** - Use when resuming after interruption
 
 ---

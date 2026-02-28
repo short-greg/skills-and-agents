@@ -43,7 +43,7 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 - **risk_management.md** - Must use for identifying and mitigating risks
 - **documentation.md** - Must use for documenting design decisions
 - **instructions.md** - Must use for writing clear instructions for implementers
-- **checklists.md** - Must use to ensure completeness
+- **tracking.md** - Must use to ensure completeness
 - **quality.md** - Use when evaluating design quality
 - **reasoning.md** - Use when evaluating tradeoffs
 - **tracking.md** - Use when tracking design aspects complete vs remaining

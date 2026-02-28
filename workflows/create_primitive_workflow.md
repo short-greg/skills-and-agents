@@ -34,7 +34,7 @@ You must satisfy these to complete the skill successfully.
 
 Constraints on how to complete the skill.
 
-1. Progress tracked per `checklists.md` — preliminary checklist created before starting work
+1. Progress tracked per `tracking.md` — preliminary checklist created before starting work
 2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for partial primitive document, resume from last section
 3. Check existing primitives before creating — if >50% overlap, extend that one instead
 4. When defining scope, use positive framing (state what IS covered) not negative framing (what ISN'T covered)

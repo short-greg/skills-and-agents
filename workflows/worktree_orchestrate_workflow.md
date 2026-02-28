@@ -41,7 +41,7 @@ You must satisfy these to complete the skill successfully.
 
 Constraints on how to complete the skill.
 
-1. Progress tracked per `checklists.md` — preliminary checklist created before starting work, track task status: not started → in progress → ready for merge → merged
+1. Progress tracked per `tracking.md` — preliminary checklist created before starting work, track task status: not started → in progress → ready for merge → merged
 2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for existing parallel plan on startup, check which worktrees exist and which branches merged, resume from current state
 3. Tasks should be independent — minimize file overlap per `risk_management.md`
 4. Merge only in dependency order

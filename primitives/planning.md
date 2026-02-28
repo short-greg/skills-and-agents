@@ -40,7 +40,7 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 
 - **reasoning.md** - Must use to reason about sequencing and verify completeness
 - **goals_and_objectives.md** - Must use to ensure plan achieves success criteria
-- **checklists.md** - Must use to ensure all aspects covered
+- **tracking.md** - Must use to ensure all aspects covered
 - **risk_management.md** - Use when identifying unknowns that affect sequencing
 - **tracking.md** - Use when tracking planning progress
 - **recovery.md** - Use when resuming after interruption
