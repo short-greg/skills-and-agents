@@ -6,6 +6,15 @@ Apply techniques to think effectively.
 
 ---
 
+## Outline
+
+- [Goal](#goal) | [Intent](#intent) | [Scope](#scope)
+- [Artifacts and Outputs](#artifacts-and-outputs) — Thought Trace, First Principles, Hypothesis, Options Analysis, System Model
+- [Core Approaches](#core-approaches) — Reasoning Techniques, Thinking Techniques
+- [Example Thinking Patterns](#example-thinking-patterns) — Evidence-Based, Strategic, Creative, First Principles, Diagnostic, Critical, Systems
+
+---
+
 ## Goal
 
 Think effectively with techniques before and after actions to optimize the outcome.
@@ -24,35 +33,47 @@ General problem-solving techniques including reasoning methods, thinking approac
 
 ---
 
+## Artifacts and Outputs
+
+| Artifact/Output | Purpose | When to Use | Artifact? |
+|-----------------|---------|-------------|-----------|
+| **Thought Trace** | Explicit record of intentions, reasoning, ideas, and ponderings | When thinking process needs to be auditable or reviewable | Output |
+| **First Principles** | Assumptions questioned + fundamental truths identified | When challenging conventions or rebuilding from fundamentals | Output |
+| **Hypothesis** | Testable explanation for observed symptoms or patterns | When diagnosing problems or exploring unknowns | Output |
+| **Options Analysis** | Alternatives evaluated with tradeoffs | When comparing approaches before committing | Output |
+| **System Model** | Components, relationships, and decomposition mapped | When understanding complex interdependencies | Either |
+
+---
+
 ## Core Approaches
 
 ### Reasoning Techniques
 
 Use reasoning techniques to derive logically sound conclusions from premises and evidence.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **Deductive** | Known rules/specs must be applied to specific cases | To ensure correct application of established rules | State rule explicitly, identify case, apply rule to case, verify conclusion follows logically | Are premises valid and explicit? Do conclusions follow logically? | Are you applying rules when premises are uncertain? |
-| **Inductive** | Multiple observations suggest a general pattern | To identify patterns that may explain or predict behavior | Gather observations, identify common pattern, state generalization, test against new cases, assess confidence | Are sufficient observations gathered? Does pattern hold across diverse cases? | Are you generalizing from too few observations? |
-| **Abductive** | Symptoms observed but cause is unknown | To find most plausible explanation for diagnosis | List symptoms, generate multiple explanations, assess plausibility of each, choose most likely, state as hypothesis | Are multiple explanations considered? Is most plausible chosen with justification? | Are you accepting first explanation without considering alternatives? |
-| **Analogical** | Similar problem was solved successfully before | To leverage proven solutions from comparable contexts | Identify similar solved problem, map structural similarities, note key differences, adapt solution to current context, verify fit | Are structural similarities identified? Are key differences noted? | Are you relying on superficial similarities while ignoring critical differences? |
-| **Causal** | Need to understand why X causes Y (not just correlation) | To establish cause-effect relationships for interventions | Observe correlation, identify potential confounders, test intervention, verify effect, rule out alternative explanations | Does evidence support causation? Are confounders ruled out? | Are you assuming causation from mere correlation? |
-| **Counterfactual** | Multiple alternatives exist and need comparison | To evaluate tradeoffs before committing to approach | Define current approach, generate alternative scenarios, evaluate outcomes of each, compare tradeoffs explicitly, document reasoning | Are alternative scenarios evaluated? Are tradeoffs stated explicitly? | Are you stuck in endless "what if" analysis without deciding? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **Deductive** | Known rules/specs must be applied to specific cases | To ensure correct application of established rules | State rule explicitly, identify case, apply rule to case, verify conclusion follows logically | Thought Trace | Are premises valid and explicit? Do conclusions follow logically? | Are you applying rules when premises are uncertain? |
+| **Inductive** | Multiple observations suggest a general pattern | To identify patterns that may explain or predict behavior | Gather observations, identify common pattern, state generalization, test against new cases, assess confidence | Thought Trace | Are sufficient observations gathered? Does pattern hold across diverse cases? | Are you generalizing from too few observations? |
+| **Abductive** | Symptoms observed but cause is unknown | To find most plausible explanation for diagnosis | List symptoms, generate multiple explanations, assess plausibility of each, choose most likely, state as hypothesis | Hypothesis, Thought Trace | Are multiple explanations considered? Is most plausible chosen with justification? | Are you accepting first explanation without considering alternatives? |
+| **Analogical** | Similar problem was solved successfully before | To leverage proven solutions from comparable contexts | Identify similar solved problem, map structural similarities, note key differences, adapt solution to current context, verify fit | Thought Trace | Are structural similarities identified? Are key differences noted? | Are you relying on superficial similarities while ignoring critical differences? |
+| **Causal** | Need to understand why X causes Y (not just correlation) | To establish cause-effect relationships for interventions | Observe correlation, identify potential confounders, test intervention, verify effect, rule out alternative explanations | Thought Trace | Does evidence support causation? Are confounders ruled out? | Are you assuming causation from mere correlation? |
+| **Counterfactual** | Multiple alternatives exist and need comparison | To evaluate tradeoffs before committing to approach | Define current approach, generate alternative scenarios, evaluate outcomes of each, compare tradeoffs explicitly, document reasoning | Options Analysis | Are alternative scenarios evaluated? Are tradeoffs stated explicitly? | Are you stuck in endless "what if" analysis without deciding? |
 
 ### Thinking Techniques
 
 Use thinking techniques to approach problems strategically, creatively, or analytically.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **First Principles** | Existing solutions are overly complex, expensive, or yield diminishing returns | To break free from conventional thinking and find optimal solutions | List current assumptions, break problem to fundamental truths, question each assumption, rebuild solution from scratch, test with small experiments | Is problem reduced to fundamental truths? Was solution rebuilt from scratch? | Are you reinventing when existing solutions work well? |
-| **Strategic** | Planning approach for complex problem with long-term consequences | To align actions with goals and consider big picture implications | Define long-term goal, map current state, identify gaps, generate alternative approaches, evaluate tradeoffs, choose approach, plan milestones | Is long-term vision clear? Is systems perspective maintained? | Are you stuck in analysis without executing? |
-| **Tactical** | Strategy is clear, need immediate concrete next steps | To translate strategy into executable actions | Review strategy and goals, identify next actionable steps, prioritize by impact and dependencies, define concrete tasks, set immediate timelines | Are immediate next steps clear and actionable? | Are you losing sight of overall goal while executing? |
-| **Creative/Lateral** | Conventional approaches tried and failed, or problem is novel | To generate non-obvious alternatives through unconventional thinking | Reframe problem from different angles, generate wild ideas without judgment, make unexpected connections, combine disparate concepts, suspend criticism | Are novel approaches explored? Are indirect solutions considered? | Are you pursuing novelty for its own sake without practical value? |
-| **Critical** | Evaluating claims, proposals, or assumptions before accepting them | To prevent accepting flawed reasoning or weak evidence | Identify claim or assumption, gather supporting evidence, gather contradicting evidence, evaluate source reliability, check for biases, weigh evidence quality | Are assumptions challenged? Is evidence rigorously evaluated? | Are you endlessly critiquing without offering alternatives? |
-| **Analytical** | Problem has many interacting components that must be understood separately | To make complex problems tractable through systematic decomposition | Identify problem components, decompose into sub-problems, analyze each separately, identify relationships and dependencies, synthesize understanding | Is problem decomposed systematically? Are cause-effects identified? | Are you over-fragmenting and losing sight of the whole? |
-| **Systems** | Changes may have ripple effects or unintended consequences across components | To prevent local optimizations that create global problems | Map system components, identify inputs/outputs for each, trace feedback loops, identify leverage points, predict second-order effects, consider unintended consequences | Are interdependencies mapped? Are feedback loops identified? | Is complexity preventing any action? |
-| **Novelty Assessment** | Generating solutions where obvious approaches likely exist but may not be best | To ensure creative, non-obvious alternatives are considered | For each idea assess likelihood (0-1 scale), identify high-likelihood ideas (>0.7), deliberately generate low-likelihood alternatives (<0.3), document estimates | Are low-likelihood ideas (<0.3) generated? Are likelihood estimates explicit? | Are all ideas high-likelihood (>0.7), defaulting to obvious? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **First Principles** | Existing solutions are overly complex, expensive, or yield diminishing returns | To break free from conventional thinking and find optimal solutions | List current assumptions, break problem to fundamental truths, question each assumption, rebuild solution from scratch, test with small experiments | First Principles, Thought Trace | Is problem reduced to fundamental truths? Was solution rebuilt from scratch? | Are you reinventing when existing solutions work well? |
+| **Strategic** | Planning approach for complex problem with long-term consequences | To align actions with goals and consider big picture implications | Define long-term goal, map current state, identify gaps, generate alternative approaches, evaluate tradeoffs, choose approach, plan milestones | Options Analysis, Thought Trace | Is long-term vision clear? Is systems perspective maintained? | Are you stuck in analysis without executing? |
+| **Tactical** | Strategy is clear, need immediate concrete next steps | To translate strategy into executable actions | Review strategy and goals, identify next actionable steps, prioritize by impact and dependencies, define concrete tasks, set immediate timelines | Thought Trace | Are immediate next steps clear and actionable? | Are you losing sight of overall goal while executing? |
+| **Creative/Lateral** | Conventional approaches tried and failed, or problem is novel | To generate non-obvious alternatives through unconventional thinking | Reframe problem from different angles, generate wild ideas without judgment, make unexpected connections, combine disparate concepts, suspend criticism | Options Analysis, Thought Trace | Are novel approaches explored? Are indirect solutions considered? | Are you pursuing novelty for its own sake without practical value? |
+| **Critical** | Evaluating claims, proposals, or assumptions before accepting them | To prevent accepting flawed reasoning or weak evidence | Identify claim or assumption, gather supporting evidence, gather contradicting evidence, evaluate source reliability, check for biases, weigh evidence quality | Thought Trace | Are assumptions challenged? Is evidence rigorously evaluated? | Are you endlessly critiquing without offering alternatives? |
+| **Analytical** | Problem has many interacting components that must be understood separately | To make complex problems tractable through systematic decomposition | Identify problem components, decompose into sub-problems, analyze each separately, identify relationships and dependencies, synthesize understanding | System Model, Thought Trace | Is problem decomposed systematically? Are cause-effects identified? | Are you over-fragmenting and losing sight of the whole? |
+| **Systems** | Changes may have ripple effects or unintended consequences across components | To prevent local optimizations that create global problems | Map system components, identify inputs/outputs for each, trace feedback loops, identify leverage points, predict second-order effects, consider unintended consequences | System Model, Thought Trace | Are interdependencies mapped? Are feedback loops identified? | Is complexity preventing any action? |
+| **Novelty Assessment** | Generating solutions where obvious approaches likely exist but may not be best | To ensure creative, non-obvious alternatives are considered | For each idea assess likelihood (0-1 scale), identify high-likelihood ideas (>0.7), deliberately generate low-likelihood alternatives (<0.3), document estimates | Thought Trace | Are low-likelihood ideas (<0.3) generated? Are likelihood estimates explicit? | Are all ideas high-likelihood (>0.7), defaulting to obvious? |
 
 ---
 

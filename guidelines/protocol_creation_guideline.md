@@ -63,7 +63,7 @@ Protocols are **instruction-focused**, not descriptive essays.
 
 **Key principles:**
 1. **Action-oriented language** - Use imperatives and concrete actions, not vague descriptions
-2. **Technique tables** - 6-column format with When/Why/How/Validations (see template)
+2. **Technique tables** - 7-column format with When/Why/How/Output/Validations (see template)
 3. **"Why" uses infinitive** - Must start with "To" (e.g., "To ensure correct application...")
 4. **"How" is executable** - Comma-separated actions that can be performed
 5. **Validations as questions** - "Are premises valid?" not "Premises are valid"
@@ -73,13 +73,13 @@ Protocols are **instruction-focused**, not descriptive essays.
 **Content pattern:**
 1. **Description (light)** - Tagline, Outline, Goal, Intent, Scope for context
 2. **Artifacts and Outputs (optional)** - Define nouns that techniques reference
-3. **Technique Tables** - Core Approaches with 6-column tables (reference artifacts where needed)
+3. **Technique Tables** - Core Approaches with 7-column tables (Output/Artifact column links to artifacts)
 4. **Example Patterns (optional)** - Step sequences with Exit Conditions sections
 5. **References** - Sources consulted during research
 
 **Structural differences from primitives:**
 - 100-150 lines (150-180 acceptable with user permission)
-- Technique tables use 6-column format
+- Technique tables use 7-column format
 - Example patterns (not exhaustive)
 - No Key Results (protocols aren't invoked directly)
 - Exit conditions in separate section, not inline
@@ -196,14 +196,15 @@ Techniques should reference these artifacts rather than defining them inline.>
 
 [One sentence describing when to use this category.]
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **[Name]** | [Concrete trigger - when to use this] | To [achieve specific benefit/goal] | [Comma-separated executable actions] | [Question checking correct application?] | [Question checking for misuse?] |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **[Name]** | [Concrete trigger - when to use this] | To [achieve specific benefit/goal] | [Comma-separated executable actions] | [Artifact name from Artifacts and Outputs section, or — if none] | [Question checking correct application?] | [Question checking for misuse?] |
 
 <Guidelines for table columns:>
 - **When:** Concrete, actionable trigger (not vague like "challenging assumptions")
 - **Why:** MUST start with "To" (infinitive form)
-- **How:** Executable actions separated by commas; reference artifacts from Artifacts and Outputs section where applicable
+- **How:** Executable actions separated by commas (method/procedure)
+- **Output/Artifact:** Deliverable produced; reference artifacts from Artifacts and Outputs section, use "—" if technique produces no artifact
 - **Positive Validation:** Question format checking if technique was applied correctly
 - **Negative Validation:** Question format checking for common misuse
 

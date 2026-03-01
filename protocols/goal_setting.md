@@ -6,6 +6,15 @@ Establish goals that define what to achieve and why it matters.
 
 ---
 
+## Outline
+
+- [Goal](#goal) | [Intent](#intent) | [Scope](#scope)
+- [Artifacts and Outputs](#artifacts-and-outputs) — Goal Statement, Goal Hierarchy, Priority Ranking, Scope Definition
+- [Core Approaches](#core-approaches) — Goal Discovery, Goal Formulation, Goal Structuring
+- [Example Patterns](#example-patterns) — Establishing Project Goals, Breaking Down a Large Goal
+
+---
+
 ## Goal
 
 Establish clear objectives that provide direction, focus effort, and enable meaningful progress.
@@ -24,40 +33,51 @@ Techniques for discovering what goals to pursue, formulating goals as outcomes r
 
 ---
 
+## Artifacts and Outputs
+
+| Artifact/Output | Purpose | When to Use | Artifact? |
+|-----------------|---------|-------------|-----------|
+| **Goal Statement** | Well-formulated objective with outcome focus | When articulating what to achieve | Either |
+| **Goal Hierarchy** | Parent-child relationships between goals | When goals exist in larger context | Either |
+| **Priority Ranking** | Ordered list of goals by precedence | When multiple goals compete | Output |
+| **Scope Definition** | In-scope and out-of-scope boundaries | When clarifying goal boundaries | Output |
+
+---
+
 ## Core Approaches
 
 ### Goal Discovery
 
 Use discovery techniques to identify what goals to pursue before formulating them.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **Stakeholder Analysis** | Goals must serve someone's needs | To ensure goals address real needs | Identify who is affected, determine what each stakeholder values, find common ground, prioritize by impact | Are key stakeholders identified? Are their needs understood? | Are you assuming needs without checking? |
-| **Problem/Opportunity Framing** | Starting point is unclear | To ground goals in concrete problems or opportunities | Identify current pain points or gaps, articulate what's wrong or missing, determine root cause vs symptom, frame as opportunity to address | Is the problem concrete? Is root cause identified? | Are you solving symptoms rather than causes? |
-| **Ideal State Visualization** | Need to clarify desired end state | To define success before defining path | Describe what success looks like, identify key differences from current state, determine what changes are essential vs nice-to-have | Is ideal state concrete? Are essential changes identified? | Is ideal state too vague or unrealistic? |
-| **Inversion** | Positive framing yields vague goals | To clarify goals through negative space | Ask "What would failure look like?", identify what must be avoided, convert avoidances into positive objectives | Are failure modes identified? Do objectives address them? | Are you only avoiding negatives without pursuing positives? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **Stakeholder Analysis** | Goals must serve someone's needs | To ensure goals address real needs | Identify who is affected, determine what each stakeholder values, find common ground, prioritize by impact | — | Are key stakeholders identified? Are their needs understood? | Are you assuming needs without checking? |
+| **Problem/Opportunity Framing** | Starting point is unclear | To ground goals in concrete problems or opportunities | Identify current pain points or gaps, articulate what's wrong or missing, determine root cause vs symptom, frame as opportunity to address | — | Is the problem concrete? Is root cause identified? | Are you solving symptoms rather than causes? |
+| **Ideal State Visualization** | Need to clarify desired end state | To define success before defining path | Describe what success looks like, identify key differences from current state, determine what changes are essential vs nice-to-have | — | Is ideal state concrete? Are essential changes identified? | Is ideal state too vague or unrealistic? |
+| **Inversion** | Positive framing yields vague goals | To clarify goals through negative space | Ask "What would failure look like?", identify what must be avoided, convert avoidances into positive objectives | — | Are failure modes identified? Do objectives address them? | Are you only avoiding negatives without pursuing positives? |
 
 ### Goal Formulation
 
 Use formulation techniques to express goals correctly as outcomes, not activities.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **Outcome Focus** | Goal describes activity rather than result | To ensure goals track value delivered, not work done | Identify what changes when goal is achieved, express as state change or result, ask "So what?" to find underlying outcome | Does goal describe a result? Does achieving it deliver value? | Does goal describe an activity (verb) rather than outcome (state)? |
-| **Scope Calibration** | Goal is too broad or too narrow | To set appropriate level of ambition | Ask "Why?" to go broader (purpose), ask "How?" to go narrower (action), find level where goal is actionable but meaningful | Is goal actionable? Is it meaningful? | Is goal so broad it's paralyzing? So narrow it's trivial? |
-| **Directional Framing** | Goal needs to inspire and guide | To make goals motivating and directional | Express aspiration not just target, include why it matters, make it memorable and communicable | Is goal inspiring? Does it provide direction? | Is goal purely mechanical with no motivational pull? |
-| **Boundary Setting** | Goal scope is ambiguous | To clarify what's included and excluded | Define what's in scope, define what's explicitly out of scope, identify dependencies on other goals, document constraints | Are boundaries explicit? Are exclusions clear? | Could scope creep occur due to ambiguity? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **Outcome Focus** | Goal describes activity rather than result | To ensure goals track value delivered, not work done | Identify what changes when goal is achieved, express as state change or result, ask "So what?" to find underlying outcome | Goal Statement | Does goal describe a result? Does achieving it deliver value? | Does goal describe an activity (verb) rather than outcome (state)? |
+| **Scope Calibration** | Goal is too broad or too narrow | To set appropriate level of ambition | Ask "Why?" to go broader (purpose), ask "How?" to go narrower (action), find level where goal is actionable but meaningful | Goal Statement | Is goal actionable? Is it meaningful? | Is goal so broad it's paralyzing? So narrow it's trivial? |
+| **Directional Framing** | Goal needs to inspire and guide | To make goals motivating and directional | Express aspiration not just target, include why it matters, make it memorable and communicable | Goal Statement | Is goal inspiring? Does it provide direction? | Is goal purely mechanical with no motivational pull? |
+| **Boundary Setting** | Goal scope is ambiguous | To clarify what's included and excluded | Define what's in scope, define what's explicitly out of scope, identify dependencies on other goals, document constraints | Scope Definition | Are boundaries explicit? Are exclusions clear? | Could scope creep occur due to ambiguity? |
 
 ### Goal Structuring
 
 Use structuring techniques to organize, decompose, and prioritize goals.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **Goal Decomposition** | Goal is too large to pursue directly | To create actionable sub-goals and milestones | Break into independent sub-goals, test each: "Could I do this right now?", sequence into milestones, ensure sub-goals collectively achieve parent | Are sub-goals independent? Do they sum to parent goal? | Are sub-goals coupled or overlapping? |
-| **Hierarchy Alignment** | Goal exists within larger context | To ensure goal contributes to higher-level objectives | Identify parent goals this serves, verify contribution is real, check for conflicts with sibling goals, cascade from strategic to tactical | Does goal serve parent objectives? Are conflicts resolved? | Is goal orphaned or misaligned with strategy? |
-| **Priority Setting** | Multiple goals compete for resources | To determine which goals take precedence | Assess impact vs effort for each, identify dependencies between goals, determine sequencing constraints, rank by value delivered | Are priorities explicit? Is ranking justified? | Are all goals "high priority" (meaning none are)? |
-| **Tradeoff Analysis** | Goals conflict with each other | To make explicit choices between competing goals | Identify conflicting goals, determine which to optimize vs satisfice, document tradeoff decision and rationale | Are tradeoffs explicit? Is rationale documented? | Are conflicts ignored or deferred indefinitely? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **Goal Decomposition** | Goal is too large to pursue directly | To create actionable sub-goals and milestones | Break into independent sub-goals, test each: "Could I do this right now?", sequence into milestones, ensure sub-goals collectively achieve parent | Goal Hierarchy | Are sub-goals independent? Do they sum to parent goal? | Are sub-goals coupled or overlapping? |
+| **Hierarchy Alignment** | Goal exists within larger context | To ensure goal contributes to higher-level objectives | Identify parent goals this serves, verify contribution is real, check for conflicts with sibling goals, cascade from strategic to tactical | Goal Hierarchy | Does goal serve parent objectives? Are conflicts resolved? | Is goal orphaned or misaligned with strategy? |
+| **Priority Setting** | Multiple goals compete for resources | To determine which goals take precedence | Assess impact vs effort for each, identify dependencies between goals, determine sequencing constraints, rank by value delivered | Priority Ranking | Are priorities explicit? Is ranking justified? | Are all goals "high priority" (meaning none are)? |
+| **Tradeoff Analysis** | Goals conflict with each other | To make explicit choices between competing goals | Identify conflicting goals, determine which to optimize vs satisfice, document tradeoff decision and rationale | — | Are tradeoffs explicit? Is rationale documented? | Are conflicts ignored or deferred indefinitely? |
 
 ---
 

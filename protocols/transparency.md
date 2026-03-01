@@ -6,6 +6,15 @@ Make the implicit explicit through documentation, status communication, and deci
 
 ---
 
+## Outline
+
+- [Goal](#goal) | [Intent](#intent) | [Scope](#scope)
+- [Artifacts and Outputs](#artifacts-and-outputs) — Package Documentation, Architecture Decision Record, Status Report, Completion Summary
+- [Core Approaches](#core-approaches) — Artifact Transparency, Progress Transparency, Decision Transparency
+- [Example Patterns](#example-patterns) — Documenting a Software Package, Completing a Task
+
+---
+
 ## Goal
 
 Ensure work is visible, decisions are explainable, and progress is trackable for both humans and AI.
@@ -24,40 +33,51 @@ Techniques for documenting artifacts at all levels, communicating progress and s
 
 ---
 
+## Artifacts and Outputs
+
+| Artifact/Output | Purpose | When to Use | Artifact? |
+|-----------------|---------|-------------|-----------|
+| **Package Documentation** | CLAUDE.md/README documenting purpose and boundaries | When creating or modifying a package/module | Either |
+| **Architecture Decision Record** | Formal decision documentation with context and rationale | When making significant architectural choices | Yes |
+| **Status Report** | Current progress with done/in-progress/blocked | When work is ongoing and stakeholders need visibility | Output |
+| **Completion Summary** | What was delivered with changes and caveats | When finishing work for handoff or review | Output |
+
+---
+
 ## Core Approaches
 
 ### Artifact Transparency
 
 Use artifact transparency techniques to make created things understandable.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **Hierarchical Documentation** | Artifact has multiple levels of detail | To enable understanding at appropriate depth | Document at each level: system (architecture), package (CLAUDE.md/README), module, class, function; link between levels | Can reader navigate from overview to detail? Is each level documented? | Must reader understand everything to understand anything? |
-| **Inline Documentation** | Code or artifact needs explanation | To explain intent, not just what | Add docstrings to public APIs (parameters, returns, behavior), comment complex logic and edge cases, explain "why" not "what" | Are public interfaces documented? Is complex logic explained? | Are obvious things commented? Is "why" missing? |
-| **Package Documentation** | Creating or modifying a package/module | To establish boundaries and usage | Create CLAUDE.md/README with: purpose, what it does/doesn't do, dependencies, contents, entry points, examples | Can someone understand the package without reading all code? | Is structure only discoverable by reading implementation? |
-| **Synchronization** | Code or artifact changes | To prevent documentation drift | Update docs in same commit as changes, treat docs as code (versioned, reviewed), delete outdated docs rather than leave stale | Are docs updated with changes? Is there one source of truth? | Do docs and reality diverge? Are facts duplicated? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **Hierarchical Documentation** | Artifact has multiple levels of detail | To enable understanding at appropriate depth | Document at each level: system (architecture), package (CLAUDE.md/README), module, class, function; link between levels | Package Documentation | Can reader navigate from overview to detail? Is each level documented? | Must reader understand everything to understand anything? |
+| **Inline Documentation** | Code or artifact needs explanation | To explain intent, not just what | Add docstrings to public APIs (parameters, returns, behavior), comment complex logic and edge cases, explain "why" not "what" | — | Are public interfaces documented? Is complex logic explained? | Are obvious things commented? Is "why" missing? |
+| **Package Documentation** | Creating or modifying a package/module | To establish boundaries and usage | Create CLAUDE.md/README with: purpose, what it does/doesn't do, dependencies, contents, entry points, examples | Package Documentation | Can someone understand the package without reading all code? | Is structure only discoverable by reading implementation? |
+| **Synchronization** | Code or artifact changes | To prevent documentation drift | Update docs in same commit as changes, treat docs as code (versioned, reviewed), delete outdated docs rather than leave stale | — | Are docs updated with changes? Is there one source of truth? | Do docs and reality diverge? Are facts duplicated? |
 
 ### Progress Transparency
 
 Use progress transparency techniques to make current state visible.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **Status Reporting** | Work is ongoing | To keep stakeholders informed | Report what's done, what's in progress, what's blocked; use consistent format; include evidence not just claims | Is current status clear? Are blockers visible? | Is progress invisible until completion? |
-| **Completion Summary** | Work is finished | To enable handoff and review | Summarize what was delivered, list changes made, note any caveats or known issues, provide before/after if applicable | Is completion unambiguous? Are caveats documented? | Is it unclear what was done? Are issues hidden? |
-| **Change Notification** | Modifications affect others | To prevent surprises | Announce what changed, why it changed, who's affected, what action is needed; notify before or immediately after | Are affected parties informed? Is impact clear? | Do changes surprise people? |
-| **Bug/Issue Reporting** | Problems are discovered | To enable diagnosis and tracking | Document symptoms, reproduction steps, expected vs actual behavior, context (environment, versions), severity assessment | Can someone reproduce the issue? Is context sufficient? | Is report vague ("it's broken")? Is context missing? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **Status Reporting** | Work is ongoing | To keep stakeholders informed | Report what's done, what's in progress, what's blocked; use consistent format; include evidence not just claims | Status Report | Is current status clear? Are blockers visible? | Is progress invisible until completion? |
+| **Completion Summary** | Work is finished | To enable handoff and review | Summarize what was delivered, list changes made, note any caveats or known issues, provide before/after if applicable | Completion Summary | Is completion unambiguous? Are caveats documented? | Is it unclear what was done? Are issues hidden? |
+| **Change Notification** | Modifications affect others | To prevent surprises | Announce what changed, why it changed, who's affected, what action is needed; notify before or immediately after | — | Are affected parties informed? Is impact clear? | Do changes surprise people? |
+| **Bug/Issue Reporting** | Problems are discovered | To enable diagnosis and tracking | Document symptoms, reproduction steps, expected vs actual behavior, context (environment, versions), severity assessment | — | Can someone reproduce the issue? Is context sufficient? | Is report vague ("it's broken")? Is context missing? |
 
 ### Decision Transparency
 
 Use decision transparency techniques to make choices explainable and traceable.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **Decision Recording** | Making significant choices | To preserve context for future | Document context/problem, options considered, decision made, rationale for choice; store accessibly (ADR, wiki, code comment) | Is decision documented? Is rationale clear? | Are decisions implicit? Will rationale be lost? |
-| **Tradeoff Explanation** | Decision involves competing concerns | To make sacrifices explicit | State what you're optimizing, what you're sacrificing, why this balance is appropriate for context | Are tradeoffs explicit? Is the balance justified? | Are tradeoffs hidden? Will someone ask "why not X"? |
-| **Assumption Documentation** | Proceeding based on assumptions | To enable validation and revision | State assumptions explicitly, document basis for each, flag for review when conditions change | Are assumptions explicit? Is basis documented? | Are assumptions implicit? Will they be forgotten? |
-| **Constraint Acknowledgment** | External factors limit options | To explain why alternatives weren't chosen | Document constraints (time, resources, compatibility, requirements), explain how they shaped the decision | Are constraints documented? Is their impact clear? | Do decisions seem arbitrary because constraints are hidden? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **Decision Recording** | Making significant choices | To preserve context for future | Document context/problem, options considered, decision made, rationale for choice; store accessibly (ADR, wiki, code comment) | Architecture Decision Record | Is decision documented? Is rationale clear? | Are decisions implicit? Will rationale be lost? |
+| **Tradeoff Explanation** | Decision involves competing concerns | To make sacrifices explicit | State what you're optimizing, what you're sacrificing, why this balance is appropriate for context | — | Are tradeoffs explicit? Is the balance justified? | Are tradeoffs hidden? Will someone ask "why not X"? |
+| **Assumption Documentation** | Proceeding based on assumptions | To enable validation and revision | State assumptions explicitly, document basis for each, flag for review when conditions change | — | Are assumptions explicit? Is basis documented? | Are assumptions implicit? Will they be forgotten? |
+| **Constraint Acknowledgment** | External factors limit options | To explain why alternatives weren't chosen | Document constraints (time, resources, compatibility, requirements), explain how they shaped the decision | — | Are constraints documented? Is their impact clear? | Do decisions seem arbitrary because constraints are hidden? |
 
 ---
 

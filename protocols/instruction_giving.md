@@ -6,6 +6,15 @@ Write instructions that succeed on first attempt by managing clarity, structure,
 
 ---
 
+## Outline
+
+- [Goal](#goal) | [Intent](#intent) | [Scope](#scope)
+- [Artifacts and Outputs](#artifacts-and-outputs) — Procedural Instructions, Prerequisites List, Verification Checklist, Warning/Notice
+- [Core Approaches](#core-approaches) — Clarity Techniques, Structure Techniques, Load Management
+- [Example Patterns](#example-patterns) — Writing Procedural Instructions, Simplifying Complex Instructions
+
+---
+
 ## Goal
 
 Produce instructions that enable successful task completion on first attempt.
@@ -24,42 +33,53 @@ Techniques for writing clear instructions, structuring procedural content, manag
 
 ---
 
+## Artifacts and Outputs
+
+| Artifact/Output | Purpose | When to Use | Artifact? |
+|-----------------|---------|-------------|-----------|
+| **Procedural Instructions** | Complete step-by-step guide for task completion | When documenting repeatable processes | Either |
+| **Prerequisites List** | Requirements that must be met before starting | When task has dependencies or setup requirements | Output |
+| **Verification Checklist** | Expected outcomes to confirm at checkpoints | When complex steps need confirmation | Output |
+| **Warning/Notice** | Formatted caution before risky or destructive steps | When steps have potential for error or harm | Output |
+
+---
+
 ## Core Approaches
 
 ### Clarity Techniques
 
 Use clarity techniques to eliminate ambiguity and ensure single interpretation.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **Explicit Language** | Instructions use vague, hedging, or passive words | To eliminate interpretation variance | Use imperative mood (commands not suggestions), replace "should/could/might" with "must/will", use definite articles ("the file" not "a file"), specify exact values not ranges | Are all statements imperative and definite? Is there only one interpretation? | Do instructions contain "should", "could", "might", passive voice, or vague quantifiers? |
-| **Assumption Surfacing** | Reader may lack context you assume | To prevent failure from unstated prerequisites | List what reader must know, state environment requirements, make implicit knowledge explicit, document "obvious" steps | Are all assumptions stated? Would a newcomer succeed? | Are you assuming knowledge the reader may lack? |
-| **Concrete Examples** | Abstract instructions are hard to follow | To ground instructions in specific instances | Provide input/output examples, show exact commands with real values, include sample data, demonstrate edge cases | Are examples concrete and complete? Do they match instructions? | Are instructions abstract without grounding examples? |
-| **Action Verbs** | Steps describe states rather than actions | To make each step executable | Start each step with imperative verb (Run, Create, Open, Configure), specify the object of action, include parameters | Does each step start with a verb? Is the action clear? | Do steps describe states ("The file should be...") rather than actions? |
-| **Conciseness** | Instructions contain unnecessary words or details | To reduce reading time and cognitive load | Remove filler words (actually, basically, simply), eliminate redundant phrases, use single words over phrases ("use" not "make use of"), cut to minimum words needed | Is every word necessary? Can anything be cut without losing meaning? | Are there filler words, redundant phrases, or verbose constructions? |
-| **Accuracy** | Instructions may contain errors or outdated information | To prevent failure from incorrect instructions | Verify commands work as written, test with actual values, check version compatibility, confirm paths and names exist | Have instructions been tested? Are all commands and values correct? | Are commands assumed correct without testing? Are versions or paths outdated? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **Explicit Language** | Instructions use vague, hedging, or passive words | To eliminate interpretation variance | Use imperative mood (commands not suggestions), replace "should/could/might" with "must/will", use definite articles ("the file" not "a file"), specify exact values not ranges | — | Are all statements imperative and definite? Is there only one interpretation? | Do instructions contain "should", "could", "might", passive voice, or vague quantifiers? |
+| **Assumption Surfacing** | Reader may lack context you assume | To prevent failure from unstated prerequisites | List what reader must know, state environment requirements, make implicit knowledge explicit, document "obvious" steps | Prerequisites List | Are all assumptions stated? Would a newcomer succeed? | Are you assuming knowledge the reader may lack? |
+| **Concrete Examples** | Abstract instructions are hard to follow | To ground instructions in specific instances | Provide input/output examples, show exact commands with real values, include sample data, demonstrate edge cases | — | Are examples concrete and complete? Do they match instructions? | Are instructions abstract without grounding examples? |
+| **Action Verbs** | Steps describe states rather than actions | To make each step executable | Start each step with imperative verb (Run, Create, Open, Configure), specify the object of action, include parameters | — | Does each step start with a verb? Is the action clear? | Do steps describe states ("The file should be...") rather than actions? |
+| **Conciseness** | Instructions contain unnecessary words or details | To reduce reading time and cognitive load | Remove filler words (actually, basically, simply), eliminate redundant phrases, use single words over phrases ("use" not "make use of"), cut to minimum words needed | — | Is every word necessary? Can anything be cut without losing meaning? | Are there filler words, redundant phrases, or verbose constructions? |
+| **Accuracy** | Instructions may contain errors or outdated information | To prevent failure from incorrect instructions | Verify commands work as written, test with actual values, check version compatibility, confirm paths and names exist | — | Have instructions been tested? Are all commands and values correct? | Are commands assumed correct without testing? Are versions or paths outdated? |
 
 ### Structure Techniques
 
 Use structure techniques to organize instructions for successful execution.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **Prerequisite Gating** | Task has requirements that must be met first | To prevent failure from unmet dependencies | State prerequisites before instructions, use "Stop if X is not true" gates, group by type (tools, access, state) | Are prerequisites at the top? Are gates explicit? | Are prerequisites buried in later steps? |
-| **Step Sequencing** | Multiple steps must occur in order | To ensure correct execution order | Number steps explicitly, use transition words (first, then, next, finally), one action per step, start new line for each step | Is order unambiguous? Is each step atomic? | Could steps be executed out of order? Are multiple actions in one step? |
-| **Conditional Branching** | Different paths exist based on conditions | To handle variations without confusion | Branch at decision point ("If X: do A. If not X: do B"), keep branches parallel in structure, rejoin after divergence | Are conditions checked before branching? Are all paths covered? | Are conditions checked mid-step? Are some paths missing? |
-| **Cognitive Chunking** | Many steps overwhelm working memory | To group related steps into manageable units | Group by cognitive boundary (where one mental model ends), use 5-9 items per chunk, add headers for each chunk, allow pause between chunks | Are chunks coherent units? Is each chunk 5-9 items? | Are unrelated steps grouped? Are chunks too large? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **Prerequisite Gating** | Task has requirements that must be met first | To prevent failure from unmet dependencies | State prerequisites before instructions, use "Stop if X is not true" gates, group by type (tools, access, state) | Prerequisites List | Are prerequisites at the top? Are gates explicit? | Are prerequisites buried in later steps? |
+| **Step Sequencing** | Multiple steps must occur in order | To ensure correct execution order | Number steps explicitly, use transition words (first, then, next, finally), one action per step, start new line for each step | Procedural Instructions | Is order unambiguous? Is each step atomic? | Could steps be executed out of order? Are multiple actions in one step? |
+| **Conditional Branching** | Different paths exist based on conditions | To handle variations without confusion | Branch at decision point ("If X: do A. If not X: do B"), keep branches parallel in structure, rejoin after divergence | Procedural Instructions | Are conditions checked before branching? Are all paths covered? | Are conditions checked mid-step? Are some paths missing? |
+| **Cognitive Chunking** | Many steps overwhelm working memory | To group related steps into manageable units | Group by cognitive boundary (where one mental model ends), use 5-9 items per chunk, add headers for each chunk, allow pause between chunks | Procedural Instructions | Are chunks coherent units? Is each chunk 5-9 items? | Are unrelated steps grouped? Are chunks too large? |
 
 ### Load Management
 
 Use load management techniques to match instruction complexity to task difficulty.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **Load-Based Adaptation** | Task complexity varies | To prevent overload on complex tasks | Assess intrinsic load (count interdependencies), minimize presentation complexity for high-load tasks, add context/rationale only for low-load tasks | Is presentation complexity inverse to task complexity? | Are complex tasks presented with complex formatting? |
-| **Verification Points** | Complex steps need confirmation | To enable self-correction without re-reading | State expected outcome after complex steps ("Output should show X"), include visual confirmation where possible, specify what success looks like | Are verification points after complex steps? Is expected outcome specific? | Are complex steps missing verification? Is expected outcome vague? |
-| **Notice Placement** | Warnings or cautions are needed | To prevent errors before they occur | Place notices before relevant step (never after), use hierarchy: Note < Warning < Caution < Danger, make consequence explicit | Are notices before the step? Is severity appropriate? | Are warnings after the step? Is severity unclear? |
-| **Redundancy Reduction** | Information is repeated unnecessarily | To reduce extraneous cognitive load | State information once at point of use, reference rather than repeat, remove decorative content, eliminate synonymous terms | Is each piece of information stated once? Are references clear? | Is same information repeated? Are there unnecessary decorations? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **Load-Based Adaptation** | Task complexity varies | To prevent overload on complex tasks | Assess intrinsic load (count interdependencies), minimize presentation complexity for high-load tasks, add context/rationale only for low-load tasks | — | Is presentation complexity inverse to task complexity? | Are complex tasks presented with complex formatting? |
+| **Verification Points** | Complex steps need confirmation | To enable self-correction without re-reading | State expected outcome after complex steps ("Output should show X"), include visual confirmation where possible, specify what success looks like | Verification Checklist | Are verification points after complex steps? Is expected outcome specific? | Are complex steps missing verification? Is expected outcome vague? |
+| **Notice Placement** | Warnings or cautions are needed | To prevent errors before they occur | Place notices before relevant step (never after), use hierarchy: Note < Warning < Caution < Danger, make consequence explicit | Warning/Notice | Are notices before the step? Is severity appropriate? | Are warnings after the step? Is severity unclear? |
+| **Redundancy Reduction** | Information is repeated unnecessarily | To reduce extraneous cognitive load | State information once at point of use, reference rather than repeat, remove decorative content, eliminate synonymous terms | — | Is each piece of information stated once? Are references clear? | Is same information repeated? Are there unnecessary decorations? |
 
 ---
 

@@ -6,6 +6,15 @@ Identify risks early, mitigate proactively, fail fast when risks materialize.
 
 ---
 
+## Outline
+
+- [Goal](#goal) | [Intent](#intent) | [Scope](#scope)
+- [Artifacts and Outputs](#artifacts-and-outputs) — Risk List, Dependency Map, Accepted Risk Record, Failure Report
+- [Core Approaches](#core-approaches) — Risk Identification, Risk Mitigation, Risk Monitoring
+- [Example Patterns](#example-patterns) — Workflow Risk Assessment, Fail-Fast Implementation
+
+---
+
 ## Goal
 
 Enable workflows to identify and address risks before they cause failures or require costly rework.
@@ -24,40 +33,51 @@ Techniques for identifying risks (complexity, uncertainty, dependencies, irrever
 
 ---
 
+## Artifacts and Outputs
+
+| Artifact/Output | Purpose | When to Use | Artifact? |
+|-----------------|---------|-------------|-----------|
+| **Risk List** | Identified risks with impact × probability assessment | When documenting risks for a workflow | Either |
+| **Dependency Map** | External systems, APIs, services the workflow relies on | When analyzing external failure points | Either |
+| **Accepted Risk Record** | Risk accepted with rationale and contingency plan | When proceeding despite unmitigated risk | Yes |
+| **Failure Report** | What failed, context, and diagnostic information | When fail-fast triggers and work stops | Output |
+
+---
+
 ## Core Approaches
 
 ### Risk Identification
 
 Use identification techniques to surface risks before they cause failures.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **Complexity Indicators** | Workflow has many steps or conditionals | To identify where cognitive overload causes errors | Count steps (>7 is high), count conditionals/branches, identify nested logic, note state dependencies between steps | Are complex areas identified? Is step count within limits? | Are there >7 steps without decomposition? Nested conditionals? |
-| **Uncertainty Indicators** | Requirements or approach is unclear | To surface unknowns before they cause wrong work | Look for vague words ("probably", "should work"), missing success criteria, novel/untested approaches, assumptions without verification | Are unknowns explicit? Are assumptions documented? | Are there unstated assumptions? Vague requirements? |
-| **Dependency Analysis** | Workflow relies on external systems or outputs | To identify failure points outside your control | Map external dependencies (APIs, services, files), identify timing dependencies, note what happens if dependency fails | Are dependencies explicit? Are failure modes known? | Are external dependencies assumed reliable? |
-| **Irreversibility Assessment** | Actions may be hard to undo | To identify actions requiring extra caution | List destructive operations (delete, overwrite), identify actions affecting shared state, note actions visible to others | Are irreversible actions flagged? Is confirmation required? | Can destructive actions happen without warning? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **Complexity Indicators** | Workflow has many steps or conditionals | To identify where cognitive overload causes errors | Count steps (>7 is high), count conditionals/branches, identify nested logic, note state dependencies between steps | Risk List | Are complex areas identified? Is step count within limits? | Are there >7 steps without decomposition? Nested conditionals? |
+| **Uncertainty Indicators** | Requirements or approach is unclear | To surface unknowns before they cause wrong work | Look for vague words ("probably", "should work"), missing success criteria, novel/untested approaches, assumptions without verification | Risk List | Are unknowns explicit? Are assumptions documented? | Are there unstated assumptions? Vague requirements? |
+| **Dependency Analysis** | Workflow relies on external systems or outputs | To identify failure points outside your control | Map external dependencies (APIs, services, files), identify timing dependencies, note what happens if dependency fails | Dependency Map | Are dependencies explicit? Are failure modes known? | Are external dependencies assumed reliable? |
+| **Irreversibility Assessment** | Actions may be hard to undo | To identify actions requiring extra caution | List destructive operations (delete, overwrite), identify actions affecting shared state, note actions visible to others | Risk List | Are irreversible actions flagged? Is confirmation required? | Can destructive actions happen without warning? |
 
 ### Risk Mitigation
 
 Use mitigation techniques to reduce risk likelihood or impact.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **Fail-Fast Ordering** | Some steps have higher failure probability | To surface failures before investing effort | Order risky/uncertain steps first, validate assumptions early, check prerequisites before starting, test integrations before building | Are high-risk steps ordered early? Are assumptions validated first? | Are risky steps deferred? Can you invest effort before knowing it's viable? |
-| **Decomposition** | Complexity exceeds manageable threshold | To reduce cognitive load and isolate failures | Break into sub-workflows (<7 steps each), give each module single responsibility, define clear interfaces between modules | Are modules <7 steps? Is responsibility clear? Can failures be isolated? | Are modules too large? Is responsibility scattered? |
-| **Defensive Measures** | Failures may occur despite mitigation | To limit damage when failures happen | Add input validation, implement retry logic for transient failures, include rollback/compensation for state changes, set timeouts | Are failure handlers present? Is rollback possible? | Can failures cascade without containment? |
-| **Risk Avoidance/Transfer** | Risk can be eliminated or shifted | To remove risk rather than mitigate | Choose proven approaches over novel ones, use managed services for risky operations, defer risky features to later phases | Is the lowest-risk approach chosen? Are risky operations externalized? | Are unnecessary risks being taken? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **Fail-Fast Ordering** | Some steps have higher failure probability | To surface failures before investing effort | Order risky/uncertain steps first, validate assumptions early, check prerequisites before starting, test integrations before building | — | Are high-risk steps ordered early? Are assumptions validated first? | Are risky steps deferred? Can you invest effort before knowing it's viable? |
+| **Decomposition** | Complexity exceeds manageable threshold | To reduce cognitive load and isolate failures | Break into sub-workflows (<7 steps each), give each module single responsibility, define clear interfaces between modules | — | Are modules <7 steps? Is responsibility clear? Can failures be isolated? | Are modules too large? Is responsibility scattered? |
+| **Defensive Measures** | Failures may occur despite mitigation | To limit damage when failures happen | Add input validation, implement retry logic for transient failures, include rollback/compensation for state changes, set timeouts | — | Are failure handlers present? Is rollback possible? | Can failures cascade without containment? |
+| **Risk Avoidance/Transfer** | Risk can be eliminated or shifted | To remove risk rather than mitigate | Choose proven approaches over novel ones, use managed services for risky operations, defer risky features to later phases | — | Is the lowest-risk approach chosen? Are risky operations externalized? | Are unnecessary risks being taken? |
 
 ### Risk Monitoring
 
 Use monitoring techniques to track and respond to risks during execution.
 
-| Technique | When | Why | How | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|---------------------|---------------------|
-| **Quality Gates** | Workflow has multiple phases | To catch issues before they cascade | Add validation between major steps, define pass/fail criteria at gates, stop on failure rather than continuing | Are gates between phases? Are criteria explicit? Does failure stop execution? | Can issues cascade across phases? Are gates missing criteria? |
-| **Verification Points** | Complex steps need confirmation | To confirm expected outcomes before proceeding | State expected outcome after risky steps, verify state before dependent steps, check external dependencies are available | Are outcomes verified? Are dependencies checked? | Are you assuming success without checking? |
-| **Acceptance Documentation** | Risks must be accepted rather than eliminated | To make accepted risks explicit and reviewable | Document risk being accepted, state rationale for acceptance, describe contingency if risk materializes, get explicit approval | Are accepted risks documented? Is rationale clear? Is contingency defined? | Are risks implicitly accepted without documentation? |
-| **Escalation Triggers** | Risk exceeds acceptable threshold | To involve appropriate decision-makers | Define when to escalate (impact threshold, uncertainty level), identify who to escalate to, provide options not just problems | Are escalation criteria defined? Is escalation path clear? | Can high-impact risks proceed without review? |
+| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|-----------------|---------------------|---------------------|
+| **Quality Gates** | Workflow has multiple phases | To catch issues before they cascade | Add validation between major steps, define pass/fail criteria at gates, stop on failure rather than continuing | — | Are gates between phases? Are criteria explicit? Does failure stop execution? | Can issues cascade across phases? Are gates missing criteria? |
+| **Verification Points** | Complex steps need confirmation | To confirm expected outcomes before proceeding | State expected outcome after risky steps, verify state before dependent steps, check external dependencies are available | — | Are outcomes verified? Are dependencies checked? | Are you assuming success without checking? |
+| **Acceptance Documentation** | Risks must be accepted rather than eliminated | To make accepted risks explicit and reviewable | Document risk being accepted, state rationale for acceptance, describe contingency if risk materializes, get explicit approval | Accepted Risk Record | Are accepted risks documented? Is rationale clear? Is contingency defined? | Are risks implicitly accepted without documentation? |
+| **Escalation Triggers** | Risk exceeds acceptable threshold | To involve appropriate decision-makers | Define when to escalate (impact threshold, uncertainty level), identify who to escalate to, provide options not just problems | Failure Report | Are escalation criteria defined? Is escalation path clear? | Can high-impact risks proceed without review? |
 
 ---
 
