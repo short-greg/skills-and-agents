@@ -54,7 +54,7 @@ allowed-tools: Read, Grep
 
 ## Steps
 
-Inherits from `base.md` — output lightweight checklist, resolve preconditions, plan actions, execute, report result.
+MUST read and follow steps in `base.md`
 
 ---
 

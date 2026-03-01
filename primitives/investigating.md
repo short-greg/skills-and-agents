@@ -48,7 +48,7 @@ allowed-tools: Read, Grep, WebSearch, WebFetch
 
 ## Steps
 
-Inherits from `base.md` — output lightweight checklist, resolve preconditions, plan actions, execute, report result.
+MUST read and follow steps in `base.md`
 
 ---
 
@@ -79,7 +79,7 @@ Inherits from `base.md` — output lightweight checklist, resolve preconditions,
 
 ---
 
-## Actions
+## Possible Actions
 
 Select actions based on context. Each action shows which KR it serves.
 
