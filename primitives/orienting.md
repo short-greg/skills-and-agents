@@ -37,11 +37,18 @@ allowed-tools: Read, Grep
 
 ## Protocols
 
-Use these protocols to satisfy key results. Read each protocol before using it.
+- **discipline.md** — Must use for Map Structure, Inventory Assets, Identify Gaps and Issues (systematic enumeration, no omissions)
+- **thinking.md** — Must use for Identify Gaps and Issues, Assess Risks and Strengths (analytical reasoning)
+- **risk_management.md** — Must use for Assess Risks and Strengths (risk assessment)
+- **interviewing.md** — Use for Locate Information (when user has context not in artifacts)
+- **pragmatics.md** — Use for Summarize State and Flag Decisions (framing findings)
+- **tracking_and_recovery.md** — Must use for checklist and resuming after interruption
 
-- **reasoning.md** - Must use to reason about approach and verify findings
-- **tracking.md** - Must use to ensure comprehensive coverage and track what assessed vs remaining
-- **recovery.md** - Use when resuming after interruption
+---
+
+## Steps
+
+Inherits from `base.md` — output lightweight checklist, resolve preconditions, plan actions, execute, report result.
 
 ---
 
@@ -77,31 +84,31 @@ Select actions based on context. Each action shows which KR it serves.
 
 ### Map Structure (→ KR1)
 
-Execute structure mapping using Read and Grep to form representation of organization when understanding layout or topology of orienting target. Map directory structure, component relationships, module dependencies, data flows, or process sequences. Document hierarchy, connections, boundaries. Create visual or textual representation showing how parts relate to whole.
+Execute structure mapping using `discipline.md` (MECE Enumeration) when understanding layout or topology of orienting target. Systematically enumerate ALL components: directory structure, component relationships, module dependencies, data flows, or process sequences. Document hierarchy, connections, boundaries. Create representation showing how parts relate to whole.
 
 ### Inventory Assets (→ KR1)
 
-Execute asset inventory using Read and Grep to determine what's available when cataloging existing resources. List files, components, modules, dependencies, configurations, documentation, tests, or infrastructure. Categorize by type, purpose, or area. Note what exists, what's complete, what's partial, what's missing.
+Execute asset inventory using `discipline.md` (Coverage Tracking) when cataloging existing resources. Systematically list ALL files, components, modules, dependencies, configurations, documentation, tests, or infrastructure. Categorize by type, purpose, or area. Track coverage to ensure no significant omissions. Note what exists, what's complete, what's partial, what's missing.
 
 ### Locate Information (→ KR1)
 
-Execute information location using Grep and Read to find relevant details when specific information is needed for orientation. Search for documentation (READMEs, specs, ADRs), implementation details (functions, classes, APIs), configuration (env files, config files), test coverage, known issues, or prior decisions. Document where critical information resides.
+Execute information location using `interviewing.md` (Open Questions, Inference First) when specific information is needed for orientation. Search for documentation, implementation details, configuration, test coverage, known issues, or prior decisions. Apply interviewing when user has context not available in artifacts. Document where critical information resides.
 
 ### Identify Gaps and Issues (→ KR1)
 
-Execute gap and issue identification using reasoning.md to compare current against expected when target state is known or standards exist. Identify missing components, incomplete implementations, broken functionality, inconsistencies, technical debt, or deviations from requirements. Distinguish what's present from what's needed. Note severity and impact of each gap or issue.
+Execute gap and issue identification using `thinking.md` (Analytical) and `discipline.md` (MECE Enumeration) when target state is known or standards exist. Systematically enumerate ALL gaps: missing components, incomplete implementations, broken functionality, inconsistencies, technical debt, deviations from requirements. Distinguish what's present from what's needed. Note severity and impact of each.
 
 ### Assess Risks and Strengths (→ KR1)
 
-Execute risk and strength assessment using reasoning.md to evaluate quality when understanding stability and reliability. Identify risks (fragile code, lack of tests, tight coupling, security vulnerabilities, performance bottlenecks, unclear ownership). Identify strengths (well-tested code, clear documentation, good separation of concerns, robust error handling). Categorize by likelihood and impact.
+Execute risk and strength assessment using `thinking.md` (Analytical) and `risk_management.md` (Risk Assessment) when understanding stability and reliability. Identify risks (fragile code, lack of tests, tight coupling, security vulnerabilities, performance bottlenecks). Identify strengths (well-tested code, clear documentation, good separation). Categorize by likelihood and impact.
 
 ### Summarize State and Flag Decisions (→ KR1, KR2)
 
-Execute summary creation using tracking.md to ensure actionability when orientation is complete. Produce concise summary of current state with supporting evidence. Group findings by category or area. Flag decision points — identify what decisions need to be made based on findings (what to fix first, what approach to take, what to investigate further). Ensure reader can act on orientation.
+Execute summary creation using `pragmatics.md` (Directness Calibration) when orientation is complete. Produce concise summary of current state with supporting evidence. Group findings by category or area. Flag decision points — identify what decisions need to be made based on findings (what to fix first, what approach to take, what to investigate further). Frame findings appropriately for audience.
 
 ---
 
-## Additional Notes and Terms
+## Additional Notes
 
 None
 

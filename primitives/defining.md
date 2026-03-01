@@ -5,6 +5,7 @@ description: >
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "define this", "what are the requirements", "scope this out",
   "clarify requirements", "what should we build", "create a PRD".
+  keywords: specifying, scoping, requirements, criteria, clarifying
 argument-hint: "[task or feature to define]"
 disable-model-invocation: false
 user-invocable: true
@@ -36,14 +37,18 @@ allowed-tools: Read, Grep
 
 ## Protocols
 
-Use these protocols to satisfy key results. Read each protocol before using it.
+- **goal_setting.md** — Must use for Write User Stories, Specify Acceptance Criteria, State Out-of-Scope
+- **criteria_setting.md** — Must use for Specify Acceptance Criteria
+- **interviewing.md** — Must use for Elicit Requirements, Analyze Existing Context, Confirm with User
+- **pragmatics.md** — Use for Elicit Requirements, Confirm with User (directness calibration, presenting definition)
+- **thinking.md** — Use for Analyze Requirements (consistency, feasibility reasoning)
+- **tracking_and_recovery.md** — Must use for checklist and resuming after interruption
 
-- **goals_and_objectives.md** - Must use for writing outcome-oriented success criteria
-- **instructions.md** - Must use for writing clear instructions for implementers
-- **tracking.md** - Must use to ensure completeness
-- **reasoning.md** - Use when analyzing requirements for completeness and consistency
-- **tracking.md** - Use when tracking requirements captured vs remaining
-- **recovery.md** - Use when resuming after interruption
+---
+
+## Steps
+
+Inherits from `base.md` — output lightweight checklist, resolve preconditions, plan actions, execute, report result.
 
 ---
 
@@ -70,33 +75,36 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 Select based on context. Each action shows which KR it serves.
 
 ### Elicit Requirements (→ KR1)
-User intent must be understood. Interview with targeted questions: What problem are you solving? Who is the user? What does success look like? What are the constraints?
+
+Execute requirements elicitation using `interviewing.md` (Open Questions, Success Definition, Constraint Discovery) and `pragmatics.md` (Directness Calibration) when user intent is unclear or incomplete. Ask targeted questions: What problem are you solving? Who is the user? What does success look like? What are the constraints?
 
 ### Analyze Existing Context (→ KR1)
-Current state must be known. Review existing code, docs, and specs to understand what exists and what constraints apply.
+
+Execute context analysis using `interviewing.md` (Inference First) when information may be discoverable without asking. Review existing code, docs, and specs to understand what exists and what constraints apply before asking user.
 
 ### Write User Stories (→ KR1)
-User experience must be captured. Use template: "As a [user] I want to [action], so that [benefit]." Include edge cases.
+
+Execute user story creation using `goal_setting.md` (Outcome Focus) when capturing user experience. Express as outcomes not activities. Use template: "As a [user] I want to [action], so that [benefit]." Include edge cases.
 
 ### Specify Acceptance Criteria (→ KR1)
-Done must be testable. For each requirement, write pass/fail criteria. Apply `goals_and_objectives.md` — outcomes not implementation steps.
+
+Execute criteria specification using `goal_setting.md` (Outcome Focus) and `criteria_setting.md` (Observable Behavior, Threshold Setting) when defining done. For each requirement, write pass/fail criteria with observable behaviors and explicit thresholds. Focus on outcomes not implementation steps.
 
 ### Analyze Requirements (→ KR1)
-Requirements must be validated before confirmation. Check for:
-- **Completeness:** All necessary requirements captured?
-- **Consistency:** No conflicts between requirements?
-- **Feasibility:** Can be achieved within constraints?
-- **Priority:** Most important requirements identified?
+
+Execute requirements analysis using `thinking.md` (Critical, Analytical) when validating before confirmation. Check for completeness (all necessary requirements captured?), consistency (no conflicts?), feasibility (achievable within constraints?), and priority (most important identified?).
 
 ### State Out-of-Scope (→ KR1)
-Boundaries must be explicit. List what is NOT being addressed to prevent scope creep.
+
+Execute boundary definition using `goal_setting.md` (Boundary Setting) when clarifying scope. Define what is explicitly out of scope to prevent scope creep. Document exclusions clearly.
 
 ### Confirm with User (→ KR2)
-Definition must be agreed. Present draft, verify accuracy, resolve ambiguities before finalizing.
+
+Execute confirmation using `interviewing.md` (Understanding Validation) and `pragmatics.md` (Option Presentation) when definition is ready for review. Paraphrase understanding, present draft definition, verify accuracy, resolve ambiguities before finalizing.
 
 ---
 
-## Additional Notes and Terms
+## Additional Notes
 
 **Requirements Engineering phases:** Elicitation → Analysis → Documentation → Validation → Management (IEEE 29148)
 

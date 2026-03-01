@@ -26,11 +26,16 @@ A primitive is an **atomic cognitive action** - a single, indivisible operation 
 **Primitives answer one specific question:**
 - `orienting` - "Where are we now?"
 - `defining` - "What are we building and how will we know it's done?"
-- `critiquing` - "How good is this and how could it be better?"
+- `designing` - "How should we build this?"
 - `implementing` - "How do I build this?"
+- `evaluating` - "Is this correct and of quality?"
+- `investigating` - "What do we need to know?"
+- `brainstorming` - "What are the possibilities?"
+- `planning` - "What steps and in what order?"
+- `maintaining` - "Is this system healthy and well-documented?"
 
 **Primitives are Goal Oriented**
-[TODO: Explain]
+Each primitive has a clear Goal (what it achieves) and Key Results (how to verify achievement). Actions exist to serve Key Results. This creates accountability: a primitive succeeds or fails based on whether KRs are met.
 
 **Key characteristics:**
 - Single-purpose (does one thing well)
@@ -47,7 +52,7 @@ A primitive is an **atomic cognitive action** - a single, indivisible operation 
 
 ## Steps
 
-Follow these steps to create and validate a protocol.
+Follow these steps to create and validate a primitive.
 
 1. Elicit the goal and intent of the primitive
 2. Clarify your understanding
@@ -57,11 +62,28 @@ Follow these steps to create and validate a protocol.
    1. General web research from experts
    2. Non-domain-specific scientific research
    3. Domain-specific web research
-6. **Create decision table** - Output all relevant protocols in a table with columns:
+6. **Create decision table** - Map each protocol to actions. Output a table with columns:
    - Protocol name
-   - Reasons to use (how it helps this primitive)
+   - Maps to Action (which action in the primitive would use this protocol?)
+   - Reasons to use (how it helps that action)
    - Reasons not to use (why it might not fit)
    - Decision (use or don't use)
+
+   Note: If a protocol maps to no action, it's likely not needed. If you find a protocol that SHOULD map to an action that doesn't exist, consider adding that action.
+
+   **Available protocols:**
+   - `thinking.md` — reasoning and thinking techniques
+   - `tracking_and_recovery.md` — progress tracking and resumption
+   - `transparency.md` — documentation and decision recording
+   - `software_quality.md` — quality assessment dimensions
+   - `system_modularity.md` — component design and boundaries
+   - `goal_setting.md` — establishing objectives
+   - `criteria_setting.md` — defining measurable criteria
+   - `instruction_giving.md` — writing clear instructions
+   - `interviewing.md` — eliciting information from users
+   - `pragmatics.md` — communication style and framing
+   - `frame_of_mind.md` — establishing role and stance
+   - `risk_management.md` — identifying and mitigating risks
 7. Create the primitive according to the template
 8. Validate the primitive
 9. Do final confirmation from the creator
@@ -84,7 +106,7 @@ Primitives are **instruction-focused** or **evaluation-focused**, not descriptiv
 - 2-4 requirements vs workflows with 5-9
 - Exactly 2 Key Results vs workflows with 3-4
 - Actions show KR linkage and protocol usage
-- All primitives reference `primitive_execution.md` protocol
+- All primitives inherit from `base.md` (execution pattern)
 
 ---
 
@@ -118,7 +140,7 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 
 1. **Start with the question:** What specific question does this primitive answer?
 2. **Keep it atomic:** If you find yourself writing "first... then... finally...", it's probably a workflow
-3. **2 or 3 KRs only:** Consolidate related outcomes into compound Key Results
+3. **Exactly 2 KRs:** Consolidate related outcomes into compound Key Results
 4. **Simple requirements:** Primitives typically need 2-4 requirements, not 9
 5. **Self-contained:** Don't reference other primitives in scope or actions
 6. **Clear triggers:** Include natural phrases users might say to invoke this primitive
@@ -179,15 +201,7 @@ Protocols that this primitive uses.
 
 ## Steps
 
-Execute per protocol `primitive_execution.md` — track, plan, execute, validate.
-
----
-
-## Terms
-
-<Define key domain-specific terms used in this primitive. Write "None" if not applicable.>
-
-[Term Name]: [Definition]
+Inherits from `base.md` — output lightweight checklist, resolve preconditions, plan actions, execute, report result.
 
 ---
 
@@ -224,9 +238,9 @@ Select based on context. Each action shows which KR it serves.
 
 ---
 
-## Additional Notes and Terms
+## Additional Notes
 
-<Additional notes, clarifications, or distinctions from other primitives. Write "None" if not applicable.>
+<Additional notes, clarifications, terms, or distinctions from other primitives. Write "None" if not applicable.>
 
 ---
 
@@ -240,7 +254,7 @@ Step 1 - Claude Code's documentation FIRST:
 
 Step 2 - Expert/academic sources (in addition):
 - Search: "[primitive topic] techniques academic" or "[topic] best practices software engineering"
-- Example: Creating `reasoning` → search "reasoning techniques academic cognitive science"
+- Example: Creating `thinking` → search "reasoning techniques academic cognitive science"
 - Example: Creating `designing` → search "software design principles best practices">
 
 **List ALL sources consulted:**

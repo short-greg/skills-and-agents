@@ -25,8 +25,7 @@ allowed-tools: Read, Grep, Bash
 ## Key Results - KR
 
 1. Evaluation criteria established — what constitutes correct/quality/compliant is defined
-2. Evidence collected and assessed — observations, test results, comparisons documented
-3. Evaluation output — verdict, grade, or assessment based on evidence
+2. Assessment produced with evidence — observations documented, verdict based on evidence
 
 ## Requirements and Constraints - REQ
 
@@ -39,13 +38,19 @@ allowed-tools: Read, Grep, Bash
 
 ## Protocols
 
-Use these protocols to satisfy key results. Read each protocol before using it.
+- **criteria_setting.md** — Must use for Establish Criteria (defining evaluation criteria)
+- **discipline.md** — Must use for Establish Criteria, Output Evidence Table, Run Automated Tests (systematic enumeration)
+- **thinking.md** — Must use for Output Evidence Table, Weight Evidence, Determine Sufficiency (bias prevention, evidence reasoning)
+- **software_quality.md** — Use for Execute Manual Tests, Output Evaluation (quality dimensions)
+- **system_modularity.md** — Use for Execute Manual Tests (when evaluating design/architecture)
+- **pragmatics.md** — Use for Output Evaluation, Provide Recommendations (confidence signaling, framing results)
+- **tracking_and_recovery.md** — Must use for checklist and resuming after interruption
 
-- **reasoning.md** - Must use to find evidence for multiple possible evaluations before deciding
-- **tracking.md** - Must use to track evaluation steps systematically
-- **quality.md** - Use when assigning severity or prioritizing issues
-- **modularity.md** - Use when evaluating design or architecture
-- **recovery.md** - Use when resuming after interruption
+---
+
+## Steps
+
+Inherits from `base.md` — output lightweight checklist, resolve preconditions, plan actions, execute, report result.
 
 ---
 
@@ -84,33 +89,37 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 
 Select actions based on context. Each action shows which KR it serves.
 
-### Output Evidence Table (→ KR2, KR3)
+### Establish Criteria (→ KR1)
 
-Execute evidence table creation using reasoning.md to prevent confirmation bias when gathering evaluation evidence. Create table with evidence supporting each possible evaluation: Binary (pass/fail) shows evidence for pass and evidence for fail. Likert (scale) shows evidence for each level (1-5, poor-excellent, etc.). Categorical shows evidence for each category (low/medium/high risk, A/B/C grade, etc.). Rubric shows evidence for each criterion. If evidence is insufficient for any evaluation, document what's missing.
+Execute criteria establishment using `criteria_setting.md` (Observable Behavior, Threshold Setting) and `discipline.md` (MECE Enumeration) when evaluation criteria are not clear or not provided. Systematically enumerate ALL criteria that define correct/quality/compliant. Specify observable indicators and thresholds for each criterion. Document what constitutes pass vs fail for each.
+
+### Output Evidence Table (→ KR2)
+
+Execute evidence table creation using `thinking.md` (Analytical) and `discipline.md` (Coverage Tracking) when gathering evaluation evidence. Create table with evidence supporting each possible evaluation systematically: Binary (pass/fail) shows evidence for pass and evidence for fail. Likert (scale) shows evidence for each level. Categorical shows evidence for each category. Rubric shows evidence for each criterion. If evidence is insufficient for any evaluation, document what's missing.
 
 ### Run Automated Tests (→ KR2)
 
-Execute automated testing using Bash to gather objective evidence when tests exist and evaluation criteria require testing. Run linting for style/formatting/conventions, unit tests for function correctness/edge cases, integration tests for component interactions, end-to-end tests for full workflow validation, performance tests for speed/resource usage, security tests for vulnerability scanning, coverage tests for code coverage metrics. Document which tests ran, results, and failures.
+Execute automated testing using `discipline.md` (Coverage Tracking) when tests exist and evaluation criteria require testing. Systematically run ALL applicable test types: linting, unit tests, integration tests, end-to-end tests, performance tests, security tests, coverage tests. Document which tests ran, results, and failures with specifics.
 
 ### Execute Manual Tests (→ KR2)
 
-Execute manual evaluation using Read and Grep to gather evidence when automated tests are unavailable or insufficient. For code: read code, check logic, trace execution paths. For UI: interact with interface, verify behavior, check accessibility. For design: review against principles (SOLID, coupling/cohesion, modularity.md). For documents: read for clarity, completeness, accuracy. For claims: check sources, reproduce results, verify logic. For processes: observe execution, check adherence to standards. Document observations with specific locations and details.
+Execute manual evaluation using `software_quality.md` (Quality Dimensions) and `system_modularity.md` (Cohesion, Coupling) when automated tests are unavailable or insufficient. For code: read code, check logic, trace execution paths. For design: review against modularity principles. For documents: read for clarity, completeness, accuracy. For claims: check sources, reproduce results, verify logic. Document observations with specific locations and details.
 
-### Weight Evidence (→ KR3)
+### Weight Evidence (→ KR2)
 
-Execute evidence weighting using reasoning.md to compare strength across possible evaluations when deciding final evaluation. Review evidence strength (concrete vs speculative, comprehensive vs partial). Consider evidence quality (reliable sources, reproducible results). Note conflicting evidence. Identify strongest case based on evidence weight.
+Execute evidence weighting using `thinking.md` (Analytical, Counterfactual) when deciding final evaluation. Review evidence strength (concrete vs speculative, comprehensive vs partial). Consider evidence quality (reliable sources, reproducible results). Note conflicting evidence. Consider what would change the verdict. Identify strongest case based on evidence weight.
 
-### Determine Sufficiency (→ KR3)
+### Determine Sufficiency (→ KR2)
 
-Execute sufficiency check using reasoning.md to validate completeness when weighing evidence. Check whether judgment can be made with available evidence, whether critical criteria are covered, whether there are major gaps or unknowns. If insufficient: output what's needed (more investigation, clearer criteria, additional context, etc.). If sufficient: proceed to output evaluation.
+Execute sufficiency check using `thinking.md` (Analytical) when weighing evidence. Check whether judgment can be made with available evidence, whether critical criteria are covered, whether there are major gaps or unknowns. If insufficient: output what's needed. If sufficient: proceed to output evaluation.
 
-### Output Evaluation (→ KR3)
+### Output Evaluation (→ KR2)
 
-Execute evaluation output using quality.md to format results when evidence is sufficient. Format depends on evaluation method: Binary outputs pass/fail/inconclusive with supporting evidence. Scale outputs numeric or qualitative grade with justification. Categorical outputs category assignment with reasoning. Rubric outputs score per criterion with overall assessment. Include final evaluation, evidence summary, specific issues/strengths with locations, severity (if applicable).
+Execute evaluation output using `software_quality.md` (Quality Dimensions) and `pragmatics.md` (Confidence Signaling) when evidence is sufficient. Format depends on evaluation method: Binary outputs pass/fail/inconclusive with supporting evidence. Scale outputs grade with justification. Rubric outputs score per criterion with overall assessment. Signal confidence level appropriately.
 
-### Provide Recommendations (→ KR3)
+### Provide Recommendations (→ KR2)
 
-Execute recommendation generation using reasoning.md to suggest next steps when explicitly requested. Provide concrete next steps to address issues, improvements to strengthen quality, alternative approaches to consider, what to investigate further. Recommendations must be actionable, not vague.
+Execute recommendation generation using `thinking.md` (Strategic) and `pragmatics.md` (Recommended Option) when explicitly requested. Provide concrete next steps to address issues, improvements to strengthen quality, alternative approaches to consider. Frame recommendations clearly with rationale. Recommendations must be actionable, not vague.
 
 ---
 

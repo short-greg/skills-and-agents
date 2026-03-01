@@ -5,6 +5,7 @@ description: >
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "plan this", "how should we approach this", "break this down",
   "what should we do first", "create a plan", "what are the steps".
+  keywords: sequencing, ordering, decomposing, scheduling, prioritizing
 argument-hint: "[task or goal to plan]"
 disable-model-invocation: false
 user-invocable: true
@@ -36,14 +37,20 @@ allowed-tools: Read, Grep
 
 ## Protocols
 
-Use these protocols to satisfy key results. Read each protocol before using it.
+- **goal_setting.md** — Must use for Identify Actions
+- **discipline.md** — Must use for Identify Actions, Identify Dependencies, Surface Unknowns
+- **instruction_giving.md** — Must use for Identify Actions, Sequence Actions
+- **thinking.md** — Must use for Sequence Actions
+- **risk_management.md** — Must use for Surface Unknowns
+- **interviewing.md** — Use for Elicit Context (when info incomplete)
+- **pragmatics.md** — Use for Elicit Context, Confirm with User
+- **tracking_and_recovery.md** — Must use for checklist and resuming after interruption
 
-- **reasoning.md** - Must use to reason about sequencing and verify completeness
-- **goals_and_objectives.md** - Must use to ensure plan achieves success criteria
-- **tracking.md** - Must use to ensure all aspects covered
-- **risk_management.md** - Use when identifying unknowns that affect sequencing
-- **tracking.md** - Use when tracking planning progress
-- **recovery.md** - Use when resuming after interruption
+---
+
+## Steps
+
+Inherits from `base.md` — output lightweight checklist, resolve preconditions, plan actions, execute, report result.
 
 ---
 
@@ -69,20 +76,29 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 
 Select based on context. Each action shows which KR it serves.
 
+### Elicit Context (→ KR1)
+
+Execute context elicitation using `interviewing.md` (Open Questions, Constraint Discovery) and `pragmatics.md` (Directness Calibration) when definition, requirements, or codebase context not provided. Gather what's needed to plan accurately before proceeding.
+
 ### Identify Actions (→ KR1)
-All required work must be enumerated. List high-level actions needed to accomplish goal. Apply 100% rule — no gaps.
+
+Execute action identification using `goal_setting.md` (Goal Decomposition), `discipline.md` (MECE Enumeration), and `instruction_giving.md` (Action Verbs, Explicit Language) when enumerating required work. Break goal into independent sub-goals, enumerate ALL actions systematically, write each as clear instruction. Apply 100% rule — no gaps.
 
 ### Identify Dependencies (→ KR1)
-Prerequisites must be explicit. Determine what must be done before what.
+
+Execute dependency identification using `discipline.md` (Coverage Tracking) when determining prerequisites. Check ALL action pairs systematically, map what must be done before what.
 
 ### Sequence Actions (→ KR1)
-Order must be correct. Sequence based on dependencies and logical flow. Identify parallelizable work.
+
+Execute action sequencing using `thinking.md` (Strategic) and `instruction_giving.md` (Cognitive Chunking, Step Sequencing) when ordering work. Determine optimal order, group into 5-9 step chunks, identify parallelizable work, plan milestones.
 
 ### Surface Unknowns (→ KR1)
-Risks must be visible. Identify actions where approach is unclear and investigation may be needed first.
+
+Execute unknown surfacing using `risk_management.md` (Uncertainty Indicators, Fail-Fast Ordering) and `discipline.md` (Coverage Tracking) when identifying risks. Check ALL actions for vague requirements, untested approaches, missing criteria. Order uncertain steps early.
 
 ### Confirm with User (→ KR2)
-Plan must be agreed. Present plan, verify completeness and ordering before proceeding.
+
+Execute plan confirmation using `pragmatics.md` (Recommended Option, Option Presentation) when presenting plan for review. Frame as recommended approach with reasoning, verify completeness and ordering before proceeding.
 
 ---
 

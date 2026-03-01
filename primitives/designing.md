@@ -5,6 +5,7 @@ description: >
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "design this", "how should we build this", "what's the architecture",
   "what are the tradeoffs", "design the API", "design the data model".
+  keywords: architecting, structuring, modeling, interfacing, planning
 argument-hint: "[component or problem to design]"
 disable-model-invocation: false
 user-invocable: true
@@ -37,17 +38,23 @@ allowed-tools: Read, Grep
 
 ## Protocols
 
-Use these protocols to satisfy key results. Read each protocol before using it.
+- **thinking.md** — Must use for Write Use Cases First, Design Structure, Design Process, Evaluate Tradeoffs
+- **system_modularity.md** — Must use for Design Structure
+- **discipline.md** — Must use for Write Use Cases First, Design Structure, Design Process, Identify and Mitigate Risks, Evaluate Tradeoffs
+- **criteria_setting.md** — Must use for Design Structure, Design Process (testable interface specs, observable behaviors)
+- **software_quality.md** — Must use for Design Structure, Design Process (quality attributes affecting design)
+- **instruction_giving.md** — Must use for Design Structure, Design Process (clear, implementable specs)
+- **transparency.md** — Must use for Design Structure, Design Process, Evaluate Tradeoffs (document design artifact and decisions)
+- **risk_management.md** — Must use for Identify and Mitigate Risks
+- **interviewing.md** — Use for Elicit Context (when info incomplete)
+- **pragmatics.md** — Use for Elicit Context, Confirm with User
+- **tracking_and_recovery.md** — Must use for checklist and resuming after interruption
 
-- **modularity.md** - Must use for use-case driven design and information hiding
-- **risk_management.md** - Must use for identifying and mitigating risks
-- **documentation.md** - Must use for documenting design decisions
-- **instructions.md** - Must use for writing clear instructions for implementers
-- **tracking.md** - Must use to ensure completeness
-- **quality.md** - Use when evaluating design quality
-- **reasoning.md** - Use when evaluating tradeoffs
-- **tracking.md** - Use when tracking design aspects complete vs remaining
-- **recovery.md** - Use when resuming after interruption
+---
+
+## Steps
+
+Inherits from `base.md` — output lightweight checklist, resolve preconditions, plan actions, execute, report result.
 
 ---
 
@@ -74,31 +81,33 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 
 Select based on context. Each action shows which KR it serves.
 
+### Elicit Context (→ KR1)
+
+Execute context elicitation using `interviewing.md` (Open Questions, Constraint Discovery) and `pragmatics.md` (Directness Calibration) when project conventions, codebase context, or requirements not provided. Gather what's needed to design accurately before proceeding.
+
 ### Write Use Cases First (→ KR1)
-Usage must drive design. Write 3-5 primary use cases as ideal API calls or interactions before designing components. Identify natural boundaries from the flow.
+
+Execute use case creation using `thinking.md` (Analytical) and `discipline.md` (MECE Enumeration) when starting design. Write 3-5 primary use cases as ideal API calls or interactions, enumerate systematically, identify natural boundaries from usage patterns.
 
 ### Design Structure (→ KR1)
-Component boundaries must be explicit. Define:
-- File/module hierarchy and dependency graph
-- Data model (structures, relationships, ownership)
-- Interfaces (function signatures, API shapes, contracts)
 
-Apply `modularity.md`: high cohesion within, loose coupling between. Hide what changes frequently.
+Execute structure design using `system_modularity.md` (Cohesion, Coupling, Information Hiding), `thinking.md` (Systems), `discipline.md` (Coverage Tracking), `criteria_setting.md` (Observable Behavior), `software_quality.md` (Quality Attributes), `instruction_giving.md` (Explicit Language), and `transparency.md` (Documentation) when defining components. Enumerate ALL modules, interfaces, and data structures. Specify testable interface contracts. Consider quality attributes. Document design clearly for implementation.
 
 ### Design Process (→ KR1)
-Behavior must be specified. Define:
-- Data flow (how data moves through system)
-- State transitions (valid states and transitions)
-- Error handling (how failures propagate and recover)
+
+Execute process design using `thinking.md` (Systems), `discipline.md` (Coverage Tracking), `criteria_setting.md` (Observable Behavior, Threshold Setting), `software_quality.md` (Quality Requirements), `instruction_giving.md` (Explicit Language), and `transparency.md` (Documentation) when specifying behavior. Map ALL data flows with observable criteria, enumerate ALL valid states and transitions, specify ALL error handling. Document quality requirements (performance, reliability).
 
 ### Identify and Mitigate Risks (→ KR1)
-Risks must be resolved before implementation. Identify complexity, unknowns, fragile assumptions, edge cases, security concerns. For each risk, determine concrete mitigation.
+
+Execute risk identification using `risk_management.md` (Uncertainty Indicators, Complexity Indicators) and `discipline.md` (Coverage Tracking) when surfacing design risks. Check ALL components for complexity, unknowns, fragile assumptions, edge cases, security concerns. For each risk, determine concrete mitigation.
 
 ### Evaluate Tradeoffs (→ KR1)
-Design decisions must be justified. For key decisions, state alternatives considered, tradeoffs evaluated, and rationale for choice.
+
+Execute tradeoff evaluation using `thinking.md` (Counterfactual), `transparency.md` (Decision Recording), and `discipline.md` (Coverage Tracking) when making design decisions. Enumerate ALL key decisions, state alternatives considered for each, evaluate tradeoffs, document rationale for choices.
 
 ### Confirm with User (→ KR2)
-Design must be agreed. Present approach with enough precision to implement from. Verify acceptability before implementation begins.
+
+Execute design confirmation using `pragmatics.md` (Recommended Option, Option Presentation) when presenting design for review. Frame as recommended approach with reasoning, present with enough precision to implement from, verify acceptability before implementation begins.
 
 ---
 

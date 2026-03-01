@@ -38,11 +38,15 @@ allowed-tools: Read, Grep, WebSearch
 
 ## Protocols
 
-Use these protocols to satisfy key results. Read each protocol before using it.
+- **thinking.md** — Must use for Decompose to First Principles, Invert the Problem, Search for Analogies, Apply SCAMPER, Push to Extremes, Build and Combine Ideas, Group and Label
+- **pragmatics.md** — Use for Describe Each Idea, Group and Label (framing ideas, option presentation for user)
+- **tracking_and_recovery.md** — Must use for Describe Each Idea and checklist
 
-- **reasoning.md** - Must use to evaluate which categories to explore and assess diversity
-- **tracking.md** - Must use to track idea categories explored vs remaining
-- **recovery.md** - Use when resuming after interruption
+---
+
+## Steps
+
+Inherits from `base.md` — output lightweight checklist, resolve preconditions, plan actions, execute, report result.
 
 ---
 
@@ -78,35 +82,35 @@ Select actions based on context. Each action shows which KR it serves.
 
 ### Decompose to First Principles (→ KR1)
 
-Execute first principles decomposition using reasoning.md to generate foundational ideas when seeking novel approaches or when assumptions need questioning. Break problem to fundamental truths, identify underlying assumptions, generate ideas by modifying or removing each.
+Execute first principles decomposition using `thinking.md` to generate foundational ideas when seeking novel approaches or when assumptions need questioning. Break problem to fundamental truths, identify underlying assumptions, generate ideas by modifying or removing each.
 
 ### Invert the Problem (→ KR1)
 
-Execute problem inversion using reasoning.md to generate contrarian ideas when seeking opposite approaches or when forward thinking feels stuck. Ask what the reverse solution would look like, what would make the problem worse, how to achieve the opposite goal.
+Execute problem inversion using `thinking.md` to generate contrarian ideas when seeking opposite approaches or when forward thinking feels stuck. Ask what the reverse solution would look like, what would make the problem worse, how to achieve the opposite goal.
 
 ### Search for Analogies (→ KR1)
 
-Execute analogy search using WebSearch to generate cross-domain ideas when seeking inspiration from other fields. Identify how similar problems are solved elsewhere (nature, other industries, different contexts), apply those patterns to current problem.
+Execute analogy search using `thinking.md` (Analogical reasoning) and WebSearch to generate cross-domain ideas when seeking inspiration from other fields. Identify similar solved problems, map structural similarities, note key differences, adapt patterns to current problem.
 
 ### Apply SCAMPER (→ KR1)
 
-Execute SCAMPER method to generate systematic variations when building on existing solution or idea. Apply each transformation: **S**ubstitute, **C**ombine, **A**dapt, **M**odify, **P**ut to other uses, **E**liminate, **R**everse.
+Execute SCAMPER method using `thinking.md` (Analytical) to generate systematic variations when building on existing solution or idea. Decompose idea into components, apply each transformation systematically: **S**ubstitute, **C**ombine, **A**dapt, **M**odify, **P**ut to other uses, **E**liminate, **R**everse.
 
 ### Push to Extremes (→ KR1)
 
-Execute extreme exploration to generate boundary-case ideas when seeking unusual solutions or when moderate ideas lack impact. Generate simplest, most powerful, fastest, cheapest, and most unusual solutions.
+Execute extreme exploration using `thinking.md` (Creative/Lateral, Novelty Assessment) to generate boundary-case ideas when seeking unusual solutions or when moderate ideas lack impact. Assess likelihood of each idea, deliberately generate low-likelihood alternatives (<0.3), explore simplest, most powerful, fastest, cheapest, and most unusual solutions.
 
 ### Build and Combine Ideas (→ KR1)
 
-Execute idea synthesis using reasoning.md to generate evolved ideas when expanding on promising directions or when seeking hybrids. Take existing ideas, generate variations (refine, extend, specialize). Merge aspects of different ideas into new combinations.
+Execute idea synthesis using `thinking.md` to generate evolved ideas when expanding on promising directions or when seeking hybrids. Take existing ideas, generate variations (refine, extend, specialize). Merge aspects of different ideas into new combinations.
 
 ### Describe Each Idea (→ KR2)
 
-Execute idea description using tracking.md to ensure actionability when documenting all generated ideas. State clearly for each: what it is, how it would work, why it might be viable. Ensure every idea is concrete enough for later evaluation.
+Execute idea description using `tracking_and_recovery.md` and `pragmatics.md` (Option Presentation) to ensure actionability when documenting all generated ideas. State clearly for each: what it is, how it would work, why it might be viable. Frame ideas appropriately for audience. Ensure every idea is concrete enough for later evaluation.
 
 ### Group and Label (→ KR2)
 
-Execute idea categorization using reasoning.md to organize output when preparing ideas for evaluation. Cluster related ideas into categories, identify key tradeoffs that differentiate approaches, label each cluster.
+Execute idea categorization using `thinking.md` (Analytical) and `pragmatics.md` (Framing) to organize output when preparing ideas for evaluation. Cluster related ideas into categories, identify key tradeoffs that differentiate approaches, label each cluster, frame categories for clear presentation to user.
 
 ---
 

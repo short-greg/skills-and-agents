@@ -5,6 +5,7 @@ description: >
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "implement this", "write the code", "build this", "code this up",
   "create the feature", "add the tests", "implement the design", "write the function".
+  keywords: coding, building, writing, testing, integrating
 argument-hint: "[what to implement]"
 disable-model-invocation: false
 user-invocable: true
@@ -36,14 +37,20 @@ allowed-tools: Read, Grep, Write, Edit, Bash
 
 ## Protocols
 
-Use these protocols to satisfy key results. Read each protocol before using it.
+- **interviewing.md** — Use for Gather Context (when bug report, screenshot, error message needs clarification)
+- **pragmatics.md** — Use for Gather Context (when asking for clarification)
+- **discipline.md** — Must use for Prepare, Write Tests (systematic coverage)
+- **system_modularity.md** — Must use for Prepare, Write Stubs, Implement (modular code boundaries)
+- **criteria_setting.md** — Must use for Write Stubs, Implement, Write Tests (verify matches design)
+- **software_quality.md** — Must use for Run Tests, Self-Review (quality verification)
+- **transparency.md** — Use for Self-Review (when changes affect behavior/APIs)
+- **tracking_and_recovery.md** — Must use for checklist and resuming after interruption
 
-- **modularity.md** - Must use for modular code with clear boundaries
-- **quality.md** - Must use to ensure correctness, clarity, maintainability
-- **documentation.md** - Must use when implementation changes behavior or APIs
-- **tracking.md** - Must use to ensure completeness
-- **tracking.md** - Use when tracking progress during multi-file implementations
-- **recovery.md** - Use when resuming after interruption
+---
+
+## Steps
+
+Inherits from `base.md` — output lightweight checklist, resolve preconditions, plan actions, execute, report result.
 
 ---
 
@@ -67,23 +74,35 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 
 ## Actions
 
-Select and execute actions to achieve each Key Result. Each action shows which KR it serves.
+Select based on context. Each action shows which KR it serves.
 
-### Prepare and Implement (→ KR1)
+### Gather Context (→ KR1)
 
-**Preparation:** Review conventions (read existing code, style guides, CLAUDE.md). Review design (re-read to ensure implementation matches intent). Identify integration points (where new code connects to existing). Set up scaffolding (create files, basic structure, imports).
+Execute context gathering using `interviewing.md` (Open Questions, Inference First) and `pragmatics.md` (Directness Calibration) when bug report is unclear, screenshot needs interpretation, error message needs analysis, or reproduction steps are missing. Clarify what needs to be implemented before proceeding.
 
-**Implementation:** Implement incrementally (small pieces, verifying each works). Write core logic. Handle edge cases (boundary conditions, empty inputs, invalid states). Handle errors (implement error handling, validation, recovery). Refactor as needed. Verify conventions after writing.
+### Prepare (→ KR1)
 
-Flag design issues if implementation reveals problems. For minor issues, propose light touch-up and confirm with user.
+Execute preparation using `discipline.md` (Coverage Tracking) and `system_modularity.md` (Cohesion, Coupling) when starting implementation. Review conventions, read existing code patterns, review design, set up scaffolding and file structure.
 
-### Test and Integrate (→ KR1, KR2)
+### Write Stubs (→ KR1)
 
-**Testing:** Write tests (unit tests, integration tests as appropriate). Run tests to verify they pass. Test edge cases (ensure edge case handling works correctly). Test error paths (verify error handling behaves as expected).
+Execute stub creation using `system_modularity.md` (Information Hiding, Interfaces) and `criteria_setting.md` (Observable Behavior) when implementation is complex and structure should be reviewed before filling in logic. Define function signatures, interfaces, and module boundaries first.
 
-**Integration:** Integrate with existing code (connect to existing modules, APIs, data flows). Update dependencies (modify imports, exports, configuration). Verify integration (ensure new code works within larger system).
+### Implement (→ KR1)
 
-**Quality:** Review own code (read through for clarity and correctness). Check conventions (verify code matches project style and patterns). Clean up (remove dead code, improve names, add comments where logic is non-obvious).
+Execute implementation using `system_modularity.md` (Cohesion, Coupling) and `criteria_setting.md` (Observable Behavior) when writing or modifying code. Write modular code, integrate with existing modules and APIs, verify against design criteria. Flag design issues if discovered.
+
+### Write Tests (→ KR2)
+
+Execute test creation using `discipline.md` (MECE Enumeration, Coverage Tracking) and `criteria_setting.md` (Observable Behavior) when new functionality needs test coverage. Enumerate ALL edge cases and error paths systematically, write unit and integration tests.
+
+### Run Tests (→ KR2)
+
+Execute test verification using `software_quality.md` (Quality Dimensions) when verifying implementation works. Run all tests including existing tests, check for regressions, document failures with specifics.
+
+### Self-Review (→ KR1, KR2)
+
+Execute self-review using `software_quality.md` (Quality Dimensions) and `transparency.md` (Documentation) when implementation is complete. Review code for quality and correctness, verify conventions followed, document API changes if any.
 
 ---
 
