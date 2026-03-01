@@ -5,6 +5,7 @@ description: >
   You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
   Triggers on: "orient me", "where are we", "what's the current state", "what's the situation",
   "take stock", "size this up", "gap analysis", "assess the situation".
+  keywords: mapping, inventorying, locating, surveying, assessing
 argument-hint: "[subject to orient on]"
 disable-model-invocation: false
 user-invocable: true
@@ -39,9 +40,16 @@ allowed-tools: Read, Grep
 Use these protocols to satisfy key results. Read each protocol before using it.
 
 - **reasoning.md** - Must use to reason about approach and verify findings
-- **tracking.md** - Must use to ensure comprehensive coverage
-- **tracking.md** - Use when tracking what assessed vs remaining
+- **tracking.md** - Must use to ensure comprehensive coverage and track what assessed vs remaining
 - **recovery.md** - Use when resuming after interruption
+
+---
+
+## Terms
+
+**Orienting Target:** What is being oriented on (system, project, task, codebase, infrastructure, process, etc.)
+
+**Orienting Method:** How to orient (mapping structure, inventorying available assets, locating relevant information, assessing state against criteria, etc.)
 
 ---
 
@@ -65,17 +73,31 @@ Use these protocols to satisfy key results. Read each protocol before using it.
 
 ## Actions
 
-Select and execute actions to achieve each Key Result. Each action shows which KR it serves.
+Select actions based on context. Each action shows which KR it serves.
 
-### Assess Current State (→ KR1)
+### Map Structure (→ KR1)
 
-Read materials (code, docs, specs, test results, logs) to understand what exists. Identify gaps (compare what exists against what's needed), identify issues (problems, bugs, inconsistencies, technical debt), identify risks (what could go wrong or is fragile), identify strengths (what's working well).
+Execute structure mapping using Read and Grep to form representation of organization when understanding layout or topology of orienting target. Map directory structure, component relationships, module dependencies, data flows, or process sequences. Document hierarchy, connections, boundaries. Create visual or textual representation showing how parts relate to whole.
 
-Categorize findings by severity, type, or area.
+### Inventory Assets (→ KR1)
 
-### Summarize and Flag Decisions (→ KR1, KR2)
+Execute asset inventory using Read and Grep to determine what's available when cataloging existing resources. List files, components, modules, dependencies, configurations, documentation, tests, or infrastructure. Categorize by type, purpose, or area. Note what exists, what's complete, what's partial, what's missing.
 
-Produce concise summary of current state with evidence. Flag decision points — identify what decisions need to be made based on findings.
+### Locate Information (→ KR1)
+
+Execute information location using Grep and Read to find relevant details when specific information is needed for orientation. Search for documentation (READMEs, specs, ADRs), implementation details (functions, classes, APIs), configuration (env files, config files), test coverage, known issues, or prior decisions. Document where critical information resides.
+
+### Identify Gaps and Issues (→ KR1)
+
+Execute gap and issue identification using reasoning.md to compare current against expected when target state is known or standards exist. Identify missing components, incomplete implementations, broken functionality, inconsistencies, technical debt, or deviations from requirements. Distinguish what's present from what's needed. Note severity and impact of each gap or issue.
+
+### Assess Risks and Strengths (→ KR1)
+
+Execute risk and strength assessment using reasoning.md to evaluate quality when understanding stability and reliability. Identify risks (fragile code, lack of tests, tight coupling, security vulnerabilities, performance bottlenecks, unclear ownership). Identify strengths (well-tested code, clear documentation, good separation of concerns, robust error handling). Categorize by likelihood and impact.
+
+### Summarize State and Flag Decisions (→ KR1, KR2)
+
+Execute summary creation using tracking.md to ensure actionability when orientation is complete. Produce concise summary of current state with supporting evidence. Group findings by category or area. Flag decision points — identify what decisions need to be made based on findings (what to fix first, what approach to take, what to investigate further). Ensure reader can act on orientation.
 
 ---
 

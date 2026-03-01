@@ -1,167 +1,112 @@
-[TODO: Changed the name to the broader "informing". Currently documentation is too narrow. ]
+# Transparency
 
-# Documentation Protocol
+Systematic techniques for making work visible, understandable, and traceable.
 
-Maintain documentation that enables both humans and AI to understand, navigate, and modify code effectively.
+Make the implicit explicit through documentation, status communication, and decision rationale.
 
 ---
 
 ## Goal
 
-Ensure documentation remains accurate, synchronized with code, and serves both human developers and AI assistants.
+Ensure work is visible, decisions are explainable, and progress is trackable for both humans and AI.
 
 ---
 
 ## Intent
 
-Documentation quality directly impacts comprehension for both humans and AI. Outdated or missing documentation causes confusion, poor suggestions, and maintenance burden. Documentation must be treated as code: versioned, reviewed, and maintained with rigor.
+Without transparency, knowledge stays implicit, decisions seem arbitrary, and progress is invisible. When team members change, context is lost. When AI assists, it lacks necessary background. Transparency makes the implicit explicit—enabling understanding, trust, and effective collaboration.
 
 ---
 
 ## Scope
 
-**Addresses:** Documentation maintenance, synchronization with code, package/module documentation, structure for comprehension
-
-**Does not address:** Marketing copy, user-facing product documentation, API reference generation tools
+Techniques for documenting artifacts at all levels, communicating progress and status, and recording decision rationale. Applies to any work that others need to understand, continue, or review.
 
 ---
 
-## Core Concepts
+## Core Approaches
 
-### Two Consumers, Same Needs
+### Artifact Transparency
 
-Documentation serves humans and AI equally. Both need:
+Use artifact transparency techniques to make created things understandable.
 
-1. **Facts** - What the code does (signatures, parameters, behavior)
-2. **Intent** - Why it exists (design decisions, tradeoffs, constraints)
-3. **Patterns** - How to use it (examples, common cases)
+| Technique | When | Why | How | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|---------------------|---------------------|
+| **Hierarchical Documentation** | Artifact has multiple levels of detail | To enable understanding at appropriate depth | Document at each level: system (architecture), package (CLAUDE.md/README), module, class, function; link between levels | Can reader navigate from overview to detail? Is each level documented? | Must reader understand everything to understand anything? |
+| **Inline Documentation** | Code or artifact needs explanation | To explain intent, not just what | Add docstrings to public APIs (parameters, returns, behavior), comment complex logic and edge cases, explain "why" not "what" | Are public interfaces documented? Is complex logic explained? | Are obvious things commented? Is "why" missing? |
+| **Package Documentation** | Creating or modifying a package/module | To establish boundaries and usage | Create CLAUDE.md/README with: purpose, what it does/doesn't do, dependencies, contents, entry points, examples | Can someone understand the package without reading all code? | Is structure only discoverable by reading implementation? |
+| **Synchronization** | Code or artifact changes | To prevent documentation drift | Update docs in same commit as changes, treat docs as code (versioned, reviewed), delete outdated docs rather than leave stale | Are docs updated with changes? Is there one source of truth? | Do docs and reality diverge? Are facts duplicated? |
 
-### Diátaxis: Four Documentation Types
+### Progress Transparency
 
-Know which type you're writing ([Diátaxis](https://diataxis.fr/)):
+Use progress transparency techniques to make current state visible.
 
-| Type | Purpose | Example |
-|------|---------|---------|
-| **Tutorial** | Guided learning | "Build your first X" |
-| **How-to** | Solve specific problem | "How to configure auth" |
-| **Reference** | Accurate facts | API signatures |
-| **Explanation** | Understanding context | "Why we use saga pattern" |
+| Technique | When | Why | How | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|---------------------|---------------------|
+| **Status Reporting** | Work is ongoing | To keep stakeholders informed | Report what's done, what's in progress, what's blocked; use consistent format; include evidence not just claims | Is current status clear? Are blockers visible? | Is progress invisible until completion? |
+| **Completion Summary** | Work is finished | To enable handoff and review | Summarize what was delivered, list changes made, note any caveats or known issues, provide before/after if applicable | Is completion unambiguous? Are caveats documented? | Is it unclear what was done? Are issues hidden? |
+| **Change Notification** | Modifications affect others | To prevent surprises | Announce what changed, why it changed, who's affected, what action is needed; notify before or immediately after | Are affected parties informed? Is impact clear? | Do changes surprise people? |
+| **Bug/Issue Reporting** | Problems are discovered | To enable diagnosis and tracking | Document symptoms, reproduction steps, expected vs actual behavior, context (environment, versions), severity assessment | Can someone reproduce the issue? Is context sufficient? | Is report vague ("it's broken")? Is context missing? |
 
-### Minimalism and Cognitive Load
+### Decision Transparency
 
-From [Carroll's minimalism](https://en.wikipedia.org/wiki/Minimalism_(technical_communication)) and [Cognitive Load Theory](https://www.docsie.io/blog/glossary/cognitive-load/):
+Use decision transparency techniques to make choices explainable and traceable.
 
-- **Support doing, not reading** - Task-focused, action-oriented
-- **Short chunks** - Not lengthy monolithic docs
-- **Progressive disclosure** - Overview first, details on demand
-- **Real examples** - Anchor in the task domain, not abstract explanations
-
----
-
-## Package Documentation
-
-**Every package/folder needs documentation.** Essential for understanding structure, respecting boundaries, and maintaining modularity (see `protocols/modularity.md`).
-
-### Required Elements
-
-```markdown
-# [Package Name]
-
-[One sentence: what this does]
-
-## Purpose
-What this provides. What it does NOT do (boundaries).
-
-## Dependencies
-**Internal:** Sibling packages and why
-**External:** Libraries and why
-
-## Contents
-- `file.py` - Description
-- `subpackage/` - Description
-
-## Entry Points
-Primary classes/functions consumers use.
-```
-
-Without package docs: code lands in wrong places, dependencies tangle, boundaries erode.
+| Technique | When | Why | How | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|---------------------|---------------------|
+| **Decision Recording** | Making significant choices | To preserve context for future | Document context/problem, options considered, decision made, rationale for choice; store accessibly (ADR, wiki, code comment) | Is decision documented? Is rationale clear? | Are decisions implicit? Will rationale be lost? |
+| **Tradeoff Explanation** | Decision involves competing concerns | To make sacrifices explicit | State what you're optimizing, what you're sacrificing, why this balance is appropriate for context | Are tradeoffs explicit? Is the balance justified? | Are tradeoffs hidden? Will someone ask "why not X"? |
+| **Assumption Documentation** | Proceeding based on assumptions | To enable validation and revision | State assumptions explicitly, document basis for each, flag for review when conditions change | Are assumptions explicit? Is basis documented? | Are assumptions implicit? Will they be forgotten? |
+| **Constraint Acknowledgment** | External factors limit options | To explain why alternatives weren't chosen | Document constraints (time, resources, compatibility, requirements), explain how they shaped the decision | Are constraints documented? Is their impact clear? | Do decisions seem arbitrary because constraints are hidden? |
 
 ---
 
-## Synchronization
+## Example Patterns
 
-**Same commit rule:** Documentation updates happen in the same commit as code changes. Separating them guarantees drift.
+Structured example sequences for transparency in different contexts. Far more are possible.
 
-**Triggers:**
-- API changes → update docstrings
-- New package → create README
-- Behavior changes → update docs
-- Dependency changes → update package docs
+### Documenting a Software Package
 
-**Single source of truth:** Each fact lives in one place. Link, don't duplicate.
+Use when creating or significantly modifying a package/module.
 
----
+1. Write one-sentence purpose statement
+2. Document what it does AND doesn't do (boundaries)
+3. List dependencies (internal and external) with rationale
+4. Describe contents (files, subpackages, key classes)
+5. Identify entry points and public API
+6. Add usage examples for common cases
+7. Document any conventions or patterns used
+8. Update in same commit as code changes
 
-## Techniques
+**Exit Conditions:**
+- Purpose unclear → stop, clarify with stakeholders
+- Boundaries overlap with other packages → stop, resolve ownership
+- Can't explain without reading all code → stop, simplify or restructure
 
-- **Proximity** - Docs live close to code (docstrings > separate files > wikis)
-- **Hierarchy** - Project README → Package README → Function docs
-- **Consistent terminology** - Same term for same concept
-- **Examples over explanations** - Show, don't just tell
-- **Delete outdated docs** - Stale docs mislead; rely on git history
-- **Review docs with code** - PRs without doc updates are incomplete
+### Completing a Task
 
----
+Use when finishing work that others need to review or continue.
 
-## Anti-Patterns
+1. Summarize what was done (Completion Summary)
+2. List specific changes made (files, functions, behaviors)
+3. Document any decisions made and rationale (Decision Recording)
+4. Note assumptions made (Assumption Documentation)
+5. Report any known issues or caveats
+6. Update affected documentation (Synchronization)
+7. Notify affected parties (Change Notification)
 
-- **Documentation debt** - "Until later" never comes. Update in same commit.
-- **Scattered docs** - Wiki here, Confluence there. Keep everything in repo.
-- **Missing package docs** - AI and humans can't understand structure. README every folder.
-- **Implementation details** - Internals change. Document behavior and contracts.
-
----
-
-## Example: Package README
-
-```markdown
-# auth/
-
-User authentication and session management.
-
-## Purpose
-Provides authentication flows (login, logout, password reset) and session handling.
-Does NOT handle authorization - see `authz/`.
-
-## Dependencies
-**Internal:** `db/` (storage), `email/` (notifications)
-**External:** `bcrypt` (hashing), `jwt` (tokens)
-
-## Contents
-- `login.py` - Login flow
-- `session.py` - Session management
-- `reset.py` - Password reset
-- `tokens.py` - JWT handling
-
-## Entry Points
-- `authenticate(username, password) -> User`
-- `create_session(user) -> Session`
-- `validate_token(token) -> User`
-```
-
----
-
-## When to Apply
-
-- Implementing code → update docs in same commit
-- Adding packages → create README immediately
-- Changing APIs → update affected docstrings
-- Code review → verify docs match code
+**Exit Conditions:**
+- Can't summarize clearly → stop, work may be incomplete or unfocused
+- Decisions undocumented → stop, record rationale before it's forgotten
+- Documentation not updated → stop, sync before declaring complete
 
 ---
 
 ## References
 
-- [Diátaxis Framework](https://diataxis.fr/) - Documentation types
-- [Minimalism](https://en.wikipedia.org/wiki/Minimalism_(technical_communication)) - Carroll's approach
-- [Cognitive Load Theory](https://www.docsie.io/blog/glossary/cognitive-load/) - Information density
+- [Documentation Best Practices - Google](https://google.github.io/styleguide/docguide/best_practices.html)
+- [Documenting Python Code - Real Python](https://realpython.com/documenting-python-code/)
+- [Code Documentation Best Practices - AltexSoft](https://www.altexsoft.com/blog/how-to-write-code-documentation/)
+- [Architecture Decision Records - GitHub](https://github.com/joelparkerhenderson/architecture-decision-record)
+- [Project Status Reports - Atlassian](https://www.atlassian.com/agile/project-management/status-report)
+- [Diátaxis Documentation Framework](https://diataxis.fr/)

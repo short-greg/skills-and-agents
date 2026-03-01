@@ -11,7 +11,7 @@ Read the base skill guideline first for common instructions.
 - [Primitive Creation Guideline](#primitive-creation-guideline)
   - [Table of Contents](#table-of-contents)
   - [What is a Primitive?](#what-is-a-primitive)
-  - [Implementation Steps](#implementation-steps)
+  - [Steps](#steps)
   - [Writing Style](#writing-style)
   - [Validation Criteria](#validation-criteria)
   - [Tips](#tips)
@@ -29,8 +29,10 @@ A primitive is an **atomic cognitive action** - a single, indivisible operation 
 - `critiquing` - "How good is this and how could it be better?"
 - `implementing` - "How do I build this?"
 
+**Primitives are Goal Oriented**
+[TODO: Explain]
+
 **Key characteristics:**
-- Atomic (not decomposable)
 - Single-purpose (does one thing well)
 - Self-contained (can be used independently)
 - Exactly 2 Key Results (primitives are focused)
@@ -40,26 +42,30 @@ A primitive is an **atomic cognitive action** - a single, indivisible operation 
 - A distinct cognitive operation not covered by existing primitives
 - An atomic action that cannot be broken down further
 - A clear question it answers that no other primitive answers
-- **Before creating:** Research best practices, check for >50% overlap with existing primitives, verify it's truly atomic
 
 ---
 
-## Implementation Steps
+## Steps
 
-1. Find out the goal and intent of the primitive
+Follow these steps to create and validate a protocol.
+
+1. Elicit the goal and intent of the primitive
 2. Clarify your understanding
 3. Confirm it is not already covered
-4. Do web research to find out
-   1. General web research
-   2. Domain-specific web research
-5. **Create decision table** - List all relevant protocols in a table with columns:
+4. Critique whether it is already covered
+5. Do web research to find out
+   1. General web research from experts
+   2. Non-domain-specific scientific research
+   3. Domain-specific web research
+6. **Create decision table** - Output all relevant protocols in a table with columns:
    - Protocol name
    - Reasons to use (how it helps this primitive)
    - Reasons not to use (why it might not fit)
    - Decision (use or don't use)
-6. Create the primitive according to the template
-7. Validate the primitive
-8. Do final confirmation from the creator
+7. Create the primitive according to the template
+8. Validate the primitive
+9. Do final confirmation from the creator
+
 
 ---
 
@@ -102,14 +108,17 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 - [ ] **Atomic:** Single cognitive action, not decomposable into multiple primitives
 - [ ] **Self-contained:** Doesn't reference other primitives in scope or actions
 - [ ] **Research completed:** References section includes Claude Code docs + expert/academic sources
+- [ ] **Goal-oriented**: Actions each achieve a specific goal, goals are all in line with the scope
+- [ ] **Action-scope**: Do actions go beyond the scope of the primitive or do they leak to other primitives.
 
 ---
+
 
 ## Tips
 
 1. **Start with the question:** What specific question does this primitive answer?
 2. **Keep it atomic:** If you find yourself writing "first... then... finally...", it's probably a workflow
-3. **2 KRs only:** Consolidate related outcomes into compound Key Results
+3. **2 or 3 KRs only:** Consolidate related outcomes into compound Key Results
 4. **Simple requirements:** Primitives typically need 2-4 requirements, not 9
 5. **Self-contained:** Don't reference other primitives in scope or actions
 6. **Clear triggers:** Include natural phrases users might say to invoke this primitive

@@ -1,6 +1,8 @@
-# Quality Protocol
+# Software Quality
 
 Systematic quality assessment across complementary dimensions.
+
+Assess quality as multi-objective optimization with tradeoffs, not checklist compliance.
 
 ---
 
@@ -12,125 +14,97 @@ Enable evaluation of artifacts across quality dimensions to identify strengths, 
 
 ## Intent
 
-Quality is multi-dimensional—artifacts can excel in one dimension while failing in another. Without explicit criteria, assessments become subjective and miss critical issues. Quality assessment is multi-objective optimization with tradeoffs, not checklist compliance.
+Quality is multi-dimensional—artifacts can excel in one dimension while failing in another. Without explicit criteria, assessments become subjective and miss critical issues. Different contexts prioritize different dimensions: production systems need reliability and security, prototypes need correctness, libraries need usability and maintainability.
 
 ---
 
 ## Scope
 
-**Addresses:** Quality assessment across correctness, clarity, reliability, completeness, efficiency, and testability for code, documentation, workflows, and designs
-
-**Does not address:** Domain-specific quality standards, team processes, automated tooling configuration
+Techniques for assessing quality dimensions across functional, structural, and operational categories. Analyzing tradeoffs between dimensions and prioritizing improvements based on context. Applies to code, documentation, workflows, and designs.
 
 ---
 
-## Core Concepts
+## Core Approaches
 
-**Quality dimensions - evaluation criteria:**
+### Functional Dimensions
 
-| Dimension | Check for strength | Check for excess |
-|-----------|-------------------|------------------|
-| **Correctness** | Does what it should, edge cases handled, requirements met | Over-validation adds complexity without value |
-| **Clarity** | Understandable quickly, obvious structure, descriptive names | Verbose explanations obscure the essentials |
-| **Reliability** | Works consistently, handles failures gracefully, recovers from errors | Defensive programming adds complexity |
-| **Completeness** | Covers necessary cases, addresses requirements, no critical gaps | Gold-plating solves problems that don't exist |
-| **Efficiency** | Reasonable resource use for context, no obvious waste | Premature optimization obscures intent |
-| **Testability** | Verifiable behavior, testable in isolation, observable outcomes | Test infrastructure more complex than code |
+Assess functional dimensions to evaluate what the artifact does.
 
-**Tradeoffs:**
-- Correctness vs Efficiency: Validation adds overhead
-- Clarity vs Efficiency: Optimizations obscure intent
-- Completeness vs Simplicity: Edge cases add complexity
-- Reliability vs Performance: Recovery mechanisms add latency
+| Technique | When | Why | How | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|---------------------|---------------------|
+| **Correctness** | Evaluating if artifact does what it should | To identify functional failures | Check requirements met, verify edge cases handled, test expected behavior, confirm no incorrect outputs | Does it do what it should? Are edge cases handled? | Are there incorrect outputs? Missing requirements? |
+| **Completeness** | Evaluating coverage of requirements | To identify gaps | Check necessary cases covered, verify requirements addressed, identify critical gaps, confirm scope fulfilled | Are necessary cases covered? Are critical gaps absent? | Are common cases missing? Are requirements unaddressed? |
+| **Robustness** | Evaluating handling of unexpected inputs | To identify fragility | Check invalid input handling, verify graceful degradation, test boundary conditions, confirm no crashes on bad data | Does it handle unexpected inputs gracefully? | Does it crash or corrupt on invalid input? |
+| **Security** | Evaluating resistance to vulnerabilities | To identify attack vectors | Check input validation, verify no injection vulnerabilities, assess authentication/authorization, confirm sensitive data protected | Are inputs validated? Is sensitive data protected? | Are there injection risks? Exposed credentials? |
 
-Balance based on: use case, failure modes, constraints, team knowledge.
+### Structural Dimensions
 
----
+Assess structural dimensions to evaluate how the artifact is built.
 
-## Techniques
+| Technique | When | Why | How | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|---------------------|---------------------|
+| **Readability** | Evaluating understandability | To identify comprehension barriers | Check names are descriptive, verify structure is obvious, assess if intent is clear, test if newcomer understands quickly | Is it understandable quickly? Are names clear? | Is it confusing? Are names cryptic? Is intent hidden? |
+| **Simplicity** | Evaluating unnecessary complexity | To identify over-engineering | Check for unnecessary abstraction, verify no premature optimization, assess if solution matches problem complexity | Is complexity proportionate to problem? Is it as simple as possible? | Is there unnecessary abstraction? Over-engineering? |
+| **Consistency** | Evaluating pattern adherence | To identify unpredictable behavior | Check naming conventions followed, verify similar things done similarly, assess error handling patterns consistent | Are patterns consistent? Is behavior predictable? | Do similar things work differently? Are conventions violated? |
+| **Maintainability** | Evaluating ease of modification | To identify change barriers | Check changes localize, verify low coupling between parts, assess if modifications are safe, confirm refactoring is feasible | Can it be modified safely? Do changes localize? | Do changes ripple? Is it afraid to touch? |
 
-**Quality assessment process:**
+### Operational Dimensions
 
-1. **Identify critical dimensions** - Which dimensions matter for this artifact's use case?
-   - Production system: Correctness, Reliability
-   - Library: Clarity, Testability, Completeness
-   - Prototype: Correctness (others less critical)
-   - Internal tool: Clarity
+Assess operational dimensions to evaluate how the artifact performs.
 
-2. **Assess each dimension** - Use evaluation criteria from Core Concepts table
-
-3. **Identify tradeoffs** - When dimensions conflict, make explicit choices:
-   - State what you're optimizing
-   - State what you're sacrificing
-   - Document why (for future maintainers)
-
-4. **Prioritize improvements:**
-   - High: Correctness failures, reliability failures, critical missing functionality
-   - Medium: Inefficiency in frequent operations, completeness gaps in common cases
-   - Low: Inefficiency in rare operations, clarity in obvious code
-
-**Evaluation criteria:**
-- Are quality issues identified systematically (not accidentally)?
-- Are tradeoffs explicit and intentional?
-- Do improvement efforts focus on dimensions that matter?
-- Are assessments objective (specific evidence, not feelings)?
+| Technique | When | Why | How | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|---------------------|---------------------|
+| **Reliability** | Evaluating consistent operation | To identify failure modes | Check failure handling, verify recovery from errors, test under adverse conditions, confirm consistent behavior | Does it work consistently? Does it recover from errors? | Does it fail silently? Are errors unhandled? |
+| **Efficiency** | Evaluating resource usage | To identify waste | Check resource use reasonable for context, identify obvious waste, verify no unnecessary operations | Is resource use reasonable? Is there no obvious waste? | Is there premature optimization? Unnecessary complexity? |
+| **Testability** | Evaluating verifiability | To identify testing barriers | Check behavior is verifiable, confirm testable in isolation, verify observable outcomes | Is behavior verifiable? Is it testable in isolation? | Is testing harder than implementation? |
+| **Usability** | Evaluating ease of correct use | To identify misuse risks | Check API is intuitive, verify hard to use incorrectly, assess error messages helpful, confirm documentation sufficient | Is it easy to use correctly? Hard to misuse? | Is it easy to use incorrectly? Are errors cryptic? |
 
 ---
 
-## Use Cases and Triggers
+## Example Patterns
 
-Apply when:
-- Designing new systems (identify critical dimensions)
-- Reviewing code or documentation (assess systematically)
-- Debugging quality issues (identify failing dimension)
-- Refactoring (understand tradeoffs)
-- Setting quality standards (decide priorities)
+Structured example sequences for quality assessment. Far more are possible.
 
----
+### Assessing Artifact Quality
 
-## Patterns and Anti-Patterns
+Use when reviewing code, documentation, or designs.
 
-### Patterns (✅)
+1. Identify artifact type and context (production, prototype, library, tool)
+2. Determine critical dimensions for this context
+3. Assess each critical dimension systematically
+4. Identify tradeoffs between dimensions
+5. Classify issues by severity (high: correctness/security/reliability failures)
+6. Prioritize improvements by impact vs effort
+7. Document accepted tradeoffs and rationale
 
-**Dimension-Appropriate Quality:** Optimize what matters for the use case. Production API needs correctness/reliability; prototype needs correctness but can defer others.
+**Exit Conditions:**
+- Critical dimension unclear → stop, clarify requirements and context
+- All dimensions seem equally important → stop, identify actual use case
+- Too many issues to address → stop, focus on high-severity only
 
-**Evidence-Based Assessment:** "Handles null case correctly" vs "This feels wrong". Use specific criteria, not feelings.
+### Context-Based Prioritization
 
-**Explicit Tradeoffs:** Document what you're optimizing and sacrificing. "Optimized for speed (reduced clarity) because profiling showed bottleneck."
+Use when deciding which dimensions matter most.
 
-**Progressive Quality:** Start with correctness, add dimensions as needed. Don't prematurely maximize all dimensions.
+1. Identify artifact type:
+   - Production system → Correctness, Reliability, Security
+   - Prototype → Correctness (others less critical)
+   - Library/API → Usability, Maintainability, Testability
+   - Internal tool → Readability, Simplicity
+2. Identify operational context (frequency, failure cost, modification rate)
+3. Prioritize dimensions based on context
+4. Accept lower quality in non-critical dimensions
+5. Document prioritization rationale
 
-### Anti-Patterns (❌)
-
-**Uniform Quality:** Trying to maximize all dimensions simultaneously. Results in over-engineering. **Fix:** Prioritize dimensions that matter.
-
-**Premature Optimization:** Optimizing efficiency before measuring. **Fix:** Optimize when measurements prove it matters.
-
-**Subjective Assessment:** "This doesn't feel right" without criteria. **Fix:** Use dimension-specific evaluation criteria.
-
-**Quality as Checklist:** Treating quality as boxes to check. **Fix:** Think in terms of multi-objective optimization.
-
----
-
-## Examples
-
-### Example: REST API Endpoint
-
-**Context:** Designing GET /users/{id} endpoint
-
-**Assessment:**
-- **Correctness:** ✅ Returns correct data, handles 404 | ❌ Missing pagination
-- **Clarity:** ✅ Clear naming, obvious structure | ❌ Error codes undocumented
-- **Reliability:** ✅ Handles DB failures, timeouts | ❌ No retry logic
-- **Completeness:** ✅ Primary use case | ❌ Missing filtering, field selection
-- **Efficiency:** ✅ Indexed queries | ❌ No caching (tradeoff: stale data)
-- **Testability:** ✅ Unit/integration testable, observable behavior
-
-**Result:** Prioritize pagination (completeness) and error docs (clarity). Defer caching until usage data shows need.
+**Exit Conditions:**
+- Context unclear → stop, clarify how artifact will be used
+- All dimensions critical → stop, scope may be too broad
+- Prioritization feels wrong → stop, revisit context assumptions
 
 ---
 
 ## References
 
-- See `protocols/modularity.md` - Modularity assessment overlaps with quality
 - [ISO 25010 Software Quality Model](https://iso25000.com/en/iso-25000-standards/iso-25010)
+- [Software Quality - Wikipedia](https://en.wikipedia.org/wiki/Software_quality)
+- [OWASP Top 10 Security Risks](https://owasp.org/www-project-top-ten/)

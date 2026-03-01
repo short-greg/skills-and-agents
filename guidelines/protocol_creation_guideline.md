@@ -6,12 +6,14 @@ This guideline explains how to create protocols for the skills-and-agents framew
 
 ## Table of Contents
 
-- [What is a Protocol?](#what-is-a-protocol)
-- [Implementation Steps](#implementation-steps)
-- [Writing Style](#writing-style)
-- [Validation Criteria](#validation-criteria)
-- [Tips](#tips)
-- [Template](#template)
+- [Protocol Creation Guideline](#protocol-creation-guideline)
+  - [Table of Contents](#table-of-contents)
+  - [What is a Protocol?](#what-is-a-protocol)
+  - [Steps](#steps)
+  - [Writing Style](#writing-style)
+  - [Validation Criteria](#validation-criteria)
+  - [Tips](#tips)
+  - [Template](#template)
 
 ---
 
@@ -20,10 +22,10 @@ This guideline explains how to create protocols for the skills-and-agents framew
 A protocol is a **standardized process or pattern** that multiple primitives and workflows follow. Protocols capture essential principles and patterns, distilling expert knowledge into reusable concepts.
 
 **Examples of protocols:**
-- `tracking.md` - Progress documentation standards
-- `recovery.md` - Resuming from interruption
-- `quality.md` - Quality assessment dimensions
-- `validation.md` - Evidence-based verification
+- `tracking_and_recovery.md` - Progress tracking and resumption
+- `software_quality.md` - Quality assessment dimensions
+- `thinking.md` - Reasoning and thinking techniques
+- `transparency.md` - Making work visible and traceable
 
 **Key characteristics:**
 - Reusable across multiple skills
@@ -39,7 +41,9 @@ A protocol is a **standardized process or pattern** that multiple primitives and
 
 ---
 
-## Implementation Steps
+## Steps
+
+Follow these steps to create and validate a protocol.
 
 1. Find out the goal and intent of the protocol
 2. Clarify your understanding
@@ -58,28 +62,39 @@ A protocol is a **standardized process or pattern** that multiple primitives and
 Protocols are **instruction-focused**, not descriptive essays.
 
 **Key principles:**
-1. **Action-oriented language** - Use imperatives ("Output evaluation") or instructions ("1. Do X, 2. Do Y"), not descriptions
-2. **Evaluation criteria over descriptions** - Focus on what to check, not what things mean
-3. **Minimal descriptions** - Goal/Intent/Scope should be brief (2-3 sentences max)
-4. **Output-focused language** - "Output an evaluation of X" is better than "Evaluate X"
+1. **Action-oriented language** - Use imperatives and concrete actions, not vague descriptions
+2. **Technique tables** - 6-column format with When/Why/How/Validations (see template)
+3. **"Why" uses infinitive** - Must start with "To" (e.g., "To ensure correct application...")
+4. **"How" is executable** - Comma-separated actions that can be performed
+5. **Validations as questions** - "Are premises valid?" not "Premises are valid"
+6. **Exit conditions separate** - At bottom of patterns, not inline with steps
+7. **Minimal descriptions** - Goal/Intent/Scope should be brief (2-3 sentences max)
 
 **Content pattern:**
-1. **Description (light)** - Goal/Intent/Scope for context
-2. **Instructions** - How to do it (actionable steps in Techniques)
-3. **Criteria** - How to evaluate success (in Core Concepts and/or Techniques)
-4. **Examples** - Show it in action (optional)
+1. **Description (light)** - Tagline, Outline, Goal, Intent, Scope for context
+2. **Artifacts and Outputs (optional)** - Define nouns that techniques reference
+3. **Technique Tables** - Core Approaches with 6-column tables (reference artifacts where needed)
+4. **Example Patterns (optional)** - Step sequences with Exit Conditions sections
+5. **References** - Sources consulted during research
 
 **Structural differences from primitives:**
 - 100-150 lines (150-180 acceptable with user permission)
-- More instructional sections (Core Concepts, Techniques)
-- Examples are optional
+- Technique tables use 6-column format
+- Example patterns (not exhaustive)
 - No Key Results (protocols aren't invoked directly)
+- Exit conditions in separate section, not inline
 
 ---
 
 ## Validation Criteria
 
 For each criterion, you MUST output all evidence that it passes and all evidence that it fails. Once evidence is output, weigh the evidence to decide if it passes or fails.
+
+**Primary Criteria:**
+- [ ] **Clear when to use protocol:** Goal/Intent/Scope make it obvious when this protocol applies
+- [ ] **Clear how to use protocol:** Instructions are executable, not vague or philosophical
+- [ ] **Clear when to use each technique:** "When" column provides concrete, actionable triggers
+- [ ] **Clear how to execute each technique:** "How" column contains executable actions
 
 **Structural:**
 - [ ] **Follows template exactly:** All required sections present with correct format
@@ -119,15 +134,26 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 ```markdown
 # [Protocol Name]
 
-**Type:** Protocol
-
 [Brief one-sentence description of what this protocol does.]
+
+[Tagline: action-oriented statement, e.g., "Apply techniques to think effectively."]
+
+---
+
+## Outline
+
+<Lightweight table of contents for navigation. Single line with links.>
+
+- [Goal](#goal) | [Intent](#intent) | [Scope](#scope)
+- [Artifacts](#artifacts-and-outputs) — [list key artifacts]
+- [Core Approaches](#core-approaches) — [list categories]
+- [Example Patterns](#example-patterns) — [list patterns]
 
 ---
 
 ## Goal
 
-[What this protocol achieves — the end state it produces. One clear sentence.]
+[What this protocol achieves — direct statement without justification. One clear sentence.]
 
 ---
 
@@ -139,81 +165,77 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 
 ## Scope
 
-**Addresses:** [What's included - specific areas, concerns, or contexts this protocol covers]
-
-**Does not address:** [What's explicitly excluded - related but out of scope]
+[General statement of what this protocol covers — reasoning methods, approaches, patterns, etc. No "Does not address" section.]
 
 ---
 
-## Core Concepts
+## Artifacts and Outputs <OPTIONAL>
 
-[Keep this light. Prefer evaluation criteria over verbose descriptions.]
+<Include when protocol defines nouns (artifacts, outputs, templates) that techniques reference.
+Techniques should reference these artifacts rather than defining them inline.>
 
-**Best format - Table with evaluation criteria:**
+| Artifact/Output | Purpose | When to Use |
+|-----------------|---------|-------------|
+| **[Name]** | [What it is and does] | [When to use it] |
 
-| Concept | Check for strength | Check for excess |
-|---------|-------------------|------------------|
-| [Name] | [How to verify it's working] | [How to detect too much] |
+<If protocol has templates (e.g., checklist format), include here with guidance:>
 
-**Alternative - Brief bulleted principles (2-3 sentences max each)**
+**[Template Name]:** `[format]`
 
-**Avoid:** Long explanations of what concepts mean. Focus on what to check, not what to know.
-
----
-
-## Techniques
-
-[Instructions for how to do it + criteria for evaluating success.]
-
-**[Technique name]:**
-
-[Brief instruction on how to apply]
-
-1. Step 1 - [action]
-2. Step 2 - [action]
-3. Step 3 - [action]
-
-**Evaluation criteria:**
-- [Question or check 1]
-- [Question or check 2]
+| Principle | Description | Good | Bad |
+|-----------|-------------|------|-----|
+| **[Principle]** | [What to do] | [Good example] | [Bad example] |
 
 ---
 
-## Use Cases
+## Core Approaches
 
-[Specific contexts where this protocol is relevant]
+<If protocol has different categories of techniques, use subsections. Otherwise, use single table.>
 
-- [Context 1]
-- [Context 2]
-- [Context 3]
+### [Category Name]
 
----
+[One sentence describing when to use this category.]
 
-## Patterns and Anti-Patterns <OPTIONAL>
+| Technique | When | Why | How | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|---------------------|---------------------|
+| **[Name]** | [Concrete trigger - when to use this] | To [achieve specific benefit/goal] | [Comma-separated executable actions] | [Question checking correct application?] | [Question checking for misuse?] |
 
-<Only include if truly needed. Keep examples concise.>
-
-### Patterns (✅)
-
-**[Pattern name]:** [What it is, when to use, brief example]
-
-### Anti-Patterns (❌)
-
-**[Anti-pattern name]:** [What it is, why it fails, what to do instead]
+<Guidelines for table columns:>
+- **When:** Concrete, actionable trigger (not vague like "challenging assumptions")
+- **Why:** MUST start with "To" (infinitive form)
+- **How:** Executable actions separated by commas; reference artifacts from Artifacts and Outputs section where applicable
+- **Positive Validation:** Question format checking if technique was applied correctly
+- **Negative Validation:** Question format checking for common misuse
 
 ---
 
-## Examples <OPTIONAL>
+## Example [Pattern/Technique Name] <OPTIONAL>
 
-<Only include if needed to clarify application. Keep concise.>
+<Only include if protocol needs example step sequences. These are EXAMPLES, not exhaustive.
+Title: "Example Thinking Patterns" or "Example Patterns">
 
-### Example 1: [Scenario]
+[Brief description: "Structured example sequences of steps for different contexts. Far more are possible."]
 
-**Context:** [Description of situation]
+### [Pattern Name]
 
-**Application:** [How protocol was applied]
+Use when [specific context/trigger].
 
-**Result:** [Outcome achieved]
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+4. [Step 4 with inline exit: → stop if X, continue if Y]
+5. [Step 5]
+
+**Exit Conditions:**
+- [Condition 1] → stop, [what to do]
+- [Condition 2] → stop, [what to do]
+- [Condition 3] → stop, [what to do]
+
+<Guidelines for patterns:>
+- Numbered steps (main success path)
+- Exit conditions in separate section at bottom (not inline)
+- Exit conditions specify what to do (stop, request info, escalate, etc.)
+- Patterns are examples, not exhaustive
 
 ---
 
@@ -228,7 +250,7 @@ Step 1 - Claude Code's documentation FIRST:
 Step 2 - Expert/academic sources (in addition):
 - Search: "[protocol topic] techniques" or "[topic] best practices"
 - Example: Creating `quality` → search "code quality assessment best practices"
-- Example: Creating `risk_management` → search "risk management software engineering">
+- Example: Creating `thinking` → search "reasoning techniques cognitive science">
 
 **List ALL sources consulted:**
 - [Claude Code documentation URL and topic]

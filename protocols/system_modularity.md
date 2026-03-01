@@ -1,6 +1,8 @@
-# Modularity Protocol
+# System Modularity
 
-Enable effective system decomposition through use-case driven design.
+Techniques for decomposing systems into components that can be understood, modified, and composed independently.
+
+Design from use cases, then derive component boundaries to serve those use cases.
 
 ---
 
@@ -12,121 +14,96 @@ Enable design of systems where components can be understood, modified, and compo
 
 ## Intent
 
-Balance cohesion, coupling, encapsulation, composability, coherence, and traceability based on project needs—these objectives often conflict. **The developer is the user.** Modular systems optimize developer UX: code that's easy to use, understand, and modify. Start with **how the system will be used**, then derive component boundaries to serve those use cases.
+Balance cohesion, coupling, encapsulation, composability, coherence, and traceability based on project needs—these objectives often conflict. The developer is the user. Modular systems optimize developer UX: code that's easy to use, understand, and modify. Start with how the system will be used, then derive component boundaries to serve those use cases.
 
 ---
 
 ## Scope
 
-**Addresses:** Use-case driven decomposition, component boundary definition, interface design, tradeoff analysis across modularity objectives
-
-**Does not address:** Performance optimization, deployment architecture, team organization, project management
+Techniques for use-case driven decomposition, component boundary definition, interface design, and tradeoff analysis across modularity objectives. Does not address performance optimization, deployment architecture, or team organization.
 
 ---
 
-## Core Concepts
+## Core Approaches
 
-**Modularity objectives - evaluation criteria:**
+### Decomposition Techniques
 
-| Objective | Check for strength | Check for excess |
-|-----------|-------------------|------------------|
-| **Cohesion** | Related functionality in one place | System too fragmented into tiny components |
-| **Coupling** | Components can be modified independently | Components can't interact to provide value |
-| **Encapsulation** | Internals can change without breaking users | Can't see what's happening during debugging |
-| **Composability** | Components combine to create new functionality | Too much abstraction obscures directness |
-| **Coherence** | Consistent patterns make behavior predictable | Conventions too rigid, prevent necessary variation |
-| **Traceability** | Can follow execution flow and debug issues | Implementation details exposed, high coupling to internals |
+Use decomposition techniques to break systems into well-bounded components.
 
-Balance based on: expected changes, debugging needs, team knowledge, usage patterns.
+| Technique | When | Why | How | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|---------------------|---------------------|
+| **Use-Case First** | Designing new system or component | To derive boundaries from actual usage patterns | Write 3-5 primary use cases as ideal API calls, identify what responsibilities appear together, let usage patterns reveal natural groupings | Do use cases flow naturally through interfaces? Were boundaries derived from usage? | Were components named before understanding flows (UserManager, OrderManager)? |
+| **Natural Boundaries** | Multiple responsibilities in one place | To identify where to split components | Group responsibilities that appear together repeatedly, separate responsibilities that change for different reasons, look for clusters in call patterns | Do changes localize without rippling? Is each component's purpose unambiguous? | Do changes require modifying multiple unrelated components? |
+| **Single Responsibility** | Component does too many things | To ensure each component has clear purpose | Define what component does AND doesn't do, ensure one reason to change, keep component explainable in one sentence | Can you explain purpose in one sentence? Does component have one reason to change? | Does component have multiple unrelated reasons to change? |
+| **Dependency Mapping** | Relationships between components unclear | To make coupling explicit and manageable | List what each component depends on, distinguish internal vs external dependencies, depend on stable interfaces not implementations | Are dependencies explicit and necessary? Do dependencies point toward stability? | Are there circular dependencies? Dependencies on implementation details? |
 
----
+### Interface Design
 
-## Techniques
+Use interface design techniques to define clear contracts between components.
 
-**Use-case first design:**
+| Technique | When | Why | How | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|---------------------|---------------------|
+| **Explicit Dependencies** | Component needs external resources | To make coupling visible and testable | Pass dependencies as parameters, avoid hidden globals or singletons, declare what component needs to function | Are all dependencies declared? Can component be tested in isolation? | Does component reach into global state? Are dependencies hidden? |
+| **Stable Interfaces** | Interface may need to evolve | To allow internals to change without breaking users | Expose what's needed for use cases, hide what changes frequently, version interfaces when breaking changes needed | Can internals change without breaking users? Is interface minimal? | Are implementation details exposed? Does internal change break callers? |
+| **Change Isolation** | Some parts change more than others | To prevent changes from rippling | Put volatile logic behind stable abstractions, isolate external integrations, separate configuration from logic | Do changes stay contained? Are external systems isolated? | Do small changes require updates across codebase? |
+| **Convention Following** | Team needs consistent patterns | To make behavior predictable across components | Establish naming conventions, use consistent error handling, follow same patterns for similar operations | Are patterns consistent? Can developers predict behavior? | Does each component follow different conventions? |
 
-Write how you want to use the system before designing components:
+### Tradeoff Evaluation
 
-```python
-# Step 1: Write desired usage
-order = Order.create(cart, customer)
-order.validate()
-payment = PaymentProcessor.charge(order.total, method)
-inventory.reserve(order.items)
-order.confirm()
+Use tradeoff evaluation techniques to balance competing modularity objectives.
 
-# Step 2: Identify natural boundaries from flow
-# - Order: domain logic, validation, state
-# - PaymentProcessor: external integration
-# - Inventory: resource management
-```
-
-Then apply design process:
-
-1. **Write 3-5 primary use cases** as ideal API calls
-2. **Identify natural boundaries** - Group responsibilities appearing together repeatedly
-3. **Define components** - Purpose (what it does/doesn't do), dependencies (internal/external)
-4. **Evaluate tradeoffs** - Which objectives optimized? Which sacrificed? Appropriate?
-5. **Iterate** - Refactor when boundaries feel wrong or debugging is hard
-
-**Design decisions:**
-
-- Make dependencies explicit, depend on stable interfaces not implementation details
-- Hide what changes frequently, expose what needs debugging visibility
-- Establish and follow conventions (naming, patterns, error handling)
-- Start direct and simple, abstract when patterns emerge
-
-**Evaluation criteria:**
-
-- Can you understand a component without reading the entire system?
-- Do common use cases flow naturally through interfaces?
-- Do changes localize without rippling?
-- Do components compose following consistent patterns?
-- Can you trace execution flow and debug issues?
-- Is each component's purpose unambiguous?
-- Are dependencies explicit and necessary?
+| Technique | When | Why | How | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|---------------------|---------------------|
+| **Cohesion Assessment** | Deciding what belongs together | To keep related functionality in one place | Check if responsibilities are related, verify component isn't too fragmented, ensure concept isn't split across components | Is related functionality in one place? | Is system fragmented into tiny components? Is concept scattered? |
+| **Coupling Assessment** | Deciding component independence | To allow independent modification | Check if components can change independently, verify interactions don't create hidden dependencies, assess impact of change | Can components be modified independently? | Do components share too much internal knowledge? |
+| **Encapsulation Assessment** | Deciding what to hide vs expose | To balance information hiding with debuggability | Hide what changes frequently, expose what needs debugging visibility, provide observability without coupling | Can internals change safely? Can you observe behavior? | Is everything hidden (can't debug)? Is everything exposed (can't change)? |
+| **Traceability Assessment** | Deciding abstraction level | To maintain ability to understand and debug | Check if execution can be followed, verify debugging is possible, ensure behavior is predictable | Can you trace execution flow? Can you debug issues? | Is abstraction so deep you can't see what's happening? |
 
 ---
 
-## Use Cases and Triggers
+## Example Patterns
 
-Apply when:
-- Designing new systems or components
-- Refactoring code with unclear boundaries
-- Component boundaries feel wrong (awkward interfaces, changes ripple)
-- Debugging is difficult (can't trace behavior)
-- New developers struggle to understand what goes where
+Structured example sequences for system modularity in different contexts. Far more are possible.
 
----
+### Designing Component Boundaries
 
-## Patterns and Anti-Patterns
+Use when creating a new system or major feature.
 
-### Anti-Patterns (❌)
+1. Write 3-5 primary use cases as ideal API calls (Use-Case First)
+2. Identify responsibilities that appear together repeatedly (Natural Boundaries)
+3. Define each component: purpose, what it does/doesn't do (Single Responsibility)
+4. Map dependencies: internal, external, direction (Dependency Mapping)
+5. Design interfaces: minimal, stable, explicit (Stable Interfaces)
+6. Evaluate tradeoffs: which objectives optimized? sacrificed? (Tradeoff Evaluation)
+7. Iterate when boundaries feel wrong or debugging is hard
 
-**Dogmatic Encapsulation:**
+**Exit Conditions:**
+- Can't write clear use cases → stop, clarify requirements first
+- Component boundaries feel forced → stop, revisit with different grouping
+- Changes ripple across components → stop, boundaries may be wrong
 
-```python
-# Bad: Everything hidden, can't observe or debug
-class Cache:
-    def __init__(self):
-        self._data = {}
-        self._hits = 0       # Hidden
-        self._misses = 0     # Hidden
+### Refactoring Unclear Boundaries
 
-# Good: Internals hidden, behavior observable
-class Cache:
-    def __init__(self):
-        self._data = {}
-        self.stats = CacheStats()  # Exposed for observability
-```
+Use when existing code has modularity problems.
 
-**Component-First Design:** Designing "UserManager, OrderManager, PaymentManager" before understanding flows. Results in awkward interfaces. **Fix:** Use-case first design (see Techniques).
+1. Identify symptoms: awkward interfaces, rippling changes, hard debugging
+2. Write how code should ideally be used (Use-Case First)
+3. Compare ideal usage to current structure
+4. Identify natural boundaries from usage patterns (Natural Boundaries)
+5. Plan incremental refactoring toward new boundaries
+6. Add stable interfaces before moving logic (Stable Interfaces)
+7. Move logic behind interfaces incrementally
 
-**Premature Abstraction:** Creating flexible components before knowing what variations are needed. **Fix:** Build for current use case, abstract when second real use case emerges.
+**Exit Conditions:**
+- Ideal usage unclear → stop, interview users of the code
+- Too many dependencies to untangle → stop, extract smaller piece first
+- Tests insufficient for safe refactoring → stop, add tests first
 
 ---
 
 ## References
 
-- See `protocols/documentation.md` - Package documentation supports modularity
-- See `protocols/quality.md` - Modularity assessment criteria
+- [Cohesion and Coupling - Wikipedia](https://en.wikipedia.org/wiki/Cohesion_(computer_science))
+- [Single Responsibility Principle - Wikipedia](https://en.wikipedia.org/wiki/Single-responsibility_principle)
+- [Dependency Inversion Principle - Wikipedia](https://en.wikipedia.org/wiki/Dependency_inversion_principle)
+- [Information Hiding - Wikipedia](https://en.wikipedia.org/wiki/Information_hiding)

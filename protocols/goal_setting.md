@@ -1,144 +1,127 @@
-# Goals and Objectives Protocol
+# Goal Setting
 
-Enable clear goal-setting and measurable outcomes through OKRs.
+Systematic techniques for establishing clear, directional objectives.
+
+Establish goals that define what to achieve and why it matters.
 
 ---
 
 ## Goal
 
-Ensure artifacts have clear, measurable, outcome-oriented success criteria.
+Establish clear objectives that provide direction, focus effort, and enable meaningful progress.
 
 ---
 
 ## Intent
 
-Without explicit goals and measurable outcomes, work drifts, success becomes subjective, and expectations misalign. OKRs (Objectives and Key Results) define success before work begins, enabling objective assessment.
+Without well-formed goals, work lacks direction. Activity-oriented goals track busywork rather than value. Goals that are too vague fail to guide decisions; goals that are too narrow miss the bigger picture. This protocol ensures objectives are outcome-focused, appropriately scoped, and aligned with larger purpose.
 
 ---
 
 ## Scope
 
-**Addresses:** OKR structure (clear objectives, measurable key results), context-appropriate goals (PRDs, plans, implementations), outcome vs process vs implementation distinction
-
-**Does not address:** Project management methodologies, team goal-setting processes, performance reviews
+Techniques for discovering what goals to pursue, formulating goals as outcomes rather than activities, decomposing goals into sub-goals and milestones, aligning goals within hierarchies, and prioritizing between competing goals. Criteria_setting handles making goals measurable and verifiable.
 
 ---
 
-## Core Concepts
+## Core Approaches
 
-**OKR components - evaluation criteria:**
+### Goal Discovery
 
-| Component | Check for strength | Check for excess |
-|-----------|-------------------|------------------|
-| **Objective** | Clear, focused, single goal with purpose stated | Multiple goals combined, vague aspirations |
-| **Key Results** | Outcomes measured (what changed), 3-5 total, context-appropriate | >5 KRs (diluted), implementation steps, disconnected from objective |
-| **Evaluation type** | Subjective (judgment) OR objective (metrics), chosen appropriately | Gaming metrics, insufficient proxies, ignoring judgment |
-| **Constraints** | Stated explicitly (time, resources, scope) | Overconstrained (no flexibility), underconstrained (drift) |
+Use discovery techniques to identify what goals to pursue before formulating them.
 
-**Key Result types (preference order):**
-1. **Outcomes** (preferred): What changed ("Success rate >95%", "User satisfaction ≥4/5", "Zero incidents")
-2. **Leading indicators** (acceptable): Predictive measures (survey scores, engagement, early signals)
-3. **Process** (last resort): Activities completed ("File exists", "Template present") - only when outcome unmeasurable
+| Technique | When | Why | How | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|---------------------|---------------------|
+| **Stakeholder Analysis** | Goals must serve someone's needs | To ensure goals address real needs | Identify who is affected, determine what each stakeholder values, find common ground, prioritize by impact | Are key stakeholders identified? Are their needs understood? | Are you assuming needs without checking? |
+| **Problem/Opportunity Framing** | Starting point is unclear | To ground goals in concrete problems or opportunities | Identify current pain points or gaps, articulate what's wrong or missing, determine root cause vs symptom, frame as opportunity to address | Is the problem concrete? Is root cause identified? | Are you solving symptoms rather than causes? |
+| **Ideal State Visualization** | Need to clarify desired end state | To define success before defining path | Describe what success looks like, identify key differences from current state, determine what changes are essential vs nice-to-have | Is ideal state concrete? Are essential changes identified? | Is ideal state too vague or unrealistic? |
+| **Inversion** | Positive framing yields vague goals | To clarify goals through negative space | Ask "What would failure look like?", identify what must be avoided, convert avoidances into positive objectives | Are failure modes identified? Do objectives address them? | Are you only avoiding negatives without pursuing positives? |
 
-**Evaluation methods:**
-- **Subjective**: Judgment-based (code quality, satisfaction, experience) - valid when expertise matters, numbers mislead
-- **Objective**: Metric-based (counts, %, time) - valid when measurable, not gaming-prone
-- **Hybrid**: Combine both (metrics + expert review) - often best, balances rigor with insight
+### Goal Formulation
 
-**SMARB criteria for each key result:**
-| Criterion | Check | Example |
-|-----------|-------|---------|
-| **Specific** | Unambiguous, one interpretation | "Response time <100ms" not "Fast response" |
-| **Measurable** | Pass/fail verifiable | "Coverage >85%" not "Good coverage" |
-| **Achievable** | Within scope and resources | Realistic given constraints |
-| **Relevant** | Addresses the objective | Directly supports the goal |
-| **Bounded** | Clear stopping condition | "By end of sprint" not "Soon" |
+Use formulation techniques to express goals correctly as outcomes, not activities.
 
-**Context-appropriate focus:**
-- **PRD:** User outcomes (satisfaction, adoption, value delivered)
-- **Plan:** Feasibility (performance, scalability, risk mitigation)
-- **Implementation:** Code quality (coverage, complexity, requirements met)
-- **Refactoring:** Quality gains (complexity down, no behavior change)
-- **Bug Fix:** Resolution (not reproducible, regressions prevented)
+| Technique | When | Why | How | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|---------------------|---------------------|
+| **Outcome Focus** | Goal describes activity rather than result | To ensure goals track value delivered, not work done | Identify what changes when goal is achieved, express as state change or result, ask "So what?" to find underlying outcome | Does goal describe a result? Does achieving it deliver value? | Does goal describe an activity (verb) rather than outcome (state)? |
+| **Scope Calibration** | Goal is too broad or too narrow | To set appropriate level of ambition | Ask "Why?" to go broader (purpose), ask "How?" to go narrower (action), find level where goal is actionable but meaningful | Is goal actionable? Is it meaningful? | Is goal so broad it's paralyzing? So narrow it's trivial? |
+| **Directional Framing** | Goal needs to inspire and guide | To make goals motivating and directional | Express aspiration not just target, include why it matters, make it memorable and communicable | Is goal inspiring? Does it provide direction? | Is goal purely mechanical with no motivational pull? |
+| **Boundary Setting** | Goal scope is ambiguous | To clarify what's included and excluded | Define what's in scope, define what's explicitly out of scope, identify dependencies on other goals, document constraints | Are boundaries explicit? Are exclusions clear? | Could scope creep occur due to ambiguity? |
+
+### Goal Structuring
+
+Use structuring techniques to organize, decompose, and prioritize goals.
+
+| Technique | When | Why | How | Positive Validation | Negative Validation |
+|-----------|------|-----|-----|---------------------|---------------------|
+| **Goal Decomposition** | Goal is too large to pursue directly | To create actionable sub-goals and milestones | Break into independent sub-goals, test each: "Could I do this right now?", sequence into milestones, ensure sub-goals collectively achieve parent | Are sub-goals independent? Do they sum to parent goal? | Are sub-goals coupled or overlapping? |
+| **Hierarchy Alignment** | Goal exists within larger context | To ensure goal contributes to higher-level objectives | Identify parent goals this serves, verify contribution is real, check for conflicts with sibling goals, cascade from strategic to tactical | Does goal serve parent objectives? Are conflicts resolved? | Is goal orphaned or misaligned with strategy? |
+| **Priority Setting** | Multiple goals compete for resources | To determine which goals take precedence | Assess impact vs effort for each, identify dependencies between goals, determine sequencing constraints, rank by value delivered | Are priorities explicit? Is ranking justified? | Are all goals "high priority" (meaning none are)? |
+| **Tradeoff Analysis** | Goals conflict with each other | To make explicit choices between competing goals | Identify conflicting goals, determine which to optimize vs satisfice, document tradeoff decision and rationale | Are tradeoffs explicit? Is rationale documented? | Are conflicts ignored or deferred indefinitely? |
 
 ---
 
-## Techniques
+## Example Patterns
 
-**Writing OKRs:**
+Structured example sequences for goal setting in different contexts. Far more are possible.
 
-1. **Start with outcome** - "If this succeeds, what changes?" (users can X, performance is Y, errors are Z)
-2. **Choose evaluation** - Subjective (judgment), objective (metrics), or hybrid based on what's measurable without gaming
-3. **Make measurable** - Numbers (>95%, <100ms), comparisons (50% better), boolean (zero incidents), or judgment (expert review)
-4. **State constraints** - Time (by when), resources (with what), scope (what's excluded)
-5. **Keep focused** - One objective, 3-5 key results that directly support it
+### Establishing Project Goals
 
-**Evaluation criteria:**
-- Objective clear (one sentence explanation)?
-- KRs are outcomes (what changed), not implementation steps (what you'll do)?
-- Each KR passes SMARB (Specific, Measurable, Achievable, Relevant, Bounded)?
-- Evaluation method appropriate (won't cause gaming, captures what matters)?
-- Constraints explicit (time, scope, resources)?
-- Context-appropriate (PRD→user value, plan→feasibility, impl→quality)?
+Use when starting a new project or initiative.
 
----
+1. Identify stakeholders and their needs (Stakeholder Analysis)
+2. Frame the core problem or opportunity (Problem/Opportunity Framing)
+3. Visualize the ideal end state (Ideal State Visualization)
+4. Express goals as outcomes, not activities (Outcome Focus)
+5. Calibrate scope - neither too broad nor narrow (Scope Calibration)
+6. Decompose into milestones if goal is large (Goal Decomposition)
+7. Align with organizational objectives (Hierarchy Alignment)
+8. Hand off to criteria_setting for measurable key results
 
-## Use Cases and Triggers
+**Exit Conditions:**
+- Cannot identify stakeholders → stop, clarify who this serves
+- Problem is symptom not root cause → stop, dig deeper with "5 Whys"
+- Goals describe activities not outcomes → stop, ask "So what?" until reaching outcome
 
-Apply when:
-- Defining requirements (PRD phase)
-- Planning technical approach
-- Starting implementation
-- Setting refactoring goals
-- Scoping bug fixes
-- Evaluating whether work succeeded
+### Breaking Down a Large Goal
 
----
+Use when a goal is too large to pursue directly.
 
-## Patterns and Anti-Patterns
+1. Test: "Could I start working on this right now?"
+2. If no, identify major components or phases
+3. For each component, apply outcome focus (what result, not what activity)
+4. Test each sub-goal for independence (can pursue without others)
+5. Sequence sub-goals into milestones with dependencies
+6. Verify sub-goals collectively achieve parent goal
+7. Prioritize sub-goals by value and dependencies
 
-### Patterns (✅)
-
-**Outcome-focused:** Transform "what you'll do" into "what will change". Example: Not "Create login page" but "Login success >95%, avg time <2s, zero auth bugs".
-
-**Subjective when appropriate:** "Code quality meets team standards (expert review)" valid when metrics mislead. Combine with objective: "Coverage >85% AND passes code review".
-
-**Constraints explicit:** "Response <100ms (within 2 weeks, using current infrastructure, excluding admin panel)". Prevents scope creep.
-
-**Context-appropriate:** PRD→user value (satisfaction, adoption). Plan→feasibility (performance, scale). Impl→quality (coverage, complexity).
-
-### Anti-Patterns (❌)
-
-**Implementation steps as KRs:** "Create X, write Y, add Z" - can finish all and still fail. **Fix:** "Success rate >95%, time <2s, zero bugs".
-
-**Insufficient proxies:** Test coverage ≠ quality. Lines of code ≠ value. **Fix:** Use subjective judgment or multiple indicators.
-
-**Gaming metrics:** Optimizing for metric, not outcome. **Fix:** Hybrid evaluation (metrics + judgment).
-
-**Too many KRs:** >5 dilutes focus. **Fix:** 3-5 key results max.
-
----
-
-## Examples
-
-**Bad (implementation):** "Add password reset. KRs: 1) Create endpoint 2) Write email template 3) Add DB migration 4) Write tests"
-
-**Good (outcome):** "Enable secure password reset. KRs: 1) Completion rate >95% 2) Avg time <2min 3) Zero security incidents 4) Satisfaction ≥4/5"
-
-**Subjective evaluation:** "Improve code quality. KRs: 1) Complexity reduced (expert review: satisfactory) 2) Coverage >85% 3) No regressions (tests pass)"
-
-**With constraints:** "Improve response time (within Q1, using current infrastructure, excluding batch jobs). KRs: 1) P95 <100ms 2) Zero timeouts 3) Cost unchanged"
-
-**Context-appropriate:**
-- PRD: "Order tracking. KRs: Tickets -60%, satisfaction ≥4/5, adoption >50%"
-- Plan: "Scalable tracking. KRs: 100k users, <500ms latency, zero SPOFs"
-- Impl: "Quality tracking. KRs: 100% requirements, 85% coverage, zero critical bugs"
+**Exit Conditions:**
+- Sub-goals are coupled → stop, reframe to create independence
+- Sub-goals don't sum to parent → stop, identify missing pieces
+- Still can't start → stop, decompose further
 
 ---
 
 ## References
 
-- [OKRs: The Ultimate Guide - Atlassian](https://www.atlassian.com/agile/agile-at-scale/okr)
-- [What are OKRs? Guide - Asana](https://asana.com/resources/okr-meaning)
-- [OKRs: The Only Guide You Need - Mooncamp](https://mooncamp.com/okr)
-- [Practical Guidance on Developing Indicators - CRS](https://www.crs.org/sites/default/files/2025-03/indicator_guidance_final_low_res.pdf)
+**Anthropic/Claude documentation:**
+- [Be clear and direct - Claude API Docs](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/be-clear-and-direct)
+- [Chain complex prompts - Claude API Docs](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/chain-prompts)
+
+**Goal setting theory:**
+- [The Neuroscience of Goals and Behavior Change - PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC5854216/)
+- [Goal Setting Theory - Positive Psychology](https://positivepsychology.com/goal-setting-theory/)
+- [Goal Setting Scientific Guide - James Clear](https://jamesclear.com/goal-setting)
+
+**OKRs and frameworks:**
+- [OKRs vs SMART Goals - Leapsome](https://www.leapsome.com/blog/okrs-vs-smart-goals)
+- [OKR Best Practices 2026 - Synergita](https://www.synergita.com/blog/okr-best-practices/)
+- [Output vs Outcome - WhatMatters](https://www.whatmatters.com/faqs/outputs-vs-outcome-okr)
+
+**Goal decomposition:**
+- [Goal Decomposition - LeaderTask](https://www.leadertask.com/articles/decomposition-of-goals-and-objectives)
+- [Strategy Decomposition - BSC Designer](https://bscdesigner.com/strategy-decomposition.htm)
+
+**Prioritization:**
+- [Prioritization Frameworks - Atlassian](https://www.atlassian.com/agile/product-management/prioritization-framework)
+- [Goal Alignment - Medium](https://medium.com/the-caring-network-company/how-we-align-our-goals-85bfb19fe089)
