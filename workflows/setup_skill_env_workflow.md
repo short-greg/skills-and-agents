@@ -1,10 +1,9 @@
 ---
 name: setup-skill-env
 description: >
-  Use when making a repository AI-friendly using the skills-and-agents framework.
-  Analyzes existing repos, interviews the user, installs all framework components, sets up the repo to be AI-friendly based on user requests.
-  You MUST satisfy the Goal, Key Results and follow the Requirements of this skill. They are specified in the instruction body.
-  Triggers on: "setup skills environment", "configure skill environment", "make repo AI-friendly".
+  Install the skills-and-agents framework to make a repository AI-friendly.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow.
+  Triggers on: "setup skills", "install framework", "make repo AI-friendly".
 argument-hint: "[project path or 'current']"
 disable-model-invocation: true
 user-invocable: true
@@ -13,276 +12,199 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 
 # Setup Skill Environment Workflow
 
-**Goal:** Configure a complete skill environment for a project, installing primitives, workflows, and protocols, and creating documentation for effective AI coding.
+**Goal:** Install the skills-and-agents framework components into a project.
 
-**Intent:** Projects need proper setup for AI coding to be effective. This includes understanding the repo, installing the right skills, configuring worktrees if needed, and creating documentation that guides AI behavior. Without this setup, AI coding is inconsistent and ineffective.
+**Intent:** Projects need primitives, workflows, and protocols installed for effective AI coding. This workflow handles the installation and basic configuration.
 
-**Scope:** Complete AI-friendliness setup: repo analysis (for existing repos), user interview, skills framework installation (primitives, protocols, workflows), AI-focused documentation (CLAUDE.md, repository analysis reports, setup summaries, etc.), worktree configuration (optional), and setup validation.
+**Scope:** Framework installation: copy primitives, protocols, and workflows to the project's AI tool config directory. Create basic CLAUDE.md if missing.
 
 ---
 
 ## Key Results - KR
 
-You must satisfy these to complete the skill successfully.
-
-1. User have been made clear before setting up the skill — project state, preferences, desired workflows, AI-Friendly preferences.
-2. Framework components installed — selected primitives, workflows, protocols in place
-3. The repository is AI-friendly by creating detailed AI guidance documentation such as docstrings, conventions documentation, CLAUDE.md.
-4. The skill Setup is functional — installed components work correctly
+1. Framework components installed — primitives, protocols, and workflows copied to config directory
+2. Project has AI guidance — CLAUDE.md exists with project conventions
+3. Setup validated — installed components are accessible
 
 ## Requirements and Constraints - REQ
 
-Constraints on how to complete the skill.
-
-1. Progress tracked per `tracking.md` — preliminary checklist created before starting work
-2. Recoverable from interruption per `tracking.md` and `recovery.md` — don't duplicate already-installed components
-3. Resolve existing skills before installing new ones
-4. Iterate up to 3 times if validation fails, identify missing components, Offer to install/fix, Re-validate
+1. Progress tracked per `tracking_and_recovery.md`
+2. Ask user for AI tool type (Claude Code, Cursor, etc.) to determine config directory
+3. Do not overwrite existing files without user confirmation
 
 ---
 
 ## Preconditions
 
-Satisfy preconditions before beginning unless Optional.
-
-**Required:** Project path or confirmation of current directory
+**Required:** Project path or current directory, framework source location
 
 **Elicit if not provided:**
-- Project structure (detected)
-- Existing configuration (detected)
-- Framework components (from framework repo)
+- AI tool type (Claude Code → `.claude/`, Cursor → `.cursor/`, etc.)
+- Whether to overwrite existing files
+
+**Optional:** Custom config directory path
 
 ## Postconditions
 
-The resulting state after the skill is finished.
+**Success:** All framework components installed, CLAUDE.md exists, setup validated
 
-**Success:**
-- Skill environment fully configured
-- Selected workflows installed and customized
-- Project documentation created/updated
-- Setup validated and working
+**Failure:** Framework source not accessible, cannot write to config directory, user aborts
 
-**Failure:**
-- User aborts
-- Framework repo not accessible
-- Installation fails
+---
 
 ## Steps
 
-Complete the Tasks in this order.
-
-Steps:
-1. Create preliminary checklist from key results (todo list)
-2. Reason about project
-3. Interview the user
-4. Decide on remaining tasks to complete in order to achieve the key results and refine the checklist
-5. Validate setup
+MUST read and follow steps in `dynamic_workflow_base.md`
 
 ---
 
-## Tasks
+## Deliverables
 
-Select and execute tasks to achieve each Key Result. Each task shows which KR it serves.
-
-### Create Preliminary Checklist (→ Req 1)
-
-Create checklist according to `tracking.md` first:
-
-1. List all Key Results from this workflow in a todo list (checklist)
-2. Create checklist items for each KR using format: `setup-skill-env - KR<num> - <task>`
-3. Tasks can be "(clarify requirements)" initially, refined after interview
-
-### Reason About Project (→ KR1)
-
-Per `reasoning.md` — reason about:
-
-1. **Project state** — Existing repo with code? New/empty repo? Existing AI config?
-2. **Project type** — Language, framework, patterns used
-3. **Team context** — Solo or team? Existing conventions?
-4. **Likely needs** — What workflows will this project need?
-
-Output your reasoning.
-
-### Interview the User (→ KR1)
-
-After understanding the Goal, Key Results, and Requirements and setting up a preliminary checklist with key results, interview the user to understand their situation. Once finished with that finalize the checklist with tasks to achieve them:
-
-**Questions to ask:**
-
-1. **Project state:**
-   - Is this an existing project with code, or a new/empty project?
-   - Does it have existing AI tool config (`.claude/`, `.cursor/`, etc.)?
-
-2. **Existing skills:**
-   - Are there existing skills installed?
-   - If yes: Do you want to adapt them to the framework, keep them alongside, remove them, or leave them as-is?
-
-3. **What they want:**
-   - Which workflows do they need? (feature, bugfix, refactor, code review, etc.)
-   - Do they want worktree support for parallel work?
-   - How strict should validation be?
-
-4. **Preferences:**
-   - Where should specs and plans for tasks be stored?
-   - What documentation format do they prefer?
-
-**Detect what you can automatically** (existing code, AI config, project structure) and confirm with user.
-
-### Determine Best Approach (→ KR1)
-
-Based on the interview, determine the order of remaining tasks.
-
-**Tasks to complete (can add others):**
-
-- **Understand repository** — For existing repos, understand structure and conventions first
-- **Handle existing skills** — Adapt, keep, remove, or leave as-is based on user choice
-- **Configure tool directories** — Set up `.claude/skills/`, etc.
-- **Install framework components** — Primitives, protocols, selected workflows
-- **Create/update AI guidance documentation** — CLAUDE.md, docstrings, conventions, etc.
-- **Configure worktrees** — If user wants parallel work support
-- **Validate setup** — Confirm everything works
-- **Create summary** — Document what was done
-
-### Understand the Repository (→ KR1)
-
-Use `orient` primitive. For existing repos only.
-
-For existing repos, understand before configuring:
-
-1. **Project structure** — Where is code? Tests? Docs?
-2. **Language/framework** — What technologies?
-3. **Conventions** — Naming, file organization, patterns
-4. **Existing documentation** — README, CONTRIBUTING, etc.
-5. **Build/test commands** — How to run tests, build, lint
-
-**Gate:** Confirm understanding with user before proceeding.
-
-### Repository Analysis Report (→ KR3)
-
-Use `investigate` and `critique` primitives. For existing repos only.
-
-Create a comprehensive analysis report highlighting what the AI needs to know to work effectively in this codebase.
-
-**Analysis Categories:**
-- Uncertainties — areas where requirements, behavior, or intent are unclear
-- Risks — technical and operational risks
-- Complexity Analysis — areas of high complexity
-- Modularity Critique — code organization and boundaries
-- Conventions Critique — consistency of conventions
-
-**Gate:** Review report with user, discuss key findings.
-
-### Handle Existing Skills (→ Req 3)
-
-Based on interview, adapt, keep, remove, or leave existing skills as-is.
-
-### Tool Configuration (→ KR2)
-
-Determine AI tool and create directory structure:
-
-- Ask user which AI coding tool (Claude Code, Cursor, Windsurf, etc.)
-- Create `${TOOL_CONFIG}/skills`, `${TOOL_CONFIG}/primitives`, `${TOOL_CONFIG}/protocols`
-
-### Worktree Configuration (→ KR2)
-
-If user wants parallel work support:
-
-1. Create Worktrees directory
-2. Add shell functions to .zshrc/.bashrc
-3. Create .worktreesync file
-4. Test the setup
-
-### Workflow Selection (→ KR1, KR2)
-
-Present workflow categories and let user select:
-
-- **Core Development:** feature-workflow, bugfix-workflow, refactor-workflow
-- **Code Quality:** code-review-workflow, test-strategy-workflow
-- **Parallel Work:** worktree workflows (requires worktrees)
-- **Meta:** create-primitive-workflow, create-workflow-workflow
-
-### Skill Customization (→ KR1, KR2)
-
-Ask about customization preferences:
-
-- Spec directory location
-- Modularity assessment inclusion
-- Documentation requirements strictness
-- Validation strictness
-- User approval gates frequency
-
-### Install Components (→ KR2)
-
-Install selected components:
-
-1. **Install primitives** — Copy from `primitives/` to `${TOOL_CONFIG}/primitives/`
-2. **Install protocols** — Copy from `protocols/` to `${TOOL_CONFIG}/protocols/`
-3. **Install workflows** — Copy selected from `workflows/` to `${TOOL_CONFIG}/skills/`
-4. **Apply customizations** — Replace placeholders in installed files
-
-### Create Project Documentation (→ KR3)
-
-Create or update AI guidance documentation throughout the repo:
-
-- **CLAUDE.md** — Project overview, conventions, commands, skills configuration
-- **Docstrings** — Add/improve where needed for AI understanding
-- **Conventions documentation** — Document patterns, naming, file organization
-- **Analysis reports** — Repository analysis findings (for existing repos)
-
-**Scope determined with user** — how much documentation they want.
-
-### Validate Setup (→ KR4)
-
-Use `validate` primitive.
-
-Verify the setup works:
-
-1. Config directory exists
-2. Skills installed
-3. Primitives installed
-4. Protocols installed
-5. Spec directory exists
-6. Project docs exist
-7. Worktrees working (if enabled)
-
-**On failure:** Report what's missing, offer to fix.
-
-### Create Setup Summary (→ KR4)
-
-Write summary file to `${TOOL_CONFIG}/SETUP_SUMMARY.md` documenting:
-
-- Configuration settings
-- Installed components
-- Quick start examples
-- Customizations applied
-- How to re-run setup
+| Deliverable | Format | Location | Validation |
+|-------------|--------|----------|------------|
+| Primitives | Markdown files | `${CONFIG}/primitives/` | All 10 files present |
+| Protocols | Markdown files | `${CONFIG}/protocols/` | All 13 files present |
+| Workflows | Markdown files | `${CONFIG}/workflows/` | Base + dev_planning present |
+| CLAUDE.md | Markdown | Project root | File exists, has project info |
 
 ---
 
-## Protocols
+## Possible Tasks
 
-Comply with protocols to get consistent behavior `protocols/`. If you do not understand a protocol, read it.
+### Determine Config Directory (→ KR1)
 
-- `tracking.md` — Track which setup tasks are complete vs remain
-- `recovery.md` — On startup, check for existing progress. Resume from last completed task.
-- `tracking.md` — Build preliminary checklist from Key Results before starting work.
-- `reasoning.md` — Reason about project state and approach before starting.
-- `goals_and_objectives.md` — Ensure setup achieves user's stated goals.
+Execute config detection when starting setup. Ask user which AI tool they use. Map to config directory:
+- Claude Code → `.claude/`
+- Cursor → `.cursor/`
+- Other → ask for path
+
+Create subdirectories: `primitives/`, `protocols/`, `workflows/`
+
+**Fallback:** If directory creation fails, report error and ask user to create manually.
+
+### Install Primitives (→ KR1)
+
+Execute primitive installation when config directory exists. Copy all primitives from framework:
+
+```
+primitives/base.md
+primitives/orienting.md
+primitives/defining.md
+primitives/planning.md
+primitives/designing.md
+primitives/implementing.md
+primitives/evaluating.md
+primitives/investigating.md
+primitives/brainstorming.md
+primitives/maintaining.md
+```
+
+**Fallback:** If file exists, ask user whether to overwrite.
+
+### Install Protocols (→ KR1)
+
+Execute protocol installation when config directory exists. Copy all protocols from framework:
+
+```
+protocols/tracking_and_recovery.md
+protocols/thinking.md
+protocols/discipline.md
+protocols/pragmatics.md
+protocols/interviewing.md
+protocols/instruction_giving.md
+protocols/criteria_setting.md
+protocols/goal_setting.md
+protocols/risk_management.md
+protocols/transparency.md
+protocols/software_quality.md
+protocols/system_modularity.md
+protocols/frame_of_mind.md
+```
+
+**Fallback:** If file exists, ask user whether to overwrite.
+
+### Install Workflows (→ KR1)
+
+Execute workflow installation when config directory exists. Copy workflow files:
+
+```
+workflows/dynamic_workflow_base.md
+workflows/dev_planning_workflow.md
+```
+
+**Fallback:** If file exists, ask user whether to overwrite.
+
+### Create CLAUDE.md (→ KR2)
+
+Execute documentation creation when CLAUDE.md does not exist or user wants to update. Create basic CLAUDE.md with:
+
+- Project name and description
+- Key commands (build, test, lint)
+- Directory structure overview
+- Conventions (naming, patterns)
+- Reference to installed skills
+
+**Fallback:** If CLAUDE.md exists, ask user if they want to update or skip.
+
+### Validate Setup (→ KR3)
+
+Execute validation using `evaluating` primitive when installation complete. Check:
+
+1. Config directory exists with subdirectories
+2. All primitive files present (10 files)
+3. All protocol files present (13 files)
+4. Workflow files present (2 files)
+5. CLAUDE.md exists
+
+Report any missing components.
+
+**Fallback:** If validation fails, offer to re-run failed installation tasks.
 
 ---
 
-## Available Primitives
+## Components to Install
 
-Primitives are atomic cognitive actions in `skills/`. Use these for setup. If you do not understand a primitive, read it before using it.
+### Primitives (10 files)
+| File | Purpose |
+|------|---------|
+| base.md | Base steps all primitives follow |
+| orienting.md | Understand current state |
+| defining.md | Establish requirements |
+| planning.md | Sequence actions |
+| designing.md | Plan technical approach |
+| implementing.md | Write code |
+| evaluating.md | Assess against criteria |
+| investigating.md | Research and diagnose |
+| brainstorming.md | Generate options |
+| maintaining.md | Keep system healthy |
 
-- `orient` — Understand repository structure and conventions.
-- `define` — Establish user requirements and preferences.
-- `validate` — Verify setup works correctly.
-- `investigate` — Analyze existing code for risks, complexity, uncertainties.
-- `critique` — Evaluate modularity and conventions of existing code.
+### Protocols (13 files)
+| File | Purpose |
+|------|---------|
+| tracking_and_recovery.md | Progress tracking and recovery |
+| thinking.md | Reasoning techniques |
+| discipline.md | Systematic enumeration |
+| pragmatics.md | Communication calibration |
+| interviewing.md | Eliciting information |
+| instruction_giving.md | Clear instructions |
+| criteria_setting.md | Defining success criteria |
+| goal_setting.md | Setting objectives |
+| risk_management.md | Risk assessment |
+| transparency.md | Documentation practices |
+| software_quality.md | Quality dimensions |
+| system_modularity.md | Modular design |
+| frame_of_mind.md | Expert reasoning |
+
+### Workflows (2 files)
+| File | Purpose |
+|------|---------|
+| dynamic_workflow_base.md | Base for dynamic workflows |
+| dev_planning_workflow.md | Development planning |
 
 ---
 
-## Additional Notes and Terms
+## Additional Notes
 
-None
+**Extending:** After setup, users can add more workflows by copying from the framework's `workflows/` directory.
+
+**Customization:** Users should edit CLAUDE.md to add project-specific conventions and commands.
