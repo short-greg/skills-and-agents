@@ -6,10 +6,10 @@ All primitives must execute these steps.
 
 ## Steps
 
-1. **Output lightweight checklist** per `tracking_and_recovery.md` — output lightweight checklist using Key Results, display inline
+1. **Output lightweight checklist** per `protocols/tracking_and_recovery.md` — output lightweight checklist using Key Results, display inline
 2. **Resolve preconditions** — elicit missing required inputs from user
 3. **Evaluate actions** — output a table of actions including alternative actions then choose them based on the conditions and evaluate their usage in this situation | Action | Why Use | Why Not
-4. **Output expert reasonined action plan** - Output the ideal type of expert for this problem and how they would tackle using `frame_of_mind.md` and how they would tackle this problem then decide the action plan using `planning.md` based on the action evaluation in step 3. 
+4. **Output expert reasonined action plan** - Output the ideal type of expert for this problem and how they would tackle using `protocols/frame_of_mind.md` and how they would tackle this problem then decide the action plan using `primitives/planning.md` based on the action evaluation in step 3. 
 5. [PLACEHOLDER: **Execute actions** — include primitive-specific actions per Actions section. Replace with actual actions. Must update with actions.]
 6. **Confirm and report result** — confirm each KR met, output success or failure, if it fails explain why
 

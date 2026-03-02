@@ -38,17 +38,17 @@ allowed-tools: Read, Grep
 
 ## Protocols
 
-- **thinking.md** — Must use for Write Use Cases First, Design Structure, Design Process, Evaluate Tradeoffs
-- **system_modularity.md** — Must use for Design Structure
-- **discipline.md** — Must use for Write Use Cases First, Design Structure, Design Process, Identify and Mitigate Risks, Evaluate Tradeoffs
-- **criteria_setting.md** — Must use for Design Structure, Design Process (testable interface specs, observable behaviors)
-- **software_quality.md** — Must use for Design Structure, Design Process (quality attributes affecting design)
-- **instruction_giving.md** — Must use for Design Structure, Design Process (clear, implementable specs)
-- **transparency.md** — Must use for Design Structure, Design Process, Evaluate Tradeoffs (document design artifact and decisions)
-- **risk_management.md** — Must use for Identify and Mitigate Risks
-- **interviewing.md** — Use for Elicit Context (when info incomplete)
-- **pragmatics.md** — Use for Elicit Context, Confirm with User
-- **tracking_and_recovery.md** — Must use for checklist and resuming after interruption
+- **protocols/thinking.md** — Must use for Write Use Cases First, Design Structure, Design Process, Evaluate Tradeoffs
+- **protocols/system_modularity.md** — Must use for Design Structure
+- **protocols/discipline.md** — Must use for Write Use Cases First, Design Structure, Design Process, Identify and Mitigate Risks, Evaluate Tradeoffs
+- **protocols/criteria_setting.md** — Must use for Design Structure, Design Process (testable interface specs, observable behaviors)
+- **protocols/software_quality.md** — Must use for Design Structure, Design Process (quality attributes affecting design)
+- **protocols/instruction_giving.md** — Must use for Design Structure, Design Process (clear, implementable specs)
+- **protocols/transparency.md** — Must use for Design Structure, Design Process, Evaluate Tradeoffs (document design artifact and decisions)
+- **protocols/risk_management.md** — Must use for Identify and Mitigate Risks
+- **protocols/interviewing.md** — Use for Elicit Context (when info incomplete)
+- **protocols/pragmatics.md** — Use for Elicit Context, Confirm with User
+- **protocols/tracking_and_recovery.md** — Must use for checklist and resuming after interruption
 
 ---
 
@@ -77,37 +77,37 @@ MUST read and follow steps in `base.md`
 
 ---
 
-## Actions
+## Possible Actions
 
-Select based on context. Each action shows which KR it serves.
+Select or propose actions based on context. Each action shows which KR it serves.
 
 ### Elicit Context (→ KR1)
 
-Execute context elicitation using `interviewing.md` (Open Questions, Constraint Discovery) and `pragmatics.md` (Directness Calibration) when project conventions, codebase context, or requirements not provided. Gather what's needed to design accurately before proceeding.
+Execute context elicitation using `protocols/interviewing.md` (Open Questions, Constraint Discovery) and `protocols/pragmatics.md` (Directness Calibration) when project conventions, codebase context, or requirements not provided. Gather what's needed to design accurately before proceeding.
 
 ### Write Use Cases First (→ KR1)
 
-Execute use case creation using `thinking.md` (Analytical) and `discipline.md` (MECE Enumeration) when starting design. Write 3-5 primary use cases as ideal API calls or interactions, enumerate systematically, identify natural boundaries from usage patterns.
+Execute use case creation using `protocols/thinking.md` (Analytical) and `protocols/discipline.md` (MECE Enumeration) when starting design. Write 3-5 primary use cases as ideal API calls or interactions, enumerate systematically, identify natural boundaries from usage patterns.
 
 ### Design Structure (→ KR1)
 
-Execute structure design using `system_modularity.md` (Cohesion, Coupling, Information Hiding), `thinking.md` (Systems), `discipline.md` (Coverage Tracking), `criteria_setting.md` (Observable Behavior), `software_quality.md` (Quality Attributes), `instruction_giving.md` (Explicit Language), and `transparency.md` (Documentation) when defining components. Enumerate ALL modules, interfaces, and data structures. Specify testable interface contracts. Consider quality attributes. Document design clearly for implementation.
+Execute structure design using `protocols/system_modularity.md` (Cohesion, Coupling, Information Hiding), `protocols/thinking.md` (Systems), `protocols/discipline.md` (Coverage Tracking), `protocols/criteria_setting.md` (Observable Behavior), `protocols/software_quality.md` (Quality Attributes), `protocols/instruction_giving.md` (Explicit Language), and `protocols/transparency.md` (Documentation) when defining components. Enumerate ALL modules, interfaces, and data structures. Specify testable interface contracts. Consider quality attributes. Document design clearly for implementation.
 
 ### Design Process (→ KR1)
 
-Execute process design using `thinking.md` (Systems), `discipline.md` (Coverage Tracking), `criteria_setting.md` (Observable Behavior, Threshold Setting), `software_quality.md` (Quality Requirements), `instruction_giving.md` (Explicit Language), and `transparency.md` (Documentation) when specifying behavior. Map ALL data flows with observable criteria, enumerate ALL valid states and transitions, specify ALL error handling. Document quality requirements (performance, reliability).
+Execute process design using `protocols/thinking.md` (Systems), `protocols/discipline.md` (Coverage Tracking), `protocols/criteria_setting.md` (Observable Behavior, Threshold Setting), `protocols/software_quality.md` (Quality Requirements), `protocols/instruction_giving.md` (Explicit Language), and `protocols/transparency.md` (Documentation) when specifying behavior. Map ALL data flows with observable criteria, enumerate ALL valid states and transitions, specify ALL error handling. Document quality requirements (performance, reliability).
 
 ### Identify and Mitigate Risks (→ KR1)
 
-Execute risk identification using `risk_management.md` (Uncertainty Indicators, Complexity Indicators) and `discipline.md` (Coverage Tracking) when surfacing design risks. Check ALL components for complexity, unknowns, fragile assumptions, edge cases, security concerns. For each risk, determine concrete mitigation.
+Execute risk identification using `protocols/risk_management.md` (Uncertainty Indicators, Complexity Indicators) and `protocols/discipline.md` (Coverage Tracking) when surfacing design risks. Check ALL components for complexity, unknowns, fragile assumptions, edge cases, security concerns. For each risk, determine concrete mitigation.
 
 ### Evaluate Tradeoffs (→ KR1)
 
-Execute tradeoff evaluation using `thinking.md` (Counterfactual), `transparency.md` (Decision Recording), and `discipline.md` (Coverage Tracking) when making design decisions. Enumerate ALL key decisions, state alternatives considered for each, evaluate tradeoffs, document rationale for choices.
+Execute tradeoff evaluation using `protocols/thinking.md` (Counterfactual), `protocols/transparency.md` (Decision Recording), and `protocols/discipline.md` (Coverage Tracking) when making design decisions. Enumerate ALL key decisions, state alternatives considered for each, evaluate tradeoffs, document rationale for choices.
 
 ### Confirm with User (→ KR2)
 
-Execute design confirmation using `pragmatics.md` (Recommended Option, Option Presentation) when presenting design for review. Frame as recommended approach with reasoning, present with enough precision to implement from, verify acceptability before implementation begins.
+Execute design confirmation using `protocols/pragmatics.md` (Recommended Option, Option Presentation) when presenting design for review. Frame as recommended approach with reasoning, present with enough precision to implement from, verify acceptability before implementation begins.
 
 ---
 

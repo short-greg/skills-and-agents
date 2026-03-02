@@ -1,121 +1,140 @@
 # Skills and Agents Framework
 
-**A framework to set up a code repository to be AI-Friendly. It includes primitives, workflows, and protocols for building reliable AI coding assistant skills.**
+**A framework for building reliable AI coding assistant skills with primitives, workflows, and protocols.**
 
 ---
 
-## Getting Started
+## Quick Start
 
-### For AI Assistants
+### Option 1: Submodule (Recommended)
 
-Copy the following to your project's AI tool config directory (e.g., `.claude/skills/`):
+```bash
+cd your-project
+git submodule add https://github.com/short-greg/skills-and-agents.git .skills-framework
+```
 
-**Workflow:**
-- `workflows/dev_planning_workflow.md` — Development planning workflow
-- `workflows/dynamic_workflow_base.md` — Base for dynamic workflows
+Then create skill pointers (see [Skill Structure](#skill-structure) below).
 
-**Primitives:**
-- `primitives/base.md` — Base steps all primitives follow
-- `primitives/orienting.md` — Understand current state
-- `primitives/defining.md` — Establish requirements
-- `primitives/planning.md` — Sequence actions
-- `primitives/designing.md` — Plan technical approach
-- `primitives/implementing.md` — Write code
-- `primitives/evaluating.md` — Assess against criteria
-- `primitives/investigating.md` — Research and diagnose
-- `primitives/brainstorming.md` — Generate options
-- `primitives/maintaining.md` — Keep system healthy
+### Option 2: Use the Setup Skill
 
-**Protocols:**
-- `protocols/tracking_and_recovery.md` — Progress tracking and recovery
-- `protocols/thinking.md` — Reasoning techniques
-- `protocols/discipline.md` — Systematic enumeration
-- `protocols/pragmatics.md` — Communication calibration
-- `protocols/interviewing.md` — Eliciting information
-- `protocols/instruction_giving.md` — Clear instructions
-- `protocols/criteria_setting.md` — Defining success criteria
-- `protocols/goal_setting.md` — Setting objectives
-- `protocols/risk_management.md` — Risk assessment
-- `protocols/transparency.md` — Documentation practices
-- `protocols/software_quality.md` — Quality dimensions
-- `protocols/system_modularity.md` — Modular design
-- `protocols/frame_of_mind.md` — Expert reasoning
+If you have Claude Code, run:
+```
+/setup-skill-env current
+```
 
-### Access Methods
-
-1. **Clone temporarily** (recommended)
-   ```bash
-   git clone https://github.com/short-greg/skills-and-agents.git /tmp/skills-framework
-   # Copy files to your project
-   rm -rf /tmp/skills-framework  # cleanup
-   ```
-
-2. **Submodule** (for ongoing updates)
-   ```bash
-   git submodule add https://github.com/short-greg/skills-and-agents.git .skills-framework
-   ```
-
-3. **Manual download** — Download ZIP from GitHub
+This will guide you through installation.
 
 ---
 
-## What This Is
+## How It Works
+
+### Skill Structure
+
+Skills are **lightweight pointers** in `.claude/skills/[name]/SKILL.md` that reference workflow files:
+
+```
+your-project/
+├── .claude/
+│   └── skills/
+│       └── dev-planning/
+│           └── SKILL.md          # Points to workflow
+├── .skills-framework/            # Framework (submodule or copy)
+│   ├── primitives/
+│   ├── protocols/
+│   └── workflows/
+│       └── dev_planning_workflow.md
+└── CLAUDE.md
+```
+
+**SKILL.md example:**
+```markdown
+---
+name: dev-planning
+description: Create a development plan before implementation
+argument-hint: "[project or feature to plan]"
+---
+
+# Dev Planning
+
+Follow [dev_planning_workflow.md](../../../.skills-framework/workflows/dev_planning_workflow.md).
+```
+
+### Framework Components
 
 | Component | Purpose | Location |
 |-----------|---------|----------|
-| **Primitives** | Atomic cognitive actions | `primitives/` |
-| **Workflows** | Multi-step processes composing primitives | `workflows/` |
-| **Protocols** | Reusable reasoning and tracking patterns | `protocols/` |
-
-### Why This Exists
-
-AI coding assistants often skip steps, violate conventions, and don't complete workflows. This framework solves these problems with:
-
-- **Dynamic execution** — Skills evaluate which actions to take based on context
-- **Progress tracking** — Skills report what they're doing (less skipping)
-- **Fallback handling** — Skills recover from failures gracefully
-- **Protocol-based reasoning** — Consistent techniques across all skills
+| **Primitives** | Atomic cognitive actions | `.skills-framework/primitives/` |
+| **Protocols** | Reusable reasoning patterns | `.skills-framework/protocols/` |
+| **Workflows** | Multi-step processes | `.skills-framework/workflows/` |
 
 ---
 
-## Architecture
+## Available Components
 
-### Primitives
+### Primitives (10)
 
-Atomic cognitive actions. Each primitive:
-- Inherits steps from `base.md`
-- Has Key Results (KR) and Requirements (REQ)
-- Lists possible actions with conditions and protocol references
-- Evaluates actions dynamically based on context
+| File | Purpose |
+|------|---------|
+| base.md | Base steps all primitives follow |
+| orienting.md | Understand current state |
+| defining.md | Establish requirements |
+| planning.md | Sequence actions |
+| designing.md | Plan technical approach |
+| implementing.md | Write code |
+| evaluating.md | Assess against criteria |
+| investigating.md | Research and diagnose |
+| brainstorming.md | Generate options |
+| maintaining.md | Keep system healthy |
 
-**Format:**
-```
-Execute [action] using `protocol.md` (Technique) when [condition]. [Details.]
-```
+### Protocols (13)
 
-### Workflows
+| File | Purpose |
+|------|---------|
+| tracking_and_recovery.md | Progress tracking and recovery |
+| thinking.md | Reasoning techniques |
+| discipline.md | Systematic enumeration |
+| pragmatics.md | Communication calibration |
+| interviewing.md | Eliciting information |
+| instruction_giving.md | Clear instructions |
+| criteria_setting.md | Defining success criteria |
+| goal_setting.md | Setting objectives |
+| risk_management.md | Risk assessment |
+| transparency.md | Documentation practices |
+| software_quality.md | Quality dimensions |
+| system_modularity.md | Modular design |
+| frame_of_mind.md | Expert reasoning |
 
-Multi-step processes composing primitives. Dynamic workflows:
-- Inherit steps from `dynamic_workflow_base.md`
-- Evaluate tasks with fallbacks
-- Produce deliverables with validation criteria
-- Support recovery from interruption
+### Workflows (2 core)
 
-### Protocols
+| File | Purpose |
+|------|---------|
+| dynamic_workflow_base.md | Base for dynamic workflows |
+| dev_planning_workflow.md | Development planning |
 
-Reusable reasoning patterns. Referenced inline:
-```
-Execute X using `thinking.md` (Analytical) when...
+---
+
+## Creating Skills
+
+1. **Create skill directory:** `.claude/skills/my-skill/`
+2. **Create SKILL.md** with frontmatter and workflow reference
+3. **Invoke with:** `/my-skill [args]`
+
+---
+
+## Updating Framework
+
+If using submodule:
+```bash
+git submodule update --remote .skills-framework
 ```
 
 ---
 
 ## Tool Compatibility
 
-Works with any AI coding assistant:
 - Claude Code (`.claude/skills/`)
-- Cursor
-- Windsurf
+- Cursor (adapt paths)
+- Windsurf (adapt paths)
 - Others (adapt to your tool's format)
 
 ---

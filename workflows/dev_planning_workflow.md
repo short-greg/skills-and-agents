@@ -31,7 +31,7 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, WebSearch, WebFetch, Task, T
 
 ## Requirements and Constraints - REQ
 
-1. Progress tracked per `tracking_and_recovery.md` — file-based progress tracking
+1. Progress tracked per `protocols/tracking_and_recovery.md` — file-based progress tracking
 2. Recoverable from interruption — check for existing progress on startup
 3. Validate context before defining requirements
 4. Validate requirements before planning tasks
@@ -40,10 +40,10 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, WebSearch, WebFetch, Task, T
 
 ## Protocols
 
-- **tracking_and_recovery.md** — Must use for progress tracking and recovery
-- **discipline.md** — Must use for systematic enumeration of requirements, tasks, risks
-- **risk_management.md** — Must use for risk identification and mitigation
-- **pragmatics.md** — Must use for user confirmation
+- **protocols/tracking_and_recovery.md** — Must use for progress tracking and recovery
+- **protocols/discipline.md** — Must use for systematic enumeration of requirements, tasks, risks
+- **protocols/risk_management.md** — Must use for risk identification and mitigation
+- **protocols/pragmatics.md** — Must use for user confirmation
 
 ---
 
@@ -110,13 +110,13 @@ Execute task planning using `planning` primitive when requirements are clear and
 
 ### Identify and Mitigate Risks (→ KR3)
 
-Execute risk assessment using `risk_management.md` when plan exists but risks not fully addressed. Enumerate risks, assess likelihood and impact, determine mitigations. Add contingency tasks to plan if needed.
+Execute risk assessment using `protocols/risk_management.md` when plan exists but risks not fully addressed. Enumerate risks, assess likelihood and impact, determine mitigations. Add contingency tasks to plan if needed.
 
 **Fallback:** If risks are too high, present options to user (reduce scope, add spikes, accept risk).
 
 ### Confirm with User (→ KR4)
 
-Execute confirmation using `pragmatics.md` (Recommended Option, Option Presentation) when plan is complete. Present plan summary, highlight key decisions and risks, request approval before implementation begins.
+Execute confirmation using `protocols/pragmatics.md` (Recommended Option, Option Presentation) when plan is complete. Present plan summary, highlight key decisions and risks, request approval before implementation begins.
 
 **Fallback:** If user rejects, capture feedback and return to relevant task (requirements, planning, or risks).
 

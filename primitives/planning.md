@@ -37,14 +37,14 @@ allowed-tools: Read, Grep
 
 ## Protocols
 
-- **goal_setting.md** — Must use for Identify Actions
-- **discipline.md** — Must use for Identify Actions, Identify Dependencies, Surface Unknowns
-- **instruction_giving.md** — Must use for Identify Actions, Sequence Actions
-- **thinking.md** — Must use for Sequence Actions
-- **risk_management.md** — Must use for Surface Unknowns
-- **interviewing.md** — Use for Elicit Context (when info incomplete)
-- **pragmatics.md** — Use for Elicit Context, Confirm with User
-- **tracking_and_recovery.md** — Must use for checklist and resuming after interruption
+- **protocols/goal_setting.md** — Must use for Identify Actions
+- **protocols/discipline.md** — Must use for Identify Actions, Identify Dependencies, Surface Unknowns
+- **protocols/instruction_giving.md** — Must use for Identify Actions, Sequence Actions
+- **protocols/thinking.md** — Must use for Sequence Actions
+- **protocols/risk_management.md** — Must use for Surface Unknowns
+- **protocols/interviewing.md** — Use for Elicit Context (when info incomplete)
+- **protocols/pragmatics.md** — Use for Elicit Context, Confirm with User
+- **protocols/tracking_and_recovery.md** — Must use for checklist and resuming after interruption
 
 ---
 
@@ -74,31 +74,31 @@ MUST read and follow steps in `base.md`
 
 ## Possible Actions
 
-Select based on context. Each action shows which KR it serves.
+Select or propose actions based on context. Each action shows which KR it serves.
 
 ### Elicit Context (→ KR1)
 
-Execute context elicitation using `interviewing.md` (Open Questions, Constraint Discovery) and `pragmatics.md` (Directness Calibration) when definition, requirements, or codebase context not provided. Gather what's needed to plan accurately before proceeding.
+Execute context elicitation using `protocols/interviewing.md` (Open Questions, Constraint Discovery) and `protocols/pragmatics.md` (Directness Calibration) when definition, requirements, or codebase context not provided. Gather what's needed to plan accurately before proceeding.
 
 ### Identify Actions (→ KR1)
 
-Execute action identification using `goal_setting.md` (Goal Decomposition), `discipline.md` (MECE Enumeration), and `instruction_giving.md` (Action Verbs, Explicit Language) when enumerating required work. Break goal into independent sub-goals, enumerate ALL actions systematically, write each as clear instruction. Apply 100% rule — no gaps.
+Execute action identification using `protocols/goal_setting.md` (Goal Decomposition), `protocols/discipline.md` (MECE Enumeration), and `protocols/instruction_giving.md` (Action Verbs, Explicit Language) when enumerating required work. Break goal into independent sub-goals, enumerate ALL actions systematically, write each as clear instruction. Apply 100% rule — no gaps.
 
 ### Identify Dependencies (→ KR1)
 
-Execute dependency identification using `discipline.md` (Coverage Tracking) when determining prerequisites. Check ALL action pairs systematically, map what must be done before what.
+Execute dependency identification using `protocols/discipline.md` (Coverage Tracking) when determining prerequisites. Check ALL action pairs systematically, map what must be done before what.
 
 ### Sequence Actions (→ KR1)
 
-Execute action sequencing using `thinking.md` (Strategic) and `instruction_giving.md` (Cognitive Chunking, Step Sequencing) when ordering work. Determine optimal order, group into 5-9 step chunks, identify parallelizable work, plan milestones.
+Execute action sequencing using `protocols/thinking.md` (Strategic) and `protocols/instruction_giving.md` (Cognitive Chunking, Step Sequencing) when ordering work. Determine optimal order, group into 5-9 step chunks, identify parallelizable work, plan milestones.
 
 ### Surface Unknowns (→ KR1)
 
-Execute unknown surfacing using `risk_management.md` (Uncertainty Indicators, Fail-Fast Ordering) and `discipline.md` (Coverage Tracking) when identifying risks. Check ALL actions for vague requirements, untested approaches, missing criteria. Order uncertain steps early.
+Execute unknown surfacing using `protocols/risk_management.md` (Uncertainty Indicators, Fail-Fast Ordering) and `protocols/discipline.md` (Coverage Tracking) when identifying risks. Check ALL actions for vague requirements, untested approaches, missing criteria. Order uncertain steps early.
 
 ### Confirm with User (→ KR2)
 
-Execute plan confirmation using `pragmatics.md` (Recommended Option, Option Presentation) when presenting plan for review. Frame as recommended approach with reasoning, verify completeness and ordering before proceeding.
+Execute plan confirmation using `protocols/pragmatics.md` (Recommended Option, Option Presentation) when presenting plan for review. Frame as recommended approach with reasoning, verify completeness and ordering before proceeding.
 
 ---
 

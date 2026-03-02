@@ -37,14 +37,14 @@ allowed-tools: Read, Grep, Write, Edit, Bash
 
 ## Protocols
 
-- **interviewing.md** — Use for Gather Context (when bug report, screenshot, error message needs clarification)
-- **pragmatics.md** — Use for Gather Context (when asking for clarification)
-- **discipline.md** — Must use for Prepare, Write Tests (systematic coverage)
-- **system_modularity.md** — Must use for Prepare, Write Stubs, Implement (modular code boundaries)
-- **criteria_setting.md** — Must use for Write Stubs, Implement, Write Tests (verify matches design)
-- **software_quality.md** — Must use for Run Tests, Self-Review (quality verification)
-- **transparency.md** — Use for Self-Review (when changes affect behavior/APIs)
-- **tracking_and_recovery.md** — Must use for checklist and resuming after interruption
+- **protocols/interviewing.md** — Use for Gather Context (when bug report, screenshot, error message needs clarification)
+- **protocols/pragmatics.md** — Use for Gather Context (when asking for clarification)
+- **protocols/discipline.md** — Must use for Prepare, Write Tests (systematic coverage)
+- **protocols/system_modularity.md** — Must use for Prepare, Write Stubs, Implement (modular code boundaries)
+- **protocols/criteria_setting.md** — Must use for Write Stubs, Implement, Write Tests (verify matches design)
+- **protocols/software_quality.md** — Must use for Run Tests, Self-Review (quality verification)
+- **protocols/transparency.md** — Use for Self-Review (when changes affect behavior/APIs)
+- **protocols/tracking_and_recovery.md** — Must use for checklist and resuming after interruption
 
 ---
 
@@ -74,35 +74,35 @@ MUST read and follow steps in `base.md`
 
 ## Possible Actions
 
-Select based on context. Each action shows which KR it serves.
+Select or propose actions based on context. Each action shows which KR it serves.
 
 ### Gather Context (→ KR1)
 
-Execute context gathering using `interviewing.md` (Open Questions, Inference First) and `pragmatics.md` (Directness Calibration) when bug report is unclear, screenshot needs interpretation, error message needs analysis, or reproduction steps are missing. Clarify what needs to be implemented before proceeding.
+Execute context gathering using `protocols/interviewing.md` (Open Questions, Inference First) and `protocols/pragmatics.md` (Directness Calibration) when bug report is unclear, screenshot needs interpretation, error message needs analysis, or reproduction steps are missing. Clarify what needs to be implemented before proceeding.
 
 ### Prepare (→ KR1)
 
-Execute preparation using `discipline.md` (Coverage Tracking) and `system_modularity.md` (Cohesion, Coupling) when starting implementation. Review conventions, read existing code patterns, review design, set up scaffolding and file structure.
+Execute preparation using `protocols/discipline.md` (Coverage Tracking) and `protocols/system_modularity.md` (Cohesion, Coupling) when starting implementation. Review conventions, read existing code patterns, review design, set up scaffolding and file structure.
 
 ### Write Stubs (→ KR1)
 
-Execute stub creation using `system_modularity.md` (Information Hiding, Interfaces) and `criteria_setting.md` (Observable Behavior) when implementation is complex and structure should be reviewed before filling in logic. Define function signatures, interfaces, and module boundaries first.
+Execute stub creation using `protocols/system_modularity.md` (Information Hiding, Interfaces) and `protocols/criteria_setting.md` (Observable Behavior) when implementation is complex and structure should be reviewed before filling in logic. Define function signatures, interfaces, and module boundaries first.
 
 ### Implement (→ KR1)
 
-Execute implementation using `system_modularity.md` (Cohesion, Coupling) and `criteria_setting.md` (Observable Behavior) when writing or modifying code. Write modular code, integrate with existing modules and APIs, verify against design criteria. Flag design issues if discovered.
+Execute implementation using `protocols/system_modularity.md` (Cohesion, Coupling) and `protocols/criteria_setting.md` (Observable Behavior) when writing or modifying code. Write modular code, integrate with existing modules and APIs, verify against design criteria. Flag design issues if discovered.
 
 ### Write Tests (→ KR2)
 
-Execute test creation using `discipline.md` (MECE Enumeration, Coverage Tracking) and `criteria_setting.md` (Observable Behavior) when new functionality needs test coverage. Enumerate ALL edge cases and error paths systematically, write unit and integration tests.
+Execute test creation using `protocols/discipline.md` (MECE Enumeration, Coverage Tracking) and `protocols/criteria_setting.md` (Observable Behavior) when new functionality needs test coverage. Enumerate ALL edge cases and error paths systematically, write unit and integration tests.
 
 ### Run Tests (→ KR2)
 
-Execute test verification using `software_quality.md` (Quality Dimensions) when verifying implementation works. Run all tests including existing tests, check for regressions, document failures with specifics.
+Execute test verification using `protocols/software_quality.md` (Quality Dimensions) when verifying implementation works. Run all tests including existing tests, check for regressions, document failures with specifics.
 
 ### Self-Review (→ KR1, KR2)
 
-Execute self-review using `software_quality.md` (Quality Dimensions) and `transparency.md` (Documentation) when implementation is complete. Review code for quality and correctness, verify conventions followed, document API changes if any.
+Execute self-review using `protocols/software_quality.md` (Quality Dimensions) and `protocols/transparency.md` (Documentation) when implementation is complete. Review code for quality and correctness, verify conventions followed, document API changes if any.
 
 ---
 

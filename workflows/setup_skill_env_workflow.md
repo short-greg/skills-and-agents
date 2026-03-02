@@ -12,24 +12,25 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 
 # Setup Skill Environment Workflow
 
-**Goal:** Install the skills-and-agents framework components into a project.
+**Goal:** Install the skills-and-agents framework into a project so AI tools can use it.
 
-**Intent:** Projects need primitives, workflows, and protocols installed for effective AI coding. This workflow handles the installation and basic configuration.
+**Intent:** Projects need the framework installed correctly for AI coding to work. Skills are lightweight pointers (SKILL.md files) that reference workflows. The workflows, primitives, and protocols must be accessible to those skills.
 
-**Scope:** Framework installation: copy primitives, protocols, and workflows to the project's AI tool config directory. Create basic CLAUDE.md if missing.
+**Scope:** Framework installation: copy framework files, create skill directories with SKILL.md pointers, create basic CLAUDE.md.
 
 ---
 
 ## Key Results - KR
 
-1. Framework components installed — primitives, protocols, and workflows copied to config directory
-2. Project has AI guidance — CLAUDE.md exists with project conventions
-3. Setup validated — installed components are accessible
+1. Framework files installed — primitives, protocols, workflows copied to accessible location
+2. Skills created — SKILL.md pointers in `.claude/skills/[skill-name]/`
+3. Project has AI guidance — CLAUDE.md exists with project conventions
+4. Setup validated — skills are invocable
 
 ## Requirements and Constraints - REQ
 
-1. Progress tracked per `tracking_and_recovery.md`
-2. Ask user for AI tool type (Claude Code, Cursor, etc.) to determine config directory
+1. Progress tracked per `protocols/tracking_and_recovery.md`
+2. Ask user for AI tool type and installation approach
 3. Do not overwrite existing files without user confirmation
 
 ---
@@ -40,15 +41,15 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 
 **Elicit if not provided:**
 - AI tool type (Claude Code → `.claude/`, Cursor → `.cursor/`, etc.)
-- Whether to overwrite existing files
+- Installation approach (submodule vs copy)
 
-**Optional:** Custom config directory path
+**Optional:** Custom paths
 
 ## Postconditions
 
-**Success:** All framework components installed, CLAUDE.md exists, setup validated
+**Success:** Framework installed, skills created, CLAUDE.md exists, skills invocable
 
-**Failure:** Framework source not accessible, cannot write to config directory, user aborts
+**Failure:** Framework source not accessible, cannot write to directories, user aborts
 
 ---
 
@@ -62,149 +63,143 @@ MUST read and follow steps in `dynamic_workflow_base.md`
 
 | Deliverable | Format | Location | Validation |
 |-------------|--------|----------|------------|
-| Primitives | Markdown files | `${CONFIG}/primitives/` | All 10 files present |
-| Protocols | Markdown files | `${CONFIG}/protocols/` | All 13 files present |
-| Workflows | Markdown files | `${CONFIG}/workflows/` | Base + dev_planning present |
-| CLAUDE.md | Markdown | Project root | File exists, has project info |
+| Framework files | Directory | `.skills-framework/` or copied location | primitives/, protocols/, workflows/ present |
+| Skill directories | SKILL.md files | `.claude/skills/[name]/SKILL.md` | Files exist, reference workflows correctly |
+| CLAUDE.md | Markdown | Project root | File exists, references framework |
 
 ---
 
 ## Possible Tasks
 
-### Determine Config Directory (→ KR1)
+### Determine Installation Approach (→ KR1)
 
-Execute config detection when starting setup. Ask user which AI tool they use. Map to config directory:
-- Claude Code → `.claude/`
-- Cursor → `.cursor/`
-- Other → ask for path
+Execute approach selection using `interviewing` primitive when starting setup. Ask user:
+1. **AI tool type:** Claude Code, Cursor, Windsurf, other?
+2. **Installation method:**
+   - Submodule (recommended for updates): `git submodule add ... .skills-framework`
+   - Copy files (simpler, no updates): copy to project directory
 
-Create subdirectories: `primitives/`, `protocols/`, `workflows/`
+**Fallback:** Default to submodule for git repos, copy for non-git.
 
-**Fallback:** If directory creation fails, report error and ask user to create manually.
+### Install Framework Files (→ KR1)
 
-### Install Primitives (→ KR1)
+Execute framework installation when approach determined.
 
-Execute primitive installation when config directory exists. Copy all primitives from framework:
-
-```
-primitives/base.md
-primitives/orienting.md
-primitives/defining.md
-primitives/planning.md
-primitives/designing.md
-primitives/implementing.md
-primitives/evaluating.md
-primitives/investigating.md
-primitives/brainstorming.md
-primitives/maintaining.md
+**If submodule:**
+```bash
+git submodule add https://github.com/short-greg/skills-and-agents.git .skills-framework
 ```
 
-**Fallback:** If file exists, ask user whether to overwrite.
+**If copy:**
+Copy entire framework to `.skills-framework/` or user-specified location.
 
-### Install Protocols (→ KR1)
+Verify these directories exist:
+- `.skills-framework/primitives/` (10 files)
+- `.skills-framework/protocols/` (13 files)
+- `.skills-framework/workflows/` (workflow files)
 
-Execute protocol installation when config directory exists. Copy all protocols from framework:
+**Fallback:** If submodule fails, offer copy approach.
 
+### Create Skill Directories (→ KR2)
+
+Execute skill creation when framework files installed. Create skill directories with SKILL.md pointers.
+
+**Structure:**
 ```
-protocols/tracking_and_recovery.md
-protocols/thinking.md
-protocols/discipline.md
-protocols/pragmatics.md
-protocols/interviewing.md
-protocols/instruction_giving.md
-protocols/criteria_setting.md
-protocols/goal_setting.md
-protocols/risk_management.md
-protocols/transparency.md
-protocols/software_quality.md
-protocols/system_modularity.md
-protocols/frame_of_mind.md
-```
-
-**Fallback:** If file exists, ask user whether to overwrite.
-
-### Install Workflows (→ KR1)
-
-Execute workflow installation when config directory exists. Copy workflow files:
-
-```
-workflows/dynamic_workflow_base.md
-workflows/dev_planning_workflow.md
+.claude/skills/
+├── dev-planning/
+│   └── SKILL.md  → references .skills-framework/workflows/dev_planning_workflow.md
+├── setup-skill-env/
+│   └── SKILL.md  → references .skills-framework/workflows/setup_skill_env_workflow.md
 ```
 
-**Fallback:** If file exists, ask user whether to overwrite.
+**SKILL.md format:**
+```markdown
+---
+name: dev-planning
+description: Create a development plan before implementation
+argument-hint: "[project or feature to plan]"
+---
 
-### Create CLAUDE.md (→ KR2)
+# Dev Planning
 
-Execute documentation creation when CLAUDE.md does not exist or user wants to update. Create basic CLAUDE.md with:
+Create a development plan by following [dev_planning_workflow.md](../../../.skills-framework/workflows/dev_planning_workflow.md).
+```
+
+**Fallback:** If directory creation fails, report error.
+
+### Create CLAUDE.md (→ KR3)
+
+Execute documentation creation using `defining` primitive when CLAUDE.md does not exist. Create CLAUDE.md with:
 
 - Project name and description
+- Reference to framework: "This project uses skills-and-agents framework in `.skills-framework/`"
 - Key commands (build, test, lint)
-- Directory structure overview
-- Conventions (naming, patterns)
-- Reference to installed skills
+- Available skills list
 
 **Fallback:** If CLAUDE.md exists, ask user if they want to update or skip.
 
-### Validate Setup (→ KR3)
+### Validate Setup (→ KR4)
 
 Execute validation using `evaluating` primitive when installation complete. Check:
 
-1. Config directory exists with subdirectories
-2. All primitive files present (10 files)
-3. All protocol files present (13 files)
-4. Workflow files present (2 files)
-5. CLAUDE.md exists
+1. Framework directory exists with subdirectories
+2. Skill directories exist with SKILL.md files
+3. SKILL.md files reference valid workflow paths
+4. CLAUDE.md exists and references framework
 
-Report any missing components.
+Report any issues.
 
-**Fallback:** If validation fails, offer to re-run failed installation tasks.
+**Fallback:** If validation fails, offer to re-run failed tasks.
 
 ---
 
-## Components to Install
+## Skill Structure
 
-### Primitives (10 files)
-| File | Purpose |
-|------|---------|
-| base.md | Base steps all primitives follow |
-| orienting.md | Understand current state |
-| defining.md | Establish requirements |
-| planning.md | Sequence actions |
-| designing.md | Plan technical approach |
-| implementing.md | Write code |
-| evaluating.md | Assess against criteria |
-| investigating.md | Research and diagnose |
-| brainstorming.md | Generate options |
-| maintaining.md | Keep system healthy |
+Each skill is a directory with a SKILL.md file:
 
-### Protocols (13 files)
-| File | Purpose |
-|------|---------|
-| tracking_and_recovery.md | Progress tracking and recovery |
-| thinking.md | Reasoning techniques |
-| discipline.md | Systematic enumeration |
-| pragmatics.md | Communication calibration |
-| interviewing.md | Eliciting information |
-| instruction_giving.md | Clear instructions |
-| criteria_setting.md | Defining success criteria |
-| goal_setting.md | Setting objectives |
-| risk_management.md | Risk assessment |
-| transparency.md | Documentation practices |
-| software_quality.md | Quality dimensions |
-| system_modularity.md | Modular design |
-| frame_of_mind.md | Expert reasoning |
+```
+.claude/skills/
+├── dev-planning/
+│   └── SKILL.md
+├── setup-skill-env/
+│   └── SKILL.md
+└── [other-skill]/
+    └── SKILL.md
+```
 
-### Workflows (2 files)
-| File | Purpose |
-|------|---------|
-| dynamic_workflow_base.md | Base for dynamic workflows |
-| dev_planning_workflow.md | Development planning |
+**SKILL.md** is a lightweight pointer with:
+- YAML frontmatter (name, description, argument-hint)
+- Reference to the full workflow file
+- Brief usage instructions
+
+The actual logic is in the workflow file, which references primitives and protocols.
+
+---
+
+## Framework Structure
+
+```
+.skills-framework/           # or wherever installed
+├── primitives/              # Atomic cognitive actions
+│   ├── base.md
+│   ├── orienting.md
+│   ├── defining.md
+│   └── ...
+├── protocols/               # Reusable patterns
+│   ├── tracking_and_recovery.md
+│   ├── thinking.md
+│   └── ...
+└── workflows/               # Multi-step processes
+    ├── dynamic_workflow_base.md
+    ├── dev_planning_workflow.md
+    └── ...
+```
 
 ---
 
 ## Additional Notes
 
-**Extending:** After setup, users can add more workflows by copying from the framework's `workflows/` directory.
+**Why submodule?** Allows pulling framework updates. Use `git submodule update --remote` to get latest.
 
-**Customization:** Users should edit CLAUDE.md to add project-specific conventions and commands.
+**Why SKILL.md pointers?** Keeps skills lightweight. The full workflow logic stays in one place (the framework), not duplicated in each skill.
