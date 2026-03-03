@@ -78,15 +78,15 @@ Select or propose actions based on context. Each action shows which KR it serves
 
 **When:** Understanding layout or topology of orienting target
 
-**Protocol:** `protocols/discipline.md`
+**Protocols:** `protocols/discipline.md`, `protocols/system_modularity.md`
 
-**Instructions:** Systematically enumerate ALL components: directory structure, component relationships, module dependencies, data flows, or process sequences. Document hierarchy, connections, boundaries. Create representation showing how parts relate to whole. Use MECE enumeration.
+**Instructions:** Systematically enumerate ALL components: directory structure, component relationships, module dependencies, data flows, or process sequences. Document hierarchy, connections, boundaries. Assess architectural structure and modularity. Create representation showing how parts relate to whole. Use MECE enumeration and modularity assessment.
 
 **Inputs:**
 - Subject to orient on (required)
 - Scope boundaries (optional)
 
-**Default Output:** Structure diagram or description
+**Default Output:** Structure diagram or description with modularity assessment
 
 ---
 

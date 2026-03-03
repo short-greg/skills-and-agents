@@ -85,31 +85,33 @@ Select or propose actions based on context. Each action shows which KR it serves
 
 **When:** Evaluation criteria are not clear or not provided
 
-**Protocols:** `protocols/criteria_setting.md`, `protocols/discipline.md`
+**Protocols:** `protocols/criteria_setting.md`, `protocols/discipline.md`, `protocols/risk_management.md`
 
-**Instructions:** Systematically enumerate ALL criteria that define correct/quality/compliant. Specify observable indicators and thresholds for each criterion. Document what constitutes pass vs fail for each. Use MECE enumeration to ensure completeness.
+**Instructions:** Systematically enumerate ALL criteria that define correct/quality/compliant including risk-related criteria. Specify observable indicators and thresholds for each criterion. Document what constitutes pass vs fail for each. Assess risks in the target being evaluated. Use MECE enumeration to ensure completeness and risk assessment techniques.
 
 **Inputs:**
 - Evaluation target (required)
 - Context or standards (optional)
+- Risk tolerance levels (optional)
 
-**Default Output:** Documented evaluation criteria with pass/fail thresholds
+**Default Output:** Documented evaluation criteria with pass/fail thresholds and risk considerations
 
-### Output Evidence Table (→ KR2)
+### Output Evidence (→ KR2)
 
 **Goal:** Gather evidence for all possible evaluation outcomes
 
 **When:** Gathering evaluation evidence
 
-**Protocols:** `protocols/thinking.md`, `protocols/discipline.md`
+**Protocols:** `protocols/thinking.md`, `protocols/discipline.md`, `protocols/transparency.md`
 
-**Instructions:** Create table with evidence supporting each possible evaluation systematically. Binary (pass/fail) shows evidence for pass and evidence for fail. Likert (scale) shows evidence for each level. Categorical shows evidence for each category. Rubric shows evidence for each criterion. If evidence is insufficient for any evaluation, document what's missing. Use analytical thinking and coverage tracking.
+**Instructions:** Document evidence supporting each possible evaluation systematically with reasoning. Table format is recommended but can be overridden by evaluation method. Binary (pass/fail) shows evidence for pass and evidence for fail. Likert (scale) shows evidence for each level. Categorical shows evidence for each category. Rubric shows evidence for each criterion. If evidence is insufficient for any evaluation, document what's missing. Use analytical thinking, coverage tracking, and clear documentation of reasoning.
 
 **Inputs:**
 - Evaluation criteria (required)
 - Evaluation target (required)
+- Output format preference (optional)
 
-**Default Output:** Evidence table showing supporting evidence for each possible evaluation
+**Default Output:** Evidence documented (typically as table) showing supporting evidence for each possible evaluation with reasoning
 
 ---
 

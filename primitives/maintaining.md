@@ -71,15 +71,16 @@ Select or propose actions based on context. Each action shows which KR it serves
 
 **When:** Beginning maintenance
 
-**Protocols:** `protocols/software_quality.md`, `protocols/discipline.md`
+**Protocols:** `protocols/software_quality.md`, `protocols/discipline.md`, `protocols/system_modularity.md`
 
-**Instructions:** Systematically enumerate ALL health indicators: linter warnings, compiler warnings, outdated dependencies, dead code, TODOs/FIXMEs. Document current health status with counts. Apply quality dimensions and MECE enumeration.
+**Instructions:** Systematically enumerate ALL health indicators: linter warnings, compiler warnings, outdated dependencies, dead code, TODOs/FIXMEs, coupling issues, cohesion problems. Document current health status with counts. Apply quality dimensions, modularity assessment, and MECE enumeration.
 
 **Inputs:**
 - Codebase or scope to assess (required)
 - Project tooling configuration (optional)
+- Modularity standards (optional)
 
-**Default Output:** Health report with counts for each indicator type
+**Default Output:** Health report with counts for each indicator type including modularity assessment
 
 ### Triage and Prioritize (→ KR1)
 

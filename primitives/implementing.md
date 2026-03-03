@@ -118,22 +118,23 @@ Select or propose actions based on context. Each action shows which KR it serves
 
 ---
 
-### Implement (→ KR1)
+### Write Code (→ KR1)
 
 **Goal:** Write functional code that meets requirements
 
 **When:** Writing or modifying code
 
-**Protocols:** `protocols/system_modularity.md`, `protocols/criteria_setting.md`
+**Protocols:** `protocols/system_modularity.md`, `protocols/criteria_setting.md`, `protocols/transparency.md`
 
-**Instructions:** Write modular code, integrate with existing modules and APIs, verify against design criteria. Apply cohesion and coupling principles. Flag design issues if discovered.
+**Instructions:** Write modular code with appropriate documentation, integrate with existing modules and APIs, verify against design criteria. Apply cohesion and coupling principles, document functions and modules appropriately. Flag design issues if discovered.
 
 **Inputs:**
 - Requirements or design (required)
 - Existing codebase (required)
 - Interface definitions (optional)
+- Documentation standards (optional)
 
-**Default Output:** Working code that implements specified functionality
+**Default Output:** Working code with appropriate documentation that implements specified functionality
 
 ### Write Tests (→ KR2)
 
@@ -141,16 +142,17 @@ Select or propose actions based on context. Each action shows which KR it serves
 
 **When:** New functionality needs test coverage
 
-**Protocols:** `protocols/discipline.md`, `protocols/criteria_setting.md`
+**Protocols:** `protocols/discipline.md`, `protocols/criteria_setting.md`, `protocols/risk_management.md`
 
-**Instructions:** Enumerate ALL edge cases and error paths systematically, write unit and integration tests. Use MECE enumeration and coverage tracking to ensure completeness.
+**Instructions:** Enumerate ALL edge cases and error paths systematically, identify implementation risks and failure modes, write unit and integration tests. Use MECE enumeration, coverage tracking, and risk assessment to ensure completeness.
 
 **Inputs:**
 - Implemented functionality (required)
 - Requirements or design (required)
 - Existing test patterns (optional)
+- Known risks (optional)
 
-**Default Output:** Unit and integration tests covering all edge cases
+**Default Output:** Unit and integration tests covering all edge cases and identified risks
 
 ---
 

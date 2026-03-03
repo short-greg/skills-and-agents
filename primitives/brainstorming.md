@@ -182,15 +182,15 @@ Select or propose actions based on context. Each action shows which KR it serves
 
 **When:** Documenting all generated ideas
 
-**Protocols:** `protocols/tracking_and_recovery.md`, `protocols/pragmatics.md`
+**Protocols:** `protocols/tracking_and_recovery.md`, `protocols/pragmatics.md`, `protocols/transparency.md`
 
-**Instructions:** State clearly for each: what it is, how it would work, why it might be viable. Frame ideas appropriately for audience. Ensure every idea is concrete enough for later evaluation. Use tracking and pragmatic framing techniques.
+**Instructions:** State clearly for each: what it is, how it would work, why it might be viable. Explain the reasoning behind idea generation where helpful. Frame ideas appropriately for audience. Ensure every idea is concrete enough for later evaluation. Use tracking, pragmatic framing, and clear documentation techniques.
 
 **Inputs:**
 - Generated ideas (required)
 - Audience context (optional)
 
-**Default Output:** Clear descriptions of each idea
+**Default Output:** Clear descriptions of each idea with reasoning where helpful
 
 ---
 
@@ -200,14 +200,15 @@ Select or propose actions based on context. Each action shows which KR it serves
 
 **When:** Preparing ideas for evaluation
 
-**Protocols:** `protocols/thinking.md`, `protocols/pragmatics.md`
+**Protocols:** `protocols/thinking.md`, `protocols/pragmatics.md`, `protocols/risk_management.md`
 
-**Instructions:** Cluster related ideas into categories, identify key tradeoffs that differentiate approaches, label each cluster, frame categories for clear presentation to user. Use analytical thinking and pragmatic framing.
+**Instructions:** Cluster related ideas into categories, identify key tradeoffs and risks that differentiate approaches, label each cluster, frame categories for clear presentation to user. Note significant risks in each category. Use analytical thinking, pragmatic framing, and risk assessment.
 
 **Inputs:**
 - All generated ideas (required)
+- Known constraints or risks (optional)
 
-**Default Output:** Categorized and labeled idea groups
+**Default Output:** Categorized and labeled idea groups with risk notes
 
 ---
 

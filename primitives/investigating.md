@@ -188,15 +188,15 @@ Select or propose actions based on context. Each action shows which KR it serves
 
 **When:** Investigation completes
 
-**Protocols:** `protocols/thinking.md`, `protocols/pragmatics.md`
+**Protocols:** `protocols/thinking.md`, `protocols/pragmatics.md`, `protocols/transparency.md`
 
-**Instructions:** Summarize findings with supporting evidence and sources. State confidence level clearly (known vs suspected vs unknown). If researching solutions, enumerate viable approaches with tradeoffs. If diagnosing, state root cause with evidence. Provide specific, prioritized recommendations for next steps. Use strategic thinking and confidence signaling.
+**Instructions:** Summarize findings with supporting evidence and sources, clearly document reasoning process. State confidence level clearly (known vs suspected vs unknown). If researching solutions, enumerate viable approaches with tradeoffs. If diagnosing, state root cause with evidence. Provide specific, prioritized recommendations for next steps. Use strategic thinking, confidence signaling, and clear documentation.
 
 **Inputs:**
 - All findings (required)
 - Context (optional)
 
-**Default Output:** Summary with confidence levels and prioritized recommendations
+**Default Output:** Summary with confidence levels, reasoning, and prioritized recommendations
 
 ---
 
