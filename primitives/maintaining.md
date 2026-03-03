@@ -36,21 +36,9 @@ allowed-tools: Read, Grep, Write, Edit, Bash
 
 ---
 
-## Protocols
-
-- **protocols/software_quality.md** — Must use for Assess Health, Verify No Regressions
-- **protocols/discipline.md** — Must use for Assess Health, Triage and Prioritize, Fix Code Health, Verify No Regressions (systematic enumeration)
-- **protocols/thinking.md** — Must use for Triage and Prioritize (reasoning about severity and effort)
-- **protocols/risk_management.md** — Must use for Fix Code Health (when changes could break things)
-- **protocols/transparency.md** — Must use for Create Issue Reports, Sync User Documentation, Sync AI Documentation, Record Decisions
-- **protocols/instruction_giving.md** — Must use for Sync User Documentation, Sync AI Documentation (clear documentation)
-- **protocols/tracking_and_recovery.md** — Must use for checklist and resuming after interruption
-
----
-
 ## Steps
 
-MUST read and follow steps in `base.md`
+MUST read and follow steps in `base_primitive.md`
 
 ---
 
@@ -58,59 +46,168 @@ MUST read and follow steps in `base.md`
 
 **Required:** Scope — what area to maintain (entire codebase vs specific module)
 
-**Elicit if not provided:**
+**Optional:**
 - Current health indicators (warnings, linter errors, dependency status)
 - Documentation locations (where records live for this project)
-
-**Optional:** Known technical debt list, prior maintenance history
+- Known technical debt list, prior maintenance history
 
 ## Postconditions
 
 **Success:** Issues addressed or deferred with rationale, records updated, no regressions
 
-**Failure:** Scope too large, cannot assess health, changes would break functionality
+**Failure:** Scope too large, cannot assess health, changes would break functionality. Output a request listing the information that was missing and what is needed to succeed.
 
 ---
 
 ## Possible Actions
 
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+
 Select or propose actions based on context. Each action shows which KR it serves.
 
 ### Assess Health (→ KR1)
 
-Execute health assessment using `protocols/software_quality.md` (Quality Dimensions) and `protocols/discipline.md` (MECE Enumeration) when beginning maintenance. Systematically enumerate ALL health indicators: linter warnings, compiler warnings, outdated dependencies, dead code, TODOs/FIXMEs. Document current health status with counts.
+**Goal:** Document current system health status
+
+**When:** Beginning maintenance
+
+**Protocols:** `protocols/software_quality.md`, `protocols/discipline.md`
+
+**Instructions:** Systematically enumerate ALL health indicators: linter warnings, compiler warnings, outdated dependencies, dead code, TODOs/FIXMEs. Document current health status with counts. Apply quality dimensions and MECE enumeration.
+
+**Inputs:**
+- Codebase or scope to assess (required)
+- Project tooling configuration (optional)
+
+**Default Output:** Health report with counts for each indicator type
 
 ### Triage and Prioritize (→ KR1)
 
-Execute triage using `protocols/thinking.md` (Analytical) and `protocols/discipline.md` (Coverage Tracking) when multiple issues exist. Categorize ALL issues by severity and effort systematically. Security issues first, then quick wins, then larger refactors. Document prioritization rationale for each category.
+**Goal:** Determine what to fix and in what order
 
-### Fix Code Health (→ KR1)
+**When:** Multiple issues exist
 
-Execute code fixes using `protocols/discipline.md` (Coverage Tracking) and `protocols/risk_management.md` (Risk Assessment) when health problems identified. Remove dead code (unused functions, imports, files). Fix warnings (linter, compiler). Update dependencies (prioritize security updates). Assess risk before each change, run tests after each change.
+**Protocols:** `protocols/thinking.md`, `protocols/discipline.md`
 
-### Create Issue Reports (→ KR2)
+**Instructions:** Categorize ALL issues by severity and effort systematically. Security issues first, then quick wins, then larger refactors. Document prioritization rationale for each category. Use analytical thinking and coverage tracking.
 
-Execute issue creation using `protocols/transparency.md` (Documentation) when problems found that cannot be fixed now. Document the issue clearly: what's wrong, where it is, potential impact, suggested fix. Create bug reports, technical debt tickets, or enhancement requests as appropriate.
+**Inputs:**
+- Health assessment results (required)
+- Project priorities (optional)
 
-### Sync User Documentation (→ KR2)
-
-Execute user documentation sync using `protocols/transparency.md` (Documentation) and `protocols/instruction_giving.md` (Explicit Language) when user-facing documentation differs from implementation. Update README, API docs, user guides to match current behavior. Ensure instructions are clear and accurate.
-
-### Sync AI Documentation (→ KR2)
-
-Execute AI documentation sync using `protocols/transparency.md` (Documentation) and `protocols/instruction_giving.md` (Explicit Language) when AI-facing documentation differs from implementation. Update CLAUDE.md, conventions files, skill definitions to match current patterns. Ensure AI instructions reflect actual project conventions.
-
-### Record Decisions (→ KR2)
-
-Execute decision recording using `protocols/transparency.md` (Decision Recording) when significant choices made during maintenance. Document what was decided, why, and alternatives considered. Capture rationale before it's forgotten.
-
-### Verify No Regressions (→ KR1, KR2)
-
-Execute regression check using `protocols/software_quality.md` (Quality Dimensions) and `protocols/discipline.md` (Coverage Tracking) when changes complete. Run ALL tests systematically, spot-check behavior, verify documentation is accurate. Confirm system still works correctly.
+**Default Output:** Prioritized list of issues with rationale
 
 ---
 
-## Additional Notes
+### Fix Code Health (→ KR1)
+
+**Goal:** Address health problems
+
+**When:** Health problems identified
+
+**Protocols:** `protocols/discipline.md`, `protocols/risk_management.md`
+
+**Instructions:** Remove dead code (unused functions, imports, files). Fix warnings (linter, compiler). Update dependencies (prioritize security updates). Assess risk before each change, run tests after each change. Track coverage and assess risks systematically.
+
+**Inputs:**
+- Prioritized issue list (required)
+- Test suite (required)
+- Dependency manifest (optional)
+
+**Default Output:** Fixed code with no regressions
+
+---
+
+### Create Issue Reports (→ KR2)
+
+**Goal:** Document problems that cannot be fixed now
+
+**When:** Problems found that cannot be fixed now
+
+**Protocol:** `protocols/transparency.md`
+
+**Instructions:** Document the issue clearly: what's wrong, where it is, potential impact, suggested fix. Create bug reports, technical debt tickets, or enhancement requests as appropriate. Apply documentation techniques.
+
+**Inputs:**
+- Identified issues (required)
+- Project tracking system (optional)
+
+**Default Output:** Issue reports in appropriate format
+
+### Sync User Documentation (→ KR2)
+
+**Goal:** Ensure user documentation matches implementation
+
+**When:** User-facing documentation differs from implementation
+
+**Protocols:** `protocols/transparency.md`, `protocols/instruction_giving.md`
+
+**Instructions:** Update README, API docs, user guides to match current behavior. Ensure instructions are clear and accurate. Apply documentation techniques and explicit language.
+
+**Inputs:**
+- Current implementation (required)
+- Documentation files (required)
+
+**Default Output:** Updated user documentation
+
+---
+
+### Sync AI Documentation (→ KR2)
+
+**Goal:** Ensure AI documentation matches implementation
+
+**When:** AI-facing documentation differs from implementation
+
+**Protocols:** `protocols/transparency.md`, `protocols/instruction_giving.md`
+
+**Instructions:** Update CLAUDE.md, conventions files, skill definitions to match current patterns. Ensure AI instructions reflect actual project conventions. Apply documentation techniques and explicit language.
+
+**Inputs:**
+- Current implementation (required)
+- AI documentation files (required)
+
+**Default Output:** Updated AI documentation
+
+---
+
+### Record Decisions (→ KR2)
+
+**Goal:** Capture significant decisions before they're forgotten
+
+**When:** Significant choices made during maintenance
+
+**Protocol:** `protocols/transparency.md`
+
+**Instructions:** Document what was decided, why, and alternatives considered. Capture rationale before it's forgotten. Apply decision recording techniques.
+
+**Inputs:**
+- Decisions made (required)
+- Context (optional)
+
+**Default Output:** Decision record
+
+---
+
+### Verify No Regressions (→ KR1, KR2)
+
+**Goal:** Confirm system still works correctly
+
+**When:** Changes complete
+
+**Protocols:** `protocols/software_quality.md`, `protocols/discipline.md`
+
+**Instructions:** Run ALL tests systematically, spot-check behavior, verify documentation is accurate. Confirm system still works correctly. Apply quality dimensions and coverage tracking.
+
+**Inputs:**
+- Modified code (required)
+- Test suite (required)
+- Documentation (required)
+
+**Default Output:** Verification report with pass/fail status
+
+---
+
+## Additional Notes and Terms
 
 **Maintenance allocation:** IEEE recommends 15% of development time for refactoring and debt reduction.
 

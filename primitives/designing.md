@@ -36,25 +36,9 @@ allowed-tools: Read, Grep
 
 ---
 
-## Protocols
-
-- **protocols/thinking.md** — Must use for Write Use Cases First, Design Structure, Design Process, Evaluate Tradeoffs
-- **protocols/system_modularity.md** — Must use for Design Structure
-- **protocols/discipline.md** — Must use for Write Use Cases First, Design Structure, Design Process, Identify and Mitigate Risks, Evaluate Tradeoffs
-- **protocols/criteria_setting.md** — Must use for Design Structure, Design Process (testable interface specs, observable behaviors)
-- **protocols/software_quality.md** — Must use for Design Structure, Design Process (quality attributes affecting design)
-- **protocols/instruction_giving.md** — Must use for Design Structure, Design Process (clear, implementable specs)
-- **protocols/transparency.md** — Must use for Design Structure, Design Process, Evaluate Tradeoffs (document design artifact and decisions)
-- **protocols/risk_management.md** — Must use for Identify and Mitigate Risks
-- **protocols/interviewing.md** — Use for Elicit Context (when info incomplete)
-- **protocols/pragmatics.md** — Use for Elicit Context, Confirm with User
-- **protocols/tracking_and_recovery.md** — Must use for checklist and resuming after interruption
-
----
-
 ## Steps
 
-MUST read and follow steps in `base.md`
+MUST read and follow steps in `base_primitive.md`
 
 ---
 
@@ -62,52 +46,149 @@ MUST read and follow steps in `base.md`
 
 **Required:** Problem or component to design
 
-**Elicit if not provided:**
+**Optional:**
 - Project conventions (patterns, architectural decisions)
 - Existing codebase (structure, dependencies, constraints)
 - Requirements or spec if available
-
-**Optional:** Prior designs, performance requirements, UI designs
+- Prior designs, performance requirements, UI designs
 
 ## Postconditions
 
 **Success:** Concrete approach established, specific enough to implement from, risks mitigated, fits conventions
 
-**Failure:** Too many unknowns, requirements unclear, constraints conflict
+**Failure:** Too many unknowns, requirements unclear, constraints conflict. Output a request listing the information that was missing and what is needed to succeed.
 
 ---
 
 ## Possible Actions
 
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+
 Select or propose actions based on context. Each action shows which KR it serves.
 
 ### Elicit Context (→ KR1)
 
-Execute context elicitation using `protocols/interviewing.md` (Open Questions, Constraint Discovery) and `protocols/pragmatics.md` (Directness Calibration) when project conventions, codebase context, or requirements not provided. Gather what's needed to design accurately before proceeding.
+**Goal:** Gather information needed for accurate design
+
+**When:** Project conventions, codebase context, or requirements not provided
+
+**Protocols:** `protocols/elicitation.md`, `protocols/pragmatics.md`
+
+**Instructions:** Use interviewing techniques to discover constraints and context. Apply pragmatic communication patterns to gather what's needed to design accurately before proceeding.
+
+**Inputs:**
+- Problem or component to design (required)
+- Known context (optional)
+
+**Default Output:** Context summary with conventions, constraints, and requirements
+
+---
 
 ### Write Use Cases First (→ KR1)
 
-Execute use case creation using `protocols/thinking.md` (Analytical) and `protocols/discipline.md` (MECE Enumeration) when starting design. Write 3-5 primary use cases as ideal API calls or interactions, enumerate systematically, identify natural boundaries from usage patterns.
+**Goal:** Define how the system will be used before designing internals
+
+**When:** Starting design
+
+**Protocols:** `protocols/thinking.md`, `protocols/discipline.md`
+
+**Instructions:** Write 3-5 primary use cases as ideal API calls or interactions, enumerate systematically, identify natural boundaries from usage patterns. Use analytical thinking and MECE enumeration.
+
+**Inputs:**
+- Requirements or problem statement (required)
+- User context (optional)
+
+**Default Output:** Use cases as API calls or interactions
+
+---
 
 ### Design Structure (→ KR1)
 
-Execute structure design using `protocols/system_modularity.md` (Cohesion, Coupling, Information Hiding), `protocols/thinking.md` (Systems), `protocols/discipline.md` (Coverage Tracking), `protocols/criteria_setting.md` (Observable Behavior), `protocols/software_quality.md` (Quality Attributes), `protocols/instruction_giving.md` (Explicit Language), and `protocols/transparency.md` (Documentation) when defining components. Enumerate ALL modules, interfaces, and data structures. Specify testable interface contracts. Consider quality attributes. Document design clearly for implementation.
+**Goal:** Define components, interfaces, and data structures
+
+**When:** Defining components
+
+**Protocols:** `protocols/system_modularity.md`, `protocols/thinking.md`, `protocols/discipline.md`, `protocols/criteria_setting.md`, `protocols/software_quality.md`, `protocols/transparency.md`
+
+**Instructions:** Enumerate ALL modules, interfaces, and data structures. Apply cohesion, coupling, and information hiding principles. Specify testable interface contracts. Consider quality attributes. Document design clearly for implementation.
+
+**Inputs:**
+- Use cases (required)
+- Project conventions (optional)
+- Quality requirements (optional)
+
+**Default Output:** Component diagram with interface specifications
+
+---
 
 ### Design Process (→ KR1)
 
-Execute process design using `protocols/thinking.md` (Systems), `protocols/discipline.md` (Coverage Tracking), `protocols/criteria_setting.md` (Observable Behavior, Threshold Setting), `protocols/software_quality.md` (Quality Requirements), `protocols/instruction_giving.md` (Explicit Language), and `protocols/transparency.md` (Documentation) when specifying behavior. Map ALL data flows with observable criteria, enumerate ALL valid states and transitions, specify ALL error handling. Document quality requirements (performance, reliability).
+**Goal:** Specify behavior, data flows, and state transitions
+
+**When:** Specifying behavior
+
+**Protocols:** `protocols/thinking.md`, `protocols/discipline.md`, `protocols/criteria_setting.md`, `protocols/software_quality.md`, `protocols/transparency.md`
+
+**Instructions:** Map ALL data flows with observable criteria, enumerate ALL valid states and transitions, specify ALL error handling. Document quality requirements (performance, reliability). Use systems thinking and coverage tracking.
+
+**Inputs:**
+- Structure design (required)
+- Quality requirements (optional)
+
+**Default Output:** Process specification with data flows and state transitions
+
+---
 
 ### Identify and Mitigate Risks (→ KR1)
 
-Execute risk identification using `protocols/risk_management.md` (Uncertainty Indicators, Complexity Indicators) and `protocols/discipline.md` (Coverage Tracking) when surfacing design risks. Check ALL components for complexity, unknowns, fragile assumptions, edge cases, security concerns. For each risk, determine concrete mitigation.
+**Goal:** Surface design risks and determine mitigations
+
+**When:** Surfacing design risks
+
+**Protocols:** `protocols/risk_management.md`, `protocols/discipline.md`
+
+**Instructions:** Check ALL components for complexity, unknowns, fragile assumptions, edge cases, security concerns. For each risk, determine concrete mitigation. Use risk assessment techniques and coverage tracking.
+
+**Inputs:**
+- Design (required)
+- Known constraints (optional)
+
+**Default Output:** Risk register with mitigations
+
+---
 
 ### Evaluate Tradeoffs (→ KR1)
 
-Execute tradeoff evaluation using `protocols/thinking.md` (Counterfactual), `protocols/transparency.md` (Decision Recording), and `protocols/discipline.md` (Coverage Tracking) when making design decisions. Enumerate ALL key decisions, state alternatives considered for each, evaluate tradeoffs, document rationale for choices.
+**Goal:** Make and document design decisions
+
+**When:** Making design decisions
+
+**Protocols:** `protocols/thinking.md`, `protocols/transparency.md`, `protocols/discipline.md`
+
+**Instructions:** Enumerate ALL key decisions, state alternatives considered for each, evaluate tradeoffs, document rationale for choices. Use counterfactual thinking and decision recording.
+
+**Inputs:**
+- Design options (required)
+- Constraints (optional)
+
+**Default Output:** Decision records with rationale
+
+---
 
 ### Confirm with User (→ KR2)
 
-Execute design confirmation using `protocols/pragmatics.md` (Recommended Option, Option Presentation) when presenting design for review. Frame as recommended approach with reasoning, present with enough precision to implement from, verify acceptability before implementation begins.
+**Goal:** Verify design acceptability before implementation
+
+**When:** Presenting design for review
+
+**Protocol:** `protocols/pragmatics.md`
+
+**Instructions:** Frame as recommended approach with reasoning, present with enough precision to implement from, verify acceptability before implementation begins. Use option presentation techniques.
+
+**Inputs:**
+- Complete design (required)
+
+**Default Output:** Confirmation request with design summary
 
 ---
 

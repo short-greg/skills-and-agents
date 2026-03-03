@@ -35,22 +35,9 @@ allowed-tools: Read, Grep
 
 ---
 
-## Protocols
-
-- **protocols/goal_setting.md** — Must use for Identify Actions
-- **protocols/discipline.md** — Must use for Identify Actions, Identify Dependencies, Surface Unknowns
-- **protocols/instruction_giving.md** — Must use for Identify Actions, Sequence Actions
-- **protocols/thinking.md** — Must use for Sequence Actions
-- **protocols/risk_management.md** — Must use for Surface Unknowns
-- **protocols/interviewing.md** — Use for Elicit Context (when info incomplete)
-- **protocols/pragmatics.md** — Use for Elicit Context, Confirm with User
-- **protocols/tracking_and_recovery.md** — Must use for checklist and resuming after interruption
-
----
-
 ## Steps
 
-MUST read and follow steps in `base.md`
+MUST read and follow steps in `base_primitive.md`
 
 ---
 
@@ -58,47 +45,128 @@ MUST read and follow steps in `base.md`
 
 **Required:** Goal or task — what needs to be accomplished
 
-**Elicit if not provided:**
+**Optional:**
 - Existing definition or requirements (read if exists)
 - Codebase context (understand current state and constraints)
-
-**Optional:** Prior plan, design decisions
+- Prior plan, design decisions
 
 ## Postconditions
 
 **Success:** Sequence of actions established, dependencies identified, right level of detail, user confirmed
 
-**Failure:** Goal too ambiguous, conflicting constraints
+**Failure:** Goal too ambiguous, conflicting constraints. Output a request listing the information that was missing and what is needed to succeed.
 
 ---
 
 ## Possible Actions
 
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+
 Select or propose actions based on context. Each action shows which KR it serves.
 
 ### Elicit Context (→ KR1)
 
-Execute context elicitation using `protocols/interviewing.md` (Open Questions, Constraint Discovery) and `protocols/pragmatics.md` (Directness Calibration) when definition, requirements, or codebase context not provided. Gather what's needed to plan accurately before proceeding.
+**Goal:** Gather information needed for accurate planning
+
+**When:** Definition, requirements, or codebase context not provided
+
+**Protocols:** `protocols/elicitation.md`, `protocols/pragmatics.md`
+
+**Instructions:** Use interviewing techniques to discover constraints and context. Apply pragmatic communication patterns to gather what's needed to plan accurately before proceeding.
+
+**Inputs:**
+- Goal or task (required)
+- Known context (optional)
+
+**Default Output:** Context summary with constraints and requirements
+
+---
 
 ### Identify Actions (→ KR1)
 
-Execute action identification using `protocols/goal_setting.md` (Goal Decomposition), `protocols/discipline.md` (MECE Enumeration), and `protocols/instruction_giving.md` (Action Verbs, Explicit Language) when enumerating required work. Break goal into independent sub-goals, enumerate ALL actions systematically, write each as clear instruction. Apply 100% rule — no gaps.
+**Goal:** Enumerate all required work
+
+**When:** Enumerating required work
+
+**Protocols:** `protocols/goal_setting.md`, `protocols/discipline.md`, `protocols/instruction_giving.md`
+
+**Instructions:** Break goal into independent sub-goals, enumerate ALL actions systematically, write each as clear instruction. Apply 100% rule — no gaps. Use goal decomposition, MECE enumeration, and action verbs with explicit language.
+
+**Inputs:**
+- Goal or task (required)
+- Requirements (optional)
+
+**Default Output:** Complete list of actions
+
+---
 
 ### Identify Dependencies (→ KR1)
 
-Execute dependency identification using `protocols/discipline.md` (Coverage Tracking) when determining prerequisites. Check ALL action pairs systematically, map what must be done before what.
+**Goal:** Map what must be done before what
+
+**When:** Determining prerequisites
+
+**Protocol:** `protocols/discipline.md`
+
+**Instructions:** Check ALL action pairs systematically, map what must be done before what. Use coverage tracking to ensure all dependencies are captured.
+
+**Inputs:**
+- Action list (required)
+
+**Default Output:** Dependency map
+
+---
 
 ### Sequence Actions (→ KR1)
 
-Execute action sequencing using `protocols/thinking.md` (Strategic) and `protocols/instruction_giving.md` (Cognitive Chunking, Step Sequencing) when ordering work. Determine optimal order, group into 5-9 step chunks, identify parallelizable work, plan milestones.
+**Goal:** Determine optimal order of actions
+
+**When:** Ordering work
+
+**Protocols:** `protocols/thinking.md`, `protocols/instruction_giving.md`
+
+**Instructions:** Determine optimal order, group into 5-9 step chunks, identify parallelizable work, plan milestones. Use strategic thinking, cognitive chunking, and step sequencing.
+
+**Inputs:**
+- Action list (required)
+- Dependencies (required)
+
+**Default Output:** Sequenced plan with milestones
+
+---
 
 ### Surface Unknowns (→ KR1)
 
-Execute unknown surfacing using `protocols/risk_management.md` (Uncertainty Indicators, Fail-Fast Ordering) and `protocols/discipline.md` (Coverage Tracking) when identifying risks. Check ALL actions for vague requirements, untested approaches, missing criteria. Order uncertain steps early.
+**Goal:** Identify risks and uncertain steps
+
+**When:** Identifying risks
+
+**Protocols:** `protocols/risk_management.md`, `protocols/discipline.md`
+
+**Instructions:** Check ALL actions for vague requirements, untested approaches, missing criteria. Order uncertain steps early. Use uncertainty indicators, fail-fast ordering, and coverage tracking.
+
+**Inputs:**
+- Action list (required)
+- Known risks (optional)
+
+**Default Output:** Risk list with uncertain steps flagged
+
+---
 
 ### Confirm with User (→ KR2)
 
-Execute plan confirmation using `protocols/pragmatics.md` (Recommended Option, Option Presentation) when presenting plan for review. Frame as recommended approach with reasoning, verify completeness and ordering before proceeding.
+**Goal:** Verify plan acceptability before execution
+
+**When:** Presenting plan for review
+
+**Protocol:** `protocols/pragmatics.md`
+
+**Instructions:** Frame as recommended approach with reasoning, verify completeness and ordering before proceeding. Use option presentation techniques.
+
+**Inputs:**
+- Complete plan (required)
+
+**Default Output:** Confirmation request with plan summary
 
 ---
 

@@ -36,21 +36,9 @@ allowed-tools: Read, Grep, Bash
 
 ---
 
-## Protocols
-
-- **protocols/criteria_setting.md** — Must use for Establish Criteria (defining evaluation criteria)
-- **protocols/discipline.md** — Must use for Establish Criteria, Output Evidence Table, Run Automated Tests (systematic enumeration)
-- **protocols/thinking.md** — Must use for Output Evidence Table, Weight Evidence, Determine Sufficiency (bias prevention, evidence reasoning)
-- **protocols/software_quality.md** — Use for Execute Manual Tests, Output Evaluation (quality dimensions)
-- **protocols/system_modularity.md** — Use for Execute Manual Tests (when evaluating design/architecture)
-- **protocols/pragmatics.md** — Use for Output Evaluation, Provide Recommendations (confidence signaling, framing results)
-- **protocols/tracking_and_recovery.md** — Must use for checklist and resuming after interruption
-
----
-
 ## Steps
 
-MUST read and follow steps in `base.md`
+MUST read and follow steps in `base_primitive.md`
 
 ---
 
@@ -87,39 +75,149 @@ MUST read and follow steps in `base.md`
 
 ## Possible Actions
 
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+
 Select or propose actions based on context. Each action shows which KR it serves.
 
 ### Establish Criteria (→ KR1)
 
-Execute criteria establishment using `protocols/criteria_setting.md` (Observable Behavior, Threshold Setting) and `protocols/discipline.md` (MECE Enumeration) when evaluation criteria are not clear or not provided. Systematically enumerate ALL criteria that define correct/quality/compliant. Specify observable indicators and thresholds for each criterion. Document what constitutes pass vs fail for each.
+**Goal:** Define what constitutes correct/quality/compliant
+
+**When:** Evaluation criteria are not clear or not provided
+
+**Protocols:** `protocols/criteria_setting.md`, `protocols/discipline.md`
+
+**Instructions:** Systematically enumerate ALL criteria that define correct/quality/compliant. Specify observable indicators and thresholds for each criterion. Document what constitutes pass vs fail for each. Use MECE enumeration to ensure completeness.
+
+**Inputs:**
+- Evaluation target (required)
+- Context or standards (optional)
+
+**Default Output:** Documented evaluation criteria with pass/fail thresholds
 
 ### Output Evidence Table (→ KR2)
 
-Execute evidence table creation using `protocols/thinking.md` (Analytical) and `protocols/discipline.md` (Coverage Tracking) when gathering evaluation evidence. Create table with evidence supporting each possible evaluation systematically: Binary (pass/fail) shows evidence for pass and evidence for fail. Likert (scale) shows evidence for each level. Categorical shows evidence for each category. Rubric shows evidence for each criterion. If evidence is insufficient for any evaluation, document what's missing.
+**Goal:** Gather evidence for all possible evaluation outcomes
+
+**When:** Gathering evaluation evidence
+
+**Protocols:** `protocols/thinking.md`, `protocols/discipline.md`
+
+**Instructions:** Create table with evidence supporting each possible evaluation systematically. Binary (pass/fail) shows evidence for pass and evidence for fail. Likert (scale) shows evidence for each level. Categorical shows evidence for each category. Rubric shows evidence for each criterion. If evidence is insufficient for any evaluation, document what's missing. Use analytical thinking and coverage tracking.
+
+**Inputs:**
+- Evaluation criteria (required)
+- Evaluation target (required)
+
+**Default Output:** Evidence table showing supporting evidence for each possible evaluation
+
+---
 
 ### Run Automated Tests (→ KR2)
 
-Execute automated testing using `protocols/discipline.md` (Coverage Tracking) when tests exist and evaluation criteria require testing. Systematically run ALL applicable test types: linting, unit tests, integration tests, end-to-end tests, performance tests, security tests, coverage tests. Document which tests ran, results, and failures with specifics.
+**Goal:** Execute all applicable automated tests
+
+**When:** Tests exist and evaluation criteria require testing
+
+**Protocol:** `protocols/discipline.md`
+
+**Instructions:** Systematically run ALL applicable test types: linting, unit tests, integration tests, end-to-end tests, performance tests, security tests, coverage tests. Document which tests ran, results, and failures with specifics. Track coverage systematically.
+
+**Inputs:**
+- Test suite (required)
+- Evaluation target (required)
+
+**Default Output:** Test execution results with pass/fail status and failure details
+
+---
 
 ### Execute Manual Tests (→ KR2)
 
-Execute manual evaluation using `protocols/software_quality.md` (Quality Dimensions) and `protocols/system_modularity.md` (Cohesion, Coupling) when automated tests are unavailable or insufficient. For code: read code, check logic, trace execution paths. For design: review against modularity principles. For documents: read for clarity, completeness, accuracy. For claims: check sources, reproduce results, verify logic. Document observations with specific locations and details.
+**Goal:** Manually evaluate when automated tests unavailable
+
+**When:** Automated tests are unavailable or insufficient
+
+**Protocols:** `protocols/software_quality.md`, `protocols/system_modularity.md`
+
+**Instructions:** For code: read code, check logic, trace execution paths. For design: review against modularity principles. For documents: read for clarity, completeness, accuracy. For claims: check sources, reproduce results, verify logic. Document observations with specific locations and details. Apply quality dimensions and modularity principles.
+
+**Inputs:**
+- Evaluation target (required)
+- Evaluation criteria (required)
+- Context (optional)
+
+**Default Output:** Manual evaluation findings with specific observations
 
 ### Weight Evidence (→ KR2)
 
-Execute evidence weighting using `protocols/thinking.md` (Analytical, Counterfactual) when deciding final evaluation. Review evidence strength (concrete vs speculative, comprehensive vs partial). Consider evidence quality (reliable sources, reproducible results). Note conflicting evidence. Consider what would change the verdict. Identify strongest case based on evidence weight.
+**Goal:** Assess evidence strength to determine verdict
+
+**When:** Deciding final evaluation
+
+**Protocol:** `protocols/thinking.md`
+
+**Instructions:** Review evidence strength (concrete vs speculative, comprehensive vs partial). Consider evidence quality (reliable sources, reproducible results). Note conflicting evidence. Consider what would change the verdict. Identify strongest case based on evidence weight. Use analytical and counterfactual thinking.
+
+**Inputs:**
+- Evidence table (required)
+- Evaluation criteria (required)
+
+**Default Output:** Evidence assessment showing relative strengths
+
+---
 
 ### Determine Sufficiency (→ KR2)
 
-Execute sufficiency check using `protocols/thinking.md` (Analytical) when weighing evidence. Check whether judgment can be made with available evidence, whether critical criteria are covered, whether there are major gaps or unknowns. If insufficient: output what's needed. If sufficient: proceed to output evaluation.
+**Goal:** Decide if enough evidence exists for judgment
+
+**When:** Weighing evidence
+
+**Protocol:** `protocols/thinking.md`
+
+**Instructions:** Check whether judgment can be made with available evidence, whether critical criteria are covered, whether there are major gaps or unknowns. If insufficient: output what's needed. If sufficient: proceed to output evaluation. Use analytical thinking.
+
+**Inputs:**
+- Evidence table (required)
+- Evaluation criteria (required)
+
+**Default Output:** Sufficiency determination with gaps identified if insufficient
+
+---
 
 ### Output Evaluation (→ KR2)
 
-Execute evaluation output using `protocols/software_quality.md` (Quality Dimensions) and `protocols/pragmatics.md` (Confidence Signaling) when evidence is sufficient. Format depends on evaluation method: Binary outputs pass/fail/inconclusive with supporting evidence. Scale outputs grade with justification. Rubric outputs score per criterion with overall assessment. Signal confidence level appropriately.
+**Goal:** Produce final evaluation based on evidence
+
+**When:** Evidence is sufficient
+
+**Protocols:** `protocols/software_quality.md`, `protocols/pragmatics.md`
+
+**Instructions:** Format depends on evaluation method: Binary outputs pass/fail/inconclusive with supporting evidence. Scale outputs grade with justification. Rubric outputs score per criterion with overall assessment. Signal confidence level appropriately. Apply quality dimensions and pragmatic framing.
+
+**Inputs:**
+- Evidence table (required)
+- Evaluation criteria (required)
+- Evaluation method (required)
+
+**Default Output:** Final evaluation with supporting evidence and confidence level
+
+---
 
 ### Provide Recommendations (→ KR2)
 
-Execute recommendation generation using `protocols/thinking.md` (Strategic) and `protocols/pragmatics.md` (Recommended Option) when explicitly requested. Provide concrete next steps to address issues, improvements to strengthen quality, alternative approaches to consider. Frame recommendations clearly with rationale. Recommendations must be actionable, not vague.
+**Goal:** Suggest actionable next steps
+
+**When:** Explicitly requested
+
+**Protocols:** `protocols/thinking.md`, `protocols/pragmatics.md`
+
+**Instructions:** Provide concrete next steps to address issues, improvements to strengthen quality, alternative approaches to consider. Frame recommendations clearly with rationale. Recommendations must be actionable, not vague. Use strategic thinking and pragmatic framing.
+
+**Inputs:**
+- Evaluation results (required)
+- Context (optional)
+
+**Default Output:** Prioritized, actionable recommendations with rationale
 
 ---
 

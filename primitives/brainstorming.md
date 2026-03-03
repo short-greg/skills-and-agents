@@ -36,17 +36,9 @@ allowed-tools: Read, Grep, WebSearch
 
 ---
 
-## Protocols
-
-- **protocols/thinking.md** — Must use for Decompose to First Principles, Invert the Problem, Search for Analogies, Apply SCAMPER, Push to Extremes, Build and Combine Ideas, Group and Label
-- **protocols/pragmatics.md** — Use for Describe Each Idea, Group and Label (framing ideas, option presentation for user)
-- **protocols/tracking_and_recovery.md** — Must use for Describe Each Idea and checklist
-
----
-
 ## Steps
 
-MUST read and follow steps in `base.md`
+MUST read and follow steps in `base_primitive.md`
 
 ---
 
@@ -62,55 +54,160 @@ MUST read and follow steps in `base.md`
 
 **Required:** Topic or problem — what to brainstorm about
 
-**Elicit if not provided:**
+**Optional:**
 - Context and constraints — problem space, what makes an idea viable
 - Goal of brainstorming — what kind of ideas are needed
-
-**Optional:** Starting ideas to build from, evaluation criteria for flagging promising ideas
+- Starting ideas to build from, evaluation criteria for flagging promising ideas
 
 ## Postconditions
 
 **Success:** Multiple distinct options generated, spanning different approaches, each described enough to evaluate later
 
-**Failure:** Only one idea generated, topic too vague, constraints too tight for viable options
+**Failure:** Only one idea generated, topic too vague, constraints too tight for viable options. Output a request listing the information that was missing and what is needed to succeed.
 
 ---
 
 ## Possible Actions
 
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+
 Select or propose actions based on context. Each action shows which KR it serves.
 
 ### Decompose to First Principles (→ KR1)
 
-Execute first principles decomposition using `protocols/thinking.md` to generate foundational ideas when seeking novel approaches or when assumptions need questioning. Break problem to fundamental truths, identify underlying assumptions, generate ideas by modifying or removing each.
+**Goal:** Generate foundational ideas from fundamental truths
+
+**When:** Seeking novel approaches or when assumptions need questioning
+
+**Protocol:** `protocols/thinking.md`
+
+**Instructions:** Break problem to fundamental truths, identify underlying assumptions, generate ideas by modifying or removing each. Use first principles reasoning techniques.
+
+**Inputs:**
+- Problem or topic (required)
+- Current assumptions (optional)
+
+**Default Output:** Ideas based on fundamental truths
+
+---
 
 ### Invert the Problem (→ KR1)
 
-Execute problem inversion using `protocols/thinking.md` to generate contrarian ideas when seeking opposite approaches or when forward thinking feels stuck. Ask what the reverse solution would look like, what would make the problem worse, how to achieve the opposite goal.
+**Goal:** Generate contrarian ideas by reversing the problem
+
+**When:** Seeking opposite approaches or when forward thinking feels stuck
+
+**Protocol:** `protocols/thinking.md`
+
+**Instructions:** Ask what the reverse solution would look like, what would make the problem worse, how to achieve the opposite goal. Use problem inversion techniques.
+
+**Inputs:**
+- Problem or goal (required)
+
+**Default Output:** Inverted approaches and contrarian ideas
+
+---
 
 ### Search for Analogies (→ KR1)
 
-Execute analogy search using `protocols/thinking.md` (Analogical reasoning) and WebSearch to generate cross-domain ideas when seeking inspiration from other fields. Identify similar solved problems, map structural similarities, note key differences, adapt patterns to current problem.
+**Goal:** Generate cross-domain ideas from similar problems
+
+**When:** Seeking inspiration from other fields
+
+**Protocols:** `protocols/thinking.md`, WebSearch
+
+**Instructions:** Identify similar solved problems, map structural similarities, note key differences, adapt patterns to current problem. Use analogical reasoning and web research.
+
+**Inputs:**
+- Problem or topic (required)
+- Potential analog domains (optional)
+
+**Default Output:** Ideas adapted from analogous solutions
+
+---
 
 ### Apply SCAMPER (→ KR1)
 
-Execute SCAMPER method using `protocols/thinking.md` (Analytical) to generate systematic variations when building on existing solution or idea. Decompose idea into components, apply each transformation systematically: **S**ubstitute, **C**ombine, **A**dapt, **M**odify, **P**ut to other uses, **E**liminate, **R**everse.
+**Goal:** Generate systematic variations of existing ideas
+
+**When:** Building on existing solution or idea
+
+**Protocol:** `protocols/thinking.md`
+
+**Instructions:** Decompose idea into components, apply each transformation systematically: **S**ubstitute, **C**ombine, **A**dapt, **M**odify, **P**ut to other uses, **E**liminate, **R**everse. Use analytical thinking.
+
+**Inputs:**
+- Existing idea or solution (required)
+
+**Default Output:** Variations generated through SCAMPER transformations
 
 ### Push to Extremes (→ KR1)
 
-Execute extreme exploration using `protocols/thinking.md` (Creative/Lateral, Novelty Assessment) to generate boundary-case ideas when seeking unusual solutions or when moderate ideas lack impact. Assess likelihood of each idea, deliberately generate low-likelihood alternatives (<0.3), explore simplest, most powerful, fastest, cheapest, and most unusual solutions.
+**Goal:** Generate boundary-case and unusual ideas
+
+**When:** Seeking unusual solutions or when moderate ideas lack impact
+
+**Protocol:** `protocols/thinking.md`
+
+**Instructions:** Assess likelihood of each idea, deliberately generate low-likelihood alternatives (<0.3), explore simplest, most powerful, fastest, cheapest, and most unusual solutions. Use creative/lateral thinking and novelty assessment.
+
+**Inputs:**
+- Problem or topic (required)
+- Current ideas (optional)
+
+**Default Output:** Extreme and unusual solution ideas
+
+---
 
 ### Build and Combine Ideas (→ KR1)
 
-Execute idea synthesis using `protocols/thinking.md` to generate evolved ideas when expanding on promising directions or when seeking hybrids. Take existing ideas, generate variations (refine, extend, specialize). Merge aspects of different ideas into new combinations.
+**Goal:** Generate evolved and hybrid ideas
+
+**When:** Expanding on promising directions or seeking hybrids
+
+**Protocol:** `protocols/thinking.md`
+
+**Instructions:** Take existing ideas, generate variations (refine, extend, specialize). Merge aspects of different ideas into new combinations. Use synthesis techniques.
+
+**Inputs:**
+- Existing ideas (required)
+
+**Default Output:** Refined, extended, and combined ideas
+
+---
 
 ### Describe Each Idea (→ KR2)
 
-Execute idea description using `protocols/tracking_and_recovery.md` and `protocols/pragmatics.md` (Option Presentation) to ensure actionability when documenting all generated ideas. State clearly for each: what it is, how it would work, why it might be viable. Frame ideas appropriately for audience. Ensure every idea is concrete enough for later evaluation.
+**Goal:** Ensure all ideas are actionable
+
+**When:** Documenting all generated ideas
+
+**Protocols:** `protocols/tracking_and_recovery.md`, `protocols/pragmatics.md`
+
+**Instructions:** State clearly for each: what it is, how it would work, why it might be viable. Frame ideas appropriately for audience. Ensure every idea is concrete enough for later evaluation. Use tracking and pragmatic framing techniques.
+
+**Inputs:**
+- Generated ideas (required)
+- Audience context (optional)
+
+**Default Output:** Clear descriptions of each idea
+
+---
 
 ### Group and Label (→ KR2)
 
-Execute idea categorization using `protocols/thinking.md` (Analytical) and `protocols/pragmatics.md` (Framing) to organize output when preparing ideas for evaluation. Cluster related ideas into categories, identify key tradeoffs that differentiate approaches, label each cluster, frame categories for clear presentation to user.
+**Goal:** Organize ideas for evaluation
+
+**When:** Preparing ideas for evaluation
+
+**Protocols:** `protocols/thinking.md`, `protocols/pragmatics.md`
+
+**Instructions:** Cluster related ideas into categories, identify key tradeoffs that differentiate approaches, label each cluster, frame categories for clear presentation to user. Use analytical thinking and pragmatic framing.
+
+**Inputs:**
+- All generated ideas (required)
+
+**Default Output:** Categorized and labeled idea groups
 
 ---
 

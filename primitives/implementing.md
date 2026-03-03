@@ -35,22 +35,9 @@ allowed-tools: Read, Grep, Write, Edit, Bash
 
 ---
 
-## Protocols
-
-- **protocols/interviewing.md** — Use for Gather Context (when bug report, screenshot, error message needs clarification)
-- **protocols/pragmatics.md** — Use for Gather Context (when asking for clarification)
-- **protocols/discipline.md** — Must use for Prepare, Write Tests (systematic coverage)
-- **protocols/system_modularity.md** — Must use for Prepare, Write Stubs, Implement (modular code boundaries)
-- **protocols/criteria_setting.md** — Must use for Write Stubs, Implement, Write Tests (verify matches design)
-- **protocols/software_quality.md** — Must use for Run Tests, Self-Review (quality verification)
-- **protocols/transparency.md** — Use for Self-Review (when changes affect behavior/APIs)
-- **protocols/tracking_and_recovery.md** — Must use for checklist and resuming after interruption
-
----
-
 ## Steps
 
-MUST read and follow steps in `base.md`
+MUST read and follow steps in `base_primitive.md`
 
 ---
 
@@ -74,35 +61,133 @@ MUST read and follow steps in `base.md`
 
 ## Possible Actions
 
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+
 Select or propose actions based on context. Each action shows which KR it serves.
 
 ### Gather Context (→ KR1)
 
-Execute context gathering using `protocols/interviewing.md` (Open Questions, Inference First) and `protocols/pragmatics.md` (Directness Calibration) when bug report is unclear, screenshot needs interpretation, error message needs analysis, or reproduction steps are missing. Clarify what needs to be implemented before proceeding.
+**Goal:** Clarify what needs to be implemented
+
+**When:** Bug report is unclear, screenshot needs interpretation, error message needs analysis, or reproduction steps are missing
+
+**Protocols:** `protocols/elicitation.md`, `protocols/pragmatics.md`
+
+**Instructions:** Use interviewing techniques to elicit information from user. Apply pragmatic communication patterns to ask for clarification effectively.
+
+**Inputs:**
+- Bug report, screenshot, error message, or unclear requirement (required)
+- Project context (optional)
+
+**Default Output:** Clear understanding of what needs to be implemented
 
 ### Prepare (→ KR1)
 
-Execute preparation using `protocols/discipline.md` (Coverage Tracking) and `protocols/system_modularity.md` (Cohesion, Coupling) when starting implementation. Review conventions, read existing code patterns, review design, set up scaffolding and file structure.
+**Goal:** Set up foundation for implementation
+
+**When:** Starting implementation
+
+**Protocols:** `protocols/discipline.md`, `protocols/system_modularity.md`
+
+**Instructions:** Review conventions, read existing code patterns, review design, set up scaffolding and file structure. Use systematic coverage tracking and apply modularity principles.
+
+**Inputs:**
+- Project conventions (required)
+- Existing codebase (required)
+- Design specification (optional)
+
+**Default Output:** File structure and scaffolding ready for implementation
+
+---
 
 ### Write Stubs (→ KR1)
 
-Execute stub creation using `protocols/system_modularity.md` (Information Hiding, Interfaces) and `protocols/criteria_setting.md` (Observable Behavior) when implementation is complex and structure should be reviewed before filling in logic. Define function signatures, interfaces, and module boundaries first.
+**Goal:** Define interfaces and structure before implementation
+
+**When:** Implementation is complex and structure should be reviewed before filling in logic
+
+**Protocols:** `protocols/system_modularity.md`, `protocols/criteria_setting.md`
+
+**Instructions:** Define function signatures, interfaces, and module boundaries first. Apply information hiding and specify observable behavior for each interface.
+
+**Inputs:**
+- Design specification (required)
+- Module boundaries (optional)
+
+**Default Output:** Interface definitions and function signatures
+
+---
 
 ### Implement (→ KR1)
 
-Execute implementation using `protocols/system_modularity.md` (Cohesion, Coupling) and `protocols/criteria_setting.md` (Observable Behavior) when writing or modifying code. Write modular code, integrate with existing modules and APIs, verify against design criteria. Flag design issues if discovered.
+**Goal:** Write functional code that meets requirements
+
+**When:** Writing or modifying code
+
+**Protocols:** `protocols/system_modularity.md`, `protocols/criteria_setting.md`
+
+**Instructions:** Write modular code, integrate with existing modules and APIs, verify against design criteria. Apply cohesion and coupling principles. Flag design issues if discovered.
+
+**Inputs:**
+- Requirements or design (required)
+- Existing codebase (required)
+- Interface definitions (optional)
+
+**Default Output:** Working code that implements specified functionality
 
 ### Write Tests (→ KR2)
 
-Execute test creation using `protocols/discipline.md` (MECE Enumeration, Coverage Tracking) and `protocols/criteria_setting.md` (Observable Behavior) when new functionality needs test coverage. Enumerate ALL edge cases and error paths systematically, write unit and integration tests.
+**Goal:** Create comprehensive test coverage
+
+**When:** New functionality needs test coverage
+
+**Protocols:** `protocols/discipline.md`, `protocols/criteria_setting.md`
+
+**Instructions:** Enumerate ALL edge cases and error paths systematically, write unit and integration tests. Use MECE enumeration and coverage tracking to ensure completeness.
+
+**Inputs:**
+- Implemented functionality (required)
+- Requirements or design (required)
+- Existing test patterns (optional)
+
+**Default Output:** Unit and integration tests covering all edge cases
+
+---
 
 ### Run Tests (→ KR2)
 
-Execute test verification using `protocols/software_quality.md` (Quality Dimensions) when verifying implementation works. Run all tests including existing tests, check for regressions, document failures with specifics.
+**Goal:** Verify implementation correctness
+
+**When:** Verifying implementation works
+
+**Protocol:** `protocols/software_quality.md`
+
+**Instructions:** Run all tests including existing tests, check for regressions, document failures with specifics. Assess against quality dimensions.
+
+**Inputs:**
+- Test suite (required)
+- Implemented code (required)
+
+**Default Output:** Test results with pass/fail status and failure details
+
+---
 
 ### Self-Review (→ KR1, KR2)
 
-Execute self-review using `protocols/software_quality.md` (Quality Dimensions) and `protocols/transparency.md` (Documentation) when implementation is complete. Review code for quality and correctness, verify conventions followed, document API changes if any.
+**Goal:** Ensure implementation quality and completeness
+
+**When:** Implementation is complete
+
+**Protocols:** `protocols/software_quality.md`, `protocols/transparency.md`
+
+**Instructions:** Review code for quality and correctness, verify conventions followed, document API changes if any. Assess against quality dimensions and document changes appropriately.
+
+**Inputs:**
+- Completed implementation (required)
+- Project conventions (required)
+- Original requirements (required)
+
+**Default Output:** Quality assessment and updated documentation if needed
 
 ---
 

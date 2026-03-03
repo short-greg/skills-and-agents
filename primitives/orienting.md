@@ -35,20 +35,9 @@ allowed-tools: Read, Grep
 
 ---
 
-## Protocols
-
-- **protocols/discipline.md** — Must use for Map Structure, Inventory Assets, Identify Gaps and Issues (systematic enumeration, no omissions)
-- **protocols/thinking.md** — Must use for Identify Gaps and Issues, Assess Risks and Strengths (analytical reasoning)
-- **protocols/risk_management.md** — Must use for Assess Risks and Strengths (risk assessment)
-- **protocols/interviewing.md** — Use for Locate Information (when user has context not in artifacts)
-- **protocols/pragmatics.md** — Use for Summarize State and Flag Decisions (framing findings)
-- **protocols/tracking_and_recovery.md** — Must use for checklist and resuming after interruption
-
----
-
 ## Steps
 
-MUST read and follow steps in `base.md`
+MUST read and follow steps in `base_primitive.md`
 
 ---
 
@@ -64,51 +53,134 @@ MUST read and follow steps in `base.md`
 
 **Required:** Subject to orient on
 
-**Elicit if not provided:**
+**Optional:**
 - Current state (read relevant files, code, docs, outputs)
 - Prior work (look for existing assessments, specs, decisions)
-
-**Optional:** Target state (if known, enables gap identification), success criteria
+- Target state (if known, enables gap identification), success criteria
 
 ## Postconditions
 
 **Success:** Current state documented accurately, gaps and issues surfaced, orientation is actionable
 
-**Failure:** Cannot access subject, subject too large or ill-defined
+**Failure:** Cannot access subject, subject too large or ill-defined. Output a request listing the information that was missing and what is needed to succeed.
 
 ---
 
 ## Possible Actions
 
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+
 Select or propose actions based on context. Each action shows which KR it serves.
 
 ### Map Structure (→ KR1)
 
-Execute structure mapping using `protocols/discipline.md` (MECE Enumeration) when understanding layout or topology of orienting target. Systematically enumerate ALL components: directory structure, component relationships, module dependencies, data flows, or process sequences. Document hierarchy, connections, boundaries. Create representation showing how parts relate to whole.
+**Goal:** Understand layout or topology of orienting target
 
-### Inventory Assets (→ KR1)
+**When:** Understanding layout or topology of orienting target
 
-Execute asset inventory using `protocols/discipline.md` (Coverage Tracking) when cataloging existing resources. Systematically list ALL files, components, modules, dependencies, configurations, documentation, tests, or infrastructure. Categorize by type, purpose, or area. Track coverage to ensure no significant omissions. Note what exists, what's complete, what's partial, what's missing.
+**Protocol:** `protocols/discipline.md`
 
-### Locate Information (→ KR1)
+**Instructions:** Systematically enumerate ALL components: directory structure, component relationships, module dependencies, data flows, or process sequences. Document hierarchy, connections, boundaries. Create representation showing how parts relate to whole. Use MECE enumeration.
 
-Execute information location using `protocols/interviewing.md` (Open Questions, Inference First) when specific information is needed for orientation. Search for documentation, implementation details, configuration, test coverage, known issues, or prior decisions. Apply interviewing when user has context not available in artifacts. Document where critical information resides.
+**Inputs:**
+- Subject to orient on (required)
+- Scope boundaries (optional)
 
-### Identify Gaps and Issues (→ KR1)
-
-Execute gap and issue identification using `protocols/thinking.md` (Analytical) and `protocols/discipline.md` (MECE Enumeration) when target state is known or standards exist. Systematically enumerate ALL gaps: missing components, incomplete implementations, broken functionality, inconsistencies, technical debt, deviations from requirements. Distinguish what's present from what's needed. Note severity and impact of each.
-
-### Assess Risks and Strengths (→ KR1)
-
-Execute risk and strength assessment using `protocols/thinking.md` (Analytical) and `protocols/risk_management.md` (Risk Assessment) when understanding stability and reliability. Identify risks (fragile code, lack of tests, tight coupling, security vulnerabilities, performance bottlenecks). Identify strengths (well-tested code, clear documentation, good separation). Categorize by likelihood and impact.
-
-### Summarize State and Flag Decisions (→ KR1, KR2)
-
-Execute summary creation using `protocols/pragmatics.md` (Directness Calibration) when orientation is complete. Produce concise summary of current state with supporting evidence. Group findings by category or area. Flag decision points — identify what decisions need to be made based on findings (what to fix first, what approach to take, what to investigate further). Frame findings appropriately for audience.
+**Default Output:** Structure diagram or description
 
 ---
 
-## Additional Notes
+### Inventory Assets (→ KR1)
+
+**Goal:** Catalog existing resources
+
+**When:** Cataloging existing resources
+
+**Protocol:** `protocols/discipline.md`
+
+**Instructions:** Systematically list ALL files, components, modules, dependencies, configurations, documentation, tests, or infrastructure. Categorize by type, purpose, or area. Track coverage to ensure no significant omissions. Note what exists, what's complete, what's partial, what's missing.
+
+**Inputs:**
+- Subject to orient on (required)
+- Categories to track (optional)
+
+**Default Output:** Asset inventory with categories and status
+
+---
+
+### Locate Information (→ KR1)
+
+**Goal:** Find specific information needed for orientation
+
+**When:** Specific information is needed for orientation
+
+**Protocol:** `protocols/elicitation.md`
+
+**Instructions:** Search for documentation, implementation details, configuration, test coverage, known issues, or prior decisions. Apply interviewing when user has context not available in artifacts. Document where critical information resides. Use open questions and inference first techniques.
+
+**Inputs:**
+- Information needed (required)
+- Known locations (optional)
+
+**Default Output:** Information found with locations
+
+---
+
+### Identify Gaps and Issues (→ KR1)
+
+**Goal:** Find what's missing or broken
+
+**When:** Target state is known or standards exist
+
+**Protocols:** `protocols/thinking.md`, `protocols/discipline.md`
+
+**Instructions:** Systematically enumerate ALL gaps: missing components, incomplete implementations, broken functionality, inconsistencies, technical debt, deviations from requirements. Distinguish what's present from what's needed. Note severity and impact of each. Use analytical thinking and MECE enumeration.
+
+**Inputs:**
+- Current state (required)
+- Target state or standards (required)
+
+**Default Output:** Gap analysis with severity and impact
+
+---
+
+### Assess Risks and Strengths (→ KR1)
+
+**Goal:** Understand stability and reliability
+
+**When:** Understanding stability and reliability
+
+**Protocols:** `protocols/thinking.md`, `protocols/risk_management.md`
+
+**Instructions:** Identify risks (fragile code, lack of tests, tight coupling, security vulnerabilities, performance bottlenecks). Identify strengths (well-tested code, clear documentation, good separation). Categorize by likelihood and impact. Use analytical thinking and risk assessment techniques.
+
+**Inputs:**
+- Current state (required)
+- Quality criteria (optional)
+
+**Default Output:** Risk and strength assessment with categorization
+
+---
+
+### Summarize State and Flag Decisions (→ KR1, KR2)
+
+**Goal:** Produce actionable summary of current state
+
+**When:** Orientation is complete
+
+**Protocol:** `protocols/pragmatics.md`
+
+**Instructions:** Produce concise summary of current state with supporting evidence. Group findings by category or area. Flag decision points — identify what decisions need to be made based on findings (what to fix first, what approach to take, what to investigate further). Frame findings appropriately for audience. Use directness calibration.
+
+**Inputs:**
+- All findings (required)
+- Audience context (optional)
+
+**Default Output:** Summary with flagged decision points
+
+---
+
+## Additional Notes and Terms
 
 None
 

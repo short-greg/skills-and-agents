@@ -36,19 +36,9 @@ allowed-tools: Read, Grep, WebSearch, WebFetch
 
 ---
 
-## Protocols
-
-- **protocols/discipline.md** — Must use for Search Information, Trace Paths (systematic coverage)
-- **protocols/thinking.md** — Must use for Assess Uncertainty, Form Hypotheses, Test Hypotheses, Diagnose Root Cause, Synthesize Findings (analytical reasoning)
-- **protocols/interviewing.md** — Use for Assess Uncertainty (when user has context LLM cannot access)
-- **protocols/pragmatics.md** — Must use for Synthesize Findings and Recommend (confidence signaling, framing findings)
-- **protocols/tracking_and_recovery.md** — Must use for checklist and resuming after interruption
-
----
-
 ## Steps
 
-MUST read and follow steps in `base.md`
+MUST read and follow steps in `base_primitive.md`
 
 ---
 
@@ -64,56 +54,153 @@ MUST read and follow steps in `base.md`
 
 **Required:** Question or topic to investigate
 
-**Elicit if not provided:**
+**Optional:**
 - Context (related code, docs, logs, error messages)
 - Investigation scope (what specifically needs to be known)
 - Prior investigations (has this been looked into before)
-
-**Optional:** Initial hypotheses, reproduction steps (if investigating bug), constraints
+- Initial hypotheses, reproduction steps (if investigating bug), constraints
 
 ## Postconditions
 
 **Success:** Uncertainty mitigated with evidence, findings grounded in sources, confidence stated, recommendations for next steps provided
 
-**Failure:** Insufficient access to information, scope too broad, question cannot be answered with available resources
+**Failure:** Insufficient access to information, scope too broad, question cannot be answered with available resources. Output a request listing the information that was missing and what is needed to succeed.
 
 ---
 
 ## Possible Actions
 
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+
 Select or propose actions based on context. Each action shows which KR it serves.
 
 ### Assess Uncertainty (→ KR1)
 
-Execute uncertainty assessment using `protocols/thinking.md` (Analytical) and `protocols/interviewing.md` (Open Questions) when beginning investigation. Explicitly identify what LLM does not know or is unsure about. Apply interviewing when uncertain about context, intent, or constraints only user can provide. Document what needs to be learned.
+**Goal:** Identify what is unknown or uncertain
 
-### Search Information (→ KR1)
+**When:** Beginning investigation
 
-Execute information search using `protocols/discipline.md` (Coverage Tracking) when information is not available in current context. Systematically search ALL relevant sources: web for documentation and best practices, codebase for related code and patterns, logs for error messages, official documentation for APIs. Track what was searched to ensure comprehensive coverage. Document findings with sources.
+**Protocols:** `protocols/thinking.md`, `protocols/elicitation.md`
 
-### Trace Paths (→ KR1)
+**Instructions:** Explicitly identify what LLM does not know or is unsure about. Apply interviewing when uncertain about context, intent, or constraints only user can provide. Document what needs to be learned. Use analytical thinking and open questions.
 
-Execute path tracing using `protocols/discipline.md` (Coverage Tracking) when investigating how something works or where something happens. Systematically follow ALL relevant paths: execution paths (function calls, method chains), data flows (inputs → processing → outputs), system interactions (API calls, database queries). Track coverage to ensure no paths missed. Document the path taken and key observations.
+**Inputs:**
+- Question or topic (required)
+- Known context (optional)
 
-### Form Hypotheses (→ KR1)
-
-Execute hypothesis formation using `protocols/thinking.md` (Analytical, Counterfactual) when evidence exists but explanation is unclear. Generate possible explanations based on gathered evidence. For each hypothesis: state it clearly, identify confirming evidence, identify refuting evidence, estimate likelihood. Consider what would need to be true for each hypothesis.
-
-### Test Hypotheses (→ KR1)
-
-Execute hypothesis testing using `protocols/thinking.md` (Analytical) when hypotheses exist. Design checks to confirm or refute each hypothesis. Reproduce issue or conditions to test prediction. Compare differences (working vs broken, before vs after). Make controlled changes and observe results. Document which hypotheses are confirmed, refuted, or remain uncertain.
-
-### Diagnose Root Cause (→ KR1)
-
-Execute root cause diagnosis using `protocols/thinking.md` (Analytical, Counterfactual) when investigating bugs, failures, or unexpected behavior. Distinguish root cause from symptoms. Work backwards from symptom to cause. Verify diagnosis explains all observed symptoms. Consider what would happen if root cause were fixed. Document root cause with evidence and reasoning.
-
-### Synthesize Findings and Recommend (→ KR1, KR2)
-
-Execute synthesis and recommendation using `protocols/thinking.md` (Strategic) and `protocols/pragmatics.md` (Confidence Signaling, Recommended Option) when investigation completes. Summarize findings with supporting evidence and sources. State confidence level clearly (known vs suspected vs unknown). If researching solutions, enumerate viable approaches with tradeoffs. If diagnosing, state root cause with evidence. Provide specific, prioritized recommendations for next steps. Frame recommendations appropriately.
+**Default Output:** List of uncertainties and knowledge gaps
 
 ---
 
-## Additional Notes
+### Search Information (→ KR1)
+
+**Goal:** Gather information from relevant sources
+
+**When:** Information is not available in current context
+
+**Protocol:** `protocols/discipline.md`
+
+**Instructions:** Systematically search ALL relevant sources: web for documentation and best practices, codebase for related code and patterns, logs for error messages, official documentation for APIs. Track what was searched to ensure comprehensive coverage. Document findings with sources.
+
+**Inputs:**
+- Search targets (required)
+- Known sources (optional)
+
+**Default Output:** Findings with sources cited
+
+---
+
+### Trace Paths (→ KR1)
+
+**Goal:** Follow execution, data, or system paths
+
+**When:** Investigating how something works or where something happens
+
+**Protocol:** `protocols/discipline.md`
+
+**Instructions:** Systematically follow ALL relevant paths: execution paths (function calls, method chains), data flows (inputs → processing → outputs), system interactions (API calls, database queries). Track coverage to ensure no paths missed. Document the path taken and key observations.
+
+**Inputs:**
+- Starting point (required)
+- Path type (optional)
+
+**Default Output:** Path documentation with key observations
+
+---
+
+### Form Hypotheses (→ KR1)
+
+**Goal:** Generate possible explanations
+
+**When:** Evidence exists but explanation is unclear
+
+**Protocol:** `protocols/thinking.md`
+
+**Instructions:** Generate possible explanations based on gathered evidence. For each hypothesis: state it clearly, identify confirming evidence, identify refuting evidence, estimate likelihood. Consider what would need to be true for each hypothesis. Use analytical and counterfactual thinking.
+
+**Inputs:**
+- Evidence gathered (required)
+- Context (optional)
+
+**Default Output:** Hypotheses with supporting/refuting evidence and likelihood
+
+---
+
+### Test Hypotheses (→ KR1)
+
+**Goal:** Confirm or refute hypotheses
+
+**When:** Hypotheses exist
+
+**Protocol:** `protocols/thinking.md`
+
+**Instructions:** Design checks to confirm or refute each hypothesis. Reproduce issue or conditions to test prediction. Compare differences (working vs broken, before vs after). Make controlled changes and observe results. Document which hypotheses are confirmed, refuted, or remain uncertain. Use analytical thinking.
+
+**Inputs:**
+- Hypotheses to test (required)
+- Test environment (optional)
+
+**Default Output:** Test results with hypothesis status (confirmed/refuted/uncertain)
+
+---
+
+### Diagnose Root Cause (→ KR1)
+
+**Goal:** Identify the root cause of a problem
+
+**When:** Investigating bugs, failures, or unexpected behavior
+
+**Protocol:** `protocols/thinking.md`
+
+**Instructions:** Distinguish root cause from symptoms. Work backwards from symptom to cause. Verify diagnosis explains all observed symptoms. Consider what would happen if root cause were fixed. Document root cause with evidence and reasoning. Use analytical and counterfactual thinking.
+
+**Inputs:**
+- Symptoms observed (required)
+- Test results (optional)
+
+**Default Output:** Root cause with evidence and reasoning
+
+---
+
+### Synthesize Findings and Recommend (→ KR1, KR2)
+
+**Goal:** Summarize investigation and provide next steps
+
+**When:** Investigation completes
+
+**Protocols:** `protocols/thinking.md`, `protocols/pragmatics.md`
+
+**Instructions:** Summarize findings with supporting evidence and sources. State confidence level clearly (known vs suspected vs unknown). If researching solutions, enumerate viable approaches with tradeoffs. If diagnosing, state root cause with evidence. Provide specific, prioritized recommendations for next steps. Use strategic thinking and confidence signaling.
+
+**Inputs:**
+- All findings (required)
+- Context (optional)
+
+**Default Output:** Summary with confidence levels and prioritized recommendations
+
+---
+
+## Additional Notes and Terms
 
 **Investigation vs Evaluation:** Investigation gathers new information to reduce uncertainty. Evaluation assesses existing work against criteria. If evaluation reveals knowledge gaps, investigation fills them.
 

@@ -106,7 +106,7 @@ Primitives are **instruction-focused** or **evaluation-focused**, not descriptiv
 - 2-4 requirements vs workflows with 5-9
 - Exactly 2 Key Results vs workflows with 3-4
 - Actions show KR linkage and protocol usage
-- All primitives inherit from `base.md` (execution pattern)
+- All primitives inherit from `base_primitive.md` (execution pattern)
 
 ---
 
@@ -190,18 +190,11 @@ Constraints on how to execute the primitive.
 1. [constraint on execution]
 2. [constraint on execution]
 
-## Protocols
-
-Protocols that this primitive uses.
-
-- **[protocol_name.md]** — Must use to [required action]
-- **[protocol_name.md]** — Use when [optional condition]
-
 ---
 
 ## Steps
 
-Inherits from `base.md` — output lightweight checklist, resolve preconditions, plan actions, execute, report result.
+MUST read and follow steps in `base_primitive.md`
 
 ---
 
@@ -209,36 +202,61 @@ Inherits from `base.md` — output lightweight checklist, resolve preconditions,
 
 **Required:** [what must be provided to proceed]
 
-**Elicit if not provided:**
-- [what primitive will detect or ask about]
-
-**Optional:** [optional inputs that enhance the primitive]
+**Optional:**
+- [optional input that enhances the primitive]
+- [optional input that enhances the primitive]
 
 ## Postconditions
 
-The resulting state after the primitive is finished.
-
 **Success:** [state when primitive completes successfully]
 
-**Failure:** [state when primitive cannot complete]
+**Failure:** [state when primitive cannot complete]. Output a request listing the information that was missing and what is needed to succeed.
 
 ---
 
-## Actions
+## Possible Actions
 
-Select based on context. Each action shows which KR it serves.
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+
+Select or propose actions based on context. Each action shows which KR it serves.
 
 ### [Action Name] (→ KR#)
 
-<Execute when [condition that triggers this action]. [What this action accomplishes and how to achieve it using protocols/methods.]>
+**Goal:** [What this action achieves]
 
-### [Action Name] (→ KR#, KR#)
+**When:** [When to execute this action]
 
-<Execute when [condition that triggers this action]. [What this action accomplishes and how to achieve it using protocols/methods.]>
+**Protocol:** `protocols/[protocol_name].md`
+
+**Instructions:** [How to execute using techniques from the protocol. Be specific about what to do, but don't prescribe exact techniques - let AI choose from protocol.]
+
+**Inputs:**
+- [required input] (required)
+- [optional input] (optional)
+
+**Default Output:** [Expected output format if not specified]
 
 ---
 
-## Additional Notes
+### [Action Name] (→ KR#, KR#)
+
+**Goal:** [What this action achieves]
+
+**When:** [When to execute this action]
+
+**Protocols:** `protocols/[protocol_name].md`, `protocols/[protocol_name2].md`
+
+**Instructions:** [How to execute using techniques from the protocols. Be specific about what to do, but don't prescribe exact techniques - let AI choose from protocols.]
+
+**Inputs:**
+- [required input] (required)
+- [optional input] (optional)
+
+**Default Output:** [Expected output format if not specified]
+
+---
+
+## Additional Notes and Terms
 
 <Additional notes, clarifications, terms, or distinctions from other primitives. Write "None" if not applicable.>
 

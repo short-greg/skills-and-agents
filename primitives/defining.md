@@ -12,10 +12,6 @@ user-invocable: true
 allowed-tools: Read, Grep
 ---
 
-[COMMENT: I've added a variety of comments here. We need to refine this primitive and then update the 
-guideline/template for primitives.
-]
-
 # Defining
 
 **Goal:** Establish when work is done — what needs to be built, what success looks like, and how completion will be verified.
@@ -29,7 +25,7 @@ guideline/template for primitives.
 ## Key Results - KR
 
 1. Requirements complete — goal clear, acceptance criteria testable, out-of-scope stated
-2. Requirements are accurate and precise and business oriented - in line with user requests
+2. Requirements are accurate, precise, and business oriented — in line with user requests
 3. User has confirmed the definition
 4. Uncertainty in requirements is minimized
 5. Requirements are output in the required format
@@ -42,22 +38,9 @@ guideline/template for primitives.
 
 ---
 
-[COMMENT: I think this is not necessary, protocols are listed in the actions]
-## Protocols
-
-- **protocols/goal_setting.md** — Must use for Write User Stories, Specify Acceptance Criteria, State Out-of-Scope
-- **protocols/criteria_setting.md** — Must use for Specify Acceptance Criteria
-- **protocols/interviewing.md** — Must use for Elicit Requirements, Analyze Existing Context, Confirm with User
-- **protocols/pragmatics.md** — Use for Elicit Requirements, Confirm with User (directness calibration, presenting definition)
-- **protocols/thinking.md** — Use for Analyze Requirements (consistency, feasibility reasoning)
-- **protocols/transparency.md** — Use for Elicit Requirements, Confirm with User (directness calibration, presenting definition)
-- **protocols/tracking_and_recovery.md** — Must use for lightweight checklist and resuming after interruption
-
----
-
 ## Steps
 
-MUST read and follow steps in `base.md`
+MUST read and follow steps in `base_primitive.md`
 
 ---
 
@@ -65,98 +48,191 @@ MUST read and follow steps in `base.md`
 
 **Required:** Task or feature to define (can be vague initially)
 
-**Optional:** A description of the required output.
-
-[COMMENT:
-Changed this to be optional. A request will be shared, but if the outer skill requires interviewing then the primitive will fail
-
-Request must specify the goal and everythig that is needed to satisfy its requirements.
-
-Let's remove the "Elicit" precondition and use optional
-
-Rephrase like below.
-]
 **Optional:**
-- User intent, goal, and document and requirements is fully provided to meet key results
+- User intent, goal, and requirements fully specified
+- Required output format/style
 - Existing context (codebase, docs, constraints)
-- If not specified and wnat to do interview will fail, otherwise outputs a request
-
-**Optional:** Prior definitions, technical constraints
+- Prior definitions, technical constraints
 
 ## Postconditions
 
 **Success:** Requirements documented with testable acceptance criteria, confirmed by user
 
-[
-  TODO: If it cannot succeed it outputs the information that it needs and its goal.
-
-This is instead of it eliciting what it wants on its own.
-]
-
-**Failure:** Requirements could not be determined, unresolvable conflicts. Output a request listing the information that was missing and what is needed to succeed.
+**Failure:** Requirements could not be determined or unresolvable conflicts exist. Output a request listing the information that was missing and what is needed to succeed.
 
 ---
 
 ## Possible Actions
 
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+
 Select or propose actions based on context. Each action shows which KR it serves.
 
-[COMMENT: Use this description so it requires reading the protocol]
-Each action specifies a protocol to use. When executing the action you MUST read that protocol if you haven't and MUST choose the appropriate techniques based on that protoocol to a achieve the key results of this skill.
+### Output Intention (→ All KRs)
 
-[COMMENT: Let's simplify each action to be a bit more template oriented. I shared my ideas below in elicit requirements.
-Also, before the actions were too prescriptive. We must be less prescriptive. 
-Note: protocols must be referred to with protocols/<protocol name>.md
-]
+**Reference**: See `base_primitive`
 
-### Output Intention ()
+**When**: Before executing any other action
 
-[COMMENT: In general the intention, like actions to execute must be output.]
+[COMMENT: include in base.md]
+**Goal:** Communicate what actions will be executed and why
 
-### Elicit Requirements (→ KR1/KR2)
+**When:** Before executing other actions
 
-Goal: Output requests for requirements 
-When: <condition>
-Protocol: `protocols/transparency.md`
-Instructions: Output defailed questionairre/description of what's needed using recommendations where needed
-Inputs: <input list with default values if not specified>
-Default Output: Codeblock
-Other: If preference for interviewing, then output this request and have the skill fail
+**Protocol:** `protocols/transparency.md`, `protocols/tracking_and_recovery.md`
 
-### Analyze Existing Context (→ KR1)
+**Instructions:** Output which actions you plan to execute and the reasoning for selecting them based on the current context and available information. Consider other possible actions as well.
 
-Execute context analysis using `protocols/thinking.md` (Inference First) when information may be discoverable without asking. Review existing code, docs, and specs to understand what exists and what constraints apply before asking user.  
+**Inputs:**
+- Available context
+- Identified gaps
 
-### Write User Stories (→ KR1)
+**Default Output:** Inline text, lightweight checklist of key results with actions
 
-Execute user story creation reading and using `protocols/goal_setting.md` by choosing the appropriate goal setting techniques when capturing user experience. 
+---
 
-### Specify Acceptance Criteria (→ KR1)
+### Elicit Requirements (→ KR1, KR2, KR4)
 
-Execute criteria specification using `protocols/goal_setting.md` and `protocols/criteria_setting.md` by choosing the appropriate techniques setting goals and criteria.
+**Goal:** Gather missing requirements information from available sources or identify what's needed
 
-### Analyze Requirements (→ KR1)
+**When:** User intent, goal, or requirements are incomplete or unclear
 
-Execute requirements analysis using `protocols/thinking.md` by choosing techniques to   when validating before confirmation. 
+**Protocol:** `protocols/transparency.md`
 
-### State Out-of-Scope (→ KR1)
+[COMMENT: I reworded this. If it should interview, then it will fail. We'll create the interviewing primitive later]
+**Instructions:** Output a detailed questionnaire or description of what's needed using appropriate framing. If interviewing is preferred/possible, output the request and signal failure so outer skill can handle elicitation.
 
-Execute boundary definition using `protocols/goal_setting.md` (Boundary Setting) when clarifying scope. Define what is explicitly out of scope to prevent scope creep. Document exclusions clearly.
+**Inputs:**
+- Task description (required)
+- Known constraints (optional)
+- Target audience (optional)
 
+**Default Output:** Codeblock with structured questions
 
-[COMMENT:
-interviewing is done by the interviewing.md primitive
+---
 
-The confirmation should simply output the requirements and then get confirmation. It shouldn't be an interview.
-]
+### Analyze Existing Context (→ KR1, KR2, KR4)
 
-### Output Definition (-> ?)
+**Goal:** Understand what already exists to inform requirements
 
-Execute full definition according to the output style reqding `transparency.md` to choose appropriate techniques, the default is a codeblock if not specified 
+**When:** Information may be discoverable from existing artifacts without asking user
 
-### Confirm with User (→ KR2)
+**Protocol:** `protocols/thinking.md`
 
-Execute confirmation using `protocols/interviewing.md` (Understanding Validation) and `protocols/pragmatics.md` (Option Presentation) when definition is ready for review. Paraphrase understanding, present draft definition, verify accuracy, resolve ambiguities before finalizing.
+**Instructions:** Review existing code, docs, and specs to understand what exists and what constraints apply. Choose appropriate analytical techniques from the protocol.
+
+**Inputs:**
+- Codebase paths (optional)
+- Documentation locations (optional)
+
+**Default Output:** Summary of findings
+
+---
+
+### Write User Stories (→ KR1, KR2)
+
+**Goal:** Capture requirements from user perspective
+
+**When:** Capturing user experience and outcomes
+
+**Protocol:** `protocols/goal_setting.md`
+
+**Instructions:** Read the protocol and choose appropriate goal-setting techniques to express requirements as user outcomes.
+
+**Inputs:**
+- User role/persona (optional)
+- Context of use (optional)
+
+**Default Output:** Formatted user stories
+
+---
+
+### Specify Acceptance Criteria (→ KR1, KR2)
+
+**Goal:** Define testable pass/fail criteria for requirements
+
+**When:** Establishing how completion will be verified
+
+**Protocols:** `protocols/goal_setting.md`, `protocols/criteria_setting.md`
+
+**Instructions:** Read the protocols and choose appropriate techniques for setting goals and establishing observable, testable criteria with explicit thresholds.
+
+**Inputs:**
+- Requirements/user stories (required)
+- Quality attributes (optional)
+
+**Default Output:** Formatted acceptance criteria
+
+---
+
+### Analyze Requirements (→ KR2, KR4)
+
+**Goal:** Validate requirements for completeness, consistency, and feasibility
+
+**When:** Requirements need validation before finalization
+
+**Protocol:** `protocols/thinking.md`
+
+**Instructions:** Read the protocol and choose appropriate thinking techniques to check for completeness, consistency, feasibility, and priority. Identify conflicts or gaps.
+
+**Inputs:**
+- Draft requirements (required)
+- Constraints (optional)
+
+**Default Output:** Analysis with identified issues
+
+---
+
+### State Out-of-Scope (→ KR1, KR4)
+
+**Goal:** Define boundaries to prevent scope creep
+
+**When:** Clarifying what is explicitly excluded
+
+**Protocol:** `protocols/goal_setting.md`
+
+**Instructions:** Read the protocol and use boundary-setting techniques to explicitly document what is not included.
+
+**Inputs:**
+- Scope boundaries (optional)
+- Known exclusions (optional)
+
+**Default Output:** List of out-of-scope items
+
+---
+
+### Output Definition (→ KR3, KR5)
+
+**Goal:** Format and present the complete definition
+
+**When:** Ready to output final requirements document
+
+**Protocol:** `protocols/transparency.md`
+
+**Instructions:** Read the protocol and choose appropriate techniques for the output style. Default is codeblock if style not specified.
+
+**Inputs:**
+- All requirement components (required)
+- Output format preference (optional, default: codeblock)
+
+**Default Output:** Codeblock or specified format
+
+---
+
+### Confirm with User (→ KR3)
+
+**Goal:** Verify definition accuracy with user
+
+**When:** Definition is ready for review
+
+**Protocols:** `protocols/pragmatics.md`
+
+**Instructions:** Read the protocol and choose appropriate techniques for presenting the definition and requesting confirmation. Paraphrase understanding, verify accuracy, resolve ambiguities.
+
+**Inputs:**
+- Complete definition (required)
+
+**Default Output:** Confirmation request with definition
 
 ---
 
