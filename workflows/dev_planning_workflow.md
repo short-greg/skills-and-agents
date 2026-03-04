@@ -38,13 +38,6 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, WebSearch, WebFetch, Task, T
 5. Surface risks early — unknowns identified before task sequencing
 6. Iterate up to 3 times if validation fails before escalating
 
-## Protocols
-
-- **protocols/tracking_and_recovery.md** — Must use for progress tracking and recovery
-- **protocols/discipline.md** — Must use for systematic enumeration of requirements, tasks, risks
-- **protocols/risk_management.md** — Must use for risk identification and mitigation
-- **protocols/pragmatics.md** — Must use for user confirmation
-
 ---
 
 ## Steps
@@ -86,39 +79,79 @@ Select and execute tasks to achieve Key Results. Each task shows which KR it ser
 
 ### Orient on Project (→ KR1)
 
-Execute project orientation using `orienting` primitive when beginning planning or context is unclear. Understand project structure, existing code, conventions, documentation, and current state. Map what exists and identify gaps.
+Use `orienting` primitive to understand project context and current state before planning begins.
 
-**Fallback:** If orienting fails (too large, cannot access), narrow scope with user or gather context through interview.
+**Inputs:**
+- Subject to orient on: The project/feature being planned
+- Current state: Codebase, documentation, existing plans (if available)
+- Target state: What the plan needs to achieve (optional)
+
+**Output:** Orientation report documenting:
+- Project structure, conventions, and patterns
+- Existing implementations related to planned work
+- Gaps between current state and planning needs
+- Key constraints, dependencies, and technical debt
+
+**Fallback:** If scope too large, use `interviewing` primitive to narrow scope with user.
+
+---
 
 ### Elicit Requirements (→ KR2)
 
-Execute requirements elicitation using `defining` primitive when requirements are unclear or incomplete. Establish what success looks like, acceptance criteria, and constraints. Document requirements with testable criteria.
+Use `defining` primitive to establish clear requirements with acceptance criteria.
 
-**Fallback:** If requirements cannot be established, surface specific blockers to user for clarification.
+**Inputs:**
+- Task or goal: The project/feature to define
+- Context: Orientation report from previous step
+- Existing requirements or specifications (if available)
+
+**Output:** Requirements document with:
+- Success criteria (what "done" looks like)
+- Acceptance criteria (testable conditions)
+- Constraints (time, resources, dependencies)
+- Scope boundaries (what's in vs out)
+
+**Fallback:** If requirements cannot be established, use `interviewing` primitive to clarify with user.
+
+---
 
 ### Research Unknowns (→ KR3)
 
-Execute research using `investigating` primitive when significant unknowns exist that affect planning. Research technical approaches, dependencies, or risks before committing to plan. Reduce uncertainty before task sequencing.
+Use `investigating` primitive when significant technical unknowns exist that affect planning.
 
-**Fallback:** If research inconclusive, document uncertainty in plan with contingency tasks.
+**Inputs:**
+- Question or topic: Technical unknowns identified in requirements or orientation
+- Context: Orientation report and requirements document
+- Investigation scope: Specific aspects needing research
+
+**Output:** Investigation summary with:
+- Findings with sources cited
+- Confidence levels (known vs suspected vs unknown)
+- Viable approaches with tradeoffs
+- Recommendations for plan
+
+**Fallback:** If inconclusive, document uncertainty in plan with contingency tasks.
+
+---
 
 ### Create Task Plan (→ KR3)
 
-Execute task planning using `planning` primitive when requirements are clear and context is understood. Break work into tasks, identify dependencies, sequence appropriately, estimate complexity. Surface risks and unknowns.
+Use `planning` primitive to sequence work into actionable tasks with dependencies.
 
-**Fallback:** If planning blocked by unclear requirements, return to Elicit Requirements.
+**Inputs:**
+- Goal or task: The project/feature to plan (from requirements)
+- Existing definition: Requirements document from previous step
+- Codebase context: Orientation report
+- Known risks: Investigation findings (if available)
 
-### Identify and Mitigate Risks (→ KR3)
+**Output:** Development plan with:
+- Complete list of tasks (1-4 hour granularity)
+- Task dependencies (what must be done before what)
+- Sequenced plan with milestones
+- Risks and unknowns flagged
+- User confirmation that plan is acceptable
 
-Execute risk assessment using `protocols/risk_management.md` when plan exists but risks not fully addressed. Enumerate risks, assess likelihood and impact, determine mitigations. Add contingency tasks to plan if needed.
-
-**Fallback:** If risks are too high, present options to user (reduce scope, add spikes, accept risk).
-
-### Confirm with User (→ KR4)
-
-Execute confirmation using `protocols/pragmatics.md` (Recommended Option, Option Presentation) when plan is complete. Present plan summary, highlight key decisions and risks, request approval before implementation begins.
-
-**Fallback:** If user rejects, capture feedback and return to relevant task (requirements, planning, or risks).
+**Fallback:** If planning blocked by unclear requirements, return to Elicit Requirements task.
 
 ---
 
@@ -136,6 +169,10 @@ Execute confirmation using `protocols/pragmatics.md` (Recommended Option, Option
 **Dev Planning vs Feature Workflow:** Dev Planning produces a plan and stops. Feature Workflow includes implementation and validation. Use Dev Planning when you need plan approval before committing to implementation.
 
 **Plan granularity:** Tasks should be 1-4 hours of work. Larger tasks need decomposition. Smaller tasks can be grouped.
+
+**Risk identification and user confirmation:** These capabilities are built into the primitives above:
+- `planning` primitive includes "Surface Unknowns" action (identifies risks) and "Confirm with User" action (gets approval)
+- Use these primitive actions as part of the Create Task Plan task
 
 ---
 

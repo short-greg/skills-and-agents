@@ -37,10 +37,23 @@ A primitive is an **atomic cognitive action** - a single, indivisible operation 
 **Primitives are Goal Oriented**
 Each primitive has a clear Goal (what it achieves) and Key Results (how to verify achievement). Actions exist to serve Key Results. This creates accountability: a primitive succeeds or fails based on whether KRs are met.
 
+**Key Results Must Be Flexible**
+Key Results must be **outcome-focused, not task-specific**. The same primitive should support multiple use cases while achieving the same KRs.
+
+Example: `investigating` primitive can be used for:
+- **Research Unknowns** - Inputs: technical unknowns; Outputs: findings, approaches, recommendations
+- **Research Common Practices** - Inputs: domain to research; Outputs: best practices, tradeoffs, recommendations
+- **Diagnose Bug** - Inputs: symptoms, errors; Outputs: root cause, evidence, recommendations
+
+All achieve the same KRs: (1) Uncertainty reduced with grounded findings, (2) Recommendations provided.
+
+Different workflow tasks use different combinations of Actions, but all satisfy the same Key Results.
+
 **Key characteristics:**
 - Single-purpose (does one thing well)
 - Self-contained (can be used independently)
 - Exactly 2 Key Results (primitives are focused)
+- KRs are outcome-focused, not task-specific (flexible for multiple use cases)
 - 80-130 lines (130-150 acceptable with user permission)
 
 **When to create a primitive:**
@@ -131,7 +144,8 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 - [ ] **Self-contained:** Doesn't reference other primitives in scope or actions
 - [ ] **Research completed:** References section includes Claude Code docs + expert/academic sources
 - [ ] **Goal-oriented**: Actions each achieve a specific goal, goals are all in line with the scope
-- [ ] **Action-scope**: Do actions go beyond the scope of the primitive or do they leak to other primitives.
+- [ ] **Action-scope**: Do actions go beyond the scope of the primitive or do they leak to other primitives
+- [ ] **Flexible Key Results:** KRs are outcome-focused, not task-specific; can support at least 3 different use cases while achieving same KRs
 
 ---
 
@@ -141,10 +155,11 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 1. **Start with the question:** What specific question does this primitive answer?
 2. **Keep it atomic:** If you find yourself writing "first... then... finally...", it's probably a workflow
 3. **Exactly 2 KRs:** Consolidate related outcomes into compound Key Results
-4. **Simple requirements:** Primitives typically need 2-4 requirements, not 9
-5. **Self-contained:** Don't reference other primitives in scope or actions
-6. **Clear triggers:** Include natural phrases users might say to invoke this primitive
-7. **Output-focused:** Use "Output X" not "Find X" to ensure LLM documents work
+4. **Flexible KRs:** Write KRs that are outcome-focused, not task-specific - test by listing 3+ different use cases that achieve the same KRs
+5. **Simple requirements:** Primitives typically need 2-4 requirements, not 9
+6. **Self-contained:** Don't reference other primitives in scope or actions
+7. **Clear triggers:** Include natural phrases users might say to invoke this primitive
+8. **Output-focused:** Use "Output X" not "Find X" to ensure LLM documents work
 
 ---
 
