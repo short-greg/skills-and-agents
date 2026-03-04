@@ -10,7 +10,7 @@ Shape delivery to match intent and context.
 
 - [Goal](#goal) | [Intent](#intent) | [Scope](#scope)
 - [Artifacts and Outputs](#artifacts-and-outputs) — Framed Message, Option Set, Confidence Statement, Hedge Expression
-- [Core Approaches](#core-approaches) — Directness Calibration, Option Presentation, Confidence Signaling, Framing Techniques
+- [Core Approaches](#core-approaches) — Option Presentation, Confidence Signaling, Framing Techniques
 - [Example Patterns](#example-patterns) — Delivering Recommendations, Presenting Options with Framing
 
 ---
@@ -45,17 +45,6 @@ Techniques for suggesting, recommending, hedging, framing, and presenting option
 ---
 
 ## Core Approaches
-
-### Directness Calibration
-
-Use directness techniques to match communication force to situation requirements.
-
-| Technique | When | Why | How | Output/Artifact | Positive Validation | Negative Validation |
-|-----------|------|-----|-----|-----------------|---------------------|---------------------|
-| **Direct Assertion** | High stakes, clear authority, or explicit request for directness | To communicate unambiguously and efficiently | Use imperative mood, state conclusion first, eliminate hedging words, be explicit about expectations | Framed Message | Is meaning unambiguous? Is action clear? | Could the statement be misunderstood? Is it softer than intended? |
-| **Indirect Suggestion** | Relationship preservation matters, hierarchy is sensitive, or face-saving is needed | To influence without commanding | Use question form ("Have you considered...?"), present as observation, offer rather than instruct, use conditional language | Framed Message | Is suggestion clear despite indirection? Is face preserved? | Is it so indirect the point is lost? Does it seem passive-aggressive? |
-| **Graduated Directness** | Recipient's receptiveness is unknown | To calibrate force based on response | Start with softest form that could succeed, observe reception, increase directness if needed, match escalation to resistance | — | Is escalation path planned? Are you reading reception signals? | Are you starting too soft or too strong? |
-| **Context-Matched Force** | Different audiences or situations require different force | To match directness to context norms | Assess relationship (peer, subordinate, superior), assess culture (direct vs. indirect), assess stakes (high vs. low), adjust force accordingly | Framed Message | Does force match context? Would audience expect this level? | Is directness mismatched to relationship or culture? |
 
 ### Option Presentation
 
@@ -100,16 +89,13 @@ Structured example sequences for pragmatic communication in different contexts. 
 
 Use when providing guidance that should influence but not dictate.
 
-1. Assess relationship and context (Context-Matched Force)
-2. Determine appropriate directness level
-3. State recommendation with matched force
-4. Provide reasoning using explicit confidence levels (Explicit Confidence)
-5. Acknowledge alternatives exist (Balanced Options or Recommended Option)
-6. Hedge appropriately where uncertainty exists (Epistemic Hedging)
-7. Frame to match audience motivation (Gain vs. Loss Framing)
+1. State recommendation clearly (Recommended Option)
+2. Provide reasoning using explicit confidence levels (Explicit Confidence)
+3. Hedge appropriately where uncertainty exists (Epistemic Hedging)
+4. Frame to match audience motivation (Gain vs. Loss Framing)
+5. Acknowledge tradeoffs and alternatives
 
 **Exit Conditions:**
-- Recipient requests more directness → increase force, reduce hedging
 - Recipient pushes back → switch to Balanced Options, reduce advocacy
 - Uncertainty is too high to recommend → switch to presenting options without recommendation
 
@@ -122,8 +108,7 @@ Use when facilitating decisions with multiple valid paths.
 3. Choose presentation strategy (Balanced, Recommended, Ordered, or Default)
 4. Apply appropriate framing (Gain/Loss, Positive, Neutral, or Contrast)
 5. Signal confidence in each option's assessment (Explicit Confidence)
-6. Present with matched directness (Context-Matched Force)
-7. Make decision process clear (what happens next)
+6. Make decision process clear (what happens next)
 
 **Exit Conditions:**
 - Options are not genuinely distinct → consolidate before presenting
