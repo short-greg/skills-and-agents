@@ -4,138 +4,197 @@
 
 ---
 
-## Quick Start
+## Installation
 
-### Option 1: Submodule (Recommended)
+### Prerequisites
 
-```bash
-cd your-project
-git submodule add https://github.com/short-greg/skills-and-agents.git .skills-framework
-```
+- Claude Code installed ([code.claude.com/docs](https://code.claude.com/docs/en/skills))
+- GitHub CLI (`gh`) installed ([cli.github.com](https://cli.github.com/))
 
-Then create skill pointers (see [Skill Structure](#skill-structure) below).
+### Installation Steps
 
-### Option 2: Use the Setup Skill
+1. Clone the repository:
+   ```bash
+   gh repo clone short-greg/skills-and-agents
+   ```
 
-If you have Claude Code, run:
-```
-/setup-skill-env current
-```
+2. Navigate to your project:
+   ```bash
+   cd your-project
+   ```
 
-This will guide you through installation.
+3. Install skills with proper directory structure:
+   ```bash
+   # Install primitive skills
+   for file in ../skills-and-agents/primitives/*.md; do
+     [ "$(basename "$file")" = "README.md" ] && continue
+     [ "$(basename "$file")" = "base_primitive.md" ] && continue
+     skill_name=$(basename "$file" .md)
+     mkdir -p ".claude/skills/$skill_name"
+     cp "$file" ".claude/skills/$skill_name/SKILL.md"
+   done
+
+   # Install workflow skills (convert workflow_name.md to workflow-name)
+   for file in ../skills-and-agents/workflows/*_workflow.md; do
+     [ -f "$file" ] || continue
+     skill_name=$(basename "$file" .md | sed 's/_workflow$//' | tr '_' '-')
+     mkdir -p ".claude/skills/$skill_name"
+     cp "$file" ".claude/skills/$skill_name/SKILL.md"
+   done
+
+   # Copy protocols directory
+   cp -r ../skills-and-agents/protocols .claude/skills/
+   ```
+
+4. Verify installation:
+   ```bash
+   ls .claude/skills/
+   ```
+
+5. Skills are now available via slash commands (e.g., `/orienting`, `/defining`, `/dev-planning`)
 
 ---
 
 ## How It Works
 
-### Skill Structure
+### Skill Loading
 
-Skills are **lightweight pointers** in `.claude/skills/[name]/SKILL.md` that reference workflow files:
+**Claude Code automatically loads skills from `.claude/skills/`:**
+
+Put all skills into a folder using the name of the skill. Then put the skill Markdown file in a SKILL.md file.
 
 ```
 your-project/
 ├── .claude/
-│   └── skills/
-│       └── dev-planning/
-│           └── SKILL.md          # Points to workflow
-├── .skills-framework/            # Framework (submodule or copy)
-│   ├── primitives/
-│   ├── protocols/
-│   └── workflows/
-│       └── dev_planning_workflow.md
+│   └── skills/                   # Skills loaded automatically
+│       ├── [some skill]/
+│       │   └── SKILL.md          # /[some skill] skill
+│       ├── ...
+│       └── protocols/            # Referenced by skills
 └── CLAUDE.md
 ```
 
-**SKILL.md example:**
+**Each skill directory contains SKILL.md with frontmatter:**
+
 ```markdown
 ---
-name: dev-planning
-description: Create a development plan before implementation
-argument-hint: "[project or feature to plan]"
+name: orienting
+description: Understand the current state of a system, project, or task
+argument-hint: "[subject to orient on]"
+user-invocable: true              # Makes it a /orienting skill
 ---
 
-# Dev Planning
+# Orienting
 
-Follow [dev_planning_workflow.md](../../../.skills-framework/workflows/dev_planning_workflow.md).
+**Goal:** Produce accurate picture of current state...
+```
+
+**Invoke with:**
+```
+/orienting my-feature
+/dev-planning new-api
 ```
 
 ### Framework Components
 
-| Component | Purpose | Location |
-|-----------|---------|----------|
-| **Primitives** | Atomic cognitive actions | `.skills-framework/primitives/` |
-| **Protocols** | Reusable reasoning patterns | `.skills-framework/protocols/` |
-| **Workflows** | Multi-step processes | `.skills-framework/workflows/` |
+**Primitives** — Atomic cognitive actions (orienting, defining, planning, designing, implementing, evaluating, investigating, brainstorming, maintaining, positioning)
+
+**Workflows** — Multi-step processes that compose primitives (dev-planning)
+
+**Protocols** — Supporting patterns and techniques referenced by skills (thinking, transparency, risk management, etc.)
 
 ---
 
-## Available Components
+## Creating Custom Skills
 
-### Primitives (10)
+### Create a New Skill
 
-| File | Purpose |
-|------|---------|
-| base.md | Base steps all primitives follow |
-| orienting.md | Understand current state |
-| defining.md | Establish requirements |
-| planning.md | Sequence actions |
-| designing.md | Plan technical approach |
-| implementing.md | Write code |
-| evaluating.md | Assess against criteria |
-| investigating.md | Research and diagnose |
-| brainstorming.md | Generate options |
-| maintaining.md | Keep system healthy |
+```bash
+# Create skill directory and file
+mkdir -p .claude/skills/my-skill
+touch .claude/skills/my-skill/SKILL.md
+```
 
-### Protocols (13)
+Edit `.claude/skills/my-skill/SKILL.md`:
 
-| File | Purpose |
-|------|---------|
-| tracking_and_recovery.md | Progress tracking and recovery |
-| thinking.md | Reasoning techniques |
-| discipline.md | Systematic enumeration |
-| pragmatics.md | Communication calibration |
-| interviewing.md | Eliciting information |
-| instruction_giving.md | Clear instructions |
-| criteria_setting.md | Defining success criteria |
-| goal_setting.md | Setting objectives |
-| risk_management.md | Risk assessment |
-| transparency.md | Documentation practices |
-| software_quality.md | Quality dimensions |
-| system_modularity.md | Modular design |
-| frame_of_mind.md | Expert reasoning |
-
-### Workflows (2 core)
-
-| File | Purpose |
-|------|---------|
-| dynamic_workflow_base.md | Base for dynamic workflows |
-| dev_planning_workflow.md | Development planning |
-
+```markdown
+---
+name: my-skill
+description: What this skill does
+argument-hint: "[what user provides]"
+user-invocable: true
 ---
 
-## Creating Skills
+# My Skill
 
-1. **Create skill directory:** `.claude/skills/my-skill/`
-2. **Create SKILL.md** with frontmatter and workflow reference
-3. **Invoke with:** `/my-skill [args]`
+**Goal:** What this skill achieves
+
+**Intent:** Why this skill exists
+
+Follow these steps...
+```
+
+**Invoke:** `/my-skill [args]`
+
+### Skill Frontmatter Fields
+
+- `name:` Skill name for invocation (use `/name`)
+- `description:` What the skill does
+- `argument-hint:` What arguments the skill expects
+- `user-invocable:` `true` to make it callable with `/name`
+- `allowed-tools:` Tools the skill can use (optional)
 
 ---
 
 ## Updating Framework
 
-If using submodule:
-```bash
-git submodule update --remote .skills-framework
-```
+To get the latest version:
+
+1. Pull latest changes from this repository:
+   ```bash
+   cd /path/to/skills-and-agents
+   git pull
+   ```
+
+2. Re-run the installation commands from step 3 in the [Installation Steps](#installation-steps) to update your project's skills
 
 ---
 
 ## Tool Compatibility
 
-- Claude Code (`.claude/skills/`)
-- Cursor (adapt paths)
-- Windsurf (adapt paths)
-- Others (adapt to your tool's format)
+This framework follows Claude Code's skill structure and is designed for:
+
+- **Claude Code** (`.claude/skills/`) - Primary support, skills auto-loaded
+- **Cursor** - Adapt paths and invocation method
+- **Windsurf** - Adapt paths and invocation method
+- **Custom AI Tools** - Use the markdown files as templates
+
+For other tools, adapt the file structure to match your tool's skill/agent format.
+
+---
+
+## Troubleshooting
+
+### Skills Not Loading
+
+1. Verify files are in `.claude/skills/` directory
+2. Check frontmatter has `user-invocable: true`
+3. Restart Claude Code to reload skills
+4. Run `/help` to see loaded skills
+
+### Skills Not Executing Correctly
+
+1. Check skill references correct protocols (in `.claude/skills/protocols/`)
+2. Verify skill directory structure is correct (`skill-name/SKILL.md`)
+3. Review Claude Code logs for errors
+
+---
+
+## References
+
+- [Claude Code Skills Documentation](https://code.claude.com/docs/en/skills)
+- [How to Use Skills in Claude Code](https://skywork.ai/blog/how-to-use-skills-in-claude-code-install-path-project-scoping-testing/)
+- [Mastering Claude Skills Guide](https://apidog.com/blog/claude-skills/)
 
 ---
 
