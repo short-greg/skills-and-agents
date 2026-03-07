@@ -1,4 +1,4 @@
-# Primitive Creation Guideline
+# Mode Creation Guideline
 
 **This guideline inherits from [skill_creation_guideline.md](skill_creation_guideline.md).**
 
@@ -8,9 +8,9 @@ Read the base skill guideline first for common instructions.
 
 ## Table of Contents
 
-- [Primitive Creation Guideline](#primitive-creation-guideline)
+- [Mode Creation Guideline](#mode-creation-guideline)
   - [Table of Contents](#table-of-contents)
-  - [What is a Primitive?](#what-is-a-primitive)
+  - [What is a Mode?](#what-is-a-mode)
   - [Steps](#steps)
   - [Writing Style](#writing-style)
   - [Validation Criteria](#validation-criteria)
@@ -19,11 +19,11 @@ Read the base skill guideline first for common instructions.
 
 ---
 
-## What is a Primitive?
+## What is a Mode?
 
-A primitive is an **atomic cognitive action** - a single, indivisible operation that cannot be meaningfully decomposed into smaller steps.
+A mode is an **atomic cognitive action** - a single, indivisible operation that cannot be meaningfully decomposed into smaller steps.
 
-**Primitives answer one specific question:**
+**Modes answer one specific question:**
 - `orienting` - "Where are we now?"
 - `defining` - "What are we building and how will we know it's done?"
 - `designing` - "How should we build this?"
@@ -34,13 +34,13 @@ A primitive is an **atomic cognitive action** - a single, indivisible operation 
 - `planning` - "What steps and in what order?"
 - `maintaining` - "Is this system healthy and well-documented?"
 
-**Primitives are Goal Oriented**
-Each primitive has a clear Goal (what it achieves) and Key Results (how to verify achievement). Actions exist to serve Key Results. This creates accountability: a primitive succeeds or fails based on whether KRs are met.
+**Modes are Goal Oriented**
+Each mode has a clear Goal (what it achieves) and Key Results (how to verify achievement). Actions exist to serve Key Results. This creates accountability: a mode succeeds or fails based on whether KRs are met.
 
 **Key Results Must Be Flexible**
-Key Results must be **outcome-focused, not task-specific**. The same primitive should support multiple use cases while achieving the same KRs.
+Key Results must be **outcome-focused, not task-specific**. The same mode should support multiple use cases while achieving the same KRs.
 
-Example: `investigating` primitive can be used for:
+Example: `investigating` mode can be used for:
 - **Research Unknowns** - Inputs: technical unknowns; Outputs: findings, approaches, recommendations
 - **Research Common Practices** - Inputs: domain to research; Outputs: best practices, tradeoffs, recommendations
 - **Diagnose Bug** - Inputs: symptoms, errors; Outputs: root cause, evidence, recommendations
@@ -52,22 +52,22 @@ Different workflow tasks use different combinations of Actions, but all satisfy 
 **Key characteristics:**
 - Single-purpose (does one thing well)
 - Self-contained (can be used independently)
-- Exactly 2 Key Results (primitives are focused)
+- Exactly 2 Key Results (modes are focused)
 - KRs are outcome-focused, not task-specific (flexible for multiple use cases)
 - 80-130 lines (130-150 acceptable with user permission)
 
-**When to create a primitive:**
-- A distinct cognitive operation not covered by existing primitives
+**When to create a mode:**
+- A distinct cognitive operation not covered by existing modes
 - An atomic action that cannot be broken down further
-- A clear question it answers that no other primitive answers
+- A clear question it answers that no other mode answers
 
 ---
 
 ## Steps
 
-Follow these steps to create and validate a primitive.
+Follow these steps to create and validate a mode.
 
-1. Elicit the goal and intent of the primitive
+1. Elicit the goal and intent of the mode
 2. Clarify your understanding
 3. Confirm it is not already covered
 4. Critique whether it is already covered
@@ -77,7 +77,7 @@ Follow these steps to create and validate a primitive.
    3. Domain-specific web research
 6. **Create decision table** - Map each protocol to actions. Output a table with columns:
    - Protocol name
-   - Maps to Action (which action in the primitive would use this protocol?)
+   - Maps to Action (which action in the mode would use this protocol?)
    - Reasons to use (how it helps that action)
    - Reasons not to use (why it might not fit)
    - Decision (use or don't use)
@@ -97,8 +97,8 @@ Follow these steps to create and validate a primitive.
    - `pragmatics.md` — communication style and framing
    - `frame_of_mind.md` — establishing role and stance
    - `risk_management.md` — identifying and mitigating risks
-7. Create the primitive according to the template
-8. Validate the primitive
+7. Create the mode according to the template
+8. Validate the mode
 9. Do final confirmation from the creator
 
 
@@ -106,10 +106,10 @@ Follow these steps to create and validate a primitive.
 
 ## Writing Style
 
-Primitives are **instruction-focused** or **evaluation-focused**, not descriptive essays.
+Modes are **instruction-focused** or **evaluation-focused**, not descriptive essays.
 
 **Key principles:**
-1. **Action-oriented OR evaluation-oriented language** - Use imperatives ("Identify gaps") or checks ("Gaps identified?"), not descriptions ("The primitive identifies...")
+1. **Action-oriented OR evaluation-oriented language** - Use imperatives ("Identify gaps") or checks ("Gaps identified?"), not descriptions ("The mode identifies...")
 2. **Evaluation criteria over descriptions** - Focus on what to check or do, not what things mean
 3. **Minimal descriptions** - Goal/Intent/Scope should be brief (2-3 sentences max)
 4. **Output-focused language** - Use "Output evidence" not "Find evidence" to prevent LLMs skipping documentation
@@ -119,7 +119,7 @@ Primitives are **instruction-focused** or **evaluation-focused**, not descriptiv
 - 2-4 requirements vs workflows with 5-9
 - Exactly 2 Key Results vs workflows with 3-4
 - Actions show KR linkage and protocol usage
-- All primitives inherit from `base_primitive.md` (execution pattern)
+- All modes inherit from `base_mode.md` (execution pattern)
 
 ---
 
@@ -138,13 +138,13 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 - [ ] **Precise:** Specific, unambiguous language
 - [ ] **LLM-focused:** Non-obvious constraints, no needless definitions
 
-**Primitive-Specific:**
-- [ ] **Distinct Purpose:** Answers question no other primitive answers (<50% overlap with existing)
-- [ ] **Atomic:** Single cognitive action, not decomposable into multiple primitives
-- [ ] **Self-contained:** Doesn't reference other primitives in scope or actions
+**Mode-Specific:**
+- [ ] **Distinct Purpose:** Answers question no other mode answers (<50% overlap with existing)
+- [ ] **Atomic:** Single cognitive action, not decomposable into multiple modes
+- [ ] **Self-contained:** Doesn't reference other modes in scope or actions
 - [ ] **Research completed:** References section includes Claude Code docs + expert/academic sources
 - [ ] **Goal-oriented**: Actions each achieve a specific goal, goals are all in line with the scope
-- [ ] **Action-scope**: Do actions go beyond the scope of the primitive or do they leak to other primitives
+- [ ] **Action-scope**: Do actions go beyond the scope of the mode or do they leak to other modes
 - [ ] **Flexible Key Results:** KRs are outcome-focused, not task-specific; can support at least 3 different use cases while achieving same KRs
 
 ---
@@ -152,27 +152,27 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 
 ## Tips
 
-1. **Start with the question:** What specific question does this primitive answer?
+1. **Start with the question:** What specific question does this mode answer?
 2. **Keep it atomic:** If you find yourself writing "first... then... finally...", it's probably a workflow
 3. **Exactly 2 KRs:** Consolidate related outcomes into compound Key Results
 4. **Flexible KRs:** Write KRs that are outcome-focused, not task-specific - test by listing 3+ different use cases that achieve the same KRs
-5. **Simple requirements:** Primitives typically need 2-4 requirements, not 9
-6. **Self-contained:** Don't reference other primitives in scope or actions
-7. **Clear triggers:** Include natural phrases users might say to invoke this primitive
+5. **Simple requirements:** Modes typically need 2-4 requirements, not 9
+6. **Self-contained:** Don't reference other modes in scope or actions
+7. **Clear triggers:** Include natural phrases users might say to invoke this mode
 8. **Output-focused:** Use "Output X" not "Find X" to ensure LLM documents work
 
 ---
 
 ## Template
 
-**Note:** Text in `[brackets]` are placeholders - replace with actual content. Text in `<angle brackets>` are guidelines - do NOT include in your final primitive. Instructions that go in the final template, are not included in either.
+**Note:** Text in `[brackets]` are placeholders - replace with actual content. Text in `<angle brackets>` are guidelines - do NOT include in your final mode. Instructions that go in the final template, are not included in either.
 
 ```markdown
 ---
-name: primitive-name
+name: mode-name
 description: >
   [Concise definition - one sentence starting with gerund, e.g. "Understanding the current state of a system, project, or task."]. [What it does in more detail.]
-  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive. They are specified in the instruction body.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this mode. They are specified in the instruction body.
   Triggers on: "[trigger phrase 1]", "[trigger phrase 2]".
   keywords: [keyword1], [keyword2], [keyword3], [keyword4], [keyword5]
 argument-hint: "[optional: e.g. [subject] or [topic]]"
@@ -181,26 +181,26 @@ user-invocable: true
 allowed-tools: Read, Grep
 ---
 
-# Primitive Name
+# Mode Name
 
-**Goal:** [What this primitive achieves - one sentence.]
+**Goal:** [What this mode achieves - one sentence.]
 
-**Intent:** [Why this primitive exists - what problem it solves or prevents.]
+**Intent:** [Why this mode exists - what problem it solves or prevents.]
 
-**Scope:** [What this primitive covers. A primitive answers one question that no other primitive answers.]
+**Scope:** [What this mode covers. A mode answers one question that no other mode answers.]
 
 ---
 
 ## Key Results - KR
 
-You must satisfy these to complete the primitive successfully.
+You must satisfy these to complete the mode successfully.
 
 1. [measurable outcome]
 2. [measurable outcome]
 
 ## Requirements and Constraints - REQ
 
-Constraints on how to execute the primitive.
+Constraints on how to execute the mode.
 
 1. [constraint on execution]
 2. [constraint on execution]
@@ -209,7 +209,7 @@ Constraints on how to execute the primitive.
 
 ## Steps
 
-MUST read and follow steps in `base_primitive.md`
+MUST read and follow steps in `base_mode.md`
 
 ---
 
@@ -218,20 +218,20 @@ MUST read and follow steps in `base_primitive.md`
 **Required:** [what must be provided to proceed]
 
 **Optional:**
-- [optional input that enhances the primitive]
-- [optional input that enhances the primitive]
+- [optional input that enhances the mode]
+- [optional input that enhances the mode]
 
 ## Postconditions
 
-**Success:** [state when primitive completes successfully]
+**Success:** [state when mode completes successfully]
 
-**Failure:** [state when primitive cannot complete]. Output a request listing the information that was missing and what is needed to succeed.
+**Failure:** [state when mode cannot complete]. Output a request listing the information that was missing and what is needed to succeed.
 
 ---
 
 ## Possible Actions
 
-**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this mode.
 
 Select or propose actions based on context. Each action shows which KR it serves.
 
@@ -273,20 +273,20 @@ Select or propose actions based on context. Each action shows which KR it serves
 
 ## Additional Notes and Terms
 
-<Additional notes, clarifications, terms, or distinctions from other primitives. Write "None" if not applicable.>
+<Additional notes, clarifications, terms, or distinctions from other modes. Write "None" if not applicable.>
 
 ---
 
 ## References
 
-<REQUIRED: Research must be completed before creating a primitive.
+<REQUIRED: Research must be completed before creating a mode.
 
 Step 1 - Claude Code's documentation FIRST:
-- Search: `site:claude.ai OR site:docs.anthropic.com [primitive topic] best practices`
+- Search: `site:claude.ai OR site:docs.anthropic.com [mode topic] best practices`
 - These guidelines take precedence
 
 Step 2 - Expert/academic sources (in addition):
-- Search: "[primitive topic] techniques academic" or "[topic] best practices software engineering"
+- Search: "[mode topic] techniques academic" or "[topic] best practices software engineering"
 - Example: Creating `thinking` → search "reasoning techniques academic cognitive science"
 - Example: Creating `designing` → search "software design principles best practices">
 

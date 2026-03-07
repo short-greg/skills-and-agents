@@ -2,7 +2,7 @@
 name: planning
 description: >
   Sequencing actions to achieve a goal. Produces a sequence of actions to accomplish a goal before starting work.
-  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this mode.
   Triggers on: "plan this", "how should we approach this", "break this down",
   "what should we do first", "create a plan", "what are the steps".
   keywords: sequencing, ordering, decomposing, scheduling, prioritizing
@@ -37,7 +37,7 @@ allowed-tools: Read, Grep
 
 ## Steps
 
-MUST read and follow steps in `base_primitive.md`
+MUST read and follow steps in `base_mode.md`
 
 ---
 
@@ -60,7 +60,7 @@ MUST read and follow steps in `base_primitive.md`
 
 ## Possible Actions
 
-**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this mode.
 
 Select or propose actions based on context. Each action shows which KR it serves.
 

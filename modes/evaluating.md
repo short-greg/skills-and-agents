@@ -2,7 +2,7 @@
 name: evaluating
 description: >
   Assessing whether a solution, approach, or claim is correct and/or of quality. Compares target against criteria using evidence-based evaluation.
-  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this mode.
   Triggers on: "verify this", "test this", "does this work", "check if correct", "validate the result", "run the tests", "confirm this", "is this right",
   "critique this", "review this", "what's wrong with this", "how can I improve", "code review", "give me feedback", "find issues", "red team this", "poke holes".
   keywords: validating, verifying, critiquing
@@ -38,7 +38,7 @@ allowed-tools: Read, Grep, Bash
 
 ## Steps
 
-MUST read and follow steps in `base_primitive.md`
+MUST read and follow steps in `base_mode.md`
 
 ---
 
@@ -75,7 +75,7 @@ MUST read and follow steps in `base_primitive.md`
 
 ## Possible Actions
 
-**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this mode.
 
 Select or propose actions based on context. Each action shows which KR it serves.
 

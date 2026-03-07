@@ -2,7 +2,7 @@
 name: interviewing
 description: >
   Gathering information from users through effective questioning. Elicits requirements, clarifies intent, and discovers constraints to reduce uncertainty.
-  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this mode.
   Triggers on: "ask the user", "clarify requirements", "what do they want", "gather requirements",
   "interview the user", "find out what they need", "elicit requirements".
   keywords: asking, clarifying, eliciting, gathering, questioning
@@ -37,7 +37,7 @@ allowed-tools: Read, Grep
 
 ## Steps
 
-MUST read and follow steps in `base_primitive.md`
+MUST read and follow steps in `base_mode.md`
 
 ---
 
@@ -57,7 +57,7 @@ MUST read and follow steps in `base_primitive.md`
 - Context from prior conversation
 - Existing requirements or specifications
 - Codebase or documentation to infer from
-- Information request from failed primitive (what's missing and what's needed)
+- Information request from failed mode (what's missing and what's needed)
 
 ## Postconditions
 
@@ -69,22 +69,22 @@ MUST read and follow steps in `base_primitive.md`
 
 ## Possible Actions
 
-**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this mode.
 
 Select or propose actions based on context. Each action shows which KR it serves.
 
 ### Parse Information Request (→ KR1)
 
-**Goal:** Understand what information another primitive needs
+**Goal:** Understand what information another mode needs
 
-**When:** Received an information request from a failed primitive
+**When:** Received an information request from a failed mode
 
 **Protocol:** `protocols/elicitation.md`
 
 **Instructions:** Parse the request to identify what information is missing and what's needed to succeed. Determine what questions need to be asked to fulfill the request. Prioritize critical information. Use inference first to check if any requested information is already available.
 
 **Inputs:**
-- Information request from failed primitive (required)
+- Information request from failed mode (required)
 - Context from prior work (optional)
 
 **Default Output:** Clarified understanding of what information is needed and prioritized question list

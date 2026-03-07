@@ -1,7 +1,7 @@
 **This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
 - **Steps section** — Sequential execution order
 - **Tasks section** — Replaces generic Execution Items
-- **Available Primitives section** — Lists primitives used in this workflow
+- **Available Modes section** — Lists modes used in this workflow
 - **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
 
 ---
@@ -105,11 +105,11 @@ Output your reasoning.
 
 ### Understand Context (→ KR1, KR2)
 
-Use `orient` primitive. Understand PRD/plan, project structure, identify parallelization opportunities.
+Use `orient` mode. Understand PRD/plan, project structure, identify parallelization opportunities.
 
 ### Brainstorm Decomposition (→ KR2)
 
-Use `brainstorm` primitive. Explore decomposition options:
+Use `brainstorm` mode. Explore decomposition options:
 
 - By component (frontend, backend, database)
 - By feature (user stories, use cases)
@@ -119,7 +119,7 @@ Recommend approach that minimizes file overlap.
 
 ### Define Task Specs (→ KR2, KR3, KR4)
 
-Use `define` primitive. Create task specs (one per task) with:
+Use `define` mode. Create task specs (one per task) with:
 
 - Goal and Key Results
 - Dependencies (which tasks must complete first)
@@ -132,7 +132,7 @@ Create dependency graph with execution waves.
 
 ### Setup Worktrees (→ KR6)
 
-Use `implement` primitive. Create worktrees for Wave 1 tasks (no dependencies):
+Use `implement` mode. Create worktrees for Wave 1 tasks (no dependencies):
 
 ```bash
 git worktree add ../{repo}-worktrees/{task-name} -b parallel/{task-name}
@@ -142,7 +142,7 @@ Copy task spec to each worktree.
 
 ### Track and Merge (→ KR5)
 
-Use `validate` and `implement` primitives. Monitor status, merge completed tasks in dependency order:
+Use `validate` and `implement` modes. Monitor status, merge completed tasks in dependency order:
 
 1. Check task status (not started, in progress, ready for merge, merged)
 2. Merge ready tasks respecting dependencies
@@ -156,9 +156,9 @@ Use `validate` and `implement` primitives. Monitor status, merge completed tasks
 
 ---
 
-## Available Primitives
+## Available Modes
 
-Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
+Modes are atomic cognitive actions in `modes/`. Use these to execute the workflow. If you do not understand a mode, read it before using it.
 
 - `orient` — Understand PRD/plan, project structure, identify parallelization opportunities
 - `brainstorm` — Explore decomposition options

@@ -79,7 +79,7 @@ Select and execute tasks to achieve Key Results. Each task shows which KR it ser
 
 ### Orient on Project (→ KR1)
 
-Use `orienting` primitive to understand project context and current state before planning begins.
+Use `orienting` mode to understand project context and current state before planning begins.
 
 **Inputs:**
 - Subject to orient on: The project/feature being planned
@@ -92,13 +92,13 @@ Use `orienting` primitive to understand project context and current state before
 - Gaps between current state and planning needs
 - Key constraints, dependencies, and technical debt
 
-**Fallback:** If scope too large, use `interviewing` primitive to narrow scope with user.
+**Fallback:** If scope too large, use `interviewing` mode to narrow scope with user.
 
 ---
 
 ### Elicit Requirements (→ KR2)
 
-Use `defining` primitive to establish clear requirements with acceptance criteria.
+Use `defining` mode to establish clear requirements with acceptance criteria.
 
 **Inputs:**
 - Task or goal: The project/feature to define
@@ -111,13 +111,13 @@ Use `defining` primitive to establish clear requirements with acceptance criteri
 - Constraints (time, resources, dependencies)
 - Scope boundaries (what's in vs out)
 
-**Fallback:** If requirements cannot be established, use `interviewing` primitive to clarify with user.
+**Fallback:** If requirements cannot be established, use `interviewing` mode to clarify with user.
 
 ---
 
 ### Research Unknowns (→ KR3)
 
-Use `investigating` primitive when significant technical unknowns exist that affect planning.
+Use `investigating` mode when significant technical unknowns exist that affect planning.
 
 **Inputs:**
 - Question or topic: Technical unknowns identified in requirements or orientation
@@ -136,7 +136,7 @@ Use `investigating` primitive when significant technical unknowns exist that aff
 
 ### Create Task Plan (→ KR3)
 
-Use `planning` primitive to sequence work into actionable tasks with dependencies.
+Use `planning` mode to sequence work into actionable tasks with dependencies.
 
 **Inputs:**
 - Goal or task: The project/feature to plan (from requirements)
@@ -155,7 +155,7 @@ Use `planning` primitive to sequence work into actionable tasks with dependencie
 
 ---
 
-## Available Primitives
+## Available Modes
 
 - `orienting` — Understand project context and current state
 - `defining` — Establish requirements and acceptance criteria
@@ -170,9 +170,9 @@ Use `planning` primitive to sequence work into actionable tasks with dependencie
 
 **Plan granularity:** Tasks should be 1-4 hours of work. Larger tasks need decomposition. Smaller tasks can be grouped.
 
-**Risk identification and user confirmation:** These capabilities are built into the primitives above:
-- `planning` primitive includes "Surface Unknowns" action (identifies risks) and "Confirm with User" action (gets approval)
-- Use these primitive actions as part of the Create Task Plan task
+**Risk identification and user confirmation:** These capabilities are built into the modes above:
+- `planning` mode includes "Surface Unknowns" action (identifies risks) and "Confirm with User" action (gets approval)
+- Use these mode actions as part of the Create Task Plan task
 
 ---
 

@@ -2,7 +2,7 @@
 name: defining
 description: >
   Specifying the problem, goal, and constraints of a project or task. Establishes requirements, success criteria, and definition of done.
-  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this mode.
   Triggers on: "define this", "what are the requirements", "scope this out",
   "clarify requirements", "what should we create", "create a task description", "create a PRD".
   keywords: specifying, scoping, requirements, criteria, clarifying
@@ -40,7 +40,7 @@ allowed-tools: Read, Grep
 
 ## Steps
 
-MUST read and follow steps in `base_primitive.md`
+MUST read and follow steps in `base_mode.md`
 
 ---
 
@@ -64,13 +64,13 @@ MUST read and follow steps in `base_primitive.md`
 
 ## Possible Actions
 
-**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this mode.
 
 Select or propose actions based on context. Each action shows which KR it serves.
 
 ### Output Intention (→ All KRs)
 
-**Reference**: See `base_primitive`
+**Reference**: See `base_mode`
 
 **When**: Before executing any other action
 
@@ -99,7 +99,7 @@ Select or propose actions based on context. Each action shows which KR it serves
 
 **Protocol:** `protocols/transparency.md`
 
-[COMMENT: I reworded this. If it should interview, then it will fail. We'll create the interviewing primitive later]
+[COMMENT: I reworded this. If it should interview, then it will fail. We'll create the interviewing mode later]
 **Instructions:** Output a detailed questionnaire or description of what's needed using appropriate framing. If interviewing is preferred/possible, output the request and signal failure so outer skill can handle elicitation.
 
 **Inputs:**

@@ -19,7 +19,7 @@ This guideline explains how to create protocols for the skills-and-agents framew
 
 ## What is a Protocol?
 
-A protocol is a **standardized process or pattern** that multiple primitives and workflows follow. Protocols capture essential principles and patterns, distilling expert knowledge into reusable concepts.
+A protocol is a **standardized process or pattern** that multiple modes and workflows follow. Protocols capture essential principles and patterns, distilling expert knowledge into reusable concepts.
 
 **Examples of protocols:**
 - `tracking_and_recovery.md` - Progress tracking and resumption
@@ -34,7 +34,7 @@ A protocol is a **standardized process or pattern** that multiple primitives and
 - 100-150 lines (150-180 acceptable with user permission)
 
 **When to create a protocol:**
-- Pattern is used by multiple primitives/workflows
+- Pattern is used by multiple modes/workflows
 - Protocol provides non-obvious constraints
 - Process needs standardization across the framework
 - **Don't create when:** Used by only one skill (put it there instead), too specific to a use case, no clear process to define
@@ -77,7 +77,7 @@ Protocols are **instruction-focused**, not descriptive essays.
 4. **Example Patterns (optional)** - Step sequences with Exit Conditions sections
 5. **References** - Sources consulted during research
 
-**Structural differences from primitives:**
+**Structural differences from modes:**
 - 100-150 lines (150-180 acceptable with user permission)
 - Technique tables use 7-column format
 - Example patterns (not exhaustive)
@@ -109,7 +109,7 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 - [ ] **Actionable:** Provides clear techniques, not vague philosophy
 
 **Protocol-Specific:**
-- [ ] **Used by multiple skills:** Not just one primitive/workflow
+- [ ] **Used by multiple skills:** Not just one mode/workflow
 - [ ] **Clear boundaries:** Scope states what's included and excluded
 - [ ] **Research completed:** References section includes relevant sources
 
@@ -123,7 +123,7 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 4. **Output-oriented instructions:** "Output evaluation" better than "Evaluate"
 5. **Avoid vague platitudes:** Not "make good decisions", but "Evaluate: Which objectives does this optimize? Which does it sacrifice?"
 6. **Reference, don't repeat:** Link to related protocols instead of duplicating content
-7. **Test with multiple skills:** Verify the protocol works across different primitives/workflows
+7. **Test with multiple skills:** Verify the protocol works across different modes/workflows
 
 ---
 

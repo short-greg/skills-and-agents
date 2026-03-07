@@ -1,6 +1,6 @@
 # Skills and Agents Framework
 
-**A framework for building reliable AI coding assistant skills with primitives, workflows, and protocols.**
+**A framework for building reliable AI coding assistant skills with modes, workflows, and protocols.**
 
 ---
 
@@ -14,9 +14,9 @@
 ### Installation Steps
 
 1. Ask the user whether to use gh to just fetch the files to clone, or use another method, recommend gh to just fetch directly.
-2. Copy all primitives, workflows and protocols.
-   1. Copy protocols into a protocols directory underneat Claude `.claude/protocols/`
-   2. Copy each primitive and workflow into a new directory for it
+2. Copy all modes, workflows and protocols.
+   1. Copy protocols into a protocols directory underneath Claude `.claude/protocols/`
+   2. Copy each mode and workflow into a new directory for it
    .claude/skills/<skill name>/SKILL.md
 3. Verify installation:
    ```bash
@@ -69,9 +69,9 @@ user-invocable: true              # Makes it a /orienting skill
 
 ### Framework Components
 
-**Primitives** — Atomic cognitive actions (orienting, defining, planning, designing, implementing, evaluating, investigating, brainstorming, maintaining, positioning)
+**Modes** — Atomic cognitive actions (orienting, defining, planning, designing, implementing, evaluating, investigating, brainstorming, maintaining, positioning)
 
-**Workflows** — Multi-step processes that compose primitives (dev-planning)
+**Workflows** — Multi-step processes that compose modes (dev-planning)
 
 **Protocols** — Supporting patterns and techniques referenced by skills (thinking, transparency, risk management, etc.)
 

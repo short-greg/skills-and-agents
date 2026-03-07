@@ -64,12 +64,12 @@ Three fundamental hurdles limit what LLMs can achieve in producing maintainable 
 
 ### Modularity
 
-1. **Should primitives be invokable standalone?**
-   - Currently primitives (orient, define, design, implement, validate, etc.) are composed by workflows
+1. **Should modes be invokable standalone?**
+   - Currently modes (orient, define, design, implement, validate, etc.) are composed by workflows
    - Could someone invoke just `define` without a full workflow?
-   - Primitives are generic; workflows provide context
+   - Modes are generic; workflows provide context
 
-2. **Should there be additional "building block" primitives?**
+2. **Should there be additional "building block" modes?**
    - Current set: orient, define, design, implement, validate, investigate, brainstorm, critique
    - Potential additions: `interview`, `assess`, `synthesize`
    - Composed into workflows as needed
@@ -84,7 +84,7 @@ Three fundamental hurdles limit what LLMs can achieve in producing maintainable 
 
 ### Naming
 
-- Primitives are generic and reusable (`brainstorm`, not `bugfix-brainstorm`)
+- Modes are generic and reusable (`brainstorm`, not `bugfix-brainstorm`)
 - Workflows are domain-specific (`bugfix_workflow`, `feature_workflow`)
 - This separation is intentional but may need refinement
 
@@ -109,7 +109,7 @@ plugin/
 │   ├── <prefix>-setup/SKILL.md
 │   └── <prefix>-workflow/SKILL.md
 │
-├── primitives/                # Bundled - core cognitive actions
+├── modes/                # Bundled - core cognitive actions
 ├── workflows/                 # Bundled - multi-step processes
 ├── protocols/                 # Bundled - reusable patterns
 └── templates/                 # Bundled - skill templates

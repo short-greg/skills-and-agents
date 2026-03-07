@@ -1,7 +1,7 @@
 **This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
 - **Steps section** — Sequential execution order
 - **Tasks section** — Replaces generic Execution Items
-- **Available Primitives section** — Lists primitives used in this workflow
+- **Available Modes section** — Lists modes used in this workflow
 - **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
 
 ---
@@ -105,11 +105,11 @@ Output your reasoning.
 
 ### Understand Context (→ KR1, KR2)
 
-Use `orient` primitive. Understand code/feature to test, project test conventions, existing patterns.
+Use `orient` mode. Understand code/feature to test, project test conventions, existing patterns.
 
 ### Analyze Testability (→ KR2, KR5)
 
-Use `investigate` primitive. Identify what needs testing at each level:
+Use `investigate` mode. Identify what needs testing at each level:
 
 - **Units:** Functions/methods to test in isolation
 - **Integrations:** Component interactions
@@ -119,7 +119,7 @@ Use `investigate` primitive. Identify what needs testing at each level:
 
 ### Design Strategy (→ KR3)
 
-Use `design` primitive. Plan test distribution following pyramid:
+Use `design` mode. Plan test distribution following pyramid:
 
 - Unit tests (many): Individual functions, edge cases, error handling
 - Integration tests (some): Component interactions, API contracts
@@ -127,7 +127,7 @@ Use `design` primitive. Plan test distribution following pyramid:
 
 ### Identify Test Cases (→ KR4, KR5)
 
-Use `brainstorm` primitive. Enumerate specific test cases for each level:
+Use `brainstorm` mode. Enumerate specific test cases for each level:
 
 - What to test
 - Input variations (valid, invalid, edge)
@@ -136,7 +136,7 @@ Use `brainstorm` primitive. Enumerate specific test cases for each level:
 
 ### Generate Output (→ KR6)
 
-Use `implement` primitive. Produce one of:
+Use `implement` mode. Produce one of:
 
 - **Strategy document** — For planning and review
 - **Test code skeleton** — For implementation
@@ -145,9 +145,9 @@ Use `implement` primitive. Produce one of:
 
 ---
 
-## Available Primitives
+## Available Modes
 
-Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
+Modes are atomic cognitive actions in `modes/`. Use these to execute the workflow. If you do not understand a mode, read it before using it.
 
 - `orient` — Understand code/feature to test, project test conventions, existing patterns
 - `investigate` — Analyze testability: units, integrations, boundaries, edge cases

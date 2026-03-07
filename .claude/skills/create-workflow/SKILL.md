@@ -1,23 +1,23 @@
 ---
 name: create-workflow
-description: Create a new workflow (multi-step process composing primitives) for the skills framework
+description: Create a new workflow (multi-step process composing modes) for the skills framework
 argument-hint: "[workflow name and purpose]"
 ---
 
 # Create Workflow
 
-Create a reliable, recoverable workflow that orchestrates primitives effectively.
+Create a reliable, recoverable workflow that orchestrates modes effectively.
 
 ## When to Use
 
 Use this skill when:
-- Task requires multiple primitives in sequence
+- Task requires multiple modes in sequence
 - Order/dependencies matter
 - Recovery from interruption is valuable
 - Task is common enough to codify
 
 Do NOT use when:
-- Single primitive suffices
+- Single mode suffices
 - Sequence is ad-hoc and won't recur
 - Steps have no dependencies
 
@@ -29,13 +29,13 @@ Follow the workflow defined in `workflows/create_workflow_workflow.md`.
 
 1. **Understand existing workflows** — Check workflows/ for overlap
 2. **Define the workflow** — Name, goal, intent, scope, type, style
-3. **Design the workflow** — Identify primitives, sequence, gates, iteration
+3. **Design the workflow** — Identify modes, sequence, gates, iteration
 4. **Write the workflow** — Create file in workflows/ with required sections
-5. **Validate** — Ensure composes primitives, has required protocols, recoverable
+5. **Validate** — Ensure composes modes, has required protocols, recoverable
 
 ## Key Principles
 
-- **Higher-order**: Workflows compose primitives, don't repeat them
+- **Higher-order**: Workflows compose modes, don't repeat them
 - **Prefer declarative**: Define goals and constraints, not rigid steps
 - **Required protocols**: Every workflow needs tracking, recovery, checklist_management
 - **Validation gates**: After steps that produce artifacts
@@ -43,7 +43,7 @@ Follow the workflow defined in `workflows/create_workflow_workflow.md`.
 
 ## Workflow Styles
 
-- **Declarative (preferred)**: Goal + key results + available primitives + constraints
+- **Declarative (preferred)**: Goal + key results + available modes + constraints
 - **Imperative**: Step-by-step sequence (only when order is strictly required)
 - **Hybrid**: Declarative goals with imperative validation gates
 

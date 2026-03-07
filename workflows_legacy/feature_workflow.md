@@ -1,7 +1,7 @@
 **This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
 - **Steps section** — Sequential execution order
 - **Tasks section** — Replaces generic Execution Items
-- **Available Primitives section** — Lists primitives used in this workflow
+- **Available Modes section** — Lists modes used in this workflow
 - **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
 
 ---
@@ -97,18 +97,18 @@ Per `reasoning.md` — reason about:
 
 1. **Complexity assessment** — Simple feature or complex? Uncertainty level?
 2. **Risk identification** — What could go wrong? Where are unknowns?
-3. **Approach selection** — Which primitives needed? What order?
+3. **Approach selection** — Which modes needed? What order?
 4. **Alternatives** — What if primary approach fails?
 
 Output your reasoning.
 
 ### Understand Context (→ KR4)
 
-Use `orient` primitive. Understand project structure, conventions, and where this feature fits.
+Use `orient` mode. Understand project structure, conventions, and where this feature fits.
 
 ### Define Requirements (→ KR1)
 
-Use `define` primitive. Establish requirements and success criteria.
+Use `define` mode. Establish requirements and success criteria.
 
 Per `goals_and_objectives.md` — requirements must be outcome-oriented and verifiable.
 
@@ -116,7 +116,7 @@ Per `goals_and_objectives.md` — requirements must be outcome-oriented and veri
 
 ### Design Approach (→ KR2)
 
-Use `design` primitive. Plan technical approach.
+Use `design` mode. Plan technical approach.
 
 Per `risk_management.md` — if uncertainty exists, invoke `investigate` before finalizing design.
 
@@ -124,7 +124,7 @@ Per `risk_management.md` — if uncertainty exists, invoke `investigate` before 
 
 ### Implement (→ KR3, KR4)
 
-Use `implement` primitive. Write code following the design.
+Use `implement` mode. Write code following the design.
 
 Per `documentation.md` — update documentation when implementation changes behavior or APIs.
 
@@ -132,7 +132,7 @@ Per `tracking.md` — add sub-tasks dynamically when scope expands.
 
 ### Validate (→ KR3)
 
-Use `validate` primitive. Verify implementation meets requirements.
+Use `validate` mode. Verify implementation meets requirements.
 
 **On failure:**
 - Invoke `investigate` to diagnose root cause
@@ -146,9 +146,9 @@ Per `documentation.md` — ensure all documentation reflects the implemented fea
 
 ---
 
-## Available Primitives
+## Available Modes
 
-Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
+Modes are atomic cognitive actions in `modes/`. Use these to execute the workflow. If you do not understand a mode, read it before using it.
 
 - `orient` — Understand project structure, conventions, and where this feature fits
 - `define` — Establish requirements and success criteria

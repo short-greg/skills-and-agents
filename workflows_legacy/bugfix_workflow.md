@@ -1,7 +1,7 @@
 **This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
 - **Steps section** — Sequential execution order
 - **Tasks section** — Replaces generic Execution Items
-- **Available Primitives section** — Lists primitives used in this workflow
+- **Available Modes section** — Lists modes used in this workflow
 - **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
 
 ---
@@ -105,21 +105,21 @@ Output your reasoning.
 
 ### Understand Context (→ KR1)
 
-Use `orient` primitive. Understand codebase, identify relevant code areas, testing conventions.
+Use `orient` mode. Understand codebase, identify relevant code areas, testing conventions.
 
 ### Reproduce Bug (→ KR1)
 
-Use `investigate` primitive. Create failing test that demonstrates the bug. This becomes the success criterion.
+Use `investigate` mode. Create failing test that demonstrates the bug. This becomes the success criterion.
 
 **On failure to reproduce:** Per `risk_management.md` — gather more information, check environment factors, consider intermittent issues.
 
 ### Generate Hypotheses (→ KR2)
 
-Use `brainstorm` primitive. Generate potential root causes ranked by likelihood. Scale hypothesis count with uncertainty.
+Use `brainstorm` mode. Generate potential root causes ranked by likelihood. Scale hypothesis count with uncertainty.
 
 ### Investigate Root Cause (→ KR2)
 
-Use `investigate` primitive. Test hypotheses through instrumentation, logging, analysis until root cause is confirmed.
+Use `investigate` mode. Test hypotheses through instrumentation, logging, analysis until root cause is confirmed.
 
 **Iteration:** Test most likely hypothesis first. If ruled out, test next. If all ruled out, generate new hypotheses.
 
@@ -129,15 +129,15 @@ Use `investigate` primitive. Test hypotheses through instrumentation, logging, a
 
 ### Define Fix Scope (→ KR3)
 
-Use `define` primitive. Define minimal fix scope — what should change and what must NOT change.
+Use `define` mode. Define minimal fix scope — what should change and what must NOT change.
 
 ### Implement Fix (→ KR3, KR4)
 
-Use `implement` primitive. Apply minimal fix addressing root cause. Add regression test.
+Use `implement` mode. Apply minimal fix addressing root cause. Add regression test.
 
 ### Validate Fix (→ KR4)
 
-Use `validate` primitive. Confirm: failing test passes, all tests pass, fix addresses root cause.
+Use `validate` mode. Confirm: failing test passes, all tests pass, fix addresses root cause.
 
 **On failure:**
 - Invoke `investigate` to determine why fix didn't work
@@ -147,9 +147,9 @@ Use `validate` primitive. Confirm: failing test passes, all tests pass, fix addr
 
 ---
 
-## Available Primitives
+## Available Modes
 
-Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
+Modes are atomic cognitive actions in `modes/`. Use these to execute the workflow. If you do not understand a mode, read it before using it.
 
 - `orient` — Understand codebase, identify relevant code areas, testing conventions
 - `investigate` — Create failing test, trace execution, test hypotheses

@@ -14,7 +14,7 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 
 **Goal:** Install the skills-and-agents framework into a project so AI tools can use it.
 
-**Intent:** Projects need the framework installed correctly for AI coding to work. Skills are lightweight pointers (SKILL.md files) that reference workflows. The workflows, primitives, and protocols must be accessible to those skills.
+**Intent:** Projects need the framework installed correctly for AI coding to work. Skills are lightweight pointers (SKILL.md files) that reference workflows. The workflows, modes, and protocols must be accessible to those skills.
 
 **Scope:** Framework installation: copy framework files, create skill directories with SKILL.md pointers, create basic CLAUDE.md.
 
@@ -22,7 +22,7 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 
 ## Key Results - KR
 
-1. Framework files installed — primitives, protocols, workflows copied to accessible location
+1. Framework files installed — modes, protocols, workflows copied to accessible location
 2. Skills created — SKILL.md pointers in `.claude/skills/[skill-name]/`
 3. Project has AI guidance — CLAUDE.md exists with project conventions
 4. Setup validated — skills are invocable
@@ -63,7 +63,7 @@ MUST read and follow steps in `dynamic_workflow_base.md`
 
 | Deliverable | Format | Location | Validation |
 |-------------|--------|----------|------------|
-| Framework files | Directory | `.skills-framework/` or copied location | primitives/, protocols/, workflows/ present |
+| Framework files | Directory | `.skills-framework/` or copied location | modes/, protocols/, workflows/ present |
 | Skill directories | SKILL.md files | `.claude/skills/[name]/SKILL.md` | Files exist, reference workflows correctly |
 | CLAUDE.md | Markdown | Project root | File exists, references framework |
 
@@ -73,7 +73,7 @@ MUST read and follow steps in `dynamic_workflow_base.md`
 
 ### Determine Installation Approach (→ KR1)
 
-Execute approach selection using `interviewing` primitive when starting setup. Ask user:
+Execute approach selection using `interviewing` mode when starting setup. Ask user:
 1. **AI tool type:** Claude Code, Cursor, Windsurf, other?
 2. **Installation method:**
    - Submodule (recommended for updates): `git submodule add ... .skills-framework`
@@ -94,7 +94,7 @@ git submodule add https://github.com/short-greg/skills-and-agents.git .skills-fr
 Copy entire framework to `.skills-framework/` or user-specified location.
 
 Verify these directories exist:
-- `.skills-framework/primitives/` (10 files)
+- `.skills-framework/modes/` (10 files)
 - `.skills-framework/protocols/` (13 files)
 - `.skills-framework/workflows/` (workflow files)
 
@@ -130,7 +130,7 @@ Create a development plan by following [dev_planning_workflow.md](../../../.skil
 
 ### Create CLAUDE.md (→ KR3)
 
-Execute documentation creation using `defining` primitive when CLAUDE.md does not exist. Create CLAUDE.md with:
+Execute documentation creation using `defining` mode when CLAUDE.md does not exist. Create CLAUDE.md with:
 
 - Project name and description
 - Reference to framework: "This project uses skills-and-agents framework in `.skills-framework/`"
@@ -141,7 +141,7 @@ Execute documentation creation using `defining` primitive when CLAUDE.md does no
 
 ### Validate Setup (→ KR4)
 
-Execute validation using `evaluating` primitive when installation complete. Check:
+Execute validation using `evaluating` mode when installation complete. Check:
 
 1. Framework directory exists with subdirectories
 2. Skill directories exist with SKILL.md files
@@ -173,7 +173,7 @@ Each skill is a directory with a SKILL.md file:
 - Reference to the full workflow file
 - Brief usage instructions
 
-The actual logic is in the workflow file, which references primitives and protocols.
+The actual logic is in the workflow file, which references modes and protocols.
 
 ---
 
@@ -181,7 +181,7 @@ The actual logic is in the workflow file, which references primitives and protoc
 
 ```
 .skills-framework/           # or wherever installed
-├── primitives/              # Atomic cognitive actions
+├── modes/              # Atomic cognitive actions
 │   ├── base.md
 │   ├── orienting.md
 │   ├── defining.md

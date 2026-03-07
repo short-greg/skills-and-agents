@@ -1,7 +1,7 @@
 **This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
 - **Steps section** — Sequential execution order
 - **Tasks section** — Replaces generic Execution Items
-- **Available Primitives section** — Lists primitives used in this workflow
+- **Available Modes section** — Lists modes used in this workflow
 - **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
 
 ---
@@ -104,11 +104,11 @@ Output your reasoning.
 
 ### Understand Context (→ KR1, KR2)
 
-Use `orient` primitive. Understand code to refactor, identify test coverage, existing patterns.
+Use `orient` mode. Understand code to refactor, identify test coverage, existing patterns.
 
 ### Define Scope (→ KR1, KR2)
 
-Use `define` primitive. Establish what will change (structure) and what will NOT change (behavior).
+Use `define` mode. Establish what will change (structure) and what will NOT change (behavior).
 
 - **Refactoring goals:** What quality dimensions to improve
 - **Preservation criteria:** What must stay the same (API, outputs, side effects)
@@ -118,7 +118,7 @@ Use `define` primitive. Establish what will change (structure) and what will NOT
 
 ### Design Approach (→ KR4)
 
-Use `design` primitive. Plan incremental refactoring steps. Each step is small and verifiable.
+Use `design` mode. Plan incremental refactoring steps. Each step is small and verifiable.
 
 Per `modularity.md` — ensure steps maintain clear component boundaries.
 
@@ -126,7 +126,7 @@ Per `modularity.md` — ensure steps maintain clear component boundaries.
 
 ### Implement Incrementally (→ KR1, KR3, KR4)
 
-Use `implement` primitive. Execute refactoring plan:
+Use `implement` mode. Execute refactoring plan:
 
 1. Make one small change
 2. Run tests
@@ -135,7 +135,7 @@ Use `implement` primitive. Execute refactoring plan:
 
 ### Validate Refactoring (→ KR1, KR2, KR3)
 
-Use `validate` primitive. Confirm: all tests pass, quality improved, no API changes, no new complexity.
+Use `validate` mode. Confirm: all tests pass, quality improved, no API changes, no new complexity.
 
 **On failure:**
 - Invoke `investigate` to determine which increment broke behavior
@@ -145,9 +145,9 @@ Use `validate` primitive. Confirm: all tests pass, quality improved, no API chan
 
 ---
 
-## Available Primitives
+## Available Modes
 
-Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
+Modes are atomic cognitive actions in `modes/`. Use these to execute the workflow. If you do not understand a mode, read it before using it.
 
 - `orient` — Understand code to refactor, identify test coverage, existing patterns
 - `define` — Establish what will change (structure) and what will NOT change (behavior)

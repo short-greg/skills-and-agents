@@ -1,24 +1,24 @@
 **This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions.**
 
 ---
-name: create-primitive
+name: create-mode
 description: >
-  Use when creating a new primitive (atomic cognitive action).
+  Use when creating a new mode (atomic cognitive action).
   You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow. They are specified in the instruction body.
-  Triggers on: "create a primitive", "define a new primitive", "add a primitive".
-argument-hint: "[primitive name and purpose]"
+  Triggers on: "create a mode", "define a new mode", "add a mode".
+argument-hint: "[mode name and purpose]"
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, TodoWrite
 ---
 
-# Create Primitive Workflow
+# Create Mode Workflow
 
-**Goal:** Create a well-scoped, composable primitive that does one thing well.
+**Goal:** Create a well-scoped, composable mode that does one thing well.
 
-**Intent:** Primitives are building blocks of workflows. Poorly defined primitives cause confusion, scope overlap, and brittle compositions. Clear primitives with distinct purposes make workflow creation straightforward.
+**Intent:** Modes are building blocks of workflows. Poorly defined modes cause confusion, scope overlap, and brittle compositions. Clear modes with distinct purposes make workflow creation straightforward.
 
-**Scope:** Primitive creation: determining if a primitive is needed, defining scope, writing the primitive document, and validating against existing primitives.
+**Scope:** Mode creation: determining if a mode is needed, defining scope, writing the mode document, and validating against existing modes.
 
 ---
 
@@ -26,19 +26,19 @@ allowed-tools: Read, Grep, Glob, Write, Edit, TodoWrite
 
 You must satisfy these to complete the skill successfully.
 
-1. Primitive need justified and distinct — reasoned about necessity, answers unique question no existing primitive answers, atomic (single cognitive action)
-2. Primitive document created — in primitives/, follows template, validated against criteria
-3. Primitive is well-scoped — self-contained (no references to other primitives), composable, outcome-oriented
+1. Mode need justified and distinct — reasoned about necessity, answers unique question no existing mode answers, atomic (single cognitive action)
+2. Mode document created — in modes/, follows template, validated against criteria
+3. Mode is well-scoped — self-contained (no references to other modes), composable, outcome-oriented
 
 ## Requirements and Constraints - REQ
 
 Constraints on how to complete the skill.
 
 1. Progress tracked per `tracking.md` — preliminary checklist created before starting work
-2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for partial primitive document, resume from last section
-3. Check existing primitives before creating — if >50% overlap, extend that one instead
+2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for partial mode document, resume from last section
+3. Check existing modes before creating — if >50% overlap, extend that one instead
 4. When defining scope, use positive framing (state what IS covered) not negative framing (what ISN'T covered)
-5. Iterate up to 3 times if validation fails, revise primitive, re-validate
+5. Iterate up to 3 times if validation fails, revise mode, re-validate
 
 ---
 
@@ -46,31 +46,31 @@ Constraints on how to complete the skill.
 
 Satisfy preconditions before beginning unless Optional.
 
-**Required:** Primitive name and purpose
+**Required:** Mode name and purpose
 
 **Elicit if not provided:**
-- Existing primitives (read from primitives/ to check for duplicates)
-- Primitive category (Understanding | Planning | Execution | Verification | Maintenance)
+- Existing modes (read from modes/ to check for duplicates)
+- Mode category (Understanding | Planning | Execution | Verification | Maintenance)
 
-**Optional:** Specific use cases, example workflows that would use this primitive
+**Optional:** Specific use cases, example workflows that would use this mode
 
 ## Postconditions
 
 The resulting state after the skill is finished.
 
-**Success:** New primitive document created in primitives/, validated against all criteria
+**Success:** New mode document created in modes/, validated against all criteria
 
-**Failure:** Primitive duplicates existing one, is not atomic, or user aborts
+**Failure:** Mode duplicates existing one, is not atomic, or user aborts
 
 ## Steps
 
 Complete the Tasks in this order.
 
 1. Reason About Need
-2. Understand Existing Primitives
-3. Define the Primitive
-4. Write the Primitive
-5. Validate Primitive
+2. Understand Existing Modes
+3. Define the Mode
+4. Write the Mode
+5. Validate Mode
 
 ---
 
@@ -81,31 +81,31 @@ Select and execute tasks to achieve each Key Result. Each task shows which KR it
 ### Reason About Need (→ KR1)
 
 Per `reasoning.md` — before beginning, reason about:
-1. **Is this primitive needed?** — Could an existing primitive handle this?
+1. **Is this mode needed?** — Could an existing mode handle this?
 2. **Is it atomic?** — Can it be decomposed? If yes, it's a workflow.
-3. **What question does it answer?** — One sentence that no other primitive answers.
+3. **What question does it answer?** — One sentence that no other mode answers.
 4. **Where does it fit?** — Understanding, Planning, Execution, Verification, Maintenance?
 
 Output your reasoning.
 
-### Understand Existing Primitives (→ KR1)
+### Understand Existing Modes (→ KR1)
 
-Use `orient` primitive. Read existing primitives to understand the landscape and verify uniqueness.
+Use `orient` mode. Read existing modes to understand the landscape and verify uniqueness.
 
-### Define the Primitive (→ KR1, KR3)
+### Define the Mode (→ KR1, KR3)
 
-Use `define` primitive. Establish the primitive's identity:
+Use `define` mode. Establish the mode's identity:
 1. Name (action verb: orient, define, validate)
 2. Goal (one sentence outcome)
 3. Intent (why it exists, what problem it prevents)
 4. Scope (what's covered — positive, self-contained, precise)
 5. Category (Understanding | Planning | Execution | Verification | Maintenance)
 
-Ask user to confirm the scope is distinct from existing primitives.
+Ask user to confirm the scope is distinct from existing modes.
 
-### Write the Primitive (→ KR2)
+### Write the Mode (→ KR2)
 
-Create the primitive document in primitives/ following templates/primitive_template.md.
+Create the mode document in modes/ following templates/mode_template.md.
 
 Required sections per template:
 - Frontmatter with MUST satisfy instruction
@@ -118,9 +118,9 @@ Required sections per template:
 - Validation Criteria
 - Additional Notes and Terms
 
-### Validate Primitive (→ KR1, KR2, KR3)
+### Validate Mode (→ KR1, KR2, KR3)
 
-Use `validate` primitive. Verify the created primitive against all Validation Criteria from templates/primitive_template.md:
+Use `validate` mode. Verify the created mode against all Validation Criteria from templates/mode_template.md:
 
 1. **Structure:** All sections present with one-line imperatives
 2. **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW)
@@ -131,25 +131,25 @@ Use `validate` primitive. Verify the created primitive against all Validation Cr
 7. **Complete:** All necessary information provided, all KRs achievable from Actions
 8. **Precise:** Specific, unambiguous language
 
-Additionally verify primitive-specific criteria:
-9. **Distinct purpose:** Answers a question no existing primitive answers
+Additionally verify mode-specific criteria:
+9. **Distinct purpose:** Answers a question no existing mode answers
 10. **Atomic:** Single cognitive action, not decomposable into multiple actions
-11. **Self-contained scope:** No references to other primitives in scope definition
+11. **Self-contained scope:** No references to other modes in scope definition
 
 Check each criterion. Report which pass and which fail.
 
-On failure: Revise the primitive to address failures, then re-validate (up to 3 iterations per REQ5).
+On failure: Revise the mode to address failures, then re-validate (up to 3 iterations per REQ5).
 
 ---
 
-## Available Primitives
+## Available Modes
 
-Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
+Modes are atomic cognitive actions in `modes/`. Use these to execute the workflow. If you do not understand a mode, read it before using it.
 
-- `orient` — Understand existing primitives and the landscape
-- `define` — Establish the new primitive's identity and scope
-- `validate` — Verify the primitive meets all criteria
-- `critique` — Review the primitive for issues
+- `orient` — Understand existing modes and the landscape
+- `define` — Establish the new mode's identity and scope
+- `validate` — Verify the mode meets all criteria
+- `critique` — Review the mode for issues
 - `brainstorm` — Generate options for scope and naming
 
 ---
@@ -174,11 +174,11 @@ Primitives are atomic cognitive actions in `primitives/`. Use these to execute t
 **Scope Pattern:**
 ```markdown
 **Scope:** [Core activity]. Includes: [activity 1], [activity 2], [activity 3].
-[Primitive name] answers "[question it answers]" not "[different question]".
+[Mode name] answers "[question it answers]" not "[different question]".
 ```
 
 **Anti-Patterns to Avoid:**
-- Scope references other primitives ("Unlike validate..." — describe what this primitive does, not what others do)
+- Scope references other modes ("Unlike validate..." — describe what this mode does, not what others do)
 - Not atomic (if it requires multiple cognitive actions, create a workflow instead)
-- Overlapping (if >50% overlap, extend the existing primitive)
-- Step-oriented (primitives define goals and possible actions, not required steps)
+- Overlapping (if >50% overlap, extend the existing mode)
+- Step-oriented (modes define goals and possible actions, not required steps)

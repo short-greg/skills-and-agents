@@ -1,7 +1,7 @@
 **This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
 - **Steps section** — Sequential execution order
 - **Tasks section** — Replaces generic Execution Items
-- **Available Primitives section** — Lists primitives used in this workflow
+- **Available Modes section** — Lists modes used in this workflow
 - **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
 
 ---
@@ -103,13 +103,13 @@ Output your reasoning.
 
 ### Understand Context (→ KR1, KR5)
 
-Use `orient` primitive. Understand project conventions, coding standards, test conventions.
+Use `orient` mode. Understand project conventions, coding standards, test conventions.
 
 Read: CLAUDE.md, style guides, existing patterns.
 
 ### Review Against Standards (→ KR2, KR5)
 
-Use `validate` primitive. Check code against each category systematically.
+Use `validate` mode. Check code against each category systematically.
 
 Per `quality.md` — apply quality dimensions:
 
@@ -121,7 +121,7 @@ Per `quality.md` — apply quality dimensions:
 
 ### Categorize Issues (→ KR3, KR4)
 
-Use `critique` primitive. Classify by severity:
+Use `critique` mode. Classify by severity:
 
 - **Blocking:** Security, data integrity, functional bugs, breaking changes
 - **Non-blocking:** Code quality, minor violations, missing coverage
@@ -157,9 +157,9 @@ Output structured report:
 
 ---
 
-## Available Primitives
+## Available Modes
 
-Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
+Modes are atomic cognitive actions in `modes/`. Use these to execute the workflow. If you do not understand a mode, read it before using it.
 
 - `orient` — Understand project conventions, coding standards, test conventions
 - `validate` — Check code against standards systematically

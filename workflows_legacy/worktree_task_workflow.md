@@ -1,7 +1,7 @@
 **This template inherits from [../templates/skill_template.md](../templates/skill_template.md) with workflow-specific additions:**
 - **Steps section** — Sequential execution order
 - **Tasks section** — Replaces generic Execution Items
-- **Available Primitives section** — Lists primitives used in this workflow
+- **Available Modes section** — Lists modes used in this workflow
 - **Recovery requirement** — Standard workflow requirements include progress tracking, recovery, iteration
 
 ---
@@ -105,7 +105,7 @@ Output your reasoning.
 
 ### Understand Task (→ KR2)
 
-Use `orient` primitive. Read task spec, understand:
+Use `orient` mode. Read task spec, understand:
 
 - Goal and Key Results
 - Dependencies
@@ -114,7 +114,7 @@ Use `orient` primitive. Read task spec, understand:
 
 ### Validate Dependencies (→ KR3)
 
-Use `validate` primitive. Check all dependencies are merged to main.
+Use `validate` mode. Check all dependencies are merged to main.
 
 **On failure (dependencies not merged):**
 ```
@@ -150,7 +150,7 @@ Invoke selected workflow with task context:
 
 ### Validate Completion (→ KR4, KR5)
 
-Use `validate` primitive. Verify:
+Use `validate` mode. Verify:
 
 - All acceptance criteria satisfied
 - All key results achieved
@@ -182,9 +182,9 @@ git merge parallel/[task-name]
 
 ---
 
-## Available Primitives
+## Available Modes
 
-Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
+Modes are atomic cognitive actions in `modes/`. Use these to execute the workflow. If you do not understand a mode, read it before using it.
 
 - `orient` — Read task spec, understand goal and dependencies
 - `validate` — Check dependencies are merged, verify completion criteria

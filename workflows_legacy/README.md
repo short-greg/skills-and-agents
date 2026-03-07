@@ -1,14 +1,14 @@
 # Workflows
 
-This directory contains workflow definitions that compose primitives into reliable multi-step processes.
+This directory contains workflow definitions that compose modes into reliable multi-step processes.
 
 ---
 
 ## What is a Workflow?
 
-A workflow is a sequence of primitives orchestrated to accomplish a larger goal. All workflows in this directory:
+A workflow is a sequence of modes orchestrated to accomplish a larger goal. All workflows in this directory:
 
-- **Compose primitives** — Each step invokes exactly one primitive
+- **Compose modes** — Each step invokes exactly one mode
 - **Follow protocols** — Required: tracking, recovery, checklist_management
 - **Are recoverable** — Can resume from interruption
 - **Have clear goals** — Defined outcomes with verifiable success criteria
@@ -26,19 +26,19 @@ A workflow is a sequence of primitives orchestrated to accomplish a larger goal.
 
 **[feature_workflow.md](feature_workflow.md)**
 - Complete feature development from idea to validated implementation
-- **Primitives:** define → validate → design → validate → implement → validate
+- **Modes:** define → validate → design → validate → implement → validate
 - **Type:** Adaptive (handles design uncertainty, validation failures)
 - **Use when:** Building new features end-to-end
 
 **[bugfix_workflow.md](bugfix_workflow.md)**
 - Systematic bug investigation and fixing with hypothesis-driven approach
-- **Primitives:** orient → investigate → define → implement → validate
+- **Modes:** orient → investigate → define → implement → validate
 - **Type:** Adaptive (hypothesis iteration, root cause discovery)
 - **Use when:** Fixing bugs systematically with verified root causes
 
 **[refactor_workflow.md](refactor_workflow.md)**
 - Safe refactoring without changing behavior
-- **Primitives:** orient → define → design → implement → validate
+- **Modes:** orient → define → design → implement → validate
 - **Type:** Deterministic (behavior preservation is predictable)
 - **Use when:** Improving code structure without adding features
 
@@ -46,13 +46,13 @@ A workflow is a sequence of primitives orchestrated to accomplish a larger goal.
 
 **[worktree_orchestrate_workflow.md](worktree_orchestrate_workflow.md)**
 - Break large plans/PRDs into parallelizable tasks across git worktrees
-- **Primitives:** orient → brainstorm → define → validate → implement (setup/merge)
+- **Modes:** orient → brainstorm → define → validate → implement (setup/merge)
 - **Type:** Adaptive (task decomposition, dependency management)
 - **Use when:** Large features can be split into independent parallel tasks
 
 **[worktree_task_workflow.md](worktree_task_workflow.md)**
 - Execute a single task in a git worktree based on a task specification
-- **Primitives:** orient → validate → (delegates to feature/bugfix/refactor workflow)
+- **Modes:** orient → validate → (delegates to feature/bugfix/refactor workflow)
 - **Type:** Adaptive (routes to appropriate workflow based on task type)
 - **Use when:** Working on an individual task within a worktree (created by orchestrate workflow)
 
@@ -60,13 +60,13 @@ A workflow is a sequence of primitives orchestrated to accomplish a larger goal.
 
 **[code_review_workflow.md](code_review_workflow.md)**
 - Systematic code review for quality, conventions, and issues
-- **Primitives:** orient → validate → critique → implement (report)
+- **Modes:** orient → validate → critique → implement (report)
 - **Type:** Deterministic (review criteria are well-defined)
 - **Use when:** Reviewing code changes for quality and issues
 
 **[test_strategy_workflow.md](test_strategy_workflow.md)**
 - Design test strategies following test pyramid principles
-- **Primitives:** orient → investigate → design → brainstorm → implement (output)
+- **Modes:** orient → investigate → design → brainstorm → implement (output)
 - **Type:** Deterministic (test design follows established patterns)
 - **Use when:** Planning tests for new features or changes
 
@@ -100,7 +100,7 @@ protocols:
 [Deterministic/Adaptive, Imperative/Declarative/Hybrid]
 
 ## Steps
-[Each step maps to one primitive]
+[Each step maps to one mode]
 
 ## Preconditions
 [What's needed to start]
@@ -162,7 +162,7 @@ Follow the `protocols/create_workflow.md` protocol:
 2. **Determine workflow type:**
    - Deterministic or Adaptive?
    - Imperative, Declarative, or Hybrid?
-3. **Map steps to primitives** — Each step = exactly one primitive
+3. **Map steps to modes** — Each step = exactly one mode
 4. **Define data flow** — Inputs/outputs between steps
 5. **Add quality gates** — Validate/critique each deliverable
 6. **Plan recovery** — How to resume from interruption
@@ -176,7 +176,7 @@ Common patterns (from `protocols/create_workflow.md`):
 
 **Validation Loop:**
 ```
-primitive → validate → [on failure: investigate → loop back → refine]
+mode → validate → [on failure: investigate → loop back → refine]
 ```
 
 **Quality Gate:**
@@ -210,5 +210,5 @@ When adding a new workflow:
 ## References
 
 - **Protocol:** [create_workflow.md](../protocols/create_workflow.md)
-- **Primitives:** [primitives/](../primitives/)
+- **Modes:** [modes/](../modes/)
 - **Protocols:** [protocols/](../protocols/)

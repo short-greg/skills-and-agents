@@ -2,7 +2,7 @@
 name: maintaining
 description: >
   Keeping a system healthy and well-documented. Addresses accumulated issues and keeps records accurate.
-  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this mode.
   Triggers on: "clean this up", "reduce tech debt", "update dependencies", "fix warnings",
   "housekeeping", "tidy up", "prune unused code", "update the docs", "sync documentation",
   "record this decision", "update the changelog", "maintenance pass".
@@ -38,7 +38,7 @@ allowed-tools: Read, Grep, Write, Edit, Bash
 
 ## Steps
 
-MUST read and follow steps in `base_primitive.md`
+MUST read and follow steps in `base_mode.md`
 
 ---
 
@@ -61,7 +61,7 @@ MUST read and follow steps in `base_primitive.md`
 
 ## Possible Actions
 
-**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this mode.
 
 Select or propose actions based on context. Each action shows which KR it serves.
 

@@ -2,7 +2,7 @@
 name: designing
 description: >
   Detailing how a solution will work and be used. Produces technical approach for how to build something before implementation.
-  You MUST satisfy the Goal, Key Results and follow the Requirements of this primitive.
+  You MUST satisfy the Goal, Key Results and follow the Requirements of this mode.
   Triggers on: "design this", "how should we build this", "what's the architecture",
   "what are the tradeoffs", "design the API", "design the data model".
   keywords: architecting, structuring, modeling, interfacing, planning
@@ -38,7 +38,7 @@ allowed-tools: Read, Grep
 
 ## Steps
 
-MUST read and follow steps in `base_primitive.md`
+MUST read and follow steps in `base_mode.md`
 
 ---
 
@@ -62,7 +62,7 @@ MUST read and follow steps in `base_primitive.md`
 
 ## Possible Actions
 
-**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this primitive.
+**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this mode.
 
 Select or propose actions based on context. Each action shows which KR it serves.
 

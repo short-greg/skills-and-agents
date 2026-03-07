@@ -1,19 +1,19 @@
 # Skill Creation Guideline
 
-This guideline explains how to create skills (primitives and workflows) for the skills-and-agents framework.
+This guideline explains how to create skills (modes and workflows) for the skills-and-agents framework.
 
 ## What is a Skill?
 
 A skill is a structured instruction set that guides Claude through a specific cognitive process. Skills ensure consistent, reliable execution by defining clear goals, requirements, and execution steps.
 
 **Two types of skills:**
-- **Primitives** - Atomic cognitive actions (single, indivisible operations)
-- **Workflows** - Multi-step processes that compose primitives
+- **Modes** - Atomic cognitive actions (single, indivisible operations)
+- **Workflows** - Multi-step processes that compose modes
 
 ## Creating a New Skill
 
 **Steps:**
-1. Determine skill type (primitive vs workflow)
+1. Determine skill type (mode vs workflow)
 2. Research best practices (Claude Code first, then ask about expert/academic)
 3. Review relevant protocols
 4. Interview user to clarify design (if needed)
@@ -24,14 +24,14 @@ A skill is a structured instruction set that guides Claude through a specific co
 
 ### 1. Determine Skill Type
 
-**Use a Primitive when:**
+**Use a Mode when:**
 - The action is atomic (cannot be meaningfully decomposed)
 - It answers one specific question or performs one cognitive operation
 - It does not require orchestrating multiple other operations
 
 **Use a Workflow when:**
 - The process requires multiple steps in sequence
-- It orchestrates 2+ primitives to achieve a larger goal
+- It orchestrates 2+ modes to achieve a larger goal
 - It has phases or stages
 
 ### 2. Research Best Practices (Before Writing)
@@ -50,7 +50,7 @@ Always start by searching Claude Code's documentation and best practices:
 
 After Claude Code research, ask:
 
-"Would you like me to also search for expert and academic best practices for this [primitive/workflow]? If so, should I search for:
+"Would you like me to also search for expert and academic best practices for this [mode/workflow]? If so, should I search for:
 1. General best practices (broader applicability)
 2. LLM-specific best practices (AI agent context)
 3. Both general and LLM-specific"
@@ -194,14 +194,14 @@ description: >
 
 ### 9. Conciseness Targets
 
-- **Primitives:** 100-150 lines maximum
+- **Modes:** 100-150 lines maximum
 - **Workflows:** 150-250 lines maximum
 - If longer, refactor into multiple skills or remove verbose descriptions
 
 ### 10. Follow the Template
 
 Use the skill template below, customizing sections as appropriate for your skill type:
-- Primitives: Use 2 Key Results, Actions section
+- Modes: Use 2 Key Results, Actions section
 - Workflows: Use 2-4 Key Results, Steps → Tasks sections
 
 ### 11. Validate the Skill
@@ -304,7 +304,7 @@ Execute these to achieve each Key Result. Each item shows which KR it serves.
 
 **Note:**
 - Workflows replace this section with: Steps (ordered list) → Tasks (detailed execution)
-- Primitives replace this section with: Actions (detailed execution)
+- Modes replace this section with: Actions (detailed execution)
 
 ---
 
@@ -321,7 +321,7 @@ For each criterion, output evidence for PASS and evidence for FAIL, then decide.
 - [ ] **Preconditions:** Categorized as Required, Elicit if not provided, or Optional
 - [ ] **No redundancy:** Each piece of information appears exactly once
 - [ ] **Coherent:** Execution flows logically, no contradictions between sections
-- [ ] **Concise:** Meets line count target (primitives: 100-150, workflows: 150-250). Goal/Intent/Scope brief (2-3 sentences max each). No duplication.
+- [ ] **Concise:** Meets line count target (modes: 100-150, workflows: 150-250). Goal/Intent/Scope brief (2-3 sentences max each). No duplication.
 - [ ] **Complete:** All necessary information provided, all KRs achievable
 - [ ] **Precise:** Specific, unambiguous language, clear definitions
 - [ ] **LLM-focused:** Instructions/evaluation criteria over descriptions. No unnecessary explanations.
@@ -408,7 +408,7 @@ Claude Code's best practices researched FIRST. Additional expert/academic source
 
 ### Key Results (WHAT)
 - Measurable outcomes that define success
-- 2 KRs for primitives, 2-4 KRs for workflows
+- 2 KRs for modes, 2-4 KRs for workflows
 - Must be verifiable as pass/fail
 - Focus on results, not process
 
@@ -477,12 +477,12 @@ scripts/helper.py  # Works across platforms
 
 ❌ **Nested skill references**
 ```markdown
-Use workflow A, which calls workflow B, which calls primitive C
+Use workflow A, which calls workflow B, which calls mode C
 ```
 
 ✅ **Keep references one level deep**
 ```markdown
-Workflow directly references primitives it needs
+Workflow directly references modes it needs
 ```
 
 ❌ **Too many options**

@@ -3,7 +3,7 @@
 ---
 name: create-workflow
 description: >
-  Use when creating a new workflow (multi-step process composing primitives).
+  Use when creating a new workflow (multi-step process composing modes).
   You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow. They are specified in the instruction body.
   Triggers on: "create a workflow", "define a new workflow", "add a workflow".
 argument-hint: "[workflow name and purpose]"
@@ -14,11 +14,11 @@ allowed-tools: Read, Grep, Glob, Write, Edit, TodoWrite
 
 # Create Workflow Workflow
 
-**Goal:** Create a reliable, recoverable workflow that orchestrates primitives effectively.
+**Goal:** Create a reliable, recoverable workflow that orchestrates modes effectively.
 
-**Intent:** Primitives are atomic cognitive actions. Many tasks require multiple primitives in sequence with progress tracking and recovery. Workflows provide this orchestration layer—they compose primitives while maintaining state.
+**Intent:** Modes are atomic cognitive actions. Many tasks require multiple modes in sequence with progress tracking and recovery. Workflows provide this orchestration layer—they compose modes while maintaining state.
 
-**Scope:** Workflow creation: determining if a workflow is needed, composing primitives, defining validation gates, and ensuring recoverability.
+**Scope:** Workflow creation: determining if a workflow is needed, composing modes, defining validation gates, and ensuring recoverability.
 
 ---
 
@@ -28,7 +28,7 @@ You must satisfy these to complete the skill successfully.
 
 1. Workflow need justified and distinct — reasoned about necessity, serves unique purpose not covered by existing workflows
 2. Workflow document created — in workflows/, follows template, validated against criteria
-3. Workflow is effective — orchestrates 2+ primitives, recoverable, trackable
+3. Workflow is effective — orchestrates 2+ modes, recoverable, trackable
 
 ## Requirements and Constraints - REQ
 
@@ -36,7 +36,7 @@ Constraints on how to complete the skill.
 
 1. Progress tracked per `tracking.md` — preliminary checklist created before starting work
 2. Recoverable from interruption per `tracking.md` and `recovery.md` — check for partial workflow document, resume from last section
-3. Compose primitives, don't repeat their content — reference primitives, add workflow-specific context only
+3. Compose modes, don't repeat their content — reference modes, add workflow-specific context only
 4. Iterate up to 3 times if validation fails, revise workflow, re-validate
 
 ---
@@ -51,7 +51,7 @@ Satisfy preconditions before beginning unless Optional.
 - Existing workflows (read from workflows/ to check for duplicates)
 - Workflow type preference (Deterministic vs Adaptive, Imperative vs Declarative)
 
-**Optional:** Specific primitives to compose, validation gate preferences
+**Optional:** Specific modes to compose, validation gate preferences
 
 ## Postconditions
 
@@ -59,7 +59,7 @@ The resulting state after the skill is finished.
 
 **Success:** New workflow document created in workflows/, validated against all criteria
 
-**Failure:** Workflow duplicates existing one, doesn't need multiple primitives, or user aborts
+**Failure:** Workflow duplicates existing one, doesn't need multiple modes, or user aborts
 
 ## Steps
 
@@ -81,8 +81,8 @@ Select and execute tasks to achieve each Key Result. Each task shows which KR it
 ### Reason About Need (→ KR1)
 
 Per `reasoning.md` — before beginning, reason about:
-1. **Is a workflow needed?** — Does this require multiple primitives? Would a single primitive suffice?
-2. **What primitives are involved?** — Which from: orient, define, design, implement, validate, investigate, brainstorm, critique?
+1. **Is a workflow needed?** — Does this require multiple modes? Would a single mode suffice?
+2. **What modes are involved?** — Which from: orient, define, design, implement, validate, investigate, brainstorm, critique?
 3. **What are the dependencies?** — Must any step complete before another?
 4. **What validation gates?** — Where should progress be verified?
 5. **Style?** — Deterministic (fixed path) or Adaptive (context-dependent)?
@@ -91,11 +91,11 @@ Output your reasoning.
 
 ### Understand Existing Workflows (→ KR1)
 
-Use `orient` primitive. Read existing workflows to understand patterns and verify uniqueness.
+Use `orient` mode. Read existing workflows to understand patterns and verify uniqueness.
 
 ### Define the Workflow (→ KR2)
 
-Use `define` primitive. Establish the workflow's identity:
+Use `define` mode. Establish the workflow's identity:
 1. Name, Goal, Intent, Scope
 2. Type (Deterministic/Adaptive, Imperative/Declarative/Hybrid)
 3. Key Results (2-4 measurable outcomes)
@@ -105,8 +105,8 @@ Ask user to confirm the workflow purpose is distinct.
 
 ### Design the Workflow (→ KR2, KR3)
 
-Use `design` primitive. Plan the workflow structure:
-1. Identify primitives needed
+Use `design` mode. Plan the workflow structure:
+1. Identify modes needed
 2. Determine sequence/dependencies
 3. Add validation gates
 4. Define iteration behavior
@@ -127,13 +127,13 @@ Required sections per template:
 - Postconditions (Success, Failure)
 - Steps
 - Tasks (with → KR# mapping)
-- Available Primitives
+- Available Modes
 - Validation Criteria
 - Additional Notes and Terms
 
 ### Validate Workflow (→ KR2, KR3)
 
-Use `validate` primitive. Verify the created workflow against all Validation Criteria from templates/workflow_template.md:
+Use `validate` mode. Verify the created workflow against all Validation Criteria from templates/workflow_template.md:
 
 1. **Structure:** All sections present with one-line imperatives. Frontmatter complete.
 2. **KRs vs Requirements:** KRs are outcomes (WHAT), Requirements are constraints (HOW), no overlap
@@ -152,13 +152,13 @@ On failure: Revise the workflow to address failures, then re-validate (up to 3 i
 
 ---
 
-## Available Primitives
+## Available Modes
 
-Primitives are atomic cognitive actions in `primitives/`. Use these to execute the workflow. If you do not understand a primitive, read it before using it.
+Modes are atomic cognitive actions in `modes/`. Use these to execute the workflow. If you do not understand a mode, read it before using it.
 
 - `orient` — Understand existing workflows and patterns
 - `define` — Establish the new workflow's identity and purpose
-- `design` — Plan the workflow structure and primitive composition
+- `design` — Plan the workflow structure and mode composition
 - `validate` — Verify the workflow meets all criteria
 - `critique` — Review the workflow for issues
 - `brainstorm` — Generate options for structure and approach
@@ -183,8 +183,8 @@ Primitives are atomic cognitive actions in `primitives/`. Use these to execute t
 ## Additional Notes and Terms
 
 **Anti-Patterns to Avoid:**
-- Repeating primitive content (reference instead)
+- Repeating mode content (reference instead)
 - Silent iteration (explicitly update checklist on validation failure)
-- Over-specification (let primitives do their job)
-- Single primitive workflows (use primitive directly)
+- Over-specification (let modes do their job)
+- Single mode workflows (use mode directly)
 - Missing protocols (every workflow needs tracking, recovery, checklists in Requirements)

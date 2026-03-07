@@ -1,21 +1,21 @@
 # Protocols
 
-This directory contains protocols that define standard processes and patterns used across primitives and workflows.
+This directory contains protocols that define standard processes and patterns used across modes and workflows.
 
 ---
 
 ## What is a Protocol?
 
-A protocol is a standardized process or pattern that multiple primitives and workflows follow. Protocols ensure consistency and quality across the framework.
+A protocol is a standardized process or pattern that multiple modes and workflows follow. Protocols ensure consistency and quality across the framework.
 
 **Protocols are:**
-- **Reusable** — Referenced by multiple primitives/workflows
+- **Reusable** — Referenced by multiple modes/workflows
 - **Prescriptive** — Define how to do something, not what to build
 - **Foundational** — Provide common patterns that higher-level components depend on
 
 **Protocols are NOT:**
 - Skills (user-invocable)
-- Primitives (cognitive actions)
+- Modes (cognitive actions)
 - Workflows (multi-step processes)
 
 ---
@@ -24,13 +24,13 @@ A protocol is a standardized process or pattern that multiple primitives and wor
 
 ### Creation & Design
 
-**[create_primitive.md](create_primitive.md)**
-- How to create new primitives
-- Primitive structure and requirements
-- Quality guidelines for primitives
+**[create_mode.md](create_mode.md)**
+- How to create new modes
+- Mode structure and requirements
+- Quality guidelines for modes
 
 **[create_workflow.md](create_workflow.md)**
-- How to create workflows that compose primitives
+- How to create workflows that compose modes
 - Workflow types (deterministic vs. adaptive, imperative vs. declarative)
 - Workflow patterns from research
 - Quality gates and iteration handling
@@ -106,9 +106,9 @@ A protocol is a standardized process or pattern that multiple primitives and wor
 
 ## When to Use Each Protocol
 
-### During Primitive/Workflow Creation
+### During Mode/Workflow Creation
 
-- **create_primitive.md** — When creating a new primitive
+- **create_mode.md** — When creating a new mode
 - **create_workflow.md** — When creating a new workflow
 - **skill_template.md** — Template for skill structure
 
@@ -149,7 +149,7 @@ A protocol is a standardized process or pattern that multiple primitives and wor
 ## Protocol Relationships
 
 ```
-create_primitive.md ──┐
+create_mode.md ──┐
                       ├──> Define structure
 create_workflow.md ───┘
 
@@ -174,12 +174,12 @@ doc_maintenance.md ──┘
 ## Creating New Protocols
 
 **When to create a protocol:**
-- Pattern is used by multiple primitives/workflows
+- Pattern is used by multiple modes/workflows
 - Process needs standardization
 - Quality concern needs systematic approach
 
 **When NOT to create a protocol:**
-- Used by only one primitive/workflow (put it there instead)
+- Used by only one mode/workflow (put it there instead)
 - Too specific to a use case (belongs in a skill)
 - No clear process to define (needs research first)
 
@@ -188,7 +188,7 @@ doc_maintenance.md ──┘
 2. Define Goal, Intent, Scope
 3. Provide clear process/guidelines
 4. Include examples
-5. Reference from primitives/workflows that use it
+5. Reference from modes/workflows that use it
 
 ---
 
@@ -242,4 +242,4 @@ When adding a new protocol:
 2. Add entry to this README
 3. Update "When to Use" section
 4. Update "Protocol Relationships" diagram
-5. Reference from relevant primitives/workflows
+5. Reference from relevant modes/workflows

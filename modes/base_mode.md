@@ -1,6 +1,6 @@
-# Primitive Base
+# Mode Base
 
-All primitives must execute these steps.
+All modes must execute these steps.
 
 ---
 
@@ -9,15 +9,15 @@ All primitives must execute these steps.
 1. **Output lightweight checklist** per `protocols/tracking_and_recovery.md` — output a checklist using Key Results
 2. **Resolve preconditions** — elicit missing required inputs from user
 3. **Evaluate actions** — output a table of actions including alternative actions then choose them based on the conditions and evaluate their usage in this situation | Action | Why Use | Why Not
-4. **Output expert reasonined action plan** - Output the ideal type of expert for this problem and how they would tackle using `protocols/frame_of_mind.md` and how they would tackle this problem then decide the action plan using `primitives/planning.md` based on the action evaluation in step 3. 
-5. [PLACEHOLDER: **Execute actions** — include primitive-specific actions per Actions section. Replace with actual actions. Must update with actions.]
+4. **Output expert reasonined action plan** - Output the ideal type of expert for this problem and how they would tackle using `protocols/frame_of_mind.md` and how they would tackle this problem then decide the action plan using `modes/planning.md` based on the action evaluation in step 3. 
+5. [PLACEHOLDER: **Execute actions** — include mode-specific actions per Actions section. Replace with actual actions. Must update with actions.]
 6. **Confirm and report result** — confirm each KR met, output success or failure, if it fails explain why
 
 ---
 
 ## Output Requirements
 
-**Must report result** — Every primitive ends with explicit success or failure. Never complete silently.
+**Must report result** — Every mode ends with explicit success or failure. Never complete silently.
 
 **Inline tracking** — Output checklist and progress in conversation, not files. File-based tracking is for workflows.
 
@@ -61,5 +61,5 @@ Always end with explicit result:
 ## Result: Failure
 - KR1: [status - met/not met]
 - KR2: [status - met/not met]
-- Reason: [why primitive could not complete]
+- Reason: [why mode could not complete]
 ```

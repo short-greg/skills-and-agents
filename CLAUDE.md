@@ -2,24 +2,24 @@
 
 ## About This Repo
 
-This is a **tool/framework repository**. It defines primitives, workflows, and protocols that other projects use to build reliable AI coding assistant skills.
+This is a **tool/framework repository**. It defines modes, workflows, and protocols that other projects use to build reliable AI coding assistant skills.
 
 **To use this framework in another project:** See [README.md](README.md) and follow [workflows/setup_skill_env_workflow.md](workflows/setup_skill_env_workflow.md).
 
 **To develop this framework:** Use the skills in `.claude/skills/`:
 - `/create-workflow` — Create new workflows
-- `/create-primitive` — Create new primitives
+- `/create-mode` — Create new modes
 - `/setup-skill-env` — Test the setup workflow
 
 ---
 
 ## Project Intent
 
-This repository provides **primitives, workflows, and protocols** for creating reliable AI coding assistant skills.
+This repository provides **modes, workflows, and protocols** for creating reliable AI coding assistant skills.
 
 **What this is:**
-- Primitives (atomic cognitive actions)
-- Workflows (multi-step processes composing primitives)
+- Modes (atomic cognitive actions)
+- Workflows (multi-step processes composing modes)
 - Protocols (reusable patterns for tracking, recovery, quality)
 - Templates for creating new skills
 
@@ -49,8 +49,8 @@ skills-and-agents/
 ├── CLAUDE.md                    # This file - project conventions
 ├── README.md                    # User-facing overview and quick start
 │
-├── primitives/                  # Core cognitive actions (atomic building blocks)
-│   ├── README.md                # Primitives overview
+├── modes/                       # Core cognitive actions (atomic building blocks)
+│   ├── README.md                # Modes overview
 │   ├── orient.md                # Understand context and constraints
 │   ├── define.md                # Establish requirements and scope
 │   ├── design.md                # Plan technical approach
@@ -60,7 +60,7 @@ skills-and-agents/
 │   ├── brainstorm.md            # Generate options
 │   └── critique.md              # Evaluate quality
 │
-├── workflows/                   # Multi-step processes composing primitives
+├── workflows/                   # Multi-step processes composing modes
 │   ├── README.md                # Workflows overview
 │   ├── feature_workflow.md      # Complete feature development
 │   ├── bugfix_workflow.md       # Hypothesis-driven bug fixing
@@ -90,19 +90,19 @@ skills-and-agents/
 
 ## Document Naming Conventions
 
-### Primitives
-- `[action].md` - One primitive per file, named after the action
+### Modes
+- `[action].md` - One mode per file, named after the action
 - Examples: `orient.md`, `define.md`, `validate.md`
 
 ### Workflows
 - `[name]_workflow.md` - One workflow per file
 - Examples: `feature_workflow.md`, `bugfix_workflow.md`, `worktree_orchestrate_workflow.md`
-- Each workflow composes primitives into a complete process
+- Each workflow composes modes into a complete process
 
 ### Protocols
 - `[topic].md` - One protocol per file
 - Examples: `tracking.md`, `recovery.md`, `checklist_management.md`
-- Protocols are referenced by workflows and primitives
+- Protocols are referenced by workflows and modes
 
 ---
 
@@ -115,7 +115,7 @@ Each workflow file (e.g., `feature_workflow.md`) contains:
 1. **Frontmatter** - name, description, argument-hint, protocols
 2. **Goal/Intent/Scope** - What it achieves and why
 3. **Workflow Type** - Deterministic/Adaptive, Imperative/Declarative/Hybrid
-4. **Steps** - Each step maps to exactly one primitive
+4. **Steps** - Each step maps to exactly one mode
 5. **Preconditions/Postconditions** - What's needed, what's produced
 6. **Recovery** - How to resume from interruption
 7. **Quality Gates** - When to validate deliverables
@@ -146,7 +146,7 @@ protocols:
 [Deterministic/Adaptive, Imperative/Declarative/Hybrid]
 
 ## Steps
-[Each step maps to one primitive]
+[Each step maps to one mode]
 
 ## Preconditions
 [What's needed to start]
