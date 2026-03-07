@@ -13,44 +13,14 @@
 
 ### Installation Steps
 
-1. Clone the repository:
-   ```bash
-   gh repo clone short-greg/skills-and-agents
-   ```
-
-2. Navigate to your project:
-   ```bash
-   cd your-project
-   ```
-
-3. Install skills with proper directory structure:
-   ```bash
-   # Install primitive skills
-   for file in ../skills-and-agents/primitives/*.md; do
-     [ "$(basename "$file")" = "README.md" ] && continue
-     [ "$(basename "$file")" = "base_primitive.md" ] && continue
-     skill_name=$(basename "$file" .md)
-     mkdir -p ".claude/skills/$skill_name"
-     cp "$file" ".claude/skills/$skill_name/SKILL.md"
-   done
-
-   # Install workflow skills (convert workflow_name.md to workflow-name)
-   for file in ../skills-and-agents/workflows/*_workflow.md; do
-     [ -f "$file" ] || continue
-     skill_name=$(basename "$file" .md | sed 's/_workflow$//' | tr '_' '-')
-     mkdir -p ".claude/skills/$skill_name"
-     cp "$file" ".claude/skills/$skill_name/SKILL.md"
-   done
-
-   # Copy protocols directory
-   cp -r ../skills-and-agents/protocols .claude/skills/
-   ```
-
+1. Copy all primitives, workflows and protocols into a temporary directory. Ensure it can be deleted. Ask whether to use gh, clone, or another method, recommend gh.
+2. Copy protocols into a protocols directory underneat Claude `.claude/protocols/`
+3. Copy each primitive and workflow into a new directory for it
+   .claude/skills/<skill name>/SKILL.md
 4. Verify installation:
    ```bash
    ls .claude/skills/
    ```
-
 5. Skills are now available via slash commands (e.g., `/orienting`, `/defining`, `/dev-planning`)
 
 ---
