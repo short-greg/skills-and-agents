@@ -13,14 +13,16 @@
 
 ### Installation Steps
 
-1. Copy all primitives, workflows and protocols into a temporary directory. Ensure it can be deleted. Ask whether to use gh, clone, or another method, recommend gh.
-2. Copy protocols into a protocols directory underneat Claude `.claude/protocols/`
-3. Copy each primitive and workflow into a new directory for it
+1. Ask the user whether to use gh to just fetch the files to clone, or use another method, recommend gh to just fetch directly.
+2. Copy all primitives, workflows and protocols.
+   1. Copy protocols into a protocols directory underneat Claude `.claude/protocols/`
+   2. Copy each primitive and workflow into a new directory for it
    .claude/skills/<skill name>/SKILL.md
-4. Verify installation:
+3. Verify installation:
    ```bash
    ls .claude/skills/
    ```
+4. Cleanup any temporary files
 5. Skills are now available via slash commands (e.g., `/orienting`, `/defining`, `/dev-planning`)
 
 ---
