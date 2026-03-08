@@ -14,16 +14,16 @@
 ### Installation Steps
 
 1. Ask the user whether to use gh to just fetch the files to clone, or use another method, recommend gh to just fetch directly.
-2. Copy all modes, workflows and protocols.
-   1. Copy protocols into a protocols directory underneath Claude `.claude/protocols/`
-   2. Copy each mode and workflow into a new directory for it
-   .claude/skills/<skill name>/SKILL.md
+2. Copy workflows and supporting files.
+   1. Copy protocols into `.claude/protocols/`
+   2. Copy modes into `.claude/modes/`
+   3. Copy each workflow into `.claude/skills/<workflow-name>/SKILL.md`
 3. Verify installation:
    ```bash
    ls .claude/skills/
    ```
 4. Cleanup any temporary files
-5. Skills are now available via slash commands (e.g., `/orienting`, `/defining`, `/dev-planning`)
+5. Workflows are available via slash commands (e.g., `/setup-env-workflow`)
 
 ---
 
@@ -38,42 +38,43 @@ Put all skills into a folder using the name of the skill. Then put the skill Mar
 ```
 your-project/
 ├── .claude/
-│   └── skills/                   # Skills loaded automatically
-│       ├── [some skill]/
-│       │   └── SKILL.md          # /[some skill] skill
-│       ├── ...
-│       └── protocols/            # Referenced by skills
+│   ├── skills/                   # Workflows loaded as skills
+│   │   └── [workflow-name]/
+│   │       └── SKILL.md          # /[workflow-name] skill
+│   ├── modes/                    # Internal cognitive actions
+│   └── protocols/                # Referenced by modes
 └── CLAUDE.md
 ```
 
-**Each skill directory contains SKILL.md with frontmatter:**
+**Each workflow directory contains SKILL.md with frontmatter:**
 
 ```markdown
 ---
-name: orienting
-description: Understand the current state of a system, project, or task
-argument-hint: "[subject to orient on]"
-user-invocable: true              # Makes it a /orienting skill
+name: setup-env-workflow
+description: Make a project AI-ready with customized skill builder
+argument-hint: "[project path or context]"
+user-invocable: true
 ---
 
-# Orienting
+# Setup Environment Workflow
 
-**Goal:** Produce accurate picture of current state...
+**Goal:** Partner with developer to make their project AI-ready...
 ```
 
 **Invoke with:**
 ```
-/orienting my-feature
-/dev-planning new-api
+/setup-env-workflow my-project
 ```
 
 ### Framework Components
 
-**Modes** — Atomic cognitive actions (orienting, defining, planning, designing, implementing, evaluating, investigating, brainstorming, maintaining, positioning)
+**Modes** — Internal cognitive actions used by workflows (orienting, defining, planning, designing, implementing, evaluating, investigating, interviewing, brainstorming, maintaining, positioning)
 
-**Workflows** — Multi-step processes that compose modes (dev-planning)
+**Workflows** — User-invocable skills that compose modes (setup-env-workflow)
 
-**Protocols** — Supporting patterns and techniques referenced by skills (thinking, transparency, risk management, etc.)
+**Protocols** — Supporting patterns and techniques referenced by modes (thinking, transparency, risk management, etc.)
+
+**Guidelines** — Creation guides for modes, workflows, protocols, and skill builders
 
 ---
 
