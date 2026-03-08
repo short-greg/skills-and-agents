@@ -10,6 +10,11 @@
 
 - Claude Code installed ([code.claude.com/docs](https://code.claude.com/docs/en/skills))
 - GitHub CLI (`gh`) installed ([cli.github.com](https://cli.github.com/))
+- Command to start
+```
+Use gh to fetch README.md then following the guidelines to proceed with installation and setup in the README from https://github.com/short-greg/skills-and-agents.git, do not clone.
+
+```
 
 ### Installation Steps
 
