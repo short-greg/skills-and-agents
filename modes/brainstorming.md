@@ -6,10 +6,6 @@ description: >
   Triggers on: "brainstorm", "what are our options", "alternatives", "how else could we",
   "generate ideas", "explore possibilities", "creative solutions".
   keywords: generating, ideating, diverging, exploring, creating
-argument-hint: "[topic or problem to brainstorm]"
-disable-model-invocation: false
-user-invocable: true
-allowed-tools: Read, Grep, WebSearch
 ---
 
 # Brainstorming
@@ -21,6 +17,18 @@ allowed-tools: Read, Grep, WebSearch
 **Scope:** Generating and exploring ideas, options, and alternatives from current knowledge. Answers "what are the possibilities?" not "which one is best?" Brainstorming is divergent (expand options), not convergent (select best).
 
 ---
+
+## Table of Contents
+
+- [Key Results](#key-results---kr) — Success criteria for this mode
+- [Requirements](#requirements-and-constraints---req) — Rules and constraints to follow
+- [Steps](#steps) — Reference to base mode execution
+- [Terms](#terms) — Key vocabulary and definitions
+- [Preconditions](#preconditions) — What's needed before starting
+- [Postconditions](#postconditions) — What's delivered upon completion
+- [Actions](#possible-actions) — Concrete steps to achieve results
+- [Notes](#additional-notes-and-terms) — Additional context and details
+- [References](#references) — External documentation and resources
 
 ## Key Results - KR
 

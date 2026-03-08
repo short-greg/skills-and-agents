@@ -10,7 +10,7 @@ Workflows that inherit from this base execute dynamically, evaluating which task
 2. **Set up progress tracking** — create/update progress file with KRs, deliverables checklist, and task status
 3. **Resolve preconditions** — elicit missing required inputs from user
 4. **Evaluate tasks** — output table of available tasks: | Task | Mode/Workflow | Why Use | Why Not | Fallback |
-5. **Output task plan** — using `planning` mode, sequence selected tasks with dependencies, identify parallel opportunities
+5. **Output task plan** — using [planning mode](../modes/planning.md), sequence selected tasks with dependencies, identify parallel opportunities
 6. [PLACEHOLDER: **Execute tasks** — workflow-specific tasks per Possible Tasks section. On failure, execute fallback or diagnose.]
 7. **Validate deliverables** — verify each deliverable meets its validation criteria per Deliverables section
 8. **Confirm and report result** — output success or failure with evidence for each KR
@@ -22,7 +22,7 @@ Workflows that inherit from this base execute dynamically, evaluating which task
 When a task fails:
 1. Check fallback from evaluation table
 2. If fallback exists: execute fallback, update progress, re-evaluate remaining tasks
-3. If no fallback: diagnose failure using the `investigating` mode
+3. If no fallback: diagnose failure using the [investigating mode](../modes/investigating.md)
 4. If diagnosis suggests remediation: add remediation tasks, continue
 5. If max iterations reached (default 3) or unrecoverable: report failure with diagnosis
 

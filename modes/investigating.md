@@ -6,10 +6,6 @@ description: >
   Triggers on: "investigate", "research", "look into", "find out", "why is this happening",
   "what's the best practice", "check the docs", "find prior art", "what solutions exist".
   keywords: searching, surveying, diagnosing, analyzing, synthesizing
-argument-hint: "[question or topic to investigate]"
-disable-model-invocation: false
-user-invocable: true
-allowed-tools: Read, Grep, WebSearch, WebFetch
 ---
 
 # Investigating
@@ -21,6 +17,18 @@ allowed-tools: Read, Grep, WebSearch, WebFetch
 **Scope:** Gathering and synthesizing information to answer questions and reduce uncertainty. Covers researching documentation and best practices, surveying solutions and prior art, tracing code paths and data flows, forming and testing hypotheses, diagnosing root causes, and synthesizing findings with actionable recommendations. Investigation answers "what do we need to know?" not "what should we build?"
 
 ---
+
+## Table of Contents
+
+- [Key Results](#key-results---kr) — Success criteria for this mode
+- [Requirements](#requirements-and-constraints---req) — Rules and constraints to follow
+- [Steps](#steps) — Reference to base mode execution
+- [Terms](#terms) — Key vocabulary and definitions
+- [Preconditions](#preconditions) — What's needed before starting
+- [Postconditions](#postconditions) — What's delivered upon completion
+- [Actions](#possible-actions) — Concrete steps to achieve results
+- [Notes](#additional-notes-and-terms) — Additional context and details
+- [References](#references) — External documentation and resources
 
 ## Key Results - KR
 

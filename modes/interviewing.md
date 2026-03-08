@@ -6,10 +6,6 @@ description: >
   Triggers on: "ask the user", "clarify requirements", "what do they want", "gather requirements",
   "interview the user", "find out what they need", "elicit requirements".
   keywords: asking, clarifying, eliciting, gathering, questioning
-argument-hint: "[topic or question to clarify]"
-disable-model-invocation: false
-user-invocable: true
-allowed-tools: Read, Grep
 ---
 
 # Interviewing
@@ -21,6 +17,18 @@ allowed-tools: Read, Grep
 **Scope:** Eliciting information from users through questioning and inference. Answers "what does the user need?" not "what should we build?" Interviewing gathers input; defining specifies requirements; designing determines approach.
 
 ---
+
+## Table of Contents
+
+- [Key Results](#key-results---kr) — Success criteria for this mode
+- [Requirements](#requirements-and-constraints---req) — Rules and constraints to follow
+- [Steps](#steps) — Reference to base mode execution
+- [Terms](#terms) — Key vocabulary and definitions
+- [Preconditions](#preconditions) — What's needed before starting
+- [Postconditions](#postconditions) — What's delivered upon completion
+- [Actions](#possible-actions) — Concrete steps to achieve results
+- [Notes](#additional-notes-and-terms) — Additional context and details
+- [References](#references) — External documentation and resources
 
 ## Key Results - KR
 

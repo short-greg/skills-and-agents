@@ -6,10 +6,6 @@ description: >
   Triggers on: "orient me", "where are we", "what's the current state", "what's the situation",
   "take stock", "size this up", "gap analysis", "assess the situation".
   keywords: mapping, inventorying, locating, surveying, assessing
-argument-hint: "[subject to orient on]"
-disable-model-invocation: false
-user-invocable: true
-allowed-tools: Read, Grep
 ---
 
 # Orienting
@@ -21,6 +17,18 @@ allowed-tools: Read, Grep
 **Scope:** Understanding current situation before taking action. Includes inventorying what exists (code, docs, infrastructure), evaluating what works vs broken, identifying gaps between current and target state, surfacing existing issues and technical debt, noting risks in current state. Orientation answers "where are we now?" not "where should we go?"
 
 ---
+
+## Table of Contents
+
+- [Key Results](#key-results---kr) — Success criteria for this mode
+- [Requirements](#requirements-and-constraints---req) — Rules and constraints to follow
+- [Steps](#steps) — Reference to base mode execution
+- [Terms](#terms) — Key vocabulary and definitions
+- [Preconditions](#preconditions) — What's needed before starting
+- [Postconditions](#postconditions) — What's delivered upon completion
+- [Actions](#possible-actions) — Concrete steps to achieve results
+- [Notes](#additional-notes-and-terms) — Additional context and details
+- [References](#references) — External documentation and resources
 
 ## Key Results - KR
 

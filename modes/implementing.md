@@ -6,10 +6,6 @@ description: >
   Triggers on: "implement this", "write the code", "build this", "code this up",
   "create the feature", "add the tests", "implement the design", "write the function".
   keywords: coding, building, writing, testing, integrating
-argument-hint: "[what to implement]"
-disable-model-invocation: false
-user-invocable: true
-allowed-tools: Read, Grep, Write, Edit, Bash
 ---
 
 # Implementing
@@ -21,6 +17,18 @@ allowed-tools: Read, Grep, Write, Edit, Bash
 **Scope:** Writing and modifying code, tests, configuration, and other artifacts. Includes translating designs into code, following project conventions and patterns, handling error cases and edge cases, writing tests alongside implementation, integrating with existing code, and iterating based on feedback. Implementation answers "does the code exist and work?" not "is it the right approach?"
 
 ---
+
+## Table of Contents
+
+- [Key Results](#key-results---kr) — Success criteria for this mode
+- [Requirements](#requirements-and-constraints---req) — Rules and constraints to follow
+- [Steps](#steps) — Reference to base mode execution
+- [Terms](#terms) — Key vocabulary and definitions
+- [Preconditions](#preconditions) — What's needed before starting
+- [Postconditions](#postconditions) — What's delivered upon completion
+- [Actions](#possible-actions) — Concrete steps to achieve results
+- [Notes](#additional-notes-and-terms) — Additional context and details
+- [References](#references) — External documentation and resources
 
 ## Key Results - KR
 

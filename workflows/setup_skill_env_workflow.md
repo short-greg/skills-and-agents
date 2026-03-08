@@ -10,6 +10,8 @@ user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, AskUserQuestion, TodoWrite
 ---
 
+[TODO: Update]
+
 # Setup Skill Environment Workflow
 
 **Goal:** Install the skills-and-agents framework into a project so AI tools can use it.
@@ -73,7 +75,7 @@ MUST read and follow steps in `dynamic_workflow_base.md`
 
 ### Determine Installation Approach (→ KR1)
 
-Execute approach selection using `interviewing` mode when starting setup. Ask user:
+Execute approach selection using [interviewing mode](../modes/interviewing.md) when starting setup. Ask user:
 1. **AI tool type:** Claude Code, Cursor, Windsurf, other?
 2. **Installation method:**
    - Submodule (recommended for updates): `git submodule add ... .skills-framework`
@@ -130,7 +132,7 @@ Create a development plan by following [dev_planning_workflow.md](../../../.skil
 
 ### Create CLAUDE.md (→ KR3)
 
-Execute documentation creation using `defining` mode when CLAUDE.md does not exist. Create CLAUDE.md with:
+Execute documentation creation using [defining mode](../modes/defining.md) when CLAUDE.md does not exist. Create CLAUDE.md with:
 
 - Project name and description
 - Reference to framework: "This project uses skills-and-agents framework in `.skills-framework/`"
@@ -141,7 +143,7 @@ Execute documentation creation using `defining` mode when CLAUDE.md does not exi
 
 ### Validate Setup (→ KR4)
 
-Execute validation using `evaluating` mode when installation complete. Check:
+Execute validation using [evaluating mode](../modes/evaluating.md) when installation complete. Check:
 
 1. Framework directory exists with subdirectories
 2. Skill directories exist with SKILL.md files

@@ -5,10 +5,6 @@ description: >
   You MUST satisfy the Goal, Key Results and follow the Requirements of this mode.
   Triggers on: "position yourself", "configure for this", "set yourself up", "adapt to the user".
   keywords: configuring, calibrating, adapting, tuning
-argument-hint: "[task and user context]"
-disable-model-invocation: false
-user-invocable: true
-allowed-tools: Read, Grep
 ---
 
 # Positioning
@@ -20,6 +16,18 @@ allowed-tools: Read, Grep
 **Scope:** Self-configuration for task and user through selecting identity (role, expertise, perspective, domain) and configuring communication style (directness, formality, verbosity, tone). Answers "how should I configure myself?" not "what should I do?" (planning) or "what's the situation?" (orienting).
 
 ---
+
+## Table of Contents
+
+- [Key Results](#key-results---kr) — Success criteria for this mode
+- [Requirements](#requirements-and-constraints---req) — Rules and constraints to follow
+- [Steps](#steps) — Reference to base mode execution
+- [Terms](#terms) — Key vocabulary and definitions
+- [Preconditions](#preconditions) — What's needed before starting
+- [Postconditions](#postconditions) — What's delivered upon completion
+- [Actions](#possible-actions) — Concrete steps to achieve results
+- [Notes](#additional-notes-and-terms) — Additional context and details
+- [References](#references) — External documentation and resources
 
 ## Key Results - KR
 

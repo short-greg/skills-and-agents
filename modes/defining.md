@@ -6,10 +6,6 @@ description: >
   Triggers on: "define this", "what are the requirements", "scope this out",
   "clarify requirements", "what should we create", "create a task description", "create a PRD".
   keywords: specifying, scoping, requirements, criteria, clarifying
-argument-hint: "[task or feature to define]"
-disable-model-invocation: false
-user-invocable: true
-allowed-tools: Read, Grep
 ---
 
 # Defining
@@ -21,6 +17,18 @@ allowed-tools: Read, Grep
 **Scope:** Establishing what to build and defining done. Answers "what are we building and how will we know it's done?" not "how will we build it?"
 
 ---
+
+## Table of Contents
+
+- [Key Results](#key-results---kr) — Success criteria for this mode
+- [Requirements](#requirements-and-constraints---req) — Rules and constraints to follow
+- [Steps](#steps) — Reference to base mode execution
+- [Terms](#terms) — Key vocabulary and definitions
+- [Preconditions](#preconditions) — What's needed before starting
+- [Postconditions](#postconditions) — What's delivered upon completion
+- [Actions](#possible-actions) — Concrete steps to achieve results
+- [Notes](#additional-notes-and-terms) — Additional context and details
+- [References](#references) — External documentation and resources
 
 ## Key Results - KR
 

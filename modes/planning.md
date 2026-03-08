@@ -6,10 +6,6 @@ description: >
   Triggers on: "plan this", "how should we approach this", "break this down",
   "what should we do first", "create a plan", "what are the steps".
   keywords: sequencing, ordering, decomposing, scheduling, prioritizing
-argument-hint: "[task or goal to plan]"
-disable-model-invocation: false
-user-invocable: true
-allowed-tools: Read, Grep
 ---
 
 # Planning
@@ -21,6 +17,18 @@ allowed-tools: Read, Grep
 **Scope:** Deciding what to do and in what order. Answers "what steps and in what order?" not "how do we implement each step?"
 
 ---
+
+## Table of Contents
+
+- [Key Results](#key-results---kr) — Success criteria for this mode
+- [Requirements](#requirements-and-constraints---req) — Rules and constraints to follow
+- [Steps](#steps) — Reference to base mode execution
+- [Terms](#terms) — Key vocabulary and definitions
+- [Preconditions](#preconditions) — What's needed before starting
+- [Postconditions](#postconditions) — What's delivered upon completion
+- [Actions](#possible-actions) — Concrete steps to achieve results
+- [Notes](#additional-notes-and-terms) — Additional context and details
+- [References](#references) — External documentation and resources
 
 ## Key Results - KR
 

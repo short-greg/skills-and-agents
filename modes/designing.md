@@ -6,10 +6,6 @@ description: >
   Triggers on: "design this", "how should we build this", "what's the architecture",
   "what are the tradeoffs", "design the API", "design the data model".
   keywords: architecting, structuring, modeling, interfacing, planning
-argument-hint: "[component or problem to design]"
-disable-model-invocation: false
-user-invocable: true
-allowed-tools: Read, Grep
 ---
 
 # Designing
@@ -21,6 +17,18 @@ allowed-tools: Read, Grep
 **Scope:** Figuring out how to build something. Answers "how will we build this?" not "what steps will we take?"
 
 ---
+
+## Table of Contents
+
+- [Key Results](#key-results---kr) — Success criteria for this mode
+- [Requirements](#requirements-and-constraints---req) — Rules and constraints to follow
+- [Steps](#steps) — Reference to base mode execution
+- [Terms](#terms) — Key vocabulary and definitions
+- [Preconditions](#preconditions) — What's needed before starting
+- [Postconditions](#postconditions) — What's delivered upon completion
+- [Actions](#possible-actions) — Concrete steps to achieve results
+- [Notes](#additional-notes-and-terms) — Additional context and details
+- [References](#references) — External documentation and resources
 
 ## Key Results - KR
 

@@ -6,10 +6,6 @@ description: >
   Triggers on: "verify this", "test this", "does this work", "check if correct", "validate the result", "run the tests", "confirm this", "is this right",
   "critique this", "review this", "what's wrong with this", "how can I improve", "code review", "give me feedback", "find issues", "red team this", "poke holes".
   keywords: validating, verifying, critiquing
-argument-hint: "[what to evaluate]"
-disable-model-invocation: false
-user-invocable: true
-allowed-tools: Read, Grep, Bash
 ---
 
 # Evaluating
@@ -21,6 +17,18 @@ allowed-tools: Read, Grep, Bash
 **Scope:** Comparing an evaluation target against evaluation criteria using systematic methods. Outputs assessment based on evidence. Optionally provides recommendations when requested.
 
 ---
+
+## Table of Contents
+
+- [Key Results](#key-results---kr) — Success criteria for this mode
+- [Requirements](#requirements-and-constraints---req) — Rules and constraints to follow
+- [Steps](#steps) — Reference to base mode execution
+- [Terms](#terms) — Key vocabulary and definitions
+- [Preconditions](#preconditions) — What's needed before starting
+- [Postconditions](#postconditions) — What's delivered upon completion
+- [Actions](#possible-actions) — Concrete steps to achieve results
+- [Notes](#additional-notes-and-terms) — Additional context and details
+- [References](#references) — External documentation and resources
 
 ## Key Results - KR
 

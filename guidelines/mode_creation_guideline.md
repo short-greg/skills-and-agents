@@ -40,7 +40,7 @@ Each mode has a clear Goal (what it achieves) and Key Results (how to verify ach
 **Key Results Must Be Flexible**
 Key Results must be **outcome-focused, not task-specific**. The same mode should support multiple use cases while achieving the same KRs.
 
-Example: `investigating` mode can be used for:
+Example: [investigating mode](../modes/investigating.md) can be used for:
 - **Research Unknowns** - Inputs: technical unknowns; Outputs: findings, approaches, recommendations
 - **Research Common Practices** - Inputs: domain to research; Outputs: best practices, tradeoffs, recommendations
 - **Diagnose Bug** - Inputs: symptoms, errors; Outputs: root cause, evidence, recommendations

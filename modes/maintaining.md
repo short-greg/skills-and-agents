@@ -7,10 +7,6 @@ description: >
   "housekeeping", "tidy up", "prune unused code", "update the docs", "sync documentation",
   "record this decision", "update the changelog", "maintenance pass".
   keywords: cleaning, updating, syncing, documenting, pruning
-argument-hint: "[scope to maintain]"
-disable-model-invocation: false
-user-invocable: true
-allowed-tools: Read, Grep, Write, Edit, Bash
 ---
 
 # Maintaining
@@ -22,6 +18,18 @@ allowed-tools: Read, Grep, Write, Edit, Bash
 **Scope:** Addressing accumulated health issues and keeping records accurate. Includes fixing warnings, removing dead code, updating dependencies, syncing documentation with implementation, and recording decisions. Answers "is this system healthy and well-documented?"
 
 ---
+
+## Table of Contents
+
+- [Key Results](#key-results---kr) — Success criteria for this mode
+- [Requirements](#requirements-and-constraints---req) — Rules and constraints to follow
+- [Steps](#steps) — Reference to base mode execution
+- [Terms](#terms) — Key vocabulary and definitions
+- [Preconditions](#preconditions) — What's needed before starting
+- [Postconditions](#postconditions) — What's delivered upon completion
+- [Actions](#possible-actions) — Concrete steps to achieve results
+- [Notes](#additional-notes-and-terms) — Additional context and details
+- [References](#references) — External documentation and resources
 
 ## Key Results - KR
 
