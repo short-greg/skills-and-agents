@@ -11,6 +11,26 @@ user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, WebFetch, AskUserQuestion
 ---
 
+[COMMENT:  
+This skill is too large so I want to break it into three skills
+
+Break Up Into 3 skills:
+
+setup-interview  [this skill]
+ - this will orient and interview based on the current
+ - it creates the first task to set up the environment
+ - once completed it unlocks "setup-environment" and "setup-skills" and adds them to your skills (before that they are just reference files in the setup-interview skill), it moves them to .claude/skills/
+ - and it outputs a task.md file in the task folder
+setup-environment
+ - this primiarily executes based on
+ - what was already decided in setup interview
+ - configures docstrings
+setup-skills 
+ - create the skill builder
+ - offer to set up skills
+ - etc
+]
+
 # Setup
 
 **Goal:** Partner with developer to make their project AI-ready and deliver a project-specific skill builder.
@@ -60,20 +80,18 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 ## Steps
 
-[COMMENT: Refine steps as discussed]
-1. Create preliminary checklist → KR1-4, uses TodoWrite — formula: `setup - KR# - <task> - <details>`
-2. Position consultation approach → KR2, uses `positioning.md` — output how you will consult
-3. Orient to project → KR1, uses `orienting.md` — review all project documentation
-4. Interview developer → KR1, KR2, uses `interviewing.md` — gather needs and preferences
-5. <Placeholder: Replace this point with a fully developed checklist to account for all key reuslts>
-6. Validate all KRs → KR1-4, uses `evaluating.md` — output evidence for each KR
-7. Inform the user the next step is to setup up the project with the `/setup_env_workflow` after refreshing Claude.
+1. Create preliminary checklist → KR1-4. You MUST use TodoWrite with formula: `setup - KR# - <task> - <details>`
+2. Assess and gather requirements → KR1, KR2. Execute "Assess and Gather Requirements" task
+3. Define AI-readiness criteria → KR3. Execute "Define AI-Readiness Criteria" task
+4. Plan implementation → KR3. Execute "Plan Implementation" task. Output action plan for approval
+5. [Execute discovered tasks] → KR4. This is a PLACEHOLDER. Replace with specific tasks from approved plan
+6. Validate all KRs → KR1-4. Execute "Validate Deliverables" task. Output positive and negative evidence for each KR
+7. Hand off → Inform user the next step is to test the skill builder, then refresh Claude to use new skills
 
 ---
 
 ## Tasks
 
-[COMMENT: Updated this section to be more explicit]
 **REQUIRED:** 
 1. Each task specifies modes to use. 
 2. When executing a task you MUST read those modes if you haven't already. Select tasks based on context. Each task shows which KR it serves.
@@ -122,23 +140,28 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 --
 
-### Create Skills (→ KR?)
+### Create Skills (→ KR4)
 
-**Goal:** Set up skills to get the developer started
+**Goal:** Create initial skills to get the developer started
 
-**Instructions:** Create skills according to the skill-builder skill. This must already have been created.
+**When:** Skill builder skill has been created
+
+**Mode:** Use the skill builder skill created in "Create Skill Builder Skill" task
+
+**Instructions:** Use the skill builder skill to create initial skills. Interview developer about which skills they need first.
 
 **Inputs:**
-- Skill builder worfklow
+- Skill builder skill (required)
+- Developer's skill priorities (required)
 
 **Outputs:**
-- Skills
+- Initial skills customized to project
 
 ---
 
 ### Set Up Worktree Environment (→ KR4)
 
-**Goal:** Set up environment that is ;..
+**Goal:** Configure git worktrees for parallel development workflows
 
 **When:** Team has parallel work needs or requests worktree setup
 
@@ -256,18 +279,14 @@ Interaction Mode: The developer may wish to treat AI as
 **Mode:** [implementing](../modes/implementing.md)
 
 **Instructions:** Based on plan, set up as needed:
-1. Creates Tasks and Docs folder as needed (see Additional Notes and Terms)
-2. Create CLAUDE.md files
-- Root level: project overview, codebase navigation, key conventions, available skills
-- Package level (if monorepo): package-specific context, local patterns
-- Emphasize: how AI should navigate codebase, important patterns/anti-patterns, what skills exist and how to invoke them
+1. Create Tasks and Docs folders as needed (see Additional Notes and Terms)
+2. Create CLAUDE.md files:
+   - Root level: project overview, codebase navigation, key conventions, available skills
+   - Package level (if monorepo): package-specific context, local patterns
+   - Emphasize: how AI should navigate codebase, important patterns/anti-patterns, what skills exist and how to invoke them
 3. Initialize system documentation
 4. Clarify code documentation standards
-5. Set up worktree-setup [COMMENT: Isn't there already a task for this]
-- Configure directory structure per worktree-setup-guideline
-- Install shell functions if wanted
-- Create .worktreesync with environment files to sync
-- If orchestration needed: install worktree-orchestrate and worktree-task as skills in .claude/skills/
+5. If worktrees needed: execute "Set Up Worktree Environment" task
 
 **Inputs:**
 - Implementation plan (required)
@@ -284,15 +303,18 @@ Interaction Mode: The developer may wish to treat AI as
 
 ## Additional Notes and Terms
 
-- Skill Builder: See [skill-builder-guideline.md](../guidelines/skill-builder-guideline.md) for options and template. [COMMENT: Isn't there already a task for this?]
-- Worktree Setup: See [worktree-setup-guideline.md](../guidelines/worktree-setup-guideline.md) for worktree and orchestration workflow guidance. [COMMENT: Isn't there already a task for this?]
-- AI-Readiness dimensions: Understanding, navigation, behavior knowledge, task execution, skills, constraints, growth capability, maintainability. [COMMENT: Isn't there already a task for this?]
-- Customization Levels: Minimal (basic CLAUDE.md), Moderate (project patterns), Comprehensive (full skill suite). [COMMENT: Currently not clear, theese terms must be defined]
-- Descriptive vs Prescriptive:** Present options with recommendations. Developer decides. [COMMENT: Currently not clear, these terms must be defined]
-- Task Folder: Folder where tasks will be put such as PRDs, bug reports (recommended ./tasks/{TASK_ID}/ with ./tasks/{TASK_ID}/local_conext for context and )
-- Docs Folder: Folder where system docs and user docs will be put (recommended ./docs/)
+**AI-Readiness Dimensions:** Understanding, navigation, behavior knowledge, task execution, skills, constraints, growth capability, maintainability. Used in "Define AI-Readiness Criteria" task.
 
-**Task Folder
+**Customization Levels:**
+- Minimal: Basic CLAUDE.md with project overview
+- Moderate: CLAUDE.md plus project patterns and conventions
+- Comprehensive: Full skill suite with skill builder and custom workflows
+
+**Interaction Modes:** See "Assess and Gather Requirements" task for Lead/Senior/Peer/Junior definitions.
+
+**Task Folder:** Folder for task artifacts like PRDs, bug reports. Recommended: `./tasks/{TASK_ID}/` with `./tasks/{TASK_ID}/local_context/` for task-specific context.
+
+**Docs Folder:** Folder for system and user documentation. Recommended: `./docs/`
 
 ---
 

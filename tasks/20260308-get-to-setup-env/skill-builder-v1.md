@@ -59,7 +59,9 @@
 
 ---
 
-[COMMENT: this should be in a separate file that gets referenced]
+[COMMENT: this should be in a separate file that gets referenced. Also describe what must go into it.
+
+]
 ## Skill Structure Template
 
 ```markdown
