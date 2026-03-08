@@ -27,6 +27,14 @@ A skill builder skill is a project-specific skill that creates other skills. Eac
 7. **Implement skill builder skill** — Create the skill builder following workflow_creation_guideline.md
 8. **Validate with team** — Confirm skill builder works for their use cases, iterate if needed
 
+## Required Emphases for Skills
+
+The skill builder skill MUST ensure all skills it creates emphasize:
+- **Maintenance** — Skills always keep documentation up to date and in line with feedback
+- **Tracking** — Updates are always tracked (via TodoWrite, trace files, or similar)
+- **Validation** — Use evidence-based evaluation to confirm alignment with key results, conventions, functional and non-functional requirements
+- **Understanding use case** — The skill builder MUST interview about each skill's use case and intent before creating it. Do NOT just follow the template.
+
 ## Considerations to Account for When Creating the Skill Builder Skill
 
 The skill builder skill must take the following into account

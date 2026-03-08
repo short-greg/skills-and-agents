@@ -37,6 +37,16 @@ Techniques for identity positioning (who am I), profile configuration (what char
 | Artifact/Output | Purpose | When to Use | Artifact? |
 |-----------------|---------|-------------|-----------|
 | **Position Statement** | Explicit identity: role, expertise, perspective, domain | When task requires specific viewpoint or spawning subagent | Output |
+
+**Position Statement Example:**
+```
+This task requires [description of what's needed]. I will tackle this from the perspective of a [specific expert type, e.g., "senior software architect", "security consultant", "UX researcher"].
+
+A [expert type] would approach this by:
+1. [How expert would start]
+2. [Key considerations expert would have]
+3. [How expert would validate their work]
+```
 | **Profile Specification** | Configuration of characteristics: personality, values, knowledge domains, preferences | When default profile doesn't fit or consistency matters | Output |
 | **Persona Alignment Check** | Verification that behavior matches established identity and profile | Periodically during work or when detecting drift | Output |
 

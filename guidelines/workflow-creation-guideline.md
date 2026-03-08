@@ -177,33 +177,44 @@ The resulting state after the skill is finished.
 
 Steps define execution order. Format differs by workflow style.
 
+**Writing Rules for Steps:**
+- Use imperative form or "You MUST" — never "should" or "could"
+- Say "Read X to understand..." — never "uses X"
+- Specify exact outputs — never vague "do X"
+- Include framing output (Position Statement) early
+- Include action plan output after investigation/interview
+
 <**Imperative** — Fixed sequence, no KR labels needed, checklist optional:
 
 ```
-1. Review CLAUDE.md to understand the project
-2. Interview the user to gather requirements
-3. Design the solution
-4. Implement the changes
-5. Validate the implementation
+1. Read CLAUDE.md to understand the project conventions
+2. Interview the user to gather requirements. Output your understanding for confirmation
+3. Design the solution. Output your proposed approach for approval
+4. Implement the changes per approved design
+5. Validate the implementation. Output evidence of success
 ```
 
 **Declarative** — Preliminary checklist keeps it on track, but adapts (add/remove items) as plan evolves:
 
 ```
-1. Create preliminary checklist → KR1-4, uses TodoWrite — formula: `[workflow] - KR# - <task> - <details>`
-2. Orient to project → KR1, uses `orienting.md` — review all documentation
-3. Update checklist based on findings → KR1-4 — add/remove tasks as understanding changes
-4. Execute tasks, updating checklist as plan evolves → KR2-3 — adapt to new information
-5. Validate all KRs → KR1-4, uses `evaluating.md` — output evidence for each KR
+1. Create preliminary checklist → KR1-4. You MUST use TodoWrite with this formula: `[workflow] - KR# - <task> - <details>`
+2. Output Position Statement → How you will approach this task as an expert (see identity_and_profile.md)
+3. Orient to project → KR1. Read `orienting.md` to understand how to orient. Review all project documentation
+4. Investigate and interview → KR1-2. Read `interviewing.md`. Output your assessment, then ask questions arising from that assessment
+5. Output action plan → Based on findings, output proposed tasks with rationale. Get approval before proceeding
+6. [Execute discovered tasks] → KR2-3. This is a placeholder. Replace with specific tasks discovered during interview
+7. Validate all KRs → KR1-4. Read `evaluating.md`. Output both positive and negative evidence for each KR, then decide if it passes
 ```
 
 **Hybrid** — Imperative bookends (setup + validation), declarative middle:
 
 ```
-1. Create preliminary checklist with all KRs
-2. Orient to understand context
-3. [Dynamic: select and execute tasks based on KRs]
-4. Validate all KRs with evidence
+1. Create preliminary checklist. You MUST use TodoWrite with formula: `[workflow] - KR# - <task>`
+2. Output Position Statement — your expert framing for this task
+3. Orient and investigate to understand context
+4. Output action plan for approval
+5. [Execute discovered tasks — placeholder, replace with specific tasks]
+6. Validate all KRs. Output positive and negative evidence for each, then decide
 ```
 
 >
