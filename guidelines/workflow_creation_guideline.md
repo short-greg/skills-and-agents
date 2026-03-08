@@ -1,141 +1,106 @@
 # Workflow Creation Guideline
 
-**This guideline inherits from [skill_creation_guideline.md](skill_creation_guideline.md).**
-
-Read the base skill guideline first for common instructions.
+**Inherits from [skill_creation_guideline.md](skill_creation_guideline.md).** Read base guideline first.
 
 ---
 
-## Table of Contents
+## Prerequisites
 
-- [Workflow Creation Guideline](#workflow-creation-guideline)
-  - [Table of Contents](#table-of-contents)
-  - [What is a Workflow?](#what-is-a-workflow)
-  - [Implementation Steps](#implementation-steps)
-  - [Writing Style](#writing-style)
-  - [Validation Criteria](#validation-criteria)
-  - [Tips](#tips)
-  - [Template](#template)
+Stop if any are false:
+- [ ] Task requires multiple steps in sequence
+- [ ] Task orchestrates 2+ modes (not just one)
+- [ ] Read [skill_creation_guideline.md](skill_creation_guideline.md)
+
+If task uses only one mode → use that mode directly, do not create a workflow.
 
 ---
 
-## What is a Workflow?
+## Definition
 
-A workflow is a **multi-step process** that orchestrates modes to achieve a larger goal.
+A **workflow** orchestrates 2+ modes to achieve a multi-step goal.
 
-**Workflows compose modes:**
-- `feature_workflow` - Orchestrates orienting → defining → designing → implementing → validating
-- `bugfix_workflow` - Orchestrates orienting → investigating → defining → implementing → validating
-- `refactor_workflow` - Orchestrates orienting → designing → implementing → validating
-
-**Key characteristics:**
-- Multi-step (has sequential phases)
-- Orchestrates 2+ modes
-- 3-4 Key Results (more complex than modes)
-- Includes recovery and progress tracking
-- 150-200 lines (200-250 acceptable with user permission)
-
-**When to create a workflow:**
-- A process requiring multiple steps in sequence
-- A task that orchestrates 2+ modes to achieve a goal
-- Clear phases or stages that build on each other
-- **Don't create when:** The action is atomic (use a mode instead), only uses one mode (just use that mode directly)
+| Attribute | Requirement |
+|-----------|-------------|
+| Modes | 2+ |
+| Key Results | 3-4 |
+| Lines | 150-200 (200-250 with permission) |
+| Recovery | Required |
+| Progress tracking | Required |
 
 ---
 
-## Implementation Steps
+## Steps to Create
 
-1. Find out the goal and intent of the workflow
-2. Clarify your understanding
-3. Confirm it requires multiple modes/workflows (not just one)
-4. Identify which modes/workflows might be orchestrated
-5. Do web research to find out:
-   1. General web research on the process
-   2. Domain-specific web research
-6. **Create decision tables**:
-   - **Modes/Workflows table** with columns:
-     - Mode/Workflow name
-     - Reasons to use (how it helps this workflow)
-     - Reasons not to use (why it might not fit)
-     - Decision (use or don't use)
-   - **Protocols table** with same columns
-7. Create the workflow according to the template
-8. Validate the workflow
-9. Do final confirmation from the creator
+1. **Elicit goal** — Ask user: "What is the goal of this workflow?"
+2. **Confirm understanding** — Paraphrase back, get user confirmation
+3. **Verify prerequisites** — Confirm task requires 2+ modes (stop if not)
+4. **Research**:
+   - Search: `[workflow topic] best practices`
+   - Search: `[domain] workflow patterns`
+5. **Create decision tables**:
+
+   | Mode | Reasons to use | Reasons not to use | Decision |
+   |------|----------------|-------------------|----------|
+   | orienting | ... | ... | Use/Skip |
+
+6. **Write workflow** — Follow template exactly
+7. **Validate** — Run validation criteria checklist
+8. **Get confirmation** — User approves final workflow
 
 ---
 
-## Writing Style
+## Writing Rules
 
-Workflows are **orchestration-focused** - they coordinate modes and other workflows to achieve larger goals.
-
-**Key principles:**
-1. **Task-oriented language** - Tasks should specify which modes/workflows/protocols to use (strongly recommended)
-2. **Recovery-aware** - Must include progress tracking, recovery behavior, iteration limits
-3. **Minimal descriptions** - Goal/Intent/Scope should be brief (2-3 sentences max)
-4. **Clear task structure** - Each task shows → KR#, and ideally uses mode-name/workflow-name, uses protocol-name
-5. **Specify workflow style** - Declare whether Declarative or Imperative, Implicit or Explicit
+1. **Specify modes in tasks** — Each task states which mode(s) it uses
+2. **Include recovery** — Add progress tracking, recovery behavior, iteration limits
+3. **Keep descriptions brief** — Goal/Intent/Scope: 2-3 sentences max
+4. **Label tasks with KRs** — Format: `### Task Name (→ KR#)`
+5. **Declare workflow style** — State Imperative, Declarative, or Hybrid
 
 **Workflow Styles:**
 
-**Goal-Oriented vs Process-Oriented:**
-- **Goal-Oriented (Declarative)** - Specify what to achieve, let modes/workflows determine how. Relies heavily on preconditions/postconditions of skills used.
-- **Process-Oriented (Imperative)** - Specify exact steps to execute. More control, less flexibility.
-- **Recommendation:** Checklist setup (first step) and validation (last step) should be process-oriented. Middle steps can be goal-oriented or process-oriented based on user needs.
-
-**Implicit vs Explicit:**
-- **Implicit** - Minimal instructions, rely on mode/workflow intelligence
-- **Explicit** - Detailed instructions at each step
-
-**Content pattern:**
-1. **Steps** - High-level phases (each typically maps to one mode or workflow)
-2. **Tasks** - Detailed tasks showing which modes/workflows/protocols to use
-3. **Preconditions/Postconditions** - What's needed, what's produced (crucial for declarative workflows)
-
-**Structural differences from modes:**
-- 150-200 lines (200-250 acceptable with user permission)
-- 3-4 Key Results vs modes with 2
-- Orchestrates multiple modes and/or workflows
-- Must include recovery requirements
-- Tasks replace Actions
-- Must specify workflow style
+| Style | Checklist | Steps | When to use |
+|-------|-----------|-------|-------------|
+| **Imperative** | Optional, fixed | Fixed sequence, no KR labels | Predictable process |
+| **Declarative** | Required, adapts | KR labels, add/remove tasks | Adaptive process |
+| **Hybrid** | Required at bookends | Imperative setup + validation, declarative middle | Most workflows |
 
 ---
 
-## Validation Criteria
+## Validation Checklist
 
-For each criterion, you MUST output all evidence that it passes and all evidence that it fails. Once evidence is output, weigh the evidence to decide if it passes or fails.
+For each criterion: output evidence it passes, output evidence it fails, then decide.
 
 **Structural:**
-- [ ] **Follows template exactly:** All sections present with correct format (3-4 KRs, Tasks show → KR# and modes/protocols used, etc.)
-- [ ] **150-200 lines:** Length stays within target range (200-250 acceptable with user permission)
+- [ ] **Follows template** — All sections present, correct format
+- [ ] **150-200 lines** — (200-250 with permission)
+- [ ] **3-4 Key Results** — Not 2, not 5+
 
-**Content Quality:**
-- [ ] **Coherent:** Sections flow logically without contradictions
-- [ ] **Complete:** All necessary information provided, all KRs achievable from Tasks
-- [ ] **Concise:** Minimum necessary words, no duplication
-- [ ] **Precise:** Specific, unambiguous language
-- [ ] **LLM-focused:** Non-obvious constraints, no needless definitions
+**Content:**
+- [ ] **Coherent** — No contradictions between sections
+- [ ] **Complete** — All KRs achievable from Tasks
+- [ ] **Concise** — No duplication, minimum words
+- [ ] **Precise** — Unambiguous language, no hedging
 
 **Workflow-Specific:**
-- [ ] **Multi-mode:** Uses 2+ modes (not just one)
-- [ ] **Recovery included:** Requirements include progress tracking, recovery behavior, iteration limit
-- [ ] **Tasks specify modes/protocols when used:** Tasks show which modes and protocols to use (strongly recommended, not required for all tasks)
-- [ ] **Research completed:** References section includes relevant sources
+- [ ] **Uses 2+ modes** — Not single-mode
+- [ ] **Recovery included** — Progress tracking, recovery, iteration limit
+- [ ] **Tasks specify modes** — Each task states which mode(s)
+- [ ] **Research completed** — References section has sources
 
 ---
 
-## Tips
+## Rules
 
-1. **Specify workflow style:** Declare Goal-Oriented (Declarative), Process-Oriented (Imperative), or Hybrid
-2. **Hybrid recommended:** First step (checklist setup) and last step (validation) process-oriented; middle steps goal-oriented
-3. **Each step typically maps to one skill:** Orient → Define → Design → Implement → Validate (can be modes or workflows)
-4. **Tasks can use modes OR workflows:** Don't just orchestrate modes - workflows can orchestrate other workflows too
-5. **Include preconditions/postconditions:** Crucial for goal-oriented workflows - specify what each skill needs and produces
-6. **Include recovery:** All workflows need progress tracking per `tracking.md`, recovery per `recovery.md`, iteration limits
-7. **3-4 Key Results:** Workflows can have more KRs than modes (but not too many)
-8. **Handle failures:** Specify what happens when tasks fail (retry, escalate, etc.)
-9. **Don't create single-skill workflows:** If it only uses one mode/workflow, just use that skill directly
+1. **Declare workflow style** — State Imperative, Declarative, or Hybrid at top
+2. **Use Hybrid for most workflows** — Imperative bookends (setup + validation), declarative middle
+3. **Map each step to one mode** — Orient → Define → Design → Implement → Validate
+4. **Orchestrate modes or workflows** — Tasks can use either
+5. **State preconditions/postconditions** — Required for declarative tasks
+6. **Add recovery** — Progress tracking per `tracking.md`, recovery per `recovery.md`, iteration limit
+7. **Limit to 3-4 Key Results** — More than modes, but not excessive
+8. **Handle failures** — State what happens when task fails (retry, escalate, etc.)
+9. **Do not create single-mode workflows** — Use the mode directly instead
 
 ---
 
@@ -187,13 +152,6 @@ Constraints on how to complete the skill.
 4. [workflow-specific constraint]
 5. Iterate up to N times if [condition] before escalating
 
-## Protocols
-
-Protocols that this workflow uses.
-
-- **[protocol_name.md]** — Must use to [required action]
-- **[protocol_name.md]** — Use when [optional condition]
-
 ---
 
 ## Preconditions
@@ -202,10 +160,8 @@ Satisfy preconditions before beginning unless Optional.
 
 **Required:** [what must be provided]
 
-**Elicit if not provided:**
-- [what workflow will detect or ask about]
-
-**Optional:** [optional inputs that enhance the workflow]
+**Optional:**
+- [optional inputs that enhance the workflow]
 
 ## Postconditions
 
@@ -219,70 +175,67 @@ The resulting state after the skill is finished.
 
 ## Steps
 
+Steps define execution order. Format differs by workflow style.
 
-Complete the Tasks in this order.
+<**Imperative** — Fixed sequence, no KR labels needed, checklist optional:
 
-1. [Step Name]
-2. [Step Name]
-3. [Step Name]
-4. [Step Name]
+```
+1. Review CLAUDE.md to understand the project
+2. Interview the user to gather requirements
+3. Design the solution
+4. Implement the changes
+5. Validate the implementation
+```
 
-<Recommended: Require the first steps to be to set up the checklist with key results then resolve all preconditions that are okay to "elicit". Then require the final step be to validate the key results of the workflow.
+**Declarative** — Preliminary checklist keeps it on track, but adapts (add/remove items) as plan evolves:
 
-Even if it is goal-oriented. However, in goal-oriented, if a step fails it may go back. In process-oriented, it will only go back if required and may fail if a step fails.
+```
+1. Create preliminary checklist → KR1-4, uses TodoWrite — formula: `[workflow] - KR# - <task> - <details>`
+2. Orient to project → KR1, uses `orienting.md` — review all documentation
+3. Update checklist based on findings → KR1-4 — add/remove tasks as understanding changes
+4. Execute tasks, updating checklist as plan evolves → KR2-3 — adapt to new information
+5. Validate all KRs → KR1-4, uses `evaluating.md` — output evidence for each KR
+```
 
-Example (use the required format, though):
-1. Set up the checklist
-2. Elicit all pre-conditions marked as "Elicit"
-3. Finalize the checklist with tasks to execute
-4. List of all tasks after finalizing
-5. Validate that the step was completed>
+**Hybrid** — Imperative bookends (setup + validation), declarative middle:
+
+```
+1. Create preliminary checklist with all KRs
+2. Orient to understand context
+3. [Dynamic: select and execute tasks based on KRs]
+4. Validate all KRs with evidence
+```
+
+>
 
 ---
 
 ## Tasks
 
-Select and execute tasks to achieve each Key Result. Each task shows which KR it serves. Strongly recommended: specify which modes/workflows/protocols to use.
-
-### [Task Name] (→ KR#, uses mode-name, uses protocol-name)
-
-[What this task does. Context for using the mode in this workflow.]
-
-**Preconditions:** [What mode needs - crucial for goal-oriented workflows]
-**Postconditions:** [What mode produces - crucial for goal-oriented workflows]
-
-**On failure:** [What to do if this task fails - retry, escalate, etc.]
-
-### [Task Name] (→ KR#, KR#, uses workflow-name)
-
-[What this task does. Tasks can use other workflows, not just modes.]
-
-**Preconditions:** [What workflow needs]
-**Postconditions:** [What workflow produces]
-
-### [Task Name] (→ KR#, uses mode-name)
-
-[What this task does.]
-
-Per `protocol.md` — [reference specific protocol guidance].
+**IMPORTANT:** Each task specifies modes to use. When executing a task you MUST read those modes if you haven't already. Select tasks based on context. Each task shows which KR it serves.
 
 ### [Task Name] (→ KR#)
 
-[What this task does - if no specific mode/workflow/protocol needed, just describe the task.]
+**Goal:** [What this task achieves]
 
----
+**When:** [When to execute this task]
 
-## Available Modes <OPTIONAL>
+**Mode:** [mode-name](../modes/mode-name.md)
 
-<Only include if helpful to list modes used. Many workflows won't need this section.>
+[OPTIONAL] **Protocol (Override):** <Can include special protocols or require other protocols be used>
 
-Modes are atomic cognitive actions in `modes/`. Use these to execute the workflow.
+**Instructions:** [How to execute. Be specific about what to do, but let AI choose techniques from the mode.]
 
-<Here is an example:
-- `orienting` — [when to use in this workflow]
-- `defining` — [when to use in this workflow]
-- `designing` — [when to use in this workflow]
-- `implementing` — [when to use in this workflow]>
+**Inputs:**
+- [required input] (required)
+- [optional input] (optional)
+
+**Outputs:** 
+
+<Outputs can be a reference to a style, output must align with the mode, though, specify any default output values>
+
+- [required output <if has a default value mention it>]
+- [optional output]
 
 ---
 
