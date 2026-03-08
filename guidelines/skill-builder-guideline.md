@@ -1,20 +1,4 @@
-
-
-[COMMENT: This is currently really bad. 
-It is overly prescriptive and not taking a consultant approach.
-
-I am trying to get away from that and you back toward it
-
-
-Requirements
-
-1. Skill builder interview, investigate the user to understand the needs of user and project then create the appropriate
-2. Skill builder must check out current
-3. Skill builder must recommend certain actions such as always checking CLAUDE.md
-
-This 
-
-]
+# Skill Builder Guideline
 
 ## Objective
 
@@ -30,7 +14,7 @@ To create an effective skill builder skill that will meet project requirements
 
 ## Background
 
-[COMMENT: Add brief rationale]
+A skill builder skill is a project-specific skill that creates other skills. Each project has different conventions, structures, and team preferences. Rather than prescribing a fixed approach, the skill builder must be designed to discover and adapt to these differences. It acts as a consultant - understanding the project and team before generating skills that fit.
 
 ## Tasks
 
@@ -57,9 +41,54 @@ The skill builder skill must take the following into account
     - If it is more descriptive they outline the general guidelines but the skill must be set up so that it will come up with specific tasks to execute. This can be done through first doing expert-research or expert-reasoning about the problem it faces. 
     - With more prescriptive skills, underlying tasks it performs in the workflow for the skill be decided by the user.
   - It must account for whether the developer working on the project wants more hands on involvement or less hands on involvement. 
-- **Workflow creation guidelines and consultation Orientedness**
+- **Workflow creation guidelines and consultation orientedness**
   - The outputted skill builder must follow these and be validated by them
-  - The skill must be declarative in form and consultation oriented.
-  - It must review the latest best practices for skill building.
+  - The skill must be declarative in form and consultation oriented
+  - It must review the latest best practices for skill building
+  - It must present recommendations/suggestions in a way that is easy to review and address
+- **Naming and structure conventions**
+  - How skills should be named in this project
+  - Where skill files should be placed
+  - Any project-specific file naming patterns (snake_case, kebab-case, etc.)
+- **Modes and tasks**
+  - Review all modes that might be applicable for the skill, list them up in a table
+- **Action or Output-oriented**
+  - Skills that the skill-builder outputs must be action/output-oriented, avoid verbs that do not require concrete actions or outputs (e.g. instead of "consider X or Y" use "output a table for comparison")
+- **Installation process**
+  - The skill builder must describe how to install skills according to Claude's guidelines
+- **Expert-oriented**
+  - The skills skill-builder creates had better use reflection in which it first outputs how an expert would tackle the problem
+- **Supporting files and dependencies**
+  - What modes does the skill need to reference? Are they available?
+  - What protocols should the skill use? Are they in the project?
+  - Should missing modes/protocols be copied from the framework or created?
+- **Scripts and shell functions**
+  - Does the skill require shell functions (e.g., worktree helpers)?
+  - Are there setup scripts needed for the skill to work?
+  - How should these be installed and where should they live?
+- **Skill placement and file structure**
+  - Where should the created skill file be placed?
+  - What directory structure does the project use for skills?
+  - Are there supporting files that need to be created alongside the skill?
 
-  - It must also present recommendations/suggestions in a way so they are easy to review and address.
+## Output
+
+The skill builder skill produces:
+- A complete skill file ready for use, or a draft for team review (depending on team preference)
+- Skills that follow the project's conventions discovered during creation
+- Skills validated against workflow_creation_guideline.md
+
+## Validation
+
+The skill builder skill should validate skills it creates:
+- Follows workflow_creation_guideline.md structure
+- Accounts for project-specific conventions
+- Matches team's preferred workflow style
+- References appropriate modes and protocols
+
+## References
+
+- Research current Claude Code skill builder patterns
+- workflow_creation_guideline.md
+- mode_creation_guideline.md
+- Project-specific documentation discovered during consultation

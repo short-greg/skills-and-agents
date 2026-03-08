@@ -66,6 +66,7 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 5. Compose project-specific checklist → KR1-4 — update checklist with tasks for this project
 6. Execute checklist tasks → KR3, KR4 — complete tasks, updating checklist as you go
 7. Validate all KRs → KR1-4, uses `evaluating.md` — output evidence for each KR
+8. Inform the user the next step is to setup up the project with the `/setup_env_workflow` after refreshing Claude.
 
 ---
 
@@ -88,6 +89,48 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 **Outputs:**
 - Recovery summary and confirmed resume point
+
+---
+
+### Create Skill Builder Skill (→ KR4)
+
+**Goal:** Create a project-specific skill builder that can generate skills following project conventions
+
+**When:** Project conventions understood, team preferences gathered
+
+**Mode:** [designing](../modes/designing.md), [implementing](../modes/implementing.md)
+
+**Instructions:** Follow [skill-builder-guideline.md](../guidelines/skill-builder-guideline.md). Research current best practices. Output expert reasoning on how to approach this project's skill builder. Design skill builder that accounts for: project setup/codebase, team workflow style preferences (imperative/declarative, prescriptive/descriptive), consultation orientedness, naming conventions. Present recommendations for team review. Implement based on approved design.
+
+**Inputs:**
+- Project conventions (required)
+- Team preferences (required)
+- Assessment document (required)
+
+**Outputs:**
+- Skill builder skill customized to project
+- Documentation of how the skill builder works
+
+---
+
+### Set Up Worktree Environment (→ KR4)
+
+**Goal:** Determine if worktrees are appropriate and configure them if needed
+
+**When:** Team has parallel work needs or requests worktree setup
+
+**Mode:** [interviewing](../modes/interviewing.md), [implementing](../modes/implementing.md)
+
+**Instructions:** Follow [worktree-setup-guideline.md](../guidelines/worktree-setup-guideline.md). Assess whether team benefits from worktrees. If so, discover preferences for: directory structure, environment sync needs, shell integration. If orchestration workflows are needed, create worktree-orchestrate and worktree-task workflows per guideline. Present options, let team decide.
+
+**Inputs:**
+- Team's parallel work patterns (required)
+- Project structure (required)
+
+**Outputs:**
+- Decision on whether worktrees are appropriate (documented)
+- If appropriate: worktree configuration, shell functions, .worktreesync
+- If orchestration needed: orchestrate and task workflows
 
 ---
 
@@ -149,27 +192,6 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 ---
 
-### Design and Implement Skill Builder (→ KR4)
-
-**Goal:** Design and create project-specific skill builder
-
-**When:** Plan approved, ready to build
-
-**Mode:** [designing](../modes/designing.md), [implementing](../modes/implementing.md)
-
-**Instructions:** Follow [skill_builder_guideline.md](../guidelines/skill_builder_guideline.md) for options and template. Present options to developer based on project needs. Design skill builder encoding agreed conventions. Implement per approved design. Present drafts, iterate on feedback.
-
-**Inputs:**
-- Implementation plan (required)
-- Project conventions (required)
-
-**Outputs:**
-- Skill builder design document
-- Implemented skill builder
-- Supporting documentation
-
----
-
 ### Validate Deliverables (→ KR1, KR2, KR3, KR4)
 
 **Goal:** Verify all KRs met and hand off
@@ -199,9 +221,22 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 **Mode:** [implementing](../modes/implementing.md)
 
 **Instructions:** Based on plan, set up as needed:
-- Create folders (tasks/, docs/) — adapt to existing structure
-- Configure worktrees if developer wants parallel execution — consult best practices, present options
-- Create/update CLAUDE.md files — root level and package level as needed
+
+**Folder structure:**
+- Create tasks/ folder if needed — for task specs, parallel work coordination
+- Create docs/ folder if needed — for project documentation, specs, architecture decisions
+- Adapt to existing structure — don't impose if project has conventions
+
+**CLAUDE.md files:**
+- Root level: project overview, codebase navigation, key conventions, available skills
+- Package level (if monorepo): package-specific context, local patterns
+- Emphasize: how AI should navigate codebase, important patterns/anti-patterns, what skills exist and how to invoke them
+
+**Worktree setup (if requested):**
+- Configure directory structure per worktree-setup-guideline
+- Install shell functions if wanted
+- Create .worktreesync with environment files to sync
+- If orchestration needed: install worktree-orchestrate and worktree-task as skills in .claude/skills/
 
 **Inputs:**
 - Implementation plan (required)
@@ -210,14 +245,17 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 **Outputs:**
 - Created folders with purpose explanation
+- CLAUDE.md files documenting project conventions and available skills
 - Worktree configuration if requested
-- CLAUDE.md files at appropriate levels
+- Orchestration workflows installed as skills if needed
 
 ---
 
 ## Additional Notes and Terms
 
-**Skill Builder:** See [skill_builder_guideline.md](../guidelines/skill_builder_guideline.md) for options and template.
+**Skill Builder:** See [skill-builder-guideline.md](../guidelines/skill-builder-guideline.md) for options and template.
+
+**Worktree Setup:** See [worktree-setup-guideline.md](../guidelines/worktree-setup-guideline.md) for worktree and orchestration workflow guidance.
 
 **AI-Readiness dimensions:** Understanding, navigation, behavior knowledge, task execution, skills, constraints, growth capability, maintainability.
 

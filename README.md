@@ -23,7 +23,7 @@
    ls .claude/skills/
    ```
 4. Cleanup any temporary files
-5. Workflows are available via slash commands (e.g., `/setup-env-workflow`)
+5. Inform the user Workflows are available via slash commands (e.g., `/setup-env-workflow`)
 
 ---
 
