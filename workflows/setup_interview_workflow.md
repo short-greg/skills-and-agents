@@ -78,13 +78,12 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 1. Create preliminary checklist → KR1-4. You MUST use TodoWrite with formula: `interview - KR# - <task> - <details>`
 2. Check for existing trace → Execute "Recover from Interruption" task if trace exists
-2a. Create interview plan → KR1, KR2, KR3, KR4. Execute "Create Interview Plan" task. Output plan for developer approval
-3. Assess and gather requirements → KR1, KR2. Execute "Assess and Gather Requirements" task. You MUST establish Interaction Mode and AI Personality during this step
-4. Define AI-readiness criteria → KR3. Execute "Define AI-Readiness Criteria" task
-5. Plan implementation → KR4. Execute "Plan Implementation" task. Output action plan for approval
-6. Create task directory and task.md → KR4. Execute "Create Task Documentation" task. Create `tasks/{TASK_ID}/` directory if it doesn't exist, then write all decisions to `tasks/{TASK_ID}/task.md`. Output confirmation message with file path
+3. Assess project → KR2. Execute "Assess Project" task. Output assessment summary
+4. Plan interview → KR1-4. Execute "Plan Interview" task. Output interview plan for approval
+5. Conduct interview → KR1, KR2, KR3. Execute "Conduct Interview" task
+6. Create task.md → KR3, KR4. Execute "Create Task Documentation" task. Document all decisions
 7. Unlock next workflows → Move setup-environment and setup-skills to `.claude/skills/`
-8. Complete and hand off → Execute "Complete and Hand Off" task. Output completion summary with checklist
+8. Complete and hand off → Execute "Complete and Hand Off" task. Output completion summary
 
 ---
 
@@ -118,183 +117,95 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 ---
 
-### Plan Implementation (→ KR4)
+### Assess Project (→ KR2)
 
-**Goal:** Create roadmap for achieving AI-readiness
-
-**When:** Definition complete
-
-**Mode:** [planning](../modes/planning.md)
-
-**Instructions:**
-1. Propose implementation plan based on definition and Interaction Mode
-2. Plan should specify which tasks from setup-environment and setup-skills to execute
-3. Get approval before finalizing
-
-**Inputs:**
-- Definition document (required)
-- Interaction Mode (required)
-- Constraints (optional)
-
-**Outputs:**
-- Approved implementation plan specifying:
-  - Environment setup tasks (for setup-environment workflow)
-  - Skills setup tasks (for setup-skills workflow)
-
----
-
-### Create Interview Plan (→ KR1, KR2, KR3, KR4)
-
-**Goal:** Design interview approach covering all critical topics for this project
+**Goal:** Understand project state and identify common considerations
 
 **When:** Starting consultation (after checking for existing trace)
 
-**Mode:** [planning](../modes/planning.md)
+**Mode:** [orienting](../modes/orienting.md)
 
 **Instructions:**
-1. Read existing project documentation (README, CLAUDE.md if exists, package.json/requirements.txt, etc.)
-2. Based on what you discover, determine which topics are relevant from the **possible topics** below
-3. Create interview plan covering the relevant topics (skip irrelevant ones):
-   - **Project characteristics:** Tech stack, size, conventions, existing patterns (if not already clear)
-   - **Team characteristics:** Team size, experience levels, collaboration patterns (skip for solo projects)
-   - **Pain points:** Current friction with AI assistance (if developer has used AI tools)
-   - **Constraints:** Timeline, budget, compatibility requirements, style preferences (if applicable)
-   - **Success criteria:** How to measure AI-readiness (always include)
-   - **Interaction Mode:** How developer wants to collaborate with AI (always include)
-   - **AI Personality:** Developer's preferred AI characteristics (always include - see Additional Notes)
-   - **Communication Style:** Formality, verbosity, technical level, tone (always include)
-4. For each included topic:
-   - Why this matters for AI-readiness
-   - Sample questions or question templates
-   - What to look for in responses
-5. Output plan as structured document with explicit relevance determination:
-   - **Relevance Assessment:** For each topic, explicitly state whether it's included/excluded and why
-   - **Decision Criteria Used:** What signals determined relevance (e.g., "Solo project detected from git log → skipping Team Characteristics", "README already documents stack thoroughly → skipping Project Characteristics", "No previous AI tool usage mentioned → including Pain Points to discover constraints")
-   - **Topics Included:** List with specific rationale for each
-   - **Topics Excluded:** List with specific rationale for each
-6. Ask developer: "Does this interview plan cover what you need? Anything to add or skip?"
+1. Review project documentation and structure
+2. Identify common considerations for AI-readiness
+3. Output assessment summary
 
 **Inputs:**
 - Repository access (required)
 - Existing documentation (optional)
 
 **Outputs:**
-- Interview plan document with topics, rationale, and question templates
-- Developer confirmation of plan
+- Assessment summary with findings
 
 ---
 
-### Assess and Gather Requirements (→ KR1, KR2)
+### Plan Interview (→ KR1, KR2, KR3, KR4)
 
-**Goal:** Understand project state, developer needs, and establish how developer wants to work with AI
+**Goal:** Determine relevant topics and create interview approach
 
-**When:** Starting consultation
+**When:** After project assessment
+
+**Mode:** [planning](../modes/planning.md)
+
+**Instructions:**
+1. Based on assessment, determine which topics are relevant (see possible topics in Additional Notes)
+2. For each included topic, explain why it matters and what to discover
+3. Output interview plan with explicit relevance determination (which topics and why)
+4. Get developer confirmation
+
+**Inputs:**
+- Assessment summary (required)
+
+**Outputs:**
+- Interview plan with topics to cover and rationale
+
+---
+
+### Conduct Interview (→ KR1, KR2, KR3)
+
+**Goal:** Interview developer according to plan
+
+**When:** After interview plan approved
 
 **Mode:** [interviewing](../modes/interviewing.md)
 
 **Instructions:**
-1. Output Position Statement as consultant and summary of context (read docs, analyze structure, detect patterns)
-2. Output assessment summary
-3. Ask developer: "Does this match your understanding?" (wait for confirmation)
-4. Establish Interaction Mode using AskUserQuestion tool (see Interaction Modes below)
-5. Configure AI Personality using AskUserQuestion tool (see Additional Notes: AI Personality Configuration for question structure)
-6. Configure Communication Style using AskUserQuestion tool (see Additional Notes: AI Personality Configuration)
-7. Ask targeted questions to fill remaining gaps based on interview plan
-8. Document all decisions for task.md
+Execute interview plan, gathering information for each planned topic. Document all decisions.
 
 **Inputs:**
-- Repository access (required)
-- Existing documentation (optional)
+- Interview plan (required)
 
 **Outputs:**
-- Interaction Mode (Lead/Senior/Peer/Junior) documented
-- AI Personality profile documented (Big 5 traits, communication preferences)
-- Assessment document with current state and gaps (confirmed by developer)
-- Requirements summary with developer confirmation
-
-**Interaction Modes:**
-- **Lead:** AI almost entirely autonomous, developer expects good output without much review
-- **Senior:** AI fairly autonomous, receives some feedback, less collaboration than Peer
-- **Peer:** AI and developer collaborate heavily on designs and plans
-- **Junior:** Developer heavily reviews AI output, confirms designs/plans, AI does not jump to implementation
-
-[COMMENT: Combine with the above]
-## Interaction Mode
-
-**Mode:** [Lead/Senior/Peer/Junior]
-
-**Meaning:**
-[1-2 sentences explaining what this mode means for AI behavior in this project]
-
-## AI Personality Profile
-
-**Personality Traits:**
-- Creativity vs Pragmatism: [Choice with brief note]
-- Thoroughness vs Speed: [Choice with brief note]
-- Proactive vs Responsive: [Choice with brief note]
-- Collaborative vs Direct: [Choice with brief note]
-- Cautious vs Confident: [Choice with brief note]
-
-**Communication Preferences:**
-- Verbosity: [Concise/Balanced/Detailed]
-- Technical Level: [Assume expertise/Explain/Teach]
-- Formality: [Professional/Semi-formal/Casual]
-- Emoji Usage: [Never/Sparingly/Frequently] (if specified)
-
-**Protocols Referenced:**
-- identity_and_profile.md (Personality Traits technique)
-- communication_style.md (Verbosity Calibration, Technical Level Adjustment, Formality Selection)
+- Interaction Mode (Lead/Senior/Peer/Junior)
+- AI Personality profile (Big 5 traits, communication preferences)
+- AI-readiness criteria and priorities
+- Constraints and preferences
+- All interview responses documented
 
 ---
 
-### Define AI-Readiness Criteria (→ KR3)
+### Create Task Documentation (→ KR3, KR4)
 
-**Goal:** Establish what "AI-ready" means for this project
+**Goal:** Define AI-readiness criteria, compose implementation plan, document all decisions
 
-**When:** Assessment complete, Interaction Mode established
+**When:** Interview complete
 
 **Mode:** [defining](../modes/defining.md)
 
 **Instructions:**
-1. Present AI-readiness dimensions as options (see Additional Notes)
-2. Recommend priorities based on assessment
-3. Let developer choose focus areas
-4. Document agreed criteria
+1. Define what "AI-ready" means for this project based on interview
+2. Compose implementation plan (environment setup tasks, skills setup tasks)
+3. Create `tasks/{TASK_ID}/` directory and write `tasks/{TASK_ID}/task.md` with all decisions
+4. Output confirmation with file path
 
 **Inputs:**
-- Assessment document (required)
-- Interaction Mode (required)
+- Interview responses (required)
+- Interaction Mode, AI Personality, constraints (required)
 
 **Outputs:**
-- Definition document with agreed criteria
-
-
----
-
-### Create Task Documentation (→ KR4)
-
-**Goal:** Document all decisions in structured task.md file
-
-**When:** Implementation plan approved
-
-**Mode:** [implementing](../modes/implementing.md)
-
-**Instructions:**
-1. Create `tasks/{TASK_ID}/` directory if it doesn't exist
-2. Write `tasks/{TASK_ID}/task.md` with all decisions using the structure below
-3. Output confirmation: "Created task.md at tasks/{TASK_ID}/task.md"
-
-**Inputs:**
-- Interaction Mode (required)
-- AI Personality profile (required)
-- Assessment document (required)
-- AI-readiness criteria (required)
-- Implementation plan (required)
-- Constraints and preferences (required)
-
-**Outputs:**
-- task.md file created at `tasks/{TASK_ID}/task.md`
-- Confirmation message with file path
+- AI-readiness definition
+- Implementation plan
+- task.md file at `tasks/{TASK_ID}/task.md`
 
 **task.md Structure:**
 
@@ -428,16 +339,29 @@ your skill builder and initial skills.
 
 ## Additional Notes and Terms
 
+**Possible Interview Topics:**
+
+Determine relevance based on project assessment. Not all topics apply to every project.
+
+**Core Topics** (typically include, but can skip if developer requests):
+- **Interaction Mode:** How developer wants to collaborate with AI (Lead/Senior/Peer/Junior)
+- **AI Personality:** Developer's preferred AI characteristics (see below)
+- **Communication Style:** Formality, verbosity, technical level, tone
+- **Success Criteria:** How to measure AI-readiness
+
+**Interaction Modes:**
+- **Lead:** AI almost entirely autonomous, developer expects good output without much review
+- **Senior:** AI fairly autonomous, receives some feedback, less collaboration than Peer
+- **Peer:** AI and developer collaborate heavily on designs and plans
+- **Junior:** Developer heavily reviews AI output, confirms designs/plans, AI does not jump to implementation
+
+**Optional Topics** (include when relevant):
+- **Project Characteristics:** Tech stack, size, conventions, patterns (skip if already clear from assessment)
+- **Team Characteristics:** Team size, experience levels, collaboration patterns (skip for solo projects)
+- **Pain Points:** Current friction with AI assistance (skip if no prior AI tool usage)
+- **Constraints:** Timeline, budget, compatibility requirements, style preferences (include if applicable)
+
 **AI-Readiness Dimensions:** Understanding, navigation, behavior knowledge, task execution, skills, constraints, growth capability, maintainability.
-
-**Customization Levels:**
-- Minimal: Basic CLAUDE.md with project overview
-- Moderate: CLAUDE.md plus project patterns and conventions
-- Comprehensive: Full skill suite with skill builder and custom workflows
-
-**Task Folder:** Recommended: `./tasks/{TASK_ID}/` with `./tasks/{TASK_ID}/local_context/` for task-specific context.
-
-**Docs Folder:** Recommended: `./docs/`
 
 **AI Personality Configuration:**
 
@@ -464,16 +388,14 @@ For Interaction Mode, AI Personality, and AI-readiness priorities, use AskUserQu
 - Allow "use defaults" option
 - Respect developer's time (don't over-interview)
 
-**task.md Contents:** Must include:
-- Interaction Mode selected (Lead/Senior/Peer/Junior)
+**task.md Structure:** See "Create Task Documentation" task. Must include:
+- Project Assessment (tech stack, conventions, current state, gaps)
+- Interaction Mode (Lead/Senior/Peer/Junior)
 - AI Personality profile (Big 5 traits + communication preferences)
-- Assessment summary (confirmed by developer)
-- AI-readiness criteria agreed
-- Implementation plan (with tasks for setup-environment and setup-skills)
-- Constraints and preferences discovered
+- AI-Readiness Criteria (definition and priorities)
+- Implementation Plan (environment setup and skills setup tasks)
+- Constraints and Preferences
 - Protocols referenced (identity_and_profile.md, communication_style.md)
-
-See "Create Task Documentation" task for complete structure.
 
 ---
 
