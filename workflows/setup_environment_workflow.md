@@ -75,12 +75,13 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 **REQUIRED:**
 1. Each task specifies modes to use.
 2. When executing a task you MUST read those modes if you haven't already.
+3. setup-interview must have been executed
 
 ### Set Up Project Folders (→ KR1)
 
 **Goal:** Create project folder structure per plan
 
-**When:** task.md read, plan specifies folder creation
+**When:** task.md has been read, plan specifies folder creation. 
 
 **Mode:** [implementing](../modes/implementing.md)
 

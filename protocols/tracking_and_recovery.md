@@ -114,8 +114,8 @@ Use for each step during tracked execution.
 
 1. Pre-record step with `in-progress` status (Pre-Recording)
 2. Update artifacts, decisions, focus as work progresses (Artifact Tracking)
-3. On completion: status → `completed`, write concise summary (Completion Recording)
-4. On failure: status → `failed`, record details, stop workflow (Completion Recording)
+3. On completion: status → `completed`, write 1-3 sentence summary, finalize artifacts (Completion Recording)
+4. On failure: status → `failed`, record what/why, keep focus, stop workflow (Completion Recording)
 5. Update both real-time display and trace file (Dual Tracking)
 
 **Exit Conditions:**

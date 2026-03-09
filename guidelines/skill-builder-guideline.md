@@ -9,7 +9,8 @@ Create a project-specific skill builder that understands THIS project's conventi
 1. Project conventions, modes, and protocols are understood (not just listed)
 2. Developer intent for the skill builder is captured and confirmed
 3. Skill builder is tailored to this project's specific needs
-4. Skill builder creates skills that match project patterns
+4. All skills created folllow skill builder and they project patterns
+5. S
 
 ## Deliverables
 
@@ -63,26 +64,27 @@ You MUST complete each phase and get confirmation before proceeding to the next.
    4. Are there specific skills you need first?
 
    **Style & Structure:**
-   5. Whether to prefer declarative or imperative skills or no preference (recommend to have this be an option when creating the skill)?
-   6. Should skills be able to call other skills? (require, recommend, or not require)
-   7. How much overlap acceptable between skills?
-   8. How much documentation expected in skills? (minimal, moderate, detailed)
+   6. Whether to prefer declarative or imperative skills or no preference (recommend to have this be an option when creating the skill)?
+   7. Should skills be able to call other skills? (require, recommend, or not require)
+   8. How much overlap acceptable between skills?
+   9. How much documentation expected in skills? (minimal, moderate, detailed)
 
    **Required Behaviors:**
-   9. Whether to require, recommend or not require (recommend require) the skills read over the CLAUDE.md and/or other documentation when they start?
-   10. Whether to require, recommend, or not require (recommend to require) the skills it outputs use tracking?
-   11. Whether to require, recommend or not require the skills it outputs always validate at the end (recommend validate)?
-   12. Should skills output expert reasoning first? (require, recommend, or not require)
+   10. Whether to require, recommend or not require (recommend require) the skills read over the CLAUDE.md and/or other documentation when they start?
+   11. Whether to require, recommend, or not require (recommend to require) the skills it outputs use tracking?
+   12. Whether to require, recommend or not require the skills it outputs always validate at the end (recommend validate)?
+   13. Should skills output expert reasoning first? (require, recommend, or not require)
+   14. Must they keep the CLAUDE.md files maintained after executing
 
    **Integration:**
-   13. Should skills auto-update CLAUDE.md when created? (require, recommend, or not require)
-   14. Should skills create branches/commits? (require, recommend, not require, or option per skill)
-   15. Should skills run/create tests? (require, recommend, not require, or option per skill)
+   15. Should skills auto-update CLAUDE.md when created? (require, recommend, or not require)
+   16. Should skills create branches/commits? (require, recommend, not require, or option per skill)
+   17. Should skills run/create tests? (require, recommend, not require, or option per skill)
 
    **Error Handling:**
-   16. How should skills handle errors? (fail fast, retry, ask user, or option per skill)
-   17. Should skills have rollback capabilities? (require, recommend, or not require)
-   18. How should skills handle ambiguity? (always ask, assume with documentation, or option per skill)
+   18. How should skills handle errors? (fail fast, retry, ask user, or option per skill)
+   19. Should skills have rollback capabilities? (require, recommend, or not require)
+   20. How should skills handle ambiguity? (always ask, assume with documentation, or option per skill)
 
 **Output:** Your understanding of developer intent:
 - Problem being solved
@@ -111,6 +113,20 @@ You MUST complete each phase and get confirmation before proceeding to the next.
 - When creating a skill, the skill builder MUST act as a consultant at the appropriate Interaction Mode level
 - The skill builder must interview about each skill's specific use case before designing
 - The skill builder must confirm understanding before implementing
+
+**Skill Interview**
+
+- When creating a skill the skill builder must interview the developer to understand the intent in depth
+- The interview stage of the skill builder must be consultant-focused
+  - First, review all materials
+  - Then, output a summary
+  - Begin an interview to understand the intents
+  - Give recommendations and the AskUser tool
+  - Potentially recommend adding programs to the skill
+  - Recommend if the skill needs hooks 
+  - Recommend tools to be used
+  - Point out potential risks of the skill
+  - Finally, validate the skill against the guidelines and key results finding evidence it passes and fails each
 
 **Skill Components:**
 - Developer may want to add reference files when creating skills (guidelines, templates, etc.)
