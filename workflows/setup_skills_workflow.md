@@ -62,6 +62,11 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 ## Steps
 
+0. Check preconditions → Verify required files exist:
+   - task.md at specified path
+   - CLAUDE.md with Interaction Mode section
+   **If task.md does not exist, STOP and output:** "Cannot proceed. Run `/setup-interview` first to create task.md."
+   **If CLAUDE.md does not exist or lacks Interaction Mode, STOP and output:** "Cannot proceed. Run `/setup-environment` first to create CLAUDE.md with Interaction Mode."
 1. Read context → Read task.md and CLAUDE.md to understand conventions and Interaction Mode
 2. Create preliminary checklist → KR1-3. Use TodoWrite with formula: `skills - KR# - <task>`
 3. Create skill builder → KR1. Execute "Create Skill Builder Skill" task

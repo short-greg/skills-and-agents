@@ -54,16 +54,35 @@ You MUST complete each phase and get confirmation before proceeding to the next.
 **Interview about setting up the skill-builder:**
 1. First, output what you are uncertain about in order to achieve the key results
 2. Decide on topics to interview the developer about.
-3. Example Topics:
+3. Example Topics (these configure how the skill builder behaves for ALL skills):
+
+   **Skill Basics:**
    1. Whether to prefer project-level skills, system-level skills, or decide case-by-case?
-   2. What problems will be worked on 
+   2. What problems will be worked on?
    3. How involved do you want to be when creating skills? (autonomous vs collaborative)
-   4. What workflow style do you prefer? (declarative/imperative, prescriptive/descriptive)
-   5. Are there specific skills you need first?
-   6. Whether to require, recommend or not require (recommend require) the skills read over the CLAUDE.md and/or other documentation when they start?
-   7. Whether to require, recommend, or not require (recommend to require) the skills it outputs use tracking? 
-   8. Whether to require, recommend or not require the skills it outputs always validate at the end (recommend validate)?
-   9. Whether to prefer declarative or imperative skills or no preference (recommend to have this be an option when creating the skill)? Explain the
+   4. Are there specific skills you need first?
+
+   **Style & Structure:**
+   5. Whether to prefer declarative or imperative skills or no preference (recommend to have this be an option when creating the skill)?
+   6. Should skills be able to call other skills? (require, recommend, or not require)
+   7. How much overlap acceptable between skills?
+   8. How much documentation expected in skills? (minimal, moderate, detailed)
+
+   **Required Behaviors:**
+   9. Whether to require, recommend or not require (recommend require) the skills read over the CLAUDE.md and/or other documentation when they start?
+   10. Whether to require, recommend, or not require (recommend to require) the skills it outputs use tracking?
+   11. Whether to require, recommend or not require the skills it outputs always validate at the end (recommend validate)?
+   12. Should skills output expert reasoning first? (require, recommend, or not require)
+
+   **Integration:**
+   13. Should skills auto-update CLAUDE.md when created? (require, recommend, or not require)
+   14. Should skills create branches/commits? (require, recommend, not require, or option per skill)
+   15. Should skills run/create tests? (require, recommend, not require, or option per skill)
+
+   **Error Handling:**
+   16. How should skills handle errors? (fail fast, retry, ask user, or option per skill)
+   17. Should skills have rollback capabilities? (require, recommend, or not require)
+   18. How should skills handle ambiguity? (always ask, assume with documentation, or option per skill)
 
 **Output:** Your understanding of developer intent:
 - Problem being solved
@@ -86,12 +105,37 @@ You MUST complete each phase and get confirmation before proceeding to the next.
 4. Use project naming conventions
 5. Place skills in the correct location
 
-**Other things you MUST consider to add as instructions to the skill builder because they are necessary when creating skills**
-The developer may want to 
-1. add other reference files when the create skills
-2. add scripts to the skills
-3. include scripts when they create skills
-4. when creating a skill, the skill builder MUST act as a consultant at the appropriate level
+**Other things you MUST consider to add as instructions to the skill builder because they are necessary when creating skills:**
+
+**Consultation Behavior:**
+- When creating a skill, the skill builder MUST act as a consultant at the appropriate Interaction Mode level
+- The skill builder must interview about each skill's specific use case before designing
+- The skill builder must confirm understanding before implementing
+
+**Skill Components:**
+- Developer may want to add reference files when creating skills (guidelines, templates, etc.)
+- Developer may want to add scripts to skills (shell functions, setup scripts, etc.)
+- Developer may want skills to have supporting documentation files
+
+**Mode & Protocol Selection:**
+- For each skill, review which modes are applicable and output a table
+- For each skill, determine which protocols are needed
+- Ensure referenced modes/protocols actually exist in the project
+
+**Skill Scope & Integration:**
+- Ask about scope/granularity for each skill
+- Ask if skill needs to integrate with other skills
+- Handle skill dependencies appropriately
+
+**Testing & Validation:**
+- Determine if skill needs to run tests
+- Determine if skill needs to create tests
+- Include validation step in every skill
+
+**Error Handling & Recovery:**
+- Define how each skill handles errors (based on Phase 2 preferences)
+- Include recovery capability for multi-step skills
+- Handle ambiguity per Phase 2 preferences
 
 **Output:** Proposed skill builder design:
 - Goal, Intent, Scope
@@ -134,7 +178,7 @@ The developer may want to
 
 ### Phase 6: Create Skills Using the Skill Builder
 
-**Goal:** Use the skill builder to create skills. Follow ALL steps in the skill builder.
+**Goal:** Use the newly skill builder to create skills. Follow ALL steps in the skill builder.
 
 When creating a skill, you MUST follow every step defined in the skill builder. Do not skip steps.
 
@@ -145,8 +189,16 @@ When creating a skill, you MUST follow every step defined in the skill builder. 
 The skill builder you create must define and enforce this process for every skill it creates:
 
 1. **Read project context** — CLAUDE.md, existing skills, conventions
-2. **Interview about intent** — What problem? Why this skill? Who uses it?
-3. **Review applicable modes** — Output table of modes that could apply
+2. **Interview about intent** — Ask about THIS specific skill:
+   - What problem does THIS skill solve?
+   - Who uses this skill?
+   - What's the expected workflow?
+   - What existing codebase patterns should this skill follow?
+   - What's the scope/granularity of THIS skill?
+   - Does this skill need to integrate with other skills?
+   - Does this skill need scripts or reference files?
+   - What are the success criteria for THIS skill?
+3. **Review applicable modes** — Output table of modes that could apply to THIS skill
 4. **Confirm understanding** — Output summary, get developer confirmation
 5. **Design the skill** — Tailored to what was learned
 6. **Implement the skill** — Following project conventions

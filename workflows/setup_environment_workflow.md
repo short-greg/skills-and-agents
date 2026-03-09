@@ -60,6 +60,7 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite
 
 ## Steps
 
+0. Check preconditions → Verify task.md exists at specified path. **If task.md does not exist, STOP and output:** "Cannot proceed. Run `/setup-interview` first to create task.md with project decisions."
 1. Read task.md → Understand all decisions from setup-interview
 2. Read Interaction Mode → Determine confirmation level needed
 3. Create project folders → KR1. Execute "Set Up Project Folders" task
