@@ -1,23 +1,23 @@
 ---
-name: setup-interview
+name: setup-init
 description: >
   Consultative workflow to understand a project and plan AI-readiness setup.
   Interviews developer, establishes interaction mode, defines criteria, outputs implementation plan.
   You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow.
-  Triggers on: "set up AI environment", "make project AI-ready", "setup project".
+  Triggers on: "set up AI environment", "make project AI-ready", "setup project", "setup init".
 argument-hint: "[project path or context]"
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, WebFetch, AskUserQuestion
 ---
 
-# Setup Interview
+# Setup Init
 
 **Goal:** Understand project and team needs, establish interaction mode, define AI-readiness criteria, output approved implementation plan.
 
 **Intent:** Projects differ in structure, conventions, and needs. Before implementing anything, understand what the developer wants and how they want to collaborate with AI.
 
-**Scope:** Consultation from assessment through plan approval. No implementation — that's handled by setup-environment and setup-skills workflows.
+**Scope:** Consultation from assessment through plan approval. No implementation — that's handled by setup-env and setup-skill-builder workflows.
 
 **Workflow Style:** Goal-Oriented (Declarative). Achieve outcomes; adapt approach to project needs.
 
@@ -68,7 +68,7 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 **Success:**
 - task.md created at `tasks/{TASK_ID}/task.md` documenting all decisions
 - Interaction mode, assessment, definition, and plan all documented
-- setup-environment and setup-skills workflows unlocked (moved to `.claude/skills/`)
+- setup-env installed to `.claude/skills/`
 
 **Failure:** Trace documents what was attempted and blockers; partial deliverables noted
 
@@ -82,8 +82,8 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 4. Plan interview → KR1-4. Execute "Plan Interview" task. Output interview plan for approval
 5. Conduct interview → KR1, KR2, KR3. Execute "Conduct Interview" task
 6. Create task.md → KR3, KR4. Execute "Create Task Documentation" task. Document all decisions
-7. Unlock next workflows → Move setup-environment and setup-skills to `.claude/skills/`
-8. Complete and hand off → Execute "Complete and Hand Off" task. Output completion summary
+7. Install setup-env → Copy `workflows/setup/setup-env.md` to `.claude/skills/setup-env.md`
+8. Output completion summary → Inform user: "Setup init complete. Run `/setup-env tasks/{TASK_ID}/task.md` to continue."
 
 ---
 
@@ -102,7 +102,7 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 **When:** Trace file exists from previous session
 
-**Mode:** [orienting](../modes/orienting.md)
+**Mode:** [orienting](../../modes/orienting.md)
 
 **Instructions:**
 1. Review the trace
@@ -123,12 +123,14 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 **When:** Starting consultation (after checking for existing trace)
 
-**Mode:** [orienting](../modes/orienting.md)
+**Mode:** [orienting](../../modes/orienting.md)
 
 **Instructions:**
-1. Review project documentation and structure
-2. Identify common considerations for AI-readiness
-3. Output assessment summary
+Read all actions in the mode and choose appropriate actions to achieve the goal.
+
+Additional guidance:
+- Focus on AI-readiness considerations
+- Output assessment summary when complete
 
 **Inputs:**
 - Repository access (required)
@@ -145,13 +147,15 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 **When:** After project assessment
 
-**Mode:** [planning](../modes/planning.md)
+**Mode:** [planning](../../modes/planning.md)
 
 **Instructions:**
-1. Based on assessment, determine which topics are relevant (see possible topics in Additional Notes)
-2. For each included topic, explain why it matters and what to discover
-3. Output interview plan with explicit relevance determination (which topics and why)
-4. Get developer confirmation
+Read all actions in the mode and choose appropriate actions to achieve the goal.
+
+Additional guidance:
+- See possible topics in Additional Notes
+- For each included topic, explain why it matters
+- Output interview plan for developer confirmation
 
 **Inputs:**
 - Assessment summary (required)
@@ -167,10 +171,15 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 **When:** After interview plan approved
 
-**Mode:** [interviewing](../modes/interviewing.md)
+**Mode:** [interviewing](../../modes/interviewing.md)
 
 **Instructions:**
-Execute interview plan, gathering information for each planned topic. Document all decisions.
+Read all actions in the mode and choose appropriate actions to achieve the goal.
+
+Additional guidance:
+- Follow interview plan topics
+- Infer from context before asking
+- Document all decisions
 
 **Inputs:**
 - Interview plan (required)
@@ -190,13 +199,15 @@ Execute interview plan, gathering information for each planned topic. Document a
 
 **When:** Interview complete
 
-**Mode:** [defining](../modes/defining.md)
+**Mode:** [defining](../../modes/defining.md)
 
 **Instructions:**
-1. Define what "AI-ready" means for this project based on interview
-2. Compose implementation plan (environment setup tasks, skills setup tasks)
-3. Create `tasks/{TASK_ID}/` directory and write `tasks/{TASK_ID}/task.md` with all decisions
-4. Output confirmation with file path
+Read all actions in the mode and choose appropriate actions to achieve the goal.
+
+Additional guidance:
+- Define what "AI-ready" means for this project
+- Create `tasks/{TASK_ID}/` directory and write task.md
+- Output confirmation with file path
 
 **Inputs:**
 - Interview responses (required)
@@ -245,12 +256,12 @@ Interview completed by: Claude (setup-interview workflow)
 
 ## Implementation Plan
 
-**Environment Setup (for setup-environment workflow):**
+**Environment Setup (for setup-env workflow):**
 - [ ] [Task 1]
 - [ ] [Task 2]
 ...
 
-**Skills Setup (for setup-skills workflow):**
+**Skills Setup (for setup-skill-builder workflow):**
 - [ ] [Task 1]
 - [ ] [Task 2]
 ...
@@ -281,65 +292,9 @@ After creating, verify:
 
 ---
 
-### Complete and Hand Off (→ All KRs)
-
-**Goal:** Confirm successful completion and guide developer to next step
-
-**When:** task.md created, workflows unlocked
-
-**Mode:** [positioning](../modes/positioning.md)
-
-**Instructions:**
-Output completion summary using this exact format:
-
-```
-═══════════════════════════════════════════════════════
-SETUP INTERVIEW COMPLETE
-═══════════════════════════════════════════════════════
-
-✅ Completion Checklist:
-
-1. task.md created: tasks/{TASK_ID}/task.md
-2. Interaction Mode: {Mode}
-3. AI Personality: {Brief 1-line summary}
-4. Communication Style: {Brief 1-line summary}
-5. Project assessment: Documented with {X} gaps identified
-6. AI-readiness criteria: Defined and agreed
-7. Implementation plan: Approved ({X} environment tasks, {Y} skills tasks)
-8. Workflows unlocked:
-   - setup-environment → .claude/skills/setup-environment.md
-   - setup-skills → .claude/skills/setup-skills.md
-
-═══════════════════════════════════════════════════════
-NEXT STEP
-═══════════════════════════════════════════════════════
-
-Run: /setup-environment tasks/{TASK_ID}/task.md
-
-This will:
-- Create project folders per plan
-- Generate CLAUDE.md with your Interaction Mode and AI Personality
-- Set up worktree environment (if included in plan)
-
-After setup-environment completes, you'll run /setup-skills to create
-your skill builder and initial skills.
-
-═══════════════════════════════════════════════════════
-```
-
-**Inputs:**
-- task.md path (required)
-- All documented decisions (required)
-
-**Outputs:**
-- Formatted completion summary
-- Clear next step instruction
-
----
-
 ## Additional Notes and Terms
 
-**Possible Interview Topics:**
+**Interview Topics:**
 
 Determine relevance based on project assessment. Not all topics apply to every project.
 
@@ -360,6 +315,7 @@ Determine relevance based on project assessment. Not all topics apply to every p
 - **Team Characteristics:** Team size, experience levels, collaboration patterns (skip for solo projects)
 - **Pain Points:** Current friction with AI assistance (skip if no prior AI tool usage)
 - **Constraints:** Timeline, budget, compatibility requirements, style preferences (include if applicable)
+- **Worktree Setup:** Whether to configure git worktrees for parallel development (include if developer uses multiple branches simultaneously)
 
 **AI-Readiness Dimensions:** Understanding, navigation, behavior knowledge, task execution, skills, constraints, growth capability, maintainability.
 

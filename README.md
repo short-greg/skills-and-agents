@@ -18,17 +18,28 @@ Use gh to fetch README.md then following the guidelines to proceed with installa
 
 ### Installation Steps
 
-1. Ask the user whether to use gh to just fetch the files to clone, or use another method, recommend gh to just fetch directly.
-2. Copy workflows and supporting files.
-   1. Copy protocols into `.claude/protocols/`
-   2. Copy modes into `.claude/modes/`
-   3. Copy each workflow into `.claude/skills/<workflow-name>/SKILL.md`
-3. Verify installation:
+1. Ask the user whether to use gh to just fetch the files or clone, recommend gh to just fetch directly.
+2. Copy supporting files:
+   - Copy `protocols/` into `.claude/protocols/`
+   - Copy `modes/` into `.claude/modes/`
+   - Copy `workflows/` into `.claude/workflows/` (staging area)
+3. Install initial skill:
+   - Copy `workflows/setup/setup-init.md` to `.claude/skills/setup-init.md`
+4. Verify installation:
    ```bash
    ls .claude/skills/
+   # Should show: setup-init.md
    ```
-4. Cleanup any temporary files
-5. Inform the user Workflows are available via slash commands (e.g., `/setup-env-workflow`)
+5. Cleanup any temporary files
+6. Inform the user: "Run `/setup-init` to begin project setup. It will install subsequent workflows automatically."
+
+### Setup Flow
+
+1. **`/setup-init`** — Interview developer, establish preferences, create task.md
+   - Installs: `setup-env`
+2. **`/setup-env`** — Configure environment (folders, CLAUDE.md)
+   - Installs: `setup-skill-builder`
+3. **`/setup-skill-builder`** — Create skill builder and initial skills
 
 ---
 
@@ -55,27 +66,27 @@ your-project/
 
 ```markdown
 ---
-name: setup-env-workflow
-description: Make a project AI-ready with customized skill builder
+name: setup-init
+description: Consultative workflow to understand a project and plan AI-readiness setup
 argument-hint: "[project path or context]"
 user-invocable: true
 ---
 
-# Setup Environment Workflow
+# Setup Init
 
-**Goal:** Partner with developer to make their project AI-ready...
+**Goal:** Understand project and team needs, establish interaction mode...
 ```
 
 **Invoke with:**
 ```
-/setup-env-workflow my-project
+/setup-init my-project
 ```
 
 ### Framework Components
 
 **Modes** — Internal cognitive actions used by workflows (orienting, defining, planning, designing, implementing, evaluating, investigating, interviewing, brainstorming, maintaining, positioning)
 
-**Workflows** — User-invocable skills that compose modes (setup-env-workflow)
+**Workflows** — User-invocable skills that compose modes (setup-init, setup-env, setup-skill-builder)
 
 **Protocols** — Supporting patterns and techniques referenced by modes (thinking, transparency, risk management, etc.)
 

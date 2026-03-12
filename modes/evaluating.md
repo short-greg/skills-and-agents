@@ -2,10 +2,10 @@
 name: evaluating
 description: >
   Assessing whether a solution, approach, or claim is correct and/or of quality. Compares target against criteria using evidence-based evaluation.
-  You MUST satisfy the Goal, Key Results and follow the Requirements of this mode.
-  Triggers on: "verify this", "test this", "does this work", "check if correct", "validate the result", "run the tests", "confirm this", "is this right",
-  "critique this", "review this", "what's wrong with this", "how can I improve", "code review", "give me feedback", "find issues", "red team this", "poke holes".
-  keywords: validating, verifying, critiquing
+  You MUST satisfy the Goal and Key Results of this mode.
+  Triggers on: "verify this", "test this", "does this work", "check if correct", "validate the result",
+  "critique this", "review this", "what's wrong with this", "code review", "give me feedback", "red team this".
+  keywords: selecting, applying, evaluating, collecting, assessing, reporting, recommending
 ---
 
 # Evaluating
@@ -14,57 +14,20 @@ description: >
 
 **Intent:** Determine correctness, quality, or compliance before decisions are made. Prevent shipping broken work, adopting flawed approaches, or accepting false claims.
 
-**Scope:** Comparing an evaluation target against evaluation criteria using systematic methods. Outputs assessment based on evidence. Optionally provides recommendations when requested.
+**Scope:** Comparing an evaluation target against evaluation criteria using systematic methods. Answers "is this correct/quality/compliant?" not "what should we build?" (defining) or "what do we need to know?" (investigating).
 
 ---
-
-## Table of Contents
-
-- [Key Results](#key-results---kr) — Success criteria for this mode
-- [Requirements](#requirements-and-constraints---req) — Rules and constraints to follow
-- [Steps](#steps) — Reference to base mode execution
-- [Terms](#terms) — Key vocabulary and definitions
-- [Preconditions](#preconditions) — What's needed before starting
-- [Postconditions](#postconditions) — What's delivered upon completion
-- [Actions](#possible-actions) — Concrete steps to achieve results
-- [Notes](#additional-notes-and-terms) — Additional context and details
-- [References](#references) — External documentation and resources
 
 ## Key Results - KR
 
-1. Evaluation criteria established — what constitutes correct/quality/compliant is defined
-2. Assessment produced with evidence — observations documented, verdict based on evidence
-
-## Requirements and Constraints - REQ
-
-1. Evidence must be documented, not just claimed
-2. Must output evidence for multiple possible evaluations before deciding (prevents confirmation bias)
-3. If insufficient evidence, output what's needed rather than guessing
-4. Recommendations are optional — only output when explicitly requested
-
----
-
-## Steps
-
-MUST read and follow steps in `base_mode.md`
-
----
-
-## Terms
-
-**Evaluation Target:** What is being evaluated (code, design, solution, hypothesis, claim, result, document, artifact, process)
-
-**Evaluation Method:** How to evaluate the target — the criteria, methodology, or standards to apply (binary pass/fail, Likert scale, rubric, checklist, comparison to reference, etc.)
+1. Evaluation criteria selected — applicable criteria identified from standards, specs, conventions, or user-provided
+2. Assessment produced with evidence — evidence gathered for multiple possibilities, verdict based on weighted evidence
 
 ---
 
 ## Preconditions
 
-**Required:** Evaluation target and evaluation method
-
-**Elicit if not provided:**
-- What to evaluate (evaluation target)
-- How to evaluate it (evaluation method, criteria, standards)
+**Required:** Evaluation target (what to evaluate), evaluation criteria or source of criteria (standards, specs, conventions)
 
 **Optional:**
 - Whether recommendations are requested
@@ -73,182 +36,33 @@ MUST read and follow steps in `base_mode.md`
 
 ## Postconditions
 
-**Success:** Evaluation output according to evaluation method and target
+**Success:** Evaluation output with evidence-based verdict according to selected criteria
 
-**Success (optional):** Recommendations output if explicitly requested
-
-**Failure:** Cannot access target, criteria undefined, evaluation method unavailable, insufficient evidence to evaluate
+**Failure:** Cannot access target, no applicable criteria found, insufficient evidence to evaluate. Output a request listing the information that was missing and what is needed to succeed.
 
 ---
 
 ## Possible Actions
 
-**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this mode.
-
-Select or propose actions based on context. Each action shows which KR it serves.
-
-### Establish Criteria (→ KR1)
-
-**Goal:** Define what constitutes correct/quality/compliant
-
-**When:** Evaluation criteria are not clear or not provided
-
-**Protocols:** `protocols/criteria_setting.md`, `protocols/discipline.md`, `protocols/risk_management.md`
-
-**Instructions:** Systematically enumerate ALL criteria that define correct/quality/compliant including risk-related criteria. Specify observable indicators and thresholds for each criterion. Document what constitutes pass vs fail for each. Assess risks in the target being evaluated. Use MECE enumeration to ensure completeness and risk assessment techniques.
-
-**Inputs:**
-- Evaluation target (required)
-- Context or standards (optional)
-- Risk tolerance levels (optional)
-
-**Default Output:** Documented evaluation criteria with pass/fail thresholds and risk considerations
-
-### Output Evidence (→ KR2)
-
-**Goal:** Gather evidence for all possible evaluation outcomes
-
-**When:** Gathering evaluation evidence
-
-**Protocols:** `protocols/thinking.md`, `protocols/discipline.md`, `protocols/transparency.md`
-
-**Instructions:** Document evidence supporting each possible evaluation systematically with reasoning. Table format is recommended but can be overridden by evaluation method. Binary (pass/fail) shows evidence for pass and evidence for fail. Likert (scale) shows evidence for each level. Categorical shows evidence for each category. Rubric shows evidence for each criterion. If evidence is insufficient for any evaluation, document what's missing. Use analytical thinking, coverage tracking, and clear documentation of reasoning.
-
-**Inputs:**
-- Evaluation criteria (required)
-- Evaluation target (required)
-- Output format preference (optional)
-
-**Default Output:** Evidence documented (typically as table) showing supporting evidence for each possible evaluation with reasoning
-
----
-
-### Run Automated Tests (→ KR2)
-
-**Goal:** Execute all applicable automated tests
-
-**When:** Tests exist and evaluation criteria require testing
-
-**Protocol:** `protocols/discipline.md`
-
-**Instructions:** Systematically run ALL applicable test types: linting, unit tests, integration tests, end-to-end tests, performance tests, security tests, coverage tests. Document which tests ran, results, and failures with specifics. Track coverage systematically.
-
-**Inputs:**
-- Test suite (required)
-- Evaluation target (required)
-
-**Default Output:** Test execution results with pass/fail status and failure details
-
----
-
-### Execute Manual Tests (→ KR2)
-
-**Goal:** Manually evaluate when automated tests unavailable
-
-**When:** Automated tests are unavailable or insufficient
-
-**Protocols:** `protocols/software_quality.md`, `protocols/system_modularity.md`
-
-**Instructions:** For code: read code, check logic, trace execution paths. For design: review against modularity principles. For documents: read for clarity, completeness, accuracy. For claims: check sources, reproduce results, verify logic. Document observations with specific locations and details. Apply quality dimensions and modularity principles.
-
-**Inputs:**
-- Evaluation target (required)
-- Evaluation criteria (required)
-- Context (optional)
-
-**Default Output:** Manual evaluation findings with specific observations
-
-### Weight Evidence (→ KR2)
-
-**Goal:** Assess evidence strength to determine verdict
-
-**When:** Deciding final evaluation
-
-**Protocol:** `protocols/thinking.md`
-
-**Instructions:** Review evidence strength (concrete vs speculative, comprehensive vs partial). Consider evidence quality (reliable sources, reproducible results). Note conflicting evidence. Consider what would change the verdict. Identify strongest case based on evidence weight. Use analytical and counterfactual thinking.
-
-**Inputs:**
-- Evidence table (required)
-- Evaluation criteria (required)
-
-**Default Output:** Evidence assessment showing relative strengths
-
----
-
-### Determine Sufficiency (→ KR2)
-
-**Goal:** Decide if enough evidence exists for judgment
-
-**When:** Weighing evidence
-
-**Protocol:** `protocols/thinking.md`
-
-**Instructions:** Check whether judgment can be made with available evidence, whether critical criteria are covered, whether there are major gaps or unknowns. If insufficient: output what's needed. If sufficient: proceed to output evaluation. Use analytical thinking.
-
-**Inputs:**
-- Evidence table (required)
-- Evaluation criteria (required)
-
-**Default Output:** Sufficiency determination with gaps identified if insufficient
-
----
-
-### Output Evaluation (→ KR2)
-
-**Goal:** Produce final evaluation based on evidence
-
-**When:** Evidence is sufficient
-
-**Protocols:** `protocols/software_quality.md`, `protocols/pragmatics.md`
-
-**Instructions:** Format depends on evaluation method: Binary outputs pass/fail/inconclusive with supporting evidence. Scale outputs grade with justification. Rubric outputs score per criterion with overall assessment. Signal confidence level appropriately. Apply quality dimensions and pragmatic framing.
-
-**Inputs:**
-- Evidence table (required)
-- Evaluation criteria (required)
-- Evaluation method (required)
-
-**Default Output:** Final evaluation with supporting evidence and confidence level
-
----
-
-### Provide Recommendations (→ KR2)
-
-**Goal:** Suggest actionable next steps
-
-**When:** Explicitly requested
-
-**Protocols:** `protocols/thinking.md`, `protocols/pragmatics.md`
-
-**Instructions:** Provide concrete next steps to address issues, improvements to strengthen quality, alternative approaches to consider. Frame recommendations clearly with rationale. Recommendations must be actionable, not vague. Use strategic thinking and pragmatic framing.
-
-**Inputs:**
-- Evaluation results (required)
-- Context (optional)
-
-**Default Output:** Prioritized, actionable recommendations with rationale
-
----
-
-## Additional Notes and Terms
-
-**Evaluation vs Investigation:** Evaluation compares against criteria using available evidence. Investigation gathers new evidence through research. If evaluation reveals insufficient evidence, investigation may be needed.
-
-**Evaluation types:** Binary (correct/incorrect), Scale (poor to excellent), Categorical (levels), Rubric (multiple criteria)
+Select actions based on context to achieve the Key Results.
+
+In: The inputs to the action
+Out: The outputs to the action
+
+| Action | KR | Goal | When | Instructions | Inputs | Output |
+|--------|----|----|------|--------------|--------|--------|
+| Select Criteria | KR1 | To identify which criteria apply to this evaluation | Use when starting evaluation or criteria not yet identified | Read `protocols/criteria_setting.md` and apply appropriate techniques to identify applicable criteria from standards, specs, conventions, or user requirements | In: Evaluation target (required), Available standards or specs (optional) | Out: Applicable criteria with pass/fail thresholds |
+| Apply Evaluation Methods | KR2 | To execute programmatic evaluation and gather evidence | Use when tests, metrics, or automated checks are available | Read `protocols/discipline.md` and apply appropriate techniques to execute applicable methods (tests, similarity metrics, classification accuracy, benchmarks, linting) and document results | In: Evaluation target (required), Evaluation methods (required) | Out: Method results with measurements |
+| Evaluate Manually | KR2 | To perform manual inspection and gather evidence | Use when programmatic methods unavailable or human judgment needed | Read `protocols/software_quality.md` and `protocols/thinking.md` and apply appropriate techniques to inspect target against criteria, request developer evaluation if needed, and document specific observations | In: Evaluation target (required), Criteria (required) | Out: Manual findings with observations |
+| Collect and Assess Evidence | KR2 | To list and weigh evidence for all possibilities | Use when evidence gathered and needs assessment | Read `protocols/thinking.md` and apply appropriate techniques to list evidence for each possible verdict (pass/fail, low/medium/high score), weigh evidence strength, and identify gaps | In: All gathered evidence (required), Criteria (required) | Out: Evidence list for each possibility with weights |
+| Report | KR2 | To produce final verdict with supporting evidence | Use when evidence assessed and ready to report | Read `protocols/pragmatics.md` and apply appropriate techniques to produce verdict, document supporting evidence, state confidence level, and identify strengths/weaknesses | In: Assessed evidence (required) | Out: Verdict with evidence and confidence |
+| Provide Recommendations | KR2 | To suggest actionable improvements | Use when recommendations requested or weaknesses identified | Read `protocols/thinking.md` and `protocols/pragmatics.md` and apply appropriate techniques to provide concrete, prioritized next steps based on evaluation results | In: Evaluation results (required), Context (optional) | Out: Prioritized actionable recommendations |
 
 ---
 
 ## References
 
-**Verification:**
-- [Software Testing Fundamentals](https://softwaretestingfundamentals.com/)
-- [IEEE Standard for Software Verification and Validation](https://standards.ieee.org/ieee/1012/5609/)
-
-**Quality Assessment:**
 - [Google Engineering Practices - Code Review](https://google.github.io/eng-practices/review/)
 - [Google - What to Look For](https://google.github.io/eng-practices/review/reviewer/looking-for.html)
-- [Nielsen Norman Group - Heuristic Evaluation](https://www.nngroup.com/articles/how-to-conduct-a-heuristic-evaluation/)
-- [Nielsen's 10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/)
+- [IEEE Standard for Software Verification and Validation](https://standards.ieee.org/ieee/1012/5609/)
 - [Better Evaluation - Evaluation Framework](https://www.betterevaluation.org/methods-approaches/methods/evaluation-framework)
-- [NCBI - Critical Appraisal](https://www.ncbi.nlm.nih.gov/books/NBK603121/)

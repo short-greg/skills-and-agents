@@ -54,7 +54,7 @@ Different workflow tasks use different combinations of Actions, but all satisfy 
 - Self-contained (can be used independently)
 - Exactly 2 Key Results (modes are focused)
 - KRs are outcome-focused, not task-specific (flexible for multiple use cases)
-- 80-130 lines (130-150 acceptable with user permission)
+- Lightweight and compact (60-100 lines typical)
 
 **When to create a mode:**
 - A distinct cognitive operation not covered by existing modes
@@ -114,12 +114,25 @@ Modes are **instruction-focused** or **evaluation-focused**, not descriptive ess
 3. **Minimal descriptions** - Goal/Intent/Scope should be brief (2-3 sentences max)
 4. **Output-focused language** - Use "Output evidence" not "Find evidence" to prevent LLMs skipping documentation
 
-**Structural differences from workflows:**
-- 80-130 lines (130-150 acceptable with user permission)
-- 2-4 requirements vs workflows with 5-9
+**Mode structure (simplified):**
+- Frontmatter (name, description, triggers, keywords)
+- Goal, Intent, Scope
+- 2 Key Results
+- Terms (optional, minimal)
+- Preconditions/Postconditions
+- Actions table (with consistent phrasing)
+- References
+
+**Removed sections (simpler than workflows):**
+- ❌ Requirements section (covered by scope)
+- ❌ Steps section (no longer actionable)
+- ❌ Additional Notes section (primitives don't reference each other)
+- ❌ Protocols field in actions (already in instructions)
+
+**Key differences:**
+- 60-100 lines (more compact than workflows)
+- Actions in table format with self-documenting phrasing
 - Exactly 2 Key Results vs workflows with 3-4
-- Actions show KR linkage and protocol usage
-- All modes inherit from `base_mode.md` (execution pattern)
 
 ---
 
@@ -156,10 +169,14 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 2. **Keep it atomic:** If you find yourself writing "first... then... finally...", it's probably a workflow
 3. **Exactly 2 KRs:** Consolidate related outcomes into compound Key Results
 4. **Flexible KRs:** Write KRs that are outcome-focused, not task-specific - test by listing 3+ different use cases that achieve the same KRs
-5. **Simple requirements:** Modes typically need 2-4 requirements, not 9
+5. **Keep it lightweight:** No Requirements, Steps, or Additional Notes sections - let scope and actions speak for themselves
 6. **Self-contained:** Don't reference other modes in scope or actions
 7. **Clear triggers:** Include natural phrases users might say to invoke this mode
 8. **Output-focused:** Use "Output X" not "Find X" to ensure LLM documents work
+9. **Observable "When":** Make action triggers observable/measurable. Combine multiple valid scenarios with "or" to cover different entry points. Bad: "when ideas feel conventional". Good: "when conventional ideas are not producing positive results or there is significant uncertainty". Better: "when no viable options generated or constraints appear contradictory or alternative perspective requested"
+10. **Actions are activities, not techniques:** Actions describe what to do (brainstorming moves, evaluation steps), not how to think. Delegate thinking techniques to `protocols/thinking.md`
+11. **Delegate to protocols:** Instructions must explicitly direct reading the protocol first. Pattern: "Read `protocols/[protocol].md` and apply appropriate techniques from it to [output]". Optional: Add "Consider [specific guidance]" for additional direction. Bad: "Assess likelihood of each idea, deliberately generate low-likelihood alternatives (<0.3)...". Good: "Read `protocols/thinking.md` and apply appropriate techniques from it to generate unlikely alternatives. Consider assessing and outputting your confidence that each idea is common."
+12. **Table format with consistent phrasing:** Use table for actions. Goal: "To X", When: "Use when X", Instructions: "Read protocols/X.md and apply...", Inputs: "In: X", Output: "Out: X". This makes tables self-documenting despite key-value separation.
 
 ---
 
@@ -172,7 +189,7 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 name: mode-name
 description: >
   [Concise definition - one sentence starting with gerund, e.g. "Understanding the current state of a system, project, or task."]. [What it does in more detail.]
-  You MUST satisfy the Goal, Key Results and follow the Requirements of this mode. They are specified in the instruction body.
+  You MUST satisfy the Goal and Key Results of this mode. They are specified in the instruction body.
   Triggers on: "[trigger phrase 1]", "[trigger phrase 2]".
   keywords: [keyword1], [keyword2], [keyword3], [keyword4], [keyword5]
 argument-hint: "[optional: e.g. [subject] or [topic]]"
@@ -193,23 +210,8 @@ allowed-tools: Read, Grep
 
 ## Key Results - KR
 
-You must satisfy these to complete the mode successfully.
-
 1. [measurable outcome]
 2. [measurable outcome]
-
-## Requirements and Constraints - REQ
-
-Constraints on how to execute the mode.
-
-1. [constraint on execution]
-2. [constraint on execution]
-
----
-
-## Steps
-
-MUST read and follow steps in `base_mode.md`
 
 ---
 
@@ -231,49 +233,16 @@ MUST read and follow steps in `base_mode.md`
 
 ## Possible Actions
 
-**IMPORTANT:** Each action specifies protocols to use. When executing an action you MUST read those protocols if you haven't already, and MUST choose the appropriate techniques from those protocols to achieve the key results of this mode.
+Select actions based on context to achieve the Key Results.
 
-Select or propose actions based on context. Each action shows which KR it serves.
+In: The inputs to the action
+Out: The outputs to the action
 
-### [Action Name] (→ KR#)
+| Action | KR | Goal | When | Instructions | Inputs | Output |
+|--------|----|----|------|--------------|--------|--------|
+| [Action Name] | KR# | To [what this achieves] | Use when [observable condition(s)] | Read `protocols/[protocol].md` and apply appropriate techniques to [specific output] | In: [required input] (required), [optional input] (optional) | Out: [expected output format] |
 
-**Goal:** [What this action achieves]
-
-**When:** [When to execute this action]
-
-**Protocol:** `protocols/[protocol_name].md`
-
-**Instructions:** [How to execute using techniques from the protocol. Be specific about what to do, but don't prescribe exact techniques - let AI choose from protocol.]
-
-**Inputs:**
-- [required input] (required)
-- [optional input] (optional)
-
-**Default Output:** [Expected output format if not specified]
-
----
-
-### [Action Name] (→ KR#, KR#)
-
-**Goal:** [What this action achieves]
-
-**When:** [When to execute this action]
-
-**Protocols:** `protocols/[protocol_name].md`, `protocols/[protocol_name2].md`
-
-**Instructions:** [How to execute using techniques from the protocols. Be specific about what to do, but don't prescribe exact techniques - let AI choose from protocols.]
-
-**Inputs:**
-- [required input] (required)
-- [optional input] (optional)
-
-**Default Output:** [Expected output format if not specified]
-
----
-
-## Additional Notes and Terms
-
-<Additional notes, clarifications, terms, or distinctions from other modes. Write "None" if not applicable.>
+<Note: Use consistent phrasing - Goal: "To X", When: "Use when X", Instructions: imperative form with "Read protocols/X.md", Inputs: "In: X", Output: "Out: X">
 
 ---
 
