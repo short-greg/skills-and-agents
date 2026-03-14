@@ -175,7 +175,20 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 8. **Output-focused:** Use "Output X" not "Find X" to ensure LLM documents work
 9. **Observable "When":** Make action triggers observable/measurable. Combine multiple valid scenarios with "or" to cover different entry points. Bad: "when ideas feel conventional". Good: "when conventional ideas are not producing positive results or there is significant uncertainty". Better: "when no viable options generated or constraints appear contradictory or alternative perspective requested"
 10. **Actions are activities, not techniques:** Actions describe what to do (brainstorming moves, evaluation steps), not how to think. Delegate thinking techniques to `protocols/thinking.md`
-11. **Delegate to protocols:** Instructions must explicitly direct reading the protocol first. Pattern: "Read `protocols/[protocol].md` and apply appropriate techniques from it to [output]". Optional: Add "Consider [specific guidance]" for additional direction. Bad: "Assess likelihood of each idea, deliberately generate low-likelihood alternatives (<0.3)...". Good: "Read `protocols/thinking.md` and apply appropriate techniques from it to generate unlikely alternatives. Consider assessing and outputting your confidence that each idea is common."
+11. **Delegate to protocols:** Instructions must explicitly direct reading the protocol and applying techniques FROM that protocol.
+    - **Base pattern:** `Read and apply appropriate techniques from \`protocols/X.md\` to [purpose]`
+    - **With constraints:** `Read and apply appropriate techniques from \`protocols/X.md\` to [purpose] with/by [constraints]`
+    - **Purpose examples:**
+      - `to output [something] that [quality]` — producing an artifact
+      - `to guarantee that [condition]` — ensuring a state holds
+      - `to identify [something]` — discovering information
+      - `to assess [something]` — evaluating quality/risk
+      - `to enumerate [something] systematically` — listing exhaustively
+      - `to trace [something]` — following paths or flows
+      - `to distinguish [X] from [Y]` — separating concerns
+    - **Bad:** "Assess likelihood of each idea, deliberately generate low-likelihood alternatives..."
+    - **Good:** "Read and apply appropriate techniques from `protocols/thinking.md` to generate unlikely alternatives"
+    - **Good with constraint:** "Read and apply appropriate techniques from `protocols/discipline.md` to enumerate all actions with 100% coverage"
 12. **Table format with consistent phrasing:** Use table for actions. Goal: "To X", When: "Use when X", Instructions: "Read protocols/X.md and apply...", Inputs: "In: X", Output: "Out: X". This makes tables self-documenting despite key-value separation.
 
 ---
@@ -240,7 +253,7 @@ Out: The outputs to the action
 
 | Action | KR | Goal | When | Instructions | Inputs | Output |
 |--------|----|----|------|--------------|--------|--------|
-| [Action Name] | KR# | To [what this achieves] | Use when [observable condition(s)] | Read `protocols/[protocol].md` and apply appropriate techniques to [specific output] | In: [required input] (required), [optional input] (optional) | Out: [expected output format] |
+| [Action Name] | KR# | To [what this achieves] | Use when [observable condition(s)] | Read and apply appropriate techniques from `protocols/[protocol].md` to [purpose] | In: [required input] (required), [optional input] (optional) | Out: [expected output format] |
 
 <Note: Use consistent phrasing - Goal: "To X", When: "Use when X", Instructions: imperative form with "Read protocols/X.md", Inputs: "In: X", Output: "Out: X">
 
