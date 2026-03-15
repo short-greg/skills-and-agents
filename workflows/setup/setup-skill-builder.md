@@ -36,15 +36,8 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 3. Track progress per `tracking_and_recovery.md`
 4. Understood developer priorities about skill creation
 5. Validate deliverables with positive AND negative evidence
-6. When creating a skill all protocols be read and understood first in order to create appropriate actions.
-7. The skill-builder-skill that gets output MUST
-   1. Act as a consultant. It must understand the intent, it must clarify uncertainties, it must provide guidance based on the developers nees.
-   2. Create a proposal for the skill that gets approved by the user before.
-   3. Plan out the actions that the skill will need.
-   4. Include preferences about whether the developer prefers declarative or imperative. If it is imperative it expresses the order of the actions. If declarative the skill-builder will aim to satisfy the goal.
-   5. Include preferences about whether the developer prefers prescriptive or descriptive
-   6. Validate the skill before finalizing it, finding evidence why it fails and why it succeeds and confirm that it follows conventions
-   7. Include a couple of patterns for how to write steps (a) pure declarative (only a setp to plan steps), (b) mixed (e.g. it includes steps at the beginning to set up and at the end to update CLAUDE.md or documentation), (c) pure imperative (i.e. all steps are defined)
+6. When creating a skill all protocols must be read and understood first in order to create appropriate actions
+7. Follow skill-builder-template.md — it defines consultation approach, skill structure, and validation
 
 ## Preconditions
 
@@ -135,15 +128,16 @@ Exit Conditions:
 - Preferences incomplete → stop, complete A1 first
 
 Instructions:
-1. Read `skill-builder-template.md` — to understand expected output structure
-2. Read `skill-builder-guideline.md` — to understand requirements
-3. Read `discipline.md` and apply Sequential Processing — to ensure completeness
-4. Read `tracking_and_recovery.md` and apply Progress Recording — to track creation
-5. Create skill builder following all REQ requirements
-6. Incorporate developer's workflow style preference
-7. Incorporate developer's documentation style preference
-8. Place at `.claude/skills/skill-builder/SKILL.md`
-9. Validate against requirements
+1. Read `skill-builder-template.md` — contains complete structure with placeholders and guidelines
+2. Read `skill-builder-guideline.md` — understand process phases
+3. Fill in template placeholders based on:
+   - Interaction Mode from CLAUDE.md
+   - Developer's workflow style preference (from A1)
+   - Developer's documentation style preference (from A1)
+   - Project conventions from CLAUDE.md
+4. Remove guidelines (text in angle brackets) — these guide setup-skill-builder, not the output skill-builder
+5. Place at `.claude/skills/skill-builder/SKILL.md`
+6. Validate against template's validation checklist
 
 ---
 
@@ -163,9 +157,20 @@ Exit Conditions:
 
 Instructions:
 1. For each priority skill in list:
-   a. Use skill builder to create the skill
-   b. Place in `.claude/skills/{skill-name}/SKILL.md`
-   c. Mark complete in progress tracker
+   a. Gather context per skill-builder-template.md (CLAUDE.md, existing skills, protocols, tools)
+   b. Ask skill analysis questions until intent is clear (adapt to Interaction Mode)
+   c. Propose high-level design for approval:
+      - Goal, Intent, Scope, Role
+      - Proposed KRs (3-4)
+      - Proposed Actions (outline with names and purposes)
+      - Workflow style recommendation with rationale
+   d. After design approval, create initial draft following skill template
+   e. Perform risk analysis — identify scope, execution, integration, autonomy, artifact risks
+   f. Output draft with risk analysis for developer review
+   g. Ask: "What would you change?" — iterate up to 3 times
+   h. Validate final skill against checklist
+   i. Place in `.claude/skills/{skill-name}/SKILL.md`
+   j. Mark complete in progress tracker
 2. Output summary of created skills
 
 ---
@@ -196,7 +201,124 @@ Instructions:
 
 ## Additional Notes and Terms
 
-**Skill Placement:** Skills go in `.claude/skills/`
+**Skill Placement:** Skills go in `.claude/skills/`.
+- The path must be `.claude/skills/{SKILL NAME}/SKILL.md`
+- Put reference files for that skill and code for the skill in the skill directory
+- Put common reference files or code in `.claude/`
+
+**Skill-Builder Output Structure:**
+
+The skill-builder skill created by A2 is itself a skill that follows the same template. It must include:
+- Goal: Create well-structured skills following project conventions
+- Intent: Skills should be consistent with project patterns
+- Role: Consultant + skill creator
+- Actions that implement the skill creation process:
+  - A1: Gather context and ask analysis questions
+  - A2: Propose design for approval
+  - A3: Create draft, perform risk analysis, iterate
+  - A4: Validate and place skill
+- Additional Notes containing: Consultation approach table, skill analysis questions, variation dimensions, validation checklist (copied from setup-skill-builder.md)
+
+**Skill Recommendations:**
+
+The skill-builder should proactively recommend skills based on project analysis:
+1. After reading CLAUDE.md and existing skills, identify gaps
+2. Propose skills that would help based on:
+   - Common patterns in the codebase (testing, deployment, documentation)
+   - Project type (web API → endpoint skill, data science → notebook skill)
+   - Developer pain points mentioned in task.md
+3. Output recommendations with rationale before asking what skills to create
+4. Let developer accept, modify, or reject recommendations
+
+**Skill Dependencies:**
+
+When a skill depends on another skill:
+1. Check if dependency exists in `.claude/skills/`
+2. If not, either:
+   - Create dependency first (if simple)
+   - Document dependency in skill's Preconditions
+   - Recommend creating dependency skill
+
+**Sub-agent Recommendations:**
+
+Recommend sub-agents when:
+- Skill involves parallel independent tasks (e.g., checking multiple files)
+- Skill needs specialized roles (e.g., reviewer + implementer)
+- Task complexity would benefit from divide-and-conquer
+
+Recommend single skill when:
+- Tasks are sequential and interdependent
+- Simple scope with clear linear flow
+- Sub-agent overhead not justified
+
+**Consultation Approach by Interaction Mode:**
+
+| Mode | Approach |
+|------|----------|
+| Lead | Output proposal with rationale, confirm only essential points, proceed efficiently |
+| Senior | Share intermediate findings, recommend approach, get approval at gates |
+| Peer | Brainstorm options together, collaborate on design, discuss trade-offs |
+| Junior | Present all options with trade-offs, await direction at each decision |
+
+**Context to Gather Before Creating Skills:**
+1. CLAUDE.md — project conventions, Interaction Mode
+2. Existing skills in `.claude/skills/` — check for overlap, composition opportunities
+3. Available protocols in `protocols/` — what techniques can be referenced
+4. Available tools — what the skill can use
+
+**Skill Analysis Questions (ask until intent is clear):**
+
+*Understanding the Problem:*
+1. What problem does this skill solve?
+2. Why is this skill necessary? (vs manual, vs existing skill)
+3. Who will use this skill?
+4. What triggers this skill?
+
+*Defining Scope:*
+5. What are the deliverables?
+6. Should this be one skill or multiple?
+7. Does it compose with other skills?
+8. What's the granularity?
+
+*Determining Role:*
+9. What domain role? (software engineer, UI designer, data analyst, reviewer, etc.)
+10. What behavioral stance? (executor, advisor, pair programmer, auditor)
+11. Should it spawn sub-agents with narrower roles?
+
+*Deciding Behavior:*
+12. How autonomous? (proceed vs confirm at each step)
+13. Echo reasoning? (thinking aloud vs silent)
+14. How handle errors? (fail, retry, ask, rollback)
+
+*Planning Artifacts:*
+15. Just SKILL.md or additional files?
+16. Reference materials needed? (guidelines, templates, examples)
+17. Code/scripts needed? (shell functions, validators)
+18. Hooks needed? (pre-commit, post-action)
+19. What tools will it use?
+
+**Variation Dimensions:**
+
+| Dimension | Options | Determined by |
+|-----------|---------|---------------|
+| Workflow Style | Declarative, Imperative, Hybrid | Developer preference |
+| Action Style | Instructions, Objectives+Constraints | Developer preference or per-action |
+| Role | Domain (engineer, designer, analyst) + Behavioral (executor, advisor) | Skill intent |
+| Autonomy | Proceed, confirm at gates, confirm each step | Interaction Mode |
+| Reasoning | Echo thoughts, silent execution | Developer preference |
+| Composition | Standalone, spawns sub-agents, calls other skills | Skill complexity |
+| Artifacts | SKILL.md only, +references, +code, +hooks | Skill needs |
+| Error handling | Fail fast, retry, ask user, rollback | Developer preference |
+| Tracking | Required, recommended, not required | Developer preference |
+| Validation | Required, recommended, not required | Developer preference |
+
+**Artifact Types:**
+
+| Type | When to include | Location |
+|------|-----------------|----------|
+| Reference files | Guidelines, templates, examples | `.claude/skills/{skill-name}/` |
+| Code/scripts | Shell functions, validators | `.claude/skills/{skill-name}/` |
+| Hooks | Git events, file changes | `.claude/hooks/` or skill folder |
 
 **Workflow Styles:**
 - **Declarative (Goal-Oriented):** "Achieve X outcome" — adapts approach to situation. Use for creative tasks, context-dependent decisions.
@@ -206,6 +328,46 @@ Instructions:
 **Documentation Styles:**
 - **Prescriptive:** Tells you exactly what to do. Less ambiguity, less flexibility.
 - **Descriptive:** Explains concepts and options. More flexibility, requires more judgment.
+
+**Risk Analysis Categories:**
+
+When creating any skill, analyze risks in these categories:
+1. **Scope risks** — Is the skill too broad? Too narrow? Overlapping with existing skills?
+2. **Execution risks** — What could go wrong during skill execution? Data loss? Incorrect outputs?
+3. **Integration risks** — How might this skill conflict with other skills or project conventions?
+4. **Autonomy risks** — Is the skill too autonomous for its impact? Should it confirm more?
+5. **Artifact risks** — Could generated files overwrite important content? Create clutter?
+
+Output risk analysis with severity (high/medium/low) and proposed mitigations. Consult developer before finalizing.
+
+**Iterative Improvement:**
+
+Skills rarely perfect on first draft. After creating initial draft:
+1. Output the draft skill for developer review
+2. Ask: "What would you change about this skill?"
+3. Iterate based on feedback (up to 3 iterations before escalating)
+4. Check: Does it match developer's mental model? Right granularity? Appropriate workflow style?
+
+**Skill Validation Checklist:**
+
+*Structure:*
+- [ ] All sections present (Frontmatter, Goal, Intent, Scope, Role, KRs, REQs, Pre/Postconditions, Steps, Actions, Notes, Risks, References)
+- [ ] 150-200 lines (200-250 with permission)
+- [ ] 3-4 Key Results
+- [ ] 2+ Actions
+- [ ] Each action has complete structure
+
+*Content:*
+- [ ] Coherent — no contradictions between sections
+- [ ] Complete — all KRs achievable from Actions
+- [ ] Concise — no duplication, minimum words
+- [ ] Precise — unambiguous language, no hedging
+
+*Skill-specific:*
+- [ ] Role defined (domain + behavioral)
+- [ ] Referenced protocols exist in `protocols/`
+- [ ] Tools in allowed-tools are available
+- [ ] Artifacts appropriate for skill needs
 
 ---
 
