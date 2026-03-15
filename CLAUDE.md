@@ -4,9 +4,8 @@ Framework for building reliable AI coding assistant skills.
 
 ## Structure
 
-- `modes/` — Internal cognitive actions used by workflows
-- `workflows/` — User-invocable skills that compose modes
-- `protocols/` — Reusable patterns referenced by modes/workflows
+- `workflows/` — User-invocable skills that compose actions
+- `protocols/` — Reusable patterns referenced by actions
 - `guidelines/` — Creation guides (consultative, not prescriptive)
 
 Each directory has a README.md with details.
@@ -15,7 +14,7 @@ Each directory has a README.md with details.
 
 **Workflows must:**
 - Include progress tracking (prevents skipping steps)
-- Reference modes for each task
+- Reference protocols for each action
 - Define preconditions and postconditions
 
 **Guidelines must:**

@@ -50,7 +50,7 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 2. Ensure recoverable from interruption — check for existing trace on startup
 3. Consultative not prescriptive — recommend with rationale, developer decides
 4. Establish Interaction Mode early — it determines how rest of consultation proceeds
-5. Iterate up to 3 times per task if developer requests changes before escalating
+5. Iterate up to 3 times per action if developer requests changes before escalating
 6. Use AskUserQuestion tool for multi-choice questions (Interaction Mode, personality traits, priorities)
 
 ## Preconditions
@@ -76,147 +76,145 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 ## Steps
 
-1. Create preliminary checklist → KR1-4. You MUST use TodoWrite with formula: `interview - KR# - <task> - <details>`
-2. Check for existing trace → Execute "Recover from Interruption" task if trace exists
-3. Assess project → KR2. Execute "Assess Project" task. Output assessment summary
-4. Plan interview → KR1-4. Execute "Plan Interview" task. Output interview plan for approval
-5. Conduct interview → KR1, KR2, KR3. Execute "Conduct Interview" task
-6. Create task.md → KR3, KR4. Execute "Create Task Documentation" task. Document all decisions
+1. Create preliminary checklist → KR1-4. You MUST use TodoWrite with formula: `interview - KR# - <action> - <details>`
+2. Check for existing trace → Execute A1 if trace exists
+3. Assess project → KR2. Execute A2. Output assessment summary
+4. Plan interview → KR1-4. Execute A3. Output interview plan for approval
+5. Conduct interview → KR1, KR2, KR3. Execute A4
+6. Create task.md → KR3, KR4. Execute A5. Document all decisions
 7. Install setup-env → Copy `workflows/setup/setup-env.md` to `.claude/skills/setup-env.md`
 8. Output completion summary → Inform user: "Setup init complete. Run `/setup-env tasks/{TASK_ID}/task.md` to continue."
 
 ---
 
-## Tasks
+## Actions
 
-**REQUIRED:**
-1. Each task specifies modes to use.
-2. When executing a task you MUST read those modes if you haven't already.
-3. When executing a Task:
-   1. You MUST Read the mode to understand typical actions
-   2. You MUST choose actions based on the Instructions and the Mode.
+Actions are units of work that apply protocol techniques to achieve specific outcomes.
 
-### Recover from Interruption (→ KR1, KR2, KR3, KR4)
+### A1: Recover from Interruption (→ KR1, KR2, KR3, KR4)
 
-**Goal:** Resume consultation with full context
+Intent: Resume consultation with full context after session interruption
+KR: Recovery summary and confirmed resume point documented
+Preconditions:
+- Required: Trace file from previous session
+Postconditions:
+- Success: Output recovery summary, output confirmed resume point
+- Failure: Output trace status, output request for user guidance
+Exit Conditions:
+- Trace shows workflow completed → stop, inform user
+- Trace shows mid-step → stop, ask user how to proceed
 
-**When:** Trace file exists from previous session
-
-**Mode:** [orienting](../../modes/orienting.md)
-
-**Instructions:**
-1. Review the trace
-2. Recover your position
-
-**Inputs:**
-- Trace file (required)
-
-**Outputs:**
-- Recovery summary and confirmed resume point
-
+Instructions:
+1. Read `tracking_and_recovery.md` and apply Trace Detection — to locate previous session state
+2. Read `pragmatics.md` and apply Context Reconstruction — to rebuild understanding
+3. Apply Resume Decision — to determine where to continue
+4. Output recovery summary for user confirmation
 
 ---
 
-### Assess Project (→ KR2)
+### A2: Assess Project (→ KR2)
 
-**Goal:** Understand project state and identify common considerations
+Intent: Understand project state and identify AI-readiness considerations
+KR: Assessment summary with findings documented
+Preconditions:
+- Required: Repository access
+- Optional: Existing documentation
+Postconditions:
+- Success: Output assessment summary with tech stack, conventions, and gaps
+- Failure: Output partial findings, output request for access to missing areas
+Exit Conditions:
+- Repository inaccessible → stop, request access
+- No code or documentation found → stop, clarify project state with user
 
-**When:** Starting consultation (after checking for existing trace)
+Objectives (OBJ):
+1. Identify project tech stack, structure, and conventions
+2. Surface AI-readiness gaps and considerations
+3. Document findings in assessment summary
 
-**Mode:** [orienting](../../modes/orienting.md)
+Constraints (CONST):
+1. Read `pragmatics.md` and apply Context Assessment — to understand project state
+2. Focus on AI-readiness considerations, not general code review
+3. Infer from context before asking user questions
 
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
-
-Additional guidance:
-- Focus on AI-readiness considerations
-- Output assessment summary when complete
-
-**Inputs:**
-- Repository access (required)
-- Existing documentation (optional)
-
-**Outputs:**
-- Assessment summary with findings
-
----
-
-### Plan Interview (→ KR1, KR2, KR3, KR4)
-
-**Goal:** Determine relevant topics and create interview approach
-
-**When:** After project assessment
-
-**Mode:** [planning](../../modes/planning.md)
-
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
-
-Additional guidance:
-- See possible topics in Additional Notes
-- For each included topic, explain why it matters
-- Output interview plan for developer confirmation
-
-**Inputs:**
-- Assessment summary (required)
-
-**Outputs:**
-- Interview plan with topics to cover and rationale
+Validation:
+1. Add OBJ1-3 to TodoWrite checklist
+2. Output validation: list each OBJ with evidence it was achieved
 
 ---
 
-### Conduct Interview (→ KR1, KR2, KR3)
+### A3: Plan Interview (→ KR1, KR2, KR3, KR4)
 
-**Goal:** Interview developer according to plan
+Intent: Determine relevant interview topics and create approach
+KR: Interview plan with topics and rationale approved by developer
+Preconditions:
+- Required: Assessment summary
+Postconditions:
+- Success: Output interview plan with topics and rationale
+- Failure: Output partial plan, output request for missing assessment information
+Exit Conditions:
+- Assessment incomplete → stop, complete A2 first
+- Developer rejects plan 3 times → stop, escalate
 
-**When:** After interview plan approved
-
-**Mode:** [interviewing](../../modes/interviewing.md)
-
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
-
-Additional guidance:
-- Follow interview plan topics
-- Infer from context before asking
-- Document all decisions
-
-**Inputs:**
-- Interview plan (required)
-
-**Outputs:**
-- Interaction Mode (Lead/Senior/Peer/Junior)
-- AI Personality profile (Big 5 traits, communication preferences)
-- AI-readiness criteria and priorities
-- Constraints and preferences
-- All interview responses documented
+Instructions:
+1. Read `thinking.md` and apply Strategic Thinking — to plan interview approach
+2. Read `risk_management.md` and apply Fail-Fast Ordering — to prioritize critical topics first
+3. Review topics in Additional Notes, select relevant ones based on assessment
+4. For each included topic, explain why it matters for this project
+5. Output interview plan for developer confirmation
 
 ---
 
-### Create Task Documentation (→ KR3, KR4)
+### A4: Conduct Interview (→ KR1, KR2, KR3)
 
-**Goal:** Define AI-readiness criteria, compose implementation plan, document all decisions
+Intent: Gather developer preferences and requirements through effective questioning
+KR: Interaction Mode established, AI Personality profiled, AI-readiness criteria documented
+Preconditions:
+- Required: Approved interview plan
+Postconditions:
+- Success: Output all interview responses with Interaction Mode, AI Personality profile, and criteria
+- Failure: Output partial responses, output blockers identified
+Exit Conditions:
+- Developer requests to stop → stop, document what was gathered, note incomplete
+- Critical information refused → stop, document assumption to use defaults
 
-**When:** Interview complete
+Objectives (OBJ):
+1. Establish Interaction Mode (Lead/Senior/Peer/Junior)
+2. Profile AI Personality using Big 5 framework
+3. Discover AI-readiness criteria and priorities
+4. Respect developer's time — infer before asking
 
-**Mode:** [defining](../../modes/defining.md)
+Constraints (CONST):
+1. Read `elicitation.md` and apply Inference Before Asking — to minimize questions
+2. Use AskUserQuestion tool for multi-choice questions
+3. Follow interview plan topics
+4. Do not exceed 3 follow-up questions per topic
 
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
+Validation:
+1. Add OBJ1-4 to TodoWrite checklist
+2. Output validation: list each OBJ with evidence it was achieved
 
-Additional guidance:
-- Define what "AI-ready" means for this project
-- Create `tasks/{TASK_ID}/` directory and write task.md
-- Output confirmation with file path
+---
 
-**Inputs:**
-- Interview responses (required)
-- Interaction Mode, AI Personality, constraints (required)
+### A5: Create Task Documentation (→ KR3, KR4)
 
-**Outputs:**
-- AI-readiness definition
-- Implementation plan
-- task.md file at `tasks/{TASK_ID}/task.md`
+Intent: Document all decisions and create implementation plan
+KR: task.md created with AI-readiness definition and actionable implementation plan
+Preconditions:
+- Required: Interview responses with Interaction Mode, AI Personality, constraints
+Postconditions:
+- Success: Output task.md file at `tasks/{TASK_ID}/task.md` with all sections populated
+- Failure: Output partial task.md, output list of missing sections
+Exit Conditions:
+- Interview responses incomplete → stop, complete A4 first
+- Cannot create tasks directory → stop, report filesystem error
+
+Instructions:
+1. Read `criteria_setting.md` and apply Operational Definition — to define "AI-ready"
+2. Read `goal_setting.md` and apply Goal Decomposition — to create implementation plan
+3. Create `tasks/{TASK_ID}/` directory
+4. Write task.md following the template below
+5. Verify all sections populated (use "Not specified" if developer skipped)
+6. Output confirmation with file path
 
 **task.md Structure:**
 
@@ -344,7 +342,7 @@ For Interaction Mode, AI Personality, and AI-readiness priorities, use AskUserQu
 - Allow "use defaults" option
 - Respect developer's time (don't over-interview)
 
-**task.md Structure:** See "Create Task Documentation" task. Must include:
+**task.md Structure:** See "Create Task Documentation" action. Must include:
 - Project Assessment (tech stack, conventions, current state, gaps)
 - Interaction Mode (Lead/Senior/Peer/Junior)
 - AI Personality profile (Big 5 traits + communication preferences)
@@ -352,6 +350,17 @@ For Interaction Mode, AI Personality, and AI-readiness priorities, use AskUserQu
 - Implementation Plan (environment setup and skills setup tasks)
 - Constraints and Preferences
 - Protocols referenced (identity_and_profile.md, communication_style.md)
+
+---
+
+## Risks (RISK)
+
+| # | Risk | When | Mitigation |
+|---|------|------|------------|
+| 1 | Over-interviewing | Developer feels interrogated or loses patience | Infer from context before asking; limit to 3 follow-ups per topic |
+| 2 | Wrong Interaction Mode | Mode selected doesn't match developer's actual preference | Explain each mode clearly; allow changes mid-workflow |
+| 3 | Incomplete trace on interruption | Session ends mid-action without recoverable state | Write trace events at step boundaries, not just completion |
+| 4 | Defaults don't fit project | Applied defaults conflict with project conventions | Document defaults used; allow override in task.md |
 
 ---
 

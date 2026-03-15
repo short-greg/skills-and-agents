@@ -1,6 +1,6 @@
 # Skills and Agents Framework
 
-**A framework for building reliable AI coding assistant skills with modes, workflows, and protocols.**
+**A framework for building reliable AI coding assistant skills with workflows and protocols.**
 
 ---
 
@@ -21,7 +21,6 @@ Use gh to fetch README.md then following the guidelines to proceed with installa
 1. Ask the user whether to use gh to just fetch the files or clone, recommend gh to just fetch directly.
 2. Copy supporting files:
    - Copy `protocols/` into `.claude/protocols/`
-   - Copy `modes/` into `.claude/modes/`
    - Copy `workflows/` into `.claude/workflows/` (staging area)
 3. Install initial skill:
    - Copy `workflows/setup/setup-init.md` to `.claude/skills/setup-init.md`
@@ -57,8 +56,7 @@ your-project/
 │   ├── skills/                   # Workflows loaded as skills
 │   │   └── [workflow-name]/
 │   │       └── SKILL.md          # /[workflow-name] skill
-│   ├── modes/                    # Internal cognitive actions
-│   └── protocols/                # Referenced by modes
+│   └── protocols/                # Referenced by actions
 └── CLAUDE.md
 ```
 
@@ -84,13 +82,11 @@ user-invocable: true
 
 ### Framework Components
 
-**Modes** — Internal cognitive actions used by workflows (orienting, defining, planning, designing, implementing, evaluating, investigating, interviewing, brainstorming, maintaining, positioning)
+**Workflows** — User-invocable skills that compose actions (setup-init, setup-env, setup-skill-builder)
 
-**Workflows** — User-invocable skills that compose modes (setup-init, setup-env, setup-skill-builder)
+**Protocols** — Techniques and patterns referenced by actions (thinking, elicitation, risk management, etc.)
 
-**Protocols** — Supporting patterns and techniques referenced by modes (thinking, transparency, risk management, etc.)
-
-**Guidelines** — Creation guides for modes, workflows, protocols, and skill builders
+**Guidelines** — Creation guides for workflows, protocols, and skill builders
 
 ---
 

@@ -55,8 +55,15 @@ A **workflow** orchestrates 2+ actions to achieve a multi-step goal. Actions ref
 
 Actions are units of work that apply protocol techniques to achieve specific outcomes. Each action must be sufficiently small: one clear goal, one protocol (or tightly related set), predictable inputs → outputs.
 
+**Numbering Scheme:** All elements are numbered for referenceability.
+- Actions: `A1`, `A2`, `A3`...
+- Objectives: `OBJ1`, `OBJ2`... (or `OKR1` with sub-results `a`, `b`, `c`)
+- Constraints: `CONST1`, `CONST2`...
+- Key Results: `KR1`, `KR2`...
+- Risks: `RISK1`, `RISK2`...
+
 ```markdown
-### Action Name
+### A1: Action Name (→ KR#)
 
 Intent: Why this action exists
 KR: Outcome-oriented success criteria (comma-separated)
@@ -71,19 +78,33 @@ Exit Conditions:
 - Condition — stop, action to take
 
 Instructions: (use for predictable, sequential work)
-1. Read `protocol.md` and apply Action Name to achieve X
-2. Apply Technique Name to do Y
+1. Read `protocol.md` and apply Technique Name — to achieve X
+2. Apply Technique Name — to do Y
 3. Output Z for confirmation
+
+Note: Use output-oriented verbs (list, evaluate, derive, document, output) not internal verbs (find, check, look).
 
 — OR —
 
-Objectives: (use for judgment-heavy, adaptive work)
-- Achieve X before proceeding
-- Minimize Y while ensuring Z
+Objectives (OBJ): (use for judgment-heavy, adaptive work)
+1. Achieve X before proceeding
+2. Minimize Y while ensuring Z
 
-Constraints:
-- Must read `protocol.md` before proceeding
-- Must not exceed N iterations
+— OR —
+
+Objectives and Key Results (OKR): (use when objectives have sub-results)
+1. Achieve X
+   a. Sub-result 1
+   b. Sub-result 2
+2. Minimize Y while ensuring Z
+
+Constraints (CONST):
+1. Read `protocol.md` and apply Technique Name — to achieve X
+2. Do not exceed N iterations
+
+Validation:
+1. Add OBJ1-N (or OKR1-N) to TodoWrite checklist
+2. Output validation: list each objective with evidence it was achieved
 ```
 
 ### When to Use Instructions vs Objectives+Constraints
@@ -140,8 +161,11 @@ For each criterion: output evidence it passes, output evidence it fails, then de
 **Workflow-Specific:**
 - [ ] **Uses 2+ actions** — Not single-action
 - [ ] **Recovery included** — Progress tracking, recovery, iteration limit
-- [ ] **Actions specify protocols** — Each action references protocol(s)
-- [ ] **Actions are complete** — Each has Intent, KR, Pre/Postconditions, Exit Conditions, Instructions or Objectives+Constraints
+- [ ] **Actions specify protocols** — Each action references protocol(s) with techniques
+- [ ] **Actions are complete** — Each has Intent, KR, Pre/Postconditions, Exit Conditions, Instructions or OBJ/OKR+CONST
+- [ ] **Actions are numbered** — A1, A2, A3... format
+- [ ] **Objectives/Constraints numbered** — OBJ1/OKR1, CONST1 format
+- [ ] **Validation included** — Actions with OBJ/OKR include TodoWrite checklist and evidence output
 - [ ] **Research completed** — References section has sources
 
 ---
@@ -150,13 +174,15 @@ For each criterion: output evidence it passes, output evidence it fails, then de
 
 1. **Declare workflow style** — State Imperative, Declarative, or Hybrid at top
 2. **Use Hybrid for most workflows** — Imperative bookends (setup + validation), declarative middle
-3. **Map each action to protocols** — Reference specific protocols and techniques
-4. **State preconditions/postconditions** — Required for each action
+3. **Map each action to protocols** — Reference specific protocols and techniques (not just file names)
+4. **State preconditions/postconditions** — Required for each action, postconditions must be action-oriented ("Output X")
 5. **Add recovery** — Progress tracking per `tracking_and_recovery.md`, iteration limit
 6. **Limit to 3-4 Key Results** — Focused but comprehensive
 7. **Handle failures** — State what happens when action fails (retry, escalate, etc.)
 8. **Do not create single-action workflows** — Execute the action directly instead
 9. **Actions must be sufficiently small** — One clear goal, predictable inputs → outputs
+10. **Number everything** — Actions (A1, A2), Objectives (OBJ1, OKR1), Constraints (CONST1)
+11. **Include validation for OBJ/OKR** — Add to TodoWrite checklist, output evidence for each
 
 ---
 
@@ -277,7 +303,7 @@ Steps define execution order. Format differs by workflow style.
 
 Actions are units of work that apply protocol techniques to achieve specific outcomes. Select actions based on context. Each action shows which KR it serves.
 
-### [Action Name] (→ KR#)
+### A1: [Action Name] (→ KR#)
 
 Intent: [Why this action exists]
 KR: [Success criteria for this action]
@@ -286,31 +312,60 @@ Preconditions:
 - Required (request): [what to request if not provided]
 - Optional: [what enhances the action] (default: [value])
 Postconditions:
-- Success: [output produced]
-- Failure: [what to output on failure]
+- Success: Output [result] with [details] documented
+- Failure: Output request listing [missing information]
 Exit Conditions:
 - [condition] — stop, [action to take]
 
 Instructions:
-1. Read `[protocol].md` and apply [Technique Name] to [purpose]
+1. Read `[protocol].md` and apply [Technique Name] — to [purpose]
 2. [Next step]
 3. Output [result] for [purpose]
 
 — OR —
 
-Objectives:
-- [What to achieve]
-- [What to minimize/maximize]
+Objectives (OBJ):
+1. [What to achieve]
+2. [What to minimize/maximize]
 
-Constraints:
-- Must read `[protocol].md` before proceeding
-- [Other constraints]
+— OR —
+
+Objectives and Key Results (OKR):
+1. [What to achieve]
+   a. [Sub-result]
+   b. [Sub-result]
+2. [What to minimize/maximize]
+
+Constraints (CONST):
+1. Read `[protocol].md` and apply [Technique Name] — to [purpose]
+2. [Other constraints]
+
+Validation:
+1. Add OBJ1-N (or OKR1-N) to TodoWrite checklist
+2. Output validation: list each objective with evidence
 
 ---
 
 ## Additional Notes and Terms
 
 <Domain-specific terms, customization points, or other notes. Write "None" if not applicable.>
+
+---
+
+## Risks (RISK)
+
+<Workflow-specific risks and mitigations. What could go wrong during execution?>
+
+| # | Risk | When | Mitigation |
+|---|------|------|------------|
+| 1 | [Risk Name] | [Condition that triggers this risk] | [How to prevent or recover] |
+| 2 | [Risk Name] | [Condition] | [Mitigation] |
+
+<Guidelines for risks:>
+- Number risks as 1, 2, etc. for referenceability (referenced as RISK1, RISK2)
+- Focus on workflow execution risks, not general project risks
+- "When" describes the trigger condition
+- Mitigation is actionable and specific
 
 ---
 

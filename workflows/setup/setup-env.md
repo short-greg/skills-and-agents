@@ -63,139 +63,149 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch
 
 0. Check preconditions → Verify task.md exists. **If not, STOP:** "Run `/setup-init` first to create task.md."
 1. Read task.md → Understand decisions and Interaction Mode
-2. Investigate best practices → KR1, KR2. Execute "Investigate Best Practices" task
-3. Orient to findings → KR1, KR2, KR3. Execute "Orient to Findings" task
-4. Design environment → KR1, KR2, KR3. Execute "Design Environment" task. Output proposal as code block
-5. Implement environment → KR1, KR2, KR3. Execute "Implement Environment" task
-6. Evaluate results → Execute "Evaluate Results" task
+2. Investigate best practices → KR1, KR2. Execute A1
+3. Orient to findings → KR1, KR2, KR3. Execute A2
+4. Design environment → KR1, KR2, KR3. Execute A3. Output proposal as code block
+5. Implement environment → KR1, KR2, KR3. Execute A4
+6. Evaluate results → Execute A5
 7. Install setup-skill-builder → If successful, copy `workflows/setup/setup-skill-builder.md` to `.claude/skills/setup-skill-builder.md`
 
 ---
 
-## Tasks
+## Actions
 
-**REQUIRED:**
-1. Each task specifies modes to use.
-2. When executing a task you MUST read those modes if you haven't already.
-3. setup-init must have been executed
+Actions are units of work that apply protocol techniques to achieve specific outcomes.
 
-### Investigate Best Practices (→ KR1, KR2)
+**Precondition:** setup-init must have been executed.
 
-**Goal:** Research current AI-readiness environment patterns
+### A1: Investigate Best Practices (→ KR1, KR2)
 
-**When:** After reading task.md
+Intent: Research current AI-readiness environment patterns
+KR: Research findings on folder structures, CLAUDE.md patterns, and worktree practices documented
+Preconditions:
+- Required: task.md context
+Postconditions:
+- Success: Output research findings with sources cited
+- Failure: Output partial findings with gaps noted
+Exit Conditions:
+- WebSearch unavailable → stop, use existing knowledge and note limitation
 
-**Mode:** [investigating](../../modes/investigating.md)
-
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
-
-Additional guidance:
-- Focus on: folder structures, CLAUDE.md best practices, worktree patterns
-
-**Inputs:**
-- task.md context (required)
-
-**Outputs:**
-- Research findings on current best practices
+Instructions:
+1. Read `thinking.md` and apply Evidence-Based Reasoning — to evaluate sources
+2. Read `discipline.md` and apply MECE Enumeration — to structure research topics
+3. Use WebSearch for: folder structures, CLAUDE.md best practices, worktree patterns
+4. Document findings with sources
+5. Output research summary
 
 ---
 
-### Orient to Findings (→ KR1, KR2, KR3)
+### A2: Orient to Findings (→ KR1, KR2, KR3)
 
-**Goal:** Understand research in context of this project's needs
+Intent: Understand research in context of project needs
+KR: Contextualized understanding of applicable patterns documented
+Preconditions:
+- Required: Research findings
+- Required: task.md
+Postconditions:
+- Success: Output patterns matched to project requirements with gaps/conflicts noted
+- Failure: Output incomplete analysis with blockers identified
+Exit Conditions:
+- Research findings empty → stop, complete A1 first
+- task.md inaccessible → stop, verify preconditions
 
-**When:** After investigation
+Objectives (OBJ):
+1. Compare research findings against task.md requirements
+2. Identify which patterns apply to this project
+3. Note gaps where research doesn't address project needs
+4. Note conflicts where patterns contradict project constraints
 
-**Mode:** [orienting](../../modes/orienting.md)
+Constraints (CONST):
+1. Read `pragmatics.md` and apply Context Assessment — to evaluate applicability
+2. Prioritize project requirements over general best practices
 
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
-
-Additional guidance:
-- Compare research findings against task.md requirements
-- Note gaps or conflicts
-
-**Inputs:**
-- Research findings (required)
-- task.md (required)
-
-**Outputs:**
-- Contextualized understanding of applicable patterns
-
----
-
-### Design Environment (→ KR1, KR2, KR3)
-
-**Goal:** Create environment proposal per Interaction Mode
-
-**When:** After orientation
-
-**Mode:** [designing](../../modes/designing.md)
-
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
-
-Additional guidance:
-- Output proposal as code block
-- Collaborate per Interaction Mode (see Additional Notes)
-
-**Inputs:**
-- Oriented findings (required)
-- task.md decisions (required)
-
-**Outputs:**
-- Environment proposal (folders, CLAUDE.md structure, worktrees if applicable)
+Validation:
+1. Add OBJ1-4 to TodoWrite checklist
+2. Output validation: list each OBJ with evidence it was achieved
 
 ---
 
-### Implement Environment (→ KR1, KR2, KR3)
+### A3: Design Environment (→ KR1, KR2, KR3)
 
-**Goal:** Create folders, CLAUDE.md, and worktrees per approved design
+Intent: Create environment proposal per Interaction Mode
+KR: Environment proposal approved by developer
+Preconditions:
+- Required: Oriented findings
+- Required: task.md decisions
+Postconditions:
+- Success: Output environment proposal as code block, output approval confirmation
+- Failure: Output proposal, output feedback captured for iteration
+Exit Conditions:
+- Developer rejects proposal 3 times → stop, escalate
+- Oriented findings incomplete → stop, complete A2 first
 
-**When:** After design approved
+Objectives (OBJ):
+1. Generate environment proposal (folders, CLAUDE.md structure, worktrees if applicable)
+2. Collaborate per Interaction Mode (see Additional Notes)
+3. Present proposal as code block for review
 
-**Mode:** [implementing](../../modes/implementing.md)
+Constraints (CONST):
+1. Read `thinking.md` and apply Alternative Generation — to explore options
+2. Read `pragmatics.md` and apply Option Presentation — to structure proposal
+3. Respect Interaction Mode collaboration style
+4. Output proposal as code block
 
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
-
-Additional guidance:
-- CLAUDE.md must include: Interaction Mode, AI Personality, Communication Style
-- Follow [worktree-setup-guideline.md](../../guidelines/worktree-setup-guideline.md) if worktrees in plan
-
-**Inputs:**
-- Approved design (required)
-- task.md with full AI profile (required)
-
-**Outputs:**
-- Created folders
-- CLAUDE.md with full AI profile
-- Worktree configuration (if applicable)
+Validation:
+1. Add OBJ1-3 to TodoWrite checklist
+2. Output validation: list each OBJ with evidence it was achieved
 
 ---
 
-### Evaluate Results (→ All KRs)
+### A4: Implement Environment (→ KR1, KR2, KR3)
 
-**Goal:** Verify environment created correctly; hand off if successful
+Intent: Create folders, CLAUDE.md, and worktrees per approved design
+KR: Environment artifacts created and verified
+Preconditions:
+- Required: Approved design
+- Required: task.md with full AI profile
+Postconditions:
+- Success: Output folders created, output CLAUDE.md written, output worktree config if applicable
+- Failure: Output partial implementation, output errors documented
+Exit Conditions:
+- Design not approved → stop, complete A3 first
+- Filesystem error → stop, report error and request guidance
 
-**When:** After implementation
+Instructions:
+1. Read `discipline.md` and apply Sequential Processing — to implement in order
+2. Read `tracking_and_recovery.md` and apply Dual Tracking — to record progress
+3. Create folders per design
+4. Write CLAUDE.md with Interaction Mode, AI Personality, Communication Style sections
+5. Configure worktrees if in plan (follow worktree-setup-guideline.md)
+6. Confirm each artifact created successfully
+7. Output implementation summary
 
-**Mode:** [evaluating](../../modes/evaluating.md)
+---
 
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
+### A5: Evaluate Results (→ All KRs)
 
-Additional guidance:
-- Verify CLAUDE.md contains full AI profile
-- If successful, output: "Environment ready. Run `/setup-skill-builder` to continue."
+Intent: Verify environment created correctly and hand off
+KR: All KRs verified with evidence
+Preconditions:
+- Required: Implementation outputs
+Postconditions:
+- Success: Output verification results, output hand off message
+- Failure: Output verification failures with remediation steps
+Exit Conditions:
+- Critical verification failure → stop, report and await guidance
+- All KRs pass → proceed to hand off
 
-**Inputs:**
-- Implementation outputs (required)
-
-**Outputs:**
-- Verification results
-- Hand off to setup-skill-builder (if successful)
+Instructions:
+1. Read `software_quality.md` and apply Correctness and Completeness — to assess artifacts
+2. Read `criteria_setting.md` and apply Binary Criteria — for pass/fail on each KR
+3. Confirm CLAUDE.md contains full AI profile (Interaction Mode, AI Personality, Communication Style)
+4. Confirm folders exist per plan
+5. Confirm worktree configuration if applicable
+6. Output verification results with evidence
+7. If successful, output: "Environment ready. Run `/setup-skill-builder` to continue."
 
 ---
 
@@ -229,6 +239,17 @@ This project uses **[Mode]** collaboration style:
 - Technical Level: [Assume expertise/Explain/Teach]
 - Formality: [Professional/Semi-formal/Casual]
 ```
+
+---
+
+## Risks (RISK)
+
+| # | Risk | When | Mitigation |
+|---|------|------|------------|
+| 1 | Overwriting existing files | CLAUDE.md or folders already exist | Confirm before overwriting; back up existing files |
+| 2 | Research outdated | Best practices change faster than workflow updates | Use WebSearch for current patterns; cite sources with dates |
+| 3 | Worktree misconfiguration | Git worktrees set up incorrectly | Follow worktree-setup-guideline.md exactly; verify with git status |
+| 4 | task.md drift | Implementation diverges from task.md decisions | Reference task.md at each step; update if changes approved |
 
 ---
 

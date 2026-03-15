@@ -36,12 +36,12 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 3. Track progress per `tracking_and_recovery.md`
 4. Understood developer priorities about skill creation
 5. Validate deliverables with positive AND negative evidence
-6. When creating a skill all protocols and modes be read and understood first in order to create appropriate tasks.
+6. When creating a skill all protocols be read and understood first in order to create appropriate actions.
 7. The skill-builder-skill that gets output MUST
    1. Act as a consultant. It must understand the intent, it must clarify uncertainties, it must provide guidance based on the developers nees.
    2. Create a proposal for the skill that gets approved by the user before.
-   3. Plan out the tasks that the skill will need.
-   4. Include preferences about whether the developer prefers declarative or imperative. If it is imperative it expresses the order of the tasks. If declarative the skill-builder will aim to satisfy the goal.
+   3. Plan out the actions that the skill will need.
+   4. Include preferences about whether the developer prefers declarative or imperative. If it is imperative it expresses the order of the actions. If declarative the skill-builder will aim to satisfy the goal.
    5. Include preferences about whether the developer prefers prescriptive or descriptive
    6. Validate the skill before finalizing it, finding evidence why it fails and why it succeeds and confirm that it follows conventions
    7. Include a couple of patterns for how to write steps (a) pure declarative (only a setp to plan steps), (b) mixed (e.g. it includes steps at the beginning to set up and at the end to update CLAUDE.md or documentation), (c) pure imperative (i.e. all steps are defined)
@@ -73,109 +73,123 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 0. Check preconditions → Verify task.md and CLAUDE.md exist. **If not, STOP with appropriate message.**
 1. Read context → Read task.md and CLAUDE.md to understand conventions and Interaction Mode
-2. Interview skill preferences → KR1, KR2. Execute "Interview Skill Preferences" task
-3. Create skill builder → KR1. Execute "Create Skill Builder Skill" task
-4. Create skills → KR2. Execute "Create Skill" task (loop for each priority skill)
-5. Validate deliverables → KR3. Execute "Validate Deliverables" task
+2. Interview skill preferences → KR1, KR2. Execute A1
+3. Create skill builder → KR1. Execute A2
+4. Create skills → KR2. Execute A3 (loop for each priority skill)
+5. Validate deliverables → KR3. Execute A4
 6. Update CLAUDE.md → Add available skills section
 7. Hand off → Inform user setup is complete
 
 ---
 
-## Tasks
+## Actions
 
-**REQUIRED:**
-1. Each task specifies modes to use.
-2. When executing a task you MUST read those modes if you haven't already.
+Actions are units of work that apply protocol techniques to achieve specific outcomes.
 
-### Interview Skill Preferences (→ KR1, KR2)
+### A1: Interview Skill Preferences (→ KR1, KR2)
 
-**Goal:** Discover developer's skill preferences and priorities
+Intent: Discover developer's skill preferences and priorities
+KR: Workflow style, documentation style, and priority skills documented
+Preconditions:
+- Required: task.md and CLAUDE.md context read
+Postconditions:
+- Success: Output documented preferences (workflow style, documentation style, priority skills list)
+- Failure: Output partial preferences with defaults applied, output what could not be determined
+Exit Conditions:
+- Developer declines preferences interview → stop, apply documented defaults, output defaults used
+- Context files inaccessible → stop, output which files missing
 
-**When:** After reading context
+Objectives (OBJ):
+1. Discover workflow style preference (declarative/imperative/hybrid)
+2. Discover documentation style preference (prescriptive/descriptive)
+3. Discover which skills developer needs first
+4. Infer from context before asking
 
-**Mode:** [interviewing](../../modes/interviewing.md)
+Constraints (CONST):
+1. Read `elicitation.md` and apply Inference Before Asking — to minimize questions
+2. Read `elicitation.md` and apply Targeted Questioning — to ask only what cannot be inferred
+3. Respect Interaction Mode from CLAUDE.md when questioning
 
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
-
-Additional guidance:
-- Discover workflow style preference (declarative/imperative/hybrid)
-- Discover documentation style preference (prescriptive/descriptive)
-- Discover which skills they need first
-
-**Outputs:**
-- Workflow style preference (declarative/imperative/hybrid)
-- Documentation style preference (prescriptive/descriptive)
-- List of priority skills to create
-
----
-
-### Create Skill Builder Skill (→ KR1)
-
-**Goal:** Create a consultative skill builder with developer preferences baked in
-
-**When:** After preferences gathered
-
-**Mode:** [implementing](../../modes/implementing.md)
-
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
-
-Additional guidance:
-- Read [skill-builder-guideline.md](../../guidelines/skill-builder-guideline.md) first
-- Follow all requirements for the skill-builder deliverable in REQ section
-- See Example Skill Builder Output in Additional Notes
-
-**Inputs:**
-- Skill preferences from interview (required)
-- task.md and CLAUDE.md (required)
-- skill-builder-guideline.md (required)
-
-**Outputs:**
-- Skill builder skill at `.claude/skills/`
+Validation:
+1. Add OBJ1-4 to TodoWrite checklist
+2. Mark each objective complete as achieved
+3. Output validation: list each OBJ with evidence it was achieved
+4. Output documented preferences summary
 
 ---
 
-### Create Skill (→ KR2)
+### A2: Create Skill Builder Skill (→ KR1)
 
-**Goal:** Create each priority skill using the skill builder
+Intent: Create consultative skill builder with developer preferences baked in
+KR: Skill builder skill created following project conventions
+Preconditions:
+- Required: Skill preferences from A1
+- Required: task.md and CLAUDE.md
+- Required: skill-builder-guideline.md read
+Postconditions:
+- Success: Output skill builder skill at `.claude/skills/skill-builder/SKILL.md`
+- Failure: Output partial skill, output validation failures
+Exit Conditions:
+- skill-builder-guideline.md inaccessible → stop, request file
+- Preferences incomplete → stop, complete A1 first
 
-**When:** Skill builder created
-
-**Mode:** Use the skill builder skill
-
-**Instructions:**
-For each priority skill:
-1. Use skill builder to create the skill
-2. Place in `.claude/skills/`
-
-**Inputs:**
-- Skill builder skill (required)
-- Priority skills list (required)
-
-**Outputs:**
-- Initial skills customized to project
+Instructions:
+1. Read `skill-builder-template.md` — to understand expected output structure
+2. Read `skill-builder-guideline.md` — to understand requirements
+3. Read `discipline.md` and apply Sequential Processing — to ensure completeness
+4. Read `tracking_and_recovery.md` and apply Progress Recording — to track creation
+5. Create skill builder following all REQ requirements
+6. Incorporate developer's workflow style preference
+7. Incorporate developer's documentation style preference
+8. Place at `.claude/skills/skill-builder/SKILL.md`
+9. Validate against requirements
 
 ---
 
-### Validate Deliverables (→ KR3)
+### A3: Create Skill (→ KR2)
 
-**Goal:** Verify setup outputs exist and are correct
+Intent: Create each priority skill using the skill builder
+KR: Initial skills created and placed in `.claude/skills/`
+Preconditions:
+- Required: Skill builder skill created
+- Required: Priority skills list from A1
+Postconditions:
+- Success: Output each priority skill at `.claude/skills/{skill-name}/SKILL.md`
+- Failure: Output partial skills, output failures documented
+Exit Conditions:
+- Skill builder not available → stop, complete A2 first
+- Developer requests stop → stop, document completed skills
 
-**When:** All skills created
+Instructions:
+1. For each priority skill in list:
+   a. Use skill builder to create the skill
+   b. Place in `.claude/skills/{skill-name}/SKILL.md`
+   c. Mark complete in progress tracker
+2. Output summary of created skills
 
-**Mode:** [evaluating](../../modes/evaluating.md)
+---
 
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
+### A4: Validate Deliverables (→ KR3)
 
-Additional guidance:
-- Find evidence of success AND evidence of failure
-- Output validation summary
+Intent: Verify setup outputs exist and are correct
+KR: Validation summary with positive and negative evidence for each deliverable
+Preconditions:
+- Required: All skills created
+Postconditions:
+- Success: Output validation summary with evidence for each KR
+- Failure: Output validation failures with remediation steps
+Exit Conditions:
+- Critical validation failure → stop, report and await guidance
+- Skills incomplete → stop, complete A3 first
 
-**Outputs:**
-- Validation summary with evidence
+Instructions:
+1. Read `software_quality.md` and apply Quality Assessment — to evaluate artifacts
+2. Read `criteria_setting.md` and apply Binary Criteria — for pass/fail assessment
+3. For each deliverable (skill builder + each priority skill):
+   a. List evidence of success (file exists, structure correct, conventions followed)
+   b. List evidence of failure (missing sections, convention violations)
+   c. Document both
+4. Output validation summary with evidence
 
 ---
 
@@ -194,156 +208,14 @@ Additional guidance:
 
 ---
 
-## Example Skill Builder Output
+## Risks (RISK)
 
-The skill builder skill should produce output similar to this annotated example:
-
-```markdown
----
-name: skill-builder
-description: >
-  Consultative skill for creating new skills. Understands intent, clarifies uncertainties,
-  proposes skill design, and validates output.
-  <!-- COMMENT: Description explains what AND how -->
-argument-hint: "[skill name or intent]"
-user-invocable: true
-allowed-tools: Read, Grep, Glob, Write, Edit, AskUserQuestion, TodoWrite
----
-
-# Skill Builder
-
-<!-- COMMENT: Goal states the outcome, not the process -->
-**Goal:** Create well-structured skills that follow project conventions and developer preferences.
-
-<!-- COMMENT: Intent explains WHY this skill exists -->
-**Intent:** Skills should be consistent with project patterns. A consultative approach ensures
-skills meet actual needs rather than assumed requirements.
-
-<!-- COMMENT: Scope defines boundaries -->
-**Scope:** Create individual skills. Does not create modes, protocols, or workflows.
-
-<!-- COMMENT: Workflow style from developer preferences -->
-**Workflow Style:** {Developer's preference: Declarative/Imperative/Hybrid}
-
----
-
-## Key Results - KR
-
-1. Skill intent understood and clarified
-2. Skill design proposed and approved
-3. Skill created following conventions
-4. Skill validated with evidence
-
-## Requirements and Constraints - REQ
-
-1. Read CLAUDE.md first — understand project conventions
-2. Act as consultant — understand intent before proposing
-3. Get approval before creating — no surprises
-4. Each task must have one mode
-5. Validate with positive AND negative evidence
-
----
-
-## Steps
-
-<!-- COMMENT: Pure declarative pattern - only Step 1 plans the rest -->
-<!-- For pure declarative: -->
-0. Read CLAUDE.md → Understand project conventions
-1. Plan skill creation → Execute "Plan Skill" task. Output plan for all subsequent steps.
-
-<!-- COMMENT: Hybrid pattern - imperative bookends, declarative middle -->
-<!-- For hybrid: -->
-0. Read CLAUDE.md → Understand project conventions
-1. Understand intent → Execute "Clarify Intent" task
-2. Plan and design skill → Plan the design and implementation based on intent
-3. Validate skill → Execute "Validate Skill" task
-
-<!-- COMMENT: Pure imperative pattern - all steps defined -->
-<!-- For pure imperative: -->
-0. Read CLAUDE.md → Understand project conventions
-1. Understand intent → Execute "Clarify Intent" task
-2. Propose design → Execute "Propose Design" task
-3. Create skill → Execute "Create Skill" task
-4. Validate skill → Execute "Validate Skill" task
-
----
-
-## Tasks
-
-<!-- COMMENT: Tasks reference modes, let executor choose actions -->
-
-### Clarify Intent (→ KR1)
-
-**Goal:** Understand what the developer actually needs
-
-**Mode:** [interviewing](../../modes/interviewing.md)
-
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
-
-Additional guidance:
-- Infer from context before asking
-- Discover constraints and success criteria
-
-**Outputs:**
-- Clarified skill intent
-- Constraints and requirements
-
----
-
-### Propose Design (→ KR2)
-
-**Goal:** Create skill design for approval
-
-**Mode:** [designing](../../modes/designing.md)
-
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
-
-Additional guidance:
-- Follow project conventions from CLAUDE.md
-- Output design as code block for review
-
-**Outputs:**
-- Proposed skill structure
-- Task breakdown with modes
-
----
-
-### Create Skill (→ KR3)
-
-**Goal:** Implement the approved skill design
-
-**Mode:** [implementing](../../modes/implementing.md)
-
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
-
-Additional guidance:
-- Place skill in `.claude/skills/`
-- Follow approved design exactly
-
-**Outputs:**
-- Skill file at `.claude/skills/{skill-name}.md`
-
----
-
-### Validate Skill (→ KR4)
-
-**Goal:** Verify skill follows conventions and will work
-
-**Mode:** [evaluating](../../modes/evaluating.md)
-
-**Instructions:**
-Read all actions in the mode and choose appropriate actions to achieve the goal.
-
-Additional guidance:
-- Find evidence of success AND evidence of failure
-- Check against CLAUDE.md conventions
-
-**Outputs:**
-- Validation summary with evidence
-```
+| # | Risk | When | Mitigation |
+|---|------|------|------------|
+| 1 | Skills don't follow conventions | Skill builder created without reading CLAUDE.md | Require CLAUDE.md read as precondition; validate against conventions |
+| 2 | Scope creep in skills | Priority skills become too complex | Keep each skill focused; split if exceeds 200 lines |
+| 3 | Missing protocol references | Actions created without linking to protocols | Validate each action references at least one protocol with technique |
+| 4 | Preferences not captured | Developer style preferences lost between A1 and A2 | Document preferences explicitly; reference in A2 preconditions |
 
 ---
 

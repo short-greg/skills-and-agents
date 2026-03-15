@@ -19,7 +19,7 @@ This guideline explains how to create protocols for the skills-and-agents framew
 
 ## What is a Protocol?
 
-A protocol is a **standardized process or pattern** that multiple modes and workflows follow. Protocols capture essential principles and patterns, distilling expert knowledge into reusable concepts.
+A protocol is a **standardized process or pattern** that workflow actions follow. Protocols capture essential principles and patterns, distilling expert knowledge into reusable concepts.
 
 **Examples of protocols:**
 - `tracking_and_recovery.md` - Progress tracking and resumption
@@ -34,7 +34,7 @@ A protocol is a **standardized process or pattern** that multiple modes and work
 - 100-150 lines (150-180 acceptable with user permission)
 
 **When to create a protocol:**
-- Pattern is used by multiple modes/workflows
+- Pattern is used by multiple workflow actions
 - Protocol provides non-obvious constraints
 - Process needs standardization across the framework
 - **Don't create when:** Used by only one skill (put it there instead), too specific to a use case, no clear process to define
@@ -79,7 +79,7 @@ Protocols are **instruction-focused**, not descriptive essays.
 6. **Risks** - Project-level risks from misuse of this protocol
 7. **References** - Sources consulted during research
 
-**Structural differences from modes:**
+**Structural notes:**
 - 100-150 lines (150-180 acceptable with user permission)
 - Technique tables use 7-column format
 - Example patterns (not exhaustive)
@@ -111,7 +111,7 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 - [ ] **Actionable:** Provides clear techniques, not vague philosophy
 
 **Protocol-Specific:**
-- [ ] **Used by multiple skills:** Not just one mode/workflow
+- [ ] **Used by multiple skills:** Not just one workflow action
 - [ ] **Clear boundaries:** Scope states what's included and excluded
 - [ ] **Research completed:** References section includes relevant sources
 
@@ -125,7 +125,7 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 4. **Output-oriented instructions:** "Output evaluation" better than "Evaluate"
 5. **Avoid vague platitudes:** Not "make good decisions", but "Evaluate: Which objectives does this optimize? Which does it sacrifice?"
 6. **Reference, don't repeat:** Link to related protocols instead of duplicating content
-7. **Test with multiple skills:** Verify the protocol works across different modes/workflows
+7. **Test with multiple skills:** Verify the protocol works across different workflow actions
 
 ---
 
@@ -257,19 +257,20 @@ Select or execute possible actions based on context; this list is not exhaustive
 - Goal: "To X" format
 - When: "Use when X" format with observable triggers
 - How: Brief description, not exhaustive steps (techniques provide details)
-- Actions bridge the gap between modes (which invoke protocols) and techniques (which are granular)
+- Actions bridge the gap between workflows (which orchestrate actions) and techniques (which are granular)
 
 ---
 
-## Risks
+## Risks (RISK)
 
 These are risks that misuse of this protocol poses to a project with mitigation strategies.
 
-| Risk | When | Mitigation Strategy |
-|------|------|---------------------|
-| **[Risk Name]** | [Condition that causes this risk] | [How to prevent or mitigate] |
+| # | Risk | When | Mitigation |
+|---|------|------|------------|
+| 1 | [Risk Name] | [Condition that causes this risk] | [How to prevent or mitigate] |
 
 <Guidelines for risks:>
+- Number risks as 1, 2, etc. for referenceability (referenced as RISK1, RISK2)
 - Focus on project-level consequences, not just communication mistakes
 - "When" describes the misuse or condition that triggers the risk
 - Mitigation is actionable and specific
