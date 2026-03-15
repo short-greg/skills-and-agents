@@ -2,15 +2,14 @@
 
 ## Objective
 
-Create a project-specific skill builder that understands THIS project's conventions, modes, protocols, and developer intent — then generates skills that fit.
+Create a project-specific skill builder that understands THIS project's conventions, protocols, and developer intent — then generates skills that fit.
 
 ## Key Results
 
-1. Project conventions, modes, and protocols are understood (not just listed)
+1. Project conventions and protocols are understood (not just listed)
 2. Developer intent for the skill builder is captured and confirmed
 3. Skill builder is tailored to this project's specific needs
-4. All skills created folllow skill builder and they project patterns
-5. S
+4. All skills created follow skill builder and project patterns
 
 ## Deliverables
 
@@ -30,16 +29,14 @@ You MUST complete each phase and get confirmation before proceeding to the next.
 
 **You MUST read:**
 1. CLAUDE.md — project conventions, Interaction Mode, existing patterns
-2. ALL files in `modes/` — understand what cognitive actions are available
-3. ALL files in `protocols/` — understand what patterns are available
-4. `workflow-creation-guideline.md` — understand how workflows should be structured
-5. Existing skills (if any) — understand current patterns
-6. Current Claude official skill builder skill as well as skill requirements using WebSearch
+2. ALL files in `protocols/` — understand what techniques are available
+3. `workflow-creation-guideline.md` — understand how workflows and actions should be structured
+4. Existing skills (if any) — understand current patterns
+5. Current Claude official skill builder skill as well as skill requirements using WebSearch
 
 **Output:** Summary of what you learned:
 - Project conventions discovered
 - Interaction Mode (Lead/Senior/Peer/Junior)
-- Available modes (list with one-line purpose each)
 - Available protocols (list with one-line purpose each)
 - Naming conventions
 - Skill placement location
@@ -64,27 +61,27 @@ You MUST complete each phase and get confirmation before proceeding to the next.
    4. Are there specific skills you need first?
 
    **Style & Structure:**
-   6. Whether to prefer declarative or imperative skills or no preference (recommend to have this be an option when creating the skill)?
-   7. Should skills be able to call other skills? (require, recommend, or not require)
-   8. How much overlap acceptable between skills?
-   9. How much documentation expected in skills? (minimal, moderate, detailed)
+   5. Whether to prefer declarative (objectives+constraints) or imperative (instructions) actions, or decide per-action?
+   6. Should skills be able to call other skills? (require, recommend, or not require)
+   7. How much overlap acceptable between skills?
+   8. How much documentation expected in skills? (minimal, moderate, detailed)
 
    **Required Behaviors:**
-   10. Whether to require, recommend or not require (recommend require) the skills read over the CLAUDE.md and/or other documentation when they start?
-   11. Whether to require, recommend, or not require (recommend to require) the skills it outputs use tracking?
-   12. Whether to require, recommend or not require the skills it outputs always validate at the end (recommend validate)?
-   13. Should skills output expert reasoning first? (require, recommend, or not require)
-   14. Must they keep the CLAUDE.md files maintained after executing
+   9. Whether to require, recommend or not require (recommend require) the skills read over the CLAUDE.md and/or other documentation when they start?
+   10. Whether to require, recommend, or not require (recommend to require) the skills it outputs use tracking?
+   11. Whether to require, recommend or not require the skills it outputs always validate at the end (recommend validate)?
+   12. Should skills output expert reasoning first? (require, recommend, or not require)
+   13. Must they keep the CLAUDE.md files maintained after executing
 
    **Integration:**
-   15. Should skills auto-update CLAUDE.md when created? (require, recommend, or not require)
-   16. Should skills create branches/commits? (require, recommend, not require, or option per skill)
-   17. Should skills run/create tests? (require, recommend, not require, or option per skill)
+   14. Should skills auto-update CLAUDE.md when created? (require, recommend, or not require)
+   15. Should skills create branches/commits? (require, recommend, not require, or option per skill)
+   16. Should skills run/create tests? (require, recommend, not require, or option per skill)
 
    **Error Handling:**
-   18. How should skills handle errors? (fail fast, retry, ask user, or option per skill)
-   19. Should skills have rollback capabilities? (require, recommend, or not require)
-   20. How should skills handle ambiguity? (always ask, assume with documentation, or option per skill)
+   17. How should skills handle errors? (fail fast, retry, ask user, or option per skill)
+   18. Should skills have rollback capabilities? (require, recommend, or not require)
+   19. How should skills handle ambiguity? (always ask, assume with documentation, or option per skill)
 
 **Output:** Your understanding of developer intent:
 - Problem being solved
@@ -101,7 +98,7 @@ You MUST complete each phase and get confirmation before proceeding to the next.
 **Goal:** Design a skill builder tailored to Phase 1 + Phase 2 findings.
 
 **The skill builder you design MUST:**
-1. Reference the modes and protocols you read in Phase 1
+1. Reference the protocols you read in Phase 1
 2. Match the Interaction Mode from CLAUDE.md
 3. Match the workflow style preferences from Phase 2
 4. Use project naming conventions
@@ -123,7 +120,7 @@ You MUST complete each phase and get confirmation before proceeding to the next.
   - Begin an interview to understand the intents
   - Give recommendations and the AskUser tool
   - Potentially recommend adding programs to the skill
-  - Recommend if the skill needs hooks 
+  - Recommend if the skill needs hooks
   - Recommend tools to be used
   - Point out potential risks of the skill
   - Finally, validate the skill against the guidelines and key results finding evidence it passes and fails each
@@ -133,10 +130,14 @@ You MUST complete each phase and get confirmation before proceeding to the next.
 - Developer may want to add scripts to skills (shell functions, setup scripts, etc.)
 - Developer may want skills to have supporting documentation files
 
-**Mode & Protocol Selection:**
-- For each skill, review which modes are applicable and output a table
-- For each skill, determine which protocols are needed
-- Ensure referenced modes/protocols actually exist in the project
+**Protocol Selection:**
+- For each skill, review which protocols are applicable and output a table
+- Ensure referenced protocols actually exist in the project
+
+**Action Design:**
+- For each action in the skill, ensure it follows the Action Template from workflow-creation-guideline.md
+- Each action must have: Intent, KR, Preconditions, Postconditions, Exit Conditions, Instructions or Objectives+Constraints
+- Actions must be sufficiently small: one clear goal, predictable inputs → outputs
 
 **Skill Scope & Integration:**
 - Ask about scope/granularity for each skill
@@ -156,8 +157,8 @@ You MUST complete each phase and get confirmation before proceeding to the next.
 **Output:** Proposed skill builder design:
 - Goal, Intent, Scope
 - Key Results (3-4)
-- Steps (referencing modes)
-- Tasks (each referencing one mode)
+- Steps (referencing actions)
+- Actions (each referencing protocols)
 - How it will interview about each skill's use case
 
 **Gate:** Get developer approval of design. Do not proceed until approved.
@@ -171,7 +172,7 @@ You MUST complete each phase and get confirmation before proceeding to the next.
 **Follow:**
 - `workflow-creation-guideline.md` structure
 - Project naming conventions
-- Reference actual modes/protocols from Phase 1
+- Reference actual protocols from Phase 1
 
 **Place:** In the location identified in Phase 1
 
@@ -183,10 +184,10 @@ You MUST complete each phase and get confirmation before proceeding to the next.
 
 **For each criterion, output positive evidence, negative evidence, and decision:**
 
-- [ ] References modes/protocols that actually exist
+- [ ] References protocols that actually exist
 - [ ] Matches Interaction Mode from CLAUDE.md
 - [ ] Matches workflow style from Phase 2
-- [ ] Each task references exactly one mode
+- [ ] Each action has complete structure (Intent, KR, Pre/Postconditions, Exit Conditions, Instructions or Objectives+Constraints)
 - [ ] Uses action/output-oriented language
 - [ ] Follows workflow-creation-guideline.md structure
 
@@ -214,9 +215,9 @@ The skill builder you create must define and enforce this process for every skil
    - Does this skill need to integrate with other skills?
    - Does this skill need scripts or reference files?
    - What are the success criteria for THIS skill?
-3. **Review applicable modes** — Output table of modes that could apply to THIS skill
+3. **Review applicable protocols** — Output table of protocols that apply to THIS skill
 4. **Confirm understanding** — Output summary, get developer confirmation
-5. **Design the skill** — Tailored to what was learned
+5. **Design the skill** — Tailored to what was learned, with complete action definitions
 6. **Implement the skill** — Following project conventions
 7. **Validate** — Evidence-based evaluation
 
@@ -248,6 +249,6 @@ Read from CLAUDE.md. Determines confirmation level:
 ## References
 
 - `workflow-creation-guideline.md`
-- `mode-creation-guideline.md`
+- `protocol-creation-guideline.md`
 - `templates/skill_template.md`
 - Project CLAUDE.md
