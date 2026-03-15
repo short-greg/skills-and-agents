@@ -65,14 +65,15 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 ## Steps
 
 0. Check preconditions → Verify task.md exists. **If not, STOP:** "Run `/setup-init` first to create task.md."
-1. Read task.md → Understand decisions and Interaction Mode
-2. Investigate best practices → KR1, KR2. Execute A1
-3. Orient to findings → KR1, KR2, KR3. Execute A2
-4. Design environment → KR1, KR2, KR3. Execute A3. Output proposal as code block
-5. Implement environment → KR1, KR2, KR3. Execute A4
-6. Set up continuous improvement → KR4. Execute A6
-7. Evaluate results → Execute A5
-8. Install setup-skill-builder → If successful, copy `workflows/setup/setup-skill-builder.md` to `.claude/skills/setup-skill-builder.md`
+1. Create preliminary checklist → KR1-4. Use TodoWrite with formula: `setup-env - KR# - <action> - <details>`
+2. Read task.md → Understand decisions and Interaction Mode
+3. Investigate best practices → KR1, KR2. Execute A1
+4. Orient to findings → KR1, KR2, KR3. Execute A2
+5. Design environment → KR1, KR2, KR3. Execute A3. Output proposal as code block
+6. Implement environment → KR1, KR2, KR3. Execute A4
+7. Set up continuous improvement → KR4. Execute A6
+8. Evaluate results → Execute A5
+9. Install setup-skill-builder → If successful, copy `workflows/setup/setup-skill-builder.md` to `.claude/skills/setup-skill-builder.md`
 
 ---
 

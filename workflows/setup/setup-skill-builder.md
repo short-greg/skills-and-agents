@@ -72,13 +72,14 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 ## Steps
 
 0. Check preconditions → Verify task.md and CLAUDE.md exist. **If not, STOP with appropriate message.**
-1. Read context → Read task.md and CLAUDE.md to understand conventions and Interaction Mode
-2. Interview skill preferences → KR1, KR2. Execute A1
-3. Create skill builder → KR1. Execute A2
-4. Create skills → KR2. Execute A3 (loop for each priority skill)
-5. Validate deliverables → KR3. Execute A4
-6. Update CLAUDE.md → Add available skills section
-7. Hand off → Inform user setup is complete
+1. Create preliminary checklist → KR1-3. Use TodoWrite with formula: `setup-skill-builder - KR# - <action> - <details>`
+2. Read context → Read task.md and CLAUDE.md to understand conventions and Interaction Mode
+3. Interview skill preferences → KR1, KR2. Execute A1
+4. Create skill builder → KR1. Execute A2
+5. Create skills → KR2. Execute A3 (loop for each priority skill)
+6. Validate deliverables → KR3. Execute A4
+7. Update CLAUDE.md → Add available skills section
+8. Hand off → Inform user setup is complete
 
 ---
 

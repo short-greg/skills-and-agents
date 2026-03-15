@@ -183,6 +183,7 @@ For each criterion: output evidence it passes, output evidence it fails, then de
 9. **Actions must be sufficiently small** — One clear goal, predictable inputs → outputs
 10. **Number everything** — Actions (A1, A2), Objectives (OBJ1, OKR1), Constraints (CONST1)
 11. **Include validation for OBJ/OKR** — Add to TodoWrite checklist, output evidence for each
+12. **Start with TodoWrite checklist** — First step after preconditions must create preliminary checklist using TodoWrite
 
 ---
 
