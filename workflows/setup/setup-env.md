@@ -35,9 +35,11 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 1. Read task.md first — do not proceed without it
 2. Research current best practices before proposing (use WebSearch)
 3. Respect Interaction Mode throughout (see Additional Notes for behavior per mode)
-4. Output all proposals as code blocks
+4. Output all proposals as structured markdown documents
 5. Do not re-interview WHAT to do — but collaborate on HOW per Interaction Mode
 6. Track progress per `tracking_and_recovery.md`
+7. You MUST get explicit approval before implementing — output proposal summary, ask "Does this look correct?", wait for confirmation
+8. Echo back what you understood from task.md before proposing — confirm Interaction Mode and AI Personality are correct
 
 ## Preconditions
 
@@ -137,30 +139,28 @@ Intent: Create comprehensive environment proposal per Interaction Mode
 KR: Environment proposal approved by developer
 Preconditions:
 - Required: Oriented findings
-- Required: task.md decisions
+- Required: task.md decisions with Interaction Mode, AI Personality, Communication Style
 Postconditions:
-- Success: Output environment proposal as structured document, output approval confirmation
+- Success: Output environment proposal as structured document, output explicit approval confirmation
 - Failure: Output proposal, output feedback captured for iteration
 Exit Conditions:
 - Developer rejects proposal 3 times → stop, escalate
 - Oriented findings incomplete → stop, complete A2 first
 
-Objectives (OBJ):
-1. Generate comprehensive environment proposal covering all aspects (see Proposal Template)
-2. Use AskUserQuestion for decisions with trade-offs (e.g., folder structure options)
-3. Collaborate per Interaction Mode (see Additional Notes)
-4. Present proposal as structured markdown document for review
-
-Constraints (CONST):
+Instructions:
 1. Read `thinking.md` and apply Alternative Generation — to explore options
-2. Read `pragmatics.md` and apply Option Presentation — to structure proposal
-3. Read `elicitation.md` and apply Targeted Questioning — for decisions requiring user input
-4. Respect Interaction Mode collaboration style
-5. Proposal MUST cover all sections in Proposal Template (see Additional Notes)
-
-Validation:
-1. Add OBJ1-4 to TodoWrite checklist
-2. Output validation: list each OBJ with evidence it was achieved
+2. Echo back task.md understanding: "Based on task.md, I understand your preferences are: [Interaction Mode], [AI Personality traits], [Communication Style]. Is this correct?"
+3. Wait for confirmation before proceeding
+4. Use AskUserQuestion for these decisions (unless task.md already specifies):
+   - Folder structure approach (if multiple valid options)
+   - CLAUDE.md detail level (concise vs comprehensive)
+   - Tooling integrations (MCP servers, hooks) — ask what the developer wants
+   - Migration approach for existing files (if any)
+5. Read `pragmatics.md` and apply Option Presentation — to structure proposal
+6. Generate proposal covering ALL sections in Proposal Template (see Additional Notes)
+7. Output complete proposal as structured markdown
+8. Ask: "Does this proposal look correct? Any changes before I implement?"
+9. Wait for explicit approval — do NOT proceed to A4 until developer confirms
 
 ---
 
@@ -169,8 +169,8 @@ Validation:
 Intent: Create folders, CLAUDE.md, and worktrees per approved design
 KR: Environment artifacts created and verified
 Preconditions:
-- Required: Approved design
-- Required: task.md with full AI profile
+- Required: Approved design (explicit confirmation from A3)
+- Required: task.md with Interaction Mode, AI Personality, Communication Style
 Postconditions:
 - Success: Output folders created, output CLAUDE.md written, output worktree config if applicable
 - Failure: Output partial implementation, output errors documented
@@ -182,10 +182,36 @@ Instructions:
 1. Read `discipline.md` and apply Sequential Processing — to implement in order
 2. Read `tracking_and_recovery.md` and apply Dual Tracking — to record progress
 3. Create folders per design
-4. Write CLAUDE.md with Interaction Mode, AI Personality, Communication Style sections
+4. Write CLAUDE.md — translate AI Personality from task.md into actionable instructions:
+
+   **Interaction Mode → Behavioral instructions:**
+   - Lead: "Proceed autonomously. Inform after completion. Minimal confirmation needed."
+   - Senior: "Proceed with brief confirmation. Request feedback on major decisions only."
+   - Peer: "Present options with trade-offs. Confirm approach before implementing."
+   - Junior: "Explain reasoning thoroughly. Wait for explicit approval. Never assume."
+
+   **Personality traits → CLAUDE.md instructions:**
+   - High Creativity: "Suggest creative alternatives. Explore unconventional solutions."
+   - High Pragmatism: "Prefer proven patterns. Minimize novelty and experimentation."
+   - High Thoroughness: "Provide comprehensive analysis. Cover edge cases thoroughly."
+   - High Speed: "Be concise. Prioritize progress over completeness."
+   - Proactive: "Anticipate needs. Suggest improvements proactively."
+   - Responsive: "Wait for explicit requests. Don't suggest unless asked."
+   - Collaborative: "Share reasoning. Invite feedback. Iterate together."
+   - Direct: "State conclusions directly. Minimize unnecessary explanation."
+   - Cautious: "Verify assumptions before acting. Confirm risky operations."
+   - Confident: "Proceed decisively. Minimal hedging."
+
+   **Communication → CLAUDE.md instructions:**
+   - Concise: "Keep responses brief. Use bullet points over paragraphs."
+   - Detailed: "Explain thoroughly. Include context and rationale."
+   - Assume expertise: "Use technical terms without explanation."
+   - Teach: "Explain concepts. Include learning context."
+
 5. Configure worktrees if in plan (follow worktree-setup-guideline.md)
-6. Confirm each artifact created successfully
-7. Output implementation summary
+6. Create `.claude/settings.json` if tooling integrations were requested in A3
+7. Confirm each artifact created successfully
+8. Output implementation summary with list of all files created
 
 ---
 
@@ -251,6 +277,14 @@ A3 proposals MUST cover all these sections with specific recommendations:
 ```markdown
 # Environment Proposal
 
+## 0. Confirmed Understanding
+Based on task.md:
+- **Interaction Mode:** [Mode] — [what this means for AI behavior]
+- **AI Personality:** [list each trait and its setting]
+- **Communication Style:** [verbosity, technical level, formality]
+
+Please confirm this is correct before I continue.
+
 ## 1. Folder Structure
 [Tree diagram showing proposed structure]
 - Rationale for each top-level folder
@@ -258,50 +292,70 @@ A3 proposals MUST cover all these sections with specific recommendations:
 
 ## 2. CLAUDE.md Structure
 [Outline of sections to include]
-- AI Profile (Mode, Personality, Communication)
+- AI Profile (Mode, Personality, Communication) — translated into actionable instructions
 - Project context
 - Conventions and patterns
 - Available skills
 
-## 3. Worktrees (if applicable)
+## 3. Tooling Integrations
+[Use AskUserQuestion to ask developer what they want]
+- **MCP Servers:** [None / GitHub / Other — based on developer response]
+- **Hooks:** [None / Formatting / Validation / Other — based on developer response]
+- **settings.json:** [What to include if any integrations requested]
+
+## 4. Worktrees (if applicable)
 [Configuration or "Not applicable" with reason]
 
-## 4. Continuous Improvement
+## 5. Continuous Improvement
 - CLAUDE.md maintenance triggers (when to update)
 - Skill feedback tracking approach
 - Post-mortem template location
 
-## 5. Migration Plan
+## 6. Migration Plan
 [For existing files that need moving/updating]
 - Files to migrate
 - Files to archive
 - Files to delete
 
-## 6. Open Questions
-[Decisions requiring user input - use AskUserQuestion]
+## 7. Summary
+[Brief summary of what will be created]
+
+**Does this proposal look correct? Any changes before I implement?**
 ```
 
 **CLAUDE.md Full AI Profile:**
-Must include all of these sections:
+Must include all sections with TRANSLATED instructions (not just trait names). Example for a Peer mode, Creative, Thorough developer:
+
 ```markdown
 ## Interaction Mode
 
-This project uses **[Mode]** collaboration style:
-- [Description of what this means for AI behavior]
+This project uses **Peer** collaboration style.
+
+**How to work with me:**
+- Present options with trade-offs before implementing
+- Confirm approach on significant decisions
+- Share your reasoning and invite feedback
+- Iterate together on designs
 
 ## AI Personality
 
-- Creativity vs Pragmatism: [Choice]
-- Thoroughness vs Speed: [Choice]
-- Proactive vs Responsive: [Choice]
-- Collaborative vs Direct: [Choice]
-- Cautious vs Confident: [Choice]
+**Creativity:** Suggest creative alternatives. Explore unconventional solutions when they might be better.
+
+**Thoroughness:** Provide comprehensive analysis. Cover edge cases. Don't skip details.
+
+**Proactive:** Anticipate needs. Suggest improvements proactively. Don't wait to be asked.
+
+**Collaborative:** Share reasoning. Invite feedback. Iterate together.
+
+**Confident:** Proceed decisively on routine matters. Verify assumptions on risky operations.
 
 ## Communication Style
 
-- Verbosity: [Concise/Balanced/Detailed]
-- Technical Level: [Assume expertise/Explain/Teach]
-- Formality: [Professional/Semi-formal/Casual]
+**Verbosity:** Balanced — concise but include necessary context.
+
+**Technical Level:** Assume expertise — use technical terms without explanation.
+
+**Formality:** Semi-formal — professional but not stiff.
 
 ## Maintenance
 
@@ -313,6 +367,8 @@ Update this file when:
 
 Last updated: [date]
 ```
+
+**Note:** The actual content MUST be translated from task.md — do not copy placeholders. Each personality trait becomes a behavioral instruction.
 
 **Skill Feedback System:**
 The `.claude/feedback/` folder tracks skill usage outcomes:
