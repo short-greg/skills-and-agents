@@ -188,6 +188,45 @@ Use when understanding complex interdependencies.
 
 ---
 
+## Possible Actions
+
+Select or execute possible actions based on context; this list is not exhaustive. Actions describe what to do; use techniques from Core Approaches for how.
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **Explore Possibilities** | To generate options without premature judgment | Use when ideating, when stuck, or when conventional approaches fail | Suspend evaluation; follow tangents; make unexpected connections; combine disparate concepts; generate quantity over quality |
+| **Shift Perspective** | To see problem differently by changing viewpoint | Use when stuck, constraints seem contradictory, or need fresh insight | View from different stakeholders; challenge the problem frame; apply first principles; consider alternative contexts |
+| **Reason Sequentially** | To build logically from premises to conclusions | Use when constructing arguments, verifying logic, or following chains of reasoning | Identify premises; apply rules step-by-step; follow cause-effect chains; document each step |
+| **Validate Reasoning** | To check that conclusions follow from premises | Use when conclusions drawn and need verification | Check logical validity; verify each step follows; assess confidence level; identify gaps or leaps |
+| **Identify Premises** | To surface assumptions and rules being relied upon | Use when starting reasoning or when conclusions seem shaky | List assumptions explicitly; identify rules or specs being applied; state what is taken as given |
+| **Challenge Assumptions** | To question premises before building on them | Use when proceeding on inherited beliefs or solution feels over-constrained | Question each assumption for necessity; distinguish fundamental truths from conventions |
+| **Generate Alternatives** | To produce diverse options for consideration | Use when options needed or only one approach visible | Generate realistic alternatives; apply SCAMPER; include low-probability ideas |
+| **Decompose** | To break complex problems into manageable parts | Use when problem too large or components need separate analysis | Identify components; map relationships; analyze separately; identify dependencies |
+| **Synthesize** | To combine elements into coherent wholes | Use when multiple ideas or insights need integration | Find complementary aspects; merge compatible parts; resolve conflicts; validate coherence |
+| **Formulate Hypothesis** | To create testable explanation for observations | Use when diagnosing problems or explaining patterns | List symptoms; generate explanations; assess plausibility; state confirmation/refutation criteria |
+| **Formulate Strategy** | To develop approach for complex goals | Use when planning multi-step or long-term objectives | Define goal; map current state; generate approaches; evaluate tradeoffs; plan milestones |
+| **Analyze Strategy** | To evaluate soundness of a plan or approach | Use when reviewing strategy before execution | Check alignment with goals; identify gaps/risks; verify assumptions; assess feasibility |
+| **Weigh Evidence** | To assess strength and relevance of evidence | Use when evidence gathered and verdict needed | List evidence for each possibility; assess quality; identify gaps; weigh for/against |
+| **Evaluate Tradeoffs** | To compare options against criteria | Use when multiple alternatives exist and decision needed | Define criteria; assess each option; document tradeoffs; recommend with rationale |
+| **Map System Dependencies** | To identify how parts affect each other | Use when changes may have ripple effects | Map components and relationships; trace feedback loops; predict second-order effects |
+
+---
+
+## Risks
+
+These are risks that misuse of this protocol poses to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **Analysis paralysis** | Excessive thinking without acting | Set thinking time limits; recognize when "good enough" is sufficient; bias toward action with course correction |
+| **Premature conclusion** | Insufficient thinking leads to wrong direction | Ensure multiple alternatives considered; validate key assumptions before committing; test hypotheses |
+| **Confirmation bias** | Seeking only supporting evidence | Actively seek disconfirming evidence; consider alternative explanations; weigh evidence objectively |
+| **Tunnel vision** | Narrowing to one approach too early | Generate alternatives before evaluating; use lateral thinking techniques; defer judgment during ideation |
+| **Complexity blindness** | Missing second-order effects and interactions | Apply systems thinking; trace feedback loops; consider unintended consequences before acting |
+| **False confidence** | Concluding with certainty despite weak evidence | State confidence levels explicitly; acknowledge gaps in evidence; distinguish correlation from causation |
+
+---
+
 ## References
 
 **First principles:**

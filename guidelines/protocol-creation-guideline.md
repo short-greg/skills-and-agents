@@ -75,7 +75,9 @@ Protocols are **instruction-focused**, not descriptive essays.
 2. **Artifacts and Outputs (optional)** - Define nouns that techniques reference
 3. **Technique Tables** - Core Approaches with 7-column tables (Output/Artifact column links to artifacts)
 4. **Example Patterns (optional)** - Step sequences with Exit Conditions sections
-5. **References** - Sources consulted during research
+5. **Possible Actions** - High-level actions that use techniques from this protocol
+6. **Risks** - Project-level risks from misuse of this protocol
+7. **References** - Sources consulted during research
 
 **Structural differences from modes:**
 - 100-150 lines (150-180 acceptable with user permission)
@@ -148,6 +150,8 @@ For each criterion, you MUST output all evidence that it passes and all evidence
 - [Artifacts](#artifacts-and-outputs) — [list key artifacts]
 - [Core Approaches](#core-approaches) — [list categories]
 - [Example Patterns](#example-patterns) — [list patterns]
+- [Possible Actions](#possible-actions) — [list key actions]
+- [Risks](#risks)
 
 ---
 
@@ -237,6 +241,38 @@ Use when [specific context/trigger].
 - Exit conditions in separate section at bottom (not inline)
 - Exit conditions specify what to do (stop, request info, escalate, etc.)
 - Patterns are examples, not exhaustive
+
+---
+
+## Possible Actions
+
+Select or execute possible actions based on context; this list is not exhaustive. Actions describe what to do; use techniques from Core Approaches for how.
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **[Action Name]** | To [what this achieves] | Use when [observable condition] | [Brief description of how to execute] |
+
+<Guidelines for actions:>
+- Actions are high-level activities that use techniques from this protocol
+- Goal: "To X" format
+- When: "Use when X" format with observable triggers
+- How: Brief description, not exhaustive steps (techniques provide details)
+- Actions bridge the gap between modes (which invoke protocols) and techniques (which are granular)
+
+---
+
+## Risks
+
+These are risks that misuse of this protocol poses to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **[Risk Name]** | [Condition that causes this risk] | [How to prevent or mitigate] |
+
+<Guidelines for risks:>
+- Focus on project-level consequences, not just communication mistakes
+- "When" describes the misuse or condition that triggers the risk
+- Mitigation is actionable and specific
 
 ---
 

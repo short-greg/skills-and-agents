@@ -134,6 +134,40 @@ Use when user has given contradictory requirements.
 
 ---
 
+## Possible Actions
+
+Select or execute possible actions based on context; this list is not exhaustive. Actions describe what to do; use techniques from Core Approaches for how.
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **Infer from Context** | To discover information without asking | Use when information may be discoverable from codebase, docs, or conversation | Analyze codebase patterns, check documentation, examine similar implementations; proceed with documented assumptions if inference is solid |
+| **Prioritize Questions** | To identify critical unknowns and batch appropriately | Use when multiple questions needed or starting information gathering | Identify critical vs nice-to-have unknowns; batch 1-2 questions at a time; ask critical questions first |
+| **Assess Information Value** | To evaluate expected information gain before asking | Use when deciding whether a question is worth asking | Estimate what answer would change; skip questions where any answer leads to same action; prioritize high-information-gain questions |
+| **Elicit Information** | To gather requirements, constraints, and success criteria | Use when need to ask user for information | Ask open questions about goals; discover constraints and preferences; define success criteria |
+| **Clarify Uncertainties** | To resolve ambiguous or unclear responses | Use when answers are vague, incomplete, or could be interpreted multiple ways | Ask for specifics; provide examples to anchor meaning; restate in concrete terms for confirmation |
+| **Understand Concerns** | To surface underlying worries, objections, or hesitations | Use when user seems hesitant, pushes back, or gives qualified answers | Ask what worries them; probe for unstated objections; understand root of hesitation before proceeding |
+| **Follow Up** | To probe deeper into reasons, edge cases, and implications | Use when initial answers need more depth | Ask follow-up "why" or "what if"; explore edge cases mentioned; clarify vague terms |
+| **Confirm Understanding** | To validate understanding before proceeding | Use when complex requirements gathered or ready to act | Paraphrase understanding back; summarize key points; get explicit confirmation |
+| **Document Assumptions** | To make implicit assumptions explicit and reviewable | Use when proceeding without complete information | State assumptions clearly; explain basis; flag for review; design for easy correction |
+| **Resolve Contradiction** | To surface and resolve conflicting statements | Use when user gives contradictory requirements | Present contradiction neutrally; ask which takes priority; document resolution |
+
+---
+
+## Risks
+
+These are risks that misuse of this protocol poses to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **Question fatigue** | Too many questions asked, user becomes unresponsive | Batch questions (1-2 at a time); prioritize critical questions; infer when possible instead of asking |
+| **Analysis paralysis** | Over-questioning delays progress indefinitely | Assess: can you start meaningful work? Apply Sufficient Information check; accept manageable unknowns |
+| **Wrong assumptions** | Proceeding on unverified critical assumptions | Document assumptions explicitly; flag for review; design for easy correction if wrong |
+| **Hidden constraints** | Missing unstated requirements that cause late rework | Probe for "obvious" expectations; ask about performance, compatibility, style; check existing patterns |
+| **False confirmation** | User agrees without truly understanding what was paraphrased | Paraphrase specifically, not generally; highlight assumptions explicitly; ask targeted confirmation questions |
+| **Buried priorities** | Critical questions asked late or not at all | Prioritize by impact and dependency; ask critical unknowns first; don't defer important questions |
+
+---
+
 ## References
 
 **Anthropic/Claude documentation:**

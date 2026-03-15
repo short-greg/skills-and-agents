@@ -122,6 +122,42 @@ Use when finishing work that others need to review or continue.
 
 ---
 
+## Possible Actions
+
+Select or execute possible actions based on context; this list is not exhaustive. Actions describe what to do; use techniques from Core Approaches for how.
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **Document Work Product** | To make created artifacts understandable | Use when producing artifacts others need to understand | Apply Hierarchical, Inline, or Package Documentation based on artifact type |
+| **Synchronize Documentation** | To prevent documentation drift | Use when code or artifacts change | Update docs in same change as implementation, delete outdated content |
+| **Report Status** | To keep stakeholders informed of progress | Use when work is ongoing and visibility needed | Report done/in-progress/blocked with evidence, use consistent format |
+| **Summarize Completion** | To enable handoff and review | Use when finishing work | Summarize deliverables, list changes, note caveats and known issues |
+| **Notify Stakeholders** | To prevent surprises from changes | Use when modifications affect others | Announce what changed, why, who's affected, what action needed |
+| **Report Issue** | To enable diagnosis and tracking | Use when problems discovered | Document symptoms, reproduction steps, expected vs actual, context |
+| **Record Decision** | To preserve context for future | Use when making significant choices | Document context, options, decision, rationale; store accessibly |
+| **Explain Tradeoffs** | To make sacrifices explicit | Use when decision involves competing concerns | State what's optimized, what's sacrificed, why balance is appropriate |
+| **Document Assumptions** | To enable validation and revision | Use when proceeding based on assumptions | State assumptions explicitly, document basis, flag for review |
+| **Acknowledge Constraints** | To explain why alternatives weren't chosen | Use when external factors limit options | Document constraints and how they shaped the decision |
+
+---
+
+## Risks
+
+These are risks that misuse of this protocol poses to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **Documentation Drift** | Docs updated separately from code changes | Update docs in same commit/PR as code changes; treat stale docs as bugs |
+| **Knowledge Loss** | Critical decisions/context not captured before team changes | Record decisions at decision time, not retrospectively; document "why" not just "what" |
+| **Surprise Discoveries** | Changes made without stakeholder notification | Identify affected parties before making changes; notify before or immediately after |
+| **Decision Amnesia** | Rationale discussed but not recorded | Record decisions when made, not when convenient; use lightweight ADR format |
+| **Hidden Assumptions** | Proceeding without stating assumptions explicitly | State assumptions in writing; flag for review when context changes |
+| **False Progress Signals** | Status reports inaccurate or omit blockers | Report based on evidence, not optimism; make blockers visible immediately |
+| **Information Overload** | Every detail documented with equal weight | Document at appropriate level; summarize for stakeholders, detail for implementers |
+| **Incomplete Handoffs** | Work declared complete without summary | Always produce completion summary with changes, caveats, and known issues |
+
+---
+
 ## References
 
 - [Documentation Best Practices - Google](https://google.github.io/styleguide/docguide/best_practices.html)

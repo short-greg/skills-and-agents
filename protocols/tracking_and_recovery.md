@@ -157,6 +157,39 @@ Use when trace file exists from previous session.
 
 ---
 
+## Possible Actions
+
+Select or execute possible actions based on context; this list is not exhaustive. Actions describe what to do; use techniques from Core Approaches for how.
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **Initialize Tracking** | To set up progress visibility and recovery capability | Use when starting any multi-step process | Check for existing trace, build checklist from objectives, set up dual tracking |
+| **Pre-Record Step** | To make in-progress work visible before starting | Use when beginning each step | Add entry with `in-progress` status and focus before work begins |
+| **Update Step Record** | To capture progress and finalize outcome | Use when step produces outputs or completes | Record artifacts/decisions during work; on completion update status and write summary |
+| **Detect Prior State** | To identify incomplete work from previous sessions | Use when starting workflow that may have prior state | Check for trace file, read state, never assume fresh start |
+| **Resume from Interruption** | To continue appropriately after context loss | Use when prior incomplete state detected | Reconstruct context, verify artifacts, determine resume point, ask user for ambiguous states |
+| **Adapt Tracking** | To modify plan when requirements change | Use when new requirements discovered or priorities shift | Add items with suffixes, remove with reason, use conditionals and loop-backs |
+| **Report Final Result** | To communicate outcome with evidence | Use when workflow completes or cannot continue | Confirm each KR status, output success/failure, explain any failures |
+
+---
+
+## Risks
+
+These are risks that misuse of this protocol poses to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **Lost Progress** | Tracking skipped or steps not pre-recorded | Default to tracking for multi-step work; always pre-record step status before starting |
+| **Tracking Overhead** | Full tracking applied to simple tasks | Use lightweight tracking for simple tasks; reserve dual tracking for workflows needing recovery |
+| **Corrupted Resume** | Prior state assumed accurate without verification | Always verify artifacts exist and match trace before resuming; ask user for ambiguous states |
+| **Duplicate Work** | Fresh start assumed without checking for existing trace | Always check for trace file on workflow start before any action |
+| **Scope Creep** | Dynamic adaptation only adds items, never removes | Balance additions with removals; document why each change made |
+| **Plan-Reality Drift** | Plan never adapted despite changing conditions | Review plan against reality periodically; adapt tracking when mismatch detected |
+| **Silent Completion** | No final result communicated to user | Always end with explicit success/failure statement |
+| **False Success** | Success claimed without verifying all KRs met | Require evidence for each KR before reporting success; list KR status explicitly |
+
+---
+
 ## References
 
 - [Microsoft Agent Framework - Checkpointing and Resuming Workflows](https://learn.microsoft.com/en-us/agent-framework/tutorials/workflows/checkpointing-and-resuming)

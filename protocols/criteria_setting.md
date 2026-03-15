@@ -123,6 +123,38 @@ Use when refining ambiguous or qualitative criteria.
 
 ---
 
+## Possible Actions
+
+Select or execute possible actions based on context; this list is not exhaustive. Actions describe what to do; use techniques from Core Approaches for how.
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **Establish Criteria** | To create verifiable criteria where none exist | Use when requirements lack explicit acceptance conditions | Use Specification Techniques to define measurable criteria (binary, scale, categorical, or rubric as appropriate) |
+| **Select Criteria** | To identify which existing criteria apply | Use when evaluating against standards, specs, or conventions | Match target to criteria sources, filter to applicable subset with appropriate thresholds or levels |
+| **Refine Criteria** | To make vague criteria concrete and testable | Use when criteria contain subjective, unmeasurable, or undefined terms | Use Refinement Techniques to replace vague terms with operational definitions and indicators |
+| **Select Criteria Type** | To choose appropriate criteria structure for the situation | Use when criteria could be binary, scaled, categorical, or multi-dimensional | Assess whether judgment is yes/no, graded, typed, or multi-factor; select matching structure |
+| **Establish Classification** | To create rules for categorizing items into types or levels | Use when items must be sorted into discrete categories or graded on scales | Use Categorization Techniques to define categories or scale points with membership rules |
+| **Define Aggregation** | To specify how multiple criteria combine into overall assessment | Use when overall judgment depends on multiple criteria | Specify combination logic (AND/OR/weighted/threshold) and document explicitly |
+| **Provide Boundary Examples** | To ground abstract criteria in concrete instances | Use when criteria too abstract to specify directly or boundaries unclear | Use Example-Based technique to provide distinguishing examples at each level or category |
+| **Validate Criteria** | To verify criteria are complete, consistent, and unambiguous | Use when criteria drafted and need testing before use | Test with edge cases, check for gaps, conflicts, and ambiguous boundaries |
+
+---
+
+## Risks
+
+These are risks that misuse of this protocol poses to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **Inconsistent evaluation** | Criteria are vague, subjective, or lack explicit aggregation rules | Refine to measurable indicators; document combination logic; validate with multiple evaluators |
+| **False acceptance** | Wrong criteria selected, criteria too loose, or critical dimensions missing | Match criteria to actual quality concerns; review against full failure modes; set evidence-based thresholds |
+| **False rejection** | Criteria over-specified, too strict, or missing boundary examples | Include examples of valid edge cases; test criteria against known-good cases before deployment |
+| **Category misclassification** | Classification categories overlap, have gaps, or lack clear membership rules | Ensure mutual exclusivity; specify boundary rules; test ambiguous cases against each category |
+| **Untested criteria deployed** | Criteria used without validation against edge cases | Test criteria with boundary cases before deployment; get stakeholder agreement on examples |
+| **Criteria overhead** | Too many criteria relative to decision importance | Prioritize by impact; use tiered evaluation (critical criteria first); remove criteria that don't differentiate |
+
+---
+
 ## References
 
 **Anthropic/Claude documentation:**

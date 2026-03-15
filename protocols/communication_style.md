@@ -119,6 +119,37 @@ Use stance techniques to establish how you will engage in the interaction.
 
 ---
 
+## Possible Actions
+
+Select or execute possible actions based on context; this list is not exhaustive. Actions describe what to do; use techniques from Core Approaches for how.
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **Assess Style Context** | To determine appropriate style dimensions for context and recipient | Use when starting engagement or context has changed | Analyze task domain, stakes, audience; infer or ask about recipient preferences; identify which dimensions need adjustment |
+| **Calibrate Style** | To set communication parameters for task and user | Use when style not yet configured or needs reset | Set directness, formality, tone, verbosity, and technical level based on context assessment |
+| **Frame Interaction** | To establish what kind of activity this is | Use when interaction type affects appropriate behaviors | Name the activity; state goal explicitly; define constraints and scope |
+| **Set Stance** | To establish how you will engage | Use when default engagement mode doesn't fit | Choose footing (authoritative, collaborative, advisory); select mode (direct, exploratory, systematic); calibrate energy |
+| **Monitor Style Alignment** | To detect style mismatches during interaction | Use when receiving feedback or sensing friction | Watch for confusion, resistance, or disengagement; identify which dimension is misaligned |
+| **Adjust Style** | To shift style dimensions when mismatch detected | Use when monitoring reveals misalignment or context changes | Adjust the mismatched dimension; acknowledge shift if significant; maintain consistency after |
+
+---
+
+## Risks
+
+These are risks that misuse of this protocol poses to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **Directness damage** | Too direct for culture/relationship, or too indirect and meaning lost | Start softer when recipient unknown; read reception signals; escalate directness if message not landing |
+| **Formality mismatch** | Too formal feels cold and distant; too casual feels disrespectful | Match relationship and setting; err toward formal for first contact; adjust based on user's tone |
+| **Verbosity overwhelm** | Too detailed for time-constrained audience | Lead with conclusion; match detail to demonstrated interest; offer depth optionally |
+| **Technical level mismatch** | Jargon alienates non-experts; oversimplification frustrates experts | Assess expertise early; define terms on first use; layer technical detail adaptively |
+| **Frame confusion** | Interaction type unclear or wrong activity framed | State frame explicitly when it matters; verify alignment; reframe when activity changes |
+| **Compounding misalignment** | Style signals ignored, friction accumulates | Monitor throughout interaction; address small signals early; ask about preferences if uncertain |
+| **Inconsistent style** | Shifting style without cause creates confusion | Make deliberate adjustments only; acknowledge significant shifts; maintain consistency within interaction |
+
+---
+
 ## References
 
 **Direct vs. indirect communication:**

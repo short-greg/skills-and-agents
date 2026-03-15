@@ -123,6 +123,42 @@ Use when existing instructions are failing or confusing.
 
 ---
 
+## Possible Actions
+
+Select or execute possible actions based on context; this list is not exhaustive. Actions describe what to do; use techniques from Core Approaches for how.
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **Write Procedural Instructions** | To create step-by-step guidance that must be followed | Use when documenting a repeatable process | 1. Start each step with imperative verb 2. One action per step 3. Number all steps 4. Specify outputs for each step |
+| **Surface Prerequisites** | To make dependencies explicit before instructions begin | Use when task has requirements that must be met first | 1. List all prerequisites at top 2. Use "Stop if X is not true" gates 3. State environment requirements explicitly |
+| **Sequence Steps** | To order actions for correct execution | Use when multiple steps must occur in specific order | 1. Number steps explicitly 2. Use transitions (first, then, next) 3. Branch at decision points with parallel structure |
+| **Chunk Content** | To group steps into manageable units | Use when many steps would overwhelm working memory | 1. Group by cognitive boundary 2. Limit 5-9 items per chunk 3. Add headers for each chunk |
+| **Use Action-Oriented Language** | To make every step executable | Use when writing any instruction | 1. Start each step with imperative verb (Run, Create, Output, List) 2. Specify the object of action 3. Include parameters and values |
+| **Use Explicit Language** | To eliminate ambiguity and ensure compliance | Use when instructions could be interpreted or ignored | 1. Use "must" or imperative mood (not "should/could/might") 2. Use definite articles ("the file" not "a file") 3. Specify exact values not ranges |
+| **Request Enumeration** | To make outputs exhaustive and visible | Use when LLM must produce complete lists or sequences | 1. Request explicit enumeration ("List all X", "Output each step", "Enumerate the options") 2. Specify format (numbered list, bullets) 3. State completeness requirement ("all", "every", "100%") |
+| **Make Outputs Explicit** | To ensure every instruction produces observable results | Use when instructions could be followed invisibly | 1. Replace mental verbs with output verbs ("Output your thoughts on X" not "Think about X") 2. Specify format of output 3. State what completion looks like |
+| **Add Verification Points** | To enable confirmation at checkpoints | Use when complex steps need confirmation | 1. State expected outcome after critical steps 2. Specify what success looks like 3. Include observable verification criteria |
+| **Test Instructions** | To verify instructions work for target executor | Use when instructions are complete but untested | 1. Execute with actual target (human or LLM) 2. Observe full execution 3. Identify skipped or misinterpreted steps 4. Iterate |
+
+---
+
+## Risks
+
+These are risks that misuse of this protocol poses to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **Non-action language** | Instructions describe states or use passive voice | Use imperative verbs; start every step with action verb (Output, Create, List, Run) |
+| **Implicit requirements** | Requirements buried in prose or hedged with "should/could" | Use "must" or imperative mood; enumerate as numbered/bulleted lists; one requirement per item |
+| **Non-enumerative structure** | Requirements in paragraph form allow selective reading | Convert all requirements to explicit lists; never use prose for multi-part instructions |
+| **Skipped steps** | Instructions lack observable outputs | Require explicit outputs ("Output your thoughts on...", "List all...") |
+| **Incomplete outputs** | LLM summarizes or skips items instead of enumerating | Request explicit enumeration ("List all...", "Enumerate each..."); specify completeness ("100%", "every") |
+| **Ambiguous compliance** | Unclear whether instruction was followed | Specify exit conditions; state what "done" looks like; include verification criteria |
+| **Assumed prerequisites** | Reader lacks context instructions assume | Surface all prerequisites at top; gate with "Stop if X is not true" |
+| **Untested instructions** | Instructions assumed correct without validation | Test with actual executor; observe full execution; iterate on failures |
+
+---
+
 ## References
 
 **Anthropic/Claude documentation:**

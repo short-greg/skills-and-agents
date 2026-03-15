@@ -123,6 +123,43 @@ Use when implementing a workflow with external dependencies or novel approaches.
 
 ---
 
+## Possible Actions
+
+Select actions based on context; this list is not exhaustive. Actions describe what to do; use techniques from Core Approaches for how.
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **Map Complexity** | To identify structural and process complexity that causes errors | Use when workflow has many steps, conditionals, nested logic, or state dependencies | Count steps, identify branches and nesting, note state dependencies between steps |
+| **Surface Uncertainty** | To make unknowns and assumptions explicit before they cause wrong work | Use when requirements unclear, approach untested, or assumptions unstated | Identify vague language, missing criteria, novel approaches; document assumptions |
+| **Map Dependencies** | To identify failure points outside your control | Use when workflow relies on external systems, APIs, or outputs | List external dependencies, timing constraints, and failure modes |
+| **Analyze Risk** | To identify actions that may cause harm or be hard to undo | Use when evaluating potential failure modes and their consequences | Identify destructive operations, shared state changes, externally visible actions; assess what could go wrong |
+| **Assess Severity** | To prioritize issues by impact and probability | Use when risks/uncertainties identified and prioritization needed | Evaluate impact × probability; categorize as low/medium/high/critical or assign fibonacci estimate (1/2/3/5/8/13) |
+| **Propose Mitigations** | To generate strategies for reducing risk, complexity, or uncertainty | Use when significant issues identified and options needed | Propose fail-fast ordering, decomposition, defensive measures, avoidance, or transfer; present alternatives |
+| **Defer Risk** | To postpone risk handling to an appropriate scope or phase | Use when risk is local to a future feature, low priority for current work, or contingent on later decisions | Document deferred risk with scope/phase where it applies; set trigger for when to revisit |
+| **Add Verification Points** | To catch issues before they cascade | Use when executing work with identified risks or uncertainty | Add quality gates between phases, verify outcomes after risky steps |
+| **Accept and Document** | To proceed with documented risk when mitigation not possible | Use when issue cannot be eliminated but work must proceed | Record acceptance with rationale, contingency plan, and explicit approval |
+| **Escalate** | To involve decision-makers when issues exceed threshold | Use when impact or uncertainty exceeds acceptable levels | Define criteria, provide context and options, involve stakeholders |
+
+---
+
+## Risks
+
+These are risks that misuse of this protocol poses to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **Hidden complexity causes errors** | Complexity not mapped; steps exceed cognitive limits | Map complexity before proceeding; decompose workflows >7 steps |
+| **Unstated assumptions invalidate work** | Uncertainty not surfaced; assumptions treated as facts | Surface unknowns explicitly; verify assumptions before dependent work |
+| **External dependency fails unexpectedly** | Dependencies not mapped or assumed reliable | Map all dependencies; define failure modes and fallbacks |
+| **Unanalyzed risk materializes** | Risk analysis skipped or superficial | Analyze risks systematically; consider destructive actions, shared state, reversibility |
+| **Premature risk mitigation** | Risks addressed outside their relevant scope or before they apply | Defer risks that are local to future phases; only handle risks relevant to current scope |
+| **Late failure after significant investment** | High-risk steps deferred; fail-fast not applied | Order uncertain/risky steps first; validate before investing effort |
+| **Cascading failures across phases** | No quality gates; issues not caught early | Add verification points between phases; stop on failure |
+| **Implicit acceptance without documentation** | Risks accepted without record or approval | Require explicit acceptance records with rationale and contingency |
+| **Over-engineering from excessive caution** | Every possible issue mitigated regardless of probability | Assess severity first; accept low-probability issues; defer when appropriate |
+
+---
+
 ## References
 
 **Anthropic/Claude documentation:**

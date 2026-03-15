@@ -123,6 +123,40 @@ Use when deciding which dimensions matter most.
 
 ---
 
+## Possible Actions
+
+Select or execute possible actions based on context; this list is not exhaustive. Actions describe what to do; use techniques from Core Approaches for how.
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **Prioritize Dimensions** | To determine which quality dimensions matter most for context | Use when starting quality assessment or context unclear | Identify artifact type (production/prototype/library/tool), determine operational context, rank dimensions by impact |
+| **Assess Quality** | To evaluate artifact against prioritized quality dimensions | Use when reviewing code, documentation, or designs | Systematically evaluate each critical dimension using techniques from Core Approaches |
+| **Classify Issues** | To categorize identified issues by severity | Use when issues found during assessment | Categorize as critical/high/medium/low based on dimension and impact |
+| **Analyze Tradeoffs** | To understand quality dimension conflicts | Use when improving one dimension would worsen another | Identify competing concerns, evaluate options, document accepted tradeoffs with rationale |
+| **Verify Quality** | To confirm artifact meets quality standards after changes | Use when changes complete and verification needed | Run tests, spot-check behavior, compare against criteria |
+| **Compare to Baseline** | To measure quality against reference or prior version | Use when baseline exists and relative assessment needed | Compare current state to baseline, identify regressions and improvements |
+| **Review Code** | To perform manual quality inspection | Use when automated methods insufficient or human judgment needed | Inspect target against criteria, document specific observations |
+| **Recommend Improvements** | To suggest actionable quality improvements | Use when assessment complete and improvements needed | Prioritize improvements by impact vs effort, provide concrete next steps |
+
+---
+
+## Risks
+
+These are risks that misuse of this protocol poses to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **Wrong Dimension Priority** | Quality dimensions prioritized based on assumptions rather than actual context | Explicitly identify artifact type and operational context before prioritizing; verify prioritization with stakeholders |
+| **Checklist Compliance Over Understanding** | Assessment becomes mechanical checklist without understanding tradeoffs | Treat quality as multi-objective optimization; document why each dimension matters for this context |
+| **Over-Engineering from Quality Focus** | Adding unnecessary complexity to satisfy quality dimensions not relevant to context | Accept lower quality in non-critical dimensions; validate that improvements match actual needs |
+| **Paralysis from Too Many Issues** | All issues treated equally, blocking progress | Classify by severity immediately; focus on critical/high issues first; defer low-severity issues |
+| **Hidden Tradeoffs** | Quality tradeoffs made without documentation | Require explicit tradeoff records when one dimension is sacrificed for another |
+| **False Confidence from Partial Assessment** | Assessment covers some dimensions but misses critical ones | Verify all critical dimensions for context are assessed before declaring quality acceptable |
+| **Regression Blindness** | Changes verified in isolation without baseline comparison | Always compare to baseline when one exists; verify no regressions in previously-passing dimensions |
+| **Improvement Without Impact** | Recommendations not prioritized by impact, wasting effort on low-value improvements | Prioritize improvements by impact vs effort; focus on high-impact changes first |
+
+---
+
 ## References
 
 - [ISO 25010 Software Quality Model](https://iso25000.com/en/iso-25000-standards/iso-25010)

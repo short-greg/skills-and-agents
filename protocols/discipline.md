@@ -123,6 +123,40 @@ Use when assessing work against a set of requirements or criteria.
 
 ---
 
+## Possible Actions
+
+Select or execute possible actions based on context; this list is not exhaustive. Actions describe what to do; use techniques from Core Approaches for how.
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **Enumerate Items** | To establish complete scope before processing | Use when facing a multi-item task or list | Apply MECE or Source-Based Enumeration to number all items explicitly and state total count |
+| **Decompose Complex Items** | To break complex items into processable sub-items | Use when a single item has multiple aspects or components | Apply Decomposition Enumeration to break into constituent parts and enumerate sub-items |
+| **Track Progress** | To maintain awareness of completion status | Use when processing enumerated items | Apply Explicit Progress Marking to mark each item's status immediately after processing |
+| **Process Sequentially** | To ensure correct order and prevent skipping | Use when order matters or dependencies exist between items | Apply Sequential Processing to complete each item before advancing |
+| **Verify Completeness** | To confirm all items were processed | Use when claiming completion of multi-item task | Apply Count Verification and Coverage Audit to compare processed count to total |
+| **Audit Coverage** | To detect skipped or partially processed items | Use when processing complete but quality uncertain | Apply Coverage Audit to review each item and verify processing evidence |
+| **Sample for Bias** | To detect uneven processing quality | Use when long lists may suffer from primacy/recency bias | Apply Randomized Sampling Check on items from middle and end |
+| **Resume Processing** | To continue from last completed item | Use when processing was interrupted | Review Coverage Tracker, identify last completed item, continue from next |
+
+---
+
+## Risks
+
+These are risks that misuse of this protocol poses to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **Skipping Enumeration** | Jumping straight to processing without establishing scope first | Always enumerate before processing; refuse to start work until items are explicitly listed and counted |
+| **Abandoning the Process** | Getting distracted mid-processing and never returning to complete remaining items | Output Coverage Tracker after each item; when context switches, explicitly note "X of Y items remain" before proceeding |
+| **Premature Completion** | Claiming "done" without verification when items remain unprocessed | Always apply Count Verification before declaring completion; require processed count to match enumeration total |
+| **Primacy Bias** | Early items receive thorough treatment while later items get rushed or skipped | Apply Randomized Sampling Check on long lists; compare quality between early and late items |
+| **Progress Drift** | Losing track of which items are done when status updates are batched instead of immediate | Mark status immediately after each item; output tracker periodically during processing |
+| **Order Violations** | Processing items out of sequence when dependencies exist, causing downstream failures | Apply Sequential Processing; complete current item fully before advancing |
+| **False Granularity** | Decomposing beyond useful level, creating overhead without benefit | Stop decomposition when sub-items are independently actionable; verify sub-items can recombine to original |
+| **Checklist Blindness** | Marking items complete without actually processing them to satisfy completion metrics | Require processing evidence for each item; apply Coverage Audit when quality is uncertain |
+
+---
+
 ## References
 
 **MECE Principle:**

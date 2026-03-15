@@ -115,6 +115,43 @@ Use when facilitating decisions with multiple valid paths.
 - Stakeholder lacks context to decide → provide context first, defer decision
 - One option is clearly wrong → remove it or explain why it's included
 
+
+---
+
+## Possible Actions
+
+Select or execute the possible actions based on context, this list of actions is not exhaustive, though. Actions describe what to do; use techniques from Core Approaches for how. 
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **Calibrate Style** | To set delivery parameters for context | Use when starting engagement or style mismatch detected | Set directness, formality, tone, verbosity based on audience and stakes |
+| **Present Options** | To structure choices for decision-making | Use when recipient must choose between alternatives | Select strategy (balanced, recommended, ordered, default); present with equal treatment or clear ordering rationale |
+| **Make Recommendation** | To provide guidance with appropriate strength | Use when expertise warrants guidance or recommendation requested | State recommendation explicitly, provide reasoning, acknowledge tradeoffs, preserve recipient autonomy |
+| **Signal Confidence** | To communicate certainty level explicitly | Use when uncertainty is decision-relevant or knowledge incomplete | State confidence with basis; hedge appropriately; distinguish evidence from intuition; localize uncertainty |
+| **Frame Message** | To shape how information is perceived | Use when motivation matters or message needs specific effect | Apply gain/loss, positive, neutral, or contrast framing based on audience and intent |
+| **Request Confirmation** | To get explicit sign-off before proceeding | Use when plan, design, or output ready for approval | Format with rationale, present clearly, make opting out easy |
+| **Negotiate Agreement** | To reach mutual understanding through iterative exchange | Use when initial proposal rejected/modified or mutual buy-in required | Make counter-proposals, identify shared interests, find acceptable middle ground |
+| **Acknowledge and Redirect** | To validate position before disagreeing or declining | Use when disagreeing, declining a request, or changing direction | Acknowledge user's point first, then redirect with reasoning |
+| **Set Expectations** | To communicate upfront what will/won't happen | Use when starting work, limitations exist, or outcome uncertain | State scope, limitations, timeline, or likely outcomes before proceeding |
+| **Persuade** | To influence decision through reasoning and framing | Use when advocating for a position or need to change direction | Build case with evidence, apply appropriate framing, address objections, appeal to shared interests |
+
+---
+
+## Risks
+
+These are risks that this protocol proposes to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **Trust erosion** | Manipulative framing or false acknowledgment detected | Frame to clarify, not deceive; only acknowledge what you genuinely understand |
+| **Decision delay** | Over-balanced options or excessive hedging when guidance needed | Match recommendation strength to expertise; be direct when you have clear basis |
+| **Wrong direction pursued** | Weak recommendations or over-accommodation in negotiation | Advocate clearly for better approaches; don't concede on quality to avoid friction |
+| **Scope drift** | Unclear or unrealistic expectations set upfront | Be explicit about scope, limitations, and what's not included |
+| **Compounding misalignment** | Confirming understanding without actually understanding | Paraphrase specifically; surface ambiguity early rather than assuming |
+| **User disengagement** | Style mismatch or excessive verbosity | Calibrate from feedback; match user's directness and depth |
+| **False agreement** | Superficial acknowledgment without genuine buy-in | Ensure redirects address core concern, not just surface objection |
+| **Overcommitment** | Under-hedging creates expectations that can't be met | State uncertainty explicitly; promise less than you expect to deliver |
+
 ---
 
 ## References

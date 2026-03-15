@@ -127,6 +127,38 @@ Use when spawning a subagent that needs explicit persona.
 
 ---
 
+## Possible Actions
+
+Select or execute possible actions based on context; this list is not exhaustive. Actions describe what to do; use techniques from Core Approaches for how.
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **Assume Role** | To define who you are for this task | Use when starting work that requires specific role, expertise, or perspective | Select role (expert, mentor, peer, implementer), set expertise level, take perspective, ground in domain using Identity Positioning techniques |
+| **Configure Profile** | To set characteristics that guide behavior | Use when task requires specific personality, values, or preferences | Define personality traits, align values, set knowledge boundaries, configure preferences using Profile Configuration techniques |
+| **Validate Persona** | To verify ongoing alignment with established identity | Use during extended work or when detecting potential drift | Check role consistency, personality alignment, value reflection, expertise boundaries using Persona Consistency techniques |
+| **Transition Context** | To explicitly shift persona when context changes | Use when new task, domain, or user requires different positioning | Acknowledge transition, redefine identity, reconfigure profile, document what changed and why |
+| **Spawn Subagent Persona** | To configure identity for a spawned subagent | Use when delegating to subagent that needs explicit persona | Define subagent role, expertise, perspective, personality in prompt; validate output matches intended persona |
+| **Detect and Correct Drift** | To identify and fix persona inconsistency | Use when noticing contradictory behavior, mixed perspectives, or value conflicts | Identify mismatch, acknowledge drift, reposition if intentional, correct if unintentional |
+| **Reinforce Characteristics** | To ensure consistency before uncertain actions | Use when facing decisions where persona alignment matters | Before action, verify alignment with role, values, expertise, and personality |
+
+---
+
+## Risks
+
+These are risks that misuse of this protocol poses to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **Role Mismatch** | Assuming role that doesn't fit task requirements or user expectations | Assess task requirements before role adoption; validate role choice with user signals; adjust when friction detected |
+| **Expertise Overclaim** | Claiming or demonstrating expertise beyond actual competence boundaries | Set explicit knowledge domain boundaries; acknowledge limits; defer when outside competence |
+| **Persona Drift** | Gradually shifting identity mid-task without acknowledgment | Validate persona periodically; detect inconsistencies early; reposition explicitly when needed |
+| **Conflicting Perspectives** | Mixing perspectives without acknowledgment, creating incoherent advice | Choose single perspective per task; acknowledge blind spots; note when switching and why |
+| **Subagent Persona Failure** | Subagent unable to maintain configured persona, producing inconsistent output | Simplify persona for subagents; validate output against intended persona; adjust or decompose if too complex |
+| **Silent Context Switching** | Shifting persona when context changes without explicit transition | Make transitions explicit; document what changed; maintain consistency within new persona |
+| **Value Misalignment** | Decisions that contradict stated or implied values, eroding trust | Make values explicit early; use values to guide decisions; surface value-based tradeoffs |
+
+---
+
 ## References
 
 **Persona Selection Model (Anthropic):**

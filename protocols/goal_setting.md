@@ -122,6 +122,40 @@ Use when a goal is too large to pursue directly.
 
 ---
 
+## Possible Actions
+
+Select or execute possible actions based on context; this list is not exhaustive. Actions describe what to do; use techniques from Core Approaches for how.
+
+| Action | Goal | When | How |
+|--------|------|------|-----|
+| **Discover Goals** | To identify what goals to pursue | Use when starting fresh or goals unclear | Apply Stakeholder Analysis, Problem/Opportunity Framing, Ideal State Visualization, or Inversion techniques |
+| **Frame Problem** | To articulate the problem or opportunity being addressed | Use when starting point is unclear or problem not stated | Apply Problem/Opportunity Framing to identify root cause vs symptom |
+| **Formulate Goal** | To express goals as outcomes rather than activities | Use when goal describes activity rather than result | Apply Outcome Focus and Directional Framing to convert "do X" to "achieve state Y" |
+| **Set Goal Boundaries** | To clarify what's in scope and out of scope | Use when scope is ambiguous or creep is likely | Apply Boundary Setting and Scope Calibration techniques |
+| **Decompose Goal** | To break large goals into actionable sub-goals | Use when goal is too large to pursue directly | Apply Goal Decomposition to create independent, collectively complete sub-goals |
+| **Align Goal Hierarchy** | To ensure goals contribute to higher-level objectives | Use when goal exists within larger context | Apply Hierarchy Alignment to verify goals serve parent objectives |
+| **Prioritize Goals** | To determine which goals take precedence | Use when multiple goals compete for resources | Apply Priority Setting to rank by impact, effort, and dependencies |
+| **Resolve Goal Tradeoffs** | To make explicit choices between conflicting goals | Use when goals conflict with each other | Apply Tradeoff Analysis to determine what to optimize vs satisfice |
+
+---
+
+## Risks
+
+These are risks that misuse of this protocol poses to a project with mitigation strategies.
+
+| Risk | When | Mitigation Strategy |
+|------|------|---------------------|
+| **Goal-solution mismatch** | Goals formulated without understanding stakeholder needs | Run Stakeholder Analysis before formulating goals; validate against identified needs |
+| **Activity masquerading as goal** | Goals describe activities ("implement X") rather than outcomes | Apply "So what?" test; reframe using Outcome Focus if goal describes work not results |
+| **Scope paralysis** | Goals too broad to act on, or too narrow to be meaningful | Apply Scope Calibration to find actionable level; ask "Why?" if too narrow, decompose if too broad; test with "Could I start now?" and "Does this matter?" |
+| **Orphaned goals** | Goals pursued without connection to higher objectives | Apply Hierarchy Alignment; question value of goals that don't serve parent objectives |
+| **Everything is priority** | No real prioritization, all goals treated equally | Force ranking; if Priority Setting doesn't produce clear order, decompose further |
+| **Hidden tradeoffs** | Conflicting goals pursued simultaneously without explicit choice | Surface conflicts early; apply Tradeoff Analysis to make optimization choices explicit |
+| **Decomposition drift** | Sub-goals diverge from parent goal over time | Verify sub-goals sum to parent; re-check alignment at milestones |
+| **Problem-symptom confusion** | Goals address symptoms rather than root causes | Apply Problem/Opportunity Framing with "5 Whys"; validate solution addresses real need |
+
+---
+
 ## References
 
 **Anthropic/Claude documentation:**
