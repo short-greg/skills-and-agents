@@ -68,7 +68,7 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 4. Implement environment → KR1-3. Execute A2
 5. Set up continuous improvement → KR4. Execute A3
 6. Evaluate results → Execute A4
-7. Install setup-skill-builder → Copy to `.claude/skills/`
+7. Install setup-skill-builder → Copy `workflows/setup/setup-skill-builder.md` to `.claude/skills/setup-skill-builder/SKILL.md`
 
 ---
 
