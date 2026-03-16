@@ -18,12 +18,14 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 **Intent:** Preferences were established during setup-init. This workflow implements those decisions while respecting Interaction Mode for HOW to execute.
 
 **Scope:** Make the environment AI-ready — nothing more. AI-ready means:
-- Project context (type, phase) in CLAUDE.md — drives all AI behavior
-- Root CLAUDE.md with AI profile that skills inherit
-- CLAUDE.local.md for personal config (gitignored)
-- Docs and tasks locations established
+- Project context (type, phase) in CLAUDE.md
+- Task infrastructure documented (location, template)
+- Coding conventions documented in CLAUDE.md (NOT enforced with files)
+- Root CLAUDE.md with AI profile
+- CLAUDE.local.md template (optional)
+- `.claude/` directory structure
 
-**Out of scope:** Coding conventions (requires tech stack), skill creation (setup-skill-builder), legacy cleanup.
+**Out of scope:** Creating source code structure, test configs, build files, dependencies, skill creation (setup-skill-builder).
 
 **Workflow Style:** Goal-Oriented (Declarative).
 
@@ -44,6 +46,7 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 4. Track progress per `tracking_and_recovery.md`
 5. Get explicit approval before implementing
 6. Do NOT assume preferences — always ask via AskUserQuestion
+7. STRICTLY in scope: .claude/ directory, CLAUDE.md, task location. OUT of scope: source code, tests, build configs
 
 ## Preconditions
 
@@ -103,6 +106,16 @@ Required Decisions (ask via AskUserQuestion):
 - **Docs location:** recommend based on project type
 - **Tasks location:** recommend `tasks/`
 - **Task naming:** recommend `YYYYMMDD-<task-name>`
+- **Task infrastructure:**
+  - Storage location (recommend `tasks/`)
+  - Folder template (recommend: task.md, notes.md, artifacts/)
+  - Naming convention (recommend YYYYMMDD-name)
+- **Coding conventions** (to document in CLAUDE.md, NOT to enforce):
+  - Detect languages from existing files
+  - Ask about style guides (PEP 8, Airbnb, etc.)
+  - Ask about doc methods (JSDoc, Sphinx, etc.)
+  - Recommend linting tools based on language
+  - NOTE: Document only, do NOT create config files
 - **Worktrees:** recommend based on project, ALWAYS ask
 - **Tooling:** MCP servers, hooks
 
@@ -126,11 +139,33 @@ Exit Conditions:
 
 Instructions:
 1. Read `discipline.md` and apply Sequential Processing
-2. Create folders per design
-3. Write CLAUDE.md per `setup-env-templates.md` — translate task.md into behavioral instructions
-4. Configure worktrees if requested (per worktree-setup-guideline.md)
-5. Create `.claude/settings.json` if tooling requested
-6. Output implementation summary
+
+2. Create ONLY AI-related folders per approved design:
+   - `.claude/` directory
+   - `.claude/feedback/` with README.md and template.md
+   - `.claude/skills/` (empty, for future skills)
+   - `{TASKS_LOCATION}/` if doesn't exist (from A1)
+   - DO NOT create: src/, tests/, config files, language-specific files
+
+3. Write CLAUDE.md with sections per `setup-env-templates.md`:
+   - Project Context (type, phase from task.md)
+   - Task Infrastructure (location, template structure from A1)
+   - Coding Conventions (languages, style guides, frameworks from A1)
+   - Interaction Mode + AI Personality (from task.md)
+   - Maintenance section
+
+4. Write CLAUDE.local.md template (optional, with examples)
+
+5. Configure worktrees if requested (per worktree-setup-guideline.md)
+
+6. Create `.claude/settings.json` if tooling requested
+
+7. Validate files created:
+   - List all files created
+   - Verify ONLY .claude/ and approved locations
+   - Output summary with what was NOT created
+
+8. Output implementation summary
 
 ---
 
@@ -211,6 +246,7 @@ Instructions:
 | 1 | Overwriting existing files | CLAUDE.md exists | Confirm before overwriting |
 | 2 | Assumptions made | Skipping AskUserQuestion | Always ask, never assume |
 | 3 | task.md drift | Implementation diverges | Reference task.md at each step |
+| 4 | Scope creep | Creating non-AI files | Validate all files are .claude/* or approved task location; list what was NOT created |
 
 ---
 

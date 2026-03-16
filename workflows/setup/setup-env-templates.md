@@ -89,6 +89,33 @@ Example for Web API in Production with Peer mode:
 **Verbosity:** Balanced — concise but include context.
 **Technical Level:** Assume expertise.
 
+## Task Infrastructure
+
+**Location:** `tasks/` (root level)
+
+**Folder Template:**
+- `task.md` — Task description, goals, decisions
+- `notes.md` — Progress notes, blockers
+- `artifacts/` — Outputs, diagrams, generated files
+
+**Naming:** YYYYMMDD-task-name (e.g., 20260315-setup-env)
+
+## Coding Conventions
+
+**Languages:** Python 3.11+, TypeScript 5.0+
+
+**Python:**
+- Style: PEP 8 (Black formatting, line length 100)
+- Docs: Google-style docstrings
+- Testing: pytest
+
+**TypeScript:**
+- Style: Airbnb with ESLint
+- Docs: TSDoc for public APIs
+- Testing: Vitest
+
+**Note:** These are for AI awareness only. Linting/formatting tools configured separately.
+
 ## Maintenance
 
 Update this file when:
