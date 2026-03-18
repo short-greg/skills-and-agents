@@ -1,10 +1,175 @@
 # Skill Builder Template
 
-Template for skills created by the skill-builder. See setup-skill-builder.md for consultation guidance, analysis questions, variation dimensions, and validation checklist.
+Template for skills created by the skill-builder.
 
 **Notation:**
 - `{PLACEHOLDER}` — Configurable values. Replace based on developer preferences.
 - `<guidelines>` — Guidance for the skill-builder. Do not include in output.
+
+---
+
+## Consultant Behavior (When Creating Skills)
+
+When creating a skill, the skill-builder must act as a consultant:
+
+**Reason Out Loud:**
+- "To create a good [skill type] skill, I need to understand..."
+- "Based on the project type, I should consider..."
+- "I found [X] in the codebase, which suggests..."
+
+**Assume and Explain Role:**
+- After understanding what skill is needed, state your role
+- Example: "For this deployment skill, I'll think as a DevOps engineer focused on reliability and rollback safety"
+- Explain what this role means for the skill design
+
+**Share Findings Before Asking:**
+- Discover what exists (patterns, conventions, similar skills)
+- Output what you found and what it implies
+- Then ask targeted questions about gaps
+
+**Recommend with Rationale:**
+- Don't just ask "what tools do you want?"
+- Instead: "This skill will modify files and run tests, so I recommend Edit, Bash, and TodoWrite for tracking. Does that sound right?"
+
+---
+
+## Available Claude Code Tools
+
+When creating skills, recommend appropriate tools. Reason out loud about why each is needed:
+
+| Tool | Purpose | Permission | Recommend When |
+|------|---------|------------|----------------|
+| Read | Read files | No | All skills need this |
+| Write | Create/overwrite files | Yes | Skills that create artifacts |
+| Edit | Targeted file edits | Yes | Skills that modify existing files |
+| Glob | Find files by pattern | No | Search, discovery, refactoring |
+| Grep | Search file contents | No | Code search, pattern finding |
+| Bash | Shell commands | Yes | Git, builds, tests, CLI tools |
+| NotebookEdit | Jupyter cell editing | Yes | Data science, notebook skills |
+| TodoWrite | Progress tracking | No | Multi-step skills (non-interactive) |
+| Task* | Task management | No | Interactive sessions, background work |
+| WebSearch | Web search | Yes | Skills needing current info |
+| WebFetch | Fetch URL content | Yes | Documentation, API research |
+| AskUserQuestion | User input | No | Consultative, decision-making |
+| Agent | Spawn subagents | No | Complex parallel work |
+| LSP | Code intelligence | No | Type checking, navigation |
+| EnterPlanMode | Design before coding | No | Complex implementation skills |
+
+**Tool Selection Reasoning:**
+- "This skill creates files, so it needs Write"
+- "This skill searches code, so Glob and Grep"
+- "This skill needs user decisions, so AskUserQuestion"
+- "This is a multi-step skill, so TodoWrite for tracking"
+
+---
+
+## MCP and Hooks Discovery
+
+Before finalizing a skill, check what's available and recommend additions:
+
+**Discovery:**
+1. Check existing configs: `~/.claude/settings.json`, `.claude/settings.json`
+2. Check existing hooks: `~/.claude/hooks/`, `.claude/hooks/`
+3. Research: Use WebSearch to find MCPs relevant to skill's domain
+
+**Reasoning:**
+- "For a [skill purpose] skill, these MCPs would help because..."
+- "I found an existing [X] hook that this skill should use"
+- "This skill would benefit from a [Y] MCP for [reason]"
+
+**Common MCP categories:**
+- Database MCPs (for data access skills)
+- API MCPs (for integration skills)
+- File system MCPs (for specialized file handling)
+- Communication MCPs (Slack, email, etc.)
+
+---
+
+## Consultation Approach by Interaction Mode
+
+| Mode | Approach |
+|------|----------|
+| Lead | Output proposal with rationale, confirm only essential points, proceed efficiently |
+| Senior | Share intermediate findings, recommend approach, get approval at gates |
+| Peer | Brainstorm options together, collaborate on design, discuss trade-offs |
+| Junior | Present all options with trade-offs, await direction at each decision |
+
+---
+
+## Skill Analysis Questions
+
+Use these to understand intent. Reason out loud about which questions matter for this skill.
+
+**Understanding the Problem:**
+- What problem does this skill solve?
+- Why is this skill necessary? (vs manual, vs existing skill)
+- Who will use this skill? What triggers it?
+
+**Defining Scope:**
+- What are the deliverables?
+- Should this be one skill or multiple?
+- Does it compose with other skills?
+
+**Determining Role:**
+- What domain role? (software engineer, designer, analyst, reviewer)
+- What behavioral stance? (executor, advisor, pair programmer)
+
+**Deciding Behavior:**
+- How autonomous? (proceed vs confirm at each step)
+- How handle errors? (fail, retry, ask, rollback)
+
+---
+
+## Variation Dimensions
+
+| Dimension | Options | Determined by |
+|-----------|---------|---------------|
+| Workflow Style | Declarative, Imperative, Hybrid | Developer preference |
+| Action Style | Instructions, Objectives+Constraints | Per-action need |
+| Role | Domain + Behavioral | Skill intent |
+| Autonomy | Proceed, confirm at gates, confirm each step | Interaction Mode |
+| Artifacts | SKILL.md only, +references, +code, +hooks | Skill needs |
+
+---
+
+## Skill Validation Checklist
+
+**Structure:**
+- [ ] All sections present (Goal, Intent, Scope, Role, KRs, REQs, Pre/Postconditions, Steps, Actions, Notes, Risks, References)
+- [ ] 3-4 Key Results
+- [ ] 2+ Actions with complete structure
+
+**Content:**
+- [ ] Coherent — no contradictions between sections
+- [ ] Complete — all KRs achievable from Actions
+- [ ] Referenced protocols exist in `protocols/`
+- [ ] Tools in allowed-tools are available
+
+---
+
+## Recommended Initial Skills
+
+When setting up a project, recommend creating a `/consult` skill for flexible consultative tasks:
+
+**Consult Skill Template:**
+```
+name: consult
+description: Flexible consultative assistance. Adapts to any topic.
+triggers: "/consult", "help me think through", "advise on"
+workflow-style: Declarative
+```
+
+**Key characteristics:**
+- Reason out loud about what you need to know
+- Assume and explain role after understanding problem
+- Discover before asking; infer before assuming
+- Recommend with rationale
+- Adapt depth to topic complexity
+
+**This skill should NOT:**
+- Follow rigid step sequences
+- Create artifacts unless requested
+- Require all questions answered before recommending
 
 ---
 

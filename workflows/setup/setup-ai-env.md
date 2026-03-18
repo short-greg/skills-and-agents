@@ -1,21 +1,30 @@
 ---
-name: setup-env
+name: setup-ai-env
 description: >
   Configure development environment for AI-readiness based on setup-init decisions.
   Creates folders, CLAUDE.md (with full profile), worktrees. Respects Interaction Mode throughout.
   You MUST satisfy the Goal, Key Results and follow the Requirements of this workflow.
-  Triggers on: "setup environment", "setup env", "create CLAUDE.md", "set up project structure".
+  Triggers on: "setup ai environment", "setup ai env", "create CLAUDE.md", "set up ai project".
 argument-hint: "[task.md path]"
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, AskUserQuestion
 ---
 
-# Setup Env
+# Setup AI Env
 
 **Goal:** Configure AI-ready development environment per decisions from setup-init.
 
 **Intent:** Preferences were established during setup-init. This workflow implements those decisions while respecting Interaction Mode for HOW to execute.
+
+**Role:** AI Environment Consultant
+
+Think like a consultant who has been hired to make this project AI-ready:
+- First understand what's already here (languages, tools, existing config)
+- Reason out loud about what you need to know to give good recommendations
+- Share your findings and what they imply before asking questions
+- Recommend with rationale, not just present options
+- Point out risks and considerations the user may not have thought of
 
 **Scope:** Make the environment AI-ready — nothing more. AI-ready means:
 - Project context (type, phase) in CLAUDE.md
@@ -79,7 +88,7 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 
 ### A1: Design Environment (→ KR1, KR2, KR3, KR4)
 
-Intent: Gather decisions and create environment proposal
+Intent: Understand project context and propose AI environment design
 KR: Environment proposal approved by developer
 Preconditions:
 - Required: task.md with Interaction Mode, AI Personality
@@ -90,38 +99,17 @@ Exit Conditions:
 - Developer rejects 3 times → stop, escalate
 
 Objectives (OBJ):
-1. Echo back task.md understanding, get confirmation
-2. Gather required decisions via AskUserQuestion (see Required Decisions below)
-3. Generate proposal covering all sections
-4. Get explicit approval before A2
+1. Understand what's already here (detect languages, tools, existing config)
+2. Reason out loud about what you need to know to make good recommendations
+3. Share findings and reasoning before asking questions
+4. Propose with rationale; point out tradeoffs and risks
+5. Get explicit approval before A2
 
 Constraints (CONST):
-1. Read `thinking.md` and apply Alternative Generation — to explore options
-2. Read `pragmatics.md` and apply Option Presentation — to structure proposal
-3. Do NOT assume preferences — always ask, make recommendations with rationale
-
-Required Decisions (ask via AskUserQuestion):
-- **Project type:** Data science / Web API / Application / Library / CLI / Other
-- **Project phase:** Prototyping / Production / Learning / Maintenance
-- **Docs location:** recommend based on project type
-- **Tasks location:** recommend `tasks/`
-- **Task naming:** recommend `YYYYMMDD-<task-name>`
-- **Task infrastructure:**
-  - Storage location (recommend `tasks/`)
-  - Folder template (recommend: task.md, notes.md, artifacts/)
-  - Naming convention (recommend YYYYMMDD-name)
-- **Coding conventions** (to document in CLAUDE.md, NOT to enforce):
-  - Detect languages from existing files
-  - Ask about style guides (PEP 8, Airbnb, etc.)
-  - Ask about doc methods (JSDoc, Sphinx, etc.)
-  - Recommend linting tools based on language
-  - NOTE: Document only, do NOT create config files
-- **Worktrees:** recommend based on project, ALWAYS ask
-- **Tooling:** MCP servers, hooks
-
-Validation:
-1. Add OBJ1-4 to TodoWrite checklist
-2. Output validation with evidence
+1. Reason out loud about what you need to know before asking
+2. Use AskUserQuestion with recommendations, not bare questions
+3. Adopt the Interaction Mode and personality from task.md
+4. Read `pragmatics.md` and apply Recommended Option — to structure proposals
 
 ---
 
@@ -211,12 +199,13 @@ Instructions:
 
 ## Additional Notes and Terms
 
-**Required Decisions Summary:**
-| Category | Decisions |
-|----------|-----------|
-| Project Context | Type (data science/web API/app/library/CLI), Phase (prototyping/production/learning/maintenance) |
-| Structure | Docs location, Tasks location, Task naming scheme, Worktrees |
-| Tooling | MCP servers, Hooks |
+**Tooling Discovery:**
+
+Before recommending tooling, discover what's available:
+1. Check existing: `~/.claude/settings.json`, `.claude/settings.json`
+2. Check hooks: `~/.claude/hooks/`, `.claude/hooks/`
+3. Research: Use WebSearch for MCPs relevant to project type
+4. Reason out loud: "For a [project type] project, these MCPs would help because..."
 
 **Project Phase → AI Behavior:**
 | Phase | Behavior |
