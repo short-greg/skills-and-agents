@@ -123,17 +123,18 @@ KR: Skill builder skill created following project conventions
 Preconditions:
 - Required: Skill preferences from A1
 - Required: task.md and CLAUDE.md
-- Required: skill-builder-guideline.md read
+- Required: [skill-builder-template.md](skill-builder-template.md) read
+- Required: [skill-template.md](skill-template.md) read
 Postconditions:
 - Success: Output skill builder skill at `.claude/skills/skill-builder/SKILL.md`
 - Failure: Output partial skill, output validation failures
 Exit Conditions:
-- skill-builder-guideline.md inaccessible → stop, request file
+- Templates inaccessible → stop, request files
 - Preferences incomplete → stop, complete A1 first
 
 Instructions:
-1. Read `skill-builder-template.md` — contains complete structure with placeholders and guidelines
-2. Read `skill-builder-guideline.md` — understand process phases
+1. Read `skill-builder-template.md` — contains guidance for creating skills
+2. Read `skill-template.md` — contains the structure all skills must follow
 3. Fill in template placeholders based on:
    - Interaction Mode from CLAUDE.md
    - Developer's workflow style preference (from A1)
@@ -147,11 +148,12 @@ Instructions:
 
 ### A3: Create Skills (→ KR2)
 
-Intent: Create priority skills using skill-builder-template.md
+Intent: Create priority skills using [skill-template.md](skill-template.md)
 KR: Initial skills created following consultant behavior
 Preconditions:
 - Required: Skill builder skill created
 - Required: Priority skills list from A1
+- Required: [skill-template.md](skill-template.md) read
 Postconditions:
 - Success: Output each priority skill at `.claude/skills/{skill-name}/SKILL.md`
 - Failure: Output partial skills, output failures documented
@@ -161,7 +163,7 @@ Exit Conditions:
 
 Objectives:
 1. Priority skills created at `.claude/skills/{skill-name}/SKILL.md`
-2. /consult skill recommended for flexible consultative tasks
+2. /consult skill created using consult-template.md
 3. Each skill validated against Validation Checklist
 
 Constraints:

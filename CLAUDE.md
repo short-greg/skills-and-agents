@@ -30,4 +30,4 @@ Each directory has a README.md with details.
 
 See [README.md](README.md) for installation in other projects.
 
-To test: `/setup_env_workflow` skill in `.claude/skills/`
+To test: `/setup-ai-env` skill in `.claude/skills/`

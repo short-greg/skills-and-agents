@@ -35,8 +35,8 @@ Use gh to fetch README.md then following the guidelines to proceed with installa
 ### Setup Flow
 
 1. **`/setup-init`** — Interview developer, establish preferences, create task.md
-   - Installs: `setup-env`
-2. **`/setup-env`** — Configure environment (folders, CLAUDE.md)
+   - Installs: `setup-ai-env`
+2. **`/setup-ai-env`** — Configure environment (folders, CLAUDE.md)
    - Installs: `setup-skill-builder`
 3. **`/setup-skill-builder`** — Create skill builder and initial skills
 
@@ -169,7 +169,7 @@ For other tools, adapt the file structure to match your tool's skill/agent forma
 
 ### Skills Not Executing Correctly
 
-1. Check skill references correct protocols (in `.claude/skills/protocols/`)
+1. Check skill references correct protocols (in `.claude/protocols/`)
 2. Verify skill directory structure is correct (`skill-name/SKILL.md`)
 3. Review Claude Code logs for errors
 

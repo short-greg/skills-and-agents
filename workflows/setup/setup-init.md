@@ -82,8 +82,8 @@ allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Task, TodoWrite, WebSearch, 
 4. Plan interview → KR1-4. Execute A3. Output interview plan for approval
 5. Conduct interview → KR1, KR2, KR3. Execute A4
 6. Create task.md → KR3, KR4. Execute A5. Document all decisions
-7. Install setup-env → Copy `workflows/setup/setup-env.md` to `.claude/skills/setup-env/SKILL.md`
-8. Output completion summary → Inform user: "Setup init complete. Run `/setup-env tasks/{TASK_ID}/task.md` to continue."
+7. Install setup-ai-env → Copy `workflows/setup/setup-ai-env.md` to `.claude/skills/setup-ai-env/SKILL.md`
+8. Output completion summary → Inform user: "Setup init complete. Run `/setup-ai-env tasks/{TASK_ID}/task.md` to continue."
 
 ---
 
