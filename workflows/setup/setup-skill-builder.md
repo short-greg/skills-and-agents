@@ -70,17 +70,17 @@ Think like a consultant who helps teams build effective AI skills:
 
 ---
 
+
 ## Steps
 
 0. Check preconditions → Verify task.md and CLAUDE.md exist. **If not, STOP with appropriate message.**
 1. Create preliminary checklist → KR1-3. Use TodoWrite with formula: `setup-skill-builder - KR# - <action> - <details>`
-2. Read context → Read task.md and CLAUDE.md to understand conventions and Interaction Mode
-3. Interview skill preferences → KR1, KR2. Execute A1
-4. Create skill builder → KR1. Execute A2
-5. Create skills → KR2. Execute A3 (loop for each priority skill)
-6. Validate deliverables → KR3. Execute A4
-7. Update CLAUDE.md → Add available skills section
-8. Hand off → Inform user setup is complete
+2. Interview skill preferences → KR1, KR2. Execute A1
+3. Create skill builder → KR1. Execute A2
+4. Create skills → KR2. Execute A3 (loop for each priority skill)
+5. Validate deliverables → KR3. Execute A4
+6. Update environment → Per CLAUDE.md maintenance conventions
+7. Hand off → Inform user setup is complete
 
 ---
 
@@ -102,15 +102,17 @@ Exit Conditions:
 - Context files missing → stop, request files
 
 Objectives:
-1. Reason out loud about what you need to understand to recommend skills
-2. Discover project conventions and existing patterns
-3. Recommend skills that would help based on project type and gaps
-4. Infer before asking; recommend with rationale
+1. Skill preferences documented
+2. Skill recommendations output with rationale
 
 Constraints:
-1. Follow Consultant Behavior from skill-builder-template.md
-2. Use AskUserQuestion with recommendations, not bare questions
-3. Respect Interaction Mode from CLAUDE.md
+1. You MUST reason out loud about what you need to understand
+2. You MUST discover project conventions before recommending
+3. You MUST infer before asking
+4. You MUST recommend with rationale
+5. You MUST use AskUserQuestion with recommendations, not bare questions
+6. You MUST respect Interaction Mode from CLAUDE.md
+7. Follow Consultant Behavior from skill-builder-template.md
 
 ---
 
@@ -158,16 +160,16 @@ Exit Conditions:
 - Developer requests stop → stop, document completed skills
 
 Objectives:
-1. Read skill-builder-template.md for consultant behavior, tools, MCPs
-2. For each priority skill, follow template's Consultant Behavior section
-3. Recommend a /consult skill for flexible consultative tasks
-4. Use template's Tools Reference to recommend appropriate tools
-5. Check for relevant MCPs per template's MCP Discovery section
+1. Priority skills created at `.claude/skills/{skill-name}/SKILL.md`
+2. /consult skill recommended for flexible consultative tasks
+3. Each skill validated against Validation Checklist
 
 Constraints:
-1. Follow Consultant Behavior section from template
-2. Recommend tools with rationale per Tools Reference
-3. Validate each skill against template's Validation Checklist
+1. You MUST read skill-builder-template.md first
+2. You MUST follow Consultant Behavior section from template
+3. You MUST use Tools Reference to recommend tools with rationale
+4. You MUST check for relevant MCPs per MCP Discovery section
+5. You MUST validate each skill against Validation Checklist
 
 ---
 
@@ -225,5 +227,4 @@ Instructions:
 ## References
 
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
-- [skill-builder-guideline.md](../../guidelines/skill-builder-guideline.md)
-- [workflow-creation-guideline.md](../../guidelines/workflow-creation-guideline.md)
+- [skill-builder-template.md](skill-builder-template.md)

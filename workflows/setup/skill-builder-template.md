@@ -31,6 +31,42 @@ When creating a skill, the skill-builder must act as a consultant:
 - Don't just ask "what tools do you want?"
 - Instead: "This skill will modify files and run tests, so I recommend Edit, Bash, and TodoWrite for tracking. Does that sound right?"
 
+**Research Before Recommending:**
+- Use WebSearch to find best practices for the skill's domain
+- Search: "[skill topic] best practices", "[domain] workflow patterns"
+- Incorporate findings into skill design
+
+---
+
+## When to Create a Skill
+
+<Before creating a skill, verify it's appropriate:>
+
+<Create a skill when:>
+<- Task requires 2+ actions in sequence>
+<- Task will be repeated (not one-off)>
+<- Task benefits from tracking/recovery>
+<- Task needs consistent execution>
+
+<Do NOT create a skill when:>
+<- Task is single action — execute the action directly>
+<- Task is one-off with no reuse value>
+<- Task is purely exploratory/research>
+
+---
+
+## Skill Definition
+
+<Minimum requirements for a well-formed skill:>
+
+<| Attribute | Requirement |>
+<|-----------|-------------|>
+<| Actions | 2+ |>
+<| Key Results | As few as needed to be complete |>
+<| Recovery | Required for multi-step skills |>
+<| Progress tracking | Required (TodoWrite) |>
+<| Line count | Target 150-200 lines (200-250 with good reason) |>
+
 ---
 
 ## Available Claude Code Tools
@@ -136,40 +172,30 @@ Use these to understand intent. Reason out loud about which questions matter for
 
 **Structure:**
 - [ ] All sections present (Goal, Intent, Scope, Role, KRs, REQs, Pre/Postconditions, Steps, Actions, Notes, Risks, References)
-- [ ] 3-4 Key Results
+- [ ] Key Results — as few as needed to be complete
 - [ ] 2+ Actions with complete structure
+- [ ] Target 150-200 lines (200-250 with good reason)
 
 **Content:**
 - [ ] Coherent — no contradictions between sections
 - [ ] Complete — all KRs achievable from Actions
+- [ ] Concise — no duplication, minimum words
+- [ ] Precise — unambiguous language, no hedging
 - [ ] Referenced protocols exist in `protocols/`
 - [ ] Tools in allowed-tools are available
+
+**Quality:**
+- [ ] Recovery included — progress tracking, recovery from interruption (if multi-step)
+- [ ] Research completed — References section has sources consulted
+- [ ] Actions are small — one clear goal each, predictable inputs → outputs
 
 ---
 
 ## Recommended Initial Skills
 
-When setting up a project, recommend creating a `/consult` skill for flexible consultative tasks:
+When setting up a project, recommend creating a `/consult` skill for flexible consultative tasks.
 
-**Consult Skill Template:**
-```
-name: consult
-description: Flexible consultative assistance. Adapts to any topic.
-triggers: "/consult", "help me think through", "advise on"
-workflow-style: Declarative
-```
-
-**Key characteristics:**
-- Reason out loud about what you need to know
-- Assume and explain role after understanding problem
-- Discover before asking; infer before assuming
-- Recommend with rationale
-- Adapt depth to topic complexity
-
-**This skill should NOT:**
-- Follow rigid step sequences
-- Create artifacts unless requested
-- Require all questions answered before recommending
+See [consult-template.md](consult-template.md) for the full template.
 
 ---
 
@@ -223,7 +249,7 @@ Skills rarely perfect on first draft. The skill-builder should:
 - Are risks adequately addressed?
 
 **After final approval:**
-- Validate against checklist (see setup-skill-builder.md)
+- Validate against Skill Validation Checklist (above)
 - Output evidence for each validation criterion
 
 ---
@@ -301,23 +327,94 @@ allowed-tools: {TOOLS}
 
 <Choose ONE pattern based on developer's workflow style preference.>
 
+<Steps must make the action that is executed clear. Except for creating the preliminary checklist, each step should have an action associated (e.g., "Execute A1") unless the step is very simple.>
+
 <DECLARATIVE PATTERN — Use when developer prefers goal-oriented, adaptive approach:>
 1. Create preliminary checklist → KR1-N. Use TodoWrite with formula: `{skill-name} - KR# - <action>`
-2. Plan execution → Based on context, output proposed actions for approval
-3. [Execute discovered actions] → Placeholder, replace with specific actions
-4. Validate KRs → Output positive and negative evidence for each
+2. {Preliminary steps — define in skill, e.g., planning} → KR#. Execute A#
+3. {Execute actions — filled in at runtime to achieve KRs} → KR?
+4. Validate KRs → Output positive and negative evidence for each. Execute A#
 
 <IMPERATIVE PATTERN — Use when developer prefers fixed steps, reproducibility:>
-1. Execute A1 → {first action}
-2. Execute A2 → {second action}
-3. Execute A3 → {third action}
-4. Execute A4 → Validate all outputs
+1. {First step} → Execute A1
+2. {Second step} → Execute A2
+3. {Third step} → Execute A3
+4. Validate all outputs → Execute A4
 
 <HYBRID PATTERN — Use when need consistency at boundaries, flexibility in middle:>
 1. Create preliminary checklist → KR1-N. Use TodoWrite
-2. Read context → Execute A1
-3. Plan and execute → Adapt based on findings
+2. {Fixed boundary step} → Execute A1
+3. {Adaptive middle — filled in at runtime} → KR?
 4. Validate → Execute final validation action
+
+---
+
+## Action Field Definitions
+
+| Field | Purpose |
+|-------|---------|
+| **Intent** | Why this action exists. The purpose it serves. |
+| **KR** | Success criteria for this action. How to know it succeeded. |
+| **Preconditions** | What must exist before this action runs. Required = must have. Optional = enhances if present. |
+| **Postconditions** | What state results from this action. Success = normal outcome. Failure = fallback outcome. |
+| **Exit Conditions** | When to stop early. Format: `{condition} → stop, {what to do}` |
+| **Validation** | How to verify objectives were met. Used with Objectives+Constraints style. |
+
+**Action Body Styles (choose one):**
+
+| Style | When to Use | Contains |
+|-------|-------------|----------|
+| **Instructions** | Predictable, sequential work | Numbered steps to follow |
+| **Objectives + Constraints** | Judgment-heavy, adaptive work | Outcomes + rules |
+
+**Objectives vs Constraints:**
+
+| | Objectives | Constraints |
+|---|------------|-------------|
+| **What** | Outcomes to achieve | Rules to follow |
+| **Focus** | What success looks like | How to behave |
+| **Format** | Statements of outcomes | "You MUST" / "You MUST NOT" |
+| **Example** | "Design proposal approved" | "You MUST propose with rationale" |
+
+---
+
+## Writing Rules
+
+<Guidelines for writing clear, maintainable skills:>
+
+<**Descriptions:**>
+<- Goal/Intent/Scope: 2-3 sentences max>
+<- Keep descriptions brief — say what's needed, no more>
+
+<**Actions:**>
+<- Actions must be sufficiently small: one clear goal, predictable inputs → outputs>
+<- Use output-oriented verbs (list, evaluate, derive, document, output) not internal verbs (find, check, look)>
+<- Each action references which protocol(s) it uses>
+
+<**Language:**>
+<- Use imperative form or "You MUST" — never "should" or "could">
+<- Say "Read X to understand..." — never "uses X">
+<- Specify exact outputs — never vague "do X">
+
+---
+
+## Error Handling
+
+<Ask about error handling preferences during skill creation. Options:>
+
+<| Strategy | When to Use |>
+<|----------|-------------|>
+<| Fail fast | Critical operations where partial completion is dangerous |>
+<| Retry | Transient failures (network, rate limits) |>
+<| Ask user | Ambiguous situations requiring judgment |>
+<| Rollback | Multi-step operations that can be reversed |>
+
+<For each skill, determine:>
+<- How should this skill handle errors?>
+<- Should it have rollback capability?>
+<- How should it handle ambiguity? (always ask, assume with documentation)>
+
+<Bake the chosen strategy into the skill's Exit Conditions and Postconditions.>
 
 ---
 
@@ -346,18 +443,19 @@ Instructions:
 2. {NEXT_STEP}
 3. Output {RESULT} for {PURPOSE}
 
-<OBJECTIVES+CONSTRAINTS STYLE — Use for judgment-heavy, adaptive work:>
+<OBJECTIVES+CONSTRAINTS STYLE — Use for judgment-heavy, adaptive work. See Action Field Definitions above.>
 
-Objectives (OBJ):
-1. {WHAT_TO_ACHIEVE}
-2. {WHAT_TO_MINIMIZE_OR_MAXIMIZE}
+Objectives:
+1. {OUTCOME_TO_ACHIEVE}
+2. {ANOTHER_OUTCOME}
 
-Constraints (CONST):
-1. Read `{PROTOCOL}.md` and apply {TECHNIQUE} — to {PURPOSE}
-2. {OTHER_CONSTRAINT}
+Constraints:
+1. You MUST {REQUIRED_BEHAVIOR}
+2. You MUST NOT {PROHIBITED_BEHAVIOR}
+3. Read `{PROTOCOL}.md` and apply {TECHNIQUE}
 
 Validation:
-1. Add OBJ1-N to TodoWrite checklist
+1. Add objectives to TodoWrite checklist
 2. Output validation: list each objective with evidence
 
 ---
